@@ -1,0 +1,140 @@
+2016-05-11 01:05:25,144 - Utils.logger - INFO - Login Successful
+2016-05-11 01:05:25,144 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:05:25,144 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:05:49,389 - Utils.logger - INFO - Login Successful
+2016-05-11 01:05:49,389 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:05:49,389 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:05:51,372 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-11 01:05:51,373 - Utils.logger - INFO - Test Suite Initiated
+2016-05-11 01:06:17,923 - Utils.logger - INFO - Login Successful
+2016-05-11 01:06:17,923 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:06:17,923 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:06:43,838 - Utils.logger - INFO - Login Successful
+2016-05-11 01:06:43,839 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:06:43,839 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:06:45,672 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-11 01:10:45,762 - Utils.logger - INFO - Login Successful
+2016-05-11 01:10:45,763 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:10:45,764 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:11:44,158 - Utils.logger - INFO - Login Successful
+2016-05-11 01:11:44,159 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:11:44,159 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:12:08,642 - Utils.logger - INFO - Login Successful
+2016-05-11 01:12:08,642 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:12:08,642 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:12:10,620 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-11 01:12:10,627 - Utils.logger - INFO - Test Suite Initiated
+2016-05-11 01:13:10,631 - Utils.logger - INFO - Login Successful
+2016-05-11 01:13:10,632 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:13:10,632 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:13:34,909 - Utils.logger - INFO - Login Successful
+2016-05-11 01:13:34,909 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:13:34,909 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 01:13:36,984 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-11 01:13:36,991 - Utils.logger - INFO - Test Suite Initiated
+2016-05-11 01:59:55,827 - Utils.logger - INFO - Login Successful
+2016-05-11 01:59:55,827 - Utils.logger - DEBUG - Username : admin
+2016-05-11 01:59:55,828 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 02:00:01,533 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-11 02:03:24,863 - Utils.logger - INFO - Login Successful
+2016-05-11 02:03:24,864 - Utils.logger - DEBUG - Username : admin
+2016-05-11 02:03:24,864 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-11 02:03:26,848 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-11 02:03:32,016 - Utils.logger - DEBUG - Col1 : UNKNOWNWDC  and Col2 : 10.11 Gbps
+2016-05-11 02:03:32,016 - Utils.logger - DEBUG - Col1 : ANAHEIMCAWDC  and Col2 : 257.72 Gbps
+2016-05-11 02:03:32,016 - Utils.logger - DEBUG - Col1 : All WDC
+ANAHEIMCAWDC
+BRANCHBURGNJWDC
+UNKNOWNWDC  and Col2 : 475.13 Gbps
+257.72 Gbps
+207.30 Gbps
+10.11 Gbps
+2016-05-11 02:03:32,016 - Utils.logger - DEBUG - Col1 : All WDC  and Col2 : 475.13 Gbps
+2016-05-11 02:03:32,017 - Utils.logger - DEBUG - Col1 : BRANCHBURGNJWDC  and Col2 : 207.30 Gbps
+2016-05-12 12:22:24,209 - Utils.logger - INFO - **************Test1 started**************
+2016-05-12 12:22:29,079 - Utils.logger - INFO - Login Successful
+2016-05-12 12:22:29,079 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:22:29,079 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:22:29,088 - Utils.logger - INFO - **************Test2 started**************
+2016-05-12 12:22:34,033 - Utils.logger - INFO - Login Successful
+2016-05-12 12:22:34,033 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:22:34,033 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:22:35,072 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-12 12:22:38,444 - Utils.logger - DEBUG - Col1 : ANAHEIMCAWDC  and Col2 : 780.00 Gbps
+2016-05-12 12:22:38,444 - Utils.logger - DEBUG - Col1 : All WDC  and Col2 : 1.64 Tbps
+2016-05-12 12:22:38,444 - Utils.logger - DEBUG - Col1 : All WDC
+BRANCHBURGNJWDC
+ANAHEIMCAWDC  and Col2 : 1.64 Tbps
+857.78 Gbps
+780.00 Gbps
+2016-05-12 12:22:38,444 - Utils.logger - DEBUG - Col1 : BRANCHBURGNJWDC  and Col2 : 857.78 Gbps
+2016-05-12 12:22:38,451 - Utils.logger - INFO - Test Suite Initiated
+2016-05-12 12:30:24,685 - Utils.logger - INFO - **************Test1 started**************
+2016-05-12 12:30:29,613 - Utils.logger - INFO - Login Successful
+2016-05-12 12:30:29,613 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:30:29,613 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:30:29,630 - Utils.logger - INFO - **************Test1 completed**************
+2016-05-12 12:32:36,817 - Utils.logger - INFO - **************Test1 started**************
+2016-05-12 12:32:40,917 - Utils.logger - INFO - Login Successful
+2016-05-12 12:32:40,917 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:32:40,918 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:32:40,925 - Utils.logger - INFO - **************Test1 completed**************
+2016-05-12 12:34:39,237 - Utils.logger - INFO - **************Test1 started**************
+2016-05-12 12:36:40,976 - Utils.logger - INFO - **************Test1 started**************
+2016-05-12 12:37:00,229 - Utils.logger - INFO - **************Test1 started**************
+2016-05-12 12:37:05,389 - Utils.logger - INFO - Login Successful
+2016-05-12 12:37:05,389 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:37:05,390 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:37:05,397 - Utils.logger - INFO - **************Test1 completed**************
+2016-05-12 12:46:25,424 - Utils.logger - INFO - **************Test2 started**************
+2016-05-12 12:46:29,544 - Utils.logger - INFO - Login Successful
+2016-05-12 12:46:29,544 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:46:29,544 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:46:29,554 - Utils.logger - INFO - **************Test2 completed**************
+2016-05-12 12:46:59,163 - Utils.logger - INFO - **************Test2 started**************
+2016-05-12 12:47:03,018 - Utils.logger - INFO - Login Successful
+2016-05-12 12:47:03,019 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:47:03,019 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:47:04,075 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-12 12:47:06,736 - Utils.logger - DEBUG - Col1 : ANAHEIMCAWDC  and Col2 : 780.00 Gbps
+2016-05-12 12:47:06,737 - Utils.logger - DEBUG - Col1 : All WDC  and Col2 : 1.64 Tbps
+2016-05-12 12:47:06,737 - Utils.logger - DEBUG - Col1 : All WDC
+BRANCHBURGNJWDC
+ANAHEIMCAWDC  and Col2 : 1.64 Tbps
+857.78 Gbps
+780.00 Gbps
+2016-05-12 12:47:06,737 - Utils.logger - DEBUG - Col1 : BRANCHBURGNJWDC  and Col2 : 857.78 Gbps
+2016-05-12 12:47:06,748 - Utils.logger - INFO - **************Test2 completed**************
+2016-05-12 12:48:47,320 - Utils.logger - INFO - **************Test2 started**************
+2016-05-12 12:48:51,352 - Utils.logger - INFO - Login Successful
+2016-05-12 12:48:51,353 - Utils.logger - DEBUG - Username : admin
+2016-05-12 12:48:51,353 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 12:48:52,427 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-12 12:48:54,546 - Utils.logger - DEBUG - Col1 : ANAHEIMCAWDC  and Col2 : 780.00 Gbps
+2016-05-12 12:48:54,546 - Utils.logger - DEBUG - Col1 : All WDC  and Col2 : 1.64 Tbps
+2016-05-12 12:48:54,546 - Utils.logger - DEBUG - Col1 : All WDC
+BRANCHBURGNJWDC
+ANAHEIMCAWDC  and Col2 : 1.64 Tbps
+857.78 Gbps
+780.00 Gbps
+2016-05-12 12:48:54,546 - Utils.logger - DEBUG - Col1 : BRANCHBURGNJWDC  and Col2 : 857.78 Gbps
+2016-05-12 12:48:54,551 - Utils.logger - INFO - **************Test2 completed**************
+2016-05-12 14:16:12,170 - Utils.logger - INFO - **************Test2 started**************
+2016-05-12 14:16:17,138 - Utils.logger - INFO - Login Successful
+2016-05-12 14:16:17,138 - Utils.logger - DEBUG - Username : admin
+2016-05-12 14:16:17,139 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 14:16:18,233 - Utils.logger - DEBUG - Page Launched : SITES
+2016-05-12 14:16:21,007 - Utils.logger - DEBUG - Col1 : ANAHEIMCAWDC  and Col2 : 489.11 Gbps
+2016-05-12 14:16:21,008 - Utils.logger - DEBUG - Col1 : All WDC  and Col2 : 1.03 Tbps
+2016-05-12 14:16:21,008 - Utils.logger - DEBUG - Col1 : All WDC
+BRANCHBURGNJWDC
+ANAHEIMCAWDC  and Col2 : 1.03 Tbps
+540.74 Gbps
+489.11 Gbps
+2016-05-12 14:16:21,008 - Utils.logger - DEBUG - Col1 : BRANCHBURGNJWDC  and Col2 : 540.74 Gbps
+2016-05-12 14:16:21,013 - Utils.logger - INFO - **************Test2 completed**************
+2016-05-12 15:38:52,082 - Utils.logger - INFO - **************Test2 started**************
+2016-05-12 15:38:57,121 - Utils.logger - INFO - Login Successful
+2016-05-12 15:38:57,121 - Utils.logger - DEBUG - Username : admin
+2016-05-12 15:38:57,121 - Utils.logger - DEBUG - Password : Admin@123
+2016-05-12 15:39:17,357 - Utils.logger - DEBUG - Page Launched : SITES
