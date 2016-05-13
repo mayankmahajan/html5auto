@@ -19,11 +19,14 @@ class Test2(unittest.TestCase):
 
 
     def test_sites(self):
-        # Login to Page
+        '''
+        Test2 : Validate Data present at BTV
+        login : Logins to App
+        launchPage : Launch Page (say Sites)
+        getBTVData : Get Bar Tabular View Data
+        '''
         login(self.driver,self.driverHelper,Constants.USERNAME,Constants.PASSWORD)
-        # Launch Sites Page
         launchPage(self.driver,self.driverHelper,Constants.SITES)
-        # Gets Data from BTV
         data = getBTVData(self.driver,self.driverHelper)
 
 
