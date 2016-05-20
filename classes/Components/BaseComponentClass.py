@@ -11,3 +11,19 @@ class BaseComponentClass:
         return elHandle.text
 
 
+    def getSpecificLocators(self,locatorClass):
+        '''
+        Can be overridden at ComponentClass
+        :param locatorClass: Locator Class of Component
+        :return: component child as Key and its locators as Value
+        '''
+        return self.dictionary_ele_locators(locatorClass)
+
+    def dictionary_ele_locators(self, locatorClass):
+        dic = {}
+        for method in dir(locatorClass):
+            if type(getattr(locatorClass,method)) == tuple:
+                dic[method]= getattr(locatorClass,method)
+        return dic
+
+

@@ -1,0 +1,47 @@
+SIGNIN = (By.CSS_SELECTOR, '[ng-click = "vm.login()"]')
+    USERNAME = (By.ID, 'username')
+    PASSWORD = (By.ID, 'password')
+
+
+<?xml version="1.0"?>
+<data>
+    <screenConfig id = "loginScreen" name="LoginScreen">
+        <component id = "username" name = "username" value = "admin" locator = "username"/>
+        <component id = "password" name = "password" value = "Admin@123" locator="password"/>
+        <component id = "signin" name = "signin" locator="[ng-click = 'vm.login()']"/>
+    </screenConfig>
+    <screenConfig id = "exploreScreen" name="ExploreScreen">
+        <component id = "exploreList" name = "exploreList" locator = "username"/>
+    </screenConfig>
+
+
+
+
+
+
+
+
+
+
+
+    <country name="Liechtenstein">
+        <rank>1</rank>
+        <year>2008</year>
+        <gdppc>141100</gdppc>
+        <neighbor name="Austria" direction="E"/>
+        <neighbor name="Switzerland" direction="W"/>
+    </country>
+    <country name="Singapore">
+        <rank>4</rank>
+        <year>2011</year>
+        <gdppc>59900</gdppc>
+        <neighbor name="Malaysia" direction="N"/>
+    </country>
+    <country name="Panama">
+        <rank>68</rank>
+        <year>2011</year>
+        <gdppc>13600</gdppc>
+        <neighbor name="Costa Rica" direction="W"/>
+        <neighbor name="Colombia" direction="E"/>
+    </country>
+</data>

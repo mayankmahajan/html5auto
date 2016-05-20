@@ -34,10 +34,8 @@ def launchPage(driver,driverHelper,pageName):
     try:
         explorePage = ExplorePageClass(driver)
         exploreListHandler = driverHelper.waitForVisibleElements(ExplorePageLocators.EXPLORELIST)
-        for elHandler in exploreListHandler:
-            if elHandler.text.upper() in pageName:
-                explorePage.launchPage(elHandler)
-                break
+        elHandler = explorePage.exploreList.getHandlerToPage(exploreListHandler,pageName)
+        explorePage.launchPage(elHandler)
         logger.debug('Page Launched : %s',pageName)
         return True
     except ValueError:
@@ -46,12 +44,34 @@ def launchPage(driver,driverHelper,pageName):
 def getBTVData(driver,driverHelper):
     try:
         sitePage = SitePageClass(driver)
-        btvHandler = driverHelper.waitForVisibleElement(BTVLocators.BTV)
-        col1Handler = driverHelper.waitForVisibleElements(BTVLocators.BTVCOLUMN1)
-        col2Handler = driverHelper.waitForVisibleElements(BTVLocators.BTVCOLUMN2)
-        data = sitePage.getBTVData(btvHandler,col1Handler,col2Handler)
+
+        btvLocators = sitePage.btv.getSpecificLocators(BTVLocators)
+        btvHandlers = driverHelper.waitForVisibleElementsAndChilds(btvLocators)
+        data = sitePage.btv.getData(btvHandlers)
         for key,value in data.iteritems():
             logger.debug('Col1 : %s  and Col2 : %s',key,value )
         return data
+    except ValueError:
+        return ValueError
+
+def drilltoScreen(driver,driverHelper,pageName):
+    try:
+        sitePage = SitePageClass(driver)
+        cmLocators = sitePage.cm.getSpecificLocators(CommonElementLocators)
+        cmHandlers = driverHelper.waitForVisibleElementsAndChilds(cmLocators)
+        sitePage.cm.activateContextMenuOptions(cmHandlers)
+
+        cmenuLocators = sitePage.cm.getSpecificLocators(ContextMenuLocators)
+        cmenuHandlers = driverHelper.waitForVisibleElementsAndChilds(cmenuLocators)
+        sitePage.cm.drillTo(driver,driverHelper,cmenuHandlers,Constants.DRILLTO)
+
+        drillLocators = sitePage.cm.getSpecificLocators(DrillToLocators)
+        drillHandlers = driverHelper.waitForVisibleElementsAndChilds(drillLocators)
+        sitePage.cm.drillTo(driver,driverHelper,drillHandlers,Constants.VRF)
+
+        logger.debug('Page Launched : %s',Constants.VRF)
+        return True
+
+
     except ValueError:
         return ValueError

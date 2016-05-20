@@ -8,11 +8,11 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 
 
-class Test2(unittest.TestCase):
+class Test3(unittest.TestCase):
 
 
     def setUp(self):
-        logger.info('**************Test2 started**************')
+        logger.info('**************Test3 started**************')
         self.driver = webdriver.Firefox()
         self.driver.get(Constants.URL)
         self.driverHelper = DriverHelper(self.driver)
@@ -25,11 +25,12 @@ class Test2(unittest.TestCase):
         launchPage(self.driver,self.driverHelper,Constants.SITES)
         # Gets Data from BTV
         data = getBTVData(self.driver,self.driverHelper)
+        drilltoScreen(self.driver,self.driverHelper,Constants.NETWORKFUNCTIONS)
 
 
     def tearDown(self):
         self.driver.close()
-        logger.info('**************Test2 completed**************')
+        logger.info('**************Test3 completed**************')
 
 if __name__ == "__main__":
     unittest.main(exit=False)

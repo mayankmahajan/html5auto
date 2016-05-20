@@ -3,6 +3,7 @@ from Utils.logger import *
 
 from Tests.Test1 import *
 from Tests.Test2 import *
+from Tests.Test3 import *
 
 class TestSuite(unittest.TestCase):
     def test_suite(self):
@@ -10,7 +11,8 @@ class TestSuite(unittest.TestCase):
 
         self.suite.addTests([
             unittest.defaultTestLoader.loadTestsFromTestCase(Test1),
-            unittest.defaultTestLoader.loadTestsFromTestCase(Test2)
+            unittest.defaultTestLoader.loadTestsFromTestCase(Test2),
+            unittest.defaultTestLoader.loadTestsFromTestCase(Test3)
         ])
         runner = unittest.TextTestRunner()
 

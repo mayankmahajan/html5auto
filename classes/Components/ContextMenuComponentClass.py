@@ -1,15 +1,19 @@
 from BaseComponentClass import BaseComponentClass
 from classes.DriverHelpers.locators import *
-class BTVComponentClass(BaseComponentClass):
+from Utils.Constants import *
+class ContextMenuComponentClass(BaseComponentClass):
 
-    def getDataforColumn1(self,elHandle):
-        return [eachHandler.text for eachHandler in elHandle]
+    def activateContextMenuOptions(self,handle):
+        handle[Constants.CONTEXTMENU][0].click()
+        # self.handle.
+    def drillTo(self,driver,driverHelper,handles,pageName):
 
-    def getDataForColumn2(self,elHandle):
-        return [eachHandler.text for eachHandler in elHandle]
-
-    def getData(self,h1,h2,h3):
-        c1 = self.getDataforColumn1(h2)
-        c2 = self.getDataForColumn2(h3)
-        data = dict(zip(c1,c2))
-        return data
+        if pageName == Constants.NETWORKFUNCTIONS:
+            handles[Constants.DRILLTONF][0].click()
+        elif pageName == Constants.SITES:
+            handles[Constants.DRILLTOSITE][0].click()
+        elif pageName == Constants.VRF:
+            handles[Constants.DRILLTOVRF][0].click()
+        elif pageName == Constants.DRILLTO:
+            handles[Constants.DRILLTO][0].click()
+        return True
