@@ -15,7 +15,7 @@ class Constants(object):
     DRILLTOVRF = 'DRILLTOVRF'
 
     # driver based constants
-    WEBDRIVERTIMEOUT = 5
+    WEBDRIVERTIMEOUT = 100
 
     # Component based constants
     ## BTV

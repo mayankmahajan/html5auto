@@ -9,6 +9,13 @@ class BTVComponentClass(BaseComponentClass):
     def getDataForColumn2(self,elHandle):
         return [eachHandler.text for eachHandler in elHandle]
 
+    def getSelection(self):
+        selection= [];
+        return selection
+
+    def totalCheck(self,handlers):
+        return True
+
     def getData(self,handlers):
         c1 = self.getDataforColumn1(handlers[Constants.BTVCOLUMN1])
         c2 = self.getDataForColumn2(handlers[Constants.BTVCOLUMN2])

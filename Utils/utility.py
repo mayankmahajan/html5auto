@@ -41,6 +41,16 @@ def launchPage(driver,driverHelper,pageName):
     except ValueError:
         return ValueError
 
+def testBTV(driver,driverHelper):
+    try:
+        sitePage = SitePageClass(driver)
+        btvLocators = sitePage.btv.getSpecificLocators(BTVLocators)
+        btvHandlers = driverHelper.waitForVisibleElementsAndChilds(btvLocators)
+        return sitePage.btv.totalCheck(btvHandlers)
+    except ValueError:
+        return ValueError
+
+
 def getBTVData(driver,driverHelper):
     try:
         sitePage = SitePageClass(driver)

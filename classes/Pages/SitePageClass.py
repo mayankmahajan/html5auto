@@ -9,6 +9,14 @@ class SitePageClass(BasePageClass):
         self.driver = driver
         self.btv = BTVComponentClass()
         self.cm = ContextMenuComponentClass()
+
+
+    # def getSelection(self, handlers):
+    #     return self._username.text(handlers)
+    #
+    # def setUserName(self, handlers, index):
+    #     self._username.m_send_keys(elHandle, value)
+
         # self.
 
     # def getBTVData(self,btvHandle,col1Handle,col2Handle):

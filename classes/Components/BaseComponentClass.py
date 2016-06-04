@@ -10,6 +10,10 @@ class BaseComponentClass:
     def text(self,elHandle):
         return elHandle.text
 
+    def getSelection(self):
+        selection = []
+        return selection
+
 
     def getSpecificLocators(self,locatorClass):
         '''
