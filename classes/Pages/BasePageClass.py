@@ -2,5 +2,5 @@ class BasePageClass():
     def __init__(self,driver):
         pass
 
-    def basePageMethod(self):
+    def testComponents(self):
         pass

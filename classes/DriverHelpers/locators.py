@@ -16,7 +16,7 @@ class BTVLocators(object):
     BTVCOLUMN0 = (By.XPATH, '//*[contains(@class, "column0")]')
     BTVCOLUMN1 = (By.XPATH, '//*[contains(@class, "column1")]')
     BTVCOLUMN2 = (By.XPATH, '//*[contains(@class, "column2")]')
-    SELECTIONS = (By.CSS_SELECTOR, '[background-color: rgb(70, 97, 111);]')
+    # SELECTIONS = (By.CSS_SELECTOR, '[background-color: rgb(70, 97, 111);]')
 
 
 class ContextMenuLocators(object):

@@ -6,6 +6,7 @@ from Tests.Test2 import *
 from Tests.Test3 import *
 
 class TestSuite(unittest.TestCase):
+
     def test_suite(self):
         self.suite = unittest.TestSuite()
 
@@ -21,5 +22,6 @@ class TestSuite(unittest.TestCase):
         # runner.run(self.suite)
 
 if __name__ == "__main__":
+
     unittest.main(exit=False)
 

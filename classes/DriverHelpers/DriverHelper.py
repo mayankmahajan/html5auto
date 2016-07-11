@@ -7,6 +7,8 @@ from Utils.Constants import *
 class DriverHelper:
     def __init__(self,driver):
         self.driver = driver
+        # webdriver.Firefox.find_element_by_xpath()
+
 
     # def
 
@@ -37,4 +39,4 @@ class DriverHelper:
             dict_element_handlers[element] = self.driver.find_elements(*locator)
         return dict_element_handlers
 
-
+# webdriver.Firefox().find_element_by_tag_name().find_element_by_xpath('//*[contains(@class, "column0")]').

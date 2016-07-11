@@ -1,13 +1,20 @@
-
 <?xml version="1.0"?>
 <data>
-    <screenConfig id = "loginScreen" name="LoginScreen">
-        <component id = "username" name = "username" value = "admin" locator = "username"/>
-        <component id = "password" name = "password" value = "Admin@123" locator="password"/>
-        <component id = "signin" name = "signin" locator="[ng-click = 'vm.login()']"/>
-    </screenConfig>
-    <screenConfig id = "exploreScreen" name="ExploreScreen">
-        <component id = "exploreList" name = "exploreList" locator = "username"/>
-    </screenConfig>
+    <screenConfigs>
 
+        <!--<screenConfig id = "exploreScreen">-->
+            <!--<component id = "exploreList"/>-->
+        <!--</screenConfig>-->
+
+        <screenConfig id = "siteScreen">
+            <!--Screen Components-->
+            <component id = "btv"/>
+            <!--<component id = "btv1"/>-->
+            <!--<component id = "summaryCard"/>-->
+
+            <!--Context Menu Options-->
+            <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
+        </screenConfig>
+
+    </screenConfigs>
 </data>
