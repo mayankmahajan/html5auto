@@ -65,8 +65,13 @@ def getHandlesForEachComponent(driver, driverHelper, configManager, pageName):
     listOfHandles = {}
     for eachComp in configManager.screenComponentRelations[pageName]:
         for comp in configManager.componentChildRelations[eachComp]:
+                # locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'],configManager.componentSelectors[comp]['wait'])
             locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'])
-            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator)
+            try:
+                wait = configManager.componentSelectors[comp]['wait']
+                listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False)
+            except:
+                listOfHandles[comp] = driverHelper.waitForVisibleElements(locator)
     return listOfHandles
 
 def getScreenInstance(driver,pageName):
@@ -83,20 +88,38 @@ def getScreenInstance(driver,pageName):
 def testScreen(driver,driverHelper,pageName):
     try:
         # Config Parsing Part
+        data = {}
         configManager = launchPage(driver,driverHelper,pageName)
         handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName)
         screenInstance = getScreenInstance(driver,pageName)
-        data = screenInstance.btv.getData(handles)
-        for key,value in data.iteritems():
+        btvData = screenInstance.btv.getData(handles)
+        data['btvData'] = {}
+        for key,value in btvData.iteritems():
+            pv = value.pop(0)
+            if len(data['btvData']) == 0:
+                data['btvData']['dimension'] = value
+            else:
+                data['btvData']['value'] = value
             logger.debug('Col1 : %s  and Col2 : %s',key,value)
-        selection = screenInstance.btv.getSelection(handles)
-        for key,value in selection.iteritems():
+        data['btvSelection'] = screenInstance.btv.getSelection(handles)
+        for key,value in data['btvSelection'].iteritems():
             logger.debug('Selection : %s ',value)
         screenInstance.btv.setSelection(4,handles)
         logger.info("Setting index --> 4")
-        newSelection = screenInstance.btv.getSelection(handles)
-        for key,value in newSelection.iteritems():
+        data['btvSelection'] = screenInstance.btv.getSelection(handles)
+        for key,value in data['btvSelection'].iteritems():
             logger.debug('Selection : %s ',value)
+        data['btvTooltipData'] = screenInstance.btv.getToolTipInfo(driver,driverHelper,handles)
+        for i in range(0,len(data['btvTooltipData'])):
+            logger.debug('Tooltip %s : %s ',i,data['btvTooltipData'][i])
+        result = screenInstance.btv.validateToolTipData(data)
+        for key,value in result.iteritems():
+            logger.debug('DIMENSION : %s  and RESULT : %s',key,value)
+
+
+
+
+
 
     except ValueError:
         return ValueError

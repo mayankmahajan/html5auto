@@ -3,10 +3,23 @@ from selenium.webdriver.support.wait import WebDriverWait
 from classes.DriverHelpers.CustomWebDriverWait import CustomWebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Utils.Constants import *
+from selenium.webdriver import ActionChains
+
+
+
+# class Actions:
+#     def __init__(self,driver):
+#         self.driver = driver
+
+
 
 class DriverHelper:
     def __init__(self,driver):
         self.driver = driver
+        # self.action = webdriver.ActionChains(driver)
+        self.action = ActionChains(driver)
+        # hover = self.action.move_to_element_with_offset()
+        # hover.perform()
         # webdriver.Firefox.find_element_by_xpath()
 
 
@@ -17,9 +30,10 @@ class DriverHelper:
         CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
-    def waitForVisibleElements(self, locator):
+    def waitForVisibleElements(self, locator, wait=True):
         # self.driver = driver
-        CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+        if wait:
+            CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
         return self.driver.find_elements(*locator)
 
     def waitForVisibleElementsAndChild(self, element_locator_pairs):

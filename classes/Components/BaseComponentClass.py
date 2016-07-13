@@ -11,9 +11,12 @@ class BaseComponentClass:
         return elHandle.text
 
     def getSelection(self):
+        '''
+        Base method for getSelection that can be used across all components for uniformity
+        :return: Selection
+        '''
         selection = []
         return selection
-
 
     def getSpecificLocators(self,locatorClass):
         '''

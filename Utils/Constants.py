@@ -1,7 +1,7 @@
 class Constants(object):
 
     #testcase based constants
-    URL = 'https://nrmca-perf.guavus.com:6443'
+    URL = 'https://nrmca-new.guavus.com:6443'
     USERNAME = 'admin'
     PASSWORD = 'Admin@123'
     SITES = 'SITES'

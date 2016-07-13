@@ -5,6 +5,8 @@
         <timeout id="timeout" value="100"/>
     </seleniumSettings>
 
+    <!--Add UserInfo-->
+
     <listOfScreens id = "screenList">
         <screen id = "exploreList" value="ExploreList">
             <screenlinks id = "sites" value = "SITES"/>
@@ -71,6 +73,8 @@
             <component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]' action="click"/>
             <component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]' action="getData"/>
             <component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]' action="getData"/>
+            <component id = "BTVTOOLTIP" selector="id" locator='barTabularChartToolTip' action="getToolTipData" wait = "skip"/>
+            <component id = "bar" selector="class name" locator='bar1' action="hover"/>
         </componentConfig>
         <componentConfig id = 'cm'>
             <component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay' action="click"/>

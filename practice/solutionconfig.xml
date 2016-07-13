@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<data>
+    <screenConfigs>
+
+        <!--<screenConfig id = "exploreScreen">-->
+            <!--<component id = "exploreList"/>-->
+        <!--</screenConfig>-->
+
+        <screenConfig id = "siteScreen">
+            <!--Screen Components-->
+            <component id = "btv"/>
+            <component id = "summaryCard"/>
+
+            <!--Context Menu Options-->
+            <component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>
+        </screenConfig>
+
+    </screenConfigs>
+</data>
