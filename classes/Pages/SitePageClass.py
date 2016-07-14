@@ -8,7 +8,7 @@ class SitePageClass(BasePageClass):
         '''
         self.driver = driver
         self.btv = BTVComponentClass()
-        # self.cm = ContextMenuComponentClass()
+        self.cm = ContextMenuComponentClass()
 
     def testComponents(self):
         return ""

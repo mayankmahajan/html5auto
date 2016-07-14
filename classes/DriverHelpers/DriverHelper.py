@@ -4,6 +4,7 @@ from classes.DriverHelpers.CustomWebDriverWait import CustomWebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Utils.Constants import *
 from selenium.webdriver import ActionChains
+import time
 
 
 
@@ -18,6 +19,7 @@ class DriverHelper:
         self.driver = driver
         # self.action = webdriver.ActionChains(driver)
         self.action = ActionChains(driver)
+        # self.sleep = time.sleep(2)
         # hover = self.action.move_to_element_with_offset()
         # hover.perform()
         # webdriver.Firefox.find_element_by_xpath()

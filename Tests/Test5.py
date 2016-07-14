@@ -24,6 +24,7 @@ class Test5(unittest.TestCase):
         login(self.driver,self.driverHelper,Constants.USERNAME,Constants.PASSWORD)
         # Launch Sites Page
         testScreen(self.driver,self.driverHelper,"siteScreen")
+        drilltoScreen(self.driver,self.driverHelper,Constants.NETWORKFUNCTIONS)
 
 
 

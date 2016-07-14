@@ -15,6 +15,7 @@ from BaseComponentClass import BaseComponentClass
 from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
+import time
 
 from selenium.webdriver import ActionChains
 
@@ -23,7 +24,9 @@ from selenium.webdriver import ActionChains
 class BTVComponentClass(BaseComponentClass):
 
     def __init__(self):
+        BaseComponentClass.__init__(self)
         self.configmanager = ConfigManager()
+
 
 
     def getDataforColumn(self,elHandle):
@@ -127,6 +130,8 @@ class BTVComponentClass(BaseComponentClass):
         # driverHelper.action.move_to_element()
         for i in range(0,len(elHandle['hover'])):
             driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
+            # adding hardcoded timeout (will be driven by Config)
+            time.sleep(2)
             data.append(elHandle['getToolTipData'][0].text)
         return data
 
@@ -188,23 +193,21 @@ class BTVComponentClass(BaseComponentClass):
 
         return result
 
+    def validateBTVData(self,dataCollection,csvData):
+        result = {}
+        # for key,value in csvData.iteritems():
+        for key in dataCollection['btvData']['dimension']:
+            if "All " in key or "Others" in key:
+                pass
+            else:
+                UIData = 0.0
+                convertedData = float(dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[0])
+                unitString = dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[1]
+                UIData = self.unitSystem.getRawValue(convertedData,unitString)
 
-            # if "Total"finalTTD.keys()
-            # dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index("key")]
+                if csvData[key]['AGGR_totalByteBuffer'] == UIData:
+                    result[key] = "Data Validation PASSED"
+                else:
+                    result[key] = "Data Validation FAILED --> Actual : "+str(UIData)+" and Expected : "+str(csvData[key]['AGGR_totalByteBuffer'])
 
-
-
-
-
-        #
-        #
-        # for el in toolTipData:
-        #     el = ""
-        #     el.split('\n')
-        #     # data['btvTooltipData'][1].split('\n')[1].split(" ")[-2]
-        # pass
-
-
-
-
-
+        return result

@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+##############################################################
+'''
+CM Component Handler
+'''
+__author__      = "Mayank Mahajan"
+__email__       = 'mayank.mahajan@guavus.com'
+__version__     = "1.0"
+__maintainer__  = "Mayank Mahajan"
+##############################################################
+
+
 from BaseComponentClass import BaseComponentClass
 from classes.DriverHelpers.locators import *
 from Utils.Constants import *

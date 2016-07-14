@@ -1,6 +1,7 @@
 # from classes.DriverHelpers.DriverHelper import DriverHelper
 # from selenium import webdriver
 # webdriver.Firefox().find_element_by_xpath().send_keys()
+from Utils.UnitSystem import UnitSystem
 
 class BaseComponentClass:
     def m_click(self,elHandle):
@@ -33,4 +34,16 @@ class BaseComponentClass:
                 dic[method]= getattr(locatorClass,method)
         return dic
 
+    def validateToolTipData(self,dataCollection):
+        result = {}
+        return result
+
+    def compare(self,v1,v2):
+        if v1 == v2:
+            return True
+        else:
+            return False
+
+    def __init__(self):
+        self.unitSystem = UnitSystem()
 

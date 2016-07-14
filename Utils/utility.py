@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+##############################################################
+'''
+Called Directly from TestCase
+'''
+__author__      = "Mayank Mahajan"
+__email__       = 'mayank.mahajan@guavus.com'
+__version__     = "1.0"
+__maintainer__  = "Mayank Mahajan"
+##############################################################
+
+
 from Utils.logger import *
 from classes.DriverHelpers.locators import *
 from classes.Pages import ExplorePageClass
@@ -7,6 +19,8 @@ from classes.Pages.SitePageClass import *
 from classes.DriverHelpers.DriverHelper import *
 from Utils.ConfigManager import ConfigManager
 from copy import deepcopy
+from Utils.csvReader import CSVReader
+import time
 
 
 
@@ -112,8 +126,14 @@ def testScreen(driver,driverHelper,pageName):
         data['btvTooltipData'] = screenInstance.btv.getToolTipInfo(driver,driverHelper,handles)
         for i in range(0,len(data['btvTooltipData'])):
             logger.debug('Tooltip %s : %s ',i,data['btvTooltipData'][i])
-        result = screenInstance.btv.validateToolTipData(data)
-        for key,value in result.iteritems():
+        result1 = screenInstance.btv.validateToolTipData(data)
+        for key,value in result1.iteritems():
+            logger.debug('DIMENSION : %s  and RESULT : %s',key,value)
+
+        csvreader = CSVReader()
+        result2 = screenInstance.btv.validateBTVData(data,csvreader.csvData)
+        logger.info("********* Logging Data Validation Results *********")
+        for key,value in result2.iteritems():
             logger.debug('DIMENSION : %s  and RESULT : %s',key,value)
 
 
@@ -165,9 +185,10 @@ def drilltoScreen(driver,driverHelper,pageName):
 
         drillLocators = sitePage.cm.getSpecificLocators(DrillToLocators)
         drillHandlers = driverHelper.waitForVisibleElementsAndChilds(drillLocators)
-        sitePage.cm.drillTo(driver,driverHelper,drillHandlers,Constants.VRF)
+        sitePage.cm.drillTo(driver,driverHelper,drillHandlers,pageName)
+        time.sleep(10)
 
-        logger.debug('Page Launched : %s',Constants.VRF)
+        logger.debug('Page Launched : %s',pageName)
         return True
 
 
