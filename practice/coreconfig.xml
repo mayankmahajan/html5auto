@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<data>
+    <seleniumSettings>
+        <browser id="browser" value="FireFox"/>
+        <timeout id="timeout" value="100"/>
+    </seleniumSettings>
+
+    <listOfScreens id = "screenList">
+        <screen id = "exploreList" value="ExploreList">
+            <screenlinks id = "sites" value = "SITES"/>
+            <screenlinks id = "networkfunctions" value = "NETWORK FUNCTIONS"/>
+            <screenlinks id = "interface" value = "INTERFACE"/>
+        </screen>
+        <screen id = "sites" value = "SITES"/>
+        <screen id = "networkfunctions" value = "NETWORK FUNCTIONS"/>
+        <screen id = "interface" value = "INTERFACE"/>
+        <screen id = "vrfs" value = "VRF" />
+    </listOfScreens>
+    <!--<drilltoComponent -->
+    <screenConfigs>
+
+        <!--LOGIN SCREEN-->
+        <screenConfig id = "loginScreen" >
+            <component id = "username" value = "admin" selector = 'id' locator = 'username' action="sendKeys" />
+            <component id = "password" value = "Admin@123" selector = 'id' locator = 'password' action="sendKeys"/>
+            <component id = "signin" selector="css selector" locator='[ng-click = "vm.login()"]' action="click"/>
+        </screenConfig>
+
+
+        <!--EXPLORE SCREEN-->
+        <screenConfig id = "exploreScreen">
+            <component id = "exploreList"/>
+        </screenConfig>
+
+        <!--<screenConfig id = "siteScreen">-->
+            <!--&lt;!&ndash; Common Elements&ndash;&gt;-->
+            <!--<component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay'/>-->
+            <!--<component id = "DRILLTO" selector="id" locator='frameworkDrill'/>-->
+            <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
+            <!--<component id = "EXPORTTO" selector="id" locator='exportDrill'/>-->
+
+            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]'/>-->
+            <!--<component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]'/>-->
+            <!--<component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]'/>-->
+            <!--<component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]'/>-->
+
+        <!--</screenConfig>-->
+    </screenConfigs>
+
+    <componentConfigs>
+        <componentConfig id = 'exploreList'>
+            <component id = "exploreList" selector="css selector" locator='[ng-mouseover="vm.showTooltip(startPoint,$index)"]'/>
+            <component id = "sites" selector="xpath" locator='//*[contains(@id, "exploreLabel0")]' action="click"/>
+        </componentConfig>
+
+        <componentConfig id = 'btv'>
+            <component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]'/>
+            <component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]'/>
+            <component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]'/>
+            <component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]'/>
+        </componentConfig>
+        <componentConfig id = 'cm'>
+            <component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay'/>
+            <component id = "DRILLTO" selector="id" locator='frameworkDrill'/>
+            <component id = "EXPORTTO" selector="id" locator='exportDrill'/>
+            <component id = "EXPORTTOCSV" selector="id" locator='EXPORT_TO_CSV'/>
+            <component id = "EXPORTTOSNAPSHOT" selector="id" locator='EXPORT_TO_SNAPSHOT'/>
+
+            <!--should be moved to SolutionConfig-->
+            <component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>
+        </componentConfig>
+    </componentConfigs>
+
+</data>
