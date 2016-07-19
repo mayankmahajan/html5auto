@@ -6,14 +6,19 @@
             <!--<component id = "exploreList"/>-->
         <!--</screenConfig>-->
 
-        <screenConfig id = "siteScreen">
+        <screenConfig id = "site_Screen">
             <!--Screen Components-->
-            <component id = "btv"/>
+            <!--<component id = "btv"/>-->
+            <component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>
             <!--<component id = "btv1"/>-->
             <!--<component id = "summaryCard"/>-->
 
             <!--Context Menu Options-->
             <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
+        </screenConfig>
+        <screenConfig id = "siteInteraction_Screen">
+            <!--Screen Components-->
+            <component id = "btv" selector="xpath" locator='//*[contains(@id, "siteInteraction_barTabularView")]' action="" parent="True"/>
         </screenConfig>
 
     </screenConfigs>

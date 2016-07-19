@@ -75,7 +75,24 @@ def launchPage(driver,driverHelper,pageName):
     except ValueError:
         return ValueError
 
-def getHandlesForEachComponent(driver, driverHelper, configManager, pageName):
+def getHandlersForParentComponent(driver, driverHelper, configManager, pageName):
+    listOfHandles = {}
+    for comp in configManager.screenComponentRelations[pageName]:
+        if configManager.screenSelectors[pageName][comp]['parent'].upper() == "TRUE":
+            locator = (configManager.screenSelectors[pageName][comp]['selector'],configManager.screenSelectors[pageName][comp]['locator'])
+            try:
+                wait = configManager.screenSelectors[pageName][comp]['wait']
+                listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False)
+            except:
+                # try:
+                #     isParent = True if configManager.componentSelectors[comp]['parent'].upper() == "TRUE" else False
+                # except:
+                #     pass
+                listOfHandles[comp] = driverHelper.waitForVisibleElements(locator)
+
+    return listOfHandles
+
+def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles):
     listOfHandles = {}
     for eachComp in configManager.screenComponentRelations[pageName]:
         for comp in configManager.componentChildRelations[eachComp]:
@@ -83,9 +100,29 @@ def getHandlesForEachComponent(driver, driverHelper, configManager, pageName):
             locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'])
             try:
                 wait = configManager.componentSelectors[comp]['wait']
-                listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False)
+                try:
+                    if configManager.componentSelectors[comp]['locatorDimension']:
+                        locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
+                        locatorText = configManager.componentSelectors[comp]['locatorText']
+                        listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp,locatorDimension,locatorText)
+                except:
+                        listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp)
+
             except:
-                listOfHandles[comp] = driverHelper.waitForVisibleElements(locator)
+                # try:
+                #     isParent = True if configManager.componentSelectors[comp]['parent'].upper() == "TRUE" else False
+                # except:
+                #     pass
+                try:
+                    if configManager.componentSelectors[comp]['locatorDimension']:
+                        locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
+                        locatorText = configManager.componentSelectors[comp]['locatorText']
+                        if 'parentDependency' in configManager.componentSelectors[comp].keys():
+                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp,locatorDimension,locatorText,configManager.componentSelectors[comp]['parentDependency'])
+                        else:
+                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp,locatorDimension,locatorText)
+                except:
+                    listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp)
     return listOfHandles
 
 def getScreenInstance(driver,pageName):
@@ -99,12 +136,19 @@ def getScreenInstance(driver,pageName):
     if "site" in pageName:
         return SitePageClass(driver)
 
-def testScreen(driver,driverHelper,pageName):
+def testScreen(driver,driverHelper,pageName,isStartScreen=False):
     try:
         # Config Parsing Part
         data = {}
-        configManager = launchPage(driver,driverHelper,pageName)
-        handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName)
+        if isStartScreen:
+            configManager = launchPage(driver,driverHelper,pageName)
+        else:
+            configManager = ConfigManager()
+        # tempString = '//*[contains(@id, "' + pageName.split('_')[0]+'_barTabularView")]'
+        # configManager.componentSelectors['btv']['locator'] = tempString
+        parentHandles = getHandlersForParentComponent(driver,driverHelper,configManager,pageName)
+
+        handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
         screenInstance = getScreenInstance(driver,pageName)
         btvData = screenInstance.btv.getData(handles)
         data['btvData'] = {}

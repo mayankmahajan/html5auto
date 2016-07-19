@@ -22,6 +22,8 @@ class ContextMenuComponentClass(BaseComponentClass):
 
         if pageName == Constants.NETWORKFUNCTIONS:
             handles[Constants.DRILLTONF][0].click()
+        elif pageName == Constants.SITEINTERACTIONS:
+            handles[Constants.DRILLTOSITEINTERACTION][0].click()
         elif pageName == Constants.SITES:
             handles[Constants.DRILLTOSITE][0].click()
         elif pageName == Constants.VRF:

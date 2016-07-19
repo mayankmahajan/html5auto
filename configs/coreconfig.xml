@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <data>
     <seleniumSettings>
-        <browser id="browser" value="FireFox"/>
+        <browser id="browser" value="Chrome"/>
         <timeout id="timeout" value="100"/>
     </seleniumSettings>
 
@@ -23,15 +23,15 @@
 
         <!--LOGIN SCREEN-->
         <screenConfig id = "loginScreen" >
-            <component id = "username" />
-            <component id = "password" />
-            <component id = "signin" />
+            <component id = "username" parent="False"/>
+            <component id = "password" parent="False"/>
+            <component id = "signin" parent="False"/>
         </screenConfig>
 
 
         <!--EXPLORE SCREEN-->
         <screenConfig id = "exploreScreen">
-            <component id = "exploreList"/>
+            <component id = "exploreList" parent="False"/>
         </screenConfig>
 
         <!--<screenConfig id = "siteScreen">-->
@@ -69,12 +69,13 @@
         </componentConfig>
 
         <componentConfig id = 'btv'>
-            <component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action=""/>
-            <component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]' action="click"/>
-            <component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]' action="getData"/>
-            <component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]' action="getData"/>
-            <component id = "BTVTOOLTIP" selector="id" locator='barTabularChartToolTip' action="getToolTipData" wait = "skip"/>
-            <component id = "bar" selector="class name" locator='bar1' action="hover"/>
+            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
+            <component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]' locatorDimension ='class' locatorText = 'column0' action="click" wait = 'skip'/>
+            <component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]' locatorDimension ='class' locatorText = 'column1' action="getData" wait = 'skip'/>
+            <component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]' locatorDimension ='class' locatorText = 'column2' action="getData" wait = 'skip'/>
+            <component id = "BTVTOOLTIP" selector="id" locator='barTabularChartToolTip' locatorDimension ='id' locatorText = 'barTabularChartToolTip' action="getToolTipData" wait = 'skip'/>
+            <component id = "bar" selector="class name" locator='bar1' locatorDimension ='class' locatorText = 'bar1' action="hover" wait = 'skip'/>
+            <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
         </componentConfig>
         <componentConfig id = 'cm'>
             <component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay' action="click"/>

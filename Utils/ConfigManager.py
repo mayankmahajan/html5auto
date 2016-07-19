@@ -18,6 +18,7 @@ class ConfigManager(object):
         self.root = self.tree.getroot()
         self.screenComponentRelations = self.getScreenComponentRelations()
         self.componentChildRelations = self.getComponentChildRelations()
+        self.screenSelectors = self.getScreenConfigs()
         self.componentSelectors = self.getComponentSelectors()
 
     def __new__(cls):
