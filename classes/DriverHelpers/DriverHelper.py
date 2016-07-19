@@ -1,3 +1,16 @@
+#!/usr/bin/env python
+##############################################################
+'''
+Driver Helper Class
+supplies Webdriver controller
+'''
+__author__      = "Mayank Mahajan"
+__email__       = 'mayank.mahajan@guavus.com'
+__version__     = "1.0"
+__maintainer__  = "Mayank Mahajan"
+##############################################################
+
+
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from classes.DriverHelpers.CustomWebDriverWait import CustomWebDriverWait
@@ -6,13 +19,6 @@ from Utils.Constants import *
 from selenium.webdriver import ActionChains
 from Utils.ConfigManager import ConfigManager
 import time
-
-
-
-# class Actions:
-#     def __init__(self,driver):
-#         self.driver = driver
-
 
 
 class DriverHelper:

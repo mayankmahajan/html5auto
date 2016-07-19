@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+##############################################################
+'''
+Manages configs
+'''
+__author__      = "Mayank Mahajan"
+__email__       = 'mayank.mahajan@guavus.com'
+__version__     = "1.0"
+__maintainer__  = "Mayank Mahajan"
+##############################################################
+
 import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import XMLParser
 from xml.etree.ElementTree import TreeBuilder
