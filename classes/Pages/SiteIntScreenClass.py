@@ -1,6 +1,7 @@
 from BasePageClass import BasePageClass
 from classes.Components.BTVComponentClass import BTVComponentClass
 from classes.Components.ContextMenuComponentClass import *
+from classes.Components.SwitcherComponentClass import *
 class SiteIntScreenClass(BasePageClass):
     def __init__(self,driver):
         '''
@@ -8,6 +9,7 @@ class SiteIntScreenClass(BasePageClass):
         '''
         self.driver = driver
         self.btv = BTVComponentClass()
+        self.switcher = SwitcherComponentClass()
         self.cm = ContextMenuComponentClass()
 
     def testComponents(self):

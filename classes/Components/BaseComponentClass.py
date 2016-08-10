@@ -2,6 +2,7 @@
 # from selenium import webdriver
 # webdriver.Firefox().find_element_by_xpath().send_keys()
 from Utils.UnitSystem import UnitSystem
+from Utils.ConfigManager import ConfigManager
 
 class BaseComponentClass:
     def m_click(self,elHandle):
@@ -46,4 +47,13 @@ class BaseComponentClass:
 
     def __init__(self):
         self.unitSystem = UnitSystem()
+        self.configmanager = ConfigManager()
+
+
+    def compHandlers(self,comp,handlers):
+        newHandlers = {}
+        for k,v in handlers.iteritems():
+            if k in self.configmanager.componentChildRelations[comp]:
+                newHandlers[k] = v
+        return newHandlers
 

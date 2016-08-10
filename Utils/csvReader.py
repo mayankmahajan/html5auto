@@ -14,4 +14,5 @@ class CSVReader :
                 d1[keys[j]] = a[i].split(',')[j]
 
             d[a[i].split(',')[0]] = d1
+        print d
         return d

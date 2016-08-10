@@ -1,7 +1,8 @@
 class Constants(object):
 
     #testcase based constants
-    URL = 'https://nrmca-new.guavus.com:6443'
+    URL = 'https://acume-staging.guavus.com:6443/'
+    # URL = 'https://nrmca-perf.guavus.com:6443/'
     USERNAME = 'admin'
     PASSWORD = 'Admin@123'
     SITES = 'SITES'
@@ -17,7 +18,7 @@ class Constants(object):
     DRILLTOSITEINTERACTION = 'DRILLTOSITEINTERACTION'
 
     # driver based constants
-    WEBDRIVERTIMEOUT = 100
+    WEBDRIVERTIMEOUT = 15
 
     # Component based constants
     ## BTV

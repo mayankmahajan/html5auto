@@ -7,7 +7,10 @@ class CustomWebDriverWait(WebDriverWait):
         super(CustomWebDriverWait,self).__init__(driver, timeout)
 
     def until(self, method, message=''):
-        startTime = time()
-        super(CustomWebDriverWait,self).until(method)
-        timeTaken = time() - startTime
-        logger.debug("Time Taken for %s element :: %s seconds", method.locator[1],timeTaken)
+        try:
+            startTime = time()
+            super(CustomWebDriverWait,self).until(method)
+            timeTaken = time() - startTime
+            logger.debug("Time Taken for %s element :: %s seconds", method.locator[1],timeTaken)
+        except Exception as e:
+            print e

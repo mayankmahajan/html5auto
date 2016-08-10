@@ -10,6 +10,8 @@
             <!--Screen Components-->
             <!--<component id = "btv"/>-->
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>
+            <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />
             <!--<component id = "btv1"/>-->
             <!--<component id = "summaryCard"/>-->
 
@@ -19,7 +21,21 @@
         <screenConfig id = "siteInteraction_Screen">
             <!--Screen Components-->
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "siteInteraction_barTabularView")]' action="" parent="True"/>
+            <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
+            <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+
         </screenConfig>
+
+        <screenConfig id = "vrf_Screen">
+            <!--Screen Components-->
+            <component id = "btv" selector="xpath" locator='//*[contains(@id, "vrf_barTabularView")]' action="" parent="True"/>
+            <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
+            <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+
+        </screenConfig>
+
 
     </screenConfigs>
 </data>

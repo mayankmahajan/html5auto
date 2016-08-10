@@ -1,13 +1,19 @@
 from BasePageClass import BasePageClass
 from classes.Components.BTVComponentClass import BTVComponentClass
 from classes.Components.ContextMenuComponentClass import *
+from classes.Components.SwitcherComponentClass import *
+from classes.Components.TableComponentClass import *
+
 class SitePageClass(BasePageClass):
     def __init__(self,driver):
         '''
         Constructor
         '''
         self.driver = driver
+
         self.btv = BTVComponentClass()
+        self.switcher = SwitcherComponentClass()
+        self.table = TableComponentClass()
         self.cm = ContextMenuComponentClass()
 
     def testComponents(self):

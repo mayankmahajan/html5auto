@@ -77,6 +77,21 @@
             <component id = "bar" selector="class name" locator='bar1' locatorDimension ='class' locatorText = 'bar1' action="hover" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
         </componentConfig>
+        <componentConfig id = 'switcherView'>
+            <component id = "TABLEVIEW" selector="id" locator="view_tableview" locatorDimension ='id' locatorText = 'view_tableview' action="click" wait = 'skip' parentDependency="False"/>
+            <component id = "CHARTVIEW" selector="id" locator="view_chartview" locatorDimension ='id' locatorText = 'view_chartview' action="click" wait = 'skip' parentDependency="False"/>
+        </componentConfig>
+
+        <componentConfig id = 'table'>
+            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
+            <!--<component id = "HEADERROW" selector="id" locator='agText' locatorDimension ='id' locatorText = 'agText' action="getData" wait = 'skip'/>-->
+            <component id = "HEADERROW" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
+
+            <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
+            <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
+        </componentConfig>
+
+
         <componentConfig id = 'cm'>
             <component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay' action="click"/>
             <component id = "DRILLTO" selector="id" locator='frameworkDrill' action="click"/>

@@ -19,6 +19,7 @@ from Utils.Constants import *
 from selenium.webdriver import ActionChains
 from Utils.ConfigManager import ConfigManager
 import time
+from Utils.logger import *
 
 
 class DriverHelper:
@@ -50,28 +51,53 @@ class DriverHelper:
                 if comp in self.configManager.componentChildRelations[eachComp]:
                     if wait:
                         print comp,locator
-                        CustomWebDriverWait(parentHandles[eachComp][0], Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                        try:
+                            CustomWebDriverWait(parentHandles[eachComp][len(parentHandles[eachComp])-1], Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                        except Exception as e:
+                            logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                            continue
+
 
                     if locatorDimension != '':
                         # tempChilds = []
-                        for eachChild in parentHandles[eachComp][0].find_elements('xpath','.//*'):
+                        for eachChild in parentHandles[eachComp][len(parentHandles[eachComp])-1].find_elements('xpath','.//*'):
                             try:
                                 if locatorText in eachChild.get_attribute(locatorDimension):
                                     tempChildHandles.append(eachChild)
-                            except:
+                            except Exception as e:
+                                # logger.debug("SwitcherCard Selection : %s",screenInstance.switcher.getSelection(handles))
+                                # logger.info("Called for DriverHelper.py :: LINE 69")
+                                # logger.debug("Exception Caught while getting handles for comp: %s , locatorDimension: %s , locatorText: %s , %s ", comp, locatorDimension, locatorText )
                                 pass
+                        return tempChildHandles
                     else:
                         tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
+                        return tempChildHandles
                 else:
                     if wait:
-                        CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                        try:
+                            CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                        except Exception as e:
+                            logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                            continue
+                    else:
+                        continue
                     tempChildHandles = tempChildHandles + self.driver.find_elements(*locator)
+                    return tempChildHandles
         else:
             if wait:
-                CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
-            tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
+                try:
+                    CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                except Exception as e:
+                    logger.debug("Exception occured while getting the component with %s %s",locator,e)
 
-        return tempChildHandles
+            tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
+            return tempChildHandles
+
+        # return tempChildHandles
+
+
+
 
 
 
@@ -88,8 +114,12 @@ class DriverHelper:
         dict_element_handlers = {}
         for element,locator in element_locator_pairs.iteritems():
             print(element,locator)  # parentHandles['btv'][0].find_elements('xpath','.//*')[2].get_attribute('class')
-            CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
-            dict_element_handlers[element] = self.driver.find_elements(*locator)
+            try:
+                CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                dict_element_handlers[element] = self.driver.find_elements(*locator)
+            except:
+                pass
         return dict_element_handlers
 
 # webdriver.Firefox().find_element_by_tag_name().find_element_by_xpath('//*[contains(@class, "column0")]').
+# webdriver.Firefox().find_element_by_xpath('//*[contains(@class, "column0")]')

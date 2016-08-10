@@ -76,25 +76,27 @@ class BTVComponentClass(BaseComponentClass):
         data = dict(zip(c1,c2))
         return data
 
-    def getData(self,handlers):
+    def getData(self,handlrs):
         '''
         Returns Data as Dictionary with Name and Value
         :param handlers: Handlers to all the components
         :return: Data from the Bar Chart
         '''
         data = {}
+        handlers = self.compHandlers('btv',handlrs)
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[key]["action"] == "getData":
                 data[key] = self.getDataforColumn(value)
         return data
 
-    def setSelection(self,index,handlers):
+    def setSelection(self,index,handlrs):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
         :param index: Index to be selected
         :param handlers: Handlers to BarChart
         :return: True/False
         '''
+        handlers = self.compHandlers('btv',handlrs)
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[key]["action"] == "click":
                 selectedIndex = self.getSelectionIndex(value)
@@ -104,20 +106,25 @@ class BTVComponentClass(BaseComponentClass):
                     self.setSelectionIndex(index,value)
                     self.setSelectionIndex(selectedIndex,value)
 
-    def getSelection(self,handlers):
+    def getSelection(self,handlrs):
         '''
         This method gives the selected Index, its Corresponding Text and Value
         :param handlers: handler to barChart
         :return: Selected Data
         '''
         data = {}
+        handlers = self.compHandlers('btv',handlrs)
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[key]["action"] == "click":
                 data['selIndex'] = self.getSelectionIndex(value)
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[key]["action"] == "getData":
-                data[key] = value[data['selIndex']].text
+                if 'selIndex' in data:
+                    data[key] = value[data['selIndex']].text
         return data
+
+    # def compHandlers(self,handlers):
+    #     return self.configmanager.componentChildRelations['btv']
 
 
     def launchToolTip(self,driver,driverHelper,elHandle):
@@ -135,13 +142,15 @@ class BTVComponentClass(BaseComponentClass):
             data.append(elHandle['getToolTipData'][0].text)
         return data
 
-    def getToolTipInfo(self,driver,driverHelper,handlers):
+    def getToolTipInfo(self,driver,driverHelper,handlrs):
         '''
 
         :param tipHandle:
         :return:
         '''
         data = []
+        handlers = self.compHandlers('btv',handlrs)
+
         toolTipHandlers = {}
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[key]["action"] == "hover":
