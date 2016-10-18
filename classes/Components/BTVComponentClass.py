@@ -138,7 +138,7 @@ class BTVComponentClass(BaseComponentClass):
         for i in range(0,len(elHandle['hover'])):
             driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
             # adding hardcoded timeout (will be driven by Config)
-            # time.sleep(2)
+            time.sleep(2)
             data.append(elHandle['getToolTipData'][0].text)
         return data
 

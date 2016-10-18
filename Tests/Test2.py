@@ -12,8 +12,10 @@ class Test2(unittest.TestCase):
 
 
     def setUp(self):
+        sleep(5)
         logger.info('**************Test2 started**************')
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
+        # self.driver = webdriver.Firefox()
         self.driver.get(Constants.URL)
         self.driverHelper = DriverHelper(self.driver)
 

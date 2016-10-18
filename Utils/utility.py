@@ -162,6 +162,15 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
         # screenInstance.scrollToElement(driver,handles)
         # if 'siteInteraction_Screen' in pageName:
         print screenInstance.table.getData(driver,handles)
+        print screenInstance.table.sortTable(driver,handles,"Total Tonnage(%)")
+
+        parentHandles = getHandlersForParentComponent(driver,driverHelper,configManager,pageName)
+        handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
+
+        screenInstance.table.getSortedColumn(driver,handles)
+
+
+
         # driver.execute_script("return arguments[0].scrollIntoView();", handles['ROWS'][len(handles['ROWS'])-1])
 
 
@@ -201,25 +210,29 @@ def testScreen(driver,driverHelper,pageName,isStartScreen=False):
         data['btvSelection'] = screenInstance.btv.getSelection(handles)
         for key,value in data['btvSelection'].iteritems():
             logger.debug('Selection : %s ',value)
-        screenInstance.btv.setSelection(2,handles)
-        logger.info("Setting index --> 2")
+        screenInstance.btv.setSelection(3,handles)
+        logger.info("Setting index --> 3")
         data['btvSelection'] = screenInstance.btv.getSelection(handles)
         for key,value in data['btvSelection'].iteritems():
             logger.debug('Selection : %s ',value)
         data['btvTooltipData'] = screenInstance.btv.getToolTipInfo(driver,driverHelper,handles)
         for i in range(0,len(data['btvTooltipData'])):
             logger.debug('Tooltip %s : %s ',i,data['btvTooltipData'][i])
-        # result1 = screenInstance.btv.validateToolTipData(data)
-        # for key,value in result1.iteritems():
-        #     logger.debug('DIMENSION : %s  and RESULT : %s',key,value)
 
+        # #####
+        # Need to comment if not run
+
+        result1 = screenInstance.btv.validateToolTipData(data)
+        for key,value in result1.iteritems():
+            logger.debug('DIMENSION : %s  and RESULT : %s',key,value)
+        #
         # csvreader = CSVReader()
         # result2 = screenInstance.btv.validateBTVData(data,csvreader.csvData)
         # logger.info("********* Logging Data Validation Results *********")
         # for key,value in result2.iteritems():
         #     logger.debug('DIMENSION : %s  and RESULT : %s',key,value)
 
-
+        # #####
 
         # testing Table
 

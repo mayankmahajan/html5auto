@@ -12,6 +12,7 @@ class Test4(unittest.TestCase):
 
 
     def setUp(self):
+        sleep(5)
         logger.info('**************Test4 started**************')
         self.driver = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
         # self.driver = webdriver.Firefox()

@@ -12,10 +12,12 @@ class Test6(unittest.TestCase):
 
 
     def setUp(self):
+        sleep(5)
         logger.info('**************Test6 started**************')
         self.driver = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
         # self.driver = webdriver.Firefox()
         self.driver.get(Constants.URL)
+        # self.driver.get("https://nrmca-upgrade-setup.sprintspectrum.com:6443/")
         self.driverHelper = DriverHelper(self.driver)
 
 

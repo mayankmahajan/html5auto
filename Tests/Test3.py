@@ -12,13 +12,15 @@ class Test3(unittest.TestCase):
 
 
     def setUp(self):
+        sleep(5)
         logger.info('**************Test3 started**************')
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
+        # self.driver = webdriver.Firefox()
         self.driver.get(Constants.URL)
         self.driverHelper = DriverHelper(self.driver)
 
 
-    def test_vrf(self):
+    def test_nf(self):
         # Login to Page
         login(self.driver,self.driverHelper,Constants.USERNAME,Constants.PASSWORD)
         # Launch Sites Page

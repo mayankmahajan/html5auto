@@ -89,6 +89,12 @@
 
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
+            <component id = "SORTCOLUMN" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
+            <component id = "CHECKSORT" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'>
+                    <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
+                    <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
+                    <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
+            </component>
         </componentConfig>
 
 

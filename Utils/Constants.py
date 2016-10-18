@@ -1,7 +1,8 @@
 class Constants(object):
 
     #testcase based constants
-    URL = 'https://acume-staging.guavus.com:6443/'
+    # URL = 'https://acume-staging.guavus.com:6443/'
+    URL = 'localhost:3333/ui/app/'
     # URL = 'https://nrmca-perf.guavus.com:6443/'
     USERNAME = 'admin'
     PASSWORD = 'Admin@123'

@@ -1,6 +1,7 @@
 from BaseComponentClass import BaseComponentClass
 from copy import deepcopy
-
+from Utils.logger import *
+from time import *
 class TableComponentClass(BaseComponentClass):
     colCount = 0
     rowCount = 0
@@ -53,7 +54,7 @@ class TableComponentClass(BaseComponentClass):
                     continue
                 elif i >= self.colCount and i < (self.colCount+self.rowCount):
                     c1.append(elHandle[i].text)
-                    continue    
+                    continue
                 else:
                     if len(tr) == self.colCount-1:
                         r.append(tr)
@@ -97,6 +98,71 @@ class TableComponentClass(BaseComponentClass):
             temp[totalKey][measures[j-1]] = d['FOOTERROW'][j]
 
         return temp
+
+    def sortTable(self,driver,h,measure,order='ASC'):
+
+        '''
+
+        :param driver:
+        :param h:
+        :param measure:
+        :param order:
+        :return:
+        '''
+
+        handlers = self.compHandlers('table',h)
+        #HardCoded for time being
+        try:
+            driver.execute_script("return arguments[0].scrollIntoView();", handlers['ROWS'][len(handlers['ROWS'])-1])
+        except:
+            pass
+
+        for key,value in handlers.iteritems():
+            if self.configmanager.componentSelectors[key]["action"] == "sort":
+
+                # This has to be unique for every component
+                # if 'HEADER' in key.upper():
+                for eachHandler in handlers[key]:
+                    if eachHandler.text == measure:
+                        driver.execute_script("return arguments[0].scrollIntoView();", handlers['ROWS'][len(handlers['ROWS'])-self.colCount+1])
+                        try:
+                            eachHandler.click()
+                            logger.info("Column with Measure : %s sorted ASC", measure)
+                        except Exception as e:
+                            logger.error("Exception Caught : %s", str(e))
+                        return order
+
+                        # logger.info("Column with Measure : %s sorted ASC", measure)
+                        # time.sleep (5)
+                        # if order == "ASC":
+                        #     return order
+                        # else:
+                        #     eachHandler.click()
+                        #     logger.info("Column with Measure : %s sorted DSC", eachHandler.text)
+                        #     return order
+
+    def getSortedColumn(self,driver,h):
+        '''
+
+        :param driver:
+        :param h:
+        :return:
+        '''
+        handlers = self.compHandlers('table',h)
+        try:
+            driver.execute_script("return arguments[0].scrollIntoView();", handlers['ROWS'][len(handlers['ROWS'])-1])
+        except:
+            pass
+
+
+
+
+
+
+
+
+
+
 
 
 

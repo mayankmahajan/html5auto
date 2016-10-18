@@ -8,10 +8,12 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 
 
+
 class Test7(unittest.TestCase):
 
 
     def setUp(self):
+        sleep(5)
         logger.info('**************Test7 started**************')
         self.driver = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
         # self.driver = webdriver.Firefox()

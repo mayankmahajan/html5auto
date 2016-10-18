@@ -12,6 +12,7 @@ class Test5(unittest.TestCase):
 
 
     def setUp(self):
+        sleep(5)
         logger.info('**************Test5 started**************')
         self.driver = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
         # self.driver = webdriver.Firefox()
@@ -23,7 +24,7 @@ class Test5(unittest.TestCase):
         # Login to Page
         login(self.driver,self.driverHelper,Constants.USERNAME,Constants.PASSWORD)
         # Launch Sites Page
-        testScreen(self.driver,self.driverHelper,"siteScreen")
+        testScreen(self.driver,self.driverHelper,"site_Screen",True)
         drilltoScreen(self.driver,self.driverHelper,Constants.NETWORKFUNCTIONS)
 
 
