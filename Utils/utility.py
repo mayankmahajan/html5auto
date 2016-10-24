@@ -250,6 +250,38 @@ def testScreen(driver,driverHelper,pageName,isStartScreen=False):
 
 
 
+def dummy_testScreen(driver,driverHelper,pageName,isStartScreen=False):
+    try:
+        # Config Parsing Part
+        data = {}
+        if isStartScreen:
+            configManager = launchPage(driver,driverHelper,pageName)
+        else:
+            configManager = ConfigManager()
+        # tempString = '//*[contains(@id, "' + pageName.split('_')[0]+'_barTabularView")]'
+        # configManager.componentSelectors['btv']['locator'] = tempString
+        parentHandles = getHandlersForParentComponent(driver,driverHelper,configManager,pageName)
+
+        handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
+
+        screenInstance = getScreenInstance(driver,pageName)
+        measure="Tonnage"
+        screenInstance.measure.doSelection(handles,measure)
+        return True
+
+
+
+
+
+    except ValueError:
+        return ValueError
+
+
+
+
+
+
+
 
 def testBTV(driver,driverHelper):
     try:
