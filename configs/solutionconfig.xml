@@ -12,12 +12,28 @@
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>
             <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />
+            <!--<component id = "measure" selector="id" locator='tableview' childOf="" action="" parent="True" />-->
+            <component id = "primaryMeasure" parent="False"/>
+            <!--<component id = "signin" parent="False"/>-->
+            <!--<component id = "signin" parent="False"/>-->
             <!--<component id = "btv1"/>-->
             <!--<component id = "summaryCard"/>-->
 
             <!--Context Menu Options-->
             <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
         </screenConfig>
+        <!--<screenConfig id = "site_Screen">-->
+            <!--&lt;!&ndash;Screen Components&ndash;&gt;-->
+            <!--&lt;!&ndash;<component id = "btv"/>&ndash;&gt;-->
+            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>-->
+            <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>-->
+            <!--<component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />-->
+            <!--&lt;!&ndash;<component id = "btv1"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<component id = "summaryCard"/>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;Context Menu Options&ndash;&gt;-->
+            <!--&lt;!&ndash;<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>&ndash;&gt;-->
+        <!--</screenConfig>-->
         <screenConfig id = "siteInteraction_Screen">
             <!--Screen Components-->
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "siteInteraction_barTabularView")]' action="" parent="True"/>

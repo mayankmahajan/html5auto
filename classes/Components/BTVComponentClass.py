@@ -104,7 +104,7 @@ class BTVComponentClass(BaseComponentClass):
                     return True
                 else:
                     self.setSelectionIndex(index,value)
-                    self.setSelectionIndex(selectedIndex,value)
+                    # self.setSelectionIndex(selectedIndex,value)
 
     def getSelection(self,handlrs):
         '''

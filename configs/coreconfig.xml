@@ -51,6 +51,12 @@
 
     <componentConfigs>
 
+
+        <componentConfig id="primaryMeasure">
+            <component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>
+        </componentConfig>
+
+
         <componentConfig id="username">
             <component id = "username" value = "admin" selector = 'id' locator = 'username' action="sendKeys" />
         </componentConfig>

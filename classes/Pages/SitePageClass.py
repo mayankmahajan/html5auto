@@ -3,6 +3,7 @@ from classes.Components.BTVComponentClass import BTVComponentClass
 from classes.Components.ContextMenuComponentClass import *
 from classes.Components.SwitcherComponentClass import *
 from classes.Components.TableComponentClass import *
+from classes.Components.MeasureComponentClass import *
 
 class SitePageClass(BasePageClass):
     def __init__(self,driver):
@@ -15,6 +16,7 @@ class SitePageClass(BasePageClass):
         self.switcher = SwitcherComponentClass()
         self.table = TableComponentClass()
         self.cm = ContextMenuComponentClass()
+        self.measure = MeasureComponentClass()
 
     def testComponents(self):
         return ""
