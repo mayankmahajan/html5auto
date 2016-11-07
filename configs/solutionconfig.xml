@@ -6,14 +6,41 @@
             <!--<component id = "exploreList"/>-->
         <!--</screenConfig>-->
 
+
+         <screenConfig id = "segment_Screen">
+             <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
+
+            <component id = "table" selector="css selector" locator='[class="ag-fresh"]' childOf="" action="" parent="True" />
+        </screenConfig>
+
+
+
+        <screenConfig id = "nf_Screen">
+             <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
+
+            <component id = "pielegend" selector="id" locator='legendCon1' childOf="" action="" parent="True" />
+        </screenConfig>
+
+
+
+
+
+
         <screenConfig id = "site_Screen">
+            class="measureselectors ng-scope"
+            <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
+            <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
+            <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
             <!--Screen Components-->
             <!--<component id = "btv"/>-->
-            <component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>
-            <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
-            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />
+
+            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>-->
+            <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>-->
+            <!--<component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />-->
+
+
             <!--<component id = "measure" selector="id" locator='tableview' childOf="" action="" parent="True" />-->
-            <component id = "primaryMeasure" parent="False"/>
+            <!--<component id = "primaryMeasure" parent="False"/>-->
             <!--<component id = "signin" parent="False"/>-->
             <!--<component id = "signin" parent="False"/>-->
             <!--<component id = "btv1"/>-->
