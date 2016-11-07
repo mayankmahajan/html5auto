@@ -5,6 +5,20 @@
         <timeout id="timeout" value="100"/>
     </seleniumSettings>
 
+    <quicklinks>
+        <quicklink id = "TODAY"/>
+        <quicklink id = "YESTERDAY"/>
+        <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
+        <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
+    </quicklinks>
+
+    <measures>
+        <measure id = "Bitrate_downlink_absolute_average"/>
+        <measure id = "Tonnage_downlink_absolute_average"/>
+        <measure id = "Flows_downlink_absolute_peak"/>
+        <measure id = "Wan-Cost($)_downlink_absolute"/>
+    </measures>
+
     <!--Add UserInfo-->
 
     <listOfScreens id = "screenList">
@@ -48,13 +62,38 @@
 
         <!--</screenConfig>-->
     </screenConfigs>
+    <!--<measureList>-->
+        <!--<measure-->
+    <!--</measureList>-->
 
     <componentConfigs>
 
-
-        <componentConfig id="primaryMeasure">
+        <componentConfig id="measureselectors">
             <component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>
+            <component id = "average" selector="css selector" locator='[title="Aggregate/Average"]' action="click"/>
+            <component id = "peak" selector="css selector" locator='[title="Peak"]' action="click"/>
+            <component id = "downlink" selector="css selector" locator='[title="Downlink"]' action="click"/>
+            <component id = "uplink" selector="css selector" locator='[title="Uplink"]' action="click"/>
+            <component id = "total" selector="css selector" locator='[title="Total"]' action="click"/>
+            <component id = "absolute" selector="css selector" locator='[title="Absolute"]' action="click"/>
+            <component id = "percentage" selector="css selector" locator='[title="Percentage"]' action="click"/>
         </componentConfig>
+
+        <componentConfig id = "timeRangeDiv">
+            <component id = "1" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>
+            <component id = "2" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
+        </componentConfig>
+
+        <componentConfig id="pielegend">
+            <component id = "COL1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="getData" wait = 'skip'/>
+            <component id = "COL2" selector="class" locator='col2' locatorDimension ='class' locatorText = 'col2' action="getData" wait = 'skip'/>
+            <component id = "legendText" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
+            <component id = "legendText_selection" selector="class" locator='legendText selected' locatorDimension ='class' locatorText = 'legendText selected' action="click" wait = 'skip'/>
+
+
+        </componentConfig>
+
+
 
 
         <componentConfig id="username">
@@ -71,7 +110,9 @@
 
         <componentConfig id = 'exploreList'>
             <component id = "exploreList" selector="css selector" locator='[ng-mouseover="vm.showTooltip(startPoint,$index)"]' action=""/>
-            <component id = "sites" selector="xpath" locator='//*[contains(@id, "exploreLabel0")]' action="click"/>
+            <component id = "site_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel0")]' action="click"/>
+            <component id = "nf_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel1")]' action="click"/>
+            <component id = "interface_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel2")]' action="click"/>
         </componentConfig>
 
         <componentConfig id = 'btv'>

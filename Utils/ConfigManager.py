@@ -24,9 +24,10 @@ class ConfigManager(object):
     def __init__(self):
         # self.tree = self.mergeScreenConfigs()
         # self.tree = self.parse()
-        self.tree = XMLCombiner(['/Users/mayank.mahajan/PycharmProjects/html5automation/configs/coreconfig.xml', '/Users/mayank.mahajan/PycharmProjects/html5automation/configs/solutionconfig.xml']).combine()
+        self.tree = XMLCombiner(['../configs/coreconfig.xml', '../configs/solutionconfig.xml']).combine()
 
         self.root = self.tree.getroot()
+        self.quickLinks = self.getQuickLinks()
         self.screenComponentRelations = self.getScreenComponentRelations()
         self.componentChildRelations = self.getComponentChildRelations()
         self.screenSelectors = self.getScreenConfigs()
@@ -37,6 +38,39 @@ class ConfigManager(object):
             ConfigManager.__instance = object.__new__(cls)
         # ConfigManager.__instance.val = val
         return ConfigManager.__instance
+
+
+    def getQuickLinks(self):
+        screenConfigs = self.tree.getiterator('quicklinks')
+        # screenConfigDetails = []
+        tempDict = {}
+        for child in screenConfigs:
+            # tempArray = []
+            # tempDict = {}
+            # tempDict[child.attrib['id']] = {}
+
+            childComponents = child.findall('quicklink')
+            for component in childComponents:
+                # tempDict[child.attrib['id']]
+                tempDict[component.attrib['id']] = {}
+                tempDict[component.attrib['id']] = component.attrib
+                # screenConfigDetails.append(tempDict)
+        return tempDict
+
+    def getNodeElements(self,parent,children):
+        parentConfigs = self.tree.getiterator(parent)
+        # screenConfigDetails = []
+        tempDict = {}
+        for child in parentConfigs:
+            childComponents = child.findall(children)
+            for component in childComponents:
+                # tempDict[child.attrib['id']]
+                tempDict[component.attrib['id']] = {}
+                tempDict[component.attrib['id']] = component.attrib
+        return tempDict
+
+
+
 
     def getScreenConfigs(self):
         screenConfigs = self.tree.getiterator('screenConfig')

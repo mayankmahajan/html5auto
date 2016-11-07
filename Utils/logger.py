@@ -6,7 +6,7 @@ logger.setLevel(logging.DEBUG)
 
 
 # Create a log handler
-handler = logging.FileHandler('/Users/mayank.mahajan/PycharmProjects/html5automation/logs/logs.txt')
+handler = logging.FileHandler('../logs/logs.txt')
 handler.setLevel(logging.DEBUG)
 
 # Format Logs

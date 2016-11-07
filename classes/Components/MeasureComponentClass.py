@@ -1,5 +1,6 @@
 from BaseComponentClass import BaseComponentClass
 from Utils.ConfigManager import ConfigManager
+import time
 
 class MeasureComponentClass(BaseComponentClass):
 
@@ -9,16 +10,37 @@ class MeasureComponentClass(BaseComponentClass):
 
 
     def doSelection(self,h,measure):
-        handlers = self.compHandlers('primaryMeasure',h)
-        for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "click":
-                self.setMeasure(measure,value)
+        handlers = self.compHandlers('measureselectors',h)
+        measureArr=measure.split("_")
+        measureName=measureArr[0]
+        downUpTotal=measureArr[1]
+        absPerc=measureArr[2]
+        self.setMeasureName(measureName,handlers['primaryMeasure'])
+        self.select(handlers[downUpTotal])
+        self.select(handlers[absPerc])
+        try:
+            avgPeak=measureArr[3]
+            self.select(handlers[avgPeak])
+        except:
+            print "Got Measure without Peak/Average %s",measureName
+
+
+        #
+        #
+        #
+        # for key,value in handlers.iteritems():
+        #     if self.configmanager.componentSelectors[key]["action"] == "click":
+        #         self.setMeasure(measure,value)
 
 
 # handlers['primaryMeasure'][0].find_element_by_xpath("//option[text()='Flows']").click()
 
-    def setMeasure(self,measure,handle):
+    def setMeasureName(self,measure,handle):
         meaurePath="//option[text()='" + measure + "']"
         handle[0].find_element_by_xpath(meaurePath).click()
+
+    def select(self,handle):
+        handle[0].click()
+        time.sleep(1) #Sets 1 second delay so as to make sure Main Charts drawn properly
 
 

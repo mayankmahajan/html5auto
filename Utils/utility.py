@@ -11,27 +11,55 @@ __maintainer__  = "Mayank Mahajan"
 
 
 from Utils.logger import *
+from Utils.resultlogger import *
 from classes.DriverHelpers.locators import *
 from classes.Pages import ExplorePageClass
 from classes.Pages.LoginPageClass import *
 from classes.Pages.ExplorePageClass import *
 from classes.Pages.SitePageClass import *
+from classes.Pages.MRX_SegmentPageClass import *
 from classes.DriverHelpers.DriverHelper import *
 from Utils.ConfigManager import ConfigManager
 from copy import deepcopy
 from Utils.csvReader import CSVReader
 import time
 
-
+# def setUp():
+#     obj={}
+#     obj.d = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver')
+#     obj.d.get(Constants.URL)
+#     obj.dH = DriverHelper(obj.d)
+#     obj.cM = ConfigManager()
+#     return obj
 
 def setupTestcase(self):
     self.driver = webdriver.Firefox()
     self.driverHelper = DriverHelper(self.driver)
     return True
 
-def login(driver,driverHelper,username,password):
+
+def checkEqualAssert(f1,f2,message=""):
+    msg = message
+    tcPass = "PASS<br>"
+    tcFail = "<b><font color='red'>FAIL</font></b><br>"
     try:
-        configmanager = ConfigManager()
+        assert f1 in f2
+        msg = msg+tcPass
+        resultlogger.info(msg)
+    except AssertionError:
+
+        msg = msg+tcFail
+        resultlogger.info(msg)
+
+
+
+def login(obj,username,password):
+    try:
+        driver = obj.d
+        driverHelper = obj.dH
+        configmanager = obj.cM
+        # configmanager = ConfigManager()
+        # configmanager = configmanager
         configs = configmanager.componentSelectors
         # configs = configmanager.getComponentConfigs()
         loginConfigs = deepcopy(configs)
@@ -55,18 +83,23 @@ def login(driver,driverHelper,username,password):
     except ValueError:
         return ValueError
 
-def launchPage(driver,driverHelper,pageName):
+def launchPage(obj,pageName,isStartScreen=False):
     try:
+        driver = obj.d
+        driverHelper = obj.dH
+        configmanager = obj.cM
         explorePage = ExplorePageClass(driver)
         # exploreListHandler = driverHelper.waitForVisibleElements(ExplorePageLocators.EXPLORELIST)
         # elHandler = explorePage.exploreList.getHandlerToPage(exploreListHandler,pageName)
 
-        configmanager = ConfigManager()
+        # configmanager = ConfigManager()
         # screenConfigs = deepcopy(configmanager.getScreenConfigs())
         screenConfigs = deepcopy(configmanager.componentSelectors)
         componentConfigsPerScreen = deepcopy(configmanager.getComponentConfigsPerScreen('exploreScreen'))
 
-        locator = (screenConfigs['sites']['selector'],screenConfigs['sites']['locator'])
+        # locator = (screenConfigs['sites']['selector'],screenConfigs['sites']['locator'])
+        locator = (screenConfigs[pageName]['selector'],screenConfigs[pageName]['locator'])
+        # locator = (screenConfigs[''])
         elHandler = driverHelper.waitForVisibleElement(locator)
         # elHandler = explorePage.exploreList.getHandlerToPage(exploreListHandler,pageName)
         explorePage.launchPage(elHandler)
@@ -265,7 +298,7 @@ def dummy_testScreen(driver,driverHelper,pageName,isStartScreen=False):
         handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
 
         screenInstance = getScreenInstance(driver,pageName)
-        measure="Tonnage"
+        measure="Flows"
         screenInstance.measure.doSelection(handles,measure)
         return True
 
@@ -329,3 +362,96 @@ def drilltoScreen(driver,driverHelper,pageName):
 
     except ValueError:
         return ValueError
+
+
+
+
+
+
+def mrxSegmentScreen(driver,driverHelper,pageName,isStartScreen=False):
+    try:
+        # Config Parsing Part
+        data = {}
+        if isStartScreen:
+            configManager = launchPage(driver,driverHelper,pageName)
+        else:
+            configManager = ConfigManager()
+        # tempString = '//*[contains(@id, "' + pageName.split('_')[0]+'_barTabularView")]'
+        # configManager.componentSelectors['btv']['locator'] = tempString
+        parentHandles = getHandlersForParentComponent(driver,driverHelper,configManager,pageName)
+
+        handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
+
+        # getting site and component instances will be moved from here.
+        screenInstance = MRX_SegmentPageClass(driver)
+        # testing Table
+
+        print screenInstance.table.getData(driver,handles)
+        print screenInstance.table.sortTable(driver,handles,"Status")
+    except ValueError:
+        return ValueError
+
+
+def testPie(driver,driverHelper,pageName,isStartScreen=False,componentList=[]):
+    try:
+        # Config Parsing Part
+        data = {}
+        if isStartScreen:
+            configManager = launchPage(driver,driverHelper,pageName)
+        else:
+            configManager = ConfigManager()
+
+        parentHandles = getHandlersForParentComponent(driver,driverHelper,configManager,pageName)
+        handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
+
+        screenInstance = getScreenInstance(driver,pageName)
+        # testing pie
+
+        print screenInstance.pielegend.getData(handles)
+        print screenInstance.pielegend.getSelection(handles)
+        print screenInstance.pielegend.setSelection(4,handles)
+        print screenInstance.pielegend.getSelection(handles)
+
+    except ValueError:
+        return ValueError
+
+
+
+def setTimeRange(obj,quicklink,pageName="site_Screen"):
+    '''
+    sets quicklinks on the particular page
+    :param obj:
+    :param quicklink:
+    :param pageName:
+    :return:
+    '''
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    screenInstance=getScreenInstance(obj.d,pageName)
+
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+
+    screenInstance.quiklinkTimeRange.setSelection(quicklink,handles)
+
+def setMeasure(obj,measure,pageName):
+    '''
+    sets quicklinks on the particular page
+    :param obj:
+    :param quicklink:
+    :param pageName:
+    :return:
+    '''
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    screenInstance=getScreenInstance(obj.d,pageName)
+
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+
+    screenInstance.measure.doSelection(handles,measure)
+
+
+
