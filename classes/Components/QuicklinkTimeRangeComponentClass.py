@@ -36,10 +36,10 @@ class QuicklinkTimeRangeComponentClass(BaseComponentClass):
         :return: True/False
         '''
         handlers = self.compHandlers('timeRangeDiv',handlrs)
-        self.setSelectionIndex(quicklink,handlers[str(quicklink)])
+        self.setSelectionIndex(handlers[str(quicklink)])
 
 
-    def setSelectionIndex(self,quicklink,elHandle):
+    def setSelectionIndex(self,elHandle):
         '''
         This method send click action to a specified index
         :param index: index to be selected

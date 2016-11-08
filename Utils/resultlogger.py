@@ -10,7 +10,7 @@ handler = logging.FileHandler('../logs/result.html')
 handler.setLevel(logging.DEBUG)
 
 # Format Logs
-formattor = logging.Formatter("%(asctime)s - %(message)s")
+formattor = logging.Formatter("%(message)s")
 # formattor = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 handler.setFormatter(formattor)
 

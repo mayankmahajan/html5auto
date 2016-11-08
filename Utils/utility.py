@@ -38,14 +38,15 @@ def setupTestcase(self):
     return True
 
 
-def checkEqualAssert(f1,f2,message=""):
-    msg = message
+def checkEqualAssert(f1,f2,time,measure,message=""):
+    msg = time + " " + measure + " " + message
     tcPass = "PASS<br>"
     tcFail = "<b><font color='red'>FAIL</font></b><br>"
     try:
         assert f1 in f2
         msg = msg+tcPass
         resultlogger.info(msg)
+
     except AssertionError:
 
         msg = msg+tcFail
@@ -213,6 +214,21 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
         return ValueError
 
 
+
+def getHandle(obj,pageName):
+    '''
+    Takes out handler of the Page along with components
+    :param obj:
+    :param pageName:
+    :return:
+    '''
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    # screenInstance=getScreenInstance(obj.d,pageName)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    return handles
 
 
 def testScreen(driver,driverHelper,pageName,isStartScreen=False):
