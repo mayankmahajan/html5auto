@@ -49,7 +49,7 @@ def checkEqualAssert(f1,f2,time,measure,message=""):
 
     except AssertionError:
 
-        msg = msg+tcFail+" "+str(f1)+" "+str(f2)
+        msg = msg+" "+str(f1)+" "+str(f2)+tcFail
         resultlogger.info(msg)
 
 
@@ -105,9 +105,10 @@ def launchPage(obj,pageName,isStartScreen=False):
         # elHandler = explorePage.exploreList.getHandlerToPage(exploreListHandler,pageName)
         explorePage.launchPage(elHandler)
         logger.debug('Page Launched : %s',pageName)
-        return configmanager
-    except ValueError:
-        return ValueError
+        # sleep(4)
+        return True
+    except Exception:
+        return Exception
 
 def getHandlersForParentComponent(driver, driverHelper, configManager, pageName):
     listOfHandles = {}

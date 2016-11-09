@@ -99,6 +99,9 @@
             <component id = "tooltip" selector="id" locator='pieView_tooltip' locatorDimension ='id' locatorText = 'pieView_tooltip' action="getToolTipData" wait = 'skip'/>
             <component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>
             <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
+            <component id = "wedgeselected" selector="xpath" locator='//*[contains(@class, "_expanded")]' wait = 'skip'/>
+
+
             <!--selector="xpath" locator='//*[contains(@id, "p1_segment0")]'-->
             <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
 

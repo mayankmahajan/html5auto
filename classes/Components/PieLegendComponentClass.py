@@ -16,6 +16,7 @@ from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 import time
+from selenium.webdriver.common.keys import Keys
 
 from selenium.webdriver import ActionChains
 
@@ -30,7 +31,7 @@ class PieLegendComponentClass(BaseComponentClass):
 
 
 
-    def setSelectionIndex(self,index,elHandle):
+    def setSelectionIndex(self,driverHelper,index,elHandle):
         '''
         This method send click action to a specified index
         :param index: index to be selected
@@ -38,9 +39,12 @@ class PieLegendComponentClass(BaseComponentClass):
         :return: nothing
         '''
         for i in range(0,len(elHandle)):
-            if i == index:
-                elHandle[i].click()
-                break
+            # time.sleep(2)
+            if i in index:
+                driverHelper.action.move_to_element(elHandle[i]).key_down(Keys.COMMAND).click().key_up(Keys.COMMAND).key_up(Keys.COMMAND).perform()
+                # driverHelper.action.release().perform()
+                # elHandle[i].click()
+                # break
 
     def getSelectionIndex(self,elHandle):
         '''
@@ -48,9 +52,11 @@ class PieLegendComponentClass(BaseComponentClass):
         :param elHandle: Handler to CheckBox Column
         :return: Selected Index
         '''
+        selIndices = []
         for i in range(0,len(elHandle)):
             if "selected" in elHandle[i].get_attribute('class') :
-                return i
+                selIndices.append(i)
+        return selIndices
 
 
     def getData(self,handlrs):
@@ -79,19 +85,19 @@ class PieLegendComponentClass(BaseComponentClass):
 
         return data
 
-    def setSelection(self,index,handlrs):
+    def setSelection(self,driverHelper,indices,handlrs):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
-        :param index: Index to be selected
+        :param indices: indices to be selected
         :param handlers: Handlers to BarChart
         :return: True/False
         '''
         handlers = self.compHandlers('pielegend',handlrs)
         selectedIndex = self.getSelectionIndex(handlers['legendText'])
-        if selectedIndex == index:
+        if selectedIndex in indices:
             return True
         else:
-            self.setSelectionIndex(index,handlers['legendText'])
+            self.setSelectionIndex(driverHelper,indices,handlers['legendText'])
 
     def getSelection(self,handlrs):
         '''
@@ -102,8 +108,9 @@ class PieLegendComponentClass(BaseComponentClass):
         try:
             data = {}
             handlers = self.compHandlers('pielegend',handlrs)
-            data['selIndex'] = self.getSelectionIndex(handlers['legendText'])
-            data['legendText'] = handlers['legendText'][data['selIndex']].text
+            data['selIndices'] = self.getSelectionIndex(handlers['legendText'])
+            data['legendText'] = [handlers['legendText'][ele].text for ele in data['selIndices']]
+            # data['legendText'] = handlers['legendText'][data['selIndices']].text
             # data['legendIcon'] = handlers['legendIcon'][data['selIndex']].color # dummy line will update
             return data
         except Exception:
