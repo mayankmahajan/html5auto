@@ -27,18 +27,6 @@ class SummaryBarComponentClass(BaseComponentClass):
         BaseComponentClass.__init__(self)
         self.configmanager = ConfigManager()
 
-    def getCellInfo(self,cellHandle):
-        data = {}
-        for ele in cellHandle:
-            if ele.get_attribute("class") == "Row":
-                measure = ele.text
-            if ele.get_attribute("class") == "BottomRow":
-                data[measure] = ele.text
-        return data
-
-
-
-
 
     def getSelection(self,handlrs):
         '''
@@ -49,7 +37,6 @@ class SummaryBarComponentClass(BaseComponentClass):
         try:
             data = {}
             handlers = self.compHandlers('summarybar',handlrs)
-            # elements = [ele for ele in handlers['summaryBarTable'][len(handlers['summaryBarTable'])-1].find_elements_by_xpath(".//*")]
 
             dimensionSelected = handlers['summaryBarTable'][len(handlers['summaryBarTable'])-1].find_elements_by_class_name("LeftCell")[0].text
             measures = [ele.text for ele in handlers['summaryBarTable'][len(handlers['summaryBarTable'])-1].find_elements_by_class_name("Row")]
@@ -61,13 +48,5 @@ class SummaryBarComponentClass(BaseComponentClass):
         except Exception:
             return Exception
 
-
-    def getSelectionIndex(self,elHandle):
-        '''
-        This method gives the Selected Index of the BarChart
-        :param elHandle: Handler to CheckBox Column
-        :return: Selected Index
-        '''
-        for i in range(0,len(elHandle)):
-            if "selected" in elHandle[i].get_attribute('class') :
-                return i
+    def validateDataWithInsta(self,d1,d2):
+        return True
