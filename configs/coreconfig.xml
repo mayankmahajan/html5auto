@@ -107,6 +107,9 @@
 
         </componentConfig>
 
+        <componentConfig id ='summarybar'>
+            <component id="summaryBarTable" selector="class name" locator="summaryBarTable" locatorDimension="class" locatorText="summaryBarTable"/>
+        </componentConfig>
 
 
         <componentConfig id="username">
