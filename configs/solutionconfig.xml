@@ -18,6 +18,7 @@
         <screenConfig id = "nf_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
 
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "networkFunction_SummaryBar")]' action="" parent="True"/>
             <component id = "piechart" selector="id" locator='pieView' childOf="" action="" parent="True" />
             <component id = "pielegend" selector="id" locator='legendCon1' childOf="" action="" parent="True" />
         </screenConfig>

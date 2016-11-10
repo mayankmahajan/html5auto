@@ -125,6 +125,20 @@ class PieComponentClass(BaseComponentClass):
             data.append(elHandle['getToolTipData'].text)
         return data
 
+    def getPieSelections(self,handlrs):
+        '''
+
+        :param handlrs:
+        :return:
+        '''
+        handlers = self.compHandlers('piechart',handlrs)
+        return [ele.get_attribute('data-index') for ele in handlers['wedgeselected']]
+
+        # sels = []
+        # for ele in handlers['wedgeselected']:
+        #     sels.append(ele.get_attribute('data-index'))
+        # return sels
+
     def getToolTipInfo(self,driver,driverHelper,handlrs):
         '''
 
