@@ -15,9 +15,9 @@ class SitePageClass(BasePageClass):
         self.driver = driver
 
         self.btv = BTVComponentClass()
-        # self.switcher = SwitcherComponentClass()
-        # self.table = TableComponentClass()
-        # self.cm = ContextMenuComponentClass()
+        self.switcher = SwitcherComponentClass()
+        self.table = TableComponentClass()
+        self.cm = ContextMenuComponentClass()
         self.measure = MeasureComponentClass()
         # self.pielegend = PieLegendComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
