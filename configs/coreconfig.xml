@@ -14,9 +14,51 @@
 
     <measures>
         <measure id = "Bitrate_downlink_absolute_average"/>
+        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
+        <!--<measure id = "Flows_downlink_percentage_peak"/>-->
+        <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
+        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
+        <!--<measure id = "Bitrate_downlink_absolute_peak"/>-->
+        <!--<measure id = "Bitrate_downlink_percentage_average"/>
+        <measure id = "Bitrate_downlink_percentage_peak"/>
+        <measure id = "Bitrate_uplink_absolute_average"/>
+        <measure id = "Bitrate_uplink_absolute_peak"/>
+        <measure id = "Bitrate_uplink_percentage_average"/>
+        <measure id = "Bitrate_uplink_percentage_peak"/>
+        <measure id = "Bitrate_total_absolute_average"/>
+        <measure id = "Bitrate_total_absolute_peak"/>
+        <measure id = "Bitrate_total_percentage_average"/>
+        <measure id = "Bitrate_total_percentage_peak"/>
         <measure id = "Tonnage_downlink_absolute_average"/>
+        <measure id = "Tonnage_downlink_absolute_peak"/>
+        <measure id = "Tonnage_downlink_percentage_average"/>
+        <measure id = "Tonnage_downlink_percentage_peak"/>
+        <measure id = "Tonnage_uplink_absolute_average"/>
+        <measure id = "Tonnage_uplink_absolute_peak"/>
+        <measure id = "Tonnage_uplink_percentage_average"/>
+        <measure id = "Tonnage_uplink_percentage_peak"/>
+        <measure id = "Tonnage_total_absolute_average"/>
+        <measure id = "Tonnage_total_absolute_peak"/>
+        <measure id = "Tonnage_total_percentage_average"/>
+        <measure id = "Tonnage_total_percentage_peak"/>
+        <measure id = "Flows_downlink_absolute_average"/>
         <measure id = "Flows_downlink_absolute_peak"/>
+        <measure id = "Flows_downlink_percentage_average"/>
+        <measure id = "Flows_downlink_percentage_peak"/>
+        <measure id = "Flows_uplink_absolute_average"/>
+        <measure id = "Flows_uplink_absolute_peak"/>
+        <measure id = "Flows_uplink_percentage_average"/>
+        <measure id = "Flows_uplink_percentage_peak"/>
+        <measure id = "Flows_total_absolute_average"/>
+        <measure id = "Flows_total_absolute_peak"/>
+        <measure id = "Flows_total_percentage_average"/>
+        <measure id = "Flows_total_percentage_peak"/>
         <measure id = "Wan-Cost($)_downlink_absolute"/>
+        <measure id = "Wan-Cost($)_downlink_percentage"/>
+        <measure id = "Wan-Cost($)_uplink_absolute"/>
+        <measure id = "Wan-Cost($)_uplink_percentage"/>
+        <measure id = "Wan-Cost($)_total_absolute"/>
+        <measure id = "Wan-Cost($)_total_percentage"/>-->
     </measures>
 
     <!--Add UserInfo-->
@@ -70,30 +112,46 @@
 
         <componentConfig id="measureselectors">
             <component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>
-            <component id = "average" selector="css selector" locator='[title="Aggregate/Average"]' action="click"/>
-            <component id = "peak" selector="css selector" locator='[title="Peak"]' action="click"/>
-            <component id = "downlink" selector="css selector" locator='[title="Downlink"]' action="click"/>
-            <component id = "uplink" selector="css selector" locator='[title="Uplink"]' action="click"/>
-            <component id = "total" selector="css selector" locator='[title="Total"]' action="click"/>
-            <component id = "absolute" selector="css selector" locator='[title="Absolute"]' action="click"/>
-            <component id = "percentage" selector="css selector" locator='[title="Percentage"]' action="click"/>
+            <component id = "average" selector="css selector" locator='[title="Aggregate/Average"]' action="click" wait = 'skip'/>
+            <component id = "peak" selector="css selector" locator='[title="Peak"]' action="click" wait = 'skip'/>
+            <component id = "downlink" selector="css selector" locator='[title="Downlink"]' action="click" wait = 'skip'/>
+            <component id = "uplink" selector="css selector" locator='[title="Uplink"]' action="click" wait = 'skip'/>
+            <component id = "total" selector="css selector" locator='[title="Total"]' action="click" wait = 'skip'/>
+            <component id = "absolute" selector="css selector" locator='[title="Absolute"]' action="click" wait = 'skip'/>
+            <component id = "percentage" selector="css selector" locator='[title="Percentage"]' action="click" wait = 'skip'/>
         </componentConfig>
 
         <componentConfig id = "timeRangeDiv">
-            <component id = "1" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>
-            <component id = "2" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
+            <component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>
+            <component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
         </componentConfig>
+
+
 
         <componentConfig id="pielegend">
             <component id = "COL1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="getData" wait = 'skip'/>
             <component id = "COL2" selector="class" locator='col2' locatorDimension ='class' locatorText = 'col2' action="getData" wait = 'skip'/>
-            <component id = "legendText" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
-            <component id = "legendText_selection" selector="class" locator='legendText selected' locatorDimension ='class' locatorText = 'legendText selected' action="click" wait = 'skip'/>
-
+            <component id = "legendText_col1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
+            <component id = "legendText" selector="class" locator='legendText' locatorDimension ='class' locatorText = 'legendText' action="click" wait = 'skip'/>
+            <component id = "legendIcon" selector="class" locator='legendIcon' locatorDimension ='class' locatorText = 'legendIcon' wait = 'skip'/>
 
         </componentConfig>
 
+        <componentConfig id="piechart">
+            <component id = "tooltip" selector="id" locator='pieView_tooltip' locatorDimension ='id' locatorText = 'pieView_tooltip' action="getToolTipData" wait = 'skip'/>
+            <component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>
+            <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
+            <component id = "wedgeselected" selector="xpath" locator='//*[contains(@class, "_expanded")]' wait = 'skip'/>
 
+
+            <!--selector="xpath" locator='//*[contains(@id, "p1_segment0")]'-->
+            <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
+
+        </componentConfig>
+
+        <componentConfig id ='summarybar'>
+            <component id="summaryBarTable" selector="class name" locator="summaryBarTable" locatorDimension="class" locatorText="summaryBarTable"/>
+        </componentConfig>
 
 
         <componentConfig id="username">

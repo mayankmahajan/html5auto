@@ -19,15 +19,17 @@ class ContextMenuComponentClass(BaseComponentClass):
         handle[Constants.CONTEXTMENU][0].click()
         # self.handle.
     def drillTo(self,driver,driverHelper,handles,pageName):
-
-        if pageName == Constants.NETWORKFUNCTIONS:
-            handles[Constants.DRILLTONF][0].click()
-        elif pageName == Constants.SITEINTERACTIONS:
-            handles[Constants.DRILLTOSITEINTERACTION][0].click()
-        elif pageName == Constants.SITES:
-            handles[Constants.DRILLTOSITE][0].click()
-        elif pageName == Constants.VRF:
-            handles[Constants.DRILLTOVRF][0].click()
-        elif pageName == Constants.DRILLTO:
-            handles[Constants.DRILLTO][0].click()
-        return True
+        try:
+            if pageName == Constants.NETWORKFUNCTIONS:
+                handles[Constants.DRILLTONF][0].click()
+            elif pageName == Constants.SITEINTERACTIONS:
+                handles[Constants.DRILLTOSITEINTERACTION][0].click()
+            elif pageName == Constants.SITES:
+                handles[Constants.DRILLTOSITE][0].click()
+            elif pageName == Constants.VRF:
+                handles[Constants.DRILLTOVRF][0].click()
+            elif pageName == Constants.DRILLTO:
+                handles[Constants.DRILLTO][0].click()
+            return True
+        except Exception:
+            return Exception

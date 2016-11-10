@@ -38,17 +38,18 @@ def setupTestcase(self):
     return True
 
 
-def checkEqualAssert(f1,f2,message=""):
-    msg = message
-    tcPass = "PASS<br>"
-    tcFail = "<b><font color='red'>FAIL</font></b><br>"
+def checkEqualAssert(f1,f2,time,measure,message=""):
+    msg = time + " " + measure + " " + message
+    tcPass = " PASS<br>"
+    tcFail = "<b><font color='red'> FAIL</font></b><br>"
     try:
-        assert f1 in f2
+        assert f1 == f2
         msg = msg+tcPass
         resultlogger.info(msg)
+
     except AssertionError:
 
-        msg = msg+tcFail
+        msg = msg+" "+str(f1)+" "+str(f2)+tcFail
         resultlogger.info(msg)
 
 
@@ -104,9 +105,10 @@ def launchPage(obj,pageName,isStartScreen=False):
         # elHandler = explorePage.exploreList.getHandlerToPage(exploreListHandler,pageName)
         explorePage.launchPage(elHandler)
         logger.debug('Page Launched : %s',pageName)
-        return configmanager
-    except ValueError:
-        return ValueError
+        # sleep(4)
+        return True
+    except Exception:
+        return Exception
 
 def getHandlersForParentComponent(driver, driverHelper, configManager, pageName):
     listOfHandles = {}
@@ -213,6 +215,21 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
         return ValueError
 
 
+
+def getHandle(obj,pageName):
+    '''
+    Takes out handler of the Page along with components
+    :param obj:
+    :param pageName:
+    :return:
+    '''
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    # screenInstance=getScreenInstance(obj.d,pageName)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    return handles
 
 
 def testScreen(driver,driverHelper,pageName,isStartScreen=False):
@@ -394,13 +411,6 @@ def mrxSegmentScreen(driver,driverHelper,pageName,isStartScreen=False):
 
 def testPie(driver,driverHelper,pageName,isStartScreen=False,componentList=[]):
     try:
-        # Config Parsing Part
-        data = {}
-        if isStartScreen:
-            configManager = launchPage(driver,driverHelper,pageName)
-        else:
-            configManager = ConfigManager()
-
         parentHandles = getHandlersForParentComponent(driver,driverHelper,configManager,pageName)
         handles = getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles)
 

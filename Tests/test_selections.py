@@ -11,10 +11,13 @@ from Utils.SetUp import *
 # Getting Setup Details
 setup = SetUp()
 
-# Getting TimeRange Info
+# Getting TimeRange Info from Config Files
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
+quicklinks = setup.cM.getNodeElements("quicklinks","quicklink").keys()
+t=0
 
-# Getting Measures Info
+
+# Getting Measures Info from Config Files
 measureIteration = len(setup.cM.getNodeElements("measures","measure"))
 measures = setup.cM.getNodeElements("measures","measure").keys()
 
@@ -25,10 +28,11 @@ login(setup, "admin", "Admin@123")
 # Launch Site Screen
 launchPage(setup,"site_Screen")
 
+
 # while loop is to iterate over all the quicklinks
-while (timeIteration > 0):
+while t < timeIteration:
     i=0
-    setTimeRange(setup,timeIteration)
+    setTimeRange(setup,quicklinks[t])
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
@@ -37,6 +41,8 @@ while (timeIteration > 0):
         # testcase body starts
 
 
+        # defaultselection = btv.getSelection()
+        # checkEqualAssert("0",defaultselection)
 
 
 
@@ -47,12 +53,17 @@ while (timeIteration > 0):
         # testcase body ends
 
         # Result Logging
-        checkEqualAssert("mayank",setup.d.current_url,__name__)
+        expected = "expected"
+        actual = "actual"
+
+
+        checkEqualAssert(expected,actual,quicklinks[t],measures[i])
+
         i+=1
         # end of measureSelection
 
 
-    timeIteration-=1
+    t+=1
     # end of while loop for QuicklinkSelections
 
 
