@@ -16,11 +16,11 @@ class NFPageClass(BasePageClass):
         '''
         self.driver = driver
 
-        # self.measure = MeasureComponentClass()
+        self.measure = MeasureComponentClass()
         self.pielegend = PieLegendComponentClass()
         self.pie = PieComponentClass()
         self.summarybar = SummaryBarComponentClass()
-        # self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
+        self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
 
     def testComponents(self):
         return ""
