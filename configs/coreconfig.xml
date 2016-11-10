@@ -84,15 +84,25 @@
             <component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
         </componentConfig>
 
+
+
         <componentConfig id="pielegend">
             <component id = "COL1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="getData" wait = 'skip'/>
             <component id = "COL2" selector="class" locator='col2' locatorDimension ='class' locatorText = 'col2' action="getData" wait = 'skip'/>
-            <component id = "legendText" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
-            <component id = "legendText_selection" selector="class" locator='legendText selected' locatorDimension ='class' locatorText = 'legendText selected' action="click" wait = 'skip'/>
-
+            <component id = "legendText_col1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
+            <component id = "legendText" selector="class" locator='legendText' locatorDimension ='class' locatorText = 'legendText' action="click" wait = 'skip'/>
+            <component id = "legendIcon" selector="class" locator='legendIcon' locatorDimension ='class' locatorText = 'legendIcon' wait = 'skip'/>
 
         </componentConfig>
 
+        <componentConfig id="piechart">
+            <component id = "tooltip" selector="id" locator='pieView_tooltip' locatorDimension ='id' locatorText = 'pieView_tooltip' action="getToolTipData" wait = 'skip'/>
+            <component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>
+            <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
+            <!--selector="xpath" locator='//*[contains(@id, "p1_segment0")]'-->
+            <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
+
+        </componentConfig>
 
 
 

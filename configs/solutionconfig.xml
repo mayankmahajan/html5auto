@@ -18,6 +18,7 @@
         <screenConfig id = "nf_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
 
+            <component id = "piechart" selector="id" locator='pieView' childOf="" action="" parent="True" />
             <component id = "pielegend" selector="id" locator='legendCon1' childOf="" action="" parent="True" />
         </screenConfig>
 
@@ -34,7 +35,7 @@
             <!--Screen Components-->
             <!--<component id = "btv"/>-->
 
-            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>-->
+            <component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>
             <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>-->
             <!--<component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />-->
 
