@@ -34,15 +34,22 @@ nfScreenHandle = getHandle(setup,"nf_Screen")
 defaultSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 
 # Log Result
-checkEqualAssert(1,defaultSelection['selIndex'],"NA","NA","Default Selection at NFScreen")
+checkEqualAssert([0],defaultSelection['selIndices'],"NA","NA","Default Selection at NFScreen")
 
 # SetSelection
-nfScreenInstance.pielegend.setSelection(3,nfScreenHandle)
+nfScreenInstance.pielegend.setSelection(setup.dH,[3],nfScreenHandle)
+nfScreenHandle = getHandle(setup,"nf_Screen")
+nfScreenInstance.pielegend.setSelection(setup.dH,[6],nfScreenHandle)
+nfScreenHandle = getHandle(setup,"nf_Screen")
+
 # GetSelection
 updatedSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 
 # Log Result
-checkEqualAssert(3,updatedSelection['selIndex'],"NA","NA","Updated Selection at NFScreen")
+checkEqualAssert([1,3,6],updatedSelection['selIndices'],"NA","NA","Updated Selection at NFScreen")
+
+# Check PieWedge Expanded
+pieSelections = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
 
 # GetChartData
 piedata = nfScreenInstance.pielegend.getData(nfScreenHandle)

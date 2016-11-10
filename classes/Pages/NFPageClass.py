@@ -8,6 +8,7 @@ from classes.Components.PieLegendComponentClass import *
 from classes.Components.QuicklinkTimeRangeComponentClass import *
 from classes.Components.PieComponentClass import *
 from classes.Components.SummaryBarComponentClass import *
+from classes.Components.SearchComponentClass import *
 
 class NFPageClass(BasePageClass):
     def __init__(self,driver):
@@ -21,6 +22,7 @@ class NFPageClass(BasePageClass):
         self.pie = PieComponentClass()
         self.summarybar = SummaryBarComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
+        self.searchComp = SearchComponentClass()
 
     def testComponents(self):
         return ""
