@@ -166,6 +166,13 @@
             <component id = "signin" selector="css selector" locator='[ng-click = "vm.login()"]' action="click"/>
         </componentConfig>
 
+        <componentConfig id="search">
+            <!--<component id = "signin" selector="css selector" locator='[ng-click = "vm.login()"]' action="click"/>-->
+            <component id = "searchIcon" selector="id" locator='searchIcon'/>
+            <component id = "searchInput" selector="id" locator='searchInput'/>
+            <component id = "searchlabelstyle" selector="class name" locator='searchlabelstyle'/>
+        </componentConfig>
+
         <componentConfig id = 'exploreList'>
             <component id = "exploreList" selector="css selector" locator='[ng-mouseover="vm.showTooltip(startPoint,$index)"]' action=""/>
             <component id = "site_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel0")]' action="click"/>
