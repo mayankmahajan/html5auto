@@ -35,12 +35,22 @@ class MeasureComponentClass(BaseComponentClass):
 
 # handlers['primaryMeasure'][0].find_element_by_xpath("//option[text()='Flows']").click()
 
+    # def setMeasureName(self,measure,handle):
+    #     meaurePath="//option[text()='" + measure + "']"
+    #     handle[0].find_element_by_xpath(meaurePath).click()
+    #
+    # def select(self,handle):
+    #     handle[0].click()
+    #     time.sleep(1) #Sets 1 second delay so as to make sure Main Charts drawn properly
+
     def setMeasureName(self,measure,handle):
-        meaurePath="//option[text()='" + measure + "']"
-        handle[0].find_element_by_xpath(meaurePath).click()
+        for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
+            if ele.text == measure:
+                ele.click()
+                break
+        # meaurePath="//option[text()='" + measure + "']"
+        # handle[len(handle)-1].find_element_by_xpath(meaurePath).click()
 
     def select(self,handle):
-        handle[0].click()
-        time.sleep(1) #Sets 1 second delay so as to make sure Main Charts drawn properly
-
-
+        handle[len(handle)-1].click()
+        time.sleep(1)
