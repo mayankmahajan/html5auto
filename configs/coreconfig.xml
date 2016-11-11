@@ -7,19 +7,19 @@
 
     <quicklinks>
         <quicklink id = "TODAY"/>
-        <quicklink id = "YESTERDAY"/>
+        <!--<!quicklink id = "YESTERDAY"/>-->
         <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
         <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
     </quicklinks>
 
     <measures>
-        <measure id = "Bitrate_downlink_absolute_average"/>
+        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
         <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
         <!--<measure id = "Flows_downlink_percentage_peak"/>-->
         <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
-        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
-        <!--<measure id = "Bitrate_downlink_absolute_peak"/>-->
-        <!--<measure id = "Bitrate_downlink_percentage_average"/>
+        <measure id = "Bitrate_downlink_absolute_average"/>
+        <measure id = "Bitrate_downlink_absolute_peak"/>
+        <measure id = "Bitrate_downlink_percentage_average"/>
         <measure id = "Bitrate_downlink_percentage_peak"/>
         <measure id = "Bitrate_uplink_absolute_average"/>
         <measure id = "Bitrate_uplink_absolute_peak"/>
@@ -29,36 +29,36 @@
         <measure id = "Bitrate_total_absolute_peak"/>
         <measure id = "Bitrate_total_percentage_average"/>
         <measure id = "Bitrate_total_percentage_peak"/>
-        <measure id = "Tonnage_downlink_absolute_average"/>
-        <measure id = "Tonnage_downlink_absolute_peak"/>
-        <measure id = "Tonnage_downlink_percentage_average"/>
-        <measure id = "Tonnage_downlink_percentage_peak"/>
-        <measure id = "Tonnage_uplink_absolute_average"/>
-        <measure id = "Tonnage_uplink_absolute_peak"/>
-        <measure id = "Tonnage_uplink_percentage_average"/>
-        <measure id = "Tonnage_uplink_percentage_peak"/>
-        <measure id = "Tonnage_total_absolute_average"/>
-        <measure id = "Tonnage_total_absolute_peak"/>
-        <measure id = "Tonnage_total_percentage_average"/>
-        <measure id = "Tonnage_total_percentage_peak"/>
-        <measure id = "Flows_downlink_absolute_average"/>
-        <measure id = "Flows_downlink_absolute_peak"/>
-        <measure id = "Flows_downlink_percentage_average"/>
-        <measure id = "Flows_downlink_percentage_peak"/>
-        <measure id = "Flows_uplink_absolute_average"/>
-        <measure id = "Flows_uplink_absolute_peak"/>
-        <measure id = "Flows_uplink_percentage_average"/>
-        <measure id = "Flows_uplink_percentage_peak"/>
-        <measure id = "Flows_total_absolute_average"/>
-        <measure id = "Flows_total_absolute_peak"/>
-        <measure id = "Flows_total_percentage_average"/>
-        <measure id = "Flows_total_percentage_peak"/>
-        <measure id = "Wan-Cost($)_downlink_absolute"/>
-        <measure id = "Wan-Cost($)_downlink_percentage"/>
-        <measure id = "Wan-Cost($)_uplink_absolute"/>
-        <measure id = "Wan-Cost($)_uplink_percentage"/>
-        <measure id = "Wan-Cost($)_total_absolute"/>
-        <measure id = "Wan-Cost($)_total_percentage"/>-->
+        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
+        <!--<measure id = "Tonnage_downlink_absolute_peak"/>-->
+        <!--<measure id = "Tonnage_downlink_percentage_average"/>-->
+        <!--<measure id = "Tonnage_downlink_percentage_peak"/>-->
+        <!--<measure id = "Tonnage_uplink_absolute_average"/>-->
+        <!--<measure id = "Tonnage_uplink_absolute_peak"/>-->
+        <!--<measure id = "Tonnage_uplink_percentage_average"/>-->
+        <!--<measure id = "Tonnage_uplink_percentage_peak"/>-->
+        <!--<measure id = "Tonnage_total_absolute_average"/>-->
+        <!--<measure id = "Tonnage_total_absolute_peak"/>-->
+        <!--<measure id = "Tonnage_total_percentage_average"/>-->
+        <!--<measure id = "Tonnage_total_percentage_peak"/>-->
+        <!--<measure id = "Flows_downlink_absolute_average"/>-->
+        <!--<measure id = "Flows_downlink_absolute_peak"/>-->
+        <!--<measure id = "Flows_downlink_percentage_average"/>-->
+        <!--<measure id = "Flows_downlink_percentage_peak"/>-->
+        <!--<measure id = "Flows_uplink_absolute_average"/>-->
+        <!--<measure id = "Flows_uplink_absolute_peak"/>-->
+        <!--<measure id = "Flows_uplink_percentage_average"/>-->
+        <!--<measure id = "Flows_uplink_percentage_peak"/>-->
+        <!--<measure id = "Flows_total_absolute_average"/>-->
+        <!--<measure id = "Flows_total_absolute_peak"/>-->
+        <!--<measure id = "Flows_total_percentage_average"/>-->
+        <!--<measure id = "Flows_total_percentage_peak"/>-->
+        <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
+        <!--<measure id = "Wan-Cost($)_downlink_percentage"/>-->
+        <!--<measure id = "Wan-Cost($)_uplink_absolute"/>-->
+        <!--<measure id = "Wan-Cost($)_uplink_percentage"/>-->
+        <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
+        <!--<measure id = "Wan-Cost($)_total_percentage"/>-->
     </measures>
 
     <!--Add UserInfo-->
