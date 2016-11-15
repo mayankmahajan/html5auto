@@ -6,6 +6,7 @@ from classes.Components.TableComponentClass import *
 from classes.Components.MeasureComponentClass import *
 from classes.Components.PieLegendComponentClass import *
 from classes.Components.QuicklinkTimeRangeComponentClass import *
+from classes.Components.SearchComponentClass import *
 
 class SitePageClass(BasePageClass):
     def __init__(self,driver):
@@ -21,6 +22,6 @@ class SitePageClass(BasePageClass):
         self.measure = MeasureComponentClass()
         # self.pielegend = PieLegendComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
-
+        self.searchComp = SearchComponentClass()
     def testComponents(self):
         return ""

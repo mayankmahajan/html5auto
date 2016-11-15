@@ -4563,3 +4563,410 @@ Downlink Bitrate: 1.78 Kbps
 2016-11-09 23:30:08,974 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 1.59351682663 seconds
 2016-11-09 23:30:12,047 - Utils.logger - DEBUG - Time Taken for summaryBarTable element :: 0.0315608978271 seconds
 >>>>>>> Stashed changes
+2016-11-11 11:14:22,610 - Utils.logger - DEBUG - Time Taken for username element :: 0.0690650939941 seconds
+2016-11-11 11:14:22,665 - Utils.logger - DEBUG - Time Taken for password element :: 0.0255420207977 seconds
+2016-11-11 11:14:22,687 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0154180526733 seconds
+2016-11-11 11:14:22,966 - Utils.logger - INFO - Login Successful
+2016-11-11 11:14:22,966 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:14:22,967 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:14:24,040 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.066229105 seconds
+2016-11-11 11:14:24,128 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:14:25,102 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.927469968796 seconds
+2016-11-11 11:14:25,152 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0334231853485 seconds
+2016-11-11 11:14:25,189 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0196180343628 seconds
+2016-11-11 11:14:33,196 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0167019367218 seconds
+2016-11-11 11:14:33,648 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.0226299762726 seconds
+2016-11-11 11:14:33,683 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0244390964508 seconds
+2016-11-11 11:14:33,709 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0143940448761 seconds
+2016-11-11 11:14:38,288 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0197491645813 seconds
+2016-11-11 11:14:42,958 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.031886100769 seconds
+2016-11-11 11:14:43,008 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0333859920502 seconds
+2016-11-11 11:14:43,044 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.019504070282 seconds
+2016-11-11 11:14:48,151 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0161881446838 seconds
+2016-11-11 11:14:52,804 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.0391471385956 seconds
+2016-11-11 11:14:52,851 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0308878421783 seconds
+2016-11-11 11:14:52,878 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0152690410614 seconds
+2016-11-11 11:14:59,640 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0249898433685 seconds
+2016-11-11 11:15:00,243 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.0311059951782 seconds
+2016-11-11 11:15:00,280 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0245821475983 seconds
+2016-11-11 11:15:00,312 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.015077829361 seconds
+2016-11-11 11:15:06,770 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0175828933716 seconds
+2016-11-11 11:15:10,802 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.0346219539642 seconds
+2016-11-11 11:15:10,844 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0253388881683 seconds
+2016-11-11 11:15:10,874 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0158240795135 seconds
+2016-11-11 11:15:17,270 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0158109664917 seconds
+2016-11-11 11:15:49,696 - Utils.logger - DEBUG - Time Taken for username element :: 0.0579428672791 seconds
+2016-11-11 11:15:49,717 - Utils.logger - DEBUG - Time Taken for password element :: 0.0151040554047 seconds
+2016-11-11 11:15:49,739 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0155580043793 seconds
+2016-11-11 11:15:50,020 - Utils.logger - INFO - Login Successful
+2016-11-11 11:15:50,020 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:15:50,020 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:15:51,120 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.09275197983 seconds
+2016-11-11 11:15:51,221 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:15:51,781 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.515017986298 seconds
+2016-11-11 11:15:51,824 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0257778167725 seconds
+2016-11-11 11:15:51,858 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0181610584259 seconds
+2016-11-11 11:15:59,317 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0148022174835 seconds
+2016-11-11 11:15:59,898 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0210659503937 seconds
+2016-11-11 11:15:59,923 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0132958889008 seconds
+2016-11-11 11:15:59,942 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0142579078674 seconds
+2016-11-11 11:16:00,429 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.396546125412 seconds
+2016-11-11 11:16:00,476 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0246269702911 seconds
+2016-11-11 11:16:00,504 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0211670398712 seconds
+2016-11-11 11:16:00,640 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0266649723053 seconds
+2016-11-11 11:16:00,664 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0173330307007 seconds
+2016-11-11 11:16:00,692 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0179660320282 seconds
+2016-11-11 11:16:00,713 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0156018733978 seconds
+2016-11-11 11:16:00,735 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0153930187225 seconds
+2016-11-11 11:16:00,850 - Utils.logger - DEBUG - Page Launched : siteInteraction_Screen
+2016-11-11 11:16:31,745 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.019101858139 seconds
+2016-11-11 11:17:40,929 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0333380699158 seconds
+2016-11-11 11:20:56,781 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.019553899765 seconds
+2016-11-11 11:21:52,904 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0122828483582 seconds
+2016-11-11 11:22:45,227 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0141439437866 seconds
+2016-11-11 11:24:09,287 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0136618614197 seconds
+2016-11-11 11:25:47,364 - Utils.logger - DEBUG - Time Taken for username element :: 0.183916091919 seconds
+2016-11-11 11:25:47,388 - Utils.logger - DEBUG - Time Taken for password element :: 0.0161519050598 seconds
+2016-11-11 11:25:47,410 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0162310600281 seconds
+2016-11-11 11:25:47,611 - Utils.logger - INFO - Login Successful
+2016-11-11 11:25:47,611 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:25:47,611 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:25:48,591 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.972612142563 seconds
+2016-11-11 11:25:48,680 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:25:49,674 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.94749712944 seconds
+2016-11-11 11:25:49,724 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0326409339905 seconds
+2016-11-11 11:25:49,768 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0259490013123 seconds
+2016-11-11 11:25:55,937 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0161490440369 seconds
+2016-11-11 11:25:56,454 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0251858234406 seconds
+2016-11-11 11:25:56,492 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0141541957855 seconds
+2016-11-11 11:25:56,517 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0153961181641 seconds
+2016-11-11 11:25:56,658 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0327339172363 seconds
+2016-11-11 11:25:56,679 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0150411128998 seconds
+2016-11-11 11:25:56,701 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0141861438751 seconds
+2016-11-11 11:25:56,792 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0141999721527 seconds
+2016-11-11 11:25:56,813 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0152168273926 seconds
+2016-11-11 11:25:56,832 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0138840675354 seconds
+2016-11-11 11:25:56,866 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0282690525055 seconds
+2016-11-11 11:25:56,890 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0173971652985 seconds
+2016-11-11 11:25:57,040 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 11:26:28,392 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0144519805908 seconds
+2016-11-11 11:27:19,978 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0123379230499 seconds
+2016-11-11 11:28:59,008 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0137169361115 seconds
+2016-11-11 11:59:26,651 - Utils.logger - DEBUG - Time Taken for username element :: 0.12285900116 seconds
+2016-11-11 11:59:26,677 - Utils.logger - DEBUG - Time Taken for password element :: 0.0200119018555 seconds
+2016-11-11 11:59:26,698 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0149998664856 seconds
+2016-11-11 11:59:26,921 - Utils.logger - INFO - Login Successful
+2016-11-11 11:59:26,921 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:59:26,921 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:59:27,982 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.05357098579 seconds
+2016-11-11 11:59:28,071 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:59:29,243 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 1.12930202484 seconds
+2016-11-11 11:59:29,283 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0233290195465 seconds
+2016-11-11 11:59:29,316 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0171608924866 seconds
+2016-11-11 11:59:35,665 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0158939361572 seconds
+2016-11-11 12:12:53,198 - Utils.logger - DEBUG - Time Taken for username element :: 0.0635039806366 seconds
+2016-11-11 12:12:53,225 - Utils.logger - DEBUG - Time Taken for password element :: 0.0162250995636 seconds
+2016-11-11 12:12:53,255 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0244991779327 seconds
+2016-11-11 12:12:53,477 - Utils.logger - INFO - Login Successful
+2016-11-11 12:12:53,477 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:12:53,477 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:12:54,382 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.897516012192 seconds
+2016-11-11 12:12:54,476 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 12:12:55,590 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 1.06599521637 seconds
+2016-11-11 12:12:55,650 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0353119373322 seconds
+2016-11-11 12:12:55,686 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0181419849396 seconds
+2016-11-11 12:13:02,499 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0162739753723 seconds
+2016-11-11 12:30:26,058 - Utils.logger - DEBUG - Time Taken for username element :: 0.0616269111633 seconds
+2016-11-11 12:30:26,079 - Utils.logger - DEBUG - Time Taken for password element :: 0.0149631500244 seconds
+2016-11-11 12:30:26,109 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0239820480347 seconds
+2016-11-11 12:30:26,340 - Utils.logger - INFO - Login Successful
+2016-11-11 12:30:26,340 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:30:26,340 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:30:27,313 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.965921878815 seconds
+2016-11-11 12:30:27,757 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 12:30:28,585 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.77988910675 seconds
+2016-11-11 12:30:28,642 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0362458229065 seconds
+2016-11-11 12:30:28,822 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.119801044464 seconds
+2016-11-11 12:30:35,198 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0335421562195 seconds
+2016-11-11 12:30:56,013 - Utils.logger - DEBUG - Time Taken for username element :: 0.115210056305 seconds
+2016-11-11 12:30:56,041 - Utils.logger - DEBUG - Time Taken for password element :: 0.0198879241943 seconds
+2016-11-11 12:30:56,074 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.024288892746 seconds
+2016-11-11 12:30:56,387 - Utils.logger - INFO - Login Successful
+2016-11-11 12:30:56,387 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:30:56,388 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:30:57,763 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.32377791405 seconds
+2016-11-11 12:30:57,860 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 12:30:58,819 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.565603971481 seconds
+2016-11-11 12:30:58,868 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0314509868622 seconds
+2016-11-11 12:30:59,046 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.160284042358 seconds
+2016-11-11 12:31:05,872 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0167620182037 seconds
+2016-11-11 12:33:07,922 - Utils.logger - DEBUG - Time Taken for username element :: 0.0888609886169 seconds
+2016-11-11 12:33:07,950 - Utils.logger - DEBUG - Time Taken for password element :: 0.0182819366455 seconds
+2016-11-11 12:33:07,976 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0178170204163 seconds
+2016-11-11 12:33:08,304 - Utils.logger - INFO - Login Successful
+2016-11-11 12:33:08,304 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:33:08,305 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:33:09,232 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.880245923996 seconds
+2016-11-11 12:33:09,340 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 12:33:10,288 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.562165975571 seconds
+2016-11-11 12:33:10,337 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0310971736908 seconds
+2016-11-11 12:33:10,379 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0237011909485 seconds
+2016-11-11 12:33:17,470 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0178320407867 seconds
+2016-11-11 12:33:51,514 - Utils.logger - DEBUG - Time Taken for username element :: 0.0653178691864 seconds
+2016-11-11 12:33:51,549 - Utils.logger - DEBUG - Time Taken for password element :: 0.0275659561157 seconds
+2016-11-11 12:33:51,577 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0184140205383 seconds
+2016-11-11 12:33:51,905 - Utils.logger - INFO - Login Successful
+2016-11-11 12:33:51,906 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:33:51,906 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:33:52,782 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel1")] element :: 0.82722902298 seconds
+2016-11-11 12:33:52,872 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 12:33:53,298 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0276730060577 seconds
+2016-11-11 12:33:53,861 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.546111106873 seconds
+2016-11-11 12:33:55,529 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 1.6565079689 seconds
+2016-11-11 12:33:55,561 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.018786907196 seconds
+2016-11-11 12:33:55,586 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0179040431976 seconds
+2016-11-11 12:33:55,611 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.018748998642 seconds
+2016-11-11 12:33:55,634 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0161190032959 seconds
+2016-11-11 12:34:10,900 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.020092010498 seconds
+2016-11-11 12:34:11,344 - Utils.logger - DEBUG - Time Taken for summaryBarTable element :: 0.0190861225128 seconds
+2016-11-11 12:37:04,315 - Utils.logger - DEBUG - Time Taken for username element :: 0.0683209896088 seconds
+2016-11-11 12:37:04,340 - Utils.logger - DEBUG - Time Taken for password element :: 0.0176939964294 seconds
+2016-11-11 12:37:04,377 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0295770168304 seconds
+2016-11-11 12:37:04,701 - Utils.logger - INFO - Login Successful
+2016-11-11 12:37:04,701 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:37:04,702 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:37:06,331 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel1")] element :: 1.57800388336 seconds
+2016-11-11 12:37:06,418 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 12:37:06,820 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0240659713745 seconds
+2016-11-11 12:37:07,373 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.540547132492 seconds
+2016-11-11 12:37:09,017 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 1.63729691505 seconds
+2016-11-11 12:37:09,068 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0379538536072 seconds
+2016-11-11 12:37:09,139 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0638151168823 seconds
+2016-11-11 12:37:09,174 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0233430862427 seconds
+2016-11-11 12:37:09,224 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0342619419098 seconds
+2016-11-11 12:37:24,837 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.023047208786 seconds
+2016-11-11 12:37:25,276 - Utils.logger - DEBUG - Time Taken for summaryBarTable element :: 0.018660068512 seconds
+2016-11-11 12:39:26,269 - Utils.logger - DEBUG - Time Taken for username element :: 0.077173948288 seconds
+2016-11-11 12:39:26,295 - Utils.logger - DEBUG - Time Taken for password element :: 0.0184350013733 seconds
+2016-11-11 12:39:26,321 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0186929702759 seconds
+2016-11-11 12:39:26,658 - Utils.logger - INFO - Login Successful
+2016-11-11 12:39:26,658 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:39:26,659 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:39:27,658 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel1")] element :: 0.947145938873 seconds
+2016-11-11 12:39:27,950 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 12:39:28,392 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0247139930725 seconds
+2016-11-11 12:39:28,964 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.559810876846 seconds
+2016-11-11 12:39:31,076 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 2.10044789314 seconds
+2016-11-11 12:39:31,122 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0304789543152 seconds
+2016-11-11 12:39:31,159 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0258889198303 seconds
+2016-11-11 12:39:31,198 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0299978256226 seconds
+2016-11-11 12:39:31,250 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0339341163635 seconds
+2016-11-11 12:39:46,323 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0178689956665 seconds
+2016-11-11 12:39:46,754 - Utils.logger - DEBUG - Time Taken for summaryBarTable element :: 0.0165112018585 seconds
+2016-11-11 12:41:01,909 - Utils.logger - DEBUG - Time Taken for username element :: 0.0849390029907 seconds
+2016-11-11 12:41:01,951 - Utils.logger - DEBUG - Time Taken for password element :: 0.0181648731232 seconds
+2016-11-11 12:41:01,978 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0185611248016 seconds
+2016-11-11 12:41:02,321 - Utils.logger - INFO - Login Successful
+2016-11-11 12:41:02,322 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:41:02,323 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:41:03,187 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.807126998901 seconds
+2016-11-11 12:41:03,286 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 12:41:04,382 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.675232887268 seconds
+2016-11-11 12:41:04,439 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0381650924683 seconds
+2016-11-11 12:41:04,480 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0212049484253 seconds
+2016-11-11 12:41:12,732 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.019052028656 seconds
+2016-11-11 12:48:25,041 - Utils.logger - DEBUG - Time Taken for username element :: 0.0755839347839 seconds
+2016-11-11 12:48:25,067 - Utils.logger - DEBUG - Time Taken for password element :: 0.0176320075989 seconds
+2016-11-11 12:48:25,102 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0276708602905 seconds
+2016-11-11 12:48:25,413 - Utils.logger - INFO - Login Successful
+2016-11-11 12:48:25,413 - Utils.logger - DEBUG - Username : admin
+2016-11-11 12:48:25,414 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 12:48:26,865 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.39939713478 seconds
+2016-11-11 12:48:26,960 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 12:48:28,040 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.691040039062 seconds
+2016-11-11 12:48:28,085 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0270628929138 seconds
+2016-11-11 12:48:28,262 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.162580966949 seconds
+2016-11-11 12:48:28,292 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.021103143692 seconds
+2016-11-11 12:48:28,325 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0252721309662 seconds
+2016-11-11 12:48:28,353 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0212190151215 seconds
+2016-11-11 12:48:35,215 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0603132247925 seconds
+2016-11-11 15:24:55,331 - Utils.logger - DEBUG - Time Taken for username element :: 0.0671300888062 seconds
+2016-11-11 15:24:55,353 - Utils.logger - DEBUG - Time Taken for password element :: 0.0159249305725 seconds
+2016-11-11 15:24:55,375 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.015300989151 seconds
+2016-11-11 15:24:55,631 - Utils.logger - INFO - Login Successful
+2016-11-11 15:24:55,631 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:24:55,631 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:24:56,666 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.02754402161 seconds
+2016-11-11 15:24:56,752 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:24:57,705 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.904268026352 seconds
+2016-11-11 15:24:57,751 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0299751758575 seconds
+2016-11-11 15:24:57,790 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0221948623657 seconds
+2016-11-11 15:24:57,821 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0206658840179 seconds
+2016-11-11 15:24:57,925 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0196459293365 seconds
+2016-11-11 15:24:57,954 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0196440219879 seconds
+2016-11-11 15:25:04,936 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.014936208725 seconds
+2016-11-11 15:26:08,354 - Utils.logger - DEBUG - Time Taken for username element :: 0.0650520324707 seconds
+2016-11-11 15:26:08,381 - Utils.logger - DEBUG - Time Taken for password element :: 0.020092010498 seconds
+2016-11-11 15:26:08,402 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0150349140167 seconds
+2016-11-11 15:26:08,646 - Utils.logger - INFO - Login Successful
+2016-11-11 15:26:08,646 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:26:08,646 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:26:09,649 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.99596786499 seconds
+2016-11-11 15:26:09,747 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:26:10,389 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.594198942184 seconds
+2016-11-11 15:26:10,436 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.029865026474 seconds
+2016-11-11 15:26:10,616 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.125885009766 seconds
+2016-11-11 15:26:10,641 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0196440219879 seconds
+2016-11-11 15:26:10,675 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0225870609283 seconds
+2016-11-11 15:26:10,706 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0214400291443 seconds
+2016-11-11 15:26:16,941 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0149109363556 seconds
+2016-11-11 15:30:42,350 - Utils.logger - DEBUG - Time Taken for username element :: 0.065397977829 seconds
+2016-11-11 15:30:42,377 - Utils.logger - DEBUG - Time Taken for password element :: 0.020280122757 seconds
+2016-11-11 15:30:42,402 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.017951965332 seconds
+2016-11-11 15:30:42,680 - Utils.logger - INFO - Login Successful
+2016-11-11 15:30:42,680 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:30:42,680 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:30:43,744 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.05781698227 seconds
+2016-11-11 15:30:43,841 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:30:44,930 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 1.04166698456 seconds
+2016-11-11 15:30:44,981 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0345239639282 seconds
+2016-11-11 15:30:45,049 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0188519954681 seconds
+2016-11-11 15:30:45,077 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0224261283875 seconds
+2016-11-11 15:30:45,102 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0195240974426 seconds
+2016-11-11 15:30:45,132 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0206279754639 seconds
+2016-11-11 15:30:51,377 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0152969360352 seconds
+2016-11-11 15:36:10,419 - Utils.logger - DEBUG - Time Taken for username element :: 0.0675868988037 seconds
+2016-11-11 15:36:10,441 - Utils.logger - DEBUG - Time Taken for password element :: 0.0155191421509 seconds
+2016-11-11 15:36:10,463 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.015841960907 seconds
+2016-11-11 15:36:10,714 - Utils.logger - INFO - Login Successful
+2016-11-11 15:36:10,714 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:36:10,715 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:36:11,681 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.959498882294 seconds
+2016-11-11 15:36:11,769 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:36:12,417 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.599586009979 seconds
+2016-11-11 15:36:12,480 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0294458866119 seconds
+2016-11-11 15:36:12,522 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0242431163788 seconds
+2016-11-11 15:36:12,549 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0206677913666 seconds
+2016-11-11 15:36:12,582 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0212781429291 seconds
+2016-11-11 15:36:12,617 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.024001121521 seconds
+2016-11-11 15:36:19,241 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0231218338013 seconds
+2016-11-11 15:37:16,757 - Utils.logger - DEBUG - Time Taken for username element :: 0.0611560344696 seconds
+2016-11-11 15:37:16,781 - Utils.logger - DEBUG - Time Taken for password element :: 0.0173799991608 seconds
+2016-11-11 15:37:16,803 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.015969991684 seconds
+2016-11-11 15:37:17,073 - Utils.logger - INFO - Login Successful
+2016-11-11 15:37:17,073 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:37:17,074 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:37:18,157 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.07617783546 seconds
+2016-11-11 15:37:18,247 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:37:19,205 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.909785985947 seconds
+2016-11-11 15:37:19,254 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0315110683441 seconds
+2016-11-11 15:37:19,290 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0193090438843 seconds
+2016-11-11 15:37:19,324 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0278179645538 seconds
+2016-11-11 15:37:19,357 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0259318351746 seconds
+2016-11-11 15:37:19,387 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.023717880249 seconds
+2016-11-11 15:37:25,790 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0147941112518 seconds
+2016-11-11 15:38:00,554 - Utils.logger - DEBUG - Time Taken for username element :: 0.0851559638977 seconds
+2016-11-11 15:38:00,577 - Utils.logger - DEBUG - Time Taken for password element :: 0.0165040493011 seconds
+2016-11-11 15:38:00,608 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0243451595306 seconds
+2016-11-11 15:38:01,162 - Utils.logger - INFO - Login Successful
+2016-11-11 15:38:01,163 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:38:01,163 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:38:02,245 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.07509613037 seconds
+2016-11-11 15:38:02,336 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:38:03,322 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.939613103867 seconds
+2016-11-11 15:38:03,370 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0305261611938 seconds
+2016-11-11 15:38:03,404 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0172131061554 seconds
+2016-11-11 15:38:03,432 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0228230953217 seconds
+2016-11-11 15:38:03,466 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0244970321655 seconds
+2016-11-11 15:38:03,490 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0187849998474 seconds
+2016-11-11 15:38:09,894 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0147178173065 seconds
+2016-11-11 15:38:54,369 - Utils.logger - DEBUG - Time Taken for username element :: 0.0682408809662 seconds
+2016-11-11 15:38:54,391 - Utils.logger - DEBUG - Time Taken for password element :: 0.015419960022 seconds
+2016-11-11 15:38:54,412 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0151169300079 seconds
+2016-11-11 15:38:54,616 - Utils.logger - INFO - Login Successful
+2016-11-11 15:38:54,617 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:38:54,617 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:38:55,682 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.05857205391 seconds
+2016-11-11 15:38:55,795 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:38:56,752 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.907405138016 seconds
+2016-11-11 15:38:56,805 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0319068431854 seconds
+2016-11-11 15:38:56,840 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0183920860291 seconds
+2016-11-11 15:38:56,871 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0214319229126 seconds
+2016-11-11 15:38:56,905 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.020201921463 seconds
+2016-11-11 15:38:56,934 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0196490287781 seconds
+2016-11-11 15:39:03,948 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0147829055786 seconds
+2016-11-11 15:40:40,782 - Utils.logger - DEBUG - Time Taken for username element :: 0.0646409988403 seconds
+2016-11-11 15:40:40,804 - Utils.logger - DEBUG - Time Taken for password element :: 0.0165150165558 seconds
+2016-11-11 15:40:40,826 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.015280008316 seconds
+2016-11-11 15:40:41,064 - Utils.logger - INFO - Login Successful
+2016-11-11 15:40:41,065 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:40:41,065 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:40:42,130 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.05854392052 seconds
+2016-11-11 15:40:42,217 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:40:43,218 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.953761816025 seconds
+2016-11-11 15:40:43,266 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0307672023773 seconds
+2016-11-11 15:40:43,301 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0187840461731 seconds
+2016-11-11 15:40:43,332 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0246679782867 seconds
+2016-11-11 15:40:43,364 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0243079662323 seconds
+2016-11-11 15:40:43,389 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0195631980896 seconds
+2016-11-11 15:40:49,729 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0151331424713 seconds
+2016-11-11 15:42:40,854 - Utils.logger - DEBUG - Time Taken for username element :: 0.0760970115662 seconds
+2016-11-11 15:42:40,876 - Utils.logger - DEBUG - Time Taken for password element :: 0.0160269737244 seconds
+2016-11-11 15:42:40,898 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0161600112915 seconds
+2016-11-11 15:42:41,135 - Utils.logger - INFO - Login Successful
+2016-11-11 15:42:41,135 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:42:41,135 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:42:42,582 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.43994092941 seconds
+2016-11-11 15:42:42,776 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:42:43,730 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.901086807251 seconds
+2016-11-11 15:42:43,779 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0293939113617 seconds
+2016-11-11 15:42:43,820 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0298750400543 seconds
+2016-11-11 15:42:43,854 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0210409164429 seconds
+2016-11-11 15:42:43,884 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0206010341644 seconds
+2016-11-11 15:42:43,918 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0194730758667 seconds
+2016-11-11 15:42:50,305 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0154690742493 seconds
+2016-11-11 16:28:34,131 - Utils.logger - DEBUG - Time Taken for username element :: 0.073704957962 seconds
+2016-11-11 16:28:34,154 - Utils.logger - DEBUG - Time Taken for password element :: 0.0170350074768 seconds
+2016-11-11 16:28:34,176 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0152230262756 seconds
+2016-11-11 16:28:34,433 - Utils.logger - INFO - Login Successful
+2016-11-11 16:28:34,433 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:28:34,433 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:28:35,847 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.40665316582 seconds
+2016-11-11 16:28:35,949 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:28:36,937 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.940083026886 seconds
+2016-11-11 16:28:36,990 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0344400405884 seconds
+2016-11-11 16:28:37,025 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0191540718079 seconds
+2016-11-11 16:28:37,055 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0206089019775 seconds
+2016-11-11 16:28:37,098 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0297899246216 seconds
+2016-11-11 16:28:37,130 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0228428840637 seconds
+2016-11-11 16:28:43,882 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0156381130219 seconds
+2016-11-11 16:42:37,112 - Utils.logger - DEBUG - Time Taken for username element :: 0.0727028846741 seconds
+2016-11-11 16:42:37,137 - Utils.logger - DEBUG - Time Taken for password element :: 0.0174541473389 seconds
+2016-11-11 16:42:37,172 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0274128913879 seconds
+2016-11-11 16:42:37,503 - Utils.logger - INFO - Login Successful
+2016-11-11 16:42:37,504 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:42:37,504 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:42:38,611 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.05153799057 seconds
+2016-11-11 16:42:38,696 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:42:39,694 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.602371931076 seconds
+2016-11-11 16:42:39,743 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0301530361176 seconds
+2016-11-11 16:42:39,787 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0264179706573 seconds
+2016-11-11 16:42:39,822 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0278389453888 seconds
+2016-11-11 16:42:39,855 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0233030319214 seconds
+2016-11-11 16:42:39,889 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0265140533447 seconds
+2016-11-11 16:42:47,059 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0193989276886 seconds
+2016-11-11 16:53:15,577 - Utils.logger - DEBUG - Time Taken for username element :: 0.0831260681152 seconds
+2016-11-11 16:53:15,603 - Utils.logger - DEBUG - Time Taken for password element :: 0.0179290771484 seconds
+2016-11-11 16:53:15,629 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0185639858246 seconds
+2016-11-11 16:53:15,972 - Utils.logger - INFO - Login Successful
+2016-11-11 16:53:15,973 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:53:15,973 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:53:17,002 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.975967168808 seconds
+2016-11-11 16:53:17,108 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:53:18,234 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.723312139511 seconds
+2016-11-11 16:53:18,283 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0309419631958 seconds
+2016-11-11 16:53:18,318 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0181119441986 seconds
+2016-11-11 16:53:18,352 - Utils.logger - DEBUG - Time Taken for searchInput element :: 0.0230360031128 seconds
+2016-11-11 16:53:18,386 - Utils.logger - DEBUG - Time Taken for searchIcon element :: 0.0231559276581 seconds
+2016-11-11 16:53:18,420 - Utils.logger - DEBUG - Time Taken for searchlabelstyle element :: 0.0211081504822 seconds
+2016-11-11 16:53:23,922 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0178401470184 seconds

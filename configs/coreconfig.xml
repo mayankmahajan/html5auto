@@ -7,14 +7,14 @@
 
     <quicklinks>
         <quicklink id = "TODAY"/>
-        <quicklink id = "YESTERDAY"/>
+        <!--<quicklink id = "YESTERDAY"/>-->
         <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
         <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
     </quicklinks>
 
     <measures>
         <measure id = "Bitrate_downlink_absolute_average"/>
-        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
+        <measure id = "Tonnage_downlink_absolute_average"/>
         <!--<measure id = "Flows_downlink_percentage_peak"/>-->
         <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
         <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
