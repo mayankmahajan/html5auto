@@ -57,3 +57,13 @@ class BaseComponentClass:
                 newHandlers[k] = v
         return newHandlers
 
+
+    def selectDropDownByText(self,handler,text,text2="HAHA"):
+        for ele in handler.find_elements_by_xpath(".//*"):
+            if ele.text == text or ele.text == text2:
+                ele.click()
+                return ele.text
+
+
+
+
