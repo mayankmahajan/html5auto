@@ -23,6 +23,7 @@ class NFPageClass(BasePageClass):
         self.summarybar = SummaryBarComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
         self.searchComp = SearchComponentClass()
+        self.cm = ContextMenuComponentClass()
 
     def testComponents(self):
         return ""

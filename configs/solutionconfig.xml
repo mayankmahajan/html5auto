@@ -29,6 +29,10 @@
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
 
+            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+
+
+
         </screenConfig>
 
 
@@ -37,7 +41,8 @@
 
 
         <screenConfig id = "site_Screen">
-            class="measureselectors ng-scope"
+            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <!--class="measureselectors ng-scope"-->
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
@@ -91,4 +96,18 @@
 
 
     </screenConfigs>
+
+
+    <contextMenus>
+        <contextMenu id = "site_Screen">
+            <option id = "Network Functions"/>
+            <option id = "Site - Site Interactions"/>
+            <option id = "Network Elements"/>
+            <option id = "VRF"/>
+
+        </contextMenu>
+        <contextMenu id = "nf_Screen">
+            <option id = "Sites"/>
+        </contextMenu>
+    </contextMenus>
 </data>

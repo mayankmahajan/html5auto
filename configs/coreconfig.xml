@@ -211,14 +211,17 @@
 
 
         <componentConfig id = 'cm'>
-            <component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay' action="click"/>
-            <component id = "DRILLTO" selector="id" locator='frameworkDrill' action="click"/>
-            <component id = "EXPORTTO" selector="id" locator='exportDrill' action="click"/>
-            <component id = "EXPORTTOCSV" selector="id" locator='EXPORT_TO_CSV' action="click"/>
-            <component id = "EXPORTTOSNAPSHOT" selector="id" locator='EXPORT_TO_SNAPSHOT' action="click"/>
+            <component id = "CONTEXTMENU" selector="id" locator='contextMenuDisplay' action="click"/>
+            <component id = "DRILLTO" selector="id" locator='frameworkDrill' action="click" wait="skip"/>
+            <component id = "EXPORTTO" selector="id" locator='exportDrill' action="click" wait="skip"/>
+            <component id = "EXPORTTOCSV" selector="id" locator='EXPORT_TO_CSV' action="click" wait="skip"/>
+            <component id = "EXPORTTOSNAPSHOT" selector="id" locator='EXPORT_TO_SNAPSHOT' action="click" wait="skip"/>
 
             <!--should be moved to SolutionConfig-->
             <component id = "SITETREND" selector="id" locator='SITE_TREND_SCR' action="click"/>
+            <component id = "site_Screen" selector="id" locator='SITE_SCR' action="click" wait="skip"/>
+
+
         </componentConfig>
     </componentConfigs>
 
