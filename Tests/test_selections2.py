@@ -32,24 +32,27 @@ launchPage(setup,"nf_Screen")
 nfScreenInstance = NFPageClass(setup.d)
 nfScreenHandle = getHandle(setup,"nf_Screen")
 
-setSearch = nfScreenInstance.searchComp.setSearchText(nfScreenHandle,"mayank")
-time.sleep(2)
-nfScreenInstance.searchComp.setSearchText(nfScreenHandle,Keys.BACK_SPACE)
-time.sleep(2)
-# Keys.BACK_SPACE
+# setSearch = nfScreenInstance.searchComp.setSearchText(nfScreenHandle,"mayank")
+# time.sleep(2)
+# nfScreenInstance.searchComp.setSearchText(nfScreenHandle,Keys.BACK_SPACE)
+# time.sleep(2)
+# # Keys.BACK_SPACE
+#
+# text = nfScreenInstance.searchComp.getSearchText(nfScreenHandle)
+#
+# if(setSearch==True):
+#     nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
+# else:
+#     # checkEqualAssert() LOG result Exception
+#     pass
+#
+# #clears the search
+# nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
 
-text = nfScreenInstance.searchComp.getSearchText(nfScreenHandle)
-
-if(setSearch==True):
-    nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
-else:
-    # checkEqualAssert() LOG result Exception
-    pass
 
 
 
-
-# selections = nfScreenInstance.summarybar.getSelection(nfScreenHandle)
+selections = nfScreenInstance.summarybar.getSelection(nfScreenHandle)
 
 
 # Log Result
