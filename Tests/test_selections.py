@@ -27,6 +27,8 @@ login(setup, "admin", "Admin@123")
 
 # Launch Site Screen
 launchPage(setup,"site_Screen")
+screeninstance =
+
 
 
 # while loop is to iterate over all the quicklinks

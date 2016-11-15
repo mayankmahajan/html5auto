@@ -13,14 +13,12 @@ setup = SetUp()
 # Getting TimeRange Info from Config Files
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
 quicklinks = setup.cM.getNodeElements("quicklinks","quicklink").keys()
-print quicklinks
 t=0
 
 
 # Getting Measures Info from Config Files
 measureIteration = len(setup.cM.getNodeElements("measures","measure"))
 measures = setup.cM.getNodeElements("measures","measure").keys()
-print measures
 
 
 # Logging into the appliction
@@ -67,6 +65,7 @@ while t < timeIteration:
     actual = "True"
 
     checkEqualAssert(expected,actual,quicklinks[t], measures[i])
+    i+=1
          # end of measureSelection
 
 

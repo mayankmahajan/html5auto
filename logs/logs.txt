@@ -4563,3 +4563,956 @@ Downlink Bitrate: 1.78 Kbps
 2016-11-09 23:30:08,974 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 1.59351682663 seconds
 2016-11-09 23:30:12,047 - Utils.logger - DEBUG - Time Taken for summaryBarTable element :: 0.0315608978271 seconds
 >>>>>>> Stashed changes
+2016-11-11 11:09:48,570 - Utils.logger - DEBUG - Time Taken for username element :: 0.0287530422211 seconds
+2016-11-11 11:09:48,621 - Utils.logger - DEBUG - Time Taken for password element :: 0.0272221565247 seconds
+2016-11-11 11:09:48,653 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0263321399689 seconds
+2016-11-11 11:09:48,832 - Utils.logger - INFO - Login Successful
+2016-11-11 11:09:48,832 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:09:48,832 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:09:49,483 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.644660949707 seconds
+2016-11-11 11:09:49,533 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:09:51,666 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 2.08732008934 seconds
+2016-11-11 11:09:51,716 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0283000469208 seconds
+2016-11-11 11:09:51,761 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0284848213196 seconds
+2016-11-11 11:09:56,630 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0262410640717 seconds
+2016-11-11 11:09:57,179 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0288610458374 seconds
+2016-11-11 11:09:57,221 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0260589122772 seconds
+2016-11-11 11:09:57,264 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0288789272308 seconds
+2016-11-11 11:09:57,364 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0382499694824 seconds
+2016-11-11 11:09:57,406 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0267021656036 seconds
+2016-11-11 11:09:57,446 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.026554107666 seconds
+2016-11-11 11:09:57,527 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0337951183319 seconds
+2016-11-11 11:09:57,568 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0266580581665 seconds
+2016-11-11 11:09:57,614 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0307469367981 seconds
+2016-11-11 11:09:57,663 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0348651409149 seconds
+2016-11-11 11:09:57,704 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0264248847961 seconds
+2016-11-11 11:10:00,762 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 11:10:31,800 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0270681381226 seconds
+2016-11-11 11:11:08,086 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.025936126709 seconds
+2016-11-11 11:11:08,128 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.027626991272 seconds
+2016-11-11 11:11:08,173 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0267989635468 seconds
+2016-11-11 11:11:08,214 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0258769989014 seconds
+2016-11-11 11:12:46,926 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0265159606934 seconds
+2016-11-11 11:12:46,967 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0275218486786 seconds
+2016-11-11 11:12:47,008 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0255610942841 seconds
+2016-11-11 11:12:47,072 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0495748519897 seconds
+2016-11-11 11:14:29,172 - Utils.logger - DEBUG - Time Taken for username element :: 0.0382459163666 seconds
+2016-11-11 11:14:29,206 - Utils.logger - DEBUG - Time Taken for password element :: 0.0268099308014 seconds
+2016-11-11 11:14:29,243 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0307688713074 seconds
+2016-11-11 11:14:29,477 - Utils.logger - INFO - Login Successful
+2016-11-11 11:14:29,478 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:14:29,478 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:14:30,803 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.30020809174 seconds
+2016-11-11 11:14:30,854 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:14:31,728 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.689877986908 seconds
+2016-11-11 11:14:31,779 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0325710773468 seconds
+2016-11-11 11:14:31,826 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0301289558411 seconds
+2016-11-11 11:14:37,433 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0275840759277 seconds
+2016-11-11 11:14:38,218 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0296039581299 seconds
+2016-11-11 11:14:38,263 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0282869338989 seconds
+2016-11-11 11:14:38,308 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0301399230957 seconds
+2016-11-11 11:14:38,396 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0315890312195 seconds
+2016-11-11 11:14:38,442 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.029552936554 seconds
+2016-11-11 11:14:38,493 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0296618938446 seconds
+2016-11-11 11:14:38,628 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0362389087677 seconds
+2016-11-11 11:14:38,710 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0661220550537 seconds
+2016-11-11 11:14:38,758 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0292689800262 seconds
+2016-11-11 11:14:38,802 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0280439853668 seconds
+2016-11-11 11:14:38,845 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0286450386047 seconds
+2016-11-11 11:14:41,896 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 11:15:13,036 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.028116941452 seconds
+2016-11-11 11:15:57,225 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0278208255768 seconds
+2016-11-11 11:15:57,269 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0290250778198 seconds
+2016-11-11 11:15:57,313 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0275630950928 seconds
+2016-11-11 11:15:57,356 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0279560089111 seconds
+2016-11-11 11:18:00,139 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0277988910675 seconds
+2016-11-11 11:18:00,183 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0287320613861 seconds
+2016-11-11 11:18:00,226 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0272710323334 seconds
+2016-11-11 11:18:00,291 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0493519306183 seconds
+2016-11-11 11:22:11,544 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0305480957031 seconds
+2016-11-11 11:22:13,253 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0332930088043 seconds
+2016-11-11 11:23:28,718 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0305540561676 seconds
+2016-11-11 11:23:31,310 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.029541015625 seconds
+2016-11-11 11:25:31,533 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0283141136169 seconds
+2016-11-11 11:25:31,577 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0290467739105 seconds
+2016-11-11 11:25:31,621 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0281820297241 seconds
+2016-11-11 11:25:31,664 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0277390480042 seconds
+2016-11-11 11:27:24,414 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0313010215759 seconds
+2016-11-11 11:27:24,461 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0299799442291 seconds
+2016-11-11 11:27:24,508 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.030375957489 seconds
+2016-11-11 11:27:24,553 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0295460224152 seconds
+2016-11-11 11:32:55,712 - Utils.logger - DEBUG - Time Taken for username element :: 0.0279490947723 seconds
+2016-11-11 11:32:55,757 - Utils.logger - DEBUG - Time Taken for password element :: 0.0252909660339 seconds
+2016-11-11 11:32:55,789 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0253489017487 seconds
+2016-11-11 11:32:55,985 - Utils.logger - INFO - Login Successful
+2016-11-11 11:32:55,985 - Utils.logger - DEBUG - Username : admin
+2016-11-11 11:32:55,985 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 11:32:57,037 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.04555392265 seconds
+2016-11-11 11:32:57,088 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 11:32:58,359 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 1.22083497047 seconds
+2016-11-11 11:32:58,408 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0322268009186 seconds
+2016-11-11 11:32:58,455 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.030091047287 seconds
+2016-11-11 11:33:03,461 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0263750553131 seconds
+2016-11-11 11:33:04,196 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0276730060577 seconds
+2016-11-11 11:33:04,238 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0261580944061 seconds
+2016-11-11 11:33:04,281 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0296771526337 seconds
+2016-11-11 11:33:04,391 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0413639545441 seconds
+2016-11-11 11:33:04,435 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0283870697021 seconds
+2016-11-11 11:33:04,477 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0282618999481 seconds
+2016-11-11 11:33:04,558 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0313541889191 seconds
+2016-11-11 11:33:04,599 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0269401073456 seconds
+2016-11-11 11:33:04,647 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0334651470184 seconds
+2016-11-11 11:33:04,688 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0264658927917 seconds
+2016-11-11 11:33:04,751 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0475950241089 seconds
+2016-11-11 11:33:07,818 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 11:33:38,761 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0275239944458 seconds
+2016-11-11 11:34:15,835 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0285670757294 seconds
+2016-11-11 11:34:15,880 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0283710956573 seconds
+2016-11-11 11:34:15,922 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0266900062561 seconds
+2016-11-11 11:34:15,964 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0275540351868 seconds
+2016-11-11 14:20:40,208 - Utils.logger - DEBUG - Time Taken for username element :: 0.0291969776154 seconds
+2016-11-11 14:20:40,243 - Utils.logger - DEBUG - Time Taken for password element :: 0.0287969112396 seconds
+2016-11-11 14:20:40,290 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0409731864929 seconds
+2016-11-11 14:20:40,767 - Utils.logger - INFO - Login Successful
+2016-11-11 14:20:40,767 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:20:40,767 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:20:42,276 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.50308418274 seconds
+2016-11-11 14:20:42,332 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:20:43,277 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.883687973022 seconds
+2016-11-11 14:20:43,321 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0282700061798 seconds
+2016-11-11 14:20:43,390 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0520851612091 seconds
+2016-11-11 14:20:48,571 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0394041538239 seconds
+2016-11-11 14:20:49,245 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0277950763702 seconds
+2016-11-11 14:20:49,286 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0260598659515 seconds
+2016-11-11 14:20:49,338 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0359170436859 seconds
+2016-11-11 14:20:49,427 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0370230674744 seconds
+2016-11-11 14:20:49,469 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0263750553131 seconds
+2016-11-11 14:20:49,509 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0264551639557 seconds
+2016-11-11 14:20:49,587 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.031879901886 seconds
+2016-11-11 14:20:49,630 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0266358852386 seconds
+2016-11-11 14:20:49,674 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0303688049316 seconds
+2016-11-11 14:20:49,717 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267038345337 seconds
+2016-11-11 14:20:49,758 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0265579223633 seconds
+2016-11-11 14:20:52,851 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 14:21:08,355 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0263249874115 seconds
+2016-11-11 14:21:08,410 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0410611629486 seconds
+2016-11-11 14:21:08,457 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0279700756073 seconds
+2016-11-11 14:21:08,498 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0264120101929 seconds
+2016-11-11 14:37:44,026 - Utils.logger - DEBUG - Time Taken for username element :: 0.0334751605988 seconds
+2016-11-11 14:37:44,067 - Utils.logger - DEBUG - Time Taken for password element :: 0.0251669883728 seconds
+2016-11-11 14:37:44,097 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0248799324036 seconds
+2016-11-11 14:37:44,255 - Utils.logger - INFO - Login Successful
+2016-11-11 14:37:44,255 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:37:44,255 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:37:45,014 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.752843141556 seconds
+2016-11-11 14:37:45,073 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:37:45,924 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.801873922348 seconds
+2016-11-11 14:37:45,992 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0311110019684 seconds
+2016-11-11 14:37:46,062 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0525410175323 seconds
+2016-11-11 14:37:51,504 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0265851020813 seconds
+2016-11-11 14:37:52,171 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0279660224915 seconds
+2016-11-11 14:37:52,217 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0273041725159 seconds
+2016-11-11 14:37:52,261 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0299890041351 seconds
+2016-11-11 14:37:52,361 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.040834903717 seconds
+2016-11-11 14:37:52,405 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.027713060379 seconds
+2016-11-11 14:37:52,447 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0277938842773 seconds
+2016-11-11 14:37:52,530 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0347290039062 seconds
+2016-11-11 14:37:52,572 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.026526927948 seconds
+2016-11-11 14:37:52,616 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0295898914337 seconds
+2016-11-11 14:37:52,658 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0266501903534 seconds
+2016-11-11 14:37:52,704 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0304441452026 seconds
+2016-11-11 14:37:55,753 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 14:38:10,978 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0262279510498 seconds
+2016-11-11 14:38:11,058 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0280449390411 seconds
+2016-11-11 14:38:11,084 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0109701156616 seconds
+2016-11-11 14:38:11,128 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0381369590759 seconds
+2016-11-11 14:42:57,155 - Utils.logger - DEBUG - Time Taken for username element :: 0.0278968811035 seconds
+2016-11-11 14:42:57,187 - Utils.logger - DEBUG - Time Taken for password element :: 0.0256779193878 seconds
+2016-11-11 14:42:57,218 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0254640579224 seconds
+2016-11-11 14:42:57,374 - Utils.logger - INFO - Login Successful
+2016-11-11 14:42:57,374 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:42:57,374 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:42:58,052 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.670662879944 seconds
+2016-11-11 14:42:58,106 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:42:58,980 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.82365489006 seconds
+2016-11-11 14:42:59,027 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0298600196838 seconds
+2016-11-11 14:42:59,071 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0278971195221 seconds
+2016-11-11 14:43:04,087 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0260848999023 seconds
+2016-11-11 14:43:04,687 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0301449298859 seconds
+2016-11-11 14:43:04,729 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0262651443481 seconds
+2016-11-11 14:43:04,770 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0265188217163 seconds
+2016-11-11 14:43:04,863 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0373919010162 seconds
+2016-11-11 14:43:04,907 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0281980037689 seconds
+2016-11-11 14:43:04,960 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0382270812988 seconds
+2016-11-11 14:43:05,039 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0299389362335 seconds
+2016-11-11 14:43:05,080 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0264430046082 seconds
+2016-11-11 14:43:05,122 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0273299217224 seconds
+2016-11-11 14:43:05,166 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267190933228 seconds
+2016-11-11 14:43:05,208 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0268981456757 seconds
+2016-11-11 14:43:08,256 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 14:43:23,751 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0273170471191 seconds
+2016-11-11 14:43:23,793 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0280389785767 seconds
+2016-11-11 14:43:23,835 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0262219905853 seconds
+2016-11-11 14:43:23,876 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0267679691315 seconds
+2016-11-11 14:45:56,874 - Utils.logger - DEBUG - Time Taken for username element :: 0.0413198471069 seconds
+2016-11-11 14:45:56,912 - Utils.logger - DEBUG - Time Taken for password element :: 0.0272178649902 seconds
+2016-11-11 14:45:56,944 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0266120433807 seconds
+2016-11-11 14:45:57,198 - Utils.logger - INFO - Login Successful
+2016-11-11 14:45:57,198 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:45:57,198 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:45:57,868 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.641132116318 seconds
+2016-11-11 14:45:57,924 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:46:40,319 - Utils.logger - DEBUG - Time Taken for username element :: 0.0406541824341 seconds
+2016-11-11 14:46:40,372 - Utils.logger - DEBUG - Time Taken for password element :: 0.0319449901581 seconds
+2016-11-11 14:46:40,407 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0283000469208 seconds
+2016-11-11 14:46:40,572 - Utils.logger - INFO - Login Successful
+2016-11-11 14:46:40,572 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:46:40,572 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:46:41,409 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.83077788353 seconds
+2016-11-11 14:46:41,466 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:46:42,247 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.732039928436 seconds
+2016-11-11 14:46:42,292 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0287590026855 seconds
+2016-11-11 14:46:42,340 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0315489768982 seconds
+2016-11-11 14:46:47,024 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0301740169525 seconds
+2016-11-11 14:46:47,697 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0300061702728 seconds
+2016-11-11 14:46:47,739 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0262181758881 seconds
+2016-11-11 14:46:47,780 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.02698802948 seconds
+2016-11-11 14:46:47,877 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0370149612427 seconds
+2016-11-11 14:46:47,918 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0264739990234 seconds
+2016-11-11 14:46:47,958 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0261449813843 seconds
+2016-11-11 14:46:48,040 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0332288742065 seconds
+2016-11-11 14:46:48,084 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0278351306915 seconds
+2016-11-11 14:46:48,126 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0280678272247 seconds
+2016-11-11 14:46:48,169 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0264399051666 seconds
+2016-11-11 14:46:48,210 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0267879962921 seconds
+2016-11-11 14:46:51,258 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 14:47:06,747 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0266170501709 seconds
+2016-11-11 14:47:06,788 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0273458957672 seconds
+2016-11-11 14:47:06,830 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0261900424957 seconds
+2016-11-11 14:47:06,873 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0283222198486 seconds
+2016-11-11 14:52:01,561 - Utils.logger - DEBUG - Time Taken for username element :: 0.0295770168304 seconds
+2016-11-11 14:52:01,599 - Utils.logger - DEBUG - Time Taken for password element :: 0.0274038314819 seconds
+2016-11-11 14:52:01,631 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0264420509338 seconds
+2016-11-11 14:52:01,852 - Utils.logger - INFO - Login Successful
+2016-11-11 14:52:01,852 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:52:01,852 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:52:02,925 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.0473921299 seconds
+2016-11-11 14:52:02,976 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:52:39,901 - Utils.logger - DEBUG - Time Taken for username element :: 0.0307669639587 seconds
+2016-11-11 14:52:39,949 - Utils.logger - DEBUG - Time Taken for password element :: 0.0256409645081 seconds
+2016-11-11 14:52:39,979 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0249009132385 seconds
+2016-11-11 14:52:40,194 - Utils.logger - INFO - Login Successful
+2016-11-11 14:52:40,194 - Utils.logger - DEBUG - Username : admin
+2016-11-11 14:52:40,195 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 14:52:41,562 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.36169505119 seconds
+2016-11-11 14:52:41,632 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 14:52:42,489 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.806326150894 seconds
+2016-11-11 14:52:42,535 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0304939746857 seconds
+2016-11-11 14:52:42,583 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0266799926758 seconds
+2016-11-11 14:52:47,628 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0262899398804 seconds
+2016-11-11 14:52:48,257 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0293338298798 seconds
+2016-11-11 14:52:48,299 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.02623295784 seconds
+2016-11-11 14:52:48,391 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.078008890152 seconds
+2016-11-11 14:52:48,503 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0357739925385 seconds
+2016-11-11 14:52:48,548 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0268888473511 seconds
+2016-11-11 14:52:48,588 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0264339447021 seconds
+2016-11-11 14:52:48,669 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0310289859772 seconds
+2016-11-11 14:52:48,711 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0274369716644 seconds
+2016-11-11 14:52:48,752 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0263428688049 seconds
+2016-11-11 14:52:48,796 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267899036407 seconds
+2016-11-11 14:52:48,837 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0265698432922 seconds
+2016-11-11 14:52:51,889 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 14:53:07,398 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0268790721893 seconds
+2016-11-11 14:53:07,441 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0274691581726 seconds
+2016-11-11 14:53:07,482 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0260651111603 seconds
+2016-11-11 14:53:07,523 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0267579555511 seconds
+2016-11-11 15:26:59,657 - Utils.logger - DEBUG - Time Taken for username element :: 0.033618927002 seconds
+2016-11-11 15:26:59,698 - Utils.logger - DEBUG - Time Taken for password element :: 0.0304479598999 seconds
+2016-11-11 15:26:59,728 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0250210762024 seconds
+2016-11-11 15:26:59,903 - Utils.logger - INFO - Login Successful
+2016-11-11 15:26:59,903 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:26:59,903 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:27:00,672 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.76317691803 seconds
+2016-11-11 15:27:00,725 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:27:01,530 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.756165981293 seconds
+2016-11-11 15:27:01,576 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0301239490509 seconds
+2016-11-11 15:27:01,623 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0290701389313 seconds
+2016-11-11 15:27:06,630 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0263750553131 seconds
+2016-11-11 15:27:07,191 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.029806137085 seconds
+2016-11-11 15:27:07,232 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0261068344116 seconds
+2016-11-11 15:27:07,285 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0380561351776 seconds
+2016-11-11 15:27:07,378 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0419600009918 seconds
+2016-11-11 15:27:07,421 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0266518592834 seconds
+2016-11-11 15:27:07,465 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0271489620209 seconds
+2016-11-11 15:27:07,547 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0356810092926 seconds
+2016-11-11 15:27:07,589 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.026654958725 seconds
+2016-11-11 15:27:07,632 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0284850597382 seconds
+2016-11-11 15:27:07,676 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0273790359497 seconds
+2016-11-11 15:27:07,717 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0266489982605 seconds
+2016-11-11 15:27:10,766 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:27:26,306 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0267200469971 seconds
+2016-11-11 15:27:26,348 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0277760028839 seconds
+2016-11-11 15:27:26,391 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.026214838028 seconds
+2016-11-11 15:27:26,433 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0273730754852 seconds
+2016-11-11 15:34:03,476 - Utils.logger - DEBUG - Time Taken for username element :: 0.0297150611877 seconds
+2016-11-11 15:34:03,587 - Utils.logger - DEBUG - Time Taken for password element :: 0.0277140140533 seconds
+2016-11-11 15:34:03,620 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0274679660797 seconds
+2016-11-11 15:34:03,802 - Utils.logger - INFO - Login Successful
+2016-11-11 15:34:03,802 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:34:03,803 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:34:04,549 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.737082958221 seconds
+2016-11-11 15:34:04,596 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:34:05,432 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.784461021423 seconds
+2016-11-11 15:34:05,482 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0300559997559 seconds
+2016-11-11 15:34:05,528 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0281357765198 seconds
+2016-11-11 15:34:10,515 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0262711048126 seconds
+2016-11-11 15:34:11,366 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0283708572388 seconds
+2016-11-11 15:34:11,411 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0264768600464 seconds
+2016-11-11 15:34:11,459 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0304148197174 seconds
+2016-11-11 15:34:11,549 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0395159721375 seconds
+2016-11-11 15:34:11,591 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0277011394501 seconds
+2016-11-11 15:34:11,632 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0267219543457 seconds
+2016-11-11 15:34:11,770 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0903589725494 seconds
+2016-11-11 15:34:11,831 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0306179523468 seconds
+2016-11-11 15:34:11,872 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0268340110779 seconds
+2016-11-11 15:34:11,913 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267169475555 seconds
+2016-11-11 15:34:11,954 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.02663397789 seconds
+2016-11-11 15:34:15,095 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:34:30,593 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0270550251007 seconds
+2016-11-11 15:34:30,691 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0283920764923 seconds
+2016-11-11 15:34:30,733 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0267250537872 seconds
+2016-11-11 15:34:30,776 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0277848243713 seconds
+2016-11-11 15:47:03,059 - Utils.logger - DEBUG - Time Taken for username element :: 0.0276539325714 seconds
+2016-11-11 15:47:03,099 - Utils.logger - DEBUG - Time Taken for password element :: 0.0256049633026 seconds
+2016-11-11 15:47:03,132 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0273320674896 seconds
+2016-11-11 15:47:03,298 - Utils.logger - INFO - Login Successful
+2016-11-11 15:47:03,298 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:47:03,298 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:47:03,997 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.69224190712 seconds
+2016-11-11 15:47:04,046 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:47:04,870 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.774858951569 seconds
+2016-11-11 15:47:04,915 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0294568538666 seconds
+2016-11-11 15:47:04,964 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0310318470001 seconds
+2016-11-11 15:47:10,255 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0273759365082 seconds
+2016-11-11 15:47:10,889 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0325419902802 seconds
+2016-11-11 15:47:10,932 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0267250537872 seconds
+2016-11-11 15:47:10,979 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0330300331116 seconds
+2016-11-11 15:47:11,069 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0364580154419 seconds
+2016-11-11 15:47:11,112 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0286779403687 seconds
+2016-11-11 15:47:11,154 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0270609855652 seconds
+2016-11-11 15:47:11,239 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0329291820526 seconds
+2016-11-11 15:47:11,281 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0268759727478 seconds
+2016-11-11 15:47:11,324 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0287330150604 seconds
+2016-11-11 15:47:11,368 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267910957336 seconds
+2016-11-11 15:47:11,409 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0265889167786 seconds
+2016-11-11 15:47:14,496 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:47:29,984 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0275959968567 seconds
+2016-11-11 15:47:30,068 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0281381607056 seconds
+2016-11-11 15:47:30,112 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0265100002289 seconds
+2016-11-11 15:47:30,153 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0268769264221 seconds
+2016-11-11 15:50:31,138 - Utils.logger - DEBUG - Time Taken for username element :: 0.0292642116547 seconds
+2016-11-11 15:50:31,192 - Utils.logger - DEBUG - Time Taken for password element :: 0.0285241603851 seconds
+2016-11-11 15:50:31,225 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.027331829071 seconds
+2016-11-11 15:50:31,418 - Utils.logger - INFO - Login Successful
+2016-11-11 15:50:31,418 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:50:31,418 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:50:32,284 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.859549045563 seconds
+2016-11-11 15:50:32,347 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:50:33,468 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 1.0711889267 seconds
+2016-11-11 15:50:33,514 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.028195142746 seconds
+2016-11-11 15:50:33,564 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0333681106567 seconds
+2016-11-11 15:50:38,980 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0263640880585 seconds
+2016-11-11 15:50:39,663 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0537769794464 seconds
+2016-11-11 15:50:39,720 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0286221504211 seconds
+2016-11-11 15:50:39,761 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0266959667206 seconds
+2016-11-11 15:50:39,850 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0360100269318 seconds
+2016-11-11 15:50:39,891 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0265090465546 seconds
+2016-11-11 15:50:39,986 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0807089805603 seconds
+2016-11-11 15:50:40,083 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.036721944809 seconds
+2016-11-11 15:50:40,124 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.026820898056 seconds
+2016-11-11 15:50:40,169 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.030503988266 seconds
+2016-11-11 15:50:40,209 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0264050960541 seconds
+2016-11-11 15:50:40,250 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0266819000244 seconds
+2016-11-11 15:50:43,371 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:50:58,902 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0318620204926 seconds
+2016-11-11 15:50:58,945 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0283060073853 seconds
+2016-11-11 15:50:58,988 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0266349315643 seconds
+2016-11-11 15:50:59,031 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0288019180298 seconds
+2016-11-11 15:51:44,119 - Utils.logger - DEBUG - Time Taken for username element :: 0.0282490253448 seconds
+2016-11-11 15:51:44,182 - Utils.logger - DEBUG - Time Taken for password element :: 0.0255801677704 seconds
+2016-11-11 15:51:44,213 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.025621175766 seconds
+2016-11-11 15:51:44,393 - Utils.logger - INFO - Login Successful
+2016-11-11 15:51:44,393 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:51:44,394 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:51:45,537 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.1376850605 seconds
+2016-11-11 15:51:45,615 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:51:46,478 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.814812898636 seconds
+2016-11-11 15:51:46,523 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0286450386047 seconds
+2016-11-11 15:51:46,569 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0302360057831 seconds
+2016-11-11 15:51:51,598 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.026260137558 seconds
+2016-11-11 15:51:52,277 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0395588874817 seconds
+2016-11-11 15:51:52,323 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0300619602203 seconds
+2016-11-11 15:51:52,406 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0650699138641 seconds
+2016-11-11 15:51:52,496 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0386588573456 seconds
+2016-11-11 15:51:52,563 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0274691581726 seconds
+2016-11-11 15:51:52,606 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0281429290771 seconds
+2016-11-11 15:51:52,697 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0369420051575 seconds
+2016-11-11 15:51:52,739 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0272228717804 seconds
+2016-11-11 15:51:52,783 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0283739566803 seconds
+2016-11-11 15:51:52,832 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0299870967865 seconds
+2016-11-11 15:51:52,874 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0276219844818 seconds
+2016-11-11 15:51:55,957 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:52:11,527 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0272870063782 seconds
+2016-11-11 15:52:11,607 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0275800228119 seconds
+2016-11-11 15:52:11,650 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0273439884186 seconds
+2016-11-11 15:52:11,692 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0277590751648 seconds
+2016-11-11 15:54:53,451 - Utils.logger - DEBUG - Time Taken for username element :: 0.0276288986206 seconds
+2016-11-11 15:54:53,482 - Utils.logger - DEBUG - Time Taken for password element :: 0.0254819393158 seconds
+2016-11-11 15:54:53,512 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0250511169434 seconds
+2016-11-11 15:54:53,673 - Utils.logger - INFO - Login Successful
+2016-11-11 15:54:53,674 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:54:53,674 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:54:55,024 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.34237480164 seconds
+2016-11-11 15:54:55,072 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:54:55,899 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.780565977097 seconds
+2016-11-11 15:54:55,950 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0334830284119 seconds
+2016-11-11 15:54:56,001 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0327758789062 seconds
+2016-11-11 15:55:00,972 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0264918804169 seconds
+2016-11-11 15:55:01,579 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0310051441193 seconds
+2016-11-11 15:55:01,622 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0274429321289 seconds
+2016-11-11 15:55:01,688 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0480351448059 seconds
+2016-11-11 15:55:01,789 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0375590324402 seconds
+2016-11-11 15:55:01,831 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.02738904953 seconds
+2016-11-11 15:55:01,874 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0278339385986 seconds
+2016-11-11 15:55:01,953 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0290379524231 seconds
+2016-11-11 15:55:01,994 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0268170833588 seconds
+2016-11-11 15:55:02,041 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0324530601501 seconds
+2016-11-11 15:55:02,082 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0268661975861 seconds
+2016-11-11 15:55:02,124 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0273869037628 seconds
+2016-11-11 15:55:05,173 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:55:20,722 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0277700424194 seconds
+2016-11-11 15:55:20,767 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0290830135345 seconds
+2016-11-11 15:55:20,811 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0273489952087 seconds
+2016-11-11 15:55:20,855 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0287101268768 seconds
+2016-11-11 15:57:50,295 - Utils.logger - DEBUG - Time Taken for username element :: 0.0289552211761 seconds
+2016-11-11 15:57:50,326 - Utils.logger - DEBUG - Time Taken for password element :: 0.0257129669189 seconds
+2016-11-11 15:57:50,359 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0260529518127 seconds
+2016-11-11 15:57:50,549 - Utils.logger - INFO - Login Successful
+2016-11-11 15:57:50,549 - Utils.logger - DEBUG - Username : admin
+2016-11-11 15:57:50,549 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 15:57:51,305 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.748835086823 seconds
+2016-11-11 15:57:51,348 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 15:57:52,174 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.778236865997 seconds
+2016-11-11 15:57:52,220 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0299210548401 seconds
+2016-11-11 15:57:52,266 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0289499759674 seconds
+2016-11-11 15:57:57,419 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0307061672211 seconds
+2016-11-11 15:57:58,041 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0348858833313 seconds
+2016-11-11 15:57:58,086 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0283319950104 seconds
+2016-11-11 15:57:58,133 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0296559333801 seconds
+2016-11-11 15:57:58,249 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.044517993927 seconds
+2016-11-11 15:57:58,292 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0277519226074 seconds
+2016-11-11 15:57:58,334 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0274617671967 seconds
+2016-11-11 15:57:58,415 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0326199531555 seconds
+2016-11-11 15:57:58,457 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0270419120789 seconds
+2016-11-11 15:57:58,503 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0306899547577 seconds
+2016-11-11 15:57:58,566 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0485560894012 seconds
+2016-11-11 15:57:58,608 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0269908905029 seconds
+2016-11-11 15:58:01,687 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 15:58:17,177 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0276298522949 seconds
+2016-11-11 15:58:17,222 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0299010276794 seconds
+2016-11-11 15:58:17,250 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0118279457092 seconds
+2016-11-11 15:58:17,282 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0269420146942 seconds
+2016-11-11 16:01:04,226 - Utils.logger - DEBUG - Time Taken for username element :: 0.0280191898346 seconds
+2016-11-11 16:01:04,258 - Utils.logger - DEBUG - Time Taken for password element :: 0.0257959365845 seconds
+2016-11-11 16:01:04,289 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0258231163025 seconds
+2016-11-11 16:01:04,464 - Utils.logger - INFO - Login Successful
+2016-11-11 16:01:04,464 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:01:04,464 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:01:05,517 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.04556798935 seconds
+2016-11-11 16:01:05,556 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:01:06,373 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.761017799377 seconds
+2016-11-11 16:01:06,460 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.056736946106 seconds
+2016-11-11 16:01:06,508 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0295400619507 seconds
+2016-11-11 16:01:11,321 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0258448123932 seconds
+2016-11-11 16:01:11,913 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0275280475616 seconds
+2016-11-11 16:01:11,958 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.029629945755 seconds
+2016-11-11 16:01:12,004 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0280549526215 seconds
+2016-11-11 16:01:12,089 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0351040363312 seconds
+2016-11-11 16:01:12,135 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0282349586487 seconds
+2016-11-11 16:01:12,176 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0265390872955 seconds
+2016-11-11 16:01:12,253 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0307159423828 seconds
+2016-11-11 16:01:12,298 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0295350551605 seconds
+2016-11-11 16:01:12,340 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0279750823975 seconds
+2016-11-11 16:01:12,384 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0265591144562 seconds
+2016-11-11 16:01:12,424 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0265641212463 seconds
+2016-11-11 16:01:15,473 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:01:30,970 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0266649723053 seconds
+2016-11-11 16:01:31,013 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0285201072693 seconds
+2016-11-11 16:01:31,054 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0260601043701 seconds
+2016-11-11 16:01:31,094 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0264048576355 seconds
+2016-11-11 16:07:23,141 - Utils.logger - DEBUG - Time Taken for username element :: 0.0289449691772 seconds
+2016-11-11 16:07:23,186 - Utils.logger - DEBUG - Time Taken for password element :: 0.0298202037811 seconds
+2016-11-11 16:07:23,216 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0253758430481 seconds
+2016-11-11 16:07:23,376 - Utils.logger - INFO - Login Successful
+2016-11-11 16:07:23,376 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:07:23,376 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:07:24,691 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.30905795097 seconds
+2016-11-11 16:07:24,741 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:07:25,511 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.721643924713 seconds
+2016-11-11 16:07:25,559 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.031051158905 seconds
+2016-11-11 16:07:25,605 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0292510986328 seconds
+2016-11-11 16:07:30,471 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0262250900269 seconds
+2016-11-11 16:07:31,086 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0286021232605 seconds
+2016-11-11 16:07:31,128 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0264480113983 seconds
+2016-11-11 16:07:31,178 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0351309776306 seconds
+2016-11-11 16:07:31,263 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0332579612732 seconds
+2016-11-11 16:07:31,307 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.029727935791 seconds
+2016-11-11 16:07:31,348 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0268230438232 seconds
+2016-11-11 16:07:31,430 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0356409549713 seconds
+2016-11-11 16:07:31,474 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0293619632721 seconds
+2016-11-11 16:07:31,518 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0291509628296 seconds
+2016-11-11 16:07:31,561 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267579555511 seconds
+2016-11-11 16:07:31,602 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.026731967926 seconds
+2016-11-11 16:07:34,652 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:07:50,197 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0281941890717 seconds
+2016-11-11 16:07:50,241 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.029098033905 seconds
+2016-11-11 16:07:50,284 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0271220207214 seconds
+2016-11-11 16:07:50,327 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0274150371552 seconds
+2016-11-11 16:09:39,337 - Utils.logger - DEBUG - Time Taken for username element :: 0.0323011875153 seconds
+2016-11-11 16:09:39,383 - Utils.logger - DEBUG - Time Taken for password element :: 0.0354750156403 seconds
+2016-11-11 16:09:39,421 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0307908058167 seconds
+2016-11-11 16:09:39,590 - Utils.logger - INFO - Login Successful
+2016-11-11 16:09:39,591 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:09:39,591 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:09:40,642 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.04492521286 seconds
+2016-11-11 16:09:40,691 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:09:41,985 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 1.23890185356 seconds
+2016-11-11 16:09:42,071 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0694489479065 seconds
+2016-11-11 16:09:42,119 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0285949707031 seconds
+2016-11-11 16:09:47,416 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0285408496857 seconds
+2016-11-11 16:09:48,151 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0293509960175 seconds
+2016-11-11 16:09:48,194 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0267968177795 seconds
+2016-11-11 16:09:48,239 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0300569534302 seconds
+2016-11-11 16:09:48,322 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0321879386902 seconds
+2016-11-11 16:09:48,367 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.028196811676 seconds
+2016-11-11 16:09:48,412 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0296900272369 seconds
+2016-11-11 16:09:48,493 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0288240909576 seconds
+2016-11-11 16:09:49,047 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.539738893509 seconds
+2016-11-11 16:09:49,090 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0272769927979 seconds
+2016-11-11 16:09:49,132 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0277059078217 seconds
+2016-11-11 16:09:49,173 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0271241664886 seconds
+2016-11-11 16:09:52,222 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:10:07,764 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0270128250122 seconds
+2016-11-11 16:10:07,808 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0306770801544 seconds
+2016-11-11 16:10:07,884 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0602087974548 seconds
+2016-11-11 16:10:07,927 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0273439884186 seconds
+2016-11-11 16:12:19,828 - Utils.logger - DEBUG - Time Taken for username element :: 0.0416719913483 seconds
+2016-11-11 16:12:19,865 - Utils.logger - DEBUG - Time Taken for password element :: 0.026927947998 seconds
+2016-11-11 16:12:19,897 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.026673078537 seconds
+2016-11-11 16:12:20,063 - Utils.logger - INFO - Login Successful
+2016-11-11 16:12:20,063 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:12:20,063 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:12:21,123 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.05133986473 seconds
+2016-11-11 16:12:21,175 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:12:21,990 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.76173210144 seconds
+2016-11-11 16:12:22,037 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0303220748901 seconds
+2016-11-11 16:12:22,086 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0302910804749 seconds
+2016-11-11 16:12:27,232 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0408480167389 seconds
+2016-11-11 16:12:27,854 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0333650112152 seconds
+2016-11-11 16:12:27,905 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0342600345612 seconds
+2016-11-11 16:12:27,954 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0290989875793 seconds
+2016-11-11 16:12:28,046 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.037584066391 seconds
+2016-11-11 16:12:28,102 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0408580303192 seconds
+2016-11-11 16:12:28,144 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0268061161041 seconds
+2016-11-11 16:12:28,228 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0320439338684 seconds
+2016-11-11 16:12:28,270 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0275599956512 seconds
+2016-11-11 16:12:28,314 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.029247045517 seconds
+2016-11-11 16:12:28,427 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0965900421143 seconds
+2016-11-11 16:12:28,469 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0269541740417 seconds
+2016-11-11 16:12:31,519 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:12:47,046 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0343580245972 seconds
+2016-11-11 16:12:47,104 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0410549640656 seconds
+2016-11-11 16:12:47,166 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0375430583954 seconds
+2016-11-11 16:12:47,229 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0390329360962 seconds
+2016-11-11 16:12:49,520 - Utils.logger - DEBUG - Time Taken for username element :: 0.0290491580963 seconds
+2016-11-11 16:12:49,562 - Utils.logger - DEBUG - Time Taken for password element :: 0.0271129608154 seconds
+2016-11-11 16:12:49,595 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0269029140472 seconds
+2016-11-11 16:12:49,789 - Utils.logger - INFO - Login Successful
+2016-11-11 16:12:49,789 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:12:49,789 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:12:50,525 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.730119943619 seconds
+2016-11-11 16:12:50,578 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:12:51,376 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.748437166214 seconds
+2016-11-11 16:12:51,428 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0350840091705 seconds
+2016-11-11 16:12:51,474 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0294508934021 seconds
+2016-11-11 16:12:56,910 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0266928672791 seconds
+2016-11-11 16:12:57,534 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0314121246338 seconds
+2016-11-11 16:12:57,587 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0350530147552 seconds
+2016-11-11 16:12:57,629 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0268518924713 seconds
+2016-11-11 16:12:57,719 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0391979217529 seconds
+2016-11-11 16:12:57,765 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0274639129639 seconds
+2016-11-11 16:12:57,806 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0269868373871 seconds
+2016-11-11 16:12:57,884 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0307719707489 seconds
+2016-11-11 16:12:57,926 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0273871421814 seconds
+2016-11-11 16:12:57,970 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0288560390472 seconds
+2016-11-11 16:12:58,014 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0271890163422 seconds
+2016-11-11 16:12:58,056 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0274460315704 seconds
+2016-11-11 16:13:01,107 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:13:16,727 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0315041542053 seconds
+2016-11-11 16:13:16,772 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0292000770569 seconds
+2016-11-11 16:13:16,830 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0299060344696 seconds
+2016-11-11 16:13:16,875 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0292541980743 seconds
+2016-11-11 16:15:26,722 - Utils.logger - DEBUG - Time Taken for username element :: 0.0281729698181 seconds
+2016-11-11 16:15:26,776 - Utils.logger - DEBUG - Time Taken for password element :: 0.0266029834747 seconds
+2016-11-11 16:15:26,808 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0261030197144 seconds
+2016-11-11 16:15:27,253 - Utils.logger - INFO - Login Successful
+2016-11-11 16:15:27,253 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:15:27,253 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:15:28,068 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.808685064316 seconds
+2016-11-11 16:15:28,144 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:15:28,974 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.781295061111 seconds
+2016-11-11 16:15:29,025 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0290739536285 seconds
+2016-11-11 16:15:29,071 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0284950733185 seconds
+2016-11-11 16:15:34,289 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0264291763306 seconds
+2016-11-11 16:15:34,961 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.029364824295 seconds
+2016-11-11 16:15:35,010 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0299091339111 seconds
+2016-11-11 16:15:35,050 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0263969898224 seconds
+2016-11-11 16:15:35,135 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0343179702759 seconds
+2016-11-11 16:15:35,179 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.028636932373 seconds
+2016-11-11 16:15:35,221 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0266699790955 seconds
+2016-11-11 16:15:35,300 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0297400951385 seconds
+2016-11-11 16:15:35,342 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.026566028595 seconds
+2016-11-11 16:15:35,387 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0281209945679 seconds
+2016-11-11 16:15:35,430 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0285310745239 seconds
+2016-11-11 16:15:35,472 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0267200469971 seconds
+2016-11-11 16:15:38,531 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:15:54,086 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0268671512604 seconds
+2016-11-11 16:15:54,148 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0286929607391 seconds
+2016-11-11 16:15:54,192 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0281281471252 seconds
+2016-11-11 16:15:54,234 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0272600650787 seconds
+2016-11-11 16:18:40,218 - Utils.logger - DEBUG - Time Taken for username element :: 0.0309019088745 seconds
+2016-11-11 16:18:40,250 - Utils.logger - DEBUG - Time Taken for password element :: 0.0263681411743 seconds
+2016-11-11 16:18:40,281 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0253140926361 seconds
+2016-11-11 16:18:40,850 - Utils.logger - INFO - Login Successful
+2016-11-11 16:18:40,850 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:18:40,850 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:18:42,187 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.3272690773 seconds
+2016-11-11 16:18:42,235 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:18:43,037 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.753400087357 seconds
+2016-11-11 16:18:43,085 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0307588577271 seconds
+2016-11-11 16:18:43,136 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0314810276031 seconds
+2016-11-11 16:18:48,048 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0265250205994 seconds
+2016-11-11 16:18:48,664 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0282809734344 seconds
+2016-11-11 16:18:48,707 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0264668464661 seconds
+2016-11-11 16:18:48,754 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0333678722382 seconds
+2016-11-11 16:18:48,906 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0314571857452 seconds
+2016-11-11 16:18:48,948 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0270199775696 seconds
+2016-11-11 16:18:48,989 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.026880979538 seconds
+2016-11-11 16:18:49,070 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0310699939728 seconds
+2016-11-11 16:18:49,112 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0270500183105 seconds
+2016-11-11 16:18:49,156 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0293791294098 seconds
+2016-11-11 16:18:49,200 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0296161174774 seconds
+2016-11-11 16:18:49,241 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0267050266266 seconds
+2016-11-11 16:18:52,293 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:19:07,850 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0269799232483 seconds
+2016-11-11 16:19:07,892 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0279312133789 seconds
+2016-11-11 16:19:07,934 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0260698795319 seconds
+2016-11-11 16:19:07,975 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0267508029938 seconds
+2016-11-11 16:25:53,298 - Utils.logger - DEBUG - Time Taken for username element :: 0.0281980037689 seconds
+2016-11-11 16:25:53,336 - Utils.logger - DEBUG - Time Taken for password element :: 0.0286900997162 seconds
+2016-11-11 16:25:53,370 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0254890918732 seconds
+2016-11-11 16:25:53,536 - Utils.logger - INFO - Login Successful
+2016-11-11 16:25:53,536 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:25:53,536 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:25:54,882 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.33906507492 seconds
+2016-11-11 16:25:54,931 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:25:55,712 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.729639053345 seconds
+2016-11-11 16:25:55,759 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0304410457611 seconds
+2016-11-11 16:25:55,803 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0277061462402 seconds
+2016-11-11 16:26:00,757 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0264050960541 seconds
+2016-11-11 16:26:01,362 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0278151035309 seconds
+2016-11-11 16:26:01,404 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0262861251831 seconds
+2016-11-11 16:26:01,448 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0295631885529 seconds
+2016-11-11 16:26:01,545 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0433309078217 seconds
+2016-11-11 16:26:01,588 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0274767875671 seconds
+2016-11-11 16:26:01,629 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0265929698944 seconds
+2016-11-11 16:26:01,706 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0304629802704 seconds
+2016-11-11 16:26:01,749 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0276288986206 seconds
+2016-11-11 16:26:01,792 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.029317855835 seconds
+2016-11-11 16:26:01,836 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0271191596985 seconds
+2016-11-11 16:26:01,878 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0270049571991 seconds
+2016-11-11 16:26:04,927 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:26:20,468 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0266151428223 seconds
+2016-11-11 16:26:20,512 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0289440155029 seconds
+2016-11-11 16:26:20,553 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0260789394379 seconds
+2016-11-11 16:26:20,594 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0265171527863 seconds
+2016-11-11 16:31:25,457 - Utils.logger - DEBUG - Time Taken for username element :: 0.0362029075623 seconds
+2016-11-11 16:31:25,492 - Utils.logger - DEBUG - Time Taken for password element :: 0.0290489196777 seconds
+2016-11-11 16:31:25,524 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0274510383606 seconds
+2016-11-11 16:31:25,683 - Utils.logger - INFO - Login Successful
+2016-11-11 16:31:25,683 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:31:25,683 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:31:27,033 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.34088301659 seconds
+2016-11-11 16:31:27,082 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:31:27,861 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.730025053024 seconds
+2016-11-11 16:31:27,906 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0285079479218 seconds
+2016-11-11 16:31:27,951 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0293099880219 seconds
+2016-11-11 16:31:33,038 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0263199806213 seconds
+2016-11-11 16:31:33,643 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0279099941254 seconds
+2016-11-11 16:31:33,684 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0262360572815 seconds
+2016-11-11 16:31:33,731 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.031919002533 seconds
+2016-11-11 16:31:33,826 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0408589839935 seconds
+2016-11-11 16:31:33,868 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0275039672852 seconds
+2016-11-11 16:31:33,920 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0379312038422 seconds
+2016-11-11 16:31:34,003 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0364351272583 seconds
+2016-11-11 16:31:34,045 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0267980098724 seconds
+2016-11-11 16:31:34,091 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0307672023773 seconds
+2016-11-11 16:31:34,132 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0266139507294 seconds
+2016-11-11 16:31:34,173 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0268478393555 seconds
+2016-11-11 16:31:37,222 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:31:52,733 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.026682138443 seconds
+2016-11-11 16:31:52,776 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0285229682922 seconds
+2016-11-11 16:31:52,818 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0262930393219 seconds
+2016-11-11 16:31:52,860 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.027951002121 seconds
+2016-11-11 16:34:27,117 - Utils.logger - DEBUG - Time Taken for username element :: 0.0396389961243 seconds
+2016-11-11 16:34:27,156 - Utils.logger - DEBUG - Time Taken for password element :: 0.0320150852203 seconds
+2016-11-11 16:34:27,190 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0286989212036 seconds
+2016-11-11 16:34:27,354 - Utils.logger - INFO - Login Successful
+2016-11-11 16:34:27,354 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:34:27,354 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:34:28,404 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.04399108887 seconds
+2016-11-11 16:34:28,451 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:34:29,268 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.759119033813 seconds
+2016-11-11 16:34:29,316 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0295300483704 seconds
+2016-11-11 16:34:29,361 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0276329517365 seconds
+2016-11-11 16:34:34,283 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0261228084564 seconds
+2016-11-11 16:34:34,884 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0288319587708 seconds
+2016-11-11 16:34:34,935 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0342757701874 seconds
+2016-11-11 16:34:34,979 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0272488594055 seconds
+2016-11-11 16:34:35,077 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0413589477539 seconds
+2016-11-11 16:34:35,129 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0365409851074 seconds
+2016-11-11 16:34:35,173 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0285980701447 seconds
+2016-11-11 16:34:35,253 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0301229953766 seconds
+2016-11-11 16:34:35,294 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0268568992615 seconds
+2016-11-11 16:34:35,341 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0306880474091 seconds
+2016-11-11 16:34:35,382 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0268580913544 seconds
+2016-11-11 16:34:35,423 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0266399383545 seconds
+2016-11-11 16:34:38,472 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:34:54,042 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0349779129028 seconds
+2016-11-11 16:34:54,085 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0283939838409 seconds
+2016-11-11 16:34:54,127 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0264768600464 seconds
+2016-11-11 16:34:54,169 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0275888442993 seconds
+2016-11-11 16:47:34,777 - Utils.logger - DEBUG - Time Taken for username element :: 0.0495851039886 seconds
+2016-11-11 16:47:34,824 - Utils.logger - DEBUG - Time Taken for password element :: 0.0410039424896 seconds
+2016-11-11 16:47:34,863 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0271530151367 seconds
+2016-11-11 16:47:35,047 - Utils.logger - INFO - Login Successful
+2016-11-11 16:47:35,047 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:47:35,047 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:47:35,788 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.732399940491 seconds
+2016-11-11 16:47:35,842 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:47:36,627 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.730144023895 seconds
+2016-11-11 16:47:36,673 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0299470424652 seconds
+2016-11-11 16:47:36,718 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0275020599365 seconds
+2016-11-11 16:47:41,615 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0262460708618 seconds
+2016-11-11 16:47:42,234 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0288491249084 seconds
+2016-11-11 16:47:42,280 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0302608013153 seconds
+2016-11-11 16:47:42,325 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0278317928314 seconds
+2016-11-11 16:47:42,416 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0402629375458 seconds
+2016-11-11 16:47:42,459 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0287058353424 seconds
+2016-11-11 16:47:42,501 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.026750087738 seconds
+2016-11-11 16:47:42,649 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.033084154129 seconds
+2016-11-11 16:47:42,690 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0269827842712 seconds
+2016-11-11 16:47:42,735 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0300011634827 seconds
+2016-11-11 16:47:42,776 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0265181064606 seconds
+2016-11-11 16:47:42,817 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0267369747162 seconds
+2016-11-11 16:47:45,866 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:48:01,362 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0267519950867 seconds
+2016-11-11 16:48:01,406 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0289828777313 seconds
+2016-11-11 16:48:01,447 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0262351036072 seconds
+2016-11-11 16:48:01,489 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0268659591675 seconds
+2016-11-11 16:51:51,471 - Utils.logger - DEBUG - Time Taken for username element :: 0.041111946106 seconds
+2016-11-11 16:51:51,509 - Utils.logger - DEBUG - Time Taken for password element :: 0.0265982151031 seconds
+2016-11-11 16:51:51,539 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0250930786133 seconds
+2016-11-11 16:51:51,710 - Utils.logger - INFO - Login Successful
+2016-11-11 16:51:51,710 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:51:51,710 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:51:52,476 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.760473012924 seconds
+2016-11-11 16:51:52,522 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:51:53,316 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.739386081696 seconds
+2016-11-11 16:51:53,363 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0301740169525 seconds
+2016-11-11 16:51:53,414 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0311460494995 seconds
+2016-11-11 16:51:58,422 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0286419391632 seconds
+2016-11-11 16:51:59,058 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.037572145462 seconds
+2016-11-11 16:51:59,106 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0317029953003 seconds
+2016-11-11 16:51:59,147 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0267570018768 seconds
+2016-11-11 16:51:59,260 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0389311313629 seconds
+2016-11-11 16:51:59,302 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.027046918869 seconds
+2016-11-11 16:51:59,351 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0323920249939 seconds
+2016-11-11 16:51:59,431 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0294299125671 seconds
+2016-11-11 16:51:59,473 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0276651382446 seconds
+2016-11-11 16:51:59,517 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0298430919647 seconds
+2016-11-11 16:51:59,571 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0379347801208 seconds
+2016-11-11 16:51:59,682 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0962600708008 seconds
+2016-11-11 16:52:02,731 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:52:18,227 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0272278785706 seconds
+2016-11-11 16:52:18,269 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0273840427399 seconds
+2016-11-11 16:52:18,312 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0266489982605 seconds
+2016-11-11 16:52:18,355 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0286920070648 seconds
+2016-11-11 16:58:10,655 - Utils.logger - DEBUG - Time Taken for username element :: 0.0713260173798 seconds
+2016-11-11 16:58:10,690 - Utils.logger - DEBUG - Time Taken for password element :: 0.029639005661 seconds
+2016-11-11 16:58:10,722 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0256960391998 seconds
+2016-11-11 16:58:10,907 - Utils.logger - INFO - Login Successful
+2016-11-11 16:58:10,907 - Utils.logger - DEBUG - Username : admin
+2016-11-11 16:58:10,907 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 16:58:11,996 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.08187389374 seconds
+2016-11-11 16:58:12,070 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 16:58:12,976 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.842108011246 seconds
+2016-11-11 16:58:13,030 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0364649295807 seconds
+2016-11-11 16:58:13,086 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0306401252747 seconds
+2016-11-11 16:58:18,256 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0264279842377 seconds
+2016-11-11 16:58:19,047 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0370090007782 seconds
+2016-11-11 16:58:19,089 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0261199474335 seconds
+2016-11-11 16:58:19,134 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0304720401764 seconds
+2016-11-11 16:58:19,226 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0363159179688 seconds
+2016-11-11 16:58:19,291 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0268959999084 seconds
+2016-11-11 16:58:19,332 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0267369747162 seconds
+2016-11-11 16:58:19,412 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0332281589508 seconds
+2016-11-11 16:58:19,454 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0269289016724 seconds
+2016-11-11 16:58:19,522 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.053475856781 seconds
+2016-11-11 16:58:19,563 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0267260074615 seconds
+2016-11-11 16:58:19,604 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0269041061401 seconds
+2016-11-11 16:58:22,665 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 16:58:38,163 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0292291641235 seconds
+2016-11-11 16:58:38,204 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0273509025574 seconds
+2016-11-11 16:58:38,249 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0269260406494 seconds
+2016-11-11 16:58:38,290 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0266160964966 seconds
+2016-11-11 17:07:24,536 - Utils.logger - DEBUG - Time Taken for username element :: 0.0291419029236 seconds
+2016-11-11 17:07:24,568 - Utils.logger - DEBUG - Time Taken for password element :: 0.0260059833527 seconds
+2016-11-11 17:07:24,600 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0257380008698 seconds
+2016-11-11 17:07:24,764 - Utils.logger - INFO - Login Successful
+2016-11-11 17:07:24,764 - Utils.logger - DEBUG - Username : admin
+2016-11-11 17:07:24,764 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-11 17:07:25,820 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 1.0501730442 seconds
+2016-11-11 17:07:25,868 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-11 17:07:26,656 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.733772993088 seconds
+2016-11-11 17:07:26,703 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0304460525513 seconds
+2016-11-11 17:07:26,747 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0270228385925 seconds
+2016-11-11 17:07:31,773 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0267720222473 seconds
+2016-11-11 17:07:32,450 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0311009883881 seconds
+2016-11-11 17:07:32,496 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0300920009613 seconds
+2016-11-11 17:07:32,545 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0318219661713 seconds
+2016-11-11 17:07:32,640 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0364990234375 seconds
+2016-11-11 17:07:32,693 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0290839672089 seconds
+2016-11-11 17:07:32,735 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0266900062561 seconds
+2016-11-11 17:07:32,817 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0357990264893 seconds
+2016-11-11 17:07:32,859 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.026683807373 seconds
+2016-11-11 17:07:32,902 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0283639431 seconds
+2016-11-11 17:07:32,946 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0269539356232 seconds
+2016-11-11 17:07:32,987 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0266118049622 seconds
+2016-11-11 17:07:36,035 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-11 17:07:51,527 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0277440547943 seconds
+2016-11-11 17:07:51,570 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0283219814301 seconds
+2016-11-11 17:07:51,612 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.026389837265 seconds
+2016-11-11 17:07:51,654 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0276129245758 seconds
+2016-11-15 14:36:56,004 - Utils.logger - DEBUG - Time Taken for username element :: 0.0370309352875 seconds
+2016-11-15 14:36:56,036 - Utils.logger - DEBUG - Time Taken for password element :: 0.026547908783 seconds
+2016-11-15 14:36:56,067 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0254509449005 seconds
+2016-11-15 14:36:56,272 - Utils.logger - INFO - Login Successful
+2016-11-15 14:36:56,273 - Utils.logger - DEBUG - Username : admin
+2016-11-15 14:36:56,273 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-15 14:36:57,114 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.835747003555 seconds
+2016-11-15 14:36:57,168 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-15 14:37:12,447 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0256941318512 seconds
+2016-11-15 14:37:12,487 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0250370502472 seconds
+2016-11-15 14:37:12,563 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0255219936371 seconds
+2016-11-15 14:43:34,858 - Utils.logger - DEBUG - Time Taken for username element :: 0.0284781455994 seconds
+2016-11-15 14:43:34,899 - Utils.logger - DEBUG - Time Taken for password element :: 0.0339109897614 seconds
+2016-11-15 14:43:34,929 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.025160074234 seconds
+2016-11-15 14:43:35,118 - Utils.logger - INFO - Login Successful
+2016-11-15 14:43:35,118 - Utils.logger - DEBUG - Username : admin
+2016-11-15 14:43:35,118 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-15 14:43:35,910 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.786187887192 seconds
+2016-11-15 14:43:35,963 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-15 14:43:51,198 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0320069789886 seconds
+2016-11-15 14:43:51,241 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0268700122833 seconds
+2016-11-15 14:43:51,321 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0249488353729 seconds
+2016-11-15 14:52:53,362 - Utils.logger - DEBUG - Time Taken for username element :: 0.0318040847778 seconds
+2016-11-15 14:52:53,394 - Utils.logger - DEBUG - Time Taken for password element :: 0.0264799594879 seconds
+2016-11-15 14:52:53,427 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0265769958496 seconds
+2016-11-15 14:52:53,584 - Utils.logger - INFO - Login Successful
+2016-11-15 14:52:53,585 - Utils.logger - DEBUG - Username : admin
+2016-11-15 14:52:53,585 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-15 14:52:54,401 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.810260057449 seconds
+2016-11-15 14:52:54,454 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-15 14:52:55,269 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.760800123215 seconds
+2016-11-15 14:52:55,314 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0283420085907 seconds
+2016-11-15 14:52:55,358 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0275099277496 seconds
+2016-11-15 14:53:00,358 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0253810882568 seconds
+2016-11-15 14:53:01,021 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0302751064301 seconds
+2016-11-15 14:53:01,063 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.026337146759 seconds
+2016-11-15 14:53:01,117 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0315780639648 seconds
+2016-11-15 14:53:01,205 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0377299785614 seconds
+2016-11-15 14:53:01,251 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0268619060516 seconds
+2016-11-15 14:53:01,293 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0269570350647 seconds
+2016-11-15 14:53:01,372 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0304219722748 seconds
+2016-11-15 14:53:01,414 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0265169143677 seconds
+2016-11-15 14:53:01,459 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0305759906769 seconds
+2016-11-15 14:53:01,500 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.026603937149 seconds
+2016-11-15 14:53:01,541 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0265078544617 seconds
+2016-11-15 14:53:04,629 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-15 14:53:39,297 - Utils.logger - DEBUG - Time Taken for username element :: 0.0366079807281 seconds
+2016-11-15 14:53:39,332 - Utils.logger - DEBUG - Time Taken for password element :: 0.0278511047363 seconds
+2016-11-15 14:53:39,367 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0278189182281 seconds
+2016-11-15 14:53:39,534 - Utils.logger - INFO - Login Successful
+2016-11-15 14:53:39,534 - Utils.logger - DEBUG - Username : admin
+2016-11-15 14:53:39,534 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-15 14:53:40,205 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.664616107941 seconds
+2016-11-15 14:53:40,258 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-15 14:53:41,056 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.745101928711 seconds
+2016-11-15 14:53:41,100 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0284678936005 seconds
+2016-11-15 14:53:41,145 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0283150672913 seconds
+2016-11-15 14:53:45,923 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0261280536652 seconds
+2016-11-15 14:53:46,541 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0277910232544 seconds
+2016-11-15 14:53:46,655 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0472390651703 seconds
+2016-11-15 14:53:46,696 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0259728431702 seconds
+2016-11-15 14:53:46,789 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.0343341827393 seconds
+2016-11-15 14:53:46,830 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0260138511658 seconds
+2016-11-15 14:53:46,871 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0269849300385 seconds
+2016-11-15 14:53:46,947 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0302679538727 seconds
+2016-11-15 14:53:46,990 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0282769203186 seconds
+2016-11-15 14:53:47,032 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.027645111084 seconds
+2016-11-15 14:53:47,077 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0308659076691 seconds
+2016-11-15 14:53:47,119 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0269849300385 seconds
+2016-11-15 14:53:50,167 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-15 14:54:05,766 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0268499851227 seconds
+2016-11-15 14:54:05,811 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0308458805084 seconds
+2016-11-15 14:54:05,852 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0260770320892 seconds
+2016-11-15 14:54:05,892 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0261669158936 seconds
+2016-11-15 14:56:12,569 - Utils.logger - DEBUG - Time Taken for username element :: 0.0416641235352 seconds
+2016-11-15 14:56:12,602 - Utils.logger - DEBUG - Time Taken for password element :: 0.0273768901825 seconds
+2016-11-15 14:56:12,636 - Utils.logger - DEBUG - Time Taken for [ng-click = "vm.login()"] element :: 0.0281569957733 seconds
+2016-11-15 14:56:12,797 - Utils.logger - INFO - Login Successful
+2016-11-15 14:56:12,797 - Utils.logger - DEBUG - Username : admin
+2016-11-15 14:56:12,797 - Utils.logger - DEBUG - Password : Admin@123
+2016-11-15 14:56:13,511 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "exploreLabel0")] element :: 0.708102226257 seconds
+2016-11-15 14:56:13,564 - Utils.logger - DEBUG - Page Launched : site_Screen
+2016-11-15 14:56:14,348 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "site_barTabularView")] element :: 0.732639074326 seconds
+2016-11-15 14:56:14,392 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "measureselectors")] element :: 0.0280630588531 seconds
+2016-11-15 14:56:14,437 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0283560752869 seconds
+2016-11-15 14:56:19,398 - Utils.logger - DEBUG - Time Taken for [ng-model="vm.primaryMeasure"] element :: 0.0272669792175 seconds
+2016-11-15 14:56:19,995 - Utils.logger - DEBUG - Time Taken for //*[contains(@class, "selectionLabel")] element :: 0.0279440879822 seconds
+2016-11-15 14:56:20,036 - Utils.logger - DEBUG - Time Taken for [style=" max-width: 500px;"] element :: 0.0256049633026 seconds
+2016-11-15 14:56:20,083 - Utils.logger - DEBUG - Time Taken for dl-menucontextMenuDisplay element :: 0.0290501117706 seconds
+2016-11-15 14:56:20,168 - Utils.logger - DEBUG - Time Taken for exportDrill element :: 0.033940076828 seconds
+2016-11-15 14:56:20,212 - Utils.logger - DEBUG - Time Taken for SITE_TREND_SCR element :: 0.0284159183502 seconds
+2016-11-15 14:56:20,256 - Utils.logger - DEBUG - Time Taken for frameworkDrill element :: 0.0300140380859 seconds
+2016-11-15 14:56:20,333 - Utils.logger - DEBUG - Time Taken for SITE_SCR element :: 0.0305991172791 seconds
+2016-11-15 14:56:20,374 - Utils.logger - DEBUG - Time Taken for VRF_SCR element :: 0.0262658596039 seconds
+2016-11-15 14:56:20,417 - Utils.logger - DEBUG - Time Taken for NWT_FUNC_SCR element :: 0.0285701751709 seconds
+2016-11-15 14:56:20,462 - Utils.logger - DEBUG - Time Taken for NETWORK_ELEMENT_SCR element :: 0.0275251865387 seconds
+2016-11-15 14:56:20,504 - Utils.logger - DEBUG - Time Taken for SITE_INTERACTION_SCR element :: 0.0267870426178 seconds
+2016-11-15 14:56:23,553 - Utils.logger - DEBUG - Page Launched : nf_Screen
+2016-11-15 14:56:39,129 - Utils.logger - DEBUG - Time Taken for pieView element :: 0.0273740291595 seconds
+2016-11-15 14:56:39,172 - Utils.logger - DEBUG - Time Taken for //*[contains(@id, "networkFunction_SummaryBar")] element :: 0.0280430316925 seconds
+2016-11-15 14:56:39,216 - Utils.logger - DEBUG - Time Taken for timeRangeDiv element :: 0.0292658805847 seconds
+2016-11-15 14:56:39,259 - Utils.logger - DEBUG - Time Taken for legendCon1 element :: 0.0276350975037 seconds

@@ -4,7 +4,8 @@ from classes.Components.ContextMenuComponentClass import *
 from classes.Components.SwitcherComponentClass import *
 from classes.Components.TableComponentClass import *
 from classes.Components.MeasureComponentClass import *
-from classes.Components.PieLegendComponentClass import *
+#from classes.Components.PieLegendComponentClass import *
+#from classes.Components.PieComponentClass import *
 from classes.Components.QuicklinkTimeRangeComponentClass import *
 
 class SitePageClass(BasePageClass):
