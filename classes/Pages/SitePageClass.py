@@ -1,4 +1,5 @@
 from BasePageClass import BasePageClass
+from classes.Components.SummaryBarComponentClass import *
 from classes.Components.BTVComponentClass import BTVComponentClass
 from classes.Components.ContextMenuComponentClass import *
 from classes.Components.SwitcherComponentClass import *
@@ -22,6 +23,8 @@ class SitePageClass(BasePageClass):
         self.measure = MeasureComponentClass()
         # self.pielegend = PieLegendComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
+        self.summarybar = SummaryBarComponentClass()
         self.searchComp = SearchComponentClass()
+
     def testComponents(self):
         return ""

@@ -37,7 +37,7 @@ screenInstance.btv.setSelection(2,siteScreenHandle)
 
 
 #Changing the measure
-setMeasure(setup,"Bitrate_downlink_absolute_average","site_Screen")
+a = setMeasure(setup,"Bitrate_downlink_absolute_average","site_Screen")
 
 # Get the new handles of the screen
 handles = getHandle(setup,Constants.SITES) # Everytime we need to get handles when the btv is redrawing

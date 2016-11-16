@@ -9,25 +9,27 @@ from Utils.SetUp import *
 from classes.Pages.SitePageClass import *
 from classes.Components.SearchComponentClass import *
 
-
-
-
-# Getting Setup Details
+# Getting Setup Details and Launching the application
 setup = SetUp()
 
-
-# Launching Application
+# Logging into the appliction
 login(setup, "admin", "Admin@123")
 
+# Launch Site Screen
+launchPage(setup,"site_Screen")
 
-# launchPage(setup,"site_Screen")
-# siteScreenInstance = SitePageClass(setup.d)
-# siteScreenHandle = getHandle(setup,"site_Screen")
-#
-# data = siteScreenInstance.btv.getData(siteScreenHandle)
 
-# Launch Screen
-launchPage(setup,Constants.SITES)
+# Get the Instance of the screen
+screenInstance = SitePageClass(setup.d)
+
+# Get the handles of the screen
+siteScreenHandle = getHandle(setup,"site_Screen")
+
+# Set the Index value at 2
+screenInstance.btv.setSelection(2,siteScreenHandle)
+
+# Drill to the Site Interaction Screen
+drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -63,7 +65,7 @@ cross = screenInstance.searchComp.hitSearchIcon(siteScreenHandle)
 if(cross==None):
     screenInstance.searchComp.hitSearchIcon(siteScreenHandle)
     time.sleep(10)
-    checkEqualAssert(None,cross,"","","Search_passed_for_cross_button")
+    checkEqualAssert(str(None),cross,"","","Search_passed_for_cross_button")
 else:
     checkEqualAssert(False,cross,"","","Search_failed_for_cross_button")
 
@@ -92,3 +94,4 @@ else:
 
 # Logging out of the application
 setup.d.close()
+

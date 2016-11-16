@@ -73,6 +73,7 @@
         <!--</screenConfig>-->
         <screenConfig id = "siteInteraction_Screen">
             <!--Screen Components-->
+            <component id = "search" parent="False"/>
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "siteInteraction_barTabularView")]' action="" parent="True"/>
             <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
             <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
