@@ -41,6 +41,7 @@
 
 
         <screenConfig id = "site_Screen">
+            <component id = "search" parent="False"/>
             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
             <!--class="measureselectors ng-scope"-->
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
@@ -77,6 +78,7 @@
             <!--&lt;!&ndash;<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>&ndash;&gt;-->
         <!--</screenConfig>-->
         <screenConfig id = "siteInteraction_Screen">
+            <component id = "search" parent="False"/>
             <!--Screen Components-->
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "siteInteraction_barTabularView")]' action="" parent="True"/>
             <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
@@ -86,6 +88,7 @@
         </screenConfig>
 
         <screenConfig id = "vrf_Screen">
+            <component id = "search" parent="False"/>
             <!--Screen Components-->
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "vrf_barTabularView")]' action="" parent="True"/>
             <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
@@ -104,7 +107,6 @@
             <option id = "Site - Site Interactions"/>
             <option id = "Network Elements"/>
             <option id = "VRF"/>
-
         </contextMenu>
         <contextMenu id = "nf_Screen">
             <option id = "Sites"/>

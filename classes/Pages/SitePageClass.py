@@ -17,10 +17,11 @@ class SitePageClass(BasePageClass):
         self.btv = BTVComponentClass()
         self.switcher = SwitcherComponentClass()
         self.table = TableComponentClass()
-        self.cm = ContextMenuComponentClass()
-        self.measure = MeasureComponentClass()
-        # self.pielegend = PieLegendComponentClass()
-        self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
+
+        # Common Components
+        BasePageClass.__init__(self,driver)
+
+
 
     def testComponents(self):
         return ""

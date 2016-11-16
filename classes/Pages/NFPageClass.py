@@ -17,13 +17,17 @@ class NFPageClass(BasePageClass):
         '''
         self.driver = driver
 
-        self.measure = MeasureComponentClass()
         self.pielegend = PieLegendComponentClass()
         self.pie = PieComponentClass()
-        self.summarybar = SummaryBarComponentClass()
-        self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
-        self.searchComp = SearchComponentClass()
-        self.cm = ContextMenuComponentClass()
+
+        # Common Components
+        BasePageClass.__init__(self,driver)
+
+        # self.measure = MeasureComponentClass()
+        # self.summarybar = SummaryBarComponentClass()
+        # self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
+        # self.searchComp = SearchComponentClass()
+        # self.cm = ContextMenuComponentClass()
 
     def testComponents(self):
         return ""
