@@ -37,10 +37,11 @@
 
 
         <screenConfig id = "site_Screen">
-            class="measureselectors ng-scope"
+
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "site_SummaryBar")]' action="" parent="True"/>
             <!--Screen Components-->
             <!--<component id = "btv"/>-->
             <component id = "search" parent="False"/>
