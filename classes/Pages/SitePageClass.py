@@ -19,12 +19,20 @@ class SitePageClass(BasePageClass):
         self.btv = BTVComponentClass()
         self.switcher = SwitcherComponentClass()
         self.table = TableComponentClass()
+<<<<<<< HEAD
         self.cm = ContextMenuComponentClass()
         self.measure = MeasureComponentClass()
         # self.pielegend = PieLegendComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
         self.summarybar = SummaryBarComponentClass()
         self.searchComp = SearchComponentClass()
+=======
+
+        # Common Components
+        BasePageClass.__init__(self,driver)
+
+
+>>>>>>> mayankmahajan/master
 
     def testComponents(self):
         return ""

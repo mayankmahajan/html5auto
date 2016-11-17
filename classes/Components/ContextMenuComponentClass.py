@@ -33,3 +33,45 @@ class ContextMenuComponentClass(BaseComponentClass):
             return True
         except Exception:
             return Exception
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+    # def activateContextMenuOptions(self,handlers):
+    #     handle = self.compHandlers('cm',handlers)
+    #     handle["CONTEXTMENU"][len(handle["CONTEXTMENU"])-1].click()
+    #     # self.handle.
+
+    def getDrillToOptions(self,handlers):
+        handle = self.compHandlers('cm',handlers)
+        #Opens DrillToOptions
+        handle['DRILLTO'][len(handle["DRILLTO"])-1].click()
+
+        # handle['DRILLTO'][len(handle["DRILLTO"])-1].find_elements_by_xpath(".//*")
+        return [ele.text for ele in handle['DRILLTO'][len(handle["DRILLTO"])-1].find_elements_by_tag_name("label")]
+
+        # handle['DRILLTO'][len(handle["DRILLTO"])-1].find_elements_by_tag_name("label")
+
+
+
+    # def drillTo(self,driver,driverHelper,handles,pageName):
+    #     handle = self.compHandlers('cm',handles)
+    #
+    #     # Open Drillto options
+    #     handle["CONTEXTMENU"][len(handle["CONTEXTMENU"])-1].click()
+    #
+    #     children = handle[Constants.CONTEXTMENU][len(handle[Constants.CONTEXTMENU])-1].find_elements_by_xpath(".//*")
+    #
+    #     handle[pageName][len(handle[pageName]) -1].click()
+
+
+    # def selectTrends(self,driver,driverHelper,handles,pageName):
+    #     pass
+    #     # handles['trends']
+>>>>>>> mayankmahajan/master

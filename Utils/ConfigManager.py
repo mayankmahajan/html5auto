@@ -69,6 +69,19 @@ class ConfigManager(object):
                 tempDict[component.attrib['id']] = component.attrib
         return tempDict
 
+    def getCMScreenRelations(self,parent,children):
+        parentConfigs = self.tree.getiterator(parent)
+        # screenConfigDetails = []
+        tempDict = {}
+        for child in parentConfigs:
+            childComponents = child.findall(children)
+            for component in childComponents:
+                # tempDict[child.attrib['id']]
+                tempDict[component.attrib['id']] = []
+                if len(component):
+                    tempDict[component.attrib['id']] = [c.attrib['id'] for c in component]
+        return tempDict
+
 
 
 

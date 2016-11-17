@@ -10,7 +10,10 @@ class SiteIntScreenClass(BasePageClass):
         self.driver = driver
         self.btv = BTVComponentClass()
         self.switcher = SwitcherComponentClass()
-        self.cm = ContextMenuComponentClass()
+        # self.cm = ContextMenuComponentClass()
+
+        # Common Components
+        BasePageClass.__init__(self,driver)
 
     def testComponents(self):
         return ""

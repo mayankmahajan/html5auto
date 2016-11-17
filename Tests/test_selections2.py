@@ -13,24 +13,24 @@ from classes.Pages.NFPageClass import *
 
 # Getting Setup Details
 setup = SetUp()
-
+timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
+drillOptions = setup.cM.getCMScreenRelations("contextMenus","contextMenu")
 
 # Launching Application
 login(setup, "admin", "Admin@123")
 
 
-# launchPage(setup,"site_Screen")
+launchPage(setup,"site_Screen")
 # siteScreenInstance = SitePageClass(setup.d)
 # siteScreenHandle = getHandle(setup,"site_Screen")
 #
 # data = siteScreenInstance.btv.getData(siteScreenHandle)
 
 # Launch Screen
-launchPage(setup,"nf_Screen")
+# launchPage(setup,"nf_Screen")
 
 # GetScreenInstance and control over its Components
-nfScreenInstance = NFPageClass(setup.d)
-nfScreenHandle = getHandle(setup,"nf_Screen")
+
 
 # setSearch = nfScreenInstance.searchComp.setSearchText(nfScreenHandle,"mayank")
 # time.sleep(2)
@@ -51,8 +51,27 @@ nfScreenHandle = getHandle(setup,"nf_Screen")
 
 
 
+siteScreenInstance = SitePageClass(setup.d)
+siteScreenHandle = getHandle(setup,"site_Screen")
+status = siteScreenInstance.cm.activateContextMenuOptions(siteScreenHandle)
 
-selections = nfScreenInstance.summarybar.getSelection(nfScreenHandle)
+drillToOptions = siteScreenInstance.cm.getDrillToOptions(siteScreenHandle)
+print "drillToOptions", drillToOptions
+status = siteScreenInstance.cm.activateContextMenuOptions(siteScreenHandle)
+
+drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
+
+nfScreenInstance = NFPageClass(setup.d)
+nfScreenHandle = getHandle(setup,"nf_Screen")
+status = nfScreenInstance.cm.activateContextMenuOptions(nfScreenHandle)
+drillToOptions = nfScreenInstance.cm.getDrillToOptions(nfScreenHandle)
+status = nfScreenInstance.cm.activateContextMenuOptions(nfScreenHandle)
+print "drillToOptions", drillToOptions
+
+# nfScreenInstance.cm.drillTo(setup.d,setup.dH,nfScreenHandle,Constants.DRILLTOSITE)
+
+
+# selections = nfScreenInstance.summarybar.getSelection(nfScreenHandle)
 
 
 # Log Result
