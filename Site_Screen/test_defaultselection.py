@@ -33,7 +33,7 @@ defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 checkEqualAssert(str(1),str(defSelection['selIndex']))
 
 # Set the bar Table view to the 2 index
-screenInstance.btv.setSelection(2,siteScreenHandle)
+screenInstance.btv.setSelection(3,siteScreenHandle)
 
 
 #Changing the measure
