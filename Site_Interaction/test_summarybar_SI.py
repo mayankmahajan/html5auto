@@ -48,19 +48,22 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],Constants.SITEINTERACTIONS)
+        setMeasure(setup,measures[i],"site_Screen")
 
         # testcase body starts
         # Get the Instance of the screen
         screenInstance = SitePageClass(setup.d)
 
         # Get the handles of the screen
-        siteScreenHandle = getHandle(setup,Constants.SITEINTERACTIONS)
-        rand = random.randrange(1,4)
+        siteScreenHandle = getHandle(setup,"site_Screen")
+        data = screenInstance.btv.getData(siteScreenHandle)
+        length = len(data['BTVCOLUMN1'])
+        rand = random.randrange(1,length)
         screenInstance.btv.setSelection(rand,siteScreenHandle)
         defselection = screenInstance.btv.getSelection(siteScreenHandle)
         #print defselection['BTVCOLUMN2']
         btvvalue = defselection['BTVCOLUMN2']
+        btvname = defselection['BTVCOLUMN1']
 
         values = measures[i].split('_')
 
@@ -72,20 +75,22 @@ while t < timeIteration:
 
         try:
             if (values[3]=="peak"):
-                values[3]=="Peak"
+                values[3]="Peak"
+
         except:
-            print "PEak is not there"
+            print "Peak is not there"
 
         if (values[0]=="Wan-Cost($)"):
             values[0] = "Wan Cost($)"
             selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+            #print "hahaha"
             #print selections['All WDC']
-            summarybarvalues = selections['All WDC'][values[0]]['Average']
+            summarybarvalues = selections[btvname][values[0]]['Average']
 
         else:
             selections = screenInstance.summarybar.getSelection(siteScreenHandle)
-            #print selections['All WDC']
-            summarybarvalues = selections['All WDC'][values[0]][values[3]]
+            #print selections[btvname]
+            summarybarvalues = selections[btvname][values[0]][values[3]]
 
 
 
@@ -93,9 +98,9 @@ while t < timeIteration:
 
 
         # testcase body ends
-
+        message = str(btvname)
         # Result Logging
-        checkEqualAssert(btvvalue,summarybarvalues,quicklinks[t],measures[i],"Data validated with summary bar")
+        checkEqualAssert(btvvalue,summarybarvalues,quicklinks[t],measures[i],message)
 
         i+=1
         # end of measureSelection

@@ -33,8 +33,7 @@ class ContextMenuComponentClass(BaseComponentClass):
             return True
         except Exception:
             return Exception
-<<<<<<< HEAD
-=======
+
 
 
 
@@ -74,4 +73,4 @@ class ContextMenuComponentClass(BaseComponentClass):
     # def selectTrends(self,driver,driverHelper,handles,pageName):
     #     pass
     #     # handles['trends']
->>>>>>> mayankmahajan/master
+

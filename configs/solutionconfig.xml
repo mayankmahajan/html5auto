@@ -41,13 +41,10 @@
 
 
         <screenConfig id = "site_Screen">
-<<<<<<< HEAD
-
-=======
             <component id = "search" parent="False"/>
             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
             <!--class="measureselectors ng-scope"-->
->>>>>>> mayankmahajan/master
+
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
