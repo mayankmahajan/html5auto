@@ -41,6 +41,7 @@ class ContextMenuComponentClass(BaseComponentClass):
 
 
 
+
     # def activateContextMenuOptions(self,handlers):
     #     handle = self.compHandlers('cm',handlers)
     #     handle["CONTEXTMENU"][len(handle["CONTEXTMENU"])-1].click()
@@ -72,3 +73,4 @@ class ContextMenuComponentClass(BaseComponentClass):
     # def selectTrends(self,driver,driverHelper,handles,pageName):
     #     pass
     #     # handles['trends']
+
