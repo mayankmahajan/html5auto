@@ -62,6 +62,12 @@
         <measure id = "Wan-Cost($)_total_percentage"/>
     </measures>
 
+    <sitetypes>
+        <sitetype id = "WDC"/>
+        <sitetype id = "SatSite"/>
+        <sitetype id = "CellSite"/>
+    </sitetypes>
+
     <!--Add UserInfo-->
 
     <listOfScreens id = "screenList">
@@ -120,7 +126,9 @@
             <component id = "total" selector="css selector" locator='[title="Total"]' action="click" wait = 'skip'/>
             <component id = "absolute" selector="css selector" locator='[title="Absolute"]' action="click" wait = 'skip'/>
             <component id = "percentage" selector="css selector" locator='[title="Percentage"]' action="click" wait = 'skip'/>
+            <component id = "sites" selector="css selector" locator='[ng-model="vm.selectedtype"]' action="click"/>
         </componentConfig>
+
 
         <componentConfig id = "timeRangeDiv">
             <component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>

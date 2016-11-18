@@ -25,13 +25,24 @@ class MeasureComponentClass(BaseComponentClass):
             print "Got Measure without Peak/Average %s",measureName
 
 
+
+    def doSelectionSite(self,h,site):
+        handlers = self.compHandlers('measureselectors',h)
+        sitename = site
+        self.setSiteName(sitename,handlers['sites'])
+
+
         #
         #
         #
         # for key,value in handlers.iteritems():
         #     if self.configmanager.componentSelectors[key]["action"] == "click":
         #         self.setMeasure(measure,value)
-
+    def setSiteName(self,site,handle):
+        for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
+            if ele.text == site:
+                ele.click()
+                break
 
 # handlers['primaryMeasure'][0].find_element_by_xpath("//option[text()='Flows']").click()
 

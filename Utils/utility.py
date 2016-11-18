@@ -23,6 +23,7 @@ from Utils.ConfigManager import ConfigManager
 from copy import deepcopy
 from Utils.csvReader import CSVReader
 from classes.Components.ContextMenuComponentClass import *
+from classes.Components.BaseComponentClass import *
 import time
 
 # def setUp():
@@ -471,6 +472,24 @@ def setMeasure(obj,measure,pageName):
     handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
 
     screenInstance.measure.doSelection(handles,measure)
+
+
+
+def setSiteType(obj,sites,pageName):
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    screenInstance = getScreenInstance(obj.d,pageName)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver,driverHelper,configmanager,pageName,parentHandles)
+
+    screenInstance.measure.doSelectionSite(handles,sites)
+
+
+
+
+
+
 
 
 
