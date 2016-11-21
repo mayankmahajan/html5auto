@@ -119,7 +119,11 @@ class PieComponentClass(BaseComponentClass):
         data = []
         # driverHelper.action.move_to_element()
         for i in range(0,len(elHandle['hover'])):
-            driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
+            print "element",elHandle['hover'][i]
+            try:
+                driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
+            except:
+                pass
             # adding hardcoded timeout (will be driven by Config)
             time.sleep(2)
             data.append(elHandle['getToolTipData'].text)
@@ -148,7 +152,8 @@ class PieComponentClass(BaseComponentClass):
         data = []
         toolTipHandlers = {}
         handlers = self.compHandlers('piechart',handlrs)
-
+        print "tool tip handler"
+        print handlers
         toolTipHandlers['hover'] = [handlers['arcs'][i] for i in range(len(handlers['arcs']))]
             # if handlers['arcs'][i].tag_name == "path":
             #     toolTipHandlers['hover'] = handlers['arcs'][i]
@@ -162,6 +167,7 @@ class PieComponentClass(BaseComponentClass):
         #         toolTipHandlers['hover'] = value
         #     elif self.configmanager.componentSelectors[key]["action"] == "getToolTipData":
         toolTipHandlers['getToolTipData'] = handlers['tooltip'][0]
+        print toolTipHandlers
         return self.launchToolTip(driver,driverHelper,toolTipHandlers)
 
 
