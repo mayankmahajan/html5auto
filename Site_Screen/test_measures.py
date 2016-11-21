@@ -43,7 +43,7 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],screenInstance,siteScreenHandle)
+        setMeasure(setup,measures[i],"site_Screen")
 
         # testcase body starts
 
