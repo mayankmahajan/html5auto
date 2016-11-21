@@ -64,6 +64,21 @@ class BaseComponentClass:
                 ele.click()
                 return ele.text
 
+    def doSelection(self,h,parentLocator,measure):
+        handlers = self.compHandlers('measureselectors',h)
+        measureArr=measure.split("_")
+        measureName=measureArr[0]
+        downUpTotal=measureArr[1]
+        absPerc=measureArr[2]
+        self.setMeasureName(measureName,handlers['primaryMeasure'])
+        self.select(handlers[downUpTotal])
+        self.select(handlers[absPerc])
+        try:
+            avgPeak=measureArr[3]
+            self.select(handlers[avgPeak])
+        except:
+            print "Got Measure without Peak/Average %s",measureName
+
 
 
 

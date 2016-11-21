@@ -33,8 +33,14 @@
 
 
 
+
         </screenConfig>
 
+
+         <screenConfig id = "qt_Screen">
+             <component id = "quicktrends" selector="id" locator='flexbox_trend' parent="True"/>
+
+         </screenConfig>
 
 
 

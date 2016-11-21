@@ -227,11 +227,19 @@
             <component id = "EXPORTTOSNAPSHOT" selector="id" locator='EXPORT_TO_SNAPSHOT' action="click" wait="skip"/>
 
             <!--should be moved to SolutionConfig-->
-            <component id = "SITETREND" selector="id" locator='SITE_TREND_SCR' action="click"/>
+            <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR' action="click"/>-->
             <component id = "site_Screen" selector="id" locator='SITE_SCR' action="click" wait="skip"/>
+            <component id = "trends" selector="xpath" locator='//*[contains(@id, "_TREND_")]' action="click" wait="skip"/>
 
 
         </componentConfig>
+
+        <componentConfig id = 'quicktrends'>
+            <component id = "quicktrends" selector="id" locator='flexbox_trend' />
+            <component id = "qttooltip" selector="class name" locator='divtooltip' action="getToolTipData" wait = 'skip'/>
+
+        </componentConfig>
+
     </componentConfigs>
 
 </data>
