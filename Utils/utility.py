@@ -455,7 +455,7 @@ def setTimeRange(obj,quicklink,pageName="site_Screen"):
 
     screenInstance.quiklinkTimeRange.setSelection(quicklink,handles)
 
-def setMeasure(obj,measure,pageName):
+def setMeasure(obj,measure,screenInstance,handles):
     '''
     sets quicklinks on the particular page
     :param obj:
@@ -463,25 +463,25 @@ def setMeasure(obj,measure,pageName):
     :param pageName:
     :return:
     '''
-    driver = obj.d
-    driverHelper = obj.dH
-    configmanager = obj.cM
-    screenInstance=getScreenInstance(obj.d,pageName)
+    # driver = obj.d
+    # driverHelper = obj.dH
+    # configmanager = obj.cM
+    # screenInstance=getScreenInstance(obj.d,pageName)
 
-    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
-    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    # parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    # handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
 
     screenInstance.measure.doSelection(handles,measure)
 
 
 
-def setSiteType(obj,sites,pageName):
-    driver = obj.d
-    driverHelper = obj.dH
-    configmanager = obj.cM
-    screenInstance = getScreenInstance(obj.d,pageName)
-    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
-    handles = getHandlesForEachComponent(driver,driverHelper,configmanager,pageName,parentHandles)
+def setSiteType(obj,sites,screenInstance,handles):
+    # driver = obj.d
+    # driverHelper = obj.dH
+    # configmanager = obj.cM
+    # screenInstance = getScreenInstance(obj.d,pageName)
+    # parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    # handles = getHandlesForEachComponent(driver,driverHelper,configmanager,pageName,parentHandles)
 
     screenInstance.measure.doSelectionSite(handles,sites)
 

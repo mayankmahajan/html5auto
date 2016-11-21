@@ -34,6 +34,12 @@ login(setup, "admin", "Admin@123")
 # Launch Site Screen
 launchPage(setup,"site_Screen")
 
+# Get the Instance of the screen
+screenInstance = SitePageClass(setup.d)
+
+# Get the handles of the screen
+siteScreenHandle = getHandle(setup,"site_Screen")
+
 
 # while loop is to iterate over all the quicklinks
 while t < timeIteration:
@@ -43,13 +49,13 @@ while t < timeIteration:
     # while loop is to iterate over all the measure
     while i < siteIteration:
         j=0
-        setSiteType(setup,sites[i],"site_Screen")
+        screenInstance.measure.doSelectionSite(siteScreenHandle,sites[i])
 
         # testcase body starts
 
         # while loop is to iterate over all the measure
         while j < measureIteration:
-            setMeasure(setup,measures[j],"site_Screen")
+            screenInstance.measure.doSelection(siteScreenHandle,measures[j])
 
         # testcase body starts
 
@@ -69,8 +75,8 @@ while t < timeIteration:
             expected = "True"
             actual = "True"
 
-            message = sites[i] +" "+ measures[j]
-            checkEqualAssert(expected,actual,quicklinks[t],message)
+            message = sites[i]
+            checkEqualAssert(expected,actual,quicklinks[t],measures[j],message)
 
             j+=1
         # end of measureSelection
