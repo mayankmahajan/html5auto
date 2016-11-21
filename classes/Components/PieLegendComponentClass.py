@@ -67,7 +67,7 @@ class PieLegendComponentClass(BaseComponentClass):
         '''
         data = {}
         handlers = self.compHandlers('pielegend',handlrs)
-
+        print "handle of get data",handlers
         data['legendText'] = [ele.text for ele in handlers['legendText']]
         # for i in range(len(handlers['legendText'])):
         #     data['legendText'] = handlers['legendText'][i].text

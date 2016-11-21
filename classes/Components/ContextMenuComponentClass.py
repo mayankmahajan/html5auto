@@ -28,8 +28,12 @@ class ContextMenuComponentClass(BaseComponentClass):
                 handles[Constants.DRILLTOSITE][0].click()
             elif pageName == Constants.VRF:
                 handles[Constants.DRILLTOVRF][0].click()
+            elif pageName==Constants.NETWORKELEMENTS:
+                handles[Constants.DRILLTONE][0].click()
             elif pageName == Constants.DRILLTO:
                 handles[Constants.DRILLTO][0].click()
+            elif pageName == Constants.NENE:
+                handles[Constants.DRILLTONENE][0].click()
             return True
         except Exception:
             return Exception
