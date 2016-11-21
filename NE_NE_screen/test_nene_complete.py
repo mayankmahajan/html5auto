@@ -70,12 +70,6 @@ neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 #######################################################################
 
 
-#######################################################################
-#VAR=neScreenInstance.switcher.getSelection(neScreenHandle)
-#test_case2="Default Selection in chart"
-#checkEqualAssert("Chart",str(status),set_time,set_measure,test_case3)
-#######################################################################
-
 
 #######################################################################
 # Get the default selection of ne screen
@@ -91,7 +85,7 @@ checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,
 neScreenInstance.pielegend.setSelection(setup.dH,[3],neScreenHandle)
 legendSel = neScreenInstance.pielegend.getSelection(neScreenHandle)
 test_case5="Selection at pieLegend in NE screen to drill NENE"
-checkEqualAssert(str("[3]"),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
+checkEqualAssert(str("[3]"),str(legendSel['selIndices']),set_time,set_measure,test_case5)
 
 #######################################################################
 
@@ -103,12 +97,18 @@ test_case6 = "Drill TO NE_NE Screen"
 checkEqualAssert("True",str(status1),set_time,set_measure,test_case6)
 
 #######################################################################
+
 #######################################################################
 # Get the default selection and Validate the result
+# Get the Instance of the nene screen
+neneScreenInstance=NeNePageClass(setup.d)
+
+# Get the handles of the nene screen
+neneScreenHandle = getHandle(setup,Constants.NENE)
 test_case7="Default selection of nene screen"
-defSelection1 = screenInstance.btv.getSelection(siteScreenHandle)
+defSelection1 = screenInstance.btv.getSelection(neneScreenHandle)
 print  defSelection1
-checkEqualAssert(str(1),str(defSelection1['selIndices']),set_time,set_measure,test_case1)
+checkEqualAssert(str(1),str(defSelection1['selIndex']),set_time,set_measure,test_case7)
 ########################################################################################
 
 ########################################################################################
@@ -119,15 +119,25 @@ neneScreenInstance=NeNePageClass(setup.d)
 # Get the handles of the nene screen
 neneScreenHandle = getHandle(setup,Constants.NENE)
 
+#######################################################################
+Var=neneScreenInstance.switcher.getSelection(neneScreenHandle)
+test_case8="Default Selection in chart"
+checkEqualAssert("Chart",str(Var),set_time,set_measure,test_case8)
 
-#Check single and multiple selection on pielegend
-Selection_list=[[1],[1,2]]
+neneScreenInstance.switcher.setSelection(1,neneScreenHandle)
+VAR=neneScreenInstance.switcher.getSelection(neneScreenHandle)
+test_case3="New Selection in table"
+checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case3)
+#######################################################################
+
+#Check single and multiple selection
+Selection_list=[3,2]
 for i in Selection_list:
     neneScreenInstance.btv.setSelection(i,neneScreenHandle)
     neneScreenHandle = getHandle(setup,Constants.NENE)
     btvsel=neneScreenInstance.btv.getSelection(neneScreenHandle)
     test_case8 = "Check Selection of btv in NENE screen"
-    checkEqualAssert(str(i),str(btvsel['BTVCOLUMN1']), set_time, set_measure, test_case8)
+    checkEqualAssert(str(i),str(btvsel['selIndex']), set_time, set_measure, test_case8)
 #######################################################################
 
 #######################################################################
@@ -178,10 +188,10 @@ for word in text:
               elif click_times == "two":
                    neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
                    neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
-                   expected_search_result = btvdata["BTVCOLUMN1"]
+                   expected_search_result = btvdata["BTVCOLUMN1"][2::]
               neneScreenHandle = getHandle(setup, Constants.NETWORKFUNCTIONS)
               search_btv_result=neneScreenInstance.btv.getData(neneScreenHandle)
               print search_btv_result
-              checkEqualAssert(expected_search_result, search_btv_result["BTVCOLUMN1"], "", "", "Search_passed_for_"+str(word)+str(click_times))
+              checkEqualAssert(expected_search_result, search_btv_result["BTVCOLUMN1"][2::], "", "", "Search_passed_for_"+str(word)+str(click_times))
     else:
          checkEqualAssert(False, setSearch, "", "", "Search_passed_for_unknown")

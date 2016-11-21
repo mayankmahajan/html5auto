@@ -27,7 +27,7 @@ login(setup, "admin", "Admin@123")
 
 # Launch Site Screen
 launchPage(setup,"site_Screen")
-screeninstance =
+
 
 
 

@@ -87,7 +87,7 @@ checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,
 
 #######################################################################
 #Check single and multiple selection on pielegend
-Selection_list=[[1],[1,2,3,4,5]]
+Selection_list=[[1],[2],[3],[4]]
 for i in Selection_list:
     nfScreenInstance.pielegend.setSelection(setup.dH,i,nfScreenHandle)
     nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
@@ -123,6 +123,7 @@ while t < timeIteration:
          # Result Logging
         expected = "True"
         actual = "True"
+
 
         checkEqualAssert(expected,actual,quicklinks[t], measures[i])
         i+=1
