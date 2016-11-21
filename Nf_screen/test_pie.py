@@ -24,18 +24,9 @@ screenInstance = SitePageClass(setup.d)
 # Get the handles of the screenx
 siteScreenHandle = getHandle(setup,"site_Screen")
 
-# Get the default selection
-defSelection = screenInstance.btv.getSelection(siteScreenHandle)
-
-
-# Validating the result
-#checkEqualAssert(str(1),str(defSelection['selIndex']),"","")
-
-
 # Set the bar Table view to the 2 index
 screenInstance.btv.setSelection(2,siteScreenHandle)
 drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
-
 
 # Get the Instance of the nf screen
 nfScreenInstance = NFPageClass(setup.d)
@@ -43,43 +34,59 @@ nfScreenInstance = NFPageClass(setup.d)
 # Get the handles of the nf screenx
 nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
-# Get the default selection
-#deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
+# GetSelection
+defaultSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
+print defaultSelection
+# Log Result
+#to check def selection of pielegend that should  be null
+checkEqualAssert([],defaultSelection['selIndices'],"","","Null Default Selection at NFScreen for pielegend")
+
+#def selection of pie
 #defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-
-# print defnfSelection
-#print defpieSel
-#print deflegendSel
-
-# Validating the result
-#checkEqualAssert(str(1),str(defpieSel['selIndex']),"","")
-#checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),"","")
+#checkEqualAssert([0],defpieSel['selIndices'],"","","Null")
 
 
+#single selection on pielegend
 
+nfScreenInstance.pielegend.setSelection(setup.dH, [2], nfScreenHandle)
 
-#checkEqualAssert("True",result,"","","drillToNF")
-#nfScreenInstance.pie.setSelection(2,nfScreenHandle)
-
-lenth=len(nfScreenHandle)
-print lenth
-l=0
-while l < lenth:
-    nfScreenInstance.pielegend.setSelection(setup.dH, [l], nfScreenHandle)
-    pieSelections = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-    updatedSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
-    checkEqualAssert([l],updatedSelection['selIndices'],"NA","NA","Updated Selection at NFScreen")
-    checkEqualAssert([l],pieSelections['selIndices'],"NA","NA","Updated Selection at NFScreen")
-    checkEqualAssert(updatedSelection['selIndices'],pieSelections['selIndices'],"NA","NA","Updated Selection at NFScreen")
-
-#nfScreenInstance.pielegend.setSelection(setup.dH,[0],nfScreenHandle)
-#nfScreenInstance.pielegend.setSelection(setup.dH,[1],nfScreenHandle)
-
-#updatedSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
-#pieSelections = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-
-#print updatedSelection
+#get the selection on pie
+pieSelections = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
 #print pieSelections
-#checkEqualAssert([0],updatedSelection['selIndices'],"NA","NA","Updated Selection at NFScreen")
-#checkEqualAssert([1],updatedSelection['selIndices'],"NA","NA","Updated Selection at NFScreen")
+
+#get selection on legend
+updatedSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
+#print  updatedSelection
+
+#match if it is 2nd one
+checkEqualAssert([2],updatedSelection['selIndices'],"","","Match Selection  b/w pie and legend is 2")
+
+
+
+#Multiple selection at pie legend and validation
+nfScreenInstance.pielegend.setSelection(setup.dH, [1,2,3], nfScreenHandle)
+
+#get pielegend multiple selection in a var
+mulpielegsel =nfScreenInstance.pielegend.getSelection(nfScreenHandle)
+#print mulpielegsel
+#get selections at pie due to set selection at legend
+mulpiesel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
+#print mulpiesel
+
+#match
+checkEqualAssert([1,2,3],mulpielegsel['selIndices'],"","","Match Selection b/w pie and legend is 1,2,3")
+
+
+# GetChartData
+piedata = nfScreenInstance.pielegend.getData(nfScreenHandle)
+print piedata
+# GetTooltipData
+piedata['tooltipdata'] = nfScreenInstance.pie.getToolTipInfo(setup.d,setup.dH,nfScreenHandle)
+print piedata
+
+# Log Result
+checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],"","","Pie Tooltip Validations at NFScreen")
+
+# Closing the Testcase
+setup.d.close()
 

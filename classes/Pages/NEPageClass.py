@@ -4,23 +4,23 @@ from classes.Components.ContextMenuComponentClass import *
 from classes.Components.SwitcherComponentClass import *
 from classes.Components.TableComponentClass import *
 from classes.Components.MeasureComponentClass import *
-#from classes.Components.PieLegendComponentClass import *
-#from classes.Components.PieComponentClass import *
+from classes.Components.PieLegendComponentClass import *
 from classes.Components.QuicklinkTimeRangeComponentClass import *
+from classes.Components.PieComponentClass import *
+from classes.Components.SummaryBarComponentClass import *
 from classes.Components.SearchComponentClass import *
-class SitePageClass(BasePageClass):
+
+class NEPageClass(BasePageClass):
     def __init__(self,driver):
         '''
         Constructor
         '''
         self.driver = driver
 
-        self.btv = BTVComponentClass()
-        self.switcher = SwitcherComponentClass()
-        self.table = TableComponentClass()
-        self.cm = ContextMenuComponentClass()
         self.measure = MeasureComponentClass()
-        #self.pielegend = PieLegendComponentClass()
+        self.pielegend = PieLegendComponentClass()
+        self.pie = PieComponentClass()
+        self.summarybar = SummaryBarComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
         self.searchComp = SearchComponentClass()
 

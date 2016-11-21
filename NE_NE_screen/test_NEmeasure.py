@@ -6,6 +6,7 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
+from classes.Pages.NEPageClass import *
 
 # Getting Setup Details and Launching the application
 setup = SetUp()
@@ -21,33 +22,45 @@ measureIteration = len(setup.cM.getNodeElements("measures","measure"))
 measures = setup.cM.getNodeElements("measures","measure").keys()
 
 
+screen_name='site_Screen'
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
 # Launch Site Screen
-launchPage(setup,"site_Screen")
-
+launchPage(setup,screen_name)
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
 
-# Get the handles of the screen
-siteScreenHandle = getHandle(setup,"site_Screen")
+# Get the handles of the screenx
+siteScreenHandle = getHandle(setup,screen_name)
 
 
 # Get the default selection
-#defSelection = screenInstance.btv.getSelection(siteScreenHandle)
+defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 
 
 # Validating the result
-#checkEqualAssert(str(1),str(defSelection['selIndex']),"","")
+checkEqualAssert(str(1),str(defSelection['selIndex']),"NA","NA","to check def selection should be one")
 
 # Set the bar Table view to the 2 index
 screenInstance.btv.setSelection(2,siteScreenHandle)
-drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
+#Drill to NE screen
+drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
 
-# screeinstancenf = SitePageClass(setup.d)
-# nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
+
+# Get the instance of the ne screen
+neScreenInstance= NEPageClass(setup.d)
+
+#get the handle of ne screen
+neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
+
+#select any pielagent on ne screen
+neScreenInstance.pielegend.setSelection(setup.dH,[3],neScreenHandle)
+
+#Drill to nene screen
+drilltoScreen(setup.d,setup.dH,Constants.NENE)
+
 
 
 # while loop is to iterate over all the quicklinks
@@ -57,7 +70,7 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
+        setMeasure(setup,measures[i],Constants.NENE)
 
         print measures[i]
         print i
@@ -77,4 +90,3 @@ while t < timeIteration:
 
 # Logging out the application
 setup.d.close()
-
