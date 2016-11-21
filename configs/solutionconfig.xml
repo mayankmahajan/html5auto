@@ -36,6 +36,21 @@
 
         </screenConfig>
 
+         <screenConfig id = "ne_Screen">
+             <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
+            <component id = "search" parent="False"/>
+            <!--<component id = "searchInput" parent="False"/>-->
+            <!--<component id = "searchlabelstyle" parent="False"/>-->
+
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "networkFunction_SummaryBar")]' action="" parent="True"/>
+            <component id = "piechart" selector="id" locator='pieView' childOf="" action="" parent="True" />
+            <component id = "pielegend" selector="id" locator='legendCon1' childOf="" action="" parent="True" />
+
+            <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
+            <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
+            <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
+
+        </screenConfig>
 
          <screenConfig id = "qt_Screen">
              <component id = "quicktrends" selector="id" locator='flexbox_trend' parent="True"/>
@@ -47,8 +62,10 @@
 
 
         <screenConfig id = "site_Screen">
+
             <component id = "search" parent="False"/>
             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+
             <!--class="measureselectors ng-scope"-->
 
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
@@ -73,6 +90,19 @@
             <!--Context Menu Options-->
             <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
         </screenConfig>
+
+         <screenConfig id = "nene_Screen">
+            <!--Screen Components-->
+             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
+            <component id = "btv" selector="xpath" locator='//*[contains(@id, "neInteraction_barTabularView")]' action="" parent="True"/>
+            <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
+            <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+             <component id = "search" parent="False"/>
+
+        </screenConfig>
+
+
         <!--<screenConfig id = "site_Screen">-->
             <!--&lt;!&ndash;Screen Components&ndash;&gt;-->
             <!--&lt;!&ndash;<component id = "btv"/>&ndash;&gt;-->
@@ -86,7 +116,11 @@
             <!--&lt;!&ndash;<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>&ndash;&gt;-->
         <!--</screenConfig>-->
         <screenConfig id = "siteInteraction_Screen">
+
+            <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
+
             <component id = "search" parent="False"/>
+
             <!--Screen Components-->
             <component id = "search" parent="False"/>
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "siteInteraction_barTabularView")]' action="" parent="True"/>
@@ -99,6 +133,7 @@
         <screenConfig id = "vrf_Screen">
             <component id = "search" parent="False"/>
             <!--Screen Components-->
+            <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "vrf_barTabularView")]' action="" parent="True"/>
             <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
             <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>

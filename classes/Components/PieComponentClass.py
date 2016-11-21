@@ -93,21 +93,21 @@ class PieComponentClass(BaseComponentClass):
         else:
             self.setSelectionIndex(index,handlers['legendText'])
 
-    def getSelection(self,handlrs):
-        '''
-        This method gives the selected Index, its Corresponding Text and Value
-        :param handlers: handler to pieChart
-        :return: Selected Data
-        '''
-        try:
-            data = {}
-            handlers = self.compHandlers('piechart',handlrs)
-            data['selIndex'] = self.getSelectionIndex(handlers['legendText'])
-            data['legendText'] = handlers['legendText'][data['selIndex']].text
-            data['legendIcon'] = handlers['legendIcon'][data['selIndex']].color # dummy line will update
-            return data
-        except Exception:
-            return Exception
+    # def getSelection(self,handlrs):
+    #     '''
+    #     This method gives the selected Index, its Corresponding Text and Value
+    #     :param handlers: handler to pieChart
+    #     :return: Selected Data
+    #     '''
+    #     try:
+    #         data = {}
+    #         handlers = self.compHandlers('piechart',handlrs)
+    #         data['selIndex'] = self.getSelectionIndex(handlers['legendText'])
+    #         data['legendText'] = handlers['legendText'][data['selIndex']].text
+    #         data['legendIcon'] = handlers['legendIcon'][data['selIndex']].color # dummy line will update
+    #         return data
+    #     except Exception:
+    #         return Exception
 
 
     def launchToolTip(self,driver,driverHelper,elHandle):
