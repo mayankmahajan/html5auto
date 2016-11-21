@@ -15,8 +15,14 @@ class MeasureComponentClass(BaseComponentClass):
         measureName=measureArr[0]
         downUpTotal=measureArr[1]
         absPerc=measureArr[2]
+
+        # Setting Measure name like bitrate,tonnage,etc.
         self.setMeasureName(measureName,handlers['primaryMeasure'])
+
+        # Setting Downlink,Uplink,Total
         self.select(handlers[downUpTotal])
+
+        # Setting Absolute,Percentage
         self.select(handlers[absPerc])
         try:
             avgPeak=measureArr[3]

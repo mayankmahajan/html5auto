@@ -35,7 +35,8 @@ class ContextMenuComponentClass(BaseComponentClass):
             return Exception
 
 
-
+    def launchTrends(self,handle):
+        handle['trends'][0].click()
 
 
 
