@@ -24,5 +24,9 @@ class SitePageClass(BasePageClass):
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
         self.searchComp = SearchComponentClass()
 
+        # Common Components
+        BasePageClass.__init__(self,driver)
+
+
     def testComponents(self):
         return ""
