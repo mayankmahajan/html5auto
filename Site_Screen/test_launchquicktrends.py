@@ -35,3 +35,4 @@ screenInstance.cm.launchTrends(siteScreenHandle)
 
 
 setup.d.close()
+
