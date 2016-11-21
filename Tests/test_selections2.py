@@ -32,12 +32,12 @@ launchPage(setup,"site_Screen")
 # GetScreenInstance and control over its Components
 
 
-# setSearch = nfScreenInstance.searchComp.setSearchText(nfScreenHandle,"mayank")
+#setSearch = nfScreenInstance.searchComp.setSearchText(nfScreenHandle,"mayank")
 # time.sleep(2)
 # nfScreenInstance.searchComp.setSearchText(nfScreenHandle,Keys.BACK_SPACE)
 # time.sleep(2)
 # # Keys.BACK_SPACE
-#
+
 # text = nfScreenInstance.searchComp.getSearchText(nfScreenHandle)
 #
 # if(setSearch==True):
