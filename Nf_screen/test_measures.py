@@ -31,7 +31,7 @@ launchPage(setup,"site_Screen")
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
 
-# Get the handles of the screenx
+# Get the handles of the screen
 siteScreenHandle = getHandle(setup,"site_Screen")
 
 
@@ -57,26 +57,24 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],"site_Screen")
+        setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
 
-         # testcase body starts
-
-         # Set the given measure on the Site Screen
-    setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
-
-         # testcase body ends
-
+        print measures[i]
+        print i
 
          # Result Logging
-    checkEqualAssert("True","True")
-    i+=1
+        expected = "True"
+        actual = "True"
+
+        checkEqualAssert(expected,actual,quicklinks[t], measures[i])
+        i+=1
          # end of measureSelection
 
 
-    timeIteration-=1
+    t+=1
      # end of while loop for QuicklinkSelections
 
 
 # Logging out the application
 setup.d.close()
-#checkEqualAssert("True",result,"","","drillToNF")
+

@@ -6,18 +6,26 @@ class Constants(object):
     URL = 'https://nrmca.guavus.com:6443/'
     USERNAME = 'admin'
     PASSWORD = 'Admin@123'
+
     SITES = 'site_Screen'
+
+    SITES = 'SITES'
+
     NETWORKFUNCTIONS = 'nf_Screen'
     SITEINTERACTIONS = 'siteInteraction_Screen'
     INTERFACE = 'INTERFACE'
-    VRF = 'VRF'
+    VRF = 'vrf_Screen'
+    NENE="ne_Screen"
     CONTEXTMENU = 'CONTEXTMENU'
     DRILLTO = 'DRILLTO'
     DRILLTONF = 'DRILLTONF'
     DRILLTOSITE = 'DRILLTOSITE'
     DRILLTOVRF = 'DRILLTOVRF'
+    DRILLTONE = "DRILLTONE"
     DRILLTOSITEINTERACTION = 'DRILLTOSITEINTERACTION'
-
+    NETWORKELEMENTS="ne_Screen"
+    DRILLTONE="DRILLTONE"
+    DRILLTONENE="DRILLTONENE"
     # driver based constants
     WEBDRIVERTIMEOUT = 15
 
@@ -27,4 +35,3 @@ class Constants(object):
     BTVCOLUMN0 = 'BTVCOLUMN0'
     BTVCOLUMN1 = 'BTVCOLUMN1'
     BTVCOLUMN2 = 'BTVCOLUMN2'
-

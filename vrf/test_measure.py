@@ -6,7 +6,7 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-
+from classes.Pages.VRFpage import  *
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
@@ -44,10 +44,10 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 
 # Set the bar Table view to the 2 index
 screenInstance.btv.setSelection(2,siteScreenHandle)
-drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
+drilltoScreen(setup.d,setup.dH,Constants.VRF)
 
-# screeinstancenf = SitePageClass(setup.d)
-# nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
+vrfscreeinstancen = VRFpage(setup.d)
+vrfScreenHandle = getHandle(setup,Constants.VRF)
 
 
 # while loop is to iterate over all the quicklinks
@@ -57,23 +57,14 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],"site_Screen")
-
-         # testcase body starts
-
-         # Set the given measure on the Site Screen
-    setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
-
-         # testcase body ends
-
-
-         # Result Logging
-    checkEqualAssert("True","True")
-    i+=1
+        status = screenInstance.measure.doSelection(vrfScreenHandle, measures[i])
+        setMeasure(setup,measures[i],Constants.VRF)
+        checkEqualAssert("True", str(status), quicklinks[t], measures[i], "Measure selection")
+        i+=1
          # end of measureSelection
 
+    t+=1
 
-    timeIteration-=1
      # end of while loop for QuicklinkSelections
 
 

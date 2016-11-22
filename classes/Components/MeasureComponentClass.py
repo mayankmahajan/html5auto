@@ -23,7 +23,11 @@ class MeasureComponentClass(BaseComponentClass):
         self.select(handlers[downUpTotal])
 
         # Setting Absolute,Percentage
+        time.sleep(2)
+        self.select(handlers[downUpTotal])
+        time.sleep(2)
         self.select(handlers[absPerc])
+        time.sleep(2)
         try:
             avgPeak=measureArr[3]
             self.select(handlers[avgPeak])

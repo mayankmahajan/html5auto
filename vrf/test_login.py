@@ -10,6 +10,7 @@ from Utils.SetUp import *
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
+
 # Getting TimeRange Info from Config Files
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
 quicklinks = setup.cM.getNodeElements("quicklinks","quicklink").keys()
@@ -18,65 +19,56 @@ t=0
 
 # Getting Measures Info from Config Files
 measureIteration = len(setup.cM.getNodeElements("measures","measure"))
+print measureIteration
 measures = setup.cM.getNodeElements("measures","measure").keys()
-
-
+print measures
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
 # Launch Site Screen
-launchPage(setup,"site_Screen")
 
+launchPage(setup,"site_Screen")
+sleep(5)
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
-
-# Get the handles of the screenx
+# Get the handles of the screen
 siteScreenHandle = getHandle(setup,"site_Screen")
-
 
 # Get the default selection
 #defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 
 
 # Validating the result
-#checkEqualAssert(str(1),str(defSelection['selIndex']),"","")
+#checkEqualAssert(str(1),str(defSelection['selIndex']),"NA","NA","")
 
 # Set the bar Table view to the 2 index
-screenInstance.btv.setSelection(2,siteScreenHandle)
-drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
-
-# screeinstancenf = SitePageClass(setup.d)
-# nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
+a = screenInstance.btv.setSelection(2,siteScreenHandle)
+drilltoScreen(setup.d,setup.dH,Constants.VRF)
 
 
-# while loop is to iterate over all the quicklinks
+#siteScreenHandle = getHandle(setup,"vrf_Screen")
+
+
+#measures testing
 while t < timeIteration:
     i=0
     setTimeRange(setup,quicklinks[t])
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],"site_Screen")
+        setMeasure(setup,measures[i],"vrf_Screen")
 
-         # testcase body starts
-
-         # Set the given measure on the Site Screen
-    setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
-
-         # testcase body ends
 
 
          # Result Logging
-    checkEqualAssert("True","True")
-    i+=1
+        expected = "True"
+        actual = "True"
+
+        checkEqualAssert(expected,actual,quicklinks[t], measures[i])
+        i+=1
          # end of measureSelection
 
 
-    timeIteration-=1
+    t+=1
      # end of while loop for QuicklinkSelections
-
-
-# Logging out the application
-setup.d.close()
-#checkEqualAssert("True",result,"","","drillToNF")

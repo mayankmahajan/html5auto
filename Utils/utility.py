@@ -17,6 +17,7 @@ from classes.Pages import ExplorePageClass
 from classes.Pages.LoginPageClass import *
 from classes.Pages.ExplorePageClass import *
 from classes.Pages.SitePageClass import *
+from classes.Pages.NEPageClass import *
 from classes.Pages.MRX_SegmentPageClass import *
 from classes.DriverHelpers.DriverHelper import *
 from Utils.ConfigManager import ConfigManager

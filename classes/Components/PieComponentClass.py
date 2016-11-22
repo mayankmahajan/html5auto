@@ -93,21 +93,21 @@ class PieComponentClass(BaseComponentClass):
         else:
             self.setSelectionIndex(index,handlers['legendText'])
 
-    def getSelection(self,handlrs):
-        '''
-        This method gives the selected Index, its Corresponding Text and Value
-        :param handlers: handler to pieChart
-        :return: Selected Data
-        '''
-        try:
-            data = {}
-            handlers = self.compHandlers('piechart',handlrs)
-            data['selIndex'] = self.getSelectionIndex(handlers['legendText'])
-            data['legendText'] = handlers['legendText'][data['selIndex']].text
-            data['legendIcon'] = handlers['legendIcon'][data['selIndex']].color # dummy line will update
-            return data
-        except Exception:
-            return Exception
+    # def getSelection(self,handlrs):
+    #     '''
+    #     This method gives the selected Index, its Corresponding Text and Value
+    #     :param handlers: handler to pieChart
+    #     :return: Selected Data
+    #     '''
+    #     try:
+    #         data = {}
+    #         handlers = self.compHandlers('piechart',handlrs)
+    #         data['selIndex'] = self.getSelectionIndex(handlers['legendText'])
+    #         data['legendText'] = handlers['legendText'][data['selIndex']].text
+    #         data['legendIcon'] = handlers['legendIcon'][data['selIndex']].color # dummy line will update
+    #         return data
+    #     except Exception:
+    #         return Exception
 
 
     def launchToolTip(self,driver,driverHelper,elHandle):
@@ -119,7 +119,11 @@ class PieComponentClass(BaseComponentClass):
         data = []
         # driverHelper.action.move_to_element()
         for i in range(0,len(elHandle['hover'])):
-            driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
+            print "element",elHandle['hover'][i]
+            try:
+                driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
+            except:
+                pass
             # adding hardcoded timeout (will be driven by Config)
             time.sleep(2)
             data.append(elHandle['getToolTipData'].text)
@@ -148,7 +152,8 @@ class PieComponentClass(BaseComponentClass):
         data = []
         toolTipHandlers = {}
         handlers = self.compHandlers('piechart',handlrs)
-
+        print "tool tip handler"
+        print handlers
         toolTipHandlers['hover'] = [handlers['arcs'][i] for i in range(len(handlers['arcs']))]
             # if handlers['arcs'][i].tag_name == "path":
             #     toolTipHandlers['hover'] = handlers['arcs'][i]
@@ -162,6 +167,7 @@ class PieComponentClass(BaseComponentClass):
         #         toolTipHandlers['hover'] = value
         #     elif self.configmanager.componentSelectors[key]["action"] == "getToolTipData":
         toolTipHandlers['getToolTipData'] = handlers['tooltip'][0]
+        print toolTipHandlers
         return self.launchToolTip(driver,driverHelper,toolTipHandlers)
 
 

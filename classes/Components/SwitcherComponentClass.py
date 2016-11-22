@@ -1,5 +1,6 @@
 from BaseComponentClass import BaseComponentClass
 from Utils.ConfigManager import ConfigManager
+from Utils.logger import *
 
 class SwitcherComponentClass(BaseComponentClass):
 
@@ -30,5 +31,6 @@ class SwitcherComponentClass(BaseComponentClass):
             if self.configmanager.componentSelectors[key]["action"] == "click":
                 # for i in range(0,len(handlers)):
                 if handlers[key][len(handlers[key]) - 1].is_displayed() and 'SELECTED' in handlers[key][len(handlers[key]) - 1].get_attribute('class').upper():
+                    logger.debug("SwitcherCard Selection : %s", handlers[key][len(handlers[key]) - 1].text)
                     return handlers[key][len(handlers[key]) - 1].text
 
