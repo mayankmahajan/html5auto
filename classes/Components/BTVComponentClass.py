@@ -220,3 +220,62 @@ class BTVComponentClass(BaseComponentClass):
                     result[key] = "Data Validation FAILED --> Actual : "+str(UIData)+" and Expected : "+str(csvData[key]['AGGR_totalByteBuffer'])
 
         return result
+
+    def validateToolTipData1(self,dataCollection):
+
+        finalTTD = {}
+        total = False
+        for i in range(1,len(dataCollection['btvTooltipData'])):
+            ttd = {}
+            stdd = {}
+            subStrings = dataCollection['btvTooltipData'][i].split('\n')
+            ar = []
+
+            for i in range(1,len(subStrings)):
+                ar.append(subStrings[i])
+            ttd[subStrings[0]] = ar
+
+            for key,value in ttd.iteritems():
+                for el in value:
+                    print el.split(":")[1]
+                    if '<' in el.split(":")[1]:
+                        break
+                    else:
+                        stdd[el.split(":")[0]]= float(el.split(":")[1].strip().split(" ")[0])
+                    print stdd[el.split(":")[0]]
+            if (len(stdd) ==2) or (len(stdd) == 1):
+                total = True
+                s = 0
+                for k,v in stdd.iteritems():
+                    s+=v
+                stdd["Total "+el.split(":")[0].split(" ")[1]] = s
+            # elif len(stdd) == 1:
+            #     total = True
+            #     s = 0
+            #     for k,v in stdd.iteritems():
+            #         s+=v
+            #     stdd["Total "+el.split(":")[0].split(" ")[1]] = s
+            else:
+                total = False
+
+
+
+            finalTTD[subStrings[0]] = stdd
+        result = {}
+        for key,value in finalTTD.iteritems():
+            UIData = 0.0
+            UIData = float(dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[0])
+
+            if total:
+                for k in value.keys():
+                    if "Total" in k:
+                        if value[k] == UIData:
+                            result[key] = True
+                        else:
+                            result[key] = False
+        if (all(value == True for value in result.values())):
+            tooltip = True
+        else:
+            tooltip = False
+        print tooltip
+        return tooltip
