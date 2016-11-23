@@ -41,9 +41,9 @@ class PieLegendComponentClass(BaseComponentClass):
         for i in range(0,len(elHandle)):
             # time.sleep(2)
             if i in index:
-                driverHelper.action.move_to_element(elHandle[i]).key_down(Keys.COMMAND).click().key_up(Keys.COMMAND).key_up(Keys.COMMAND).perform()
+                # driverHelper.action.move_to_element(elHandle[i]).key_down(Keys.COMMAND).click().key_up(Keys.COMMAND).perform()
                 # driverHelper.action.release().perform()
-                # elHandle[i].click()
+                elHandle[i].click()
                 # break
 
     def getSelectionIndex(self,elHandle):

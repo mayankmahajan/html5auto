@@ -13,4 +13,5 @@ class CustomWebDriverWait(WebDriverWait):
             timeTaken = time() - startTime
             logger.debug("Time Taken for %s element :: %s seconds", method.locator[1],timeTaken)
         except Exception as e:
-            print e
+            pass
+            # print "Element not found", method.locator[1]
