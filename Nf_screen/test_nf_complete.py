@@ -39,14 +39,21 @@ sleep(5)
 # get screen instance and set timerange and measure and Get the handles of the screen
 set_measure=measures[0]
 set_time=quicklinks[0]
+print set_time
 screenInstance = SitePageClass(setup.d)
-setTimeRange(setup,set_time)
-setMeasure(setup,set_measure,"site_Screen")
 siteScreenHandle = getHandle(setup,"site_Screen")
+# setTimeRange(setup,set_time)
+screenInstance.quiklinkTimeRange.setSelection(set_time,siteScreenHandle)
+# screenInstance.quiklinkTimeRange.doSelection()
+a=screenInstance.measure.doSelection(siteScreenHandle,set_measure)
+print a
+#setMeasure(setup,set_measure,"site_Screen")
+#siteScreenHandle = getHandle(setup,"site_Screen")
 #######################################################################
 
 #######################################################################
 # Get the default selection and Validate the result
+siteScreenHandle =getHandle(setup,"site_Screen")
 test_case1="Default selection at site screen"
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_case1)
@@ -66,19 +73,24 @@ checkEqualAssert("True",str(status),set_time,set_measure,test_case2)
 #######################################################################
 #Create screen instance and get handle of NF screen
 nfScreenInstance = NFPageClass(setup.d)
-nfScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
+nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 #######################################################################
 
 
 #######################################################################
-#VAR=neScreenInstance.switcher.getSelection(neScreenHandle)
-#test_case2="Default Selection in chart"
-#checkEqualAssert("Chart",str(status),set_time,set_measure,test_case3)
+VAR=nfScreenInstance.switcher.getSelection(nfScreenHandle)
+test_case2="Default Selection in chart"
+checkEqualAssert("Chart",str(status),set_time,set_measure,test_case2)
 #######################################################################
 
+nfScreenInstance.switcher.setSelection(1,nfScreenHandle)
+VAR=nfScreenInstance.switcher.getSelection(nfScreenHandle)
+test_case3="New Selection in table"
+checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case3)
 
+nfScreenInstance.switcher.setSelection(0,nfScreenHandle)
 #######################################################################
-# Get the default selection at NF screen
+#Get the default selection at NF screen
 deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
 test_case4="Default Selection of pieLegend at NF screen"
@@ -86,19 +98,21 @@ checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,
 #######################################################################
 
 #######################################################################
-#Check single and multiple selection on pielegend
+# #Check single and multiple selection on pielegend
 Selection_list=[[1],[2],[3],[4]]
+expected_list=[]
 for i in Selection_list:
     nfScreenInstance.pielegend.setSelection(setup.dH,i,nfScreenHandle)
     nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
     deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
     defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
     test_case5="Check Selection of pieLegend at NF screen"
-    checkEqualAssert(str(i),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
-#######################################################################
-
-#######################################################################
-#Get chart data and tooltip data
+    expected_list.append(i[0])
+    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
+# #######################################################################
+#
+# #######################################################################
+# #Get chart data and tooltip data
 test_case6="Pie Tooltip Validations at NFScreen"
 piedata = nfScreenInstance.pielegend.getData(nfScreenHandle)
 piedata['tooltipdata'] = nfScreenInstance.pie.getToolTipInfo(setup.d,setup.dH,nfScreenHandle)
@@ -111,14 +125,17 @@ checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],set_time,set_measu
 
 while t < timeIteration:
     i=0
-    setTimeRange(setup,quicklinks[t])
+    # setTimeRange(setup,quicklinks[t])
+    screenInstance.quiklinkTimeRange.setSelection(quicklinks[t], siteScreenHandle)
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
+        screenInstance.measure.doSelection(nfScreenHandle, measures[i])
+        # sleep(5)
+        #setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
 
-        print measures[i]
-        print i
+        # print measures[i]
+        # print i
 
          # Result Logging
         expected = "True"
@@ -163,29 +180,40 @@ while t < timeIteration:
 
 nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 piedata=nfScreenInstance.pielegend.getData(nfScreenHandle)
-text=["s","","6","G","%$#!","unknown","8","a"]
+# Search testing. Length of text list should be >=2 if we have to check backspace key functionality.
+text=["u","g","s",Keys.BACK_SPACE]
 click=["one","two"]
-
+count=1
 for word in text:
-    expected_search_result=[piedata["legendText"][i] for i in range(0,len(piedata["legendText"])) if piedata["legendText"][i].lower().find(word.lower()) >= 0 and piedata["legendText"][i].lower().find(word.lower()) < piedata["legendText"][i].lower().find("\n")]
+    if word==Keys.BACK_SPACE:
+       index_previous=text.index(Keys.BACK_SPACE)-1
+       word1=text[text.index(Keys.BACK_SPACE)-1][:-1]
+       setSearch =  nfScreenInstance.searchComp.setSearchText(nfScreenHandle, text[index_previous])
+       msg="Search_for_backspace"
+    else:
+        msg="Search_for_"+word+" "
+        word1=word
+    expected_search_result=[piedata["legendText"][i] for i in range(0,len(piedata["legendText"])) if piedata["legendText"][i].lower().find(word1.lower()) >= 0 and piedata["legendText"][i].lower().find(word1.lower()) < piedata["legendText"][i].lower().find("\n")]
+    print word1,expected_search_result
     setSearch = nfScreenInstance.searchComp.setSearchText(nfScreenHandle,word)
     time.sleep(5)
     if(setSearch==True):
      for click_times in click:
         if click_times == "one":
+            #single hit on search button
             nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
-        elif click_times == "two":
+        elif click_times == "two" and count==1:
+            #bouble hit on search button
             nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
             nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
             expected_search_result = piedata["legendText"]
-
+            count=0
+        else:
+            break
         nfScreenHandle = getHandle(setup, Constants.NETWORKFUNCTIONS)
         search_pie_result=nfScreenInstance.pielegend.getData(nfScreenHandle)
         print search_pie_result
-        checkEqualAssert(expected_search_result, search_pie_result["legendText"], "", "", "Search_check_for_"+str(word)+str(click))
+        checkEqualAssert(expected_search_result, search_pie_result["legendText"], "", "", msg +str(click_times) + " time_click")
+        nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
     else:
-     checkEqualAssert(False, setSearch, set_time,set_measure, "Search_check_for_word_"+str(word))
-     checkEqualAssert(False, setSearch, set_time,set_measure, "Search_check_for_word_"+str(word))
-
-# Closing the Testcase
-setup.d.close()
+     checkEqualAssert(False, setSearch, "", "", "Search_passed_for_unknown")
