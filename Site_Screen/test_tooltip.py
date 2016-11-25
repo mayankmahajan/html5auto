@@ -76,13 +76,13 @@ while t < timeIteration:
                 logger.debug('Col1 : %s  and Col2 : %s',key,value)
 
             data['btvTooltipData'] = screenInstance.btv.getToolTipInfo(setup.d,setup.dH,siteScreenHandle)
-            message = sites[i] + "TOOLTIP IS WORKIG PERFECTLY"
+            message = sites[i] + " TOOLTIP IS WORKIG PERFECTLY"
             checkEqualAssert(True,True,quicklinks[t],measures[j],message)
             print data['btvTooltipData']
-
+            # PERCENTAGE VALUES ARE NOT TESTED IN THIS CASE
             result1 = screenInstance.btv.validateToolTipData1(data)
             print result1
-            validatemessage = sites[i] + "ToolTipdata"
+            validatemessage = sites[i] + " ToolTipdata"
             checkEqualAssert(result1,True,quicklinks[t],measures[j],validatemessage)
 
 
