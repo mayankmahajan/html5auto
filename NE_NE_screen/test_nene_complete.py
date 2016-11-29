@@ -39,14 +39,25 @@ sleep(5)
 # get screen instance and set timerange and measure and Get the handles of the screen
 set_measure=measures[0]
 set_time=quicklinks[0]
+print set_time
 screenInstance = SitePageClass(setup.d)
-setTimeRange(setup,set_time)
-setMeasure(setup,set_measure,"site_Screen")
 siteScreenHandle = getHandle(setup,"site_Screen")
-#######################################################################
+setTimeRange(setup,set_time)
+a=screenInstance.measure.doSelection(siteScreenHandle,set_measure)
+print a
+
+
+
+# screenInstance = SitePageClass(setup.d)
+# setTimeRange(setup,set_time)
+# a=screenInstance.measure.doSelection(siteScreenHandle,set_measure)
+# setMeasure(setup,set_measure,"site_Screen")
+# siteScreenHandle = getHandle(setup,"site_Screen")
+# #######################################################################
 
 #######################################################################
 # Get the default selection and Validate the result
+siteScreenHandle =getHandle(setup,"site_Screen")
 test_case1="Default selection of site screen"
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_case1)
@@ -126,11 +137,12 @@ checkEqualAssert("Chart",str(Var),set_time,set_measure,test_case8)
 
 neneScreenInstance.switcher.setSelection(1,neneScreenHandle)
 VAR=neneScreenInstance.switcher.getSelection(neneScreenHandle)
-test_case3="New Selection in table"
-checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case3)
+test_case9="New Selection in table"
+checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case9)
 #######################################################################
 
 #Check single and multiple selection
+neneScreenInstance.switcher.setSelection(0,neneScreenHandle)
 Selection_list=[3,2]
 for i in Selection_list:
     neneScreenInstance.btv.setSelection(i,neneScreenHandle)
@@ -148,7 +160,7 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],Constants.NENE)
+        screenInstance.measure.doSelection(neneScreenHandle, measures[i])
 
         print measures[i]
         print i
@@ -170,28 +182,45 @@ while t < timeIteration:
 #######################################################################
 #search box testing on ne screen
 neneScreenHandle = getHandle(setup,Constants.NENE)
-btvdata=neneScreenInstance.btv.getData(neneScreenHandle)
-print btvdata
+data1=neneScreenInstance.btv.getData(neneScreenHandle)
+print data1
 
-text=["r"]
-click =["one","two"]
+# text=["r","s","-","$","!","@","#","%","^","&","*","()","+","=","",Keys.BACK_SPACE]
+text=["r","ss",Keys.BACK_SPACE]
+# Search testing. Length of text list should be >=2 if we have to check backspace key functionality.
+click=["one","two"]
+count=1
 for word in text:
-    print word
-    expected_search_result=[btvdata["BTVCOLUMN1"][i] for i in range(2,len(btvdata["BTVCOLUMN1"])) if btvdata["BTVCOLUMN1"][i].lower().find(word.lower()) >= 0]
-    setSearch = neneScreenInstance.searchComp.setSearchText(neneScreenHandle,word)
-    print setSearch
-    time.sleep(5)
-    if(setSearch=="True"):
-         for click_times in click:
-              if click_times == "one":
-                   neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
-              elif click_times == "two":
-                   neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
-                   neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
-                   expected_search_result = btvdata["BTVCOLUMN1"][2::]
-              neneScreenHandle = getHandle(setup, Constants.NETWORKFUNCTIONS)
-              search_btv_result=neneScreenInstance.btv.getData(neneScreenHandle)
-              print search_btv_result
-              checkEqualAssert(expected_search_result, search_btv_result["BTVCOLUMN1"][2::], "", "", "Search_passed_for_"+str(word)+str(click_times))
+    if word==Keys.BACK_SPACE:
+       index_previous=text.index(Keys.BACK_SPACE)-1
+       word1=text[text.index(Keys.BACK_SPACE)-1][:-1]
+       setSearch = neneScreenInstance.searchComp.setSearchText(neneScreenHandle, text[index_previous])
+       msg="Search_for_Backspace "
+
     else:
-         checkEqualAssert(False, setSearch, "", "", "Search_passed_for_unknown")
+        word1=word
+        msg="Search_for_"+word+" "
+    expected_search_result=[data1["BTVCOLUMN1"][i] for i in range(2,len(data1["BTVCOLUMN1"])) if data1["BTVCOLUMN1"][i].lower().find(word1.lower()) >= 0]
+    print word1,expected_search_result
+    setSearch = neneScreenInstance.searchComp.setSearchText(neneScreenHandle,word)
+    time.sleep(5)
+    if(setSearch==True):
+     for click_times in click:
+        if click_times == "one":
+            #single hit on search button
+            neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
+        elif click_times == "two" and count==1:
+            #bouble hit on search button
+            neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
+            neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
+            expected_search_result = data1["BTVCOLUMN1"][2::]
+            count=0
+        else:
+            break
+        neneScreenHandle = getHandle(setup, Constants.NENE)
+        search_pie_result=neneScreenInstance.btv.getData(neneScreenHandle)
+        print search_pie_result
+        checkEqualAssert(expected_search_result,search_pie_result["BTVCOLUMN1"][2::], "", "", msg+str(click_times)+" time click")
+        neneScreenInstance.searchComp.hitSearchIcon(neneScreenHandle)
+    else:
+     checkEqualAssert(False,setSearch, "", "", "Search_for_unknown")

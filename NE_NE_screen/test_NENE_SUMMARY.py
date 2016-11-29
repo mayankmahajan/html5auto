@@ -6,7 +6,8 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Pages.NFPageClass import *
+from classes.Pages.NEPageClass import *
+from classes.Pages.NeNePageClass  import *
 from classes.Components.SearchComponentClass import *
 
 # Getting Setup Details and Launching the application
@@ -41,9 +42,17 @@ screenInstance.btv.setSelection(2,siteScreenHandle)
 
 # Drill to the Site Interaction Screen
 
-drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
-screenInstance = NFPageClass(setup.d)
-NFScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
+drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
+NeScreenInstance = NEPageClass(setup.d)
+NeScreenHandle = getHandle(setup, Constants.NETWORKELEMENTS)
+
+NeScreenInstance.pielegend.setSelection(setup.dH,[3],NeScreenHandle)
+drilltoScreen(setup.d,setup.dH,Constants.NENE)
+
+NeneScreenInstance=NeNePageClass(setup.d)
+
+# Get the handles of the nene screen
+NeneScreenHandle = getHandle(setup,Constants.NENE)
 
 while t < timeIteration:
     i=0
@@ -51,32 +60,25 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        screenInstance.measure.doSelection(NFScreenHandle, measures[i])
+        NeneScreenInstance.measure.doSelection(NeneScreenHandle, measures[i])
 
         # testcase body starts
         # Get the Instance of the screen
-        NFScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
-        data = screenInstance.pielegend.getData(NFScreenHandle)
+        NeneScreenHandle = getHandle(setup, Constants.NENE)
+        data = NeneScreenInstance.btv.getData(NeneScreenHandle)
         print data
-        length = len(data["legendText"])
+        length = len(data['BTVCOLUMN1'])
         print length
-        if length == 1:
-            rand=0
-        else:
-            rand = random.randrange(0,length)
-        screenInstance.pielegend.setSelection(setup.dH,[rand],NFScreenHandle)
-        NFScreenHandle = getHandle(setup, Constants.NETWORKFUNCTIONS)
-        defselection = screenInstance.pielegend.getSelection(NFScreenHandle)
+        rand = random.randrange(1,length)
+        NeneScreenInstance.btv.setSelection(rand,NeneScreenHandle)
+        NeneScreenHandle = getHandle(setup,Constants.NENE)
+        defselection = NeneScreenInstance.btv.getSelection(NeneScreenHandle)
         print defselection
-        #print defselection['BTVCOLUMN2']
-        lt=defselection["legendText"][0]
-        print lt
-        index=defselection["legendText"][0].find('\n')
-        print index
-        element_name=lt[0:index]
-        print element_name
-        element_value=lt[index+1::]
-        print element_value
+        btvvalue = defselection['BTVCOLUMN2']
+        print btvvalue
+        btvname = defselection['BTVCOLUMN1']
+        print btvname
+
         values = measures[i].split('_')
         print values
 
@@ -95,27 +97,21 @@ while t < timeIteration:
 
         if (values[0]=="Wan-Cost($)"):
             values[0] = "Wan Cost($)"
-            selections = screenInstance.summarybar.getSelection(NFScreenHandle)
-
-            #print "hahaha"
-            #print selections['All WDC']
-            summarybarvalues = selections[element_name][values[0]]['Average']
+            selections = NeneScreenInstance.summarybar.getSelection(NeneScreenHandle)
+            print selections
+            summarybarvalues = selections[btvname][values[0]]['Average']
 
         else:
-            selections = screenInstance.summarybar.getSelection(NFScreenHandle)
-            #print selections[btvname]
+            selections = NeneScreenInstance.summarybar.getSelection(NeneScreenHandle)
             print selections
-            summarybarvalues = selections[element_name][values[0]][values[3]]
+            summarybarvalues = selections[btvname][values[0]][values[3]]
+            print summarybarvalues
 
         # testcase body ends
-        message = str(element_name)
+        message = str(btvname)
         # Result Logging
-        checkEqualAssert(element_value,summarybarvalues,quicklinks[t],measures[i],message)
+        checkEqualAssert(btvvalue,summarybarvalues,quicklinks[t],measures[i],message)
 
         i+=1
         # end of measureSelection
     t+=1
-
-
-# Closing the Testcase
-setup.d.close()

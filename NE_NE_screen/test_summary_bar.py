@@ -6,7 +6,7 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Pages.NFPageClass import *
+from classes.Pages.NEPageClass import *
 from classes.Components.SearchComponentClass import *
 
 # Getting Setup Details and Launching the application
@@ -41,9 +41,9 @@ screenInstance.btv.setSelection(2,siteScreenHandle)
 
 # Drill to the Site Interaction Screen
 
-drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
-screenInstance = NFPageClass(setup.d)
-NFScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
+drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
+screenInstance = NEPageClass(setup.d)
+NEScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 
 while t < timeIteration:
     i=0
@@ -51,12 +51,12 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        screenInstance.measure.doSelection(NFScreenHandle, measures[i])
+        screenInstance.measure.doSelection(NEScreenHandle, measures[i])
 
         # testcase body starts
         # Get the Instance of the screen
-        NFScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
-        data = screenInstance.pielegend.getData(NFScreenHandle)
+        NEScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
+        data = screenInstance.pielegend.getData(NEScreenHandle)
         print data
         length = len(data["legendText"])
         print length
@@ -64,9 +64,8 @@ while t < timeIteration:
             rand=0
         else:
             rand = random.randrange(0,length)
-        screenInstance.pielegend.setSelection(setup.dH,[rand],NFScreenHandle)
-        NFScreenHandle = getHandle(setup, Constants.NETWORKFUNCTIONS)
-        defselection = screenInstance.pielegend.getSelection(NFScreenHandle)
+        screenInstance.pielegend.setSelection(setup.dH,[rand],NEScreenHandle)
+        defselection = screenInstance.pielegend.getSelection(NEScreenHandle)
         print defselection
         #print defselection['BTVCOLUMN2']
         lt=defselection["legendText"][0]
@@ -95,17 +94,22 @@ while t < timeIteration:
 
         if (values[0]=="Wan-Cost($)"):
             values[0] = "Wan Cost($)"
-            selections = screenInstance.summarybar.getSelection(NFScreenHandle)
+            selections = screenInstance.summarybar.getSelection(NEScreenHandle)
 
             #print "hahaha"
             #print selections['All WDC']
             summarybarvalues = selections[element_name][values[0]]['Average']
 
         else:
-            selections = screenInstance.summarybar.getSelection(NFScreenHandle)
+            selections = screenInstance.summarybar.getSelection(NEScreenHandle)
             #print selections[btvname]
             print selections
             summarybarvalues = selections[element_name][values[0]][values[3]]
+
+
+
+
+
 
         # testcase body ends
         message = str(element_name)
@@ -114,8 +118,6 @@ while t < timeIteration:
 
         i+=1
         # end of measureSelection
+
+
     t+=1
-
-
-# Closing the Testcase
-setup.d.close()

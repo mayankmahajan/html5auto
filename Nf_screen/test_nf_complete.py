@@ -79,26 +79,27 @@ nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
 #######################################################################
 VAR=nfScreenInstance.switcher.getSelection(nfScreenHandle)
-test_case2="Default Selection in chart"
-checkEqualAssert("Chart",str(status),set_time,set_measure,test_case2)
+print  VAR
+test_case3="Default Selection in chart"
+checkEqualAssert("Chart",str(VAR),set_time,set_measure,test_case3)
 #######################################################################
 
 nfScreenInstance.switcher.setSelection(1,nfScreenHandle)
 VAR=nfScreenInstance.switcher.getSelection(nfScreenHandle)
-test_case3="New Selection in table"
-checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case3)
+test_case4="New Selection in table"
+checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case4)
 
 nfScreenInstance.switcher.setSelection(0,nfScreenHandle)
 #######################################################################
 #Get the default selection at NF screen
 deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-test_case4="Default Selection of pieLegend at NF screen"
-checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,test_case4)
+test_case5="Default Selection of pieLegend at NF screen"
+checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
 #######################################################################
 
 #######################################################################
-# #Check single and multiple selection on pielegend
+#Check single and multiple selection on pielegend
 Selection_list=[[1],[2],[3],[4]]
 expected_list=[]
 for i in Selection_list:
@@ -106,17 +107,17 @@ for i in Selection_list:
     nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
     deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
     defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-    test_case5="Check Selection of pieLegend at NF screen"
+    test_case6="Check Selection of pieLegend at NF screen"
     expected_list.append(i[0])
-    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
+    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),set_time,set_measure,test_case6)
 # #######################################################################
 #
 # #######################################################################
 # #Get chart data and tooltip data
-test_case6="Pie Tooltip Validations at NFScreen"
+test_case7="Pie Tooltip Validations at NFScreen"
 piedata = nfScreenInstance.pielegend.getData(nfScreenHandle)
 piedata['tooltipdata'] = nfScreenInstance.pie.getToolTipInfo(setup.d,setup.dH,nfScreenHandle)
-checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],set_time,set_measure,test_case6)
+checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],set_time,set_measure,test_case7)
 #######################################################################
 
 
@@ -217,3 +218,6 @@ for word in text:
         nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
     else:
      checkEqualAssert(False, setSearch, "", "", "Search_passed_for_unknown")
+
+# Closing the Testcase
+setup.d.close()
