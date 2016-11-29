@@ -32,6 +32,5 @@ drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
 
 
 
-
 # Logging out of the application
 setup.d.close()

@@ -30,7 +30,7 @@ defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 
 
 # Validating the result
-checkEqualAssert(str(1),str(defSelection['selIndex']))
+checkEqualAssert(str(1),str(defSelection['selIndex']),"","","DEFAULT SELECTION IS CORRECT")
 
 # Set the bar Table view to the 2 index
 screenInstance.btv.setSelection(3,siteScreenHandle)
@@ -47,7 +47,7 @@ changeselection =  screenInstance.btv.getSelection(handles)
 
 
 # Validating the result after changing the measure
-checkEqualAssert(str(1),str(changeselection['selIndex']))
+checkEqualAssert(str(1),str(changeselection['selIndex']),"TODAY","Bitrate_downlink_absolute_average","DEFAULT SELECTION IS CORRECT ")
 
 
 # Logging out of the application

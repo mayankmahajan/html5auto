@@ -21,7 +21,7 @@ sleep(2)
 
 
 #Result logging
-checkEqualAssert("True",str(result),)
+checkEqualAssert("True",str(result),"TODAY","","LOGIN SUCCESSFULL")
 
 # Logging out of the application
 setup.d.close()

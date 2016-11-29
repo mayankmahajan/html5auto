@@ -9,8 +9,12 @@ from Utils.SetUp import *
 
 ############################ CHECK FOR THE DEFAULT SELECTION BY MULTIPLE MEASURES #######################
 
+data = {}
+
 # Getting Setup Details and Launching the application
 setup = SetUp()
+
+
 
 
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
@@ -57,26 +61,40 @@ while t < timeIteration:
         while j < measureIteration:
             screenInstance.measure.doSelection(siteScreenHandle,measures[j])
 
-        # testcase body starts
+            # testcase body starts
+
+            siteScreenHandle = getHandle(setup,"site_Screen")
+
+            btvData = screenInstance.btv.getData(siteScreenHandle)
+            data['btvData'] = {}
+            for key,value in btvData.iteritems():
+                pv = value.pop(0)
+                if len(data['btvData']) == 0:
+                    data['btvData']['dimension'] = value
+                else:
+                    data['btvData']['value'] = value
+                logger.debug('Col1 : %s  and Col2 : %s',key,value)
+
+            data['btvTooltipData'] = screenInstance.btv.getToolTipInfo(setup.d,setup.dH,siteScreenHandle)
+            message = sites[i] + " TOOLTIP IS WORKIG PERFECTLY"
+            checkEqualAssert(True,True,quicklinks[t],measures[j],message)
+            print data['btvTooltipData']
+            # PERCENTAGE VALUES ARE NOT TESTED IN THIS CASE
+            result1 = screenInstance.btv.validateToolTipData1(data)
+            print result1
+            validatemessage = sites[i] + " ToolTipdata"
+            checkEqualAssert(result1,True,quicklinks[t],measures[j],validatemessage)
 
 
-        # defaultselection = btv.getSelection()
-        # checkEqualAssert("0",defaultselection)
 
 
 
 
 
+            # testcase body ends
 
 
-        # testcase body ends
 
-        # Result Logging
-            expected = "True"
-            actual = "True"
-
-            message = sites[i]
-            checkEqualAssert(expected,actual,quicklinks[t],measures[j],message)
 
             j+=1
         # end of measureSelection
@@ -89,8 +107,6 @@ while t < timeIteration:
         # testcase body ends
 
         # Result Logging
-        expected = "True"
-        actual = "True"
 
 
         # checkEqualAssert(expected,actual,quicklinks[t],sites[i])

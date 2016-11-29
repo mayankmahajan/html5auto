@@ -7,19 +7,25 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
 
+############################ CHECK FOR THE DEFAULT SELECTION BY MULTIPLE MEASURES #######################
 
-# Getting Setup Details
+# Getting Setup Details and Launching the application
 setup = SetUp()
 
-# Getting TimeRange Info from Config Files
+
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
 quicklinks = setup.cM.getNodeElements("quicklinks","quicklink").keys()
 t=0
 
 
 # Getting Measures Info from Config Files
+siteIteration = len(setup.cM.getNodeElements("sitetypes","sitetype"))
+sites = setup.cM.getNodeElements("sitetypes","sitetype").keys()
+
+# Getting Measures Info from Config Files
 measureIteration = len(setup.cM.getNodeElements("measures","measure"))
 measures = setup.cM.getNodeElements("measures","measure").keys()
+
 
 
 # Launching Application
@@ -35,15 +41,21 @@ screenInstance = SitePageClass(setup.d)
 siteScreenHandle = getHandle(setup,"site_Screen")
 
 
-
 # while loop is to iterate over all the quicklinks
 while t < timeIteration:
     i=0
     setTimeRange(setup,quicklinks[t])
 
     # while loop is to iterate over all the measure
-    while i < measureIteration:
-        setMeasure(setup,measures[i],"site_Screen")
+    while i < siteIteration:
+        j=0
+        screenInstance.measure.doSelectionSite(siteScreenHandle,sites[i])
+
+        # testcase body starts
+
+        # while loop is to iterate over all the measure
+        while j < measureIteration:
+            screenInstance.measure.doSelection(siteScreenHandle,measures[j])
 
         # testcase body starts
 
@@ -60,11 +72,28 @@ while t < timeIteration:
         # testcase body ends
 
         # Result Logging
+            expected = "True"
+            actual = "True"
+
+            message = sites[i]
+            checkEqualAssert(expected,actual,quicklinks[t],measures[j],message)
+
+            j+=1
+        # end of measureSelection
+
+
+
+
+
+
+        # testcase body ends
+
+        # Result Logging
         expected = "True"
         actual = "True"
 
 
-        checkEqualAssert(expected,actual,quicklinks[t],measures[i])
+        # checkEqualAssert(expected,actual,quicklinks[t],sites[i])
 
         i+=1
         # end of measureSelection
@@ -76,3 +105,7 @@ while t < timeIteration:
 
 # Closing the Testcase
 setup.d.close()
+#setSiteType(setup,"SatSite","site_Screen")
+
+#checkEqualAssert(True,True,"","","SAtsite")
+
