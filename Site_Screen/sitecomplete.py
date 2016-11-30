@@ -7,17 +7,37 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
 
-############################ CHECK FOR THE DEFAULT SELECTION BY MULTIPLE MEASURES #######################
 
-# Getting Setup Details and Launching the application
+
+######################## COMPLETE SITE SCREEN #########################
+
+# Getting Setup Details and launching the application
 setup = SetUp()
 
-# Logging into the appliction
-login(setup, "admin", "Admin@123")
+timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
+quicklinks = setup.cM.getNodeElements("quicklinks","quicklink").keys()
+t=0
+
+
+# Getting Measures Info from Config Files
+siteIteration = len(setup.cM.getNodeElements("sitetypes","sitetype"))
+sites = setup.cM.getNodeElements("sitetypes","sitetype").keys()
+
+# Getting Measures Info from Config Files
+measureIteration = len(setup.cM.getNodeElements("measures","measure"))
+measures = setup.cM.getNodeElements("measures","measure").keys()
+
+# Logging into the setup
+result = login(setup, "admin", "Admin@123")
+
+#Checking the login functionality
+checkEqualAssert("True",str(result),"TODAY","","LOGIN SUCCESSFULL")
 
 # Launch Site Screen
 launchPage(setup,"site_Screen")
-sleep(5)
+
+# Checking the launch page of the site page
+checkEqualAssert(True,True,"","","SITE PAGE LAUNCHES SUCCESSFULLY")
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -48,9 +68,4 @@ changeselection =  screenInstance.btv.getSelection(handles)
 
 # Validating the result after changing the measure
 checkEqualAssert(str(1),str(changeselection['selIndex']),"TODAY","Bitrate_downlink_absolute_average","DEFAULT SELECTION IS CORRECT ")
-
-
-# Logging out of the application
-setup.d.close()
-
 

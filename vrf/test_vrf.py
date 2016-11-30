@@ -1,6 +1,6 @@
 from Utils.SetUp import *
 from Utils.utility import *
-from classes.Pages.NEPageClass import *
+from classes.Pages.VrfPageClass import *
 
 #######################################################################
 # Getting Setup Details
@@ -20,8 +20,10 @@ measures = setup.cM.getNodeElements("measures","measure").keys()
 
 #######################################################################
 # Logging into the appliction and launch site screen
-login(setup, "admin", "Admin@123")
-launchPage(setup,"site_Screen")
+login_status=login(setup, "admin", "Admin@123")
+checkEqualAssert(True,login_status,"","","Login to NRMCA UI")
+launch_status=launchPage(setup,"site_Screen")
+checkEqualAssert(True,launch_status,"","","launch site screen")
 sleep(5)
 #######################################################################
 
@@ -34,12 +36,12 @@ screenInstance = SitePageClass(setup.d)
 setTimeRange(setup,set_time)
 siteScreenHandle = getHandle(setup,"site_Screen")
 screenInstance.measure.doSelection(siteScreenHandle, set_measure)
-siteScreenHandle = getHandle(setup,"site_Screen")
 #######################################################################
 
 #######################################################################
 # Get the default selection and Validate the result
 test_case1="Default selection of site screen"
+siteScreenHandle = getHandle(setup,"site_Screen")
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_case1)
 #######################################################################
@@ -50,53 +52,50 @@ checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_
 a = screenInstance.btv.setSelection(2,siteScreenHandle)
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 data=screenInstance.btv.getData(siteScreenHandle)
-status=drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
-test_case2 ="Drill TO Network Element Screen"
+status=drilltoScreen(setup.d,setup.dH,Constants.VRF)
+test_case2 ="Drill TO VRF Screen"
 checkEqualAssert("True",str(status),set_time,set_measure,test_case2)
 #######################################################################
 
 #######################################################################
 #Create screen instance and get handle of screen
-neScreenInstance = NEPageClass(setup.d)
-neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
+vrfScreenInstance = VrfPageClass(setup.d)
+vrfScreenHandle = getHandle(setup,Constants.VRF)
 #######################################################################
 
 
 #######################################################################
-VAR=neScreenInstance.switcher.getSelection(neScreenHandle)
+VAR=vrfScreenInstance.switcher.getSelection(vrfScreenHandle)
 test_case3="Default Selection in chart"
 checkEqualAssert("Chart",str(VAR),set_time,set_measure,test_case3)
 #######################################################################
 
 
 #######################################################################
-# Get the default selection of ne screen
-deflegendSel = neScreenInstance.pielegend.getSelection(neScreenHandle)
-defpieSel = neScreenInstance.pie.getPieSelections(neScreenHandle)
-test_case4="Default Selection of pieLegend in NE screen"
-checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,test_case4)
+# Get the default selection of vrf screen
+deflegendSel = vrfScreenInstance.btv.getSelection(vrfScreenHandle)
+test_case4="Default Selection of btv in VRF screen"
+checkEqualAssert(str(1),str(deflegendSel['selIndex']),set_time,set_measure,test_case4)
 #######################################################################
 
 #######################################################################
-#Check single and multiple selection on pielegend
-Selection_list=[[1]] # for multiple selection put more items in list
-expected_list=[]
+#Check single selection on btv
+Selection_list=[2] # for multiple selection put more items in list
 for i in Selection_list:
-    neScreenInstance.pielegend.setSelection(setup.dH,i,neScreenHandle)
-    neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
-    deflegendSel = neScreenInstance.pielegend.getSelection(neScreenHandle)
-    defpieSel = neScreenInstance.pie.getPieSelections(neScreenHandle)
-    test_case5="Check Selection of pieLegend in NE screen"
-    expected_list.append(i[0])
-    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
+    vrfScreenInstance.btv.setSelection(i,vrfScreenHandle)
+    vrfScreenHandle = getHandle(setup,Constants.VRF)
+    deflegendSel = vrfScreenInstance.btv.getSelection(vrfScreenHandle)
+    test_case5="Check Selection of btv in VRF screen"
+
+    checkEqualAssert(str(i),str(deflegendSel['selIndex']),set_time,set_measure,test_case5)
 #######################################################################
 
 #######################################################################
 #Get chart data and tooltip data
-test_case6="Pie Tooltip Validations at NFScreen"
-piedata = neScreenInstance.pielegend.getData(neScreenHandle)
-piedata['tooltipdata'] = neScreenInstance.pie.getToolTipInfo(setup.d,setup.dH,neScreenHandle)
-checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],set_time,set_measure,test_case6)
+piedata = vrfScreenInstance.btv.getData(vrfScreenHandle)
+#csvreader = CSVReader()
+#result = screenInstance.btv.validateBTVData(data,csvreader.csvData)
+#print result
 #######################################################################
 
 
@@ -104,17 +103,31 @@ checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],set_time,set_measu
 #measuse and time range selection and data validation
 while t < timeIteration:
     i=0
+    set_time=quicklinks[t]
     setTimeRange(setup,quicklinks[t])
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
         print measures[i]
-        screenInstance.measure.doSelection(neScreenHandle, measures[i])
-        neScreenHandle = getHandle(setup, Constants.NETWORKELEMENTS)
-        piedata1 = neScreenInstance.pielegend.getData(neScreenHandle)
-        piedata1['tooltipdata'] = neScreenInstance.pie.getToolTipInfo(setup.d, setup.dH, neScreenHandle)
-        print piedata
-        checkEqualAssert(piedata1['legendText'], piedata1['tooltipdata'], quicklinks[t], measures[i],"Pie Tooltip Validations in NEScreen for " + measures[i])
+        set_measure=measures[i]
+        logger.debug("selecting measure : %s", measures[i])
+        screenInstance.measure.doSelection(vrfScreenHandle, measures[i])
+        vrfScreenHandle = getHandle(setup, Constants.VRF)
+        btvdata=screenInstance.btv.getData(vrfScreenHandle)
+        data['btvData'] = {}
+        for key, value in btvdata.iteritems():
+            pv = value.pop(0)
+            if len(data['btvData']) == 0:
+                data['btvData']['dimension'] = value
+            else:
+                data['btvData']['value'] = value
+            logger.debug('Col1 : %s  and Col2 : %s', key, value)
+
+        data['btvTooltipData']=screenInstance.btv.getToolTipInfo(setup.d, setup.dH,vrfScreenHandle)
+        result1 = screenInstance.btv.validateToolTipData1(data)
+        validatemessage = "Match tooltip data and btv data"
+
+        checkEqualAssert(result1, True, quicklinks[t], measures[i], validatemessage)
 
         i+=1
     t+=1
@@ -123,10 +136,10 @@ while t < timeIteration:
 
 
 #######################################################################
-#search box testing on ne screen
-neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
-piedata=neScreenInstance.pielegend.getData(neScreenHandle)
-text=["p","","mm","","G","hfgjghkkkhjk","_",",","$","#","%","^","&","*","@","-","+","="]
+#search box testing on vrf screen
+vrfScreenHandle = getHandle(setup,Constants.VRF)
+data1=vrfScreenInstance.btv.getData(vrfScreenHandle)
+text=["p","","cd",Keys.BACK_SPACE,"@","$","*","&","-","_"]
 click=["one","two"]
 count=1
 for word in text:
@@ -134,30 +147,31 @@ for word in text:
        index_previous = text.index(Keys.BACK_SPACE) - 1
        word1 = text[text.index(Keys.BACK_SPACE) - 1][:-1]
        msg = "Search_for_Backspace "
-       setSearch = neScreenInstance.searchComp.setSearchText(neScreenHandle, text[index_previous])
+       setSearch = vrfScreenInstance.searchComp.setSearchText(vrfScreenHandle, text[index_previous])
     else:
         word1=word
         msg = "Search_for_" + word + " "
-    expected=[piedata["legendText"][i] for i in range(0,len(piedata["legendText"])) if piedata["legendText"][i].lower().find(word.lower()) >= 0 and piedata["legendText"][i].lower().find(word.lower()) < piedata["legendText"][i].lower().find("\n")]
-    setSearch = neScreenInstance.searchComp.setSearchText(neScreenHandle,word)
+    expected_search_result=[data1["BTVCOLUMN1"][j] for j in range(2,len(data1["BTVCOLUMN1"])) if data1["BTVCOLUMN1"][j].lower().find(word1.lower()) >= 0]
+    setSearch = vrfScreenInstance.searchComp.setSearchText(vrfScreenHandle,word)
     time.sleep(5)
     if(setSearch==True):
-
-
-        for click_times in click:
-            if click_times == "one":
-                neScreenInstance.searchComp.hitSearchIcon(neScreenHandle)
-            elif click_times == "two" and count==1:
-                neScreenInstance.searchComp.hitSearchIcon(neScreenHandle)
-                neScreenInstance.searchComp.hitSearchIcon(neScreenHandle)
-                expected = piedata["legendText"]
-                count=0
-
-        neScreenHandle = getHandle(setup, Constants.NETWORKELEMENTS)
-        search_pie_result=neScreenInstance.pielegend.getData(neScreenHandle)
+     for click_times in click:
+        if click_times == "one":
+            vrfScreenInstance.searchComp.hitSearchIcon(vrfScreenHandle)
+        elif click_times == "two" and count==1:
+            vrfScreenInstance.searchComp.hitSearchIcon(vrfScreenHandle)
+            vrfScreenInstance.searchComp.hitSearchIcon(vrfScreenHandle)
+            expected_search_result = data1["BTVCOLUMN1"][2::]
+            count=0
+        else:
+            break
+        vrfScreenHandle = getHandle(setup, Constants.VRF)
+        search_pie_result=vrfScreenInstance.btv.getData(vrfScreenHandle)
         print search_pie_result
-        checkEqualAssert(expected, search_pie_result["legendText"], set_time,set_measure,msg+click_times+" time")
-        neScreenInstance.searchComp.hitSearchIcon(neScreenHandle)
+        checkEqualAssert(expected_search_result, search_pie_result["BTVCOLUMN1"][2::],set_time,set_measure, msg+str(click_times)+" time")
+        vrfScreenInstance.searchComp.hitSearchIcon(vrfScreenHandle)
     else:
-     checkEqualAssert(False, setSearch, set_time,set_measure, "Search_passed_for_word_"+str(word))
-#######################################################################
+     checkEqualAssert(False, setSearch,set_time,set_measure, "word_not_set_for_"+word)
+
+
+######################################################################

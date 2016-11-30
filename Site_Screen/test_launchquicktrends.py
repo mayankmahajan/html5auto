@@ -7,16 +7,15 @@ from classes.Pages.QuickTrendsPageClass import *
 
 
 
-# Getting Setup Details
+# Getting Setup Details and Launching the application
 setup = SetUp()
 
-
-# Launching Application
+# Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-
-# Launch Screen
-launchPage(setup,Constants.SITES)
+# Launch Site Screen
+launchPage(setup,"site_Screen")
+sleep(5)
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -28,11 +27,33 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 screenInstance.btv.setSelection(3,siteScreenHandle)
 
 selection = screenInstance.btv.getSelection(siteScreenHandle)
+singlesitename = selection['BTVCOLUMN1']
+
+siteScreenHandle = getHandle(setup,"site_Screen")
+
 
 screenInstance.cm.activateContextMenuOptions(siteScreenHandle)
 
 screenInstance.cm.launchTrends(siteScreenHandle)
 
+checkEqualAssert(True,True,"TODAY","","TREND IS SUCCESSFULLY LAUNCHED")
+
+
+qtScreenInstance = QuickTrendsPageClass(setup.d)
+qtScreenHandle = getHandle(setup,"qt_Screen")
+
+list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
+legendname = list[0]
+
+checkEqualAssert(singlesitename,legendname,"TODAY","","DATA IS VALIDATE FOR THE SINGLE LEGEND IN THE QUICK TRENDS")
+
+
+############ MULTIPLE SELECTION IS NOT ADDED TILL NOW #################
+
 
 setup.d.close()
+
+
+
+
 

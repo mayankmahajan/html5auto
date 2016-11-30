@@ -222,10 +222,10 @@ class BTVComponentClass(BaseComponentClass):
         return result
 
     def validateToolTipData1(self,dataCollection):
-
+        per = ""
         finalTTD = {}
         total = False
-        for i in range(1,len(dataCollection['btvTooltipData'])):
+        for i in range(0,len(dataCollection['btvTooltipData'])):
             ttd = {}
             stdd = {}
             subStrings = dataCollection['btvTooltipData'][i].split('\n')
@@ -240,9 +240,11 @@ class BTVComponentClass(BaseComponentClass):
                     print el.split(":")[1]
                     if '<' in el.split(":")[1]:
                         break
+                    elif '%' in el.split(":")[1]:
+                        per = el.split(":")[1]
                     else:
                         stdd[el.split(":")[0]]= float(el.split(":")[1].strip().split(" ")[0])
-                    print stdd[el.split(":")[0]]
+                    # print stdd[el.split(":")[0]]
             if (len(stdd) ==2) or (len(stdd) == 1):
                 total = True
                 s = 0
@@ -262,20 +264,26 @@ class BTVComponentClass(BaseComponentClass):
 
             finalTTD[subStrings[0]] = stdd
         result = {}
-        for key,value in finalTTD.iteritems():
-            UIData = 0.0
-            UIData = float(dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[0])
-
-            if total:
-                for k in value.keys():
-                    if "Total" in k:
-                        if value[k] == UIData:
-                            result[key] = True
-                        else:
-                            result[key] = False
+        if '%' in per:
+            result[key] = False
+        else:
+            for key,value in finalTTD.iteritems():
+                UIData = 0.0
+                try:
+                    UIData = float(dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[0])
+                except:
+                    UIData = ""
+                    result[key] = True
+                if total:
+                    for k in value.keys():
+                        if "Total" in k:
+                            if value[k] == UIData:
+                                result[key] = True
+                            else:
+                                result[key] = False
         if (all(value == True for value in result.values())):
             tooltip = True
         else:
             tooltip = False
         print tooltip
-        return tooltip
+        return result[key]

@@ -13,7 +13,7 @@ from Utils.csvReader import *
 
 # Getting Setup Details and Launching the application
 setup = SetUp()
-
+data = {}
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
@@ -27,7 +27,17 @@ screenInstance = SitePageClass(setup.d)
 # Get the handles of the screen
 siteScreenHandle = getHandle(setup,"site_Screen")
 
-data = getBTVData(setup.d,setup.dH)
+# data = getBTVData(setup.d,setup.dH)
+btvData = screenInstance.btv.getData(siteScreenHandle)
+# btvData = screenInstance.btv.getData(siteScreenHandle)
+data['btvData'] = {}
+for key,value in btvData.iteritems():
+    pv = value.pop(0)
+    if len(data['btvData']) == 0:
+        data['btvData']['dimension'] = value
+    else:
+        data['btvData']['value'] = value
+    logger.debug('Col1 : %s  and Col2 : %s',key,value)
 
 csvreader = CSVReader()
 

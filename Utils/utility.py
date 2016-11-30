@@ -235,12 +235,16 @@ def getHandle(obj,pageName):
     return handles
 
 
-def testScreen(driver,driverHelper,pageName,isStartScreen=False):
+def testScreen(obj,pageName,isStartScreen=False):
+    driver = obj.d
+    driverHelper = obj.dH
+    configManager = obj.cM
+
     try:
         # Config Parsing Part
         data = {}
         if isStartScreen:
-            configManager = launchPage(driver,driverHelper,pageName)
+            launchPage(obj,pageName)
         else:
             configManager = ConfigManager()
         # tempString = '//*[contains(@id, "' + pageName.split('_')[0]+'_barTabularView")]'
@@ -456,7 +460,7 @@ def setTimeRange(obj,quicklink,pageName="site_Screen"):
 
     screenInstance.quiklinkTimeRange.setSelection(quicklink,handles)
 
-def setMeasure(obj,measure,screenInstance,handles):
+def setMeasure(obj,measure,pageName):
     '''
     sets quicklinks on the particular page
     :param obj:
@@ -464,13 +468,13 @@ def setMeasure(obj,measure,screenInstance,handles):
     :param pageName:
     :return:
     '''
-    # driver = obj.d
-    # driverHelper = obj.dH
-    # configmanager = obj.cM
-    # screenInstance=getScreenInstance(obj.d,pageName)
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    screenInstance=getScreenInstance(obj.d,pageName)
 
-    # parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
-    # handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
 
     screenInstance.measure.doSelection(handles,measure)
 
