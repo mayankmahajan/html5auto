@@ -396,6 +396,40 @@ def drilltoScreen(driver,driverHelper,pageName):
         return ValueError
 
 
+def exportToCSV(driver,driverHelper,pageName):
+    try:
+        sitePage = SitePageClass(driver)
+        cmLocators = sitePage.cm.getSpecificLocators(CommonElementLocators)
+        cmHandlers = driverHelper.waitForVisibleElementsAndChilds(cmLocators)
+        sitePage.cm.activateContextMenuOptions(cmHandlers)
+
+        cmenuLocators = sitePage.cm.getSpecificLocators(ContextMenuLocators)
+        cmenuHandlers = driverHelper.waitForVisibleElementsAndChilds(cmenuLocators)
+        try:
+            sitePage.cm.drillTo(driver,driverHelper,cmenuHandlers,Constants.EXPORTTO)
+        except Exception:
+            return Exception
+
+        exportLocators = sitePage.cm.getSpecificLocators(ExportToLocators)
+        exportHandlers = driverHelper.waitForVisibleElementsAndChilds(exportLocators)
+
+        if(sitePage.cm.drillTo(driver,driverHelper,exportHandlers,pageName) == True):
+            pass
+        else:
+            return sitePage.cm.drillTo(driver,driverHelper,exportHandlers,pageName)
+
+        # time.sleep(3)
+
+        logger.debug('Page Launched : %s',pageName)
+        return True
+
+
+    except ValueError:
+        return ValueError
+
+
+
+
 
 
 
@@ -494,7 +528,46 @@ def setSiteType(obj,sites,screenInstance,handles):
 
 
 
+def parseBTVData(btvData):
+    data  = {}
+    data['btvData'] = {}
+    for key,value in btvData.iteritems():
+        pv = value.pop(0)
+        if len(data['btvData']) == 0:
+            data['btvData']['dimension'] = value
+        else:
+            data['btvData']['value'] = value
+        logger.debug('Col1 : %s  and Col2 : %s',key,value)
+    return  data['btvData']
 
 
 
+def getSummaryBarData(measure,btvname,screenInstance,siteScreenHandle):
+    values = measure.split('_')
 
+    try:
+        if (values[3]=="average"):
+            values[3]="Average"
+    except:
+        print "Average is not there"
+
+    try:
+        if (values[3]=="peak"):
+            values[3]="Peak"
+
+    except:
+        print "Peak is not there"
+
+    if (values[0]=="Wan-Cost($)"):
+        values[0] = "Wan Cost($)"
+        selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+        #print "hahaha"
+        #print selections['All WDC']
+        summarybarvalues = selections[btvname][values[0]]['Average']
+        return summarybarvalues
+
+    else:
+        selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+        #print selections[btvname]
+        summarybarvalues = selections[btvname][values[0]][values[3]]
+        return summarybarvalues
