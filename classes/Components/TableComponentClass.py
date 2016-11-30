@@ -154,12 +154,40 @@ class TableComponentClass(BaseComponentClass):
         except:
             pass
 
+    def getIterfaceHeaders(self,h):
+        if h['HEADERROW'] != "":
+            elHandle=h['HEADERROW']
+            self.colCount = len(elHandle)
+            return [eachHandler.text for eachHandler in elHandle]
+        else:
+            logger.debug("header is not present in table")
+
+    def getIterfaceRows(self,colcount,h):
+        elHandle=h['ROWS']
+        # self.rowCount = (len(elHandle) - colcount) / colcount
+        rows = []
+        temp = []
+        for i in range(len(elHandle)):
+            if len(temp) < colcount:
+                temp.append(elHandle[i].text)
+            else:
+                rows.append(temp)
+                temp = [elHandle[i].text]
+
+        # return a 2D array
+
+        return rows
 
 
+    def getIterfaceTableData(self,h):
+        handlers = self.compHandlers('table', h)
+        data = {}
+        data['header'] = self.getIterfaceHeaders(handlers)
+        data['rows'] = self.getIterfaceRows(len(data['header']),handlers)
+        return data
 
-
-
-
+    def scrollVertical(self):
+        pass
 
 
 
