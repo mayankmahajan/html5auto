@@ -53,7 +53,7 @@ sleep(5)
 data1=screenInstance.btv.getData(siteScreenHandle)
 print data1
 length = len(data1['BTVCOLUMN1'])
-rand = random.randrange(1,length)
+rand = random.randrange(2,length)
 screenInstance.btv.setSelection(rand,siteScreenHandle)
 #screenInstance.btv.setSelection(2,siteScreenHandle)
 status=drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
@@ -80,7 +80,7 @@ data3=neneScreenInstance.btv.getData(neneScreenHandle)
 print data3
 
 length = len(data3['BTVCOLUMN1'])
-rand = random.randrange(1,length)
+rand = random.randrange(2,length)
 neneScreenInstance.btv.setSelection(rand,neneScreenHandle)
 # Set the bar Table view to the 2 index
 #neneScreenInstance.btv.setSelection(2,neneScreenHandle)
@@ -98,15 +98,15 @@ qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")
 
 xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
-print xaxis
 yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
-print t
 
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
 print list
 legendname = list[0]
+legendname1=list[1]
 print legendname
+print legendname1
 
 checkEqualAssert(singlesitename,legendname,"","","DATA IS VALIDATE FOR THE SINGLE LEGEND IN THE QUICK TRENDS")
 
