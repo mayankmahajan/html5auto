@@ -12,14 +12,9 @@ from classes.Pages.NeNePageClass import *
 from classes.Pages.QuickTrendsPageClass import *
 import random
 from classes.Components.SwitcherComponentClass import *
-
-
 #######################################################################
 # Getting Setup Details
 setup = SetUp()
-#######################################################################
-
-
 #######################################################################
 #get time range and measures from config file
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
@@ -37,7 +32,6 @@ launchPage(setup,"site_Screen")
 sleep(5)
 #######################################################################
 
-
 #######################################################################
 # get screen instance and set timerange and measure and Get the handles of the screen
 # set_measure=measures[0]
@@ -50,11 +44,12 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 
 #Get the default selection and Validate the result
 # siteScreenHandle =getHandle(setup,"site_Screen")
-sleep(5)
+#sleep(5)
 data1=screenInstance.btv.getData(siteScreenHandle)
 print data1
 length = len(data1['BTVCOLUMN1'])
-rand = random.randrange(1,length)
+rand = random.randrange(2,length)
+print rand
 screenInstance.btv.setSelection(rand,siteScreenHandle)
 drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
 
@@ -70,11 +65,17 @@ rand = random.randrange(0,length)
 #######################################################################
 
 #select any pielagent on ne screen and verify selection
-selection=nfScreenInstance.pielegend.setSelection(setup.dH,[rand],nfScreenHandle)
-#Drill to nene screen and verify
+nfScreenInstance.pielegend.setSelection(setup.dH,[rand],nfScreenHandle)
+defselection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
+print defselection
 
-singlesitename = selection['legendText']
-print singlesitename
+lt=defselection["legendText"][0]
+print lt
+index=defselection["legendText"][0].find('\n')
+print index
+element_name=lt[0:index]
+print element_name
+#Drill to nene screen and verify
 
 nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 nfScreenInstance.cm.activateContextMenuOptions(nfScreenHandle)
@@ -93,8 +94,7 @@ print t
 
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
 print list
-legendname = list
+legendname = list[0]
 print legendname
-
-checkEqualAssert(singlesitename,legendname,"","","DATA IS VALIDATE FOR THE SINGLE LEGEND IN THE QUICK TRENDS")
+checkEqualAssert(element_name,legendname,"Today","Bitrate_uplink_percentage_average","DATA IS VALIDATE FOR THE SINGLE LEGEND IN THE QUICK TRENDS")
 
