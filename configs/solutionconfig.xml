@@ -51,6 +51,7 @@
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
+            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
 
         </screenConfig>
 
@@ -113,6 +114,7 @@
              <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "networkFunction_SummaryBar")]' action="" parent="True"/>
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
              <component id = "search" parent="False"/>
+             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
 
         </screenConfig>
 
@@ -155,7 +157,7 @@
             <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
             <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
-
+            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
         </screenConfig>
 
 

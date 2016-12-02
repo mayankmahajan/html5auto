@@ -25,6 +25,7 @@ class NFPageClass(BasePageClass):
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
         self.searchComp = SearchComponentClass()
         self.table=TableComponentClass()
+        self.cm = ContextMenuComponentClass()
 
     def testComponents(self):
         return ""

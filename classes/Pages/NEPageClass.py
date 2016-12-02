@@ -23,6 +23,7 @@ class NEPageClass(BasePageClass):
         self.pie = PieComponentClass()
         self.summarybar = SummaryBarComponentClass()
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
+        self.cm = ContextMenuComponentClass()
         self.searchComp = SearchComponentClass()
 
     def testComponents(self):

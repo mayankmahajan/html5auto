@@ -41,6 +41,7 @@ class ContextMenuComponentClass(BaseComponentClass):
 
     def launchTrends(self,handle):
         handle['trends'][0].click()
+        return True
 
 
 
