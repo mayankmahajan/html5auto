@@ -396,7 +396,7 @@ def drilltoScreen(driver,driverHelper,pageName):
         return ValueError
 
 
-def exportToCSV(driver,driverHelper,pageName):
+def exportTo(driver,driverHelper,pageName):
     try:
         sitePage = SitePageClass(driver)
         cmLocators = sitePage.cm.getSpecificLocators(CommonElementLocators)

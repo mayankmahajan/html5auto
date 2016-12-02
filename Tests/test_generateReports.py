@@ -8,6 +8,7 @@ from Utils.Constants import *
 from Utils.SetUp import *
 from classes.Pages.NFPageClass import *
 from classes.Pages.QuickTrendsPageClass import *
+from classes.Pages.GenerateReportsPopClass import *
 
 setup = SetUp()
 login(setup, "admin", "Admin@123")
@@ -15,13 +16,16 @@ launchPage(setup,"nf_Screen")
 nfScreenInstance = NFPageClass(setup.d)
 nfScreenHandle = getHandle(setup,"nf_Screen")
 
-
+exportTo(setup.d,setup.dH,Constants.EXPORTTOCSV)
 
 ########################################################################
 
 nfScreenInstance.cm.activateContextMenuOptions(nfScreenHandle)
-nfScreenInstance.cm.launchTrends(nfScreenHandle)
+nfScreenInstance.cm.GenerateReports(nfScreenHandle)
 
+grPopInstance = GenerateReportsPopClass()
+grPopInstance = getHandle(setup,"report_popup")
+# grPopInstance.
 qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)

@@ -34,14 +34,26 @@ class ContextMenuComponentClass(BaseComponentClass):
                 handles[Constants.DRILLTO][0].click()
             elif pageName == Constants.NENE:
                 handles[Constants.DRILLTONENE][0].click()
+            elif pageName == Constants.EXPORTTO:
+                handles[Constants.EXPORTTO][0].click()
+            elif pageName == Constants.EXPORTTOCSV:
+                handles[Constants.EXPORTTOCSV][0].click()
+            elif pageName == Constants.EXPORTTOSNAPSHOT:
+                handles[Constants.EXPORTTOSNAPSHOT][0].click()
             return True
         except Exception:
             return Exception
 
 
     def launchTrends(self,handle):
-        handle['trends'][0].click()
-        return True
+        try:
+            handle['trends'][0].click()
+            return True
+        except Exception:
+            return Exception.message
+
+    def GenerateReports(self,handle):
+        handle['generatereport'][0].click()
 
 
 

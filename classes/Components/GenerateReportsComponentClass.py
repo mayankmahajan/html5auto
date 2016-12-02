@@ -21,10 +21,9 @@ from selenium.webdriver import ActionChains
 
 
 
-class QuickTrendsComponentClass(BaseComponentClass):
+class GenerateReportsComponentClass(BaseComponentClass):
     # 'Yes' if fruit == 'Apple' else 'No'
 
-    # parentHandles['quicktrends'][0].find_elements_by_tag_name("svg")[0].find_elements_by_class_name('legend')
 
     def __getHandleAxis(self, hChart, xy):
         return hChart.find_elements_by_class_name(xy)
@@ -51,20 +50,6 @@ class QuickTrendsComponentClass(BaseComponentClass):
         yaxis = self.__getAxisTicks(h, "wm-yaxis")
         return yaxis
 
-    def moveTotick(self,driverHelper,handlrs):
-        h = self.__getHandler(handlrs)
-        hxaxis = self.__getHandleAxis(h['chart'], 'wm-axis')
-        for el in hxaxis:
-            if el.tag_name == 'g':
-                hticks = self.__getHandleTicks(el, 'tick')
-                tooltipText=[]
-                for el in hticks:
-                    driverHelper.action.move_to_element(el).perform()
-                    tooltipText.append(handlrs['qttooltip'][len(handlrs['qttooltip'])-1].text)
-            else:
-                print el.tag_name
-        return tooltipText
-
 
 
     def __getHandler(self, handlrs):
@@ -82,29 +67,3 @@ class QuickTrendsComponentClass(BaseComponentClass):
         return (h['legend'].text).split('\n')
 
 
-
-
-
-
-    # def getTooltipInfo(self,handlrs):
-    #     h = self.getHandler(handlrs)
-
-
-
-
-    # def getLineSeriesHandles(self,h):
-    #     h1 = self.getHandler(h)
-    #     h1['chart'].find_elements_by_class_name("series")
-
-
-
-
-
-    # def getLegendHandler(self,handlrs):
-    #     return handlrs['quicktrends'][0].find_elements_by_tag_name("svg")[0].find_elements_by_class_name('legend')[0]
-    #
-    # def getChartHandler(self,handlrs):
-    #     return handlrs['quicktrends'][0].find_elements_by_tag_name("svg")[0].find_elements_by_class_name('legend')[0]
-
-    # def parseChart(self,handlrs):
-    #     pass

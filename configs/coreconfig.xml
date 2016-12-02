@@ -230,6 +230,14 @@
             <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR' action="click"/>-->
             <component id = "site_Screen" selector="id" locator='SITE_SCR' action="click" wait="skip"/>
             <component id = "trends" selector="xpath" locator='//*[contains(@id, "_TREND_")]' action="click" wait="skip"/>
+            <component id = "generatereport" selector="xpath" locator='//*[contains(@id, "GENERATE_REPORT")]' action="click" wait="skip"/>
+
+        </componentConfig>
+
+        <componentConfig id = 'generateReportDialog'>
+            <component id = "leftBox" selector="class name" locator='leftBox' action="click" wait="skip"/>
+            <component id = "rightBox" selector="class name" locator='rightBox' action="click" wait="skip"/>
+
 
 
         </componentConfig>

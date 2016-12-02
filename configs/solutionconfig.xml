@@ -160,6 +160,11 @@
             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
         </screenConfig>
 
+        <screenConfig id = "report_popup">
+             <component id = "generateReportDialog" selector="id" locator='generateReportScreen' parent="True"/>
+        </screenConfig>
+
+
 
     </screenConfigs>
 
