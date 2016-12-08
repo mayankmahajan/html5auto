@@ -93,8 +93,9 @@
 
 
         <!--EXPLORE SCREEN-->
-        <screenConfig id = "exploreScreen">
+        <screenConfig id = "explore_Screen">
             <component id = "exploreList" parent="False"/>
+            <!--<component id = "exploreList" selector = 'class name' locator="row" parent="True"/>-->
         </screenConfig>
 
         <!--<screenConfig id = "siteScreen">-->
@@ -135,9 +136,24 @@
             <component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
         </componentConfig>
 
-
-
         <componentConfig id="pielegend">
+            <component id = "COL1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="getData" wait = 'skip'/>
+            <component id = "COL2" selector="class" locator='col2' locatorDimension ='class' locatorText = 'col2' action="getData" wait = 'skip'/>
+            <component id = "legendText_col1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
+            <component id = "legendText" selector="class" locator='legendText' locatorDimension ='class' locatorText = 'legendText' action="click" wait = 'skip'/>
+            <component id = "legendIcon" selector="class" locator='legendIcon' locatorDimension ='class' locatorText = 'legendIcon' wait = 'skip'/>
+
+        </componentConfig>
+
+        <componentConfig id="pielegend1">
+            <component id = "COL1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="getData" wait = 'skip'/>
+            <component id = "COL2" selector="class" locator='col2' locatorDimension ='class' locatorText = 'col2' action="getData" wait = 'skip'/>
+            <component id = "legendText_col1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
+            <component id = "legendText" selector="class" locator='legendText' locatorDimension ='class' locatorText = 'legendText' action="click" wait = 'skip'/>
+            <component id = "legendIcon" selector="class" locator='legendIcon' locatorDimension ='class' locatorText = 'legendIcon' wait = 'skip'/>
+
+        </componentConfig>
+        <componentConfig id="pielegend2">
             <component id = "COL1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="getData" wait = 'skip'/>
             <component id = "COL2" selector="class" locator='col2' locatorDimension ='class' locatorText = 'col2' action="getData" wait = 'skip'/>
             <component id = "legendText_col1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
@@ -157,6 +173,22 @@
             <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
 
         </componentConfig>
+         <componentConfig id="piechart1">
+            <component id = "tooltip" selector="xpath" locator='//*[contains(@id, "_tooltip")]' action="getToolTipData" wait = 'skip'/>
+            <!--<component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>-->
+            <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
+            <!--<component id = "wedgeselected" selector="xpath" locator='//*[contains(@class, "_expanded")]' wait = 'skip'/>-->
+
+
+            <!--selector="xpath" locator='//*[contains(@id, "p1_segment0")]'-->
+            <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
+
+        </componentConfig>
+         <componentConfig id="piechart2">
+            <component id = "tooltip" selector="xpath" locator='//*[contains(@id, "_tooltip")]'  action="getToolTipData" wait = 'skip'/>
+            <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
+        </componentConfig>
+
 
         <componentConfig id ='summarybar'>
             <component id="summaryBarTable" selector="class name" locator="summaryBarTable" locatorDimension="class" locatorText="summaryBarTable"/>
@@ -173,6 +205,7 @@
 
         <componentConfig id="signin">
             <component id = "signin" selector="css selector" locator='[ng-click = "vm.login()"]' action="click"/>
+            <!--<component id = "signin" selector="css selector" locator='[translate="login.form.button"]' action="click"/>-->
         </componentConfig>
 
         <componentConfig id="search">
@@ -187,6 +220,7 @@
             <component id = "site_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel0")]' action="click"/>
             <component id = "nf_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel1")]' action="click"/>
             <component id = "interface_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel2")]' action="click"/>
+            <!--<component id = "eventdriver1" selector="css selector" locator='[translate="site.workflows.drivers.title"]' action="click"/>-->
         </componentConfig>
 
         <componentConfig id = 'btv'>

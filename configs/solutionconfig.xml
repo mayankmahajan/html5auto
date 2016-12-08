@@ -2,6 +2,16 @@
 <data>
     <screenConfigs>
 
+
+        <screenConfig id = "ed_Screen">
+            <component id = "piechart1" selector="id" locator='pieChart0' childOf="" action="" parent="True" />
+            <component id = "piechart2" selector="id" locator='piechart1' childOf="" action="" parent="True" />
+            <component id = "pielegend1" selector="id" locator='legendCon0' childOf="" action="" parent="True" />
+            <component id = "pielegend2" selector="id" locator='legendCon1' childOf="" action="" parent="True" />
+        </screenConfig>
+
+
+
         <!--<screenConfig id = "exploreScreen">-->
             <!--<component id = "exploreList"/>-->
         <!--</screenConfig>-->
