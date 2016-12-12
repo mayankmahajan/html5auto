@@ -2,6 +2,7 @@ from BaseComponentClass import BaseComponentClass
 from copy import deepcopy
 from Utils.logger import *
 from time import *
+import random
 class TableComponentClass(BaseComponentClass):
     colCount = 0
     rowCount = 0
@@ -164,10 +165,14 @@ class TableComponentClass(BaseComponentClass):
 
     def getIterfaceRows(self,colcount,h):
         elHandle=h['ROWS']
-        # self.rowCount = (len(elHandle) - colcount) / colcount
+        rowCount = len(elHandle) / colcount
         rows = []
         temp = []
-        for i in range(len(elHandle)):
+        if rowCount <= 15:
+            looprange=rowCount*colcount
+        else:
+            looprange = 15 * colcount
+        for i in range(looprange):
             if len(temp) < colcount:
                 temp.append(elHandle[i].text)
             else:
@@ -185,6 +190,29 @@ class TableComponentClass(BaseComponentClass):
         data['header'] = self.getIterfaceHeaders(handlers)
         data['rows'] = self.getIterfaceRows(len(data['header']),handlers)
         return data
+
+
+    def getSelection(self,handle):
+        handlers = self.compHandlers('table', handle)
+        data={}
+        data['selIndes']=handlers['row-selection'][len(handlers['row-selection']) - 1].get_attribute('row')
+        data['text']=handlers['row-selection'][len(handlers['row-selection']) - 1].text
+        return data
+
+
+    def setSelection(self,index,h):
+        handle = self.compHandlers('table', h)
+        header = self.getIterfaceHeaders(handle)
+        colCount=len(header)
+        rand = random.randrange(colCount*index,colCount*index+4)
+        handle['ROWS'][rand].click()
+
+    def sortedInterfaceColum(self,index,handle):
+        handlers = self.compHandlers('table', handle)
+        handlers['CHECKSORT'][len(handlers['CHECKSORT'])-index].click()
+
+
+
 
     def scrollVertical(self):
         pass
