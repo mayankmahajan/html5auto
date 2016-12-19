@@ -9,6 +9,16 @@
             <component id = "pielegend1" selector="id" locator='legendCon0' childOf="" action="" parent="True" />
             <component id = "pielegend2" selector="id" locator='legendCon1' childOf="" action="" parent="True" />
         </screenConfig>
+        <screenConfig id = "tm_Screen">
+            <component id = 'errorhandle' parent="False" />
+            <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
+            <component id = "table" selector="class name" locator='section-top-chart' childOf="" action="" parent="True" />
+            <!--<component id = "table" selector="css selector" locator='[ng-if="showGrid"]' childOf="" action="" parent="True" />-->
+            <component id = "menu-component" selector="tag name" locator="trends-chart-menu-component" action="" parent="True" />
+            <component id = "collapseCharts" selector="id" locator="collapseCharts" action="" parent="True" />
+            collapseCharts
+
+        </screenConfig>
 
 
 
@@ -21,6 +31,12 @@
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
 
             <component id = "table" selector="css selector" locator='[class="ag-fresh"]' childOf="" action="" parent="True" />
+        </screenConfig>
+
+        <screenConfig id = "report_Screen">
+             <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
+
+            <component id = "report" parent="False" />
         </screenConfig>
 
 
@@ -187,9 +203,12 @@
         </screenConfig>
 
         <screenConfig id = "report_popup">
-             <component id = "generateReportDialog" selector="id" locator='generateReportScreen' parent="True"/>
+            <component id = "generateReportDialog" selector="id" locator='generateReportScreen' parent="True"/>
+            <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
         </screenConfig>
-
+        <!--<screenConfig id="switchApps">-->
+            <!--<component id="switchApp" selector="class name" locator="switchTable"/>-->
+        <!--</screenConfig>-->
 
 
     </screenConfigs>

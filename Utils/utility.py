@@ -133,22 +133,25 @@ def getHandlersForParentComponent(driver, driverHelper, configManager, pageName)
 def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles):
     listOfHandles = {}
     for eachComp in configManager.screenComponentRelations[pageName]:
+        print "getHandlesForEachComponent",eachComp
+        listOfHandles[eachComp] = {}
         for comp in configManager.componentChildRelations[eachComp]:
                 # locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'],configManager.componentSelectors[comp]['wait'])
             locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'])
             try:
                 wait = configManager.componentSelectors[comp]['wait']
                 try:
+                    print "will not wait for ", comp
                     if configManager.componentSelectors[comp]['locatorDimension']:
                         locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
                         locatorText = configManager.componentSelectors[comp]['locatorText']
                         try:
                             parentDependency = configManager.componentSelectors[comp]['parentDependency']
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp,locatorDimension,locatorText,parentDependency)
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp,locatorDimension,locatorText,parentDependency)
                         except:
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp,locatorDimension,locatorText)
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp,locatorDimension,locatorText)
                 except:
-                        listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp)
+                        listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp)
 
             except:
                 # try:
@@ -156,15 +159,16 @@ def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, pa
                 # except:
                 #     pass
                 try:
+                    print "will wait for ", comp
                     if configManager.componentSelectors[comp]['locatorDimension']:
                         locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
                         locatorText = configManager.componentSelectors[comp]['locatorText']
                         if 'parentDependency' in configManager.componentSelectors[comp].keys():
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp,locatorDimension,locatorText,configManager.componentSelectors[comp]['parentDependency'])
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText,configManager.componentSelectors[comp]['parentDependency'])
                         else:
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp,locatorDimension,locatorText)
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText)
                 except:
-                    listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp)
+                    listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp)
     return listOfHandles
 
 def getScreenInstance(driver,pageName):

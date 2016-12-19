@@ -38,6 +38,16 @@ class QuicklinkTimeRangeComponentClass(BaseComponentClass):
         handlers = self.compHandlers('timeRangeDiv',handlrs)
         self.setSelectionIndex(handlers[str(quicklink)])
 
+    def setSelection1(self,quicklink,handlers,parent,child=None):
+        '''
+        This method do the Selection on the Bar Chart as per the index supplied
+        :param index: Index to be selected
+        :param handlers: Handlers to BarChart
+        :return: True/False
+        '''
+        # handlers = self.compHandlers('timeRangeDiv',handlrs)
+        self.setSelectionIndex(handlers[parent][str(quicklink)])
+
 
     def setSelectionIndex(self,elHandle):
         '''

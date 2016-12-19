@@ -5,10 +5,19 @@ from Utils.UnitSystem import UnitSystem
 from Utils.ConfigManager import ConfigManager
 
 class BaseComponentClass:
-    def m_click(self,elHandle):
+    def click(self, elHandle):
         return elHandle.click()
-    def m_send_keys(self,elHandle,value):
+    def send_keys(self, elHandle, value):
         return elHandle.send_keys(value)
+
+    def customClick(self, elHandle):
+        return elHandle[len(elHandle)-1].click()
+    def customSendkeys(self, elHandle, value):
+        return elHandle[len(elHandle)-1].send_keys(value)
+    def customText(self,elHandle):
+        return elHandle[len(elHandle)-1].text
+
+
     def text(self,elHandle):
         return elHandle.text
 

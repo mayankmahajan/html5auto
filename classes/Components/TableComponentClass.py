@@ -217,6 +217,32 @@ class TableComponentClass(BaseComponentClass):
     def scrollVertical(self):
         pass
 
+    def getTableData1(self,h,parent,child=None):
+        # handlers = self.compHandlers('table', h)
+
+        data = {}
+        data['header'] = self.getIterfaceHeaders(h[parent])
+        data['rows'] = self.getIterfaceRows(len(data['header']),h[parent])
+        return data
+
+    def setSelectionIndex(self,colCount,rowCount,index,h):
+        elHandle=h['ROWS']
+        newIndex = (colCount+1)*(index-1)+1
+
+        for i in range(len(elHandle)):
+            if i == newIndex:
+                elHandle[i].click()
+                return True
+
+    def setSelection1(self,index,h,parent,child=None):
+        data = self.getTableData1(h,parent)
+        colCount = len(data['header'])
+        rowCount = len(data['rows'])
+        return self.setSelectionIndex(index,colCount,rowCount,h[parent])
+
+    def getDynamicText(self,h,parent,child=None):
+        return h[parent]['count'][0].text
+
 
 
 

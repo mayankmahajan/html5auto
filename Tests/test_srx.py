@@ -14,7 +14,7 @@ from classes.Pages.EventDriversPageClass import *
 setup = SetUp()
 login(setup, "cmathieu", "a")
 exploreScreenInstance = ExplorePageClass(setup.d)
-# exploreScreenHandle = getHandle(setup,"explore_Screen")
+
 exploreScreenInstance.exploreList.launchScreen(getHandle(setup,"explore_Screen"),"exploreList","eventdriver1")
 
 edScreenInstance = EventDriversPageClass(setup.d)
@@ -28,8 +28,6 @@ p2 = edScreenInstance.pielegend.getData1(getHandle(setup,"ed_Screen"),'pielegend
 
 t1 = edScreenInstance.pie.getToolTipInfo1(setup.d,setup.dH,getHandle(setup,"ed_Screen"),'piechart1')
 t2 = edScreenInstance.pie.getToolTipInfo1(setup.d,setup.dH,getHandle(setup,"ed_Screen"),'piechart2')
-
-########################################################################
 
 
 # Closing the Testcase

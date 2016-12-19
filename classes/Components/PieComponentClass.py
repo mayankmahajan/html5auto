@@ -152,8 +152,8 @@ class PieComponentClass(BaseComponentClass):
         data = []
         toolTipHandlers = {}
         handlers = self.compHandlers('piechart',handlrs)
-        print "tool tip handler"
-        print handlers
+        # print "tool tip handler"
+        # print handlers
         toolTipHandlers['hover'] = [handlers['arcs'][i] for i in range(len(handlers['arcs']))]
             # if handlers['arcs'][i].tag_name == "path":
             #     toolTipHandlers['hover'] = handlers['arcs'][i]
@@ -169,6 +169,25 @@ class PieComponentClass(BaseComponentClass):
         toolTipHandlers['getToolTipData'] = handlers['tooltip'][0]
         print toolTipHandlers
         return self.launchToolTip(driver,driverHelper,toolTipHandlers)
+
+    def getToolTipInfo1(self,driver,driverHelper,handlers,parent,child=None):
+        '''
+
+        :param tipHandle:
+        :return:
+        '''
+        data = []
+        toolTipHandlers = {}
+
+        if child == None:
+            child = 'arcs'
+        # handlers = self.compHandlers('piechart',handlrs)
+        # print "tool tip handler"
+        # print handlers
+        toolTipHandlers['hover'] = [handlers[parent][child][i] for i in range(len(handlers[parent][child]))]
+        toolTipHandlers['getToolTipData'] = handlers[parent]['tooltip'][0]
+        return self.launchToolTip(driver,driverHelper,toolTipHandlers)
+
 
 
 

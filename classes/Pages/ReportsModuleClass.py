@@ -4,13 +4,12 @@ from classes.Components.DropdownComponentClass import *
 
 
 
-class GenerateReportsPopClass(BasePopClass):
+class ReportsModuleClass(BasePopClass):
     def __init__(self,driver):
         '''
         Constructor
         '''
         self.driver = driver
-        self.reportspopup=GenerateReportsComponentClass()
         self.dropdown = DropdownComponentClass()
 
 

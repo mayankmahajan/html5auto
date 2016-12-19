@@ -17,6 +17,7 @@ class ContextMenuComponentClass(BaseComponentClass):
 
     def activateContextMenuOptions(self,handle):
         handle[Constants.CONTEXTMENU][0].click()
+        # handle['cm'][Constants.CONTEXTMENU][0].click()
         # self.handle.
     def drillTo(self,driver,driverHelper,handles,pageName):
         try:
@@ -53,7 +54,7 @@ class ContextMenuComponentClass(BaseComponentClass):
             return Exception.message
 
     def GenerateReports(self,handle):
-        handle['generatereport'][0].click()
+        handle['cm']['generatereport'][0].click()
 
 
 
