@@ -46,6 +46,22 @@
 
 
         </screenConfig>
+        <screenConfig id ="interface_Screen">
+
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+
+            <!--class="measureselectors ng-scope"-->
+
+            <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
+            <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
+            <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
+            <!--Screen Components-->
+            <!--<component id = "btv"/>-->
+            <component id = "search" parent="False"/>
+
+
+        </screenConfig>
 
          <screenConfig id = "ne_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->

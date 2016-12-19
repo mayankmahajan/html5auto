@@ -1,6 +1,7 @@
 import unittest
 from Utils.logger import *
 from selenium import webdriver
+import random
 
 from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
@@ -29,22 +30,26 @@ measures = setup.cM.getNodeElements("measures","measure").keys()
 
 # Logging into the setup
 result = login(setup, "admin", "Admin@123")
-
+############################# LOGIN ###################################
 #Checking the login functionality
 checkEqualAssert("True",str(result),"TODAY","","LOGIN SUCCESSFULL")
+############################# LOGIN COMPLETED #########################
 
+############################# SITE LAUCNHES #########################
 # Launch Site Screen
 launchPage(setup,"site_Screen")
 
 # Checking the launch page of the site page
 checkEqualAssert(True,True,"","","SITE PAGE LAUNCHES SUCCESSFULLY")
 
+###########################SITE LAUNCHES COMPLETED####################
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
 
 # Get the handles of the screen
 siteScreenHandle = getHandle(setup,"site_Screen")
 
+######################################### DEFAULT SELECTION ######################
 # Get the default selection
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 
@@ -56,16 +61,77 @@ checkEqualAssert(str(1),str(defSelection['selIndex']),"","","DEFAULT SELECTION I
 screenInstance.btv.setSelection(3,siteScreenHandle)
 
 
-#Changing the measure
-a = setMeasure(setup,"Bitrate_downlink_absolute_average","site_Screen")
+########################## DEFAULT SELECTION COMPLETED #################################
 
-# Get the new handles of the screen
-handles = getHandle(setup,Constants.SITES) # Everytime we need to get handles when the btv is redrawing
+########################## SEARCH FUNCTIONALITY ##################################
 
-# Get the selection after changing the measures
-changeselection =  screenInstance.btv.getSelection(handles)
+alphabets = screenInstance.searchComp.setSearchText(siteScreenHandle,"branch")
+time.sleep(2)
+
+#text = screenInstance.searchComp.getSearchText(siteScreenHandle)
+
+if(alphabets==True):
+    screenInstance.searchComp.hitSearchIcon(siteScreenHandle)
+    time.sleep(10)
+    checkEqualAssert(True,alphabets,"","","Search_passed_for_branch")
+else:
+    checkEqualAssert(False,alphabets,"","","Search_failed_for_branch")
+
+screenInstance.searchComp.hitSearchIcon(siteScreenHandle)
+
+######################## SEARCH COMPLETED ####################################
+
+######################## SUMMARY CARD ############################
+
+screenInstance = SitePageClass(setup.d)
+
+# Get the handles of the screen
+siteScreenHandle = getHandle(setup,"site_Screen")
+data = screenInstance.btv.getData(siteScreenHandle)
+# length = len(data['BTVCOLUMN1'])
+# rand = random.randrange(1,length)
+# screenInstance.btv.setSelection(ra,siteScreenHandle)
+defselection = screenInstance.btv.getSelection(siteScreenHandle)
+#print defselection['BTVCOLUMN2']
+btvvalue = defselection['BTVCOLUMN2']
+btvname = defselection['BTVCOLUMN1']
+measures = "Bitrate_total_absolute_peak"
+i=0
+values = measures[i].split('_')
+
+try:
+    if (values[3]=="average"):
+        values[3]="Average"
+except:
+    print "Average is not there"
+
+try:
+    if (values[3]=="peak"):
+        values[3]="Peak"
+
+except:
+    print "Peak is not there"
+
+if (values[0]=="Wan-Cost($)"):
+    values[0] = "Wan Cost($)"
+    selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+    #print "hahaha"
+    #print selections['All WDC']
+    summarybarvalues = selections[btvname][values[0]]['Average']
+
+else:
+    selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+    #print selections[btvname]
+    summarybarvalues = selections[btvname][values[0]][values[3]]
 
 
-# Validating the result after changing the measure
-checkEqualAssert(str(1),str(changeselection['selIndex']),"TODAY","Bitrate_downlink_absolute_average","DEFAULT SELECTION IS CORRECT ")
+
+
+
+
+# testcase body ends
+message = "Data validated with summary bar " + str(btvname) + " " + sites[i]
+# Result Logging
+checkEqualAssert(btvvalue,summarybarvalues,quicklinks[t],measures[i],message)
+setup.d.close()
 

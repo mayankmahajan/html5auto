@@ -29,7 +29,7 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 # screenInstance.measure.doSelectionSite(siteScreenHandle,"SatSite")
 
 
-# setMeasure(setup,"Bitrate_total_absolute_average","site_Screen")
+#setMeasure(setup,"Bitrate_total_absolute_average","site_Screen")
 
 # Get the handles of the screen
 # siteScreenHandle = getHandle(setup,"site_Screen")
@@ -44,6 +44,7 @@ for key,value in btvData.iteritems():
         data['btvData']['value'] = value
     logger.debug('Col1 : %s  and Col2 : %s',key,value)
 data['btvTooltipData'] = screenInstance.btv.getToolTipInfo(setup.d,setup.dH,siteScreenHandle)
+sleep(2)
 checkEqualAssert(True,True,"TODAY","Bitrate_total_absolute_peak","TOOLTIP IS WORKIG PERFECTLY")
 print data['btvTooltipData']
 result1 = screenInstance.btv.validateToolTipData1(data)

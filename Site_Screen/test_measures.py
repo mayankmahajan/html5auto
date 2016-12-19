@@ -56,7 +56,7 @@ while t < timeIteration:
         # while loop is to iterate over all the measure
         while j < measureIteration:
             screenInstance.measure.doSelection(siteScreenHandle,measures[j])
-
+            sleep(2)
         # testcase body starts
 
 

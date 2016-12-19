@@ -1,12 +1,12 @@
 import unittest
 from Utils.logger import *
 from selenium import webdriver
-
+import random
 from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-
+from classes.Pages.SiteIntScreenClass import *
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
@@ -29,7 +29,19 @@ screenInstance.btv.setSelection(2,siteScreenHandle)
 # Checking drill to the Site Interaction Screen
 drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
 
+# Get the Instance of the screen
+sitescreenInstance = SiteIntScreenClass(setup.d)
 
+# Get the handles of the screen
+siteintScreenHandle = getHandle(setup,Constants.SITEINTERACTIONS)
 
-# Logging out of the application
+# Set the bar Table view to the 2 index
+sitescreenInstance.btv.setSelection(2,siteintScreenHandle)
+
+result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+
+checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT SITE INTERACTION")
+
 setup.d.close()
+
+

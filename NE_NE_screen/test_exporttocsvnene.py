@@ -1,12 +1,12 @@
 import unittest
 from Utils.logger import *
 from selenium import webdriver
-
+import random
 from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-
+from classes.Pages.NEPageClass import *
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
@@ -26,10 +26,22 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 # Set the Index value at 2
 screenInstance.btv.setSelection(2,siteScreenHandle)
 
+
 # Checking drill to the Site Interaction Screen
-drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
+drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
+
+neScreenInstance = NEPageClass(setup.d)
+
+neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
+
+neScreenInstance.pielegend.setSelection(setup.dH,[2],neScreenHandle)
+
+#Drill to nene screen
+drilltoScreen(setup.d,setup.dH,Constants.NENE)
+
+result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+
+checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT NE-NE SCREEN ")
 
 
-
-# Logging out of the application
 setup.d.close()

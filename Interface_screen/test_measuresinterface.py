@@ -6,25 +6,25 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Pages.SiteIntScreenClass import *
+from classes.Pages.InterfacePageClass import *
+############################ CHECK FOR THE DEFAULT SELECTION BY MULTIPLE MEASURES #######################
 
-
-# Getting Setup Details
+# Getting Setup Details and Launching the application
 setup = SetUp()
 
-# Getting TimeRange Info from Config Files
+
 timeIteration = len(setup.cM.getNodeElements("quicklinks","quicklink"))
 quicklinks = setup.cM.getNodeElements("quicklinks","quicklink").keys()
 t=0
 
 
 # Getting Measures Info from Config Files
-measureIteration = len(setup.cM.getNodeElements("measures","measure"))
-measures = setup.cM.getNodeElements("measures","measure").keys()
+siteIteration = len(setup.cM.getNodeElements("elementtypes","elementtype"))
+sites = setup.cM.getNodeElements("elementtypes","elementtype").keys()
 
 # Getting Measures Info from Config Files
-siteIteration = len(setup.cM.getNodeElements("sitetypes","sitetype"))
-sites = setup.cM.getNodeElements("sitetypes","sitetype").keys()
+measureIteration = len(setup.cM.getNodeElements("measures","measure"))
+measures = setup.cM.getNodeElements("measures","measure").keys()
 
 
 
@@ -32,24 +32,14 @@ sites = setup.cM.getNodeElements("sitetypes","sitetype").keys()
 login(setup, "admin", "Admin@123")
 
 # Launch Site Screen
-launchPage(setup,"site_Screen")
+launchPage(setup,Constants.INTERFACES)
 
 # Get the Instance of the screen
-screenInstance = SitePageClass(setup.d)
+screenInstance = InterfacePageClass(setup.d)
 
 # Get the handles of the screen
-siteScreenHandle = getHandle(setup,"site_Screen")
+interfaceScreenHandle = getHandle(setup,Constants.INTERFACES)
 
-# Set the Index value at 2
-screenInstance.btv.setSelection(2,siteScreenHandle)
-
-# Checking the drill to
-drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
-
-
-
-siteintscreenInstance = SiteIntScreenClass(setup.d)
-siteintscreenHandle = getHandle(setup,Constants.SITEINTERACTIONS)
 
 # while loop is to iterate over all the quicklinks
 while t < timeIteration:
@@ -59,14 +49,14 @@ while t < timeIteration:
     # while loop is to iterate over all the measure
     while i < siteIteration:
         j=0
-        screenInstance.measure.doSelectionSite(siteintscreenHandle,sites[i])
+        screenInstance.measure.doSelectionSite(interfaceScreenHandle,sites[i])
 
         # testcase body starts
 
         # while loop is to iterate over all the measure
         while j < measureIteration:
-            screenInstance.measure.doSelection(siteintscreenHandle,measures[j])
-
+            screenInstance.measure.doSelection(interfaceScreenHandle,measures[j])
+            sleep(2)
             # testcase body starts
 
 

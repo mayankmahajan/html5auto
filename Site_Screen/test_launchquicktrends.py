@@ -47,6 +47,12 @@ legendname = list[0]
 
 checkEqualAssert(singlesitename,legendname,"TODAY","","DATA IS VALIDATE FOR THE SINGLE LEGEND IN THE QUICK TRENDS")
 
+xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
+yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
+
+
+
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
 
 ############ MULTIPLE SELECTION IS NOT ADDED TILL NOW #################
 

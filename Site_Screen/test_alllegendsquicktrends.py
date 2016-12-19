@@ -52,4 +52,13 @@ legends = list[0]
 
 checkEqualAssert(sitesname,legends,"","","DATA IS VALIDATE FOR ALL THE LEGENDS IN THE QUICK TRENDS")
 #print btvdata
+xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
+yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
+
+
+
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+
+
+
 setup.d.close()

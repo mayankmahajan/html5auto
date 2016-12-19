@@ -6,7 +6,7 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Pages.VRFpage import  *
+from classes.Pages.VrfPageClass import  *
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
@@ -46,7 +46,7 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 screenInstance.btv.setSelection(2,siteScreenHandle)
 drilltoScreen(setup.d,setup.dH,Constants.VRF)
 
-vrfscreeinstancen = VRFpage(setup.d)
+vrfscreeinstancen = VrfPageClass(setup.d)
 vrfScreenHandle = getHandle(setup,Constants.VRF)
 
 

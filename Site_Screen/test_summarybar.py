@@ -80,7 +80,7 @@ while t < timeIteration:
             btvvalue = defselection['BTVCOLUMN2']
             btvname = defselection['BTVCOLUMN1']
 
-            values = measures[i].split('_')
+            values = measures[j].split('_')
 
             try:
                 if (values[3]=="average"):
