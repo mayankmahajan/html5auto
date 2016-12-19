@@ -60,6 +60,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
                 tooltipText=[]
                 for el in hticks:
                     driverHelper.action.move_to_element(el).perform()
+                    time.sleep(1) # only to show in demo
                     tooltipText.append(handlrs['qttooltip'][len(handlrs['qttooltip'])-1].text)
             else:
                 print el.tag_name

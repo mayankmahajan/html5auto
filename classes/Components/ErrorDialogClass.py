@@ -21,8 +21,10 @@ from selenium.webdriver import ActionChains
 
 
 
-class SearchComponentClass(BaseComponentClass):
+class ErrorDialogClass(BaseComponentClass):
 
+    def isExists(self,handlrs):
+        handlrs['errordialog']['']
     def getSearchText(self,handlrs):
         try:
             return handlrs['searchInput'][len(handlrs['searchInput'])-1].text

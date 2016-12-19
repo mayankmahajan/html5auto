@@ -42,48 +42,53 @@ class DriverHelper:
             CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
-    def waitForVisibleElements(self, locator, wait=True, parentHandles = {}, comp = '', locatorDimension = '', locatorText = '', parentDependency = 'True'):
+    def waitForVisibleElements(self, locator, wait=True, pH = {}, comp = '', locatorDimension = '', locatorText = '', parentDependency = 'True'):
         # self.driver = driver
         # if wait == True:
+        if pH != {}:
+            parentHandles = pH[0]
+            eachComp = pH[1]
         tempChildHandles = []
-        if parentHandles != {} and parentDependency == 'True':
-            for eachComp in parentHandles.keys():
-                if comp in self.configManager.componentChildRelations[eachComp]:
-                    if wait:
-                        print comp,locator
-                        try:
-                            CustomWebDriverWait(parentHandles[eachComp][len(parentHandles[eachComp])-1], Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
-                        except Exception as e:
-                            logger.debug("Exception occured while getting the component with %s %s",locator,e)
-                            continue
+        if pH != {} and parentDependency == 'True':
+            # for eachComp in parentHandles.keys():
+            if comp in self.configManager.componentChildRelations[eachComp]:
+                if wait:
+                    print comp,locator
+                    try:
+                        CustomWebDriverWait(parentHandles[eachComp][len(parentHandles[eachComp])-1], Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                    except Exception as e:
+                        logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                        CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                        # continue
 
 
-                    if locatorDimension != '':
-                        # tempChilds = []
-                        for eachChild in parentHandles[eachComp][len(parentHandles[eachComp])-1].find_elements('xpath','.//*'):
-                            try:
-                                if locatorText in eachChild.get_attribute(locatorDimension):
-                                    tempChildHandles.append(eachChild)
-                            except Exception as e:
-                                # logger.debug("SwitcherCard Selection : %s",screenInstance.switcher.getSelection(handles))
-                                # logger.info("Called for DriverHelper.py :: LINE 69")
-                                # logger.debug("Exception Caught while getting handles for comp: %s , locatorDimension: %s , locatorText: %s , %s ", comp, locatorDimension, locatorText )
-                                pass
-                        return tempChildHandles
-                    else:
-                        tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
-                        return tempChildHandles
-                else:
-                    if wait:
+                if locatorDimension != '':
+                    # tempChilds = []
+                    for eachChild in parentHandles[eachComp][len(parentHandles[eachComp])-1].find_elements('xpath','.//*'):
                         try:
-                            CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                            if locatorText in eachChild.get_attribute(locatorDimension):
+                                tempChildHandles.append(eachChild)
                         except Exception as e:
-                            logger.debug("Exception occured while getting the component with %s %s",locator,e)
-                            continue
-                    else:
-                        continue
-                    tempChildHandles = tempChildHandles + self.driver.find_elements(*locator)
+                            # logger.debug("SwitcherCard Selection : %s",screenInstance.switcher.getSelection(handles))
+                            # logger.info("Called for DriverHelper.py :: LINE 69")
+                            # logger.debug("Exception Caught while getting handles for comp: %s , locatorDimension: %s , locatorText: %s , %s ", comp, locatorDimension, locatorText )
+                            pass
                     return tempChildHandles
+                else:
+                    tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
+                    return tempChildHandles
+            else:
+                if wait:
+                    try:
+                        CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
+                    except Exception as e:
+                        logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                        # continue
+                else:
+                    pass
+                    # continue
+                tempChildHandles = tempChildHandles + self.driver.find_elements(*locator)
+                return tempChildHandles
         else:
             if wait:
                 try:
