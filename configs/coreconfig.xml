@@ -18,7 +18,7 @@
         <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
         <!--<measure id = "Flows_downlink_percentage_peak"/>-->
         <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
-        <measure id = "Bitrate_downlink_absolute_average"/>
+        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
         <!--<measure id = "Bitrate_downlink_absolute_peak"/>-->
         <!--<measure id = "Bitrate_downlink_percentage_average"/>-->
         <!--<measure id = "Bitrate_downlink_percentage_peak"/>-->
@@ -30,7 +30,7 @@
         <!--<measure id = "Bitrate_total_absolute_peak"/>-->
         <!--<measure id = "Bitrate_total_percentage_average"/>-->
         <!--<measure id = "Bitrate_total_percentage_peak"/>-->
-        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
+        <measure id = "Tonnage_downlink_absolute_average"/>
         <!--<measure id = "Tonnage_downlink_absolute_peak"/>-->
         <!--<measure id = "Tonnage_downlink_percentage_average"/>-->
         <!--<measure id = "Tonnage_downlink_percentage_peak"/>-->
@@ -57,7 +57,7 @@
         <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
         <!--<measure id = "Wan-Cost($)_downlink_percentage"/>-->
         <!--<measure id = "Wan-Cost($)_uplink_absolute"/>-->
-        <measure id = "Wan-Cost($)_uplink_percentage"/>
+        <!--<measure id = "Wan-Cost($)_uplink_percentage"/>-->
         <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
         <!--<measure id = "Wan-Cost($)_total_percentage"/>-->
     </measures>
@@ -67,6 +67,12 @@
         <sitetype id = "SatSite"/>
         <sitetype id = "CellSite"/>
     </sitetypes>
+
+    <elementtypes>
+        <!--<elementtype id ="Interface Name"/>-->
+        <!--<elementtype id ="Router Name"/>-->
+        <elementtype id ="Network Element"/>
+    </elementtypes>
 
     <!--Add UserInfo-->
 
@@ -241,7 +247,7 @@
             <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
             <!--<component id = "HEADERROW" selector="id" locator='agText' locatorDimension ='id' locatorText = 'agText' action="getData" wait = 'skip'/>-->
             <component id = "HEADERROW" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
-
+            <component id = "row-selection" selector="class" locator='ag-row-selected' locatorDimension ='class' locatorText = 'ag-row-selected' action="getData" wait = 'skip'/>
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
             <component id = "SORTCOLUMN" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
