@@ -6,8 +6,10 @@
     </seleniumSettings>
 
     <quicklinks>
-        <quicklink id = "TODAY"/>
+        <!--<quicklink id = "TODAY"/>-->
         <!--<quicklink id = "YESTERDAY"/>-->
+        <quicklink id = "last2Hours"/>
+
         <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
         <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
     </quicklinks>
@@ -18,7 +20,7 @@
         <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
         <!--<measure id = "Flows_downlink_percentage_peak"/>-->
         <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
-        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
+        <measure id = "Bitrate_downlink_absolute_average"/>
         <!--<measure id = "Bitrate_downlink_absolute_peak"/>-->
         <!--<measure id = "Bitrate_downlink_percentage_average"/>-->
         <!--<measure id = "Bitrate_downlink_percentage_peak"/>-->
@@ -30,7 +32,7 @@
         <!--<measure id = "Bitrate_total_absolute_peak"/>-->
         <!--<measure id = "Bitrate_total_percentage_average"/>-->
         <!--<measure id = "Bitrate_total_percentage_peak"/>-->
-        <measure id = "Tonnage_downlink_absolute_average"/>
+        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
         <!--<measure id = "Tonnage_downlink_absolute_peak"/>-->
         <!--<measure id = "Tonnage_downlink_percentage_average"/>-->
         <!--<measure id = "Tonnage_downlink_percentage_peak"/>-->
@@ -57,7 +59,7 @@
         <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
         <!--<measure id = "Wan-Cost($)_downlink_percentage"/>-->
         <!--<measure id = "Wan-Cost($)_uplink_absolute"/>-->
-        <!--<measure id = "Wan-Cost($)_uplink_percentage"/>-->
+        <measure id = "Wan-Cost($)_uplink_percentage"/>
         <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
         <!--<measure id = "Wan-Cost($)_total_percentage"/>-->
     </measures>
@@ -68,11 +70,11 @@
         <sitetype id = "CellSite"/>
     </sitetypes>
 
-    <elementtypes>
+    <!--<elementtypes>-->
         <!--<elementtype id ="Interface Name"/>-->
         <!--<elementtype id ="Router Name"/>-->
-        <elementtype id ="Network Element"/>
-    </elementtypes>
+        <!--<elementtype id ="Network Element"/>-->
+    <!--</elementtypes>-->
 
     <!--Add UserInfo-->
 
@@ -100,26 +102,29 @@
 
         <!--EXPLORE SCREEN-->
         <screenConfig id = "explore_Screen">
+            <component id="switchApp" selector="class name" locator="switchTable" parent="True"/>
+
+            <component id = "appHeader" selector="class name" locator="appHeader" parent="True"/>
             <component id = "exploreList" parent="False"/>
             <!--<component id = "exploreList" selector = 'class name' locator="row" parent="True"/>-->
         </screenConfig>
 
         <!--<screenConfig id = "siteScreen">-->
-            <!--&lt;!&ndash; Common Elements&ndash;&gt;-->
-            <!--<component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay'/>-->
-            <!--<component id = "DRILLTO" selector="id" locator='frameworkDrill'/>-->
-            <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
-            <!--<component id = "EXPORTTO" selector="id" locator='exportDrill'/>-->
+        <!--&lt;!&ndash; Common Elements&ndash;&gt;-->
+        <!--<component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay'/>-->
+        <!--<component id = "DRILLTO" selector="id" locator='frameworkDrill'/>-->
+        <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
+        <!--<component id = "EXPORTTO" selector="id" locator='exportDrill'/>-->
 
-            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]'/>-->
-            <!--<component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]'/>-->
-            <!--<component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]'/>-->
-            <!--<component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]'/>-->
+        <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]'/>-->
+        <!--<component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]'/>-->
+        <!--<component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]'/>-->
+        <!--<component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]'/>-->
 
         <!--</screenConfig>-->
     </screenConfigs>
     <!--<measureList>-->
-        <!--<measure-->
+    <!--<measure-->
     <!--</measureList>-->
 
     <componentConfigs>
@@ -138,8 +143,9 @@
 
 
         <componentConfig id = "timeRangeDiv">
-            <component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>
-            <component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
+            <!--<component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
+            <!--<component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
+            <component id = "last2Hours" selector="css selector" locator='[uib-btn-radio="&apos;last2Hours&apos;"]' locatorDimension ='css selector' locatorText = '[uib-btn-radio="&apos;last2Hours&apos;"]' action="click" wait = 'skip'/>
         </componentConfig>
 
         <componentConfig id="pielegend">
@@ -179,7 +185,7 @@
             <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
 
         </componentConfig>
-         <componentConfig id="piechart1">
+        <componentConfig id="piechart1">
             <component id = "tooltip" selector="xpath" locator='//*[contains(@id, "_tooltip")]' action="getToolTipData" wait = 'skip'/>
             <!--<component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>-->
             <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
@@ -190,7 +196,7 @@
             <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
 
         </componentConfig>
-         <componentConfig id="piechart2">
+        <componentConfig id="piechart2">
             <component id = "tooltip" selector="xpath" locator='//*[contains(@id, "_tooltip")]'  action="getToolTipData" wait = 'skip'/>
             <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
         </componentConfig>
@@ -227,9 +233,17 @@
             <component id = "nf_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel1")]' action="click"/>
             <component id = "interface_Screen" selector="xpath" locator='//*[contains(@id, "exploreLabel2")]' action="click"/>
             <!--<component id = "eventdriver1" selector="css selector" locator='[translate="site.workflows.drivers.title"]' action="click"/>-->
+            <!--<component id = "trendingMonitoring" selector="css selector" locator='[translate="site.workflows.trends.title"]' action="click"/>-->
+
+        </componentConfig>
+
+
+        <componentConfig id ='errorhandle'>
+            <component id = "errordialog" selector="class name" locator="error-dialog" action="" wait="skip"/>
         </componentConfig>
 
         <componentConfig id = 'btv'>
+            <!--<component id = "barchart" selector="xpath" locator='//*[contains(@id, "chartDiv")]'/>-->
             <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
             <component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]' locatorDimension ='class' locatorText = 'column0' action="click" wait = 'skip'/>
             <component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]' locatorDimension ='class' locatorText = 'column1' action="getData" wait = 'skip'/>
@@ -246,16 +260,17 @@
         <componentConfig id = 'table'>
             <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
             <!--<component id = "HEADERROW" selector="id" locator='agText' locatorDimension ='id' locatorText = 'agText' action="getData" wait = 'skip'/>-->
-            <component id = "HEADERROW" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
-            <component id = "row-selection" selector="class" locator='ag-row-selected' locatorDimension ='class' locatorText = 'ag-row-selected' action="getData" wait = 'skip'/>
+            <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
+
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
-            <component id = "SORTCOLUMN" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
-            <component id = "CHECKSORT" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'>
-                    <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
-                    <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
-                    <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
-            </component>
+            <component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
+            <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
+            <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
+
+            <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
+            <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
+            <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
         </componentConfig>
 
 
@@ -275,11 +290,22 @@
         </componentConfig>
 
         <componentConfig id = 'generateReportDialog'>
+            <component id = "reportName" selector="id" locator='reportName' wait="skip"/>
+            <component id = "reportType" selector="css selector" locator='[ng-model="vm.selectedReportType"]' wait="skip"/>
+            <component id = "measureType" selector="css selector" locator='[ng-model="vm.selectedReportMeasureID"]' wait="skip"/>
+            <component id = "quicklink" selector="css selector" locator='[ng-model="vm.selectedReportPeriodID"]' wait="skip"/>
+            <component id = "addemail" selector="css selector" locator='[ng-model="vm.additionalEmailId"]' wait="skip"/>
+            <component id = "emailInput" selector="id" locator='emailInput' wait="skip"/>
+
+            <component id = "generate" selector="css selector" locator='[ng-click="vm.generateReport()"]' wait="skip"/>
+            <component id = "close" selector="css selector" locator='[ng-click="vm.closeReportPopup()"]' wait="skip"/>
+
             <component id = "leftBox" selector="class name" locator='leftBox' action="click" wait="skip"/>
-            <component id = "rightBox" selector="class name" locator='rightBox' action="click" wait="skip"/>
+            <component id = "filters" selector="class name" locator='rightBox' action="click" wait="skip"/>
+        </componentConfig>
 
-
-
+        <componentConfig id = "successdialog">
+            <component id = "ok" selector="tag name" locator="button" />
         </componentConfig>
 
         <componentConfig id = 'quicktrends'>
@@ -287,6 +313,34 @@
             <component id = "qttooltip" selector="class name" locator='divtooltip' action="getToolTipData" wait = 'skip'/>
 
         </componentConfig>
+
+        <componentConfig id ="menu-component">
+            <component id = "trends-chart-menu-component" selector="class name" locator="trends-chart-menu" locatorDimension="class" locatorText="trends-chart-menu" />
+            <component id = "togglebuttons" selector="css selector" locator='[data-toggle="buttons"]'  />
+
+        </componentConfig>
+        <componentConfig id ="collapseCharts">
+            <component id = "displayname" selector="css selector" locator='[ng-if="displayName"]' wait = 'skip' />
+            <component id = "dynamictext" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip' />
+
+        </componentConfig>
+
+        <componentConfig id = 'appHeader'>
+            <component id = "alllinks" selector="tag name" locator='a' />
+            <component id = "dropbtn" selector="class name" locator ="dropbtn" />
+            <component id = "dropbtn" selector="class name" locator ="dropbtn" />
+        </componentConfig>
+
+        <componentConfig id="report">
+            <component id = "create" selector="class name" locator='createReportBtn' />
+        </componentConfig>
+        <componentConfig id="switchApp">
+            <component id="cellitem" selector="class name" locator="cellitem"/>
+            <component id="apps" selector="tag name" locator="label"/>
+        </componentConfig>
+
+
+
 
     </componentConfigs>
 
