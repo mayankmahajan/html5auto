@@ -25,18 +25,18 @@ class SearchComponentClass(BaseComponentClass):
 
     def getSearchText(self,handlrs):
         try:
-            return handlrs['searchInput'][len(handlrs['searchInput'])-1].text
+            return handlrs['search']['searchInput'][len(handlrs['search']['searchInput'])-1].text
         except Exception:
             return Exception
 
     def setSearchText(self, handlrs, value):
         try:
             # handlers = self.compHandlers('search',handlrs)
-            self.send_keys(handlrs['searchInput'][len(handlrs['searchInput']) - 1], value)
+            self.send_keys(handlrs['search']['searchInput'][len(handlrs['search']['searchInput']) - 1], value)
             return True
         except Exception:
             return Exception
 
 
     def hitSearchIcon(self, handlrs):
-        self.click(handlrs['searchIcon'][len(handlrs['searchIcon']) - 1])
+        self.click(handlrs['search']['searchIcon'][len(handlrs['search']['searchIcon']) - 1])

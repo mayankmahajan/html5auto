@@ -21,6 +21,8 @@ class ExploreListComponentClass(BaseComponentClass):
                 break
 
     def switchApp(self,h,index,parent=None,child=None):
+        h['appHeader']['switchertemplate'][0].click()
+
         if child==None:
             child='cellitem'
         if parent==None:

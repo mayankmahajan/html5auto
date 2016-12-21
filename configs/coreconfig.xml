@@ -70,12 +70,6 @@
         <sitetype id = "CellSite"/>
     </sitetypes>
 
-    <!--<elementtypes>-->
-        <!--<elementtype id ="Interface Name"/>-->
-        <!--<elementtype id ="Router Name"/>-->
-        <!--<elementtype id ="Network Element"/>-->
-    <!--</elementtypes>-->
-
     <!--Add UserInfo-->
 
     <listOfScreens id = "screenList">
@@ -110,21 +104,21 @@
         </screenConfig>
 
         <!--<screenConfig id = "siteScreen">-->
-        <!--&lt;!&ndash; Common Elements&ndash;&gt;-->
-        <!--<component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay'/>-->
-        <!--<component id = "DRILLTO" selector="id" locator='frameworkDrill'/>-->
-        <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
-        <!--<component id = "EXPORTTO" selector="id" locator='exportDrill'/>-->
+            <!--&lt;!&ndash; Common Elements&ndash;&gt;-->
+            <!--<component id = "CONTEXTMENU" selector="id" locator='dl-menucontextMenuDisplay'/>-->
+            <!--<component id = "DRILLTO" selector="id" locator='frameworkDrill'/>-->
+            <!--<component id = "SITETREND" selector="id" locator='SITE_TREND_SCR'/>-->
+            <!--<component id = "EXPORTTO" selector="id" locator='exportDrill'/>-->
 
-        <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]'/>-->
-        <!--<component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]'/>-->
-        <!--<component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]'/>-->
-        <!--<component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]'/>-->
+            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]'/>-->
+            <!--<component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]'/>-->
+            <!--<component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]'/>-->
+            <!--<component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]'/>-->
 
         <!--</screenConfig>-->
     </screenConfigs>
     <!--<measureList>-->
-    <!--<measure-->
+        <!--<measure-->
     <!--</measureList>-->
 
     <componentConfigs>
@@ -185,7 +179,7 @@
             <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
 
         </componentConfig>
-        <componentConfig id="piechart1">
+         <componentConfig id="piechart1">
             <component id = "tooltip" selector="xpath" locator='//*[contains(@id, "_tooltip")]' action="getToolTipData" wait = 'skip'/>
             <!--<component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>-->
             <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
@@ -196,7 +190,7 @@
             <!--<component id = "arcs" selector="class name" locator='_arc' locatorDimension ='class' locatorText = '_arc' action="hover" wait = 'skip'/>-->
 
         </componentConfig>
-        <componentConfig id="piechart2">
+         <componentConfig id="piechart2">
             <component id = "tooltip" selector="xpath" locator='//*[contains(@id, "_tooltip")]'  action="getToolTipData" wait = 'skip'/>
             <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
         </componentConfig>
@@ -268,9 +262,9 @@
             <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
 
-            <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
-            <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
-            <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
+                    <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
+                    <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
+                    <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
         </componentConfig>
 
 
@@ -328,7 +322,7 @@
         <componentConfig id = 'appHeader'>
             <component id = "alllinks" selector="tag name" locator='a' />
             <component id = "dropbtn" selector="class name" locator ="dropbtn" />
-            <component id = "dropbtn" selector="class name" locator ="dropbtn" />
+            <component id = "switchertemplate" selector="id" locator ="switchertemplate" />
         </componentConfig>
 
         <componentConfig id="report">
@@ -339,8 +333,48 @@
             <component id="apps" selector="tag name" locator="label"/>
         </componentConfig>
 
+        <componentConfig id ='buttons'>
+            <component id = "crudbuttons" selector="class name" locator="CrudButtons" />
+        </componentConfig>
+        <componentConfig id = "searchSelector">
+            <component id = "select" selector="id" locator="siteSelector" />
+        </componentConfig>
+        <componentConfig id = "leftcolumn">
+            <component id = "columns" selector="id" locator="leftcolumn" />
+        </componentConfig>
+
+        <componentConfig id ='createdialog'>
+            <!--<component id = "hostName" selector="css selector" locator='[ng-model="vm.createSiteModel.hostname"]' wait="skip"/>-->
+            <!--<component id = "ip" selector="css selector" locator='[ng-model="vm.createSiteModel.ip"]' wait="skip"/>-->
+            <!--<component id = "site" selector="css selector" locator='[ng-model="vm.createSiteModel.site"]' wait="skip"/>-->
+            <!--<component id = "siteType" selector="css selector" locator='[ng-model="vm.createSiteModel.site_type"]' wait="skip"/>-->
+            <!--<component id = "elementType" selector="css selector" locator='[ng-model="vm.createSiteModel.element_type"]' wait="skip"/>-->
+            <!--<component id = "radioButton" selector="css selector" locator='[ng-model="vm.createSiteModel.selectedBtn"]' wait="skip"/>-->
+
+            <component id = "hostName" selector="name" locator='HostName' wait="skip"/>
+            <component id = "ipAddress" selector="name" locator='ipAddress' wait="skip"/>
+            <component id = "existingSite" selector="name" locator='existingSite' wait="skip"/>
+            <component id = "newSite" selector="name" locator='newSite' wait="skip"/>
+            <component id = "newSiteName" selector="name" locator='newSiteName' wait="skip"/>
+            <component id = "autoCorrectSitename" selector="name" locator='autoCorrectSitename' wait="skip"/>
+            <component id = "siteType" selector="css selector" locator='[ng-model="vm.createSiteModel.site_type"]' wait="skip"/>
+            <component id = "elementType" selector="css selector" locator='[ng-model="vm.createSiteModel.element_type"]' wait="skip"/>
 
 
+
+            <component id = "nfName" selector="name" locator='nfName' wait="skip"/>
+            <component id = "networkElement1" selector="name" locator='networkElement1' wait="skip"/>
+            <component id = "networkElement2" selector="name" locator='networkElement2' wait="skip"/>
+            <component id = "port" selector="name" locator='port' wait="skip"/>
+            <component id = "protocol" selector="name" locator='protocol' wait="skip"/>
+
+
+
+            <component id = "submit" selector="css selector" locator='[ng-click="vm.onSubmit();"]' wait="skip"/>
+            <component id = "cancel" selector="css selector" locator='[ng-click="vm.cancel()"]' wait="skip"/>
+            <!--<component id = "reset" selector="css selector" locator='[ng-click="vm.cancel()"]' wait="skip"/>-->
+
+        </componentConfig>
 
     </componentConfigs>
 

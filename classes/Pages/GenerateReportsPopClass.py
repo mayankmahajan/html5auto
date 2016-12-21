@@ -10,7 +10,7 @@ class GenerateReportsPopClass(BasePopClass):
         Constructor
         '''
         self.driver = driver
-        self.reportspopup=GenerateReportsComponentClass()
+        self.reportspopup = GenerateReportsComponentClass()
         self.dropdown = DropdownComponentClass()
 
 
