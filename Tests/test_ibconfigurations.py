@@ -27,15 +27,27 @@ setup.d.switch_to.window(setup.d.window_handles[1])
 confScreenInstance = ConfigurationPageClass(setup.d)
 confScreenHandle = getHandle(setup,"configuration_Screen")
 
-confScreenInstance.leftColumn.select(1,confScreenHandle)
-confScreenHandle = getHandle(setup,"configuration_Screen")
+# confScreenInstance.leftColumn.select(1,confScreenHandle)
+# confScreenHandle = getHandle(setup,"configuration_Screen")
 
+
+# createPopHandle['createdialog']['switcher'][0].find_elements_by_tag_name("li")[1].click()
+# createPopHandle['createdialog']['choosefile'][0].send_keys("/Users/mayank.mahajan/Documents/csv1.csv")
 
 confScreenInstance.dummyelement.click(confScreenHandle['buttons']['crudbuttons'][0])
 
 
 createPopInstance = GenerateReportsPopClass(setup.d)
 createPopHandle = getHandle(setup, "config_popup")
+
+## Bulk Upload ##
+# createPopInstance.switcher.switchTo(1,createPopHandle,'createdialog','switcher')
+# createPopHandle = getHandle(setup, "config_popup")
+# createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['choosefile'],"/Users/mayank.mahajan/Documents/csv1.csv")
+# createPopInstance.dropdown.customClick(createPopHandle['createdialog']['upload'])
+## Bulk Upload ends ##
+
+
 createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['hostName'],"automationHost1")
 createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['ipAddress'],"192.168.115.113")
 createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['newSiteName'],"automationSite1")

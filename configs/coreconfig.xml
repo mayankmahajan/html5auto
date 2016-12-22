@@ -372,6 +372,14 @@
 
             <component id = "submit" selector="css selector" locator='[ng-click="vm.onSubmit();"]' wait="skip"/>
             <component id = "cancel" selector="css selector" locator='[ng-click="vm.cancel()"]' wait="skip"/>
+
+            <component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>
+            <component id = "choosefile" selector="css selector" locator='[ng-model="picFile"]' wait="skip"/>
+            <component id = "upload" selector="css selector" locator='[ng-click="uploadPic(picFile,vm.uibModalInstance)"]' wait="skip"/>
+
+
+
+
             <!--<component id = "reset" selector="css selector" locator='[ng-click="vm.cancel()"]' wait="skip"/>-->
 
         </componentConfig>

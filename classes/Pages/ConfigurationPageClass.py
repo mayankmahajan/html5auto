@@ -4,6 +4,7 @@ from classes.Components.ExploreListComponentClass import *
 from classes.Components.TableComponentClass import *
 from classes.Components.DropdownComponentClass import *
 from classes.Components.IBLeftColumnComponentClass import *
+from classes.Components.SwitcherComponentClass import *
 
 class ConfigurationPageClass(BasePageClass):
     def __init__(self,driver):
@@ -14,6 +15,7 @@ class ConfigurationPageClass(BasePageClass):
         self.table = TableComponentClass()
         self.dummyelement = DropdownComponentClass()
         self.leftColumn = IBLeftColumnComponentClass()
+        self.switcher = SwitcherComponentClass()
 
         BasePageClass.__init__(self,driver)
 
