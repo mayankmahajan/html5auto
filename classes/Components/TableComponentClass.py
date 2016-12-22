@@ -225,7 +225,7 @@ class TableComponentClass(BaseComponentClass):
         data['rows'] = self.getIterfaceRows(len(data['header']),h[parent])
         return data
 
-    def setSelectionIndex(self,colCount,rowCount,index,h):
+    def setSelectionIndex(self,index,colCount,rowCount,h):
         elHandle=h['ROWS']
         newIndex = (colCount+1)*(index-1)+1
 

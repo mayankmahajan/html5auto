@@ -2,6 +2,8 @@ from classes.Pages.BasePopClass import BasePopClass
 from classes.Components.GenerateReportsComponentClass import *
 from classes.Components.DropdownComponentClass import *
 from classes.Components.SwitcherComponentClass import *
+from classes.Components.RoutersPopUpComponentClass import *
+from classes.Components.TableComponentClass import *
 
 
 
@@ -14,6 +16,9 @@ class GenerateReportsPopClass(BasePopClass):
         self.reportspopup = GenerateReportsComponentClass()
         self.dropdown = DropdownComponentClass()
         self.switcher = SwitcherComponentClass()
+        self.routerpopup = RoutersPopUpComponentClass()
+        self.routertable = TableComponentClass()
+
 
 
         # Common Components

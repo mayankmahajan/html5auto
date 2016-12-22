@@ -218,6 +218,18 @@
             <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
         </screenConfig>
 
+        <screenConfig id = "forensics_Screen">
+            <component id = 'commoncomponents' parent="False"/>
+        </screenConfig>
+
+        <screenConfig id = "routers_popup">
+            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True"/>
+            <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True"/>
+        </screenConfig>
+
+
+
+
         <!--<screenConfig id="switchApps">-->
             <!--<component id="switchApp" selector="class name" locator="switchTable"/>-->
         <!--</screenConfig>-->

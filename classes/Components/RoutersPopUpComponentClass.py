@@ -1,0 +1,82 @@
+from BaseComponentClass import BaseComponentClass
+from Utils.ConfigManager import ConfigManager
+from Utils.logger import *
+from selenium.common.exceptions import *
+from classes.Components.DropdownComponentClass import *
+
+class RoutersPopUpComponentClass(BaseComponentClass):
+
+    def __init__(self):
+        BaseComponentClass.__init__(self)
+        self.configmanager = ConfigManager()
+
+
+    # def setQueryName(self,value,h,parent,child):
+    #     h1 = h[parent][child]
+    #     pass
+
+# h1[0].find_elements_by_tag_name("ag-grid-ng2")[0].find_elements_by_class_name("ag-selection-checkbox")
+
+    def setQueryName(self,value,h,parent,child):
+        try:
+            h[parent][child][len(h[parent][child])-1].find_elements_by_tag_name("input")[0].send_keys(value)
+            return h[parent][child][len(h[parent][child])-1].find_elements_by_tag_name("input")[0].get_attribute("value")
+        except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
+            raise e
+            return e
+
+    def getQueryName(self,value,h,parent,child):
+        try:
+            return h[parent][child][len(h[parent][child])-1].find_elements_by_tag_name("input")[0].get_attribute("value")
+        except StaleElementReferenceException or ElementNotVisibleException or NoSuchElementException or Exception as e:
+            raise e
+            return e
+
+
+# h1[0].find_elements_by_tag_name("table")[0].find_elements_by_tag_name('td')[1].find_elements_by_tag_name("select")[0]
+
+    def getHandler(self,index,h):
+        return h.find_elements_by_tag_name("table")[0].find_elements_by_tag_name('td')[index]
+
+    def setTime(self,index,h,parent,child):
+
+        try:
+            if index != 0:
+                index = 2
+            handle = self.getHandler(index,h[parent][child][len(h[parent][child])-1])
+            handle.find_elements_by_tag_name("img")[0].click()
+            handle.find_elements_by_tag_name("img")[0].click()
+            return handle.find_elements_by_tag_name("input")[0].get_attribute("value")
+        except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
+            raise e
+            return e
+
+    def getTime(self,index,h,parent,child):
+        if index != 0:
+            index = 2
+        handle = self.getHandler(index,h[parent][child][len(h[parent][child])-1])
+        return handle.find_elements_by_tag_name("input")[0].get_attribute("value")
+
+
+    def setSortBy(self,value,h,parent,child):
+        self.select(1,value,h,parent,child)
+        return True
+
+    def setSortOrder(self,value,h,parent,child):
+        self.select(3,value,h,parent,child)
+        return True
+
+    def setPageSize(self,value,h,parent,child):
+        self.select(4,value,h,parent,child)
+        return True
+
+    def select(self,i,value,h,parent,child):
+        try:
+            handle = self.getHandler(i,h[parent][child][len(h[parent][child])-1])
+            d = DropdownComponentClass()
+            d.set(value,handle.find_elements_by_tag_name("select"))
+            return True
+        except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
+            raise e
+            return e
+
