@@ -327,6 +327,7 @@
 
         <componentConfig id="report">
             <component id = "create" selector="class name" locator='createReportBtn' />
+            <component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>
         </componentConfig>
         <componentConfig id="switchApp">
             <component id="cellitem" selector="class name" locator="cellitem"/>
