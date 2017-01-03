@@ -96,7 +96,8 @@ class BTVComponentClass(BaseComponentClass):
         :param handlers: Handlers to BarChart
         :return: True/False
         '''
-        handlers = self.compHandlers('btv',handlrs)
+        # handlers = self.compHandlers('btv',handlrs)
+        handlers = handlrs['btv']
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[key]["action"] == "click":
                 selectedIndex = self.getSelectionIndex(value)

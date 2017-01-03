@@ -15,6 +15,8 @@ from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 class ContextMenuComponentClass(BaseComponentClass):
 
+    def activateContextMenuOptions1(self,handle):
+        handle['cm'][Constants.CONTEXTMENU][0].click()
     def activateContextMenuOptions(self,handle):
         handle[Constants.CONTEXTMENU][0].click()
         # handle['cm'][Constants.CONTEXTMENU][0].click()

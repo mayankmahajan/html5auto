@@ -26,6 +26,7 @@ from Utils.csvReader import CSVReader
 from classes.Components.ContextMenuComponentClass import *
 from classes.Components.BaseComponentClass import *
 import time
+import datetime
 
 # def setUp():
 #     obj={}
@@ -575,3 +576,46 @@ def getSummaryBarData(measure,btvname,screenInstance,siteScreenHandle):
         #print selections[btvname]
         summarybarvalues = selections[btvname][values[0]][values[3]]
         return summarybarvalues
+
+
+def IsreportIDvalid(data):
+    result = True
+    for key,value in data.iteritems():
+        print value
+    if 'rows' in key:
+        for a in value:
+            print a[0]
+            # i = i + 1
+            for b in value[1:]:
+                print b[0]
+                if (a[0]==b[0]):
+                    result = False
+                    break;
+                else:
+                    result = True
+            break;
+    return result
+
+def currentdate():
+    x = datetime.datetime.now()
+    # print x
+    y =str(x).split(':')
+    date = y[0]+":"+y[1]
+    # print y
+    # print date
+    return date
+
+def validatesearchtable(data,columnname,searchtext):
+    flag = False
+    for j in range(len(data['header'])):
+        if(data['header'][j].upper()==columnname.upper()==columnname.upper()):
+            col = j
+            break;
+    flag = False
+    for i in range(len(data['rows'])):
+        if(searchtext in data['rows'][i][col]):
+            print data['rows'][i][col]
+            flag = True
+        else:
+            flag = False
+    return flag

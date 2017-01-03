@@ -92,7 +92,8 @@ class PieLegendComponentClass(BaseComponentClass):
         :param handlers: Handlers to BarChart
         :return: True/False
         '''
-        handlers = self.compHandlers('pielegend',handlrs)
+        # handlers = self.compHandlers('pielegend',handlrs)
+        handlers = handlrs['pielegend']
         selectedIndex = self.getSelectionIndex(handlers['legendText'])
         if selectedIndex in indices:
             return True

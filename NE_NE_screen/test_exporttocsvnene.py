@@ -10,12 +10,13 @@ from classes.Pages.NEPageClass import *
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
+
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-# Launch Site Screen
-launchPage(setup,"site_Screen")
-
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -34,12 +35,13 @@ neScreenInstance = NEPageClass(setup.d)
 
 neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 
-neScreenInstance.pielegend.setSelection(setup.dH,[2],neScreenHandle)
+# neScreenInstance.pielegend.setSelection(setup.dH,[],neScreenHandle)
+neScreenInstance.pielegend.setSelection1(setup.dH,[0],neScreenHandle,'pielegend')
 
 #Drill to nene screen
 drilltoScreen(setup.d,setup.dH,Constants.NENE)
 
-result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
 checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT NE-NE SCREEN ")
 

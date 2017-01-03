@@ -15,4 +15,14 @@ from classes.Pages.ConfigurationPageClass import *
 setup = SetUp()
 
 login(setup, "admin", "Admin@123")
-setup.d.switchTo().alert().accept();
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+
+# exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","nf_Screen")
+
+exploreScreenInstance.exploreList.switchApp(exploreHandle,1)
+time.sleep(4)
+# setup.d.switch_to.window(setup.d.window_handles[1])
+
+
+setup.d.close()

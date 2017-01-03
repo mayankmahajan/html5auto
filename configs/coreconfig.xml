@@ -261,7 +261,8 @@
             <component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
             <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
-
+            <component id = "download" selector="class name" locator='downloadIcon' wait = 'skip'/>
+            <component id = "delete" selector="class name" locator='deleteIcon' wait = 'skip'/>
                     <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
                     <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
                     <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
@@ -328,6 +329,8 @@
         <componentConfig id="report">
             <component id = "create" selector="class name" locator='createReportBtn' />
             <component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>
+            <component id = "ok" selector="id" locator="okBtn" wait="skip"/>
+            <component id = "cancel" selector="id" locator="cancelBtn" wait="skip"/>
         </componentConfig>
         <componentConfig id="switchApp">
             <component id="cellitem" selector="class name" locator="cellitem"/>
@@ -383,7 +386,8 @@
 
         <componentConfig id="commoncomponents">
             <component id = 'newquery' selector="class name" locator="createImage"/>
-            <component id = 'refreshquerylist' selector="class name" locator="queryTypeRefreshIcon" />
+            <component id = 'refreshquerylist' selector="xpath" locator='//*[contains(@class, "refreshIcon")]' />
+
         </componentConfig>
         <componentConfig id ="queryrouters">
             <component id = "wizard1" selector="class name" locator="routerspage"/>

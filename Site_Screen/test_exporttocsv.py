@@ -31,7 +31,7 @@ launchPage(setup,Constants.SITES)
 
 
 # Export to csv
-result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
 # Result logging
 checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT SITE SCREEN")

@@ -38,7 +38,7 @@ siteintScreenHandle = getHandle(setup,Constants.SITEINTERACTIONS)
 # Set the bar Table view to the 2 index
 sitescreenInstance.btv.setSelection(2,siteintScreenHandle)
 
-result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
 checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT SITE INTERACTION")
 

@@ -35,8 +35,10 @@
 
         <screenConfig id = "report_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
-
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
             <component id = "report" parent="False" />
+            <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
         </screenConfig>
 
 
@@ -212,6 +214,9 @@
             <component id = "searchSelector" parent="False" />
             <component id = "search" parent="False" />
             <component id = 'leftcolumn' parent="False" />
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+            <component id = "report" parent="False" />
+
         </screenConfig>
 
         <screenConfig id = "config_popup">

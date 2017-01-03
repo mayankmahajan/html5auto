@@ -13,8 +13,13 @@ setup = SetUp()
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
+
+
 # Launch Site Screen
-launchPage(setup,"site_Screen")
+# launchPage(setup,"site_Screen")
 
 
 # Get the Instance of the screen

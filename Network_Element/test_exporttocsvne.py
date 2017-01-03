@@ -33,7 +33,7 @@ drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
 nescreenInstance = NEPageClass(setup.d)
 neScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
-result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
 checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT NETWORK ELEMENT SCREEN")
 
