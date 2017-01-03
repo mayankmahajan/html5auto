@@ -23,13 +23,23 @@ exploreHandle = getHandle(setup,"explore_Screen")
 # exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","nf_Screen")
 
 
-exploreScreenInstance.exploreList.switchApp(exploreHandle,1)
+# exploreScreenInstance.exploreList.switchApp(exploreHandle,1)
 
 # Reports Module
 ####################################
-# exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
-# reportScreenInstance = ReportsModuleClass(setup.d)
-# reportScreenHandle = getHandle(setup,"report_Screen")
+exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
+reportScreenInstance = ReportsModuleClass(setup.d)
+reportScreenHandle = getHandle(setup,"report_Screen")
+sleep(5)
+
+grPopInstance = GenerateReportsPopClass(setup.d)
+grPopHandle = getHandle(setup,"report2_popup")
+grPopInstance.reportpopup.selectRadioButton("Average",grPopHandle)
+# reportScreenInstance.reportpopup.selectRadioButton("Peak",grPopHandle)
+grPopInstance.reportpopup.clickButton("Next Step",grPopHandle)
+
+grPopInstance.routertable.getTableData1(grPopHandle,'table')
+
 # reportScreenInstance.dropdown.customClick(reportScreenHandle['report']['create'])
 
 

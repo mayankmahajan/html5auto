@@ -3,6 +3,10 @@ from Utils.ConfigManager import ConfigManager
 from Utils.logger import *
 from selenium.common.exceptions import *
 from classes.Components.DropdownComponentClass import *
+from Utils.utility import *
+
+
+
 
 class RoutersPopUpComponentClass(BaseComponentClass):
 
@@ -38,14 +42,35 @@ class RoutersPopUpComponentClass(BaseComponentClass):
     def getHandler(self,index,h):
         return h.find_elements_by_tag_name("table")[0].find_elements_by_tag_name('td')[index]
 
-    def setTime(self,index,h,parent,child):
+    def setTime(self,index,h,parent,child,setup,date=None):
 
         try:
             if index != 0:
                 index = 2
             handle = self.getHandler(index,h[parent][child][len(h[parent][child])-1])
             handle.find_elements_by_tag_name("img")[0].click()
+
+            # will call calendar selection here using 'date' argument
+            self.doCalendarSelection(setup,parent,index,date)
+
+            # handle.find_elements_by_tag_name("img")[0].click()
+            return handle.find_elements_by_tag_name("input")[0].get_attribute("value")
+        except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
+            raise e
+            return e
+
+    def setTime1(self,index,h,parent,child,setup,date=None):
+
+        try:
+            if index != 0:
+                index = 2
+            handle = self.getHandler(index,h[parent][child][len(h[parent][child])-1])
             handle.find_elements_by_tag_name("img")[0].click()
+
+            # will call calendar selection here using 'date' argument
+            self.doCalendarSelection(setup,parent,index,date)
+
+            # handle.find_elements_by_tag_name("img")[0].click()
             return handle.find_elements_by_tag_name("input")[0].get_attribute("value")
         except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
             raise e
@@ -80,3 +105,30 @@ class RoutersPopUpComponentClass(BaseComponentClass):
             raise e
             return e
 
+
+    def doCalendarSelection(self,setup,parent,index,date=None):
+        hParent = getHandle(setup,"routers_popup")[parent]
+
+        for el in hParent['calendar'][index].find_elements_by_tag_name("button"):
+            if 'apply' in el.get_attribute("class"):
+                try:
+                    el.click()
+                    return True
+                except NoSuchElementException or ElementNotSelectableException or Exception as e:
+                    return e
+
+
+
+
+    def addGroup(self,index,handle,parent="wizard2",child="qp"):
+        handler = handle[parent][child]
+        for ele in handler.find_elements_by_tag_name("button"):
+            if ele.text == "Add Group":
+                ele.click()
+                break
+
+
+
+
+    def addRule(self,index,handle):
+        pass

@@ -4,6 +4,8 @@ from classes.Components.DropdownComponentClass import *
 from classes.Components.SwitcherComponentClass import *
 from classes.Components.RoutersPopUpComponentClass import *
 from classes.Components.TableComponentClass import *
+from classes.Components.CalendarComponentClass import *
+from classes.Components.MulitpleDropdownComponentClass import MulitpleDropdownComponentClass
 
 
 
@@ -18,6 +20,9 @@ class GenerateReportsPopClass(BasePopClass):
         self.switcher = SwitcherComponentClass()
         self.routerpopup = RoutersPopUpComponentClass()
         self.routertable = TableComponentClass()
+        self.calendar = CalendarComponentClass()
+        self.multiDropdown = MulitpleDropdownComponentClass()
+
 
 
 
