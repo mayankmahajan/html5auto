@@ -214,7 +214,7 @@
             <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
             <component id = "table" selector="id" locator="tableview" parent="True" />
             <component id = "allbuttons" selector="class name" locator="createReportFooter" parent="True" />
-            footer
+            
         </screenConfig>
 
 
