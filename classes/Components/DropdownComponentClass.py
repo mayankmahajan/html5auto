@@ -8,7 +8,7 @@ class DropdownComponentClass(BaseComponentClass):
         BaseComponentClass.__init__(self)
         self.configmanager = ConfigManager()
 
-    def doSelection(self,h,value,parent,child=None):
+    def doSelection(self,h,value,parent,child=""):
         self.set(value, h[parent][child])
 
     def set(self, value, handle):
@@ -16,3 +16,9 @@ class DropdownComponentClass(BaseComponentClass):
             if ele.text == value:
                 ele.click()
                 break
+
+
+    def doSelectionOnVisibleDropDown(self,h,value,index=0,parent="allselects",child="select"):
+        activedrops  = self.getAllActiveElements(h[parent][child])
+        self.set(value, activedrops[index])
+

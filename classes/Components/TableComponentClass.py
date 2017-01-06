@@ -2,6 +2,8 @@ from BaseComponentClass import BaseComponentClass
 from copy import deepcopy
 from Utils.logger import *
 from time import *
+from selenium.webdriver import ActionChains
+
 import random
 class TableComponentClass(BaseComponentClass):
     colCount = 0
@@ -227,7 +229,7 @@ class TableComponentClass(BaseComponentClass):
 
     def setSelectionIndex(self,index,colCount,rowCount,h):
         elHandle=h['ROWS']
-        newIndex = (colCount+1)*(index-1)+1
+        newIndex = (colCount)*(index-1)+1
 
         for i in range(len(elHandle)):
             if i == newIndex:
@@ -242,6 +244,16 @@ class TableComponentClass(BaseComponentClass):
 
     def getDynamicText(self,h,parent,child=None):
         return h[parent]['count'][0].text
+
+    def setSpecialSelection(self,driver,indices,key,h,parent="table",child=""):
+        data = self.getTableData1(h,parent)
+        colCount = len(data['header'])
+        rowCount = len(data['rows'])
+        self.setSelectionIndex(indices[0],colCount,rowCount,h[parent])
+        if len(indices) == 2:
+            ActionChains(driver).key_down(key).perform()
+            self.setSelectionIndex(indices[1],colCount,rowCount,h[parent])
+            ActionChains(driver).key_up(key).perform()
 
 
 

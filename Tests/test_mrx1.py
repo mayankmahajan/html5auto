@@ -10,6 +10,10 @@ from classes.Pages.NFPageClass import *
 from classes.Pages.QuickTrendsPageClass import *
 from classes.Pages.GenerateReportsPopClass import *
 from classes.Pages.ReportsModuleClass import *
+from selenium.webdriver import ActionChains
+from classes.Pages.UDPageClass import *
+
+
 
 setup = SetUp()
 
@@ -20,9 +24,24 @@ login(setup, "admin", "Admin@123")
 # # UD Module
 # ####################################
 # exploreScreenInstance.exploreList.launchModule(exploreHandle,"USER DISTRIBUTION")
-setup.d.execute_script("document.getElementsByClassName('createReportBtn')[0].click()")
+screenInstance = UDPageClass(setup.d)
+screenHandle = getHandle(setup,"ud_Screen")
+screenInstance.table.setSpecialSelection(setup.d,[2,4],Keys.SHIFT,screenHandle)
+
+
+s=screenHandle['body']['startdrag'][0]
+e=screenHandle['body']['enddrag'][0]
+
+ActionChains(setup.d).drag_and_drop(s,e).perform()
+ActionChains(setup.d).click_and_hold(s).move_by_offset(200,0).perform()
+
 grPopInstance = GenerateReportsPopClass(setup.d)
 grPopHandle = getHandle(setup,"udp_popup")
+
+
+grPopInstance.clickLink("",grPopHandle)
+grPopInstance.getAllSelectedFilters(grPopHandle)
+
 
 grPopInstance.multiDropdown.domultipleSelection(grPopHandle,"Netbook",0)
 

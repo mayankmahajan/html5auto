@@ -16,3 +16,13 @@ class BasePopClass():
         self.searchComp = SearchComponentClass()
         self.cm = ContextMenuComponentClass()
         self.switcher = SwitcherComponentClass()
+
+    def clickLink(self,value,handle,parent="alllinks",child="a"):
+        for el in handle[parent][child]:
+            if el.text == value:
+                try:
+                    el.click()
+                    return True
+                except ElementNotSelectableException or Exception as e:
+                    return e
+

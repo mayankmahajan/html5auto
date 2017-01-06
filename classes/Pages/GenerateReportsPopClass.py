@@ -29,3 +29,8 @@ class GenerateReportsPopClass(BasePopClass):
         # Common Components
         BasePopClass.__init__(self,driver)
 
+    def getAllSelectedFilters(self,h,parent="filterPopup",child="allfilters"):
+        return [e.text for e in h[parent][child] if e.is_displayed()]
+
+
+

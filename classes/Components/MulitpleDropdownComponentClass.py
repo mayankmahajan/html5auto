@@ -9,31 +9,20 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         self.configmanager = ConfigManager()
 
 
-    def getAllActiveDropdowns(self,childHandles):
-        activeElements = []
-        for ele in childHandles:
-            # 'disabled' not in ele.get_attribute("class") and
-            if ele.is_displayed():
-                activeElements.append(ele)
-            else:
-                pass
-        return activeElements
-
-
     def getSelection(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
-        activeDropDowns = self.getAllActiveDropdowns(h[parent][child])
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
         activeDropDowns[index].click()
         selections = []
 
         for el in activeDropDowns[index].find_elements_by_class_name("menuitem"):
             for e in  el.find_elements_by_tag_name("input"):
-                if e.get_attribute("checked") == True:
+                if str(e[0].get_attribute("checked")).upper() == "TRUE":
                     selections.append(el.text)
 
         return selections
 
     def domultipleSelection(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
-        activeDropDowns = self.getAllActiveDropdowns(h[parent][child])
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
         activeDropDowns[index].click()
         for el in activeDropDowns[index].find_elements_by_class_name("menuitem"):
             if el.text == value:
@@ -42,23 +31,15 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         return self.getSelection(h,index)
 
     def getOptionsAvailable(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
-        activeDropDowns = self.getAllActiveDropdowns(h[parent][child])
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
         return [el.text for el in activeDropDowns[index].find_elements_by_class_name("menuitem")]
 
 
     def doSearch(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
-        activeDropDowns = self.getAllActiveDropdowns(h[parent][child])
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
         activeDropDowns[index].click()
         for el in activeDropDowns[index].find_elements_by_class_name("input"):
             if el.get_attribute("type") == "text":
                 el.send_keys(value)
         return self.getOptionsAvailable(h,index)
 
-    def doSelection(self,h,value,parent,child=None):
-        self.set(value, h[parent][child])
-
-    def set(self, value, handle):
-        for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
-            if ele.text == value:
-                ele.click()
-                break

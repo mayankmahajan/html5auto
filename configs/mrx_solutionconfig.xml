@@ -4,11 +4,12 @@
 
 
         <screenConfig id = "ud_Screen">
-            <component id="switcher" selector="id" locator="UD_Legend_Container" parent="True" />
-            <component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />
-            <component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />
-            <component id='table' selector="tag name" locator="ag-grid-ng2" parent="True" />
-            <component id="editFilters" selector="tag name" locator="kiwik-edit-parameter-dropdown" parent="True"/>
+            <!--<component id="switcher" selector="id" locator="UD_Legend_Container" parent="True" />-->
+            <!--<component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <!--<component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <component id='table' selector="id" locator="UD_Table_Container" parent="True" />
+            <!--<component id="editFilters" selector="tag name" locator="kiwik-edit-parameter-dropdown" parent="True"/>-->
+            <component id="body" selector="id" locator="UD_Data_Container" parent="True"/>
         </screenConfig>
 
         <screenConfig id ="createsegment_popup">
@@ -25,7 +26,7 @@
             <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
             <component id = "allspans" selector="class name" locator="headerDiv" parent="True" />
             <component id = "allselects" selector="tag name" locator="filterPopup" parent="True" />
-            <component id = "filterlinks" selector="class name" locator="filterTabs" parent="True" />
+            <component id = "alllinks" selector="class name" locator="filterTabs" parent="True" />
             <!--<component id = "filterContainer" selector="class name" locator="filterContainer" parent="True" />-->
 
         </screenConfig>
@@ -88,6 +89,7 @@
             <component id="header" selector="class name" locator="headerDiv"/>
             <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
             <component id = "tree" selector="tag name" locator="tree" wait="skip"/>
+            <component id="allfilters" selector="class name" locator="filterTextDiv" wait="skip"/>
 
             <!--<component id = 'edit' selector="class name" locator="drop-down-list" wait="skip"/>-->
         </componentConfig>
@@ -102,6 +104,10 @@
             <component id="header" selector="class name" locator="headerDiv"/>
             <!--<component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>-->
 
+        </componentConfig>
+        <componentConfig id="body">
+            <component id = "startdrag" selector="id" locator="startHandle"/>
+            <component id = "enddrag" selector="id" locator="endHandle"/>
         </componentConfig>
         <componentConfig id="radios">
             <component id = "radio" selector="css selector" locator='[type="radio"]' />
@@ -118,7 +124,7 @@
         <componentConfig id="allselects">
             <component id = "select" selector="tag name" locator='select' />
         </componentConfig>
-        <componentConfig id="filterlinks">
+        <componentConfig id="alllinks">
             <component id = "a" selector="tag name" locator='a' />
         </componentConfig>
         <componentConfig id = "wizard2">

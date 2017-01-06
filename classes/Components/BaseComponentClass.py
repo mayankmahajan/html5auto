@@ -92,6 +92,15 @@ class BaseComponentClass:
         except:
             print "Got Measure without Peak/Average %s",measureName
 
+    def getAllActiveElements(self, childHandles):
+        activeElements = []
+        for ele in childHandles:
+            # 'disabled' not in ele.get_attribute("class") and
+            if ele.is_displayed():
+                activeElements.append(ele)
+            else:
+                pass
+        return activeElements
 
 
 
