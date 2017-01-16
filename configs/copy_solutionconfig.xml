@@ -239,7 +239,7 @@
 
             <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
             <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
-            <!--<component id = 'leftcalendar' selector="class name" locator="calendar left" parent="True" />-->
+            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
             <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
         </screenConfig>
 

@@ -619,3 +619,14 @@ def validatesearchtable(data,columnname,searchtext):
         else:
             flag = False
     return flag
+
+def setCalendar(y,m,d,h,min,intance,handle):
+    try:
+        intance.calendar.set("year",y,handle)
+        intance.calendar.set("month",m,handle)
+        intance.calendar.setDay("day",d,handle)
+        intance.calendar.set("hour",h,handle)
+        intance.calendar.set("minute",min,handle)
+        return True
+    except ElementNotSelectableException or ElementNotVisibleException or Exception as e:
+        return e

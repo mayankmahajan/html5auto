@@ -12,10 +12,16 @@ class DropdownComponentClass(BaseComponentClass):
         self.set(value, h[parent][child])
 
     def set(self, value, handle):
-        for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
-            if ele.text == value:
-                ele.click()
-                break
+        try:
+            l = len(handle)
+            h = handle[len(handle)-1]
+        except:
+            h = handle
+
+            for ele in h.find_elements_by_xpath(".//*"):
+                if ele.text == value:
+                    ele.click()
+                    break
 
 
     def doSelectionOnVisibleDropDown(self,h,value,index=0,parent="allselects",child="select"):
