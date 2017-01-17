@@ -181,7 +181,7 @@ class RoutersPopUpComponentClass(BaseComponentClass):
         #         f=f+1
 
 
-    def updateGroup(self,ruleOrGroup,rule,handle,parent="wizards",child="qb",index=0):
+    def updateGroup(self,ruleOrGroup,rule,handle,index=0,parent="wizards",child="qb"):
         handler = handle[parent][child][0]
         handleToGroupConditions = handler.find_elements_by_class_name("group-conditions")
         handleToSubConditions = self.getsubConditions(handleToGroupConditions[0])
