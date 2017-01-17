@@ -7,15 +7,14 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
 from classes.Pages.NFPageClass import *
-# Getting Setup Details and Launching the application
 setup = SetUp()
 
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-# Launch Site Screen
-launchPage(setup,"site_Screen")
-
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -32,7 +31,7 @@ drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
 nfscreenInstance = NFPageClass(setup.d)
 nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
-result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
 checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT NETWORK FUNCTIONS SCREEN")
 

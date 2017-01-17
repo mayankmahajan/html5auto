@@ -7,7 +7,14 @@ from selenium.common.exceptions import *
 
 class BaseComponentClass:
     def click(self, elHandle):
-        return elHandle.click()
+
+        try:
+            elHandle.click()
+            return True
+        except Exception:
+            return Exception
+
+
     def send_keys(self, elHandle, value):
         return elHandle.send_keys(value)
 

@@ -7,9 +7,11 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
 from classes.Pages.NEPageClass import *
+from classes.Pages.GenerateReportsPopClass import *
 
 # Getting Setup Details and Launching the application
 setup = SetUp()
+
 
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
@@ -31,13 +33,23 @@ screenInstance.btv.setSelection(2,siteScreenHandle)
 # Checking drill to the Site Interaction Screen
 drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
 
-nescreenInstance = NEPageClass(setup.d)
+neScreenInstance = NEPageClass(setup.d)
+
 neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 
-result = exportTo(setup,setup.dH,'EXPORTTOCSV')
+# neScreenInstance.pielegend.setSelection(setup.dH,[],neScreenHandle)
+neScreenInstance.pielegend.setSelection1(setup.dH,[0],neScreenHandle,'pielegend')
 
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT NETWORK ELEMENT SCREEN")
+#Drill to nene screen
+drilltoScreen(setup.d,setup.dH,Constants.NENE)
 
+# Export to csv
+exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
+grPopInstance = GenerateReportsPopClass(setup.d)
+grPopHandle = getHandle(setup,"report2_popup")
+result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
+# Result logging
+checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT Destination Network Elements")
+
+#Closing the application
 setup.d.close()
-
-

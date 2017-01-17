@@ -6,11 +6,9 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Pages.SiteIntScreenClass import *
-# Getting Setup Details and Launching the application
-setup = SetUp()
+from classes.Pages.NFPageClass import *
+from classes.Pages.GenerateReportsPopClass import *
 
-# Getting Setup Details and Launching the application
 setup = SetUp()
 
 # Logging into the appliction
@@ -30,21 +28,18 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 screenInstance.btv.setSelection(2,siteScreenHandle)
 
 # Checking drill to the Site Interaction Screen
-drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
+drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
 
-# Get the Instance of the screen
-sitescreenInstance = SiteIntScreenClass(setup.d)
+nfscreenInstance = NFPageClass(setup.d)
+nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
-# Get the handles of the screen
-siteintScreenHandle = getHandle(setup,Constants.SITEINTERACTIONS)
+ # Export to csv
+exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
+grPopInstance = GenerateReportsPopClass(setup.d)
+grPopHandle = getHandle(setup,"report2_popup")
+result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
+# Result logging
+checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT network function")
 
-# Set the bar Table view to the 2 index
-sitescreenInstance.btv.setSelection(2,siteintScreenHandle)
-
-result = exportTo(setup,setup.dH,'EXPORTTOCSV')
-
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT SITE INTERACTION")
-
+#Closing the application
 setup.d.close()
-
-

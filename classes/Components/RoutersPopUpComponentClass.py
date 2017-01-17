@@ -50,6 +50,28 @@ class RoutersPopUpComponentClass(BaseComponentClass):
             handle = self.getHandler(index,h[parent][child][len(h[parent][child])-1])
             handle.find_elements_by_tag_name("img")[0].click()
 
+            if index==2:
+                index = 1
+            # will call calendar selection here using 'date' argument
+            self.doCalendarSelection(setup,parent,index,date)
+
+            # handle.find_elements_by_tag_name("img")[0].click()
+            return handle.find_elements_by_tag_name("input")[0].get_attribute("value")
+        except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
+            raise e
+            return e
+
+
+    def setTime2(self,index,h,parent,child,setup,date=None):
+
+        try:
+            if index != 0:
+                index = 2
+            handle = self.getHandler(index,h[parent][child][len(h[parent][child])-1])
+            handle.find_elements_by_tag_name("img")[0].click()
+
+            if index==2:
+                index = 1
             # will call calendar selection here using 'date' argument
             self.doCalendarSelection(setup,parent,index,date)
 

@@ -263,7 +263,33 @@ class TableComponentClass(BaseComponentClass):
 
 
 
+    def getTableCells(self,h,parent="table",child=None):
+        handler = h[parent]['ROWS']
+        cells = []
+
+        for el in handler:
+            cells.append(el.text)
+        return cells
 
 
 
+    def selectTableCell(self,value,h,parent="table",child=None):
+        handler = h[parent]['ROWS']
+        for el in handler:
+            if el.text == value:
+                try:
+                    el.click()
+                    return True
+                except Exception as e:
+                    return e
+
+    def selectTableCellIndex(self,value,h,parent="table",child=None):
+        handler = h[parent]['ROWS']
+        for i in range(len(handler)):
+            if i == value:
+                try:
+                    handler[i].click()
+                    return handler[i].text
+                except Exception as e:
+                    return
 

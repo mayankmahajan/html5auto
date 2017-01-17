@@ -16,7 +16,7 @@ class ForensicsPageClass(BasePageClass):
         self.dummyelement = DropdownComponentClass()
         self.leftColumn = IBLeftColumnComponentClass()
         self.switcher = SwitcherComponentClass()
-
+        self.dropdown = DropdownComponentClass()
         BasePageClass.__init__(self,driver)
 
 

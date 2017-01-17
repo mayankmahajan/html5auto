@@ -22,6 +22,8 @@ class GenerateReportsPopClass(BasePopClass):
         self.routertable = TableComponentClass()
         self.calendar = CalendarComponentClass()
         self.multiDropdown = MulitpleDropdownComponentClass()
+        self.table=TableComponentClass()
+        self.dropdown = DropdownComponentClass()
 
 
 

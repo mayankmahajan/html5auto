@@ -38,7 +38,7 @@ vrfScreenHandle = getHandle(setup,Constants.VRF)
 # Set the bar Table view to the 2 index
 vrfScreenInstance.btv.setSelection(2,vrfScreenHandle)
 
-result = exportToCSV(setup,setup.dH,'EXPORTTOCSV')
+result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
 checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT VRF SCREEN")
 

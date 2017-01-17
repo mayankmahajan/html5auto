@@ -31,12 +31,12 @@ exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
 reportScreenInstance = ReportsModuleClass(setup.d)
 reportScreenHandle = getHandle(setup,"report_Screen")
 sleep(5)
-
+reportScreenInstance.launchCreateReport(setup.d)
 grPopInstance = GenerateReportsPopClass(setup.d)
 grPopHandle = getHandle(setup,"report2_popup")
-grPopInstance.reportpopup.selectRadioButton("Average",grPopHandle)
+grPopInstance.reportspopup.selectRadioButton("Average",grPopHandle)
 # reportScreenInstance.reportpopup.selectRadioButton("Peak",grPopHandle)
-grPopInstance.reportpopup.clickButton("Next Step",grPopHandle)
+grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
 
 grPopInstance.routertable.getTableData1(grPopHandle,'table')
 

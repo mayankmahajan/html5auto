@@ -50,7 +50,7 @@ class ContextMenuComponentClass(BaseComponentClass):
 
     def launchTrends(self,handle):
         try:
-            handle['trends'][0].click()
+            handle['cm']['trends'][0].click()
             return True
         except Exception:
             return Exception.message

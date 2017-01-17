@@ -42,7 +42,6 @@
         </screenConfig>
 
 
-
         <screenConfig id = "nf_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
             <component id = "search" parent="False"/>
@@ -209,6 +208,19 @@
             <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
         </screenConfig>
 
+        <screenConfig id = "report2_popup">
+            <!--reportTypeLabel-->ag-grid="vm.mainViewController.gridOptions"
+            <component id = "radios" parent="False"/>
+            <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
+            <component id = "table" selector="id" locator="createReportScreen" parent="True" />
+            <component id = "allbuttons" selector="class name" locator="createReportFooter" parent="True" />
+            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
+
+            <component id = "generateReportDialog" selector="id" locator='generateReportScreen' parent="True"/>
+            <!--<component id = "wizardtable" parent="False"/>-->
+        </screenConfig>
+
+
         <screenConfig id = "configuration_Screen">
             <component id = "buttons" parent="False" />
             <component id = "searchSelector" parent="False" />
@@ -225,11 +237,23 @@
 
         <screenConfig id = "forensics_Screen">
             <component id = 'commoncomponents' parent="False"/>
+            <component id = "netflowtable" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+
+
+
+
+            <component id = "report" parent="False" />
+            <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
         </screenConfig>
 
         <screenConfig id = "routers_popup">
-            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True"/>
-            <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True"/>
+            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
+            <component id = 'wizard2' selector="tag name" locator="app-querybuilder" parent="False" />
+
+            <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
+            <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
+            <!--<component id = 'leftcalendar' selector="class name" locator="calendar left" parent="True" />-->
+            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
         </screenConfig>
 
 
@@ -241,6 +265,20 @@
 
 
     </screenConfigs>
+
+
+    <componentConfigs>
+        <componentConfig id="radios">
+            <component id = "radio" selector="css selector" locator='[type="radio"]' />
+        </componentConfig>
+        <componentConfig id="allbuttons">
+            <component id = "button" selector="tag name" locator='button' />
+        </componentConfig>
+        <componentConfig id = "wizard2">
+            <component id = 'qb' selector="tag name" locator="app-querybuilder" parent="False" />
+
+        </componentConfig>
+    </componentConfigs>
 
 
     <contextMenus>

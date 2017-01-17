@@ -7,6 +7,8 @@ from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
 from classes.Pages.SiteIntScreenClass import *
+from classes.Pages.GenerateReportsPopClass import *
+
 # Getting Setup Details and Launching the application
 setup = SetUp()
 
@@ -41,10 +43,13 @@ siteintScreenHandle = getHandle(setup,Constants.SITEINTERACTIONS)
 # Set the bar Table view to the 2 index
 sitescreenInstance.btv.setSelection(2,siteintScreenHandle)
 
-result = exportTo(setup,setup.dH,'EXPORTTOCSV')
+# Export to csv
+exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
+grPopInstance = GenerateReportsPopClass(setup.d)
+grPopHandle = getHandle(setup,"report2_popup")
+result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
+# Result logging
+checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT Site Interaction Screen")
 
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT SITE INTERACTION")
-
+#Closing the application
 setup.d.close()
-
-

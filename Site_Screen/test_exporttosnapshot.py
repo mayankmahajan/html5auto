@@ -8,7 +8,8 @@ from Utils.Constants import *
 from Utils.SetUp import *
 from classes.Pages.SitePageClass import *
 from classes.Components.SearchComponentClass import *
-from classes.Pages.InterfacePageClass import *
+from classes.Pages.GenerateReportsPopClass import *
+
 
 
 
@@ -20,15 +21,16 @@ login(setup, "admin", "Admin@123")
 
 exploreScreenInstance = ExplorePageClass(setup.d)
 exploreHandle = getHandle(setup,"explore_Screen")
-exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","interface_Screen")
-# Get the Instance of the screen
-screenInstance = InterfacePageClass(setup.d)
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
-# Get the handles of the screen
-interfaceScreenHandle = getHandle(setup,Constants.INTERFACES)
 
-result = exportTo(setup,setup.dH,'EXPORTTOCSV')
+# Export to csv
+exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
+grPopInstance = GenerateReportsPopClass(setup.d)
+grPopHandle = getHandle(setup,"report2_popup")
+result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
+# Result logging
+checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT")
 
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT INTERFACE SCREEN")
-
+#Closing the application
 setup.d.close()

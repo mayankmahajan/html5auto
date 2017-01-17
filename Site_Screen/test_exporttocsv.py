@@ -12,22 +12,15 @@ from classes.Components.SearchComponentClass import *
 
 
 
-# Getting Setup Details
+# Getting Setup Details and Launching the application
 setup = SetUp()
 
-
-# Launching Application
+# Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-
-# launchPage(setup,"site_Screen")
-# siteScreenInstance = SitePageClass(setup.d)
-# siteScreenHandle = getHandle(setup,"site_Screen")
-#
-# data = siteScreenInstance.btv.getData(siteScreenHandle)
-
-# Launch Screen
-launchPage(setup,Constants.SITES)
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 
 # Export to csv
