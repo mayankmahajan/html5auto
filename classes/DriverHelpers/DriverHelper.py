@@ -75,7 +75,7 @@ class DriverHelper:
                             pass
                     return tempChildHandles
                 else:
-                    tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
+                    tempChildHandles = tempChildHandles + self.visibleCompsOnly(self.driver.find_elements(*locator))
                     return tempChildHandles
             else:
                 if wait:
@@ -87,7 +87,7 @@ class DriverHelper:
                 else:
                     pass
                     # continue
-                tempChildHandles = tempChildHandles + self.driver.find_elements(*locator)
+                tempChildHandles = tempChildHandles + self.visibleCompsOnly(self.driver.find_elements(*locator))
                 return tempChildHandles
         else:
             if wait:
@@ -96,10 +96,18 @@ class DriverHelper:
                 except Exception as e:
                     logger.debug("Exception occured while getting the component with %s %s",locator,e)
 
-            tempChildHandles = tempChildHandles +  self.driver.find_elements(*locator)
+            tempChildHandles = tempChildHandles +  self.visibleCompsOnly(self.driver.find_elements(*locator))
             return tempChildHandles
 
         # return tempChildHandles
+
+
+    def visibleCompsOnly(self, arr):
+        newSet = []
+        for el in arr:
+            if el.is_displayed():
+                newSet.append(el)
+        return newSet
 
 
 
