@@ -36,11 +36,20 @@ class MeasureComponentClass(BaseComponentClass):
 
 
 
-    def doSelectionSite(self,h,site):
-        handlers = self.compHandlers('measureselectors',h)
+    def doSelectionSite(self,h,site,parent="measureselectors"):
+        handlers = self.compHandlers(parent,h)
+        sitename = site
+        self.setSiteName1(sitename,handlers['sites'])
+
+    def doSelectionSite1(self,h,site,parent="measureselectors"):
+        handlers = h[parent]
         sitename = site
         self.setSiteName(sitename,handlers['sites'])
 
+    # def doSelectionSite(self,h,site):
+    #     handlers = self.compHandlers('measureselectors',h)
+    #     sitename = site
+    #     self.setSiteName(sitename,handlers['sites'])
 
         #
         #
@@ -50,6 +59,12 @@ class MeasureComponentClass(BaseComponentClass):
         #         self.setMeasure(measure,value)
     def setSiteName(self,site,handle):
         for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
+            if ele.text == site:
+                ele.click()
+                break
+
+    def setSiteName1(self,site,handle):
+        for ele in handle[0].find_elements_by_xpath(".//*"):
             if ele.text == site:
                 ele.click()
                 break
