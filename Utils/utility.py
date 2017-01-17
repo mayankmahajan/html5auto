@@ -114,9 +114,13 @@ def launchPage(obj,pageName,isStartScreen=False):
     except Exception:
         return Exception
 
-def getHandlersForParentComponent(driver, driverHelper, configManager, pageName):
+def getHandlersForParentComponent(driver, driverHelper, configManager, pageName,parent):
     listOfHandles = {}
-    for comp in configManager.screenComponentRelations[pageName]:
+    if parent == "NA":
+        parents = configManager.screenComponentRelations[pageName]
+    else:
+        parents = [parent]
+    for comp in parents:
         if configManager.screenSelectors[pageName][comp]['parent'].upper() == "TRUE":
             locator = (configManager.screenSelectors[pageName][comp]['selector'],configManager.screenSelectors[pageName][comp]['locator'])
             try:
@@ -131,9 +135,13 @@ def getHandlersForParentComponent(driver, driverHelper, configManager, pageName)
 
     return listOfHandles
 
-def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles):
+def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles,parent):
     listOfHandles = {}
-    for eachComp in configManager.screenComponentRelations[pageName]:
+    if parent == "NA":
+        parents = configManager.screenComponentRelations[pageName]
+    else:
+        parents = [parent]
+    for eachComp in parents:
         print "getHandlesForEachComponent",eachComp
         listOfHandles[eachComp] = {}
         for comp in configManager.componentChildRelations[eachComp]:
@@ -224,7 +232,7 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
 
 
 
-def getHandle(obj,pageName):
+def getHandle(obj,pageName,parent="NA"):
     '''
     Takes out handler of the Page along with components
     :param obj:
@@ -235,8 +243,8 @@ def getHandle(obj,pageName):
     driverHelper = obj.dH
     configmanager = obj.cM
     # screenInstance=getScreenInstance(obj.d,pageName)
-    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
-    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName,parent)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles,parent)
     return handles
 
 
