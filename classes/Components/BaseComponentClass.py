@@ -3,6 +3,7 @@
 # webdriver.Firefox().find_element_by_xpath().send_keys()
 from Utils.UnitSystem import UnitSystem
 from Utils.ConfigManager import ConfigManager
+from selenium.common.exceptions import *
 
 class BaseComponentClass:
     def click(self, elHandle):
@@ -104,3 +105,18 @@ class BaseComponentClass:
 
 
 
+    def selectRadioButton(self,value,h,parent="radios",child="radio"):
+        for el in h[parent][child]:
+            if value == el.find_elements_by_xpath("..//span")[0].text:
+                try:
+                    el.click()
+                except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                    return e
+
+    def clickButton(self,value,h,parent="allbuttons",child="button"):
+        for el in h[parent][child]:
+            if value == el.text:
+                try:
+                    el.click()
+                except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                    return e

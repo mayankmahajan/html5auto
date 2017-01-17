@@ -9,19 +9,24 @@ from Utils.SetUp import *
 from classes.Pages.GenerateReportsPopClass import *
 from classes.Pages.ReportsModuleClass import *
 from classes.Pages.ForensicsPageClass import *
+from classes.Components.TimeRangeComponentClass import *
+from classes.Components.CalendarComponentClass import *
 
 setup = SetUp()
 
 login(setup, "admin", "Admin@123")
-exploreScreenInstance = ExplorePageClass(setup.d)
-exploreHandle = getHandle(setup,"explore_Screen")
 
-
-exploreScreenInstance.exploreList.switchApp(exploreHandle,2)
-
-time.sleep(4)
 setup.d.switch_to.window(setup.d.window_handles[1])
+popupInstance = GenerateReportsPopClass(setup.d)
+popupHandler = getHandle(setup,"routers_popup")
+# popupInstance.calendar.setCalendar("2016","March","24","02","10",popupHandler)
 
+setCalendar("2016","March","24","02","10",popupInstance,popupHandler)
+popupInstance.calendar.set("year","2016",popupHandler)
+popupInstance.calendar.set("month","March",popupHandler)
+popupInstance.calendar.setDay("day","24",popupHandler)
+popupInstance.calendar.set("hour","02",popupHandler)
+popupInstance.calendar.set("minute","02",popupHandler)
 
 
 
@@ -32,6 +37,11 @@ forensicsScreenInstance.dummyelement.customClick(forensicsScreenHandle['commonco
 
 popupInstance = GenerateReportsPopClass(setup.d)
 popupHandler = getHandle(setup,"routers_popup")
+
+timeRangeInstance = TimeRangeComponentClass()
+
+timeRangeInstance.setCustomTime("",getHandle(setup,"pop_up"))
+
 
 dateSelected = popupInstance.routerpopup.setTime(0,popupHandler,'queryrouters','wizard1',setup,"07-11-2016-03-00")
 
