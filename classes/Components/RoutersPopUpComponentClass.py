@@ -142,15 +142,115 @@ class RoutersPopUpComponentClass(BaseComponentClass):
 
 
 
-    def addGroup(self,index,handle,parent="wizard2",child="qp"):
-        handler = handle[parent][child]
-        for ele in handler.find_elements_by_tag_name("button"):
-            if ele.text == "Add Group":
-                ele.click()
-                break
+    def add(self, addDeleteGroupRule, handle, index = 0,parent="wizards", child="qb"):
+        handler = handle[parent][child][0]
+
+        if "addgroup" in addDeleteGroupRule:
+            name = "Add Group"
+        elif "addrule" in addDeleteGroupRule:
+            name = "Add Rule"
+        elif "deletegroup" in addDeleteGroupRule:
+            name = "Group"
+        elif "deleterule" in addDeleteGroupRule:
+            name = "Delete Rule"
+            return self.clickTarget("title",name,handler.find_elements_by_tag_name("img"),index)
+
+
+        return self.clickTarget("text",name,handler.find_elements_by_tag_name("button"),index)
+
+
+    def clickTarget(self,prop,name,groupHandle,index=0,increment=1):
+        f = 0
+        i=0
+
+        while i < len(groupHandle):
+            if self.runtimeValue(prop,groupHandle[i]) == name:
+                if f == index:
+                    groupHandle[i].click()
+                    break
+                f=f+1
+            i=i+increment
 
 
 
+        # for ele in groupHandle:
+        #     if self.runtimeValue(prop,ele) == name:
+        #         if f == index:
+        #             ele.click()
+        #             break
+        #         f=f+1
 
-    def addRule(self,index,handle):
-        pass
+
+    def updateGroup(self,ruleOrGroup,rule,handle,parent="wizards",child="qb",index=0):
+        handler = handle[parent][child][0]
+        handleToGroupConditions = handler.find_elements_by_class_name("group-conditions")
+        handleToSubConditions = self.getsubConditions(handleToGroupConditions[0])
+
+
+        if ruleOrGroup == "rule":
+            selectHandles = self.getAllActiveElements(handleToSubConditions[index].find_elements_by_tag_name("select"))
+            valueHandle = self.getAllActiveElements(handleToSubConditions[index].find_elements_by_tag_name("input"))
+            self.setRule([selectHandles,valueHandle],rule)
+
+        elif ruleOrGroup == "group":
+            selectHandle = handleToSubConditions.find_elements_by_tag_name("select")
+            buttonHandles = handleToSubConditions.find_elements_by_tag_name("button")
+
+
+    def getsubConditions(self,groupConditions):
+        return groupConditions.find_elements_by_class_name("condition")
+
+
+    # def setRule(self,index,childhandles,rule):
+    #     try:
+    #         self.clickTarget("text",rule[0],childhandles[0].find_elements_by_xpath(".//*"),index,2)
+    #         self.clickTarget("text",rule[1],childhandles[0].find_elements_by_xpath(".//*"),index+1,2)
+    #         childhandles[1].sendKeys(rule[2])
+    #         return True
+    #     except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+    #         return e
+
+
+    def setRule(self,childhandles,rule):
+        d = DropdownComponentClass()
+        try:
+            d.set(rule[0],childhandles[0][0])
+            d.set(rule[1],childhandles[0][1])
+            childhandles[1][0].send_keys(rule[2])
+            return True
+        except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+            return e
+
+
+    # def addGroup(self,index,handle,parent="wizards",child="qp"):
+    #     handler = handle[parent][child]
+    #     for ele in handler.find_elements_by_tag_name("button"):
+    #         if ele.text == "Add Group":
+    #             ele.click()
+    #             break
+    #
+    #
+    # def addRule(self,index,handle,parent="wizards",child="qp"):
+    #     handler = handle[parent][child]
+    #     for ele in handler.find_elements_by_tag_name("button"):
+    #         if ele.text == "Add Rule":
+    #             ele.click()
+    #             break
+
+    # def clickTarget1(self,name,groupHandle,index=0):
+    #     f = 0
+    #     for ele in groupHandle:
+    #         if ele.get_attribute("title") == name:
+    #             if f == index:
+    #                 ele.click()
+    #                 break
+    #             f=f+1
+    #
+    # def clickbutton(self,name,groupHandle,index=0):
+    #     f = 0
+    #     for ele in groupHandle:
+    #         if ele.text == name:
+    #             if f == index:
+    #                 ele.click()
+    #                 break
+    #             f=f+1

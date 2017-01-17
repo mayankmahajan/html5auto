@@ -397,7 +397,12 @@
         <componentConfig id ="queryrouters">
             <component id = "wizard1" selector="class name" locator="routerspage"/>
             <component id = "calendar" selector="class name" locator="daterangepicker" wait="skip"/>
+            <component id = "wizard2" selector="tag name" locator="app-querybuilder" />
         </componentConfig>
+
+        group-conditions
+
+
         <componentConfig id ='routertable'>
             <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
 

@@ -127,3 +127,14 @@ class BaseComponentClass:
                     el.click()
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
+
+
+    def runtimeValue(self,prop,ele):
+        if prop == "text":
+            return ele.text
+        elif prop == "title":
+            return ele.get_attribute("title")
+        elif prop == "value":
+            return ele.get_attribute("style")
+        elif prop == "style":
+            return ele.get_attribute("style")

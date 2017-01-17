@@ -234,13 +234,13 @@
         </screenConfig>
 
         <screenConfig id = "routers_popup">
-            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
-            <component id = 'wizard2' selector="tag name" locator="app-querybuilder" parent="False" />
+            <!--<component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />-->
+            <component id = 'wizards' selector="id" locator="bodyDiv" parent="True" />
 
-            <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
+            <!--<component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />-->
             <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
-            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
-            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
+            <!--<component id = 'leftcalendar' selector="class name" locator="left" parent="True" />-->
+            <!--<component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />-->
         </screenConfig>
 
     </screenConfigs>
@@ -252,8 +252,9 @@
         <componentConfig id="allbuttons">
             <component id = "button" selector="tag name" locator='button' />
         </componentConfig>
-        <componentConfig id = "wizard2">
-            <component id = 'qb' selector="tag name" locator="app-querybuilder" parent="False" />
+        <componentConfig id = "wizards">
+            <component id = 'qb' selector="tag name" locator="app-querybuilder"/>
+
 
         </componentConfig>
     </componentConfigs>
