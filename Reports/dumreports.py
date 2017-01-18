@@ -6,27 +6,20 @@ from Utils.utility import *
 from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Pages.NFPageClass import *
-from classes.Pages.QuickTrendsPageClass import *
 from classes.Pages.GenerateReportsPopClass import *
 from classes.Pages.ReportsModuleClass import *
-import random
+from classes.Pages.ForensicsPageClass import *
 
 setup = SetUp()
-
-# login(setup, "cmathieu", "a")
-
-
+queryname = "query2"
 login(setup, "admin", "Admin@123")
 
+time.sleep(4)
+setup.d.switch_to.window(setup.d.window_handles[1])
 
-b = []
-grPopInstance = GenerateReportsPopClass(setup.d)
-grPopHandle = getHandle(setup,"report2_popup")
+popupInstance = GenerateReportsPopClass(setup.d)
+popupHandler = getHandle(setup,"routers_popup")
+popupInstance.calendar.set("minute","02",popupHandler)
 
-# grPopInstance.table.getTableData1(grPopHandle)
-a  = grPopInstance.table.getTableCells(grPopHandle)
-print a
-grPopInstance.table.selectTableCellIndex(1,grPopHandle)
 
 setup.d.close()

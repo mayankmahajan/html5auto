@@ -616,7 +616,7 @@ def currentdate():
 def validatesearchtable(data,columnname,searchtext):
     flag = False
     for j in range(len(data['header'])):
-        if(data['header'][j].upper()==columnname.upper()==columnname.upper()):
+        if(data['header'][j].upper()==columnname.upper()):
             col = j
             break;
     flag = False
@@ -646,3 +646,18 @@ def getInputText(h,parent,child):
         if el.is_displayed() == True:
             return el.get_attribute("value")
 
+
+def FindWordInString(ar,grPopHandle):
+    resultq = []
+    for el in ar:
+        if (el in grPopHandle['generateReportDialog']['filters'][0].text):
+            result ="True"
+        else:
+            result = "False"
+
+        resultq = result
+    if (all(value == "True" for value in resultq)):
+        flag = True
+    else:
+        flag = False
+    return flag

@@ -24,6 +24,7 @@ class GenerateReportsPopClass(BasePopClass):
         self.multiDropdown = MulitpleDropdownComponentClass()
         self.table=TableComponentClass()
         self.dropdown = DropdownComponentClass()
+        self.sitetype = MeasureComponentClass()
 
 
 

@@ -16,7 +16,7 @@ setup = SetUp()
 
 # login(setup, "cmathieu", "a")
 
-
+ar = []
 reportname = "site"
 login(setup, "admin", "Admin@123")
 exploreScreenInstance = ExplorePageClass(setup.d)
@@ -48,17 +48,26 @@ for i in range(len(reports)):
     grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
     grPopHandle = getHandle(setup,"report2_popup")
     grPopInstance.reportspopup.selectRadioButton("Today",grPopHandle)
+    grPopHandle = getHandle(setup,"report2_popup")
+    starttime = getInputText(grPopHandle,'generateReportDialog','starttime')
+    endtime = getInputText(grPopHandle,'generateReportDialog','endtime')
     grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
 
     ### Get table Data has to different for different reports####
     for j in range(0,n[i]):
 
         grPopHandle = getHandle(setup,"report2_popup")
-        grPopInstance.table.getTableData1(grPopHandle,"table")
+        ar.append(grPopInstance.table.selectTableCellIndex(1,grPopHandle))
         grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
         #######################    END     ###############################################
         break
-
+    grPopHandle = getHandle(setup,"report2_popup")
+    starttimeend =getInputText(grPopHandle,'generateReportDialog','starttime')
+    endtimeend = getInputText(grPopHandle,'generateReportDialog','endtime')
+    filters = FindWordInString(ar,grPopHandle)
+    checkEqualAssert(starttime,starttimeend,"","","Start Time validation")
+    checkEqualAssert(endtime,endtimeend,"","","End Time validation")
+    checkEqualAssert(filters,True,"","","Filters validation")
     grPopHandle = getHandle(setup,"report2_popup")
     grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["reportnamewizard"],reportname)
     grPopInstance.dropdown.customClick(grPopHandle['generateReportDialog']["addemail"])

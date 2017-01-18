@@ -213,11 +213,11 @@
             <component id = "radios" parent="False"/>
             <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
             <component id = "table" selector="id" locator="createReportScreen" parent="True" />
+            <component id = "sitetype" selector="id" locator="createReportScreen" parent="True" />
             <component id = "allbuttons" selector="class name" locator="createReportFooter" parent="True" />
             <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
 
             <component id = "generateReportDialog" selector="id" locator='generateReportScreen' parent="True"/>
-            <!--<component id = "wizardtable" parent="False"/>-->
         </screenConfig>
 
 
@@ -251,6 +251,7 @@
             <component id = 'wizard2' selector="tag name" locator="app-querybuilder" parent="False" />
 
             <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
+            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
             <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
             <!--<component id = 'leftcalendar' selector="class name" locator="calendar left" parent="True" />-->
             <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />

@@ -20,9 +20,11 @@ class BaseComponentClass:
 
     def customClick(self, elHandle):
         try:
-            return elHandle[len(elHandle)-1].click()
+            elHandle[len(elHandle)-1].click()
+            return True
         except IndexError or Exception as e:
-            return elHandle.click()
+            elHandle.click()
+            return e
         # return elHandle[len(elHandle)-1].click()
     def customSendkeys(self, elHandle, value):
         return elHandle[len(elHandle)-1].send_keys(value)

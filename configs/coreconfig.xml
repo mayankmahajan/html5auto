@@ -13,6 +13,13 @@
         <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
         <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
     </quicklinks>
+    <wizardquicklinks>
+        <wizardquicklink id = "Today"/>
+        <wizardquicklink id = "Yesterday"/>
+        <wizardquicklink id = "This Week"/>
+        <wizardquicklink id = "Last week"/>
+        <wizardquicklink id = "This Month"/>
+    </wizardquicklinks>
 
     <measures>
         <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
@@ -65,9 +72,9 @@
     </measures>
 
     <sitetypes>
-        <sitetype id = "WDC"/>
+        <!--<sitetype id = "WDC"/>-->
         <sitetype id = "SatSite"/>
-        <sitetype id = "CellSite"/>
+        <!--<sitetype id = "CellSite"/>-->
     </sitetypes>
 
     <!--Add UserInfo-->
@@ -263,9 +270,13 @@
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
             <component id = "download" selector="class name" locator='downloadIcon' wait = 'skip'/>
             <component id = "delete" selector="class name" locator='deleteIcon' wait = 'skip'/>
+
                     <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
                     <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
                     <!--<subComponent id = "text" selector="class" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text'/>-->
+        </componentConfig>
+        <componentConfig id = 'sitetype'>
+            <component id = "sites" selector="css selector" locator='[ng-model="vm.selectedtype"]' />
         </componentConfig>
 
         <componentConfig id = 'netflowtable'>
@@ -422,6 +433,7 @@
             <component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
             <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
+
         </componentConfig>
 
 

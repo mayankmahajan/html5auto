@@ -16,7 +16,9 @@ import random
 setup = SetUp()
 
 # login(setup, "cmathieu", "a")
-
+# Getting Measures Info from Config Files
+siteIteration = len(setup.cM.getNodeElements("sitetypes","sitetype"))
+sites = setup.cM.getNodeElements("sitetypes","sitetype").keys()
 ar = []
 n = [1]
 reportname = "site"
@@ -37,21 +39,33 @@ grPopInstance = GenerateReportsPopClass(setup.d)
 # grPopInstance.reportspopup.selectRadioButton("Site Report",grPopHandle)
 #
 # grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+############################### time reports ###########################
 # grPopHandle = getHandle(setup,"report2_popup")
 # grPopInstance.reportspopup.selectRadioButton("Today",grPopHandle)
-# grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
-#
-#
-#
 # grPopHandle = getHandle(setup,"report2_popup")
-# grPopInstance.table.getTableCells(grPopHandle)
-#
-# ar.append(grPopInstance.table.selectTableCellIndex(1,grPopHandle))
+# starttime = getInputText(grPopHandle,'generateReportDialog','starttime')
+# endtime = getInputText(grPopHandle,'generateReportDialog','endtime')
 # grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+############################## time reports completed ####################
 
+######################### get table data ######################################
+for j in range(0,2):
+    grPopHandle = getHandle(setup,"report2_popup")
+
+    # grPopInstance.table.getTableCells(grPopHandle)
+    # ar.append(grPopInstance.table.selectTableCellIndex(1,grPopHandle))
+    # b = grPopInstance.table.selectTableCellIndex(1,grPopHandle) + "("+sites[0]+")"
+    ar.append(grPopInstance.table.selectTableCellIndex(1,grPopHandle))
+    grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+###############################get table data completed########################
+print ar
 grPopHandle = getHandle(setup,"report2_popup")
-a = getInputText(grPopHandle,'generateReportDialog','starttime')
-b = getInputText(grPopHandle,'generateReportDialog','endtime')
+# grPopHandle['generateReportDialog'][0].text
+print grPopHandle['generateReportDialog']['filters'][0].text
+a = FindWordInString(ar,grPopHandle)
 print a
-print b
+# starttimeend =getInputText(grPopHandle,'generateReportDialog','starttime')
+# endtimeend = getInputText(grPopHandle,'generateReportDialog','endtime')
+# checkEqualAssert(starttime,starttimeend,"","","Start Time validation")
+# checkEqualAssert(endtime,endtimeend,"","","End Time validation")
 setup.d.close()

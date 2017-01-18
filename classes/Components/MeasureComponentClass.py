@@ -60,7 +60,7 @@ class MeasureComponentClass(BaseComponentClass):
             if ele.text == measure:
                 ele.click()
                 break
-       
+
     def select(self,handle):
         handle[len(handle)-1].click()
         time.sleep(1)

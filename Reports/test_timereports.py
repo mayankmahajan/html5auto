@@ -13,31 +13,40 @@ from classes.Pages.ReportsModuleClass import *
 import random
 
 setup = SetUp()
-
-# login(setup, "cmathieu", "a")
-
-
-reportname = "site"
+wizardIteration = len(setup.cM.getNodeElements("wizardquicklinks","wizardquicklink"))
+quicklinks = setup.cM.getNodeElements("wizardquicklinks","wizardquicklink").keys()
+reportname = "timereports"
+reports = []
 login(setup, "admin", "Admin@123")
-# exploreScreenInstance = ExplorePageClass(setup.d)
-# exploreHandle = getHandle(setup,"explore_Screen")
-#
-# # Reports Module
-# ###################################
-# exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
-# reportScreenInstance = ReportsModuleClass(setup.d)
-# reportScreenHandle = getHandle(setup,"report_Screen")
-#
-# reportScreenInstance.launchCreateReport(setup.d)
-# grPopInstance = GenerateReportsPopClass(setup.d)
-# grPopHandle = getHandle(setup,"report2_popup")
-# grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
 
-grPopInstance = GenerateReportsPopClass(setup.d)
-grPopHandle = getHandle(setup,"report2_popup")
-# dateSelected = grPopInstance.routerpopup.setTime2(0,grPopHandle,'reportwizard','starttime',setup,"24-03-2016-03-00")
-# grPopInstance.routerpopup.doCalendarSelection(setup,'reportwizard',0,"24-03-2016-03-00")
-grPopInstance.dropdown.customClick(grPopHandle['reportwizard']['starttime'])
-grPopHandle = getHandle(setup,"report2_popup")
-grPopInstance.routerpopup.doCalendarSelection(setup,)
+# Reports Module
+###################################
+exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
+for i in range(wizardIteration):
+
+    reportScreenInstance = ReportsModuleClass(setup.d)
+    reportScreenHandle = getHandle(setup,"report_Screen")
+
+    reportScreenInstance.launchCreateReport(setup.d)
+    grPopInstance = GenerateReportsPopClass(setup.d)
+    grPopHandle = getHandle(setup,"report2_popup")
+    grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+    grPopHandle = getHandle(setup,"report2_popup")
+    grPopInstance.reportspopup.selectRadioButton(quicklinks[i],grPopHandle)
+    grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+    grPopHandle = getHandle(setup,"report2_popup")
+    grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
+    grPopHandle = getHandle(setup,"report2_popup")
+    grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["reportnamewizard"],reportname)
+    grPopInstance.dropdown.customClick(grPopHandle['generateReportDialog']["addemail"])
+    grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["emailInputwizard"],"deepanshu.ahuja@guavus.com")
+    grPopInstance.reportspopup.clickButton("Submit",grPopHandle)
+    grPopHandle = getHandle(setup,"report2_popup")
+    result = grPopInstance.dropdown.customClick(grPopHandle['successdialog']['ok'])
+
+    checkEqualAssert(result,True,quicklinks[i],"","Validation")
+
 setup.d.close()
+

@@ -291,5 +291,5 @@ class TableComponentClass(BaseComponentClass):
                     handler[i].click()
                     return handler[i].text
                 except Exception as e:
-                    return
+                    return e
 
