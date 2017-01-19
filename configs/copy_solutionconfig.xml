@@ -237,15 +237,25 @@
             <!--<component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />-->
             <component id = 'wizards' selector="id" locator="bodyDiv" parent="True" />
 
-            <!--<component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />-->
+            <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
             <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
             <!--<component id = 'leftcalendar' selector="class name" locator="left" parent="True" />-->
             <!--<component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />-->
         </screenConfig>
 
+        <screenConfig id = "fpv_screen">
+            <component id = 'fpv' selector="id" locator="flexbox_ts" parent="True" />
+        </screenConfig>
+
+
+
     </screenConfigs>
 
     <componentConfigs>
+
+        <componentConfig id ="fpv">
+            <component id="container" locator="pathView" selector="id"/>
+        </componentConfig>
         <componentConfig id="radios">
             <component id = "radio" selector="css selector" locator='[type="radio"]' />
         </componentConfig>

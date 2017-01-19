@@ -147,3 +147,7 @@ class BaseComponentClass:
             return ele.get_attribute("style")
         elif prop == "style":
             return ele.get_attribute("style")
+        elif prop == "class":
+            return ele.get_attribute("class")
+        elif prop == "id":
+            return ele.get_attribute("id")
