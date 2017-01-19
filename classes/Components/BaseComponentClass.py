@@ -4,6 +4,7 @@
 from Utils.UnitSystem import UnitSystem
 from Utils.ConfigManager import ConfigManager
 from selenium.common.exceptions import *
+import time
 
 class BaseComponentClass:
     def click(self, elHandle):
@@ -21,6 +22,7 @@ class BaseComponentClass:
     def customClick(self, elHandle):
         try:
             elHandle[len(elHandle)-1].click()
+            time.sleep(2)
             return True
         except IndexError or Exception as e:
             elHandle.click()
@@ -119,6 +121,8 @@ class BaseComponentClass:
             if value == el.find_elements_by_xpath("..//span")[0].text:
                 try:
                     el.click()
+                    time.sleep(2)
+                    break
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
 
@@ -127,6 +131,9 @@ class BaseComponentClass:
             if value == el.text:
                 try:
                     el.click()
+                    time.sleep(2)
+                    return True
+                    break
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
 

@@ -22,6 +22,7 @@ class ReportsModuleClass(BasePopClass):
     def launchCreateReport(self,driver):
         try:
             driver.execute_script("document.getElementsByClassName('createReportBtn')[0].click()")
+            sleep(4)
             return True
         except Exception as e:
             return e

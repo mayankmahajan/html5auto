@@ -145,19 +145,22 @@ class RoutersPopUpComponentClass(BaseComponentClass):
     def add(self, addDeleteGroupRule, handle, index = 0,parent="wizards", child="qb"):
         handler = handle[parent][child][0]
 
-        if "addgroup" in addDeleteGroupRule:
-            name = "Add Group"
-        elif "addrule" in addDeleteGroupRule:
-            name = "Add Rule"
-        elif "deletegroup" in addDeleteGroupRule:
-            name = "Group"
-        elif "deleterule" in addDeleteGroupRule:
-            name = "Delete Rule"
-            return self.clickTarget("title",name,handler.find_elements_by_tag_name("img"),index)
+        try:
+            if "addgroup" in addDeleteGroupRule:
+                name = "Add Group"
+            elif "addrule" in addDeleteGroupRule:
+                name = "Add Rule"
+            elif "deletegroup" in addDeleteGroupRule:
+                name = "Group"
+            elif "deleterule" in addDeleteGroupRule:
+                name = "Delete Rule"
+                self.clickTarget("title",name,handler.find_elements_by_tag_name("img"),index)
+                return True
 
-
-        return self.clickTarget("text",name,handler.find_elements_by_tag_name("button"),index)
-
+            self.clickTarget("text",name,handler.find_elements_by_tag_name("button"),index)
+            return True
+        except Exception as e:
+            return e
 
     def clickTarget(self,prop,name,groupHandle,index=0,increment=1):
         f = 0

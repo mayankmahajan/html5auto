@@ -62,6 +62,7 @@ class CalendarComponentClass(BaseComponentClass):
         for el in availableDates:
             if el.text == day:
                 el.click()
+                break
 
     def getAllDates(self, h, tbody, td):
         return h[0].find_elements_by_tag_name(tbody)[0].find_elements_by_tag_name(td)

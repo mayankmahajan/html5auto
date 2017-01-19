@@ -18,10 +18,10 @@ class DropdownComponentClass(BaseComponentClass):
         except:
             h = handle
 
-            for ele in h.find_elements_by_xpath(".//*"):
-                if ele.text == value:
-                    ele.click()
-                    break
+        for ele in h.find_elements_by_xpath(".//*"):
+            if ele.text == value:
+                ele.click()
+                break
 
 
     def doSelectionOnVisibleDropDown(self,h,value,index=0,parent="allselects",child="select"):
