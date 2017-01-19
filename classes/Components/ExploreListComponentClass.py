@@ -20,13 +20,19 @@ class ExploreListComponentClass(BaseComponentClass):
                 el.click()
                 break
 
-    def switchApp(self,h,index,parent=None,child=None):
+    def switchApp(self,h):
         h['appHeader']['switchertemplate'][0].click()
 
-        if child==None:
-            child='cellitem'
-        if parent==None:
-            parent='switchApp'
+        # if child==None:
+        #     child='cellitem'
+        # if parent==None:
+        #     parent='switchApp'
 
-        h[parent][child][index].click()
 
+
+    def launchapp(self,h,index,parent="switchApp",child="cellitem"):
+        try:
+            h[parent][child][index].click()
+            return True
+        except Exception as e:
+            return e
