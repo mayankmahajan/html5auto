@@ -25,7 +25,7 @@ exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","nf_S
 
 # exploreScreenInstance.exploreList.switchApp(exploreHandle,1)
 
-# Reports Module
+# suite_Reports Module
 ####################################
 # exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
 # reportScreenInstance = ReportsModuleClass(setup.d)

@@ -26,7 +26,7 @@ login(setup, "admin", "Admin@123")
 # exploreScreenInstance = ExplorePageClass(setup.d)
 # exploreHandle = getHandle(setup,"explore_Screen")
 #
-# # Reports Module
+# # suite_Reports Module
 # ###################################
 # exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
 # reportScreenInstance = ReportsModuleClass(setup.d)
