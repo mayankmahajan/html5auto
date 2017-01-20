@@ -50,7 +50,10 @@ class FPVComponentClass(BaseComponentClass):
             lineArray = self.getConnectingLines(handler[0])
             paths.append(self.createUniquePaths(totalPaths,hopsArray,lineArray))
 
-        return self.arrangeHops(paths,hopsArray)
+        return [self.dataPerPath(rankHandlers),self.arrangeHops(paths,hopsArray)]
+
+    def dataPerPath(self,rankHandlers):
+        return [rankHandlers[i].text for i in range(len(rankHandlers)/2)]
 
     def arrangeHops(self,paths,hopsArray):
         arrangedPaths = {}
