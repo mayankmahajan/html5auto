@@ -76,11 +76,12 @@ class BaseComponentClass:
 
 
     def compHandlers(self,comp,handlers):
-        newHandlers = {}
-        for k,v in handlers.iteritems():
-            if k in self.configmanager.componentChildRelations[comp]:
-                newHandlers[k] = v
-        return newHandlers
+        return handlers[comp]
+        # newHandlers = {}
+        # for k,v in handlers.iteritems():
+        #     if k in self.configmanager.componentChildRelations[comp]:
+        #         newHandlers[k] = v
+        # return newHandlers
 
 
     def selectDropDownByText(self,handler,text,text2="HAHA"):
