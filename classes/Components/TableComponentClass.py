@@ -168,22 +168,36 @@ class TableComponentClass(BaseComponentClass):
     def getIterfaceRows(self,colcount,h):
         elHandle=h['ROWS']
         rowCount = len(elHandle) / colcount
+        if rowCount < 15:
+            l = len(elHandle)
+        else:
+            l = 15*colcount
         rows = []
         temp = []
-        if rowCount <= 15:
-            looprange=rowCount*colcount
-        else:
-            looprange = 15 * colcount
-        for i in range(looprange):
-            if len(temp) < colcount:
-                temp.append(elHandle[i].text)
-            else:
-                rows.append(temp)
-                temp = [elHandle[i].text]
+
+        for i in range(0,l,colcount):
+            j=i
+            rows.append([elHandle[j].text for j in range(j,j+colcount)])
+
+        return rows
+
+
+
+
+        # if rowCount <= 15:
+        #     looprange=rowCount*colcount
+        # else:
+        #     looprange = 15 * colcount
+        # for i in range(looprange):
+        #     if len(temp) < colcount:
+        #         temp.append(elHandle[i].text)
+        #     else:
+        #         rows.append(temp)
+        #         temp = [elHandle[i].text]
 
         # return a 2D array
 
-        return rows
+
 
 
     def getIterfaceTableData(self,h):
