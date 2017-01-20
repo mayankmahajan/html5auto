@@ -3,11 +3,12 @@ class Constants(object):
     #testcase based constants
     # URL = 'https://acume-staging.guavus.com:6443/'
     # URL = 'localhost:3333/ui/app/'
-    # URL = 'https://nrmca.guavus.com:6443/'
+    URL = 'https://nrmca.guavus.com:44710/'
 
-    URL = 'http://10.71.3.77/'
+    # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
-    URL = 'https://nrmca-perf.guavus.com:6443/'
+    # URL = 'https://nrmca-upgrade-setup.sprintspectrum.com:6443/'
+    # URL = 'https://nrmca-perf.guavus.com:44710/'
     USERNAME = 'admin'
     PASSWORD = 'Admin@123'
 
@@ -19,7 +20,7 @@ class Constants(object):
     SITEINTERACTIONS = 'siteInteraction_Screen'
     INTERFACES = 'interface_Screen'
     VRF = 'vrf_Screen'
-    NENE="ne_Screen"
+    NENE="nene_Screen"
     CONTEXTMENU = 'CONTEXTMENU'
     EXPORTTO = 'EXPORTTO'
     EXPORTTOCSV = 'EXPORTTOCSV'
@@ -35,7 +36,7 @@ class Constants(object):
     DRILLTONE="DRILLTONE"
     DRILLTONENE="DRILLTONENE"
     # driver based constants
-    WEBDRIVERTIMEOUT = 15
+    WEBDRIVERTIMEOUT = 8
 
     # Component based constants
     ## BTV
