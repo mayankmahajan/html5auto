@@ -18,6 +18,7 @@ from Utils.ConfigManager import ConfigManager
 import time
 import re
 from Utils.logger import *
+from Utils.utility import *
 
 
 from selenium.webdriver import ActionChains
@@ -42,6 +43,7 @@ class FPVComponentClass(BaseComponentClass):
         for el in circularAreas:
             try:
                 logger.debug('Clicking Element :: Parent %s Child %s Object %s',parent,child,el.text)
+
                 el.click()
             except Exception as e:
                 logger.debug('Exception %s found on clicking Parent %s Child %s Object %s',e,parent,child,el.text)

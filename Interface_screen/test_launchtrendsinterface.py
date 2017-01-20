@@ -27,9 +27,9 @@ login(setup, "admin", "Admin@123")
 #
 # data = siteScreenInstance.btv.getData(siteScreenHandle)
 
-# Launch Screen
-launchPage(setup,Constants.INTERFACES)
-
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","interface_Screen")
 # Get the Instance of the screen
 screenInstance = InterfacePageClass(setup.d)
 

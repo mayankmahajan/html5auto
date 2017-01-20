@@ -17,11 +17,9 @@ setup = SetUp()
 login(setup, "admin", "Admin@123")
 #####################################################
 
-
-# Launch Site Screen
-launchPage(setup,"site_Screen")
-sleep(5)
-
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 # Get the Instance and handle of the screen
 screenInstance = SitePageClass(setup.d)
 siteScreenHandle = getHandle(setup,"site_Screen")

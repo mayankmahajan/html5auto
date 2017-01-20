@@ -17,10 +17,14 @@ exploreScreenInstance = ExplorePageClass(setup.d)
 exploreHandle = getHandle(setup,"explore_Screen")
 
 
-exploreScreenInstance.exploreList.switchApp(exploreHandle,2)
+exploreHandle = getHandle(setup,"explore_Screen",)
 
+# exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","nf_Screen")
+exploreScreenInstance.exploreList.switchApp(exploreHandle)
+result = exploreScreenInstance.exploreList.launchapp(getHandle(setup,"explore_Screen"),2)
 time.sleep(4)
 setup.d.switch_to.window(setup.d.window_handles[1])
 
+checkEqualAssert(result,True,"","","Forensics screen launched")
 
 setup.d.close()

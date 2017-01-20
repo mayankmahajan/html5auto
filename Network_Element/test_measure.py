@@ -28,10 +28,10 @@ print measures
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-# Launch Site Screen
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
-launchPage(setup,"site_Screen")
-sleep(5)
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)

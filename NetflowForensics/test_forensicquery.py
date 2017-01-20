@@ -16,8 +16,8 @@ login(setup, "admin", "Admin@123")
 exploreScreenInstance = ExplorePageClass(setup.d)
 exploreHandle = getHandle(setup,"explore_Screen")
 
-
-exploreScreenInstance.exploreList.switchApp(exploreHandle,2)
+exploreScreenInstance.exploreList.switchApp(exploreHandle)
+result = exploreScreenInstance.exploreList.launchapp(getHandle(setup,"explore_Screen"),2)
 
 time.sleep(4)
 setup.d.switch_to.window(setup.d.window_handles[1])
@@ -26,40 +26,80 @@ setup.d.switch_to.window(setup.d.window_handles[1])
 
 
 forensicsScreenInstance = ForensicsPageClass(setup.d)
-forensicsScreenHandle = getHandle(setup,"forensics_Screen")
+forensicsScreenHandle = getHandle(setup,"forensics_Screen","commoncomponents")
 
 forensicsScreenInstance.dummyelement.customClick(forensicsScreenHandle['commoncomponents']['newquery'])
 
 popupInstance = GenerateReportsPopClass(setup.d)
-popupHandler = getHandle(setup,"routers_popup")
+####### Get the Handles of the routers Popup#################
+popupHandler = getHandle(setup,"routers_popup","queryrouters")
 
-dateSelected = popupInstance.routerpopup.setTime(0,popupHandler,'queryrouters','wizard1',setup,"24-03-2016-03-00")
-# popupHandler = getHandle(setup,"routers_popup")
-dateSelected = popupInstance.routerpopup.setTime(1,popupHandler,'queryrouters','wizard1',setup,"12-11-2016-03-00")
+############# Get the calendar Dialog box open ##################
+popupHandler['queryrouters']['starttime'][0].click()
+############# Set the Start time ##################
+setCalendar("2016","March","24","02","10",popupInstance,setup)
+popupHandler = getHandle(setup,"routers_popup","allbuttons")
+popupInstance.reportspopup.clickButton("Apply",popupHandler)
+popupHandler = getHandle(setup,"routers_popup","queryrouters")
 
 
-# dateSelected = popupInstance.
 
+popupHandler['queryrouters']['endtime'][0].click()
+############## Get the endtime Dialog Box open####################
+setCalendar("2016","March","24","02","10",popupInstance,setup)
+popupHandler = getHandle(setup,"routers_popup","allbuttons")
+popupInstance.reportspopup.clickButton("Apply",popupHandler)
+
+
+
+popupHandler = getHandle(setup,"routers_popup","queryrouters")
 queryName = popupInstance.routerpopup.setQueryName(queryname,popupHandler,'queryrouters','wizard1')
 sortBy = popupInstance.routerpopup.setSortBy("PROTOCOL",popupHandler,'queryrouters','wizard1')
 sortOrder = popupInstance.routerpopup.setSortOrder("ASC",popupHandler,'queryrouters','wizard1')
 pageSize = popupInstance.routerpopup.setPageSize("500",popupHandler,'queryrouters','wizard1')
 
 
-data = popupInstance.routertable.getTableData1(popupHandler,'routertable')
+
+popupHandler = getHandle(setup,"routers_popup","routertable")
 popupInstance.routertable.setSelection1(2,popupHandler,'routertable')
-popupHandler = getHandle(setup,"routers_popup")
+
+
+
+popupHandler = getHandle(setup,"routers_popup","allbuttons")
 popupInstance.reportspopup.clickButton("Next Step",popupHandler)
-popupHandler = getHandle(setup,"routers_popup")
+
+
+
+popupHandler = getHandle(setup,"routers_popup","wizards")
+addrule =popupInstance.routerpopup.add("addrule",popupHandler)
+popupInstance.routerpopup.add("addrule",popupHandler,0)
+popupInstance.routerpopup.add("addrule",popupHandler,0)
+addgroup =popupInstance.routerpopup.add("addgroup",popupHandler,0)
+popupInstance.routerpopup.add("addrule",popupHandler,1)
+popupInstance.routerpopup.add("addgroup",popupHandler,1)
+popupInstance.routerpopup.add("addrule",popupHandler,2)
+deletegroup =popupInstance.routerpopup.add("deletegroup",popupHandler,1)
+deleterule = popupInstance.routerpopup.add("deleterule",popupHandler,1)
+popupInstance.routerpopup.updateGroup("rule",["DST PORT","in",2],popupHandler)
+popupInstance.routerpopup.updateGroup("rule",["DST PORT","in",2],popupHandler,2)
+
+
+
+checkEqualAssert(addrule,True,"","","Add Rule Validation")
+checkEqualAssert(addgroup,True,"","","Add Group Validation")
+checkEqualAssert(deleterule,True,"","","Delete Rule Validation")
+checkEqualAssert(deletegroup,True,"","","Delete Group Validation")
+popupHandler = getHandle(setup,"routers_popup","allbuttons")
 popupInstance.reportspopup.clickButton("Submit Query",popupHandler)
 date = currentdate()
-popupHandler = getHandle(setup,"routers_popup")
+popupHandler = getHandle(setup,"routers_popup","allbuttons")
 popupInstance.reportspopup.clickButton("Ok",popupHandler)
 forensicsScreenInstance = ForensicsPageClass(setup.d)
 forensicsScreenHandle = getHandle(setup,"forensics_Screen")
 forensicsScreenInstance.switcher.switchTo(1,forensicsScreenHandle,'createdialog','switcher')
+forensicsScreenHandle = getHandle(setup,"forensics_Screen","netflowtable")
 
-data = forensicsScreenInstance.table.getTableData1(getHandle(setup,"report_Screen"),"netflowtable")
+data = forensicsScreenInstance.table.getTableData1(forensicsScreenHandle,"netflowtable")
 # result = data['rows'][0][1]
 # type = data['rows'][0][2]
 # reportid = IsreportIDvalid(data)

@@ -36,11 +36,13 @@ checkEqualAssert("True",str(result),"TODAY","","LOGIN SUCCESSFULL")
 ############################# LOGIN COMPLETED #########################
 
 ############################# SITE LAUCNHES #########################
-# Launch Site Screen
-launchPage(setup,"site_Screen")
 
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+
+sitescreen =exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 # Checking the launch page of the site page
-checkEqualAssert(True,True,"","","SITE PAGE LAUNCHES SUCCESSFULLY")
+checkEqualAssert(sitescreen,True,"","","SITE PAGE LAUNCHES SUCCESSFULLY")
 
 ###########################SITE LAUNCHES COMPLETED####################
 # Get the Instance of the screen
@@ -88,9 +90,9 @@ screenInstance = SitePageClass(setup.d)
 # Get the handles of the screen
 siteScreenHandle = getHandle(setup,"site_Screen")
 data = screenInstance.btv.getData(siteScreenHandle)
-# length = len(data['BTVCOLUMN1'])
-# rand = random.randrange(1,length)
-# screenInstance.btv.setSelection(ra,siteScreenHandle)
+length = len(data['BTVCOLUMN1'])
+rand = random.randrange(1,length)
+screenInstance.btv.setSelection(rand,siteScreenHandle)
 defselection = screenInstance.btv.getSelection(siteScreenHandle)
 #print defselection['BTVCOLUMN2']
 btvvalue = defselection['BTVCOLUMN2']

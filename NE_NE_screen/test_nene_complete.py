@@ -30,8 +30,10 @@ measures = setup.cM.getNodeElements("measures","measure").keys()
 #######################################################################
 # Logging into the appliction and launch site screen
 login(setup, "admin", "Admin@123")
-launchPage(setup,"site_Screen")
-sleep(5)
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
+
 #######################################################################
 
 

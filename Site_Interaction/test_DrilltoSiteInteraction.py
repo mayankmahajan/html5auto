@@ -13,9 +13,10 @@ setup = SetUp()
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-# Launch Site Screen
-launchPage(setup,"site_Screen")
 
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -27,9 +28,8 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 screenInstance.btv.setSelection(2,siteScreenHandle)
 
 # Checking drill to the Site Interaction Screen
-drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
+result =drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
 
-
-
+checkEqualAssert(result,True,"","","Drill to Site Interaction Validation")
 # Logging out of the application
 setup.d.close()

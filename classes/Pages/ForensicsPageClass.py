@@ -5,6 +5,7 @@ from classes.Components.TableComponentClass import *
 from classes.Components.DropdownComponentClass import *
 from classes.Components.IBLeftColumnComponentClass import *
 from classes.Components.SwitcherComponentClass import *
+from classes.Components.GenerateReportsComponentClass import *
 
 class ForensicsPageClass(BasePageClass):
     def __init__(self,driver):
@@ -17,6 +18,8 @@ class ForensicsPageClass(BasePageClass):
         self.leftColumn = IBLeftColumnComponentClass()
         self.switcher = SwitcherComponentClass()
         self.dropdown = DropdownComponentClass()
+        self.reportspopup = GenerateReportsComponentClass()
+
         BasePageClass.__init__(self,driver)
 
 

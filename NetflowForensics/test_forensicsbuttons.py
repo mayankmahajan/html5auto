@@ -17,7 +17,8 @@ exploreScreenInstance = ExplorePageClass(setup.d)
 exploreHandle = getHandle(setup,"explore_Screen")
 
 
-exploreScreenInstance.exploreList.switchApp(exploreHandle,2)
+exploreScreenInstance.exploreList.switchApp(exploreHandle)
+result = exploreScreenInstance.exploreList.launchapp(getHandle(setup,"explore_Screen"),2)
 
 time.sleep(4)
 setup.d.switch_to.window(setup.d.window_handles[1])
@@ -25,14 +26,11 @@ setup.d.switch_to.window(setup.d.window_handles[1])
 forensicsScreenInstance = ForensicsPageClass(setup.d)
 forensicsScreenHandle = getHandle(setup,"forensics_Screen")
 
-# data = reportScreenInstance.table.getTableData1(reportScreenHandle,"netflowtable")
-view = forensicsScreenInstance.dropdown.click(forensicsScreenHandle['netflowtable']['view'][1])
 download = forensicsScreenInstance.dropdown.click(forensicsScreenHandle['netflowtable']['download'][1])
 forensicsScreenInstance.dropdown.click(forensicsScreenHandle['netflowtable']['delete'][1])
 grPopInstance = GenerateReportsPopClass(setup.d)
 grPopHandle = getHandle(setup,"report2_popup")
 delete = grPopInstance.reportspopup.clickButton("Ok",grPopHandle)
-checkEqualAssert(view,True,"","","View button validation")
 checkEqualAssert(download,True,"","","Download button validation")
 checkEqualAssert(delete,True,"",""," Delete button validation")
 

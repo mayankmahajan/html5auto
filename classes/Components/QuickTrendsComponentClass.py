@@ -61,7 +61,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
                 for el in hticks:
                     driverHelper.action.move_to_element(el).perform()
                     time.sleep(1) # only to show in demo
-                    tooltipText.append(handlrs['qttooltip'][len(handlrs['qttooltip'])-1].text)
+                    tooltipText.append(handlrs['quicktrends']['qttooltip'][len(handlrs['quicktrends']['qttooltip'])-1].text)
             else:
                 print el.tag_name
         return tooltipText
@@ -70,7 +70,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
 
     def __getHandler(self, handlrs):
         h = {}
-        for svg in handlrs['quicktrends'][0].find_elements_by_tag_name("svg"):
+        for svg in handlrs['quicktrends']['quicktrends'][0].find_elements_by_tag_name("svg"):
             if len(svg.find_elements_by_class_name('legend')) > 0:
                 h['legend']= svg
             else:

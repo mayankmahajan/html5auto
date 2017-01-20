@@ -114,7 +114,7 @@ def launchPage(obj,pageName,isStartScreen=False):
     except Exception:
         return Exception
 
-def getHandlersForParentComponent(driver, driverHelper, configManager, pageName,parent):
+def getHandlersForParentComponent(driver, driverHelper, configManager, pageName,parent="NA"):
     listOfHandles = {}
     if parent == "NA":
         parents = configManager.screenComponentRelations[pageName]
@@ -135,7 +135,7 @@ def getHandlersForParentComponent(driver, driverHelper, configManager, pageName,
 
     return listOfHandles
 
-def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles,parent):
+def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles,parent="NA"):
     listOfHandles = {}
     if parent == "NA":
         parents = configManager.screenComponentRelations[pageName]
@@ -629,13 +629,16 @@ def validatesearchtable(data,columnname,searchtext):
     return flag
 
 
-def setCalendar(y,m,d,h,min,intance,handle):
+def setCalendar(y,m,d,h,min,intance,setup):
     try:
-        intance.calendar.set("year",y,handle)
-        intance.calendar.set("month",m,handle)
-        intance.calendar.setDay("day",d,handle)
-        intance.calendar.set("hour",h,handle)
-        intance.calendar.set("minute",min,handle)
+        intance.calendar.set("year",y,getHandle(setup,"routers_popup","leftcalendar"))
+        intance.calendar.set("month",m,getHandle(setup,"routers_popup","leftcalendar"))
+        intance.calendar.setDay("day",d,getHandle(setup,"routers_popup","leftcalendar"))
+        intance.calendar.set("hour",h,getHandle(setup,"routers_popup","leftcalendar"))
+        try:
+            intance.calendar.set("minute",min,getHandle(setup,"routers_popup","leftcalendar"))
+        except:
+            pass
         return True
     except ElementNotSelectableException or ElementNotVisibleException or Exception as e:
         return e

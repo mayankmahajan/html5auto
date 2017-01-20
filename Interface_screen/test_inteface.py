@@ -22,7 +22,9 @@ t=0
 # Logging into the appliction and launch site screen
 login_status=login(setup, "admin", "Admin@123")
 #checkEqualAssert(True,login_status,"","","Login to NRMCA UI")
-launch_status=launchPage(setup,"interface_Screen")
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+launch_status =exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","interface_Screen")
 checkEqualAssert(True,launch_status,"","","launch site screen")
 sleep(5)
 screenInstance = InterfacePageClass(setup.d)

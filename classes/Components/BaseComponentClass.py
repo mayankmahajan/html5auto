@@ -129,15 +129,17 @@ class BaseComponentClass:
 
     def clickButton(self,value,h,parent="allbuttons",child="button"):
         for el in h[parent][child]:
-            if value == el.text:
-                try:
-                    el.click()
-                    time.sleep(2)
-                    return True
-                    break
-                except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
-                    return e
-
+            try:
+                if value == el.text:
+                    try:
+                        el.click()
+                        time.sleep(2)
+                        return True
+                        break
+                    except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                        return e
+            except Exception as e:
+                return e
 
     def runtimeValue(self,prop,ele):
         if prop == "text":

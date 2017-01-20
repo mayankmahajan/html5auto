@@ -21,7 +21,7 @@ class IBLeftColumnComponentClass(BaseComponentClass):
             for i in range(len(leftlinks)):
                 if index == i:
                     leftlinks[i].click()
-                    break
+                    return True
             return True
         except ElementNotSelectableException or NoSuchElementException or ElementNotVisibleException or StaleElementReferenceException or Exception as e:
             return e

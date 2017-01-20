@@ -32,17 +32,20 @@ grPopInstance.reportspopup.selectRadioButton("Network Function Report",grPopHand
 grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
 
+grPopHandle = getHandle(setup,"report2_popup","radios")
+
+grPopInstance.reportspopup.selectRadioButton("Recurring report",grPopHandle)
 
 grPopHandle = getHandle(setup,"report2_popup","allimages")
 grPopHandle['allimages']['image'][4].click()
 setCalendar("2016","March","24","02","00",grPopInstance,setup)
 grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 grPopInstance.reportspopup.clickButton("Apply",grPopHandle)
-grPopHandle = getHandle(setup,"report2_popup","allimages")
-grPopHandle['allimages']['image'][5].click()
-setCalendar("2016","March","24","03","00",grPopInstance,setup)
-grPopHandle = getHandle(setup,"report2_popup","allbuttons")
-grPopInstance.reportspopup.clickButton("Apply",grPopHandle)
+grPopHandle = getHandle(setup,"report2_popup","recurring")
+grPopInstance.dropdown.doSelection(grPopHandle,"Daily","recurring","dropdowns")
+grPopHandle = getHandle(setup,"report2_popup","recurring")
+grPopInstance.dropdown.customSendkeys(grPopHandle['recurring']["instances"],"1")
+
 grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
 
@@ -60,5 +63,8 @@ grPopInstance.reportspopup.clickButton("Submit",grPopHandle)
 grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 result = grPopInstance.reportspopup.clickButton("OK",grPopHandle)
 
-checkEqualAssert(result,True,"","","One Time Report Validation")
+checkEqualAssert(result,True,"","","Recurring Report Validation")
+
+
+
 setup.d.close()

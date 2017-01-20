@@ -32,8 +32,8 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 screenInstance.btv.setSelection(2,siteScreenHandle)
 
 # Checking the drill to
-drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
-
+result = drilltoScreen(setup.d,setup.dH,Constants.SITEINTERACTIONS)
+checkEqualAssert(result,True,"","","Drill to Validation to Site Interaction")
 
 
 

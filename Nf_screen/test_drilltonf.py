@@ -16,8 +16,9 @@ screen_name='site_Screen'
 # Logging into the appliction
 login(setup, "admin", "Admin@123")
 
-# Launch Site Screen
-launchPage(setup,screen_name)
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)
@@ -27,7 +28,7 @@ siteScreenHandle = getHandle(setup,screen_name)
 
 VAR=screenInstance.switcher.getSelection(siteScreenHandle)
 test_case2="Default Selection in chart"
-checkEqualAssert("Chart",str(status),set_time,set_measure,test_case3)
+# checkEqualAssert("Chart",str(status),set_time,set_measure,test_case3)
 
 
 # Get the default selection

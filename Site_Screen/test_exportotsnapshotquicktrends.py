@@ -31,7 +31,7 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 
 screenInstance.cm.activateContextMenuOptions1(siteScreenHandle)
 
-screenInstance.cm.launchTrends(siteScreenHandle)
+screenInstance.cm.launchTrends(getHandle(setup,"site_Screen","cm"))
 
 qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")

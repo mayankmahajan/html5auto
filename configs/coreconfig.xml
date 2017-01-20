@@ -6,9 +6,9 @@
     </seleniumSettings>
 
     <quicklinks>
-        <!--<quicklink id = "TODAY"/>-->
+        <quicklink id = "TODAY"/>
         <!--<quicklink id = "YESTERDAY"/>-->
-        <quicklink id = "last2Hours"/>
+        <!--<quicklink id = "last2Hours"/>-->
 
         <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
         <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
@@ -22,59 +22,59 @@
     </wizardquicklinks>
 
     <measures>
-        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
-        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
-        <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
-        <!--<measure id = "Flows_downlink_percentage_peak"/>-->
-        <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
         <measure id = "Bitrate_downlink_absolute_average"/>
-        <!--<measure id = "Bitrate_downlink_absolute_peak"/>-->
-        <!--<measure id = "Bitrate_downlink_percentage_average"/>-->
-        <!--<measure id = "Bitrate_downlink_percentage_peak"/>-->
-        <!--<measure id = "Bitrate_uplink_absolute_average"/>-->
-        <!--<measure id = "Bitrate_uplink_absolute_peak"/>-->
-        <!--<measure id = "Bitrate_uplink_percentage_average"/>-->
-        <!--<measure id = "Bitrate_uplink_percentage_peak"/>-->
-        <!--<measure id = "Bitrate_total_absolute_average"/>-->
-        <!--<measure id = "Bitrate_total_absolute_peak"/>-->
-        <!--<measure id = "Bitrate_total_percentage_average"/>-->
-        <!--<measure id = "Bitrate_total_percentage_peak"/>-->
-        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
-        <!--<measure id = "Tonnage_downlink_absolute_peak"/>-->
-        <!--<measure id = "Tonnage_downlink_percentage_average"/>-->
-        <!--<measure id = "Tonnage_downlink_percentage_peak"/>-->
-        <!--<measure id = "Tonnage_uplink_absolute_average"/>-->
-        <!--<measure id = "Tonnage_uplink_absolute_peak"/>-->
-        <!--<measure id = "Tonnage_uplink_percentage_average"/>-->
-        <!--<measure id = "Tonnage_uplink_percentage_peak"/>-->
-        <!--<measure id = "Tonnage_total_absolute_average"/>-->
-        <!--<measure id = "Tonnage_total_absolute_peak"/>-->
-        <!--<measure id = "Tonnage_total_percentage_average"/>-->
-        <!--<measure id = "Tonnage_total_percentage_peak"/>-->
-        <!--<measure id = "Flows_downlink_absolute_average"/>-->
-        <!--<measure id = "Flows_downlink_absolute_peak"/>-->
-        <!--<measure id = "Flows_downlink_percentage_average"/>-->
-        <!--<measure id = "Flows_downlink_percentage_peak"/>-->
-        <!--<measure id = "Flows_uplink_absolute_average"/>-->
-        <!--<measure id = "Flows_uplink_absolute_peak"/>-->
-        <!--<measure id = "Flows_uplink_percentage_average"/>-->
-        <!--<measure id = "Flows_uplink_percentage_peak"/>-->
-        <!--<measure id = "Flows_total_absolute_average"/>-->
-        <!--<measure id = "Flows_total_absolute_peak"/>-->
-        <!--<measure id = "Flows_total_percentage_average"/>-->
-        <!--<measure id = "Flows_total_percentage_peak"/>-->
-        <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
-        <!--<measure id = "Wan-Cost($)_downlink_percentage"/>-->
-        <!--<measure id = "Wan-Cost($)_uplink_absolute"/>-->
+        <measure id = "Tonnage_downlink_absolute_average"/>
+        <measure id = "Wan-Cost($)_total_absolute"/>
+        <measure id = "Flows_downlink_percentage_peak"/>
+        <measure id = "Wan-Cost($)_downlink_absolute"/>
+        <measure id = "Bitrate_downlink_absolute_average"/>
+        <measure id = "Bitrate_downlink_absolute_peak"/>
+        <measure id = "Bitrate_downlink_percentage_average"/>
+        <measure id = "Bitrate_downlink_percentage_peak"/>
+        <measure id = "Bitrate_uplink_absolute_average"/>
+        <measure id = "Bitrate_uplink_absolute_peak"/>
+        <measure id = "Bitrate_uplink_percentage_average"/>
+        <measure id = "Bitrate_uplink_percentage_peak"/>
+        <measure id = "Bitrate_total_absolute_average"/>
+        <measure id = "Bitrate_total_absolute_peak"/>
+        <measure id = "Bitrate_total_percentage_average"/>
+        <measure id = "Bitrate_total_percentage_peak"/>
+        <measure id = "Tonnage_downlink_absolute_average"/>
+        <measure id = "Tonnage_downlink_absolute_peak"/>
+        <measure id = "Tonnage_downlink_percentage_average"/>
+        <measure id = "Tonnage_downlink_percentage_peak"/>
+        <measure id = "Tonnage_uplink_absolute_average"/>
+        <measure id = "Tonnage_uplink_absolute_peak"/>
+        <measure id = "Tonnage_uplink_percentage_average"/>
+        <measure id = "Tonnage_uplink_percentage_peak"/>
+        <measure id = "Tonnage_total_absolute_average"/>
+        <measure id = "Tonnage_total_absolute_peak"/>
+        <measure id = "Tonnage_total_percentage_average"/>
+        <measure id = "Tonnage_total_percentage_peak"/>
+        <measure id = "Flows_downlink_absolute_average"/>
+        <measure id = "Flows_downlink_absolute_peak"/>
+        <measure id = "Flows_downlink_percentage_average"/>
+        <measure id = "Flows_downlink_percentage_peak"/>
+        <measure id = "Flows_uplink_absolute_average"/>
+        <measure id = "Flows_uplink_absolute_peak"/>
+        <measure id = "Flows_uplink_percentage_average"/>
+        <measure id = "Flows_uplink_percentage_peak"/>
+        <measure id = "Flows_total_absolute_average"/>
+        <measure id = "Flows_total_absolute_peak"/>
+        <measure id = "Flows_total_percentage_average"/>
+        <measure id = "Flows_total_percentage_peak"/>
+        <measure id = "Wan-Cost($)_downlink_absolute"/>
+        <measure id = "Wan-Cost($)_downlink_percentage"/>
+        <measure id = "Wan-Cost($)_uplink_absolute"/>
         <measure id = "Wan-Cost($)_uplink_percentage"/>
-        <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
-        <!--<measure id = "Wan-Cost($)_total_percentage"/>-->
+        <measure id = "Wan-Cost($)_total_absolute"/>
+        <measure id = "Wan-Cost($)_total_percentage"/>
     </measures>
 
     <sitetypes>
-        <!--<sitetype id = "WDC"/>-->
+        <sitetype id = "WDC"/>
         <sitetype id = "SatSite"/>
-        <!--<sitetype id = "CellSite"/>-->
+        <sitetype id = "CellSite"/>
     </sitetypes>
 
     <!--Add UserInfo-->
@@ -144,9 +144,9 @@
 
 
         <componentConfig id = "timeRangeDiv">
-            <!--<component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
+            <component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>
             <!--<component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
-            <component id = "last2Hours" selector="css selector" locator='[uib-btn-radio="&apos;last2Hours&apos;"]' locatorDimension ='css selector' locatorText = '[uib-btn-radio="&apos;last2Hours&apos;"]' action="click" wait = 'skip'/>
+            <!--<component id = "last2Hours" selector="css selector" locator='[uib-btn-radio="&apos;last2Hours&apos;"]' locatorDimension ='css selector' locatorText = '[uib-btn-radio="&apos;last2Hours&apos;"]' action="click" wait = 'skip'/>-->
         </componentConfig>
 
         <componentConfig id="pielegend">
@@ -268,8 +268,11 @@
             <component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
             <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
-            <component id = "download" selector="class name" locator='downloadIcon' wait = 'skip'/>
-            <component id = "delete" selector="class name" locator='deleteIcon' wait = 'skip'/>
+            <component id = "download1" selector="class name" locator='downloadIcon' />
+            <component id = "delete1" selector="class name" locator='deleteIcon' />
+            <!--<component id = "download" selector="css selector" locator='[colid="download"]' wait = 'skip'/>-->
+            <!--<component id = "delete" selector="css selector" locator='[colid="delete"]' wait = 'skip'/>-->
+
 
                     <!--<subComponent id = "sortasc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
                     <!--<subComponent id = "sortdesc" selector="class" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label'/>-->
@@ -277,6 +280,8 @@
         </componentConfig>
         <componentConfig id = 'sitetype'>
             <component id = "sites" selector="css selector" locator='[ng-model="vm.selectedtype"]' />
+
+
         </componentConfig>
 
         <componentConfig id = 'netflowtable'>
@@ -310,21 +315,21 @@
         </componentConfig>
 
         <componentConfig id = 'generateReportDialog'>
-            <component id = "reportName" selector="id" locator='reportName' wait="skip"/>
-            <component id = "reportnamewizard" selector="css selector" locator='[ng-model="vm.reportName"]' wait="skip"/>
-            <component id = "reportType" selector="css selector" locator='[ng-model="vm.selectedReportType"]' wait="skip"/>
-            <component id = "measureType" selector="css selector" locator='[ng-model="vm.selectedReportMeasureID"]' wait="skip"/>
-            <component id = "quicklink" selector="css selector" locator='[ng-model="vm.selectedReportPeriodID"]' wait="skip"/>
-            <component id = "addemail" selector="css selector" locator='[ng-model="vm.additionalEmailId"]' wait="skip"/>
+            <component id = "reportName" selector="id" locator='reportName'/>
+            <component id = "reportnamewizard" selector="css selector" locator='[ng-model="vm.reportName"]'/>
+            <component id = "reportType" selector="css selector" locator='[ng-model="vm.selectedReportType"]'/>
+            <component id = "measureType" selector="css selector" locator='[ng-model="vm.selectedReportMeasureID"]'/>
+            <component id = "quicklink" selector="css selector" locator='[ng-model="vm.selectedReportPeriodID"]'/>
+            <component id = "addemail" selector="css selector" locator='[ng-model="vm.additionalEmailId"]'/>
             <component id = "emailInput" selector="id" locator='emailInput' wait="skip"/>
-            <component id = "emailInputwizard" selector="css selector" locator='[ng-model="vm.emailID"]' wait="skip" />
-            <component id = "generate" selector="css selector" locator='[ng-click="vm.generateReport()"]' wait="skip"/>
-            <component id = "close" selector="css selector" locator='[ng-click="vm.closeReportPopup()"]' wait="skip"/>
+            <component id = "emailInputwizard" selector="css selector" locator='[ng-model="vm.emailID"]'/>
+            <component id = "generate" selector="css selector" locator='[ng-click="vm.generateReport()"]'/>
+            <component id = "close" selector="css selector" locator='[ng-click="vm.closeReportPopup()"]'/>
 
-            <component id = "leftBox" selector="class name" locator='leftBox' action="click" wait="skip"/>
-            <component id = "filters" selector="class name" locator='rightBox' action="click" wait="skip"/>
-            <component id = "starttime" selector="id" locator="startTime" wait="skip"/>
-            <component id = "endtime" selector="id" locator="endTime" wait="skip"/>
+            <component id = "leftBox" selector="class name" locator='leftBox' action="click"/>
+            <component id = "filters" selector="class name" locator='rightBox' action="click"/>
+            <component id = "starttime" selector="id" locator="startTime" />
+            <component id = "endtime" selector="id" locator="endTime" />
 
 
         </componentConfig>
@@ -408,7 +413,7 @@
             <component id = "submit" selector="css selector" locator='[ng-click="vm.onSubmit();"]' wait="skip"/>
             <component id = "cancel" selector="css selector" locator='[ng-click="vm.cancel()"]' wait="skip"/>
 
-            <component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>
+            <component id = 'switcher' selector="class name" locator="switcherContainer"/>
             <component id = "choosefile" selector="css selector" locator='[ng-model="picFile"]' wait="skip"/>
             <component id = "upload" selector="css selector" locator='[ng-click="uploadPic(picFile,vm.uibModalInstance)"]' wait="skip"/>
 
@@ -423,6 +428,17 @@
         <componentConfig id ="queryrouters">
             <component id = "wizard1" selector="class name" locator="routerspage"/>
             <component id = "calendar" selector="class name" locator="daterangepicker" wait="skip"/>
+            <component id = "wizard2" selector="tag name" locator="app-querybuilder" />
+            <component id = "starttime" selector="id" locator="starttimecal"/>
+            <component id = "endtime" selector="id" locator="endtimecal"/>
+        </componentConfig>
+        <componentConfig id="leftcalendar">
+            <component id="month" selector="class name" locator="monthselect" />
+            <component id="year" selector="class name" locator="yearselect" />
+            <component id="hour" selector="class name" locator="hourselect" />
+            <component id="minute" selector="class name" locator="minuteselect" />
+            <component id="day" selector="class name" locator="calendar-date" />
+            <component id="selection" selector="class name" locator="selection" />
         </componentConfig>
 
         <componentConfig id ='routertable'>
@@ -434,6 +450,42 @@
             <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
 
+        </componentConfig>
+
+        <componentConfig id = 'calendar'>
+
+            <component id = "starttime" selector="id" locator="startTimeCalendar"/>
+            <component id = "endtime" selector="id" locator="endTimeCalendar"/>
+        </componentConfig>
+
+        <componentConfig id="radios">
+            <component id = "radio" selector="css selector" locator='[type="radio"]' />
+        </componentConfig>
+        <componentConfig id="alllabels">
+            <component id = "label" selector="tag name" locator='label' />
+        </componentConfig>
+        <componentConfig id="allspans">
+            <component id = "span" selector="tag name" locator='span' />
+        </componentConfig>
+        <componentConfig id="allbuttons">
+            <component id = "button" selector="tag name" locator='button' />
+        </componentConfig>
+        <componentConfig id="allselects">
+            <component id = "select" selector="tag name" locator='select' />
+        </componentConfig>
+        <componentConfig id="alllinks">
+            <component id = "a" selector="tag name" locator='a' />
+        </componentConfig>
+        <componentConfig id="allimages">
+            <component id = "image" selector="tag name" locator='img' />
+        </componentConfig>
+
+        <componentConfig id="recurring">
+            <component id="dropdowns" selector="css selector" locator='[ng-model="vm.frequencyValue"]'/>
+            <component id="instances" selector="css selector" locator='[ng-model="vm.instanceValue"]'/>
+        </componentConfig>
+        <componentConfig id="footerbuttons">
+            <component id = "button" selector="tag name" locator='button' />
         </componentConfig>
 
 

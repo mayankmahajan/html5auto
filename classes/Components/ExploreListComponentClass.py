@@ -13,6 +13,7 @@ class ExploreListComponentClass(BaseComponentClass):
     def launchScreen(self,handlres,parent,child):
         # h = self.compHandlers(parent,handlres)
         handlres[parent][child][0].click()
+        return True
 
     def launchModule(self,handlres,text):
         for el in handlres["appHeader"]["alllinks"]:

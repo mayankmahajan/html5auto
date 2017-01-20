@@ -57,7 +57,7 @@ for i in range(len(reports)):
     for j in range(0,n[i]):
 
         grPopHandle = getHandle(setup,"report2_popup")
-        ar.append(grPopInstance.table.selectTableCellIndex(1,grPopHandle))
+        # ar.append(grPopInstance.table.selectTableCellIndex(1,grPopHandle))
         grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
         #######################    END     ###############################################
         break

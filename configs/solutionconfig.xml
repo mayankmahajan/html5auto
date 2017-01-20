@@ -35,7 +35,7 @@
 
         <screenConfig id = "report_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
-            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
+            <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True"/>
             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
             <component id = "report" parent="False" />
             <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
@@ -215,9 +215,12 @@
             <component id = "table" selector="id" locator="createReportScreen" parent="True" />
             <component id = "sitetype" selector="id" locator="createReportScreen" parent="True" />
             <component id = "allbuttons" selector="class name" locator="createReportFooter" parent="True" />
-            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
-
+            <component id = "queryrouters" selector="tag name" locator="kiwik-queryrouters" parent="True" />
+            <!--<component id = "calendar" selector="id" locator="createStepsContainer" parent="True"/>-->
             <component id = "generateReportDialog" selector="id" locator='generateReportScreen' parent="True"/>
+            <component id = "allimages" selector="id" locator= "createReportScreen" parent="True"/>
+            <component id = "recurring" selector="id" locator= "createReportScreen" parent="True"/>
+
         </screenConfig>
 
 
@@ -233,6 +236,7 @@
 
         <screenConfig id = "config_popup">
             <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
+            <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
         </screenConfig>
 
         <screenConfig id = "forensics_Screen">
@@ -240,18 +244,19 @@
             <component id = "netflowtable" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
 
 
-
-
+            <component id = "allbuttons" selector="id" locator="appView" parent="True" />
+            <component id = "allimages" selector="id" locator="appView" parent="True"/>
             <component id = "report" parent="False" />
             <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
         </screenConfig>
 
         <screenConfig id = "routers_popup">
             <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
-            <component id = 'wizard2' selector="tag name" locator="app-querybuilder" parent="False" />
 
+            <component id = 'wizards' selector="id" locator="bodyDiv" parent="True" />
             <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
             <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
+            <component id = 'footerbuttons' selector="class name" locator="footerDiv_config" parent="True"/>
             <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
             <!--<component id = 'leftcalendar' selector="class name" locator="calendar left" parent="True" />-->
             <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
@@ -275,7 +280,7 @@
         <componentConfig id="allbuttons">
             <component id = "button" selector="tag name" locator='button' />
         </componentConfig>
-        <componentConfig id = "wizard2">
+        <componentConfig id = "wizards">
             <component id = 'qb' selector="tag name" locator="app-querybuilder" parent="False" />
 
         </componentConfig>

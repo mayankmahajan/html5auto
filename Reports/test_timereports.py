@@ -32,6 +32,8 @@ for i in range(wizardIteration):
     reportScreenInstance.launchCreateReport(setup.d)
     grPopInstance = GenerateReportsPopClass(setup.d)
     grPopHandle = getHandle(setup,"report2_popup")
+    grPopInstance.reportspopup.selectRadioButton("Average",grPopHandle)
+    grPopInstance.reportspopup.selectRadioButton("Network Function Report",grPopHandle)
     grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
     grPopHandle = getHandle(setup,"report2_popup")
     grPopInstance.reportspopup.selectRadioButton(quicklinks[i],grPopHandle)

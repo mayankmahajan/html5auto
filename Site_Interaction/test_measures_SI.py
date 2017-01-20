@@ -31,8 +31,9 @@ sites = setup.cM.getNodeElements("sitetypes","sitetype").keys()
 # Launching Application
 login(setup, "admin", "Admin@123")
 
-# Launch Site Screen
-launchPage(setup,"site_Screen")
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 # Get the Instance of the screen
 screenInstance = SitePageClass(setup.d)

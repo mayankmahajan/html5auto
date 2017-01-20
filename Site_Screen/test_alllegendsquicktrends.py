@@ -45,14 +45,14 @@ qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")
 
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
-legends = list[0]
+legends = ""
+for i in range(len(list)):
+    legends = legends +list[i]
 
 checkEqualAssert(sitesname,legends,"","","DATA IS VALIDATE FOR ALL THE LEGENDS IN THE QUICK TRENDS")
 #print btvdata
 xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
 yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
-
-
 
 t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
 
