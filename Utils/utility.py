@@ -44,7 +44,7 @@ def setupTestcase(self):
 
 def checkEqualAssert(f1,f2,time="",measure="",message=""):
     msg = time + " " + measure + " " + message
-    tcPass = " PASS<br>"
+    tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     try:
         assert f1 == f2

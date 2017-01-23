@@ -37,7 +37,7 @@ createPopHandle = getHandle(setup, "config_popup")
 # Bulk Upload ##
 createPopInstance.switcher.switchTo(1,createPopHandle,'createdialog','switcher')
 createPopHandle = getHandle(setup, "config_popup")
-createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['choosefile'],"/Users/deepanshu.ahuja/Documents/siteib.csv")
+createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['choosefile'],"siteib.csv")
 upload = createPopInstance.dropdown.customClick(createPopHandle['createdialog']['upload'])
 checkEqualAssert(upload,True,"","","OK Dialog box Validation")
 createPopHandle = getHandle(setup, "config_popup","successdialog")
@@ -122,7 +122,7 @@ createPopHandle = getHandle(setup, "config_popup")
 # Bulk Upload ##
 createPopInstance.switcher.switchTo(1,createPopHandle,'createdialog','switcher')
 createPopHandle = getHandle(setup, "config_popup")
-createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['choosefile'],"/Users/deepanshu.ahuja/Documents/nfib.csv")
+createPopInstance.dropdown.customSendkeys(createPopHandle['createdialog']['choosefile'],"nfib.csv")
 createPopInstance.dropdown.customClick(createPopHandle['createdialog']['upload'])
 
 
