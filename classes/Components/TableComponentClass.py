@@ -235,12 +235,13 @@ class TableComponentClass(BaseComponentClass):
 
     def getTableData1(self,h,parent,child=None):
         # handlers = self.compHandlers('table', h)
-
-        data = {}
-        data['header'] = self.getIterfaceHeaders(h[parent])
-        data['rows'] = self.getIterfaceRows(len(data['header']),h[parent])
-        return data
-
+        try:
+            data = {}
+            data['header'] = self.getIterfaceHeaders(h[parent])
+            data['rows'] = self.getIterfaceRows(len(data['header']),h[parent])
+            return data
+        except Exception as e:
+            return e
     def setSelectionIndex(self,index,colCount,rowCount,h):
         elHandle=h['ROWS']
         newIndex = (colCount)*(index-1)+1

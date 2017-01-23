@@ -29,6 +29,8 @@ interfaceScreenHandle = getHandle(setup,Constants.INTERFACES)
 
 result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT INTERFACE SCREEN")
+checkEqualAssert(result,True,"","","Checking Export to csv functionality at Interface Screen")
 
+setup.d.close()
+setup.d.switch_to.window(setup.d.window_handles[0])
 setup.d.close()

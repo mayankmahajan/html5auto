@@ -614,19 +614,22 @@ def currentdate():
     return date
 
 def validatesearchtable(data,columnname,searchtext):
-    flag = False
-    for j in range(len(data['header'])):
-        if(data['header'][j].upper()==columnname.upper()):
-            col = j
-            break;
-    flag = False
-    for i in range(len(data['rows'])):
-        if(searchtext in data['rows'][i][col]):
-            print data['rows'][i][col]
-            flag = True
-        else:
-            flag = False
-    return flag
+    try:
+        flag = False
+        for j in range(len(data['header'])):
+            if(data['header'][j].upper()==columnname.upper()):
+                col = j
+                break;
+        flag = False
+        for i in range(len(data['rows'])):
+            if(searchtext in data['rows'][i][col]):
+                print data['rows'][i][col]
+                flag = True
+            else:
+                flag = False
+        return flag
+    except:
+        return False
 
 
 def setCalendar(y,m,d,h,min,intance,setup):
@@ -664,3 +667,5 @@ def FindWordInString(ar,grPopHandle):
     else:
         flag = False
     return flag
+
+# def getAbsolutePath(filename):

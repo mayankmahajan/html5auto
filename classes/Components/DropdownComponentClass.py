@@ -9,7 +9,11 @@ class DropdownComponentClass(BaseComponentClass):
         self.configmanager = ConfigManager()
 
     def doSelection(self,h,value,parent,child=""):
-        self.set(value, h[parent][child])
+        try:
+            self.set(value, h[parent][child])
+            return True
+        except Exception as e:
+            return e
 
     def set(self, value, handle):
         try:

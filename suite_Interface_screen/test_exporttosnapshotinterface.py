@@ -34,7 +34,7 @@ grPopInstance = GenerateReportsPopClass(setup.d)
 grPopHandle = getHandle(setup,"report2_popup")
 result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
 # Result logging
-checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT Interface Screen")
+checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT Validated at Interface Screen")
 
 #Closing the application
 setup.d.close()
