@@ -1,5 +1,6 @@
 import glob
 from Utils.logger import *
+from Utils.resultlogger import *
 import os
 import platform
 
@@ -12,16 +13,18 @@ test_file_strings = glob.glob('../suite_*/test_*.py')
 # module_strings = [str.split('/')[1] + "." + str.split('/')[2].split('.')[0] for str in test_file_strings]
 module_strings = [str.split(delimiter)[1] + "." + str.split(delimiter)[2].split('.')[0] for str in test_file_strings]
 # [__import__(str) for str in module_strings]
+
+
 for str in module_strings:
     try:
         logger.debug('*********** TestCase Start ***********')
+        resultlogger.debug('*********** Logging Results for %str ***********',str)
         logger.debug('Executing TestCase %s', str)
         __import__(str)
         logger.debug('*********** TestCase End ***********')
     except Exception as e:
         logger.debug('Exception found while executing %s ::: %s',str,e)
         logger.debug('*********** TestCase End ***********')
-
 
 
 
