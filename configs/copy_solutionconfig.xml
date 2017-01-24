@@ -119,6 +119,8 @@
 
         <screenConfig id = "site_Screen">
             <!--<component id="cal" selector="id" locator="dateRangePickerDivID" parent="True"/>-->
+            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
+            <component id = 'rightcalendar' selector="class name" locator="right" parent="True" />
 
             <component id = "search" parent="False"/>
             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>

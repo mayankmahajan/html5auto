@@ -13,16 +13,25 @@ __maintainer__  = "Mayank Mahajan"
 from BaseComponentClass import BaseComponentClass
 from classes.DriverHelpers.locators import *
 from Utils.Constants import *
+from Utils.logger import *
+
 class ContextMenuComponentClass(BaseComponentClass):
 
     def activateContextMenuOptions1(self,handle):
         handle['cm'][Constants.CONTEXTMENU][0].click()
-    def activateContextMenuOptions(self,handle):
-        handle[Constants.CONTEXTMENU][0].click()
+    def activateContextMenuOptions(self,handle,parent="cm",child=Constants.CONTEXTMENU):
+        try:
+            logger.debug('Clicking Element :: Parent %s Child %s',parent,child)
+            handle[parent][child][0].click()
+        except Exception as e:
+            logger.debug('Exception Found %s Trying to click directly Child %s',e,child)
+            handle[child][0].click()
+
         # handle['cm'][Constants.CONTEXTMENU][0].click()
         # self.handle.
     def drillTo(self,driver,driverHelper,handles,pageName):
         try:
+            logger.debug('Launching Page %s',pageName)
             if pageName == Constants.NETWORKFUNCTIONS:
                 handles[Constants.DRILLTONF][0].click()
             elif pageName == Constants.SITEINTERACTIONS:
@@ -44,8 +53,9 @@ class ContextMenuComponentClass(BaseComponentClass):
             elif pageName == Constants.EXPORTTOSNAPSHOT:
                 handles[Constants.EXPORTTOSNAPSHOT][0].click()
             return True
-        except Exception:
-            return Exception
+        except Exception as e:
+            logger.debug('Exception Found %s while Launching Page %s',e,pageName)
+            return e
 
 
     def launchTrends(self,handle):

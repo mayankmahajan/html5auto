@@ -632,14 +632,14 @@ def validatesearchtable(data,columnname,searchtext):
         return False
 
 
-def setCalendar(y,m,d,h,min,intance,setup):
+def setCalendar(y,m,d,h,min,intance,setup,page="routers_popup",parent="leftcalendar"):
     try:
-        intance.calendar.set("year",y,getHandle(setup,"routers_popup","leftcalendar"))
-        intance.calendar.set("month",m,getHandle(setup,"routers_popup","leftcalendar"))
-        intance.calendar.setDay("day",d,getHandle(setup,"routers_popup","leftcalendar"))
-        intance.calendar.set("hour",h,getHandle(setup,"routers_popup","leftcalendar"))
+        intance.calendar.set("year",y,getHandle(setup,page,parent),parent)
+        intance.calendar.set("month",m,getHandle(setup,page,parent),parent)
+        intance.calendar.setDay("day",d,getHandle(setup,page,parent),parent)
+        intance.calendar.set("hour",h,getHandle(setup,page,parent),parent)
         try:
-            intance.calendar.set("minute",min,getHandle(setup,"routers_popup","leftcalendar"))
+            intance.calendar.set("minute",min,getHandle(setup,page,parent),parent)
         except:
             pass
         return True
