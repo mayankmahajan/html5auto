@@ -18,13 +18,27 @@ module_strings = [str.split(delimiter)[1] + "." + str.split(delimiter)[2].split(
 for str in module_strings:
     try:
         logger.debug('*********** TestCase Start ***********')
-        resultlogger.debug('*********** Logging Results for %str ***********',str)
+        resultlogger.debug('<br>*********** Logging Results for %str ***********<br>',str)
         logger.debug('Executing TestCase %s', str)
         __import__(str)
-        logger.debug('*********** TestCase End ***********')
+        logger.debug('*********** TestCase End (%s) ***********', str)
+        try:
+            logger.debug('Executing  "taskkill /im chromedriver.exe /f"')
+            print os.system("taskkill /im chromedriver.exe /f")
+            logger.debug('ChromeDriver killed by taskkill /im chromedriver.exe /f')
+        except Exception as e:
+            logger.error('Got Exception %s while executing "taskkill /im chromedriver.exe /f"', e)
+
     except Exception as e:
-        logger.debug('Exception found while executing %s ::: %s',str,e)
-        logger.debug('*********** TestCase End ***********')
+        logger.error('Exception found while executing %s ::: %s',str,e)
+        logger.debug('*********** TestCase (%s) End with Exceptions ***********', str)
+        try:
+            logger.debug('Executing  "taskkill /im chromedriver.exe /f"')
+            print os.system("taskkill /im chromedriver.exe /f")
+            logger.debug('ChromeDriver killed by taskkill /im chromedriver.exe /f')
+        except Exception as e:
+            logger.error('Got Exception %s while executing "taskkill /im chromedriver.exe /f"',e)
+
 
 
 
