@@ -449,7 +449,7 @@
 
         <componentConfig id ='routertable'>
             <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
-
+            <component id="row-selection" selector="class name" locator="ag-row-selected" wait="skip"/>
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
             <component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>

@@ -75,7 +75,10 @@ class DriverHelper:
                             pass
                     return tempChildHandles
                 else:
-                    tempChildHandles = tempChildHandles + self.visibleCompsOnly(parentHandles[eachComp][len(parentHandles[eachComp])-1].find_elements(*locator))
+                    try:
+                        tempChildHandles = tempChildHandles + self.visibleCompsOnly(parentHandles[eachComp][len(parentHandles[eachComp])-1].find_elements(*locator))
+                    except:
+                        return tempChildHandles +  self.visibleCompsOnly(self.driver.find_elements(*locator))
                     return tempChildHandles
             else:
                 if wait:
