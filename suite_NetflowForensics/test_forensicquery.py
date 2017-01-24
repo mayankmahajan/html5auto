@@ -18,6 +18,7 @@ exploreHandle = getHandle(setup,"explore_Screen")
 
 exploreScreenInstance.exploreList.switchApp(exploreHandle)
 result = exploreScreenInstance.exploreList.launchapp(getHandle(setup,"explore_Screen"),2)
+checkEqualAssert(result,True,"","","Checking the launching of Netflow Forensics UI")
 
 time.sleep(4)
 setup.d.switch_to.window(setup.d.window_handles[1])
@@ -28,7 +29,8 @@ setup.d.switch_to.window(setup.d.window_handles[1])
 forensicsScreenInstance = ForensicsPageClass(setup.d)
 forensicsScreenHandle = getHandle(setup,"forensics_Screen","commoncomponents")
 
-forensicsScreenInstance.dummyelement.customClick(forensicsScreenHandle['commoncomponents']['newquery'])
+newquery =forensicsScreenInstance.dummyelement.customClick(forensicsScreenHandle['commoncomponents']['newquery'])
+checkEqualAssert(newquery,True,"","","Checking the functionality of the new query button at Netflow Forensics Screen")
 
 popupInstance = GenerateReportsPopClass(setup.d)
 ####### Get the Handles of the routers Popup#################
@@ -85,17 +87,17 @@ popupInstance.routerpopup.updateGroup("rule",["DST PORT","in",2],popupHandler,2)
 
 
 
-checkEqualAssert(addrule,True,"","","Add Rule Validation")
-checkEqualAssert(addgroup,True,"","","Add Group Validation")
-checkEqualAssert(deleterule,True,"","","Delete Rule Validation")
-checkEqualAssert(deletegroup,True,"","","Delete Group Validation")
+checkEqualAssert(addrule,True,"","","Checking the functionality of the Add Rule button at the Netflow Forensic Screen")
+checkEqualAssert(addgroup,True,"","","Checking the functionality of the Add Group button at the Netflow Forensic Screen")
+checkEqualAssert(deleterule,True,"","","Checking the functionality of the Delete Rule button at the Netflow Forensic Screen")
+checkEqualAssert(deletegroup,True,"","","Checking the functionality of the Delete Group button at the Netflow Forensic Screen")
 popupHandler = getHandle(setup,"routers_popup","allbuttons")
 popupInstance.reportspopup.clickButton("Submit Query",popupHandler)
 date = currentdate()
 popupHandler = getHandle(setup,"routers_popup","allbuttons")
 popupInstance.reportspopup.clickButton("Ok",popupHandler)
 forensicsScreenInstance = ForensicsPageClass(setup.d)
-forensicsScreenHandle = getHandle(setup,"forensics_Screen")
+forensicsScreenHandle = getHandle(setup,"forensics_Screen","createdialog")
 forensicsScreenInstance.switcher.switchTo(1,forensicsScreenHandle,'createdialog','switcher')
 forensicsScreenHandle = getHandle(setup,"forensics_Screen","netflowtable")
 
@@ -105,15 +107,15 @@ data = forensicsScreenInstance.table.getTableData1(forensicsScreenHandle,"netflo
 # reportid = IsreportIDvalid(data)
 # uidate = data['rows'][0][5]
 if (data['rows'][0][0] == queryname):
-    checkEqualAssert(data['rows'][0][0],queryname,"Today","","Netflow Query name")
-    checkEqualAssert(data['rows'][0][3],date,"Today","","Time of the Netflow Query")
+    checkEqualAssert(data['rows'][0][0],queryname,"Today","","Checking the name of the Netflow Query at the Pending Tab")
+    checkEqualAssert(data['rows'][0][3],date,"Today","","Checking the Requested Time of the Netflow Query at the Pending Tab")
 else:
     forensicsScreenHandle = getHandle(setup,"forensics_Screen")
     forensicsScreenInstance.switcher.switchTo(0,forensicsScreenHandle,'createdialog','switcher')
     forensicsScreenHandle = getHandle(setup,"forensics_Screen")
     data = forensicsScreenInstance.table.getTableData1(forensicsScreenHandle,"netflowtable")
-    checkEqualAssert(data['rows'][0][0],queryname,"Today","","Netflow Query name")
-    checkEqualAssert(data['rows'][0][2],date,"Today","","Time of the Netflow Query")
+    checkEqualAssert(data['rows'][0][0],queryname,"Today","","Checking the name of the Netflow Query at the Completed Tab")
+    checkEqualAssert(data['rows'][0][2],date,"Today","","Checking the time of the Netflow Query at the Completed Tab")
 
 
 

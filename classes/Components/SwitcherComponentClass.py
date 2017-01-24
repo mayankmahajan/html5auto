@@ -2,6 +2,7 @@ from BaseComponentClass import BaseComponentClass
 from Utils.ConfigManager import ConfigManager
 from Utils.logger import *
 from selenium.common.exceptions import *
+import time
 
 class SwitcherComponentClass(BaseComponentClass):
 
@@ -39,6 +40,7 @@ class SwitcherComponentClass(BaseComponentClass):
     def switchTo(self,index,h,parent=None,child=None):
         try:
             h[parent][child][len(h[parent][child])-1].find_elements_by_tag_name("li")[index].click()
+            time.sleep(2)
             return True
         except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
             raise e("%s %s",parent,child)

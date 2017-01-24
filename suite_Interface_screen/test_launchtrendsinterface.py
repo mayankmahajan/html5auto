@@ -36,7 +36,7 @@ screenInstance = InterfacePageClass(setup.d)
 # Get the handles of the screen
 interfaceScreenHandle = getHandle(setup,Constants.INTERFACES)
 
-screenInstance.cm.activateContextMenuOptions(interfaceScreenHandle)
+screenInstance.cm.activateContextMenuOptions1(interfaceScreenHandle)
 screenInstance.cm.launchTrends(interfaceScreenHandle)
 
 qtScreenInstance = QuickTrendsPageClass(setup.d)

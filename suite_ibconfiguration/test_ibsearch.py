@@ -28,7 +28,7 @@ confScreenInstance = ConfigurationPageClass(setup.d)
 confScreenHandle = getHandle(setup,"configuration_Screen")
 columnname = ["Site","IP","Host Name","Site Type","Element Type"]
 # columnname = ["Element Type"]
-searchtext = ["Akron","1.1","enB","WDC","IPA" ]
+searchtext = ["Akron","1.1","eNB","WDC","IPA" ]
 # searchtext = ["IPA" ]
 for i in range(len(columnname)):
 
