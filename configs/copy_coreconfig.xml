@@ -99,7 +99,7 @@
             <component id="switchApp" selector="class name" locator="switchTable" parent="True"/>
 
             <component id = "appHeader" selector="class name" locator="appHeader" parent="True"/>
-            <!--<component id = "exploreList" parent="False"/>-->
+            <component id = "exploreList" parent="False"/>
 
 
             <!--<component id = "exploreList" selector = 'class name' locator="row" parent="True"/>-->
@@ -260,6 +260,7 @@
             <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
             <!--<component id = "HEADERROW" selector="id" locator='agText' locatorDimension ='id' locatorText = 'agText' action="getData" wait = 'skip'/>-->
             <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
+            <component id="row-selection" selector="class name" locator="ag-row-selected" wait="skip"/>
 
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
@@ -405,6 +406,7 @@
 
         <componentConfig id ='routertable'>
             <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
+            <component id="row-selection" selector="class name" locator="ag-row-selected" wait="skip"/>
 
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->

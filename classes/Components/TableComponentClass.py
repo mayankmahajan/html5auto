@@ -208,12 +208,13 @@ class TableComponentClass(BaseComponentClass):
         return data
 
 
-    def getSelection(self,handle):
-        handlers = self.compHandlers('table', handle)
+    def getSelection(self,handle,parent="table"):
+        handlers = self.compHandlers(parent, handle)
         data={}
-        data['selIndes']=handlers['row-selection'][len(handlers['row-selection']) - 1].get_attribute('row')
-        data['text']=handlers['row-selection'][len(handlers['row-selection']) - 1].text
-        return data
+        return [[el.get_attribute('row'),el.text] for el in handlers['row-selection'] if el.text != ""]
+        # data['selIndes']=handlers['row-selection'][len(handlers['row-selection']) - 1].get_attribute('row')
+        # data['text']=handlers['row-selection'][len(handlers['row-selection']) - 1].text
+        # return data
 
 
     def setSelection(self,index,h):
