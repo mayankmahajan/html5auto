@@ -41,9 +41,14 @@ class PieLegendComponentClass(BaseComponentClass):
         for i in range(0,len(elHandle)):
             # time.sleep(2)
             if i in index:
-                driverHelper.action.move_to_element(elHandle[i]).key_down(Keys.COMMAND).click().key_up(Keys.COMMAND).key_up(Keys.COMMAND).perform()
+                # driverHelper.action.move_to_element(elHandle[i]).key_down(Keys.COMMAND).click().key_up(Keys.COMMAND).perform()
                 # driverHelper.action.release().perform()
-                # elHandle[i].click()
+                try:
+                    elHandle[i].click()
+                    return True
+                except Exception:
+                    return Exception
+
                 # break
 
     def getSelectionIndex(self,elHandle):
@@ -78,26 +83,79 @@ class PieLegendComponentClass(BaseComponentClass):
                 if child.get_attribute("class") == "circle":
                     tempArr.append(child.value_of_css_property('background-color'))
         data['legendIcon'] =tempArr
-
-
-
-
-
         return data
 
-    def setSelection(self,driverHelper,indices,handlrs):
+    def setSelection(self,driverHelper,indices,handlrs,comp=None):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
         :param indices: indices to be selected
         :param handlers: Handlers to BarChart
         :return: True/False
         '''
-        handlers = self.compHandlers('pielegend',handlrs)
+        # handlers = self.compHandlers('pielegend',handlrs)
+        handlers = handlrs['pielegend']
         selectedIndex = self.getSelectionIndex(handlers['legendText'])
         if selectedIndex in indices:
             return True
         else:
-            self.setSelectionIndex(driverHelper,indices,handlers['legendText'])
+            return self.setSelectionIndex(driverHelper,indices,handlers['legendText'])
+
+    def getData1(self,handlers,parent,child=None):
+        '''
+        Returns Data as Dictionary with Name and Value
+        :param handlers: Handlers to all the components
+        :return: Data from the Bar Chart
+        '''
+        data = {}
+        if child == None:
+            child = 'legendText'
+        # handlers = self.compHandlers('pielegend',handlrs)
+        # print "handle of get data",handlers
+        data['legendText'] = [ele.text for ele in handlers[parent][child]]
+        # for i in range(len(handlers['legendText'])):
+        #     data['legendText'] = handlers['legendText'][i].text
+
+        tempArr = []
+        for i in range(len(handlers[parent]['legendIcon'])):
+            for child in handlers[parent]['legendIcon'][i].find_elements_by_xpath(".//*"):
+                if child.get_attribute("class") == "circle":
+                    tempArr.append(child.value_of_css_property('background-color'))
+        data['legendIcon'] =tempArr
+        return data
+
+    def setSelection1(self,driverHelper,indices,handlrs,parent,child=None):
+        '''
+        This method do the Selection on the Bar Chart as per the index supplied
+        :param indices: indices to be selected
+        :param handlers: Handlers to BarChart
+        :return: True/False
+        '''
+        if child == None:
+            child = 'legendText'
+        selectedIndex = self.getSelectionIndex(handlrs[parent][child])
+        if selectedIndex in indices:
+            return True
+        else:
+            return self.setSelectionIndex(driverHelper,indices,handlrs[parent][child])
+
+
+    def getSelection1(self,handlrs,parent,child=None):
+        '''
+        This method gives the selected Index, its Corresponding Text and Value
+        :param handlers: handler to pieChart
+        :return: Selected Data
+        '''
+        try:
+            data = {}
+            if child == None:
+                child = 'legendText'
+
+            # handlers = self.compHandlers('pielegend',handlrs)
+            data['selIndices'] = self.getSelectionIndex(handlrs[parent][child])
+            data['legendText'] = [handlrs[parent][child][ele].text for ele in data['selIndices']]
+            return data
+        except Exception:
+            return Exception
 
     def getSelection(self,handlrs):
         '''
@@ -189,24 +247,5 @@ class PieLegendComponentClass(BaseComponentClass):
                             result[key] = "Tooltip Validation PASSED"
                         else:
                             result[key] = "Tooltip Validation FAILED"
-
-        return result
-
-    def validateBTVData(self,dataCollection,csvData):
-        result = {}
-        # for key,value in csvData.iteritems():
-        for key in dataCollection['btvData']['dimension']:
-            if "All " in key or "Others" in key:
-                pass
-            else:
-                UIData = 0.0
-                convertedData = float(dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[0])
-                unitString = dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[1]
-                UIData = self.unitSystem.getRawValue(convertedData,unitString)
-
-                if csvData[key]['AGGR_totalByteBuffer'] == UIData:
-                    result[key] = "Data Validation PASSED"
-                else:
-                    result[key] = "Data Validation FAILED --> Actual : "+str(UIData)+" and Expected : "+str(csvData[key]['AGGR_totalByteBuffer'])
 
         return result

@@ -3,12 +3,37 @@
 # webdriver.Firefox().find_element_by_xpath().send_keys()
 from Utils.UnitSystem import UnitSystem
 from Utils.ConfigManager import ConfigManager
+from selenium.common.exceptions import *
+import time
 
 class BaseComponentClass:
-    def m_click(self,elHandle):
-        return elHandle.click()
-    def m_send_keys(self,elHandle,value):
+    def click(self, elHandle):
+
+        try:
+            elHandle.click()
+            return True
+        except Exception:
+            return Exception
+
+
+    def send_keys(self, elHandle, value):
         return elHandle.send_keys(value)
+
+    def customClick(self, elHandle):
+        try:
+            elHandle[len(elHandle)-1].click()
+            time.sleep(2)
+            return True
+        except IndexError or Exception as e:
+            elHandle.click()
+            return e
+        # return elHandle[len(elHandle)-1].click()
+    def customSendkeys(self, elHandle, value):
+        return elHandle[len(elHandle)-1].send_keys(value)
+    def customText(self,elHandle):
+        return elHandle[len(elHandle)-1].text
+
+
     def text(self,elHandle):
         return elHandle.text
 
@@ -51,11 +76,12 @@ class BaseComponentClass:
 
 
     def compHandlers(self,comp,handlers):
-        newHandlers = {}
-        for k,v in handlers.iteritems():
-            if k in self.configmanager.componentChildRelations[comp]:
-                newHandlers[k] = v
-        return newHandlers
+        return handlers[comp]
+        # newHandlers = {}
+        # for k,v in handlers.iteritems():
+        #     if k in self.configmanager.componentChildRelations[comp]:
+        #         newHandlers[k] = v
+        # return newHandlers
 
 
     def selectDropDownByText(self,handler,text,text2="HAHA"):
@@ -79,6 +105,52 @@ class BaseComponentClass:
         except:
             print "Got Measure without Peak/Average %s",measureName
 
+    def getAllActiveElements(self, childHandles):
+        activeElements = []
+        for ele in childHandles:
+            # 'disabled' not in ele.get_attribute("class") and
+            if ele.is_displayed():
+                activeElements.append(ele)
+            else:
+                pass
+        return activeElements
 
 
 
+    def selectRadioButton(self,value,h,parent="radios",child="radio"):
+        for el in h[parent][child]:
+            if value == el.find_elements_by_xpath("..//span")[0].text:
+                try:
+                    el.click()
+                    time.sleep(2)
+                    break
+                except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                    return e
+
+    def clickButton(self,value,h,parent="allbuttons",child="button"):
+        for el in h[parent][child]:
+            try:
+                if value == el.text:
+                    try:
+                        el.click()
+                        time.sleep(2)
+                        return True
+                        break
+                    except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                        return e
+            except Exception as e:
+                return e
+
+    def runtimeValue(self,prop,ele):
+        if prop == "text":
+            return ele.text
+        elif prop == "title":
+            return ele.get_attribute("title")
+        elif prop == "value":
+            return ele.get_attribute("style")
+        elif prop == "style":
+            return ele.get_attribute("style")
+        elif prop == "class":
+            return ele.get_attribute("class")
+        elif prop == "id":
+            return ele.get_attribute("id")

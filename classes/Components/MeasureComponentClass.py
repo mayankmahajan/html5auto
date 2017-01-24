@@ -36,41 +36,30 @@ class MeasureComponentClass(BaseComponentClass):
 
 
 
-    def doSelectionSite(self,h,site):
-        handlers = self.compHandlers('measureselectors',h)
+    def doSelectionSite1(self,h,site,parent="measureselectors"):
+        handlers = self.compHandlers(parent,h)
+        sitename = site
+        self.setSiteName(sitename,handlers['sites'])
+
+    def doSelectionSite(self,h,site,parent="measureselectors"):
+        handlers = h[parent]
         sitename = site
         self.setSiteName(sitename,handlers['sites'])
 
 
-        #
-        #
-        #
-        # for key,value in handlers.iteritems():
-        #     if self.configmanager.componentSelectors[key]["action"] == "click":
-        #         self.setMeasure(measure,value)
     def setSiteName(self,site,handle):
         for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
             if ele.text == site:
                 ele.click()
                 break
 
-# handlers['primaryMeasure'][0].find_element_by_xpath("//option[text()='Flows']").click()
 
-    # def setMeasureName(self,measure,handle):
-    #     meaurePath="//option[text()='" + measure + "']"
-    #     handle[0].find_element_by_xpath(meaurePath).click()
-    #
-    # def select(self,handle):
-    #     handle[0].click()
-    #     time.sleep(1) #Sets 1 second delay so as to make sure Main Charts drawn properly
 
     def setMeasureName(self,measure,handle):
         for ele in handle[len(handle)-1].find_elements_by_xpath(".//*"):
             if ele.text == measure:
                 ele.click()
                 break
-        # meaurePath="//option[text()='" + measure + "']"
-        # handle[len(handle)-1].find_element_by_xpath(meaurePath).click()
 
     def select(self,handle):
         handle[len(handle)-1].click()

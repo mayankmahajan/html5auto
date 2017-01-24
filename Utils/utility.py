@@ -26,6 +26,7 @@ from Utils.csvReader import CSVReader
 from classes.Components.ContextMenuComponentClass import *
 from classes.Components.BaseComponentClass import *
 import time
+import datetime
 
 # def setUp():
 #     obj={}
@@ -43,7 +44,7 @@ def setupTestcase(self):
 
 def checkEqualAssert(f1,f2,time="",measure="",message=""):
     msg = time + " " + measure + " " + message
-    tcPass = " PASS<br>"
+    tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     try:
         assert f1 == f2
@@ -113,9 +114,13 @@ def launchPage(obj,pageName,isStartScreen=False):
     except Exception:
         return Exception
 
-def getHandlersForParentComponent(driver, driverHelper, configManager, pageName):
+def getHandlersForParentComponent(driver, driverHelper, configManager, pageName,parent="NA"):
     listOfHandles = {}
-    for comp in configManager.screenComponentRelations[pageName]:
+    if parent == "NA":
+        parents = configManager.screenComponentRelations[pageName]
+    else:
+        parents = [parent]
+    for comp in parents:
         if configManager.screenSelectors[pageName][comp]['parent'].upper() == "TRUE":
             locator = (configManager.screenSelectors[pageName][comp]['selector'],configManager.screenSelectors[pageName][comp]['locator'])
             try:
@@ -130,25 +135,32 @@ def getHandlersForParentComponent(driver, driverHelper, configManager, pageName)
 
     return listOfHandles
 
-def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles):
+def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, parentHandles,parent="NA"):
     listOfHandles = {}
-    for eachComp in configManager.screenComponentRelations[pageName]:
+    if parent == "NA":
+        parents = configManager.screenComponentRelations[pageName]
+    else:
+        parents = [parent]
+    for eachComp in parents:
+        print "getHandlesForEachComponent",eachComp
+        listOfHandles[eachComp] = {}
         for comp in configManager.componentChildRelations[eachComp]:
                 # locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'],configManager.componentSelectors[comp]['wait'])
             locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'])
             try:
                 wait = configManager.componentSelectors[comp]['wait']
                 try:
+                    print "will not wait for ", comp
                     if configManager.componentSelectors[comp]['locatorDimension']:
                         locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
                         locatorText = configManager.componentSelectors[comp]['locatorText']
                         try:
                             parentDependency = configManager.componentSelectors[comp]['parentDependency']
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp,locatorDimension,locatorText,parentDependency)
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp,locatorDimension,locatorText,parentDependency)
                         except:
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp,locatorDimension,locatorText)
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp,locatorDimension,locatorText)
                 except:
-                        listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False,parentHandles,comp)
+                        listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp)
 
             except:
                 # try:
@@ -156,15 +168,16 @@ def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, pa
                 # except:
                 #     pass
                 try:
+                    print "will wait for ", comp
                     if configManager.componentSelectors[comp]['locatorDimension']:
                         locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
                         locatorText = configManager.componentSelectors[comp]['locatorText']
                         if 'parentDependency' in configManager.componentSelectors[comp].keys():
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp,locatorDimension,locatorText,configManager.componentSelectors[comp]['parentDependency'])
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText,configManager.componentSelectors[comp]['parentDependency'])
                         else:
-                            listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp,locatorDimension,locatorText)
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText)
                 except:
-                    listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,True,parentHandles,comp)
+                    listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp)
     return listOfHandles
 
 def getScreenInstance(driver,pageName):
@@ -219,7 +232,7 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
 
 
 
-def getHandle(obj,pageName):
+def getHandle(obj,pageName,parent="NA"):
     '''
     Takes out handler of the Page along with components
     :param obj:
@@ -230,17 +243,21 @@ def getHandle(obj,pageName):
     driverHelper = obj.dH
     configmanager = obj.cM
     # screenInstance=getScreenInstance(obj.d,pageName)
-    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
-    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName,parent)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles,parent)
     return handles
 
 
-def testScreen(driver,driverHelper,pageName,isStartScreen=False):
+def testScreen(obj,pageName,isStartScreen=False):
+    driver = obj.d
+    driverHelper = obj.dH
+    configManager = obj.cM
+
     try:
         # Config Parsing Part
         data = {}
         if isStartScreen:
-            configManager = launchPage(driver,driverHelper,pageName)
+            launchPage(obj,pageName)
         else:
             configManager = ConfigManager()
         # tempString = '//*[contains(@id, "' + pageName.split('_')[0]+'_barTabularView")]'
@@ -392,6 +409,40 @@ def drilltoScreen(driver,driverHelper,pageName):
         return ValueError
 
 
+def exportTo(driver,driverHelper,pageName):
+    try:
+        sitePage = SitePageClass(driver)
+        cmLocators = sitePage.cm.getSpecificLocators(CommonElementLocators)
+        cmHandlers = driverHelper.waitForVisibleElementsAndChilds(cmLocators)
+        sitePage.cm.activateContextMenuOptions(cmHandlers)
+
+        cmenuLocators = sitePage.cm.getSpecificLocators(ContextMenuLocators)
+        cmenuHandlers = driverHelper.waitForVisibleElementsAndChilds(cmenuLocators)
+        try:
+            sitePage.cm.drillTo(driver,driverHelper,cmenuHandlers,Constants.EXPORTTO)
+        except Exception:
+            return Exception
+
+        exportLocators = sitePage.cm.getSpecificLocators(ExportToLocators)
+        exportHandlers = driverHelper.waitForVisibleElementsAndChilds(exportLocators)
+
+        if(sitePage.cm.drillTo(driver,driverHelper,exportHandlers,pageName) == True):
+            pass
+        else:
+            return sitePage.cm.drillTo(driver,driverHelper,exportHandlers,pageName)
+
+        # time.sleep(3)
+
+        logger.debug('Page Launched : %s',pageName)
+        return True
+
+
+    except ValueError:
+        return ValueError
+
+
+
+
 
 
 
@@ -456,7 +507,7 @@ def setTimeRange(obj,quicklink,pageName="site_Screen"):
 
     screenInstance.quiklinkTimeRange.setSelection(quicklink,handles)
 
-def setMeasure(obj,measure,screenInstance,handles):
+def setMeasure(obj,measure,pageName):
     '''
     sets quicklinks on the particular page
     :param obj:
@@ -464,13 +515,13 @@ def setMeasure(obj,measure,screenInstance,handles):
     :param pageName:
     :return:
     '''
-    # driver = obj.d
-    # driverHelper = obj.dH
-    # configmanager = obj.cM
-    # screenInstance=getScreenInstance(obj.d,pageName)
+    driver = obj.d
+    driverHelper = obj.dH
+    configmanager = obj.cM
+    screenInstance=getScreenInstance(obj.d,pageName)
 
-    # parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
-    # handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
+    parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
+    handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
 
     screenInstance.measure.doSelection(handles,measure)
 
@@ -490,7 +541,131 @@ def setSiteType(obj,sites,screenInstance,handles):
 
 
 
+def parseBTVData(btvData):
+    data  = {}
+    data['btvData'] = {}
+    for key,value in btvData.iteritems():
+        pv = value.pop(0)
+        if len(data['btvData']) == 0:
+            data['btvData']['dimension'] = value
+        else:
+            data['btvData']['value'] = value
+        logger.debug('Col1 : %s  and Col2 : %s',key,value)
+    return  data['btvData']
 
 
 
+def getSummaryBarData(measure,btvname,screenInstance,siteScreenHandle):
+    values = measure.split('_')
 
+    try:
+        if (values[3]=="average"):
+            values[3]="Average"
+    except:
+        print "Average is not there"
+
+    try:
+        if (values[3]=="peak"):
+            values[3]="Peak"
+
+    except:
+        print "Peak is not there"
+
+    if (values[0]=="Wan-Cost($)"):
+        values[0] = "Wan Cost($)"
+        selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+        #print "hahaha"
+        #print selections['All WDC']
+        summarybarvalues = selections[btvname][values[0]]['Average']
+        return summarybarvalues
+
+    else:
+        selections = screenInstance.summarybar.getSelection(siteScreenHandle)
+        #print selections[btvname]
+        summarybarvalues = selections[btvname][values[0]][values[3]]
+        return summarybarvalues
+
+
+def IsreportIDvalid(data):
+    result = True
+    for key,value in data.iteritems():
+        print value
+    if 'rows' in key:
+        for a in value:
+            print a[0]
+            # i = i + 1
+            for b in value[1:]:
+                print b[0]
+                if (a[0]==b[0]):
+                    result = False
+                    break;
+                else:
+                    result = True
+            break;
+    return result
+
+def currentdate():
+    x = datetime.datetime.now()
+    # print x
+    y =str(x).split(':')
+    date = y[0]+":"+y[1]
+    # print y
+    # print date
+    return date
+
+def validatesearchtable(data,columnname,searchtext):
+    try:
+        flag = False
+        for j in range(len(data['header'])):
+            if(data['header'][j].upper()==columnname.upper()):
+                col = j
+                break;
+        flag = False
+        for i in range(len(data['rows'])):
+            if(searchtext in data['rows'][i][col]):
+                print data['rows'][i][col]
+                flag = True
+            else:
+                flag = False
+        return flag
+    except:
+        return False
+
+
+def setCalendar(y,m,d,h,min,intance,setup,page="routers_popup",parent="leftcalendar"):
+    try:
+        intance.calendar.set("year",y,getHandle(setup,page,parent),parent)
+        intance.calendar.set("month",m,getHandle(setup,page,parent),parent)
+        intance.calendar.setDay("day",d,getHandle(setup,page,parent),parent)
+        intance.calendar.set("hour",h,getHandle(setup,page,parent),parent)
+        try:
+            intance.calendar.set("minute",min,getHandle(setup,page,parent),parent)
+        except:
+            pass
+        return True
+    except ElementNotSelectableException or ElementNotVisibleException or Exception as e:
+        return e
+
+
+def getInputText(h,parent,child):
+    for el in h[parent][child]:
+        if el.is_displayed() == True:
+            return el.get_attribute("value")
+
+
+def FindWordInString(ar,grPopHandle):
+    resultq = []
+    for el in ar:
+        if (el in grPopHandle['generateReportDialog']['filters'][0].text):
+            result ="True"
+        else:
+            result = "False"
+
+        resultq = result
+    if (all(value == "True" for value in resultq)):
+        flag = True
+    else:
+        flag = False
+    return flag
+
+# def getAbsolutePath(filename):

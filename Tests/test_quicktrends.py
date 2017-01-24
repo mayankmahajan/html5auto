@@ -25,6 +25,7 @@ nfScreenInstance.cm.launchTrends(nfScreenHandle)
 qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
+
 xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
 yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 

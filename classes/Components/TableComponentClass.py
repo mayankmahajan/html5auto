@@ -2,6 +2,9 @@ from BaseComponentClass import BaseComponentClass
 from copy import deepcopy
 from Utils.logger import *
 from time import *
+from selenium.webdriver import ActionChains
+
+import random
 class TableComponentClass(BaseComponentClass):
     colCount = 0
     rowCount = 0
@@ -154,6 +157,119 @@ class TableComponentClass(BaseComponentClass):
         except:
             pass
 
+    def getIterfaceHeaders(self,h):
+        if h['HEADERROW'] != "":
+            elHandle=h['HEADERROW']
+            self.colCount = len(elHandle)
+            return [eachHandler.text for eachHandler in elHandle]
+        else:
+            logger.debug("header is not present in table")
+
+    def getIterfaceRows(self,colcount,h):
+        elHandle=h['ROWS']
+        rowCount = len(elHandle) / colcount
+        if rowCount < 15:
+            l = len(elHandle)
+        else:
+            l = 15*colcount
+        rows = []
+        temp = []
+
+        for i in range(0,l,colcount):
+            j=i
+            rows.append([elHandle[j].text for j in range(j,j+colcount)])
+
+        return rows
+
+
+
+
+        # if rowCount <= 15:
+        #     looprange=rowCount*colcount
+        # else:
+        #     looprange = 15 * colcount
+        # for i in range(looprange):
+        #     if len(temp) < colcount:
+        #         temp.append(elHandle[i].text)
+        #     else:
+        #         rows.append(temp)
+        #         temp = [elHandle[i].text]
+
+        # return a 2D array
+
+
+
+
+    def getIterfaceTableData(self,h):
+        handlers = self.compHandlers('table', h)
+        data = {}
+        data['header'] = self.getIterfaceHeaders(handlers)
+        data['rows'] = self.getIterfaceRows(len(data['header']),handlers)
+        return data
+
+
+    def getSelection(self,handle,parent="table"):
+        handlers = self.compHandlers(parent, handle)
+        data={}
+        return [[el.get_attribute('row'),el.text] for el in handlers['row-selection'] if el.text != ""]
+        # data['selIndes']=handlers['row-selection'][len(handlers['row-selection']) - 1].get_attribute('row')
+        # data['text']=handlers['row-selection'][len(handlers['row-selection']) - 1].text
+        # return data
+
+
+    def setSelection(self,index,h):
+        handle = self.compHandlers('table', h)
+        header = self.getIterfaceHeaders(handle)
+        colCount=len(header)
+        rand = random.randrange(colCount*index,colCount*index+4)
+        handle['ROWS'][rand].click()
+
+    def sortedInterfaceColum(self,index,handle):
+        handlers = self.compHandlers('table', handle)
+        handlers['CHECKSORT'][len(handlers['CHECKSORT'])-index].click()
+
+
+
+
+    def scrollVertical(self):
+        pass
+
+    def getTableData1(self,h,parent,child=None):
+        # handlers = self.compHandlers('table', h)
+        try:
+            data = {}
+            data['header'] = self.getIterfaceHeaders(h[parent])
+            data['rows'] = self.getIterfaceRows(len(data['header']),h[parent])
+            return data
+        except Exception as e:
+            return e
+    def setSelectionIndex(self,index,colCount,rowCount,h):
+        elHandle=h['ROWS']
+        newIndex = (colCount)*(index-1)+1
+
+        for i in range(len(elHandle)):
+            if i == newIndex:
+                elHandle[i].click()
+                return True
+
+    def setSelection1(self,index,h,parent,child=None):
+        data = self.getTableData1(h,parent)
+        colCount = len(data['header'])
+        rowCount = len(data['rows'])
+        return self.setSelectionIndex(index,colCount,rowCount,h[parent])
+
+    def getDynamicText(self,h,parent,child=None):
+        return h[parent]['count'][0].text
+
+    def setSpecialSelection(self,driver,indices,key,h,parent="table",child=""):
+        data = self.getTableData1(h,parent)
+        colCount = len(data['header'])
+        rowCount = len(data['rows'])
+        self.setSelectionIndex(indices[0],colCount,rowCount,h[parent])
+        if len(indices) == 2:
+            ActionChains(driver).key_down(key).perform()
+            self.setSelectionIndex(indices[1],colCount,rowCount,h[parent])
+            ActionChains(driver).key_up(key).perform()
 
 
 
@@ -163,13 +279,33 @@ class TableComponentClass(BaseComponentClass):
 
 
 
+    def getTableCells(self,h,parent="table",child=None):
+        handler = h[parent]['ROWS']
+        cells = []
+
+        for el in handler:
+            cells.append(el.text)
+        return cells
 
 
 
+    def selectTableCell(self,value,h,parent="table",child=None):
+        handler = h[parent]['ROWS']
+        for el in handler:
+            if el.text == value:
+                try:
+                    el.click()
+                    return True
+                except Exception as e:
+                    return e
 
-
-
-
-
-
+    def selectTableCellIndex(self,value,h,parent="table",child=None):
+        handler = h[parent]['ROWS']
+        for i in range(len(handler)):
+            if i == value:
+                try:
+                    handler[i].click()
+                    return handler[i].text
+                except Exception as e:
+                    return e
 

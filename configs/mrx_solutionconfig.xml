@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<data>
+    <screenConfigs>
+
+
+        <screenConfig id = "ud_Screen">
+            <!--<component id="switcher" selector="id" locator="UD_Legend_Container" parent="True" />-->
+            <!--<component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <!--<component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <component id='table' selector="id" locator="UD_Table_Container" parent="True" />
+            <!--<component id="editFilters" selector="tag name" locator="kiwik-edit-parameter-dropdown" parent="True"/>-->
+            <component id="body" selector="id" locator="UD_Data_Container" parent="True"/>
+        </screenConfig>
+
+        <screenConfig id ="createsegment_popup">
+            <component id="popup" selector="class" locator="basePopupView" parent="True" />
+            <component id = "radios" parent="False"/>
+            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
+
+        </screenConfig>
+
+        <screenConfig id="udp_popup">
+            <component id = "timeRangeDiv" selector="id" locator="ud_timeRangeDiv" parent="True"/>
+            <component id = "filterPopup" selector="id" locator="filterPopup" parent="True"/>
+            <component id = "radios" parent="False"/>
+            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
+            <component id = "allspans" selector="class name" locator="headerDiv" parent="True" />
+            <component id = "allselects" selector="tag name" locator="filterPopup" parent="True" />
+            <component id = "alllinks" selector="class name" locator="filterTabs" parent="True" />
+            <!--<component id = "filterContainer" selector="class name" locator="filterContainer" parent="True" />-->
+
+        </screenConfig>
+
+
+        <screenConfig id = "segment_Screen">
+             <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
+
+            <component id = "table" selector="css selector" locator='[class="ag-fresh"]' childOf="" action="" parent="True" />
+        </screenConfig>
+
+
+        <screenConfig id = "report2_popup">
+            <!--reportTypeLabel-->
+            <component id = "radios" parent="False"/>
+            <component id = "successdialog" selector="id" locator='ngdialog1' parent="True"/>
+            <component id = "table" selector="id" locator="tableview" parent="True" />
+            <component id = "allbuttons" selector="class name" locator="createReportFooter" parent="True" />
+            <!--footer-->
+        </screenConfig>
+
+
+        <screenConfig id = "configuration_Screen">
+            <component id = "buttons" parent="False" />
+            <component id = "searchSelector" parent="False" />
+            <component id = "search" parent="False" />
+            <component id = 'leftcolumn' parent="False" />
+        </screenConfig>
+
+        <screenConfig id = "config_popup">
+            <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
+        </screenConfig>
+
+        <screenConfig id = "forensics_Screen">
+            <component id = 'commoncomponents' parent="False"/>
+        </screenConfig>
+
+        <screenConfig id = "routers_popup">
+            <component id = 'queryrouters' selector="tag name" locator="kiwik-queryrouters" parent="True" />
+            <component id = 'wizard2' selector="tag name" locator="app-querybuilder" parent="False" />
+
+            <component id = 'routertable' selector="tag name" locator="ag-grid-ng2" parent="True" />
+            <!--<component id = 'calendar' selector="class name" locator="calendarset" parent="True" />-->
+            <!--<component id = 'leftcalendar' selector="class name" locator="calendar left" parent="True" />-->
+            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
+        </screenConfig>
+
+    </screenConfigs>
+
+    <componentConfigs>
+        <componentConfig id ="multiselect-dropdown">
+            <component id = ""/>
+        </componentConfig>
+
+        <componentConfig id="editFilters">
+            <component id = 'edit' selector="class name" locator="drop-down-list" wait="skip"/>
+        </componentConfig>
+
+        <componentConfig id="filterPopup">
+            <component id="header" selector="class name" locator="headerDiv"/>
+            <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
+            <component id = "tree" selector="tag name" locator="tree" wait="skip"/>
+            <component id="allfilters" selector="class name" locator="filterTextDiv" wait="skip"/>
+
+            <!--<component id = 'edit' selector="class name" locator="drop-down-list" wait="skip"/>-->
+        </componentConfig>
+
+        <componentConfig id="switcher">
+            <component id = 'switches' selector="css selector" locator="button" wait="skip"/>
+        </componentConfig>
+
+        <componentConfig id="popup">
+            <component id="input" selector="class name" locator="inputSegStyle" />
+            <component id = "spans" selector="tag name" locator='span' />
+            <component id="header" selector="class name" locator="headerDiv"/>
+            <!--<component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>-->
+
+        </componentConfig>
+        <componentConfig id="body">
+            <component id = "startdrag" selector="id" locator="startHandle"/>
+            <component id = "enddrag" selector="id" locator="endHandle"/>
+        </componentConfig>
+        <componentConfig id="radios">
+            <component id = "radio" selector="css selector" locator='[type="radio"]' />
+        </componentConfig>
+        <componentConfig id="alllabels">
+            <component id = "label" selector="tag name" locator='label' />
+        </componentConfig>
+        <componentConfig id="allspans">
+            <component id = "span" selector="tag name" locator='span' />
+        </componentConfig>
+        <componentConfig id="allbuttons">
+            <component id = "button" selector="tag name" locator='button' />
+        </componentConfig>
+        <componentConfig id="allselects">
+            <component id = "select" selector="tag name" locator='select' />
+        </componentConfig>
+        <componentConfig id="alllinks">
+            <component id = "a" selector="tag name" locator='a' />
+        </componentConfig>
+        <componentConfig id = "wizard2">
+            <component id = 'qb' selector="tag name" locator="app-querybuilder" parent="False" />
+
+        </componentConfig>
+    </componentConfigs>
+
+    <contextMenus>
+        <contextMenu id = "site_Screen">
+            <option id = "Network Functions"/>
+            <option id = "Site - Site Interactions"/>
+            <option id = "Network Elements"/>
+            <option id = "VRF"/>
+        </contextMenu>
+        <contextMenu id = "nf_Screen">
+            <option id = "Sites"/>
+        </contextMenu>
+    </contextMenus>
+</data>
