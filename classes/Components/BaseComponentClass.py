@@ -115,17 +115,19 @@ class BaseComponentClass:
                 pass
         return activeElements
 
+    def selectRadioButton(self, value, h, childDiv="span", parent="radios", child="radio"):
+        childs = "..//" + childDiv
 
-
-    def selectRadioButton(self,value,h,parent="radios",child="radio"):
         for el in h[parent][child]:
-            if value == el.find_elements_by_xpath("..//span")[0].text:
+            if value == el.find_elements_by_xpath(childs)[0].text:
                 try:
                     el.click()
                     time.sleep(2)
                     break
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
+
+
 
     def clickButton(self,value,h,parent="allbuttons",child="button"):
         for el in h[parent][child]:
