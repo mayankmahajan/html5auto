@@ -106,7 +106,7 @@ class DriverHelper:
 
 
     def visibleCompsOnly(self, arr):
-        return arr
+        # return arr
         newSet = []
         for el in arr:
             if el.is_displayed():
