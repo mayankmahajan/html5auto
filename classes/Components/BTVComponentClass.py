@@ -76,16 +76,16 @@ class BTVComponentClass(BaseComponentClass):
         data = dict(zip(c1,c2))
         return data
 
-    def getData(self,handlrs):
+    def getData(self,handlrs,parent="btv"):
         '''
         Returns Data as Dictionary with Name and Value
         :param handlers: Handlers to all the components
         :return: Data from the Bar Chart
         '''
         data = {}
-        handlers = self.compHandlers('btv',handlrs)
+        handlers = self.compHandlers(parent,handlrs)
         for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "getData":
+            if self.configmanager.componentSelectors[parent][key]["action"] == "getData":
                 data[key] = self.getDataforColumn(value)
         return data
 

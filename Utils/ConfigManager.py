@@ -14,6 +14,7 @@ from xml.etree.ElementTree import XMLParser
 from xml.etree.ElementTree import TreeBuilder
 from xml.etree.ElementTree import ElementTree
 import glob
+from Utils.logger import *
 
 from Utils.XMLCombiner import XMLCombiner
 
@@ -160,15 +161,26 @@ class ConfigManager(object):
                 return ValueError
         else:
             return list
-    def getComponentSelectors(self,componentID=""):
+    def getComponentSelectors(self, parent="", child=""):
+        compConfigs = self.getComponentConfigs()
+        if parent != "" and child != "":
+            try:
+                return compConfigs[parent][child]
+            except Exception as e:
+                logger.debug("Exception %s found while getting %s parent %s child selectors",e,parent,child)
+                return e
+        return compConfigs
+
+
+
         compConfigs = self.getComponentConfigs()
         list = {}
         for key,value in compConfigs.iteritems():
             for k,v in compConfigs[key].iteritems():
                 list[k] = v
-        if componentID != "":
+        if child != "":
             try:
-                return list[componentID]
+                return list[child]
             except ValueError:
                 return ValueError
         else:

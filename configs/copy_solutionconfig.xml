@@ -98,7 +98,10 @@
         </screenConfig>
 
          <screenConfig id = "qt_Screen">
-             <component id = "quicktrends" selector="id" locator='flexbox_trend' parent="True"/>
+             <component id = "quicktrends" selector="xpath" locator='//*[contains(@class, "trend_C")]' parent="True"/>
+             <!--<component id = "quicktrends" selector="id" locator='flexbox_trend' parent="True"/>-->
+
+
 
          </screenConfig>
 

@@ -69,9 +69,9 @@ def login(obj,username,password):
         # configs = configmanager.getComponentConfigs()
         loginConfigs = deepcopy(configs)
 
-        usernameHandler = driverHelper.waitForVisibleElement((loginConfigs['username']['selector'],loginConfigs['username']['locator']))
-        passwordHandler = driverHelper.waitForVisibleElement((loginConfigs['password']['selector'],loginConfigs['password']['locator']))
-        signinHandler = driverHelper.waitForVisibleElement((loginConfigs['signin']['selector'],loginConfigs['signin']['locator']))
+        usernameHandler = driverHelper.waitForVisibleElement((loginConfigs['username']['username']['selector'],loginConfigs['username']['username']['locator']))
+        passwordHandler = driverHelper.waitForVisibleElement((loginConfigs['password']['password']['selector'],loginConfigs['password']['password']['locator']))
+        signinHandler = driverHelper.waitForVisibleElement((loginConfigs['signin']['signin']['selector'],loginConfigs['signin']['signin']['locator']))
 
         loginPage = LoginPageClass(driver)
         # usernameHandler = driverHelper.waitForVisibleElement(LoginPageLocators.USERNAME)
@@ -128,7 +128,7 @@ def getHandlersForParentComponent(driver, driverHelper, configManager, pageName,
                 listOfHandles[comp] = driverHelper.waitForVisibleElements(locator,False)
             except:
                 # try:
-                #     isParent = True if configManager.componentSelectors[comp]['parent'].upper() == "TRUE" else False
+                #     isParent = True if configManager.componentSelectors[eachComp][comp]['parent'].upper() == "TRUE" else False
                 # except:
                 #     pass
                 listOfHandles[comp] = driverHelper.waitForVisibleElements(locator)
@@ -145,17 +145,17 @@ def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, pa
         print "getHandlesForEachComponent",eachComp
         listOfHandles[eachComp] = {}
         for comp in configManager.componentChildRelations[eachComp]:
-                # locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'],configManager.componentSelectors[comp]['wait'])
-            locator = (configManager.componentSelectors[comp]['selector'],configManager.componentSelectors[comp]['locator'])
+                # locator = (configManager.componentSelectors[eachComp][comp]['selector'],configManager.componentSelectors[eachComp][comp]['locator'],configManager.componentSelectors[eachComp][comp]['wait'])
+            locator = (configManager.componentSelectors[eachComp][comp]['selector'],configManager.componentSelectors[eachComp][comp]['locator'])
             try:
-                wait = configManager.componentSelectors[comp]['wait']
+                wait = configManager.componentSelectors[eachComp][comp]['wait']
                 try:
                     print "will not wait for ", comp
-                    if configManager.componentSelectors[comp]['locatorDimension']:
-                        locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
-                        locatorText = configManager.componentSelectors[comp]['locatorText']
+                    if configManager.componentSelectors[eachComp][comp]['locatorDimension']:
+                        locatorDimension = configManager.componentSelectors[eachComp][comp]['locatorDimension']
+                        locatorText = configManager.componentSelectors[eachComp][comp]['locatorText']
                         try:
-                            parentDependency = configManager.componentSelectors[comp]['parentDependency']
+                            parentDependency = configManager.componentSelectors[eachComp][comp]['parentDependency']
                             listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp,locatorDimension,locatorText,parentDependency)
                         except:
                             listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,False,[parentHandles,eachComp],comp,locatorDimension,locatorText)
@@ -164,16 +164,16 @@ def getHandlesForEachComponent(driver, driverHelper, configManager, pageName, pa
 
             except:
                 # try:
-                #     isParent = True if configManager.componentSelectors[comp]['parent'].upper() == "TRUE" else False
+                #     isParent = True if configManager.componentSelectors[eachComp][comp]['parent'].upper() == "TRUE" else False
                 # except:
                 #     pass
                 try:
                     print "will wait for ", comp
-                    if configManager.componentSelectors[comp]['locatorDimension']:
-                        locatorDimension = configManager.componentSelectors[comp]['locatorDimension']
-                        locatorText = configManager.componentSelectors[comp]['locatorText']
-                        if 'parentDependency' in configManager.componentSelectors[comp].keys():
-                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText,configManager.componentSelectors[comp]['parentDependency'])
+                    if configManager.componentSelectors[eachComp][comp]['locatorDimension']:
+                        locatorDimension = configManager.componentSelectors[eachComp][comp]['locatorDimension']
+                        locatorText = configManager.componentSelectors[eachComp][comp]['locatorText']
+                        if 'parentDependency' in configManager.componentSelectors[eachComp][comp].keys():
+                            listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText,configManager.componentSelectors[eachComp][comp]['parentDependency'])
                         else:
                             listOfHandles[eachComp][comp] = driverHelper.waitForVisibleElements(locator,True,[parentHandles,eachComp],comp,locatorDimension,locatorText)
                 except:
