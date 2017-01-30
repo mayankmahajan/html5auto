@@ -16,6 +16,7 @@ from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 import time
 
+
 from selenium.webdriver import ActionChains
 
 
@@ -25,6 +26,7 @@ class QuicklinkTimeRangeComponentClass(BaseComponentClass):
     def __init__(self):
         BaseComponentClass.__init__(self)
         self.configmanager = ConfigManager()
+        self.utility = __import__("Utils.utility")
 
 
 
@@ -38,7 +40,7 @@ class QuicklinkTimeRangeComponentClass(BaseComponentClass):
         handlers = self.compHandlers('timeRangeDiv',handlrs)
         self.setSelectionIndex(handlers[str(quicklink)])
 
-    def setSelection1(self,quicklink,handlers,parent,child=None):
+    def setSelection1(self,quicklink,handlers,parent="timeRangeDiv",child=""):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
         :param index: Index to be selected
@@ -48,6 +50,10 @@ class QuicklinkTimeRangeComponentClass(BaseComponentClass):
         # handlers = self.compHandlers('timeRangeDiv',handlrs)
         self.setSelectionIndex(handlers[parent][str(quicklink)])
 
+    def getSelectedTime(self,handlers,parent="timeRangeDiv",child="value"):
+        return self.getEpochs(handlers[parent][child][0].text)
+    def getEpochs(self,datestring="24 Mar 2016 00:00 to 24 Mar 2016 05:00"):
+        return [[self.utility.utility.getepoch(dates.strip()),dates.strip()] for dates in datestring.split("to")]
 
     def setSelectionIndex(self,elHandle):
         '''
@@ -57,3 +63,5 @@ class QuicklinkTimeRangeComponentClass(BaseComponentClass):
         :return: nothing
         '''
         elHandle[0].click()
+
+

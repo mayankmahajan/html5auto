@@ -140,6 +140,7 @@
 
         <componentConfig id = "timeRangeDiv">
             <component id = "cal" selector="id" locator="dateRangePickerDivID" />
+            <component id = "value" selector="id" locator="timeRangeValueSpanID" />
             <component id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>
             <component id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>
             <!--<component id = "last2Hours" selector="css selector" locator='[uib-btn-radio="&apos;last2Hours&apos;"]' locatorDimension ='css selector' locatorText = '[uib-btn-radio="&apos;last2Hours&apos;"]' action="click" wait = 'skip'/>-->

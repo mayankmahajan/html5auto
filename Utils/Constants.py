@@ -44,3 +44,6 @@ class Constants(object):
     BTVCOLUMN0 = 'BTVCOLUMN0'
     BTVCOLUMN1 = 'BTVCOLUMN1'
     BTVCOLUMN2 = 'BTVCOLUMN2'
+
+    TIMEZONEOFFSET = -6
+    TIMEPATTERN = '%d %b %Y %H:%M:%S'

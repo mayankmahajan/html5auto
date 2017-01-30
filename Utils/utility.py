@@ -27,6 +27,7 @@ from classes.Components.ContextMenuComponentClass import *
 from classes.Components.BaseComponentClass import *
 import time
 import datetime
+import calendar
 
 # def setUp():
 #     obj={}
@@ -669,3 +670,7 @@ def FindWordInString(ar,grPopHandle):
     return flag
 
 # def getAbsolutePath(filename):
+
+def getepoch(datestring,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIMEPATTERN):
+    epoch = int(calendar.timegm(time.strptime(datestring.strip()+":00",tPattern)))
+    return epoch - tOffset*3600
