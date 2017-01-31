@@ -22,6 +22,8 @@ from selenium.webdriver import ActionChains
 
 
 class QuickTrendsComponentClass(BaseComponentClass):
+    def __init__(self):
+        self.util = __import__("Utils.utility")
     # 'Yes' if fruit == 'Apple' else 'No'
 
     # parentHandles['quicktrends'][0].find_elements_by_tag_name("svg")[0].find_elements_by_class_name('legend')
@@ -51,7 +53,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
         yaxis = self.__getAxisTicks(h, "wm-yaxis")
         return yaxis
 
-    def moveTotick(self,driverHelper,handlrs):
+    def moveTotick(self,driverHelper,handlrs,setup):
         h = self.__getHandler(handlrs)
         hxaxis = self.__getHandleAxis(h['chart'], 'wm-axis')
         for el in hxaxis:
@@ -60,8 +62,10 @@ class QuickTrendsComponentClass(BaseComponentClass):
                 tooltipText=[]
                 for el in hticks:
                     driverHelper.action.move_to_element(el).perform()
-                    time.sleep(1) # only to show in demo
-                    tooltipText.append(handlrs['quicktrends']['qttooltip'][len(handlrs['quicktrends']['qttooltip'])-1].text)
+                    tempHandlers = self.util.utility.getHandle(setup,"qt_Screen","quicktrends")
+                    # time.sleep(1) # only to show in demo
+
+                    tooltipText.append(tempHandlers['quicktrends']['qttooltip'][len(tempHandlers['quicktrends']['qttooltip'])-1].text)
             else:
                 print el.tag_name
         return tooltipText
