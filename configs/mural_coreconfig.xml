@@ -455,7 +455,8 @@
         </componentConfig>
 
         <componentConfig id="radios">
-            <component id = "radio" selector="class name" locator='radio-info' />
+            <component id = "radio" selector="css selector" locator='.radio-info,[type="radio"]' />
+            <!--<component id = "radio" selector="class name" locator='radio-info' />-->
         </componentConfig>
         <componentConfig id="alllabels">
             <component id = "label" selector="tag name" locator='label' />
