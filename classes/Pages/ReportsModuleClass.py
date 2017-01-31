@@ -21,8 +21,19 @@ class ReportsModuleClass(BasePopClass):
 
     def launchCreateReport(self,driver):
         try:
+            sleep(4)
             driver.execute_script("document.getElementsByClassName('createReportBtn')[0].click()")
             sleep(4)
             return True
         except Exception as e:
             return e
+
+    def launchCreateReport1(self,driver):
+        try:
+            sleep(4)
+            driver.execute_script("document.getElementsByClassName('core-report-create-image')[0].click()")
+            sleep(4)
+            return True
+        except Exception as e:
+            return e
+

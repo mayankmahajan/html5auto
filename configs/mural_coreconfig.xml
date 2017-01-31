@@ -1,18 +1,6 @@
 <?xml version="1.0"?>
 <data>
-    <seleniumSettings>
-        <browser id="browser" value="Chrome"/>
-        <timeout id="timeout" value="100"/>
-    </seleniumSettings>
 
-    <quicklinks>
-        <quicklink id = "TODAY"/>
-        <!--<quicklink id = "YESTERDAY"/>-->
-        <!--<quicklink id = "last2Hours"/>-->
-
-        <!--<quicklink id = "TODAY" selector="id" locator='TODAY' locatorDimension ='id' locatorText = 'TODAY' action="click" wait = 'skip'/>-->
-        <!--<quicklink id = "YESTERDAY" selector="id" locator='YESTERDAY' locatorDimension ='id' locatorText = 'YESTERDAY' action="click" wait = 'skip'/>-->
-    </quicklinks>
     <wizardquicklinks>
         <wizardquicklink id = "Today"/>
         <wizardquicklink id = "Yesterday"/>
@@ -20,6 +8,7 @@
         <wizardquicklink id = "Last week"/>
         <wizardquicklink id = "This Month"/>
     </wizardquicklinks>
+
 
     <measures>
         <measure id = "Bitrate_downlink_absolute_average"/>
@@ -318,26 +307,23 @@
         </componentConfig>
 
         <componentConfig id = 'generateReportDialog'>
-            <component id = "reportName" selector="id" locator='reportName'/>
-            <component id = "reportnamewizard" selector="css selector" locator='[ng-model="vm.reportName"]'/>
+            <component id = "reportName" selector="css selector" locator='[placeholder="Report Name"]'/>
             <component id = "reportType" selector="css selector" locator='[ng-model="vm.selectedReportType"]'/>
             <component id = "measureType" selector="css selector" locator='[ng-model="vm.selectedReportMeasureID"]'/>
             <component id = "quicklink" selector="css selector" locator='[ng-model="vm.selectedReportPeriodID"]'/>
             <component id = "addemail" selector="css selector" locator='[ng-model="vm.additionalEmailId"]'/>
-            <component id = "emailInput" selector="id" locator='emailInput' wait="skip"/>
-            <component id = "emailInputwizard" selector="css selector" locator='[ng-model="vm.emailID"]'/>
+
+
+            <!--below line is pure workaround it has to be fixed-->
+            <component id = "emailInput" selector="css selector" locator='[placeholder="Maximum 5 comma separated mail ids."]'/>
             <component id = "generate" selector="css selector" locator='[ng-click="vm.generateReport()"]'/>
             <component id = "close" selector="css selector" locator='[ng-click="vm.closeReportPopup()"]'/>
 
             <component id = "leftBox" selector="class name" locator='leftBox' action="click"/>
             <component id = "filters" selector="class name" locator='rightBox' action="click"/>
 
-            <component id = "starttime1" selector="xpath" locator='//*[contains(@id, "tartTime")]' />
-            <component id = "endtime1" selector="xpath" locator='//*[contains(@id, "ndTime")]' />
-
-            <!--<component id = "starttime" selector="id" locator="startTime" />-->
-            <!--<component id = "endtime" selector="id" locator="endTime" />-->
-
+            <component id = "starttime" selector="xpath" locator='//*[contains(@id, "tartTime")]' />
+            <component id = "endtime" selector="xpath" locator='//*[contains(@id, "ndTime")]' />
 
         </componentConfig>
 
@@ -488,6 +474,9 @@
         </componentConfig>
         <componentConfig id="allimages">
             <component id = "image" selector="tag name" locator='img' />
+        </componentConfig>
+        <componentConfig id="allinputs">
+            <component id = "input" selector="tag name" locator='input' />
         </componentConfig>
 
         <componentConfig id="recurring">

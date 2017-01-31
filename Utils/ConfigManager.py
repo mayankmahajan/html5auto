@@ -25,7 +25,8 @@ class ConfigManager(object):
     def __init__(self):
         # self.tree = self.mergeScreenConfigs()
         # self.tree = self.parse()
-        self.tree = XMLCombiner(['../configs/coreconfig.xml', '../configs/solutionconfig.xml']).combine()
+        self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mural_solutionconfig.xml', '../configs/mural_userlevel_config.xml']).combine()
+        # self.tree = XMLCombiner(['../configs/copy_coreconfig.xml', '../configs/copy_solutionconfig.xml']).combine()
 
         self.root = self.tree.getroot()
         self.quickLinks = self.getQuickLinks()
@@ -68,6 +69,19 @@ class ConfigManager(object):
                 # tempDict[child.attrib['id']]
                 tempDict[component.attrib['id']] = {}
                 tempDict[component.attrib['id']] = component.attrib
+        return tempDict
+
+    def getAllNodeElements(self,parent,children,prop="id"):
+        parentConfigs = self.tree.getiterator(parent)
+        # screenConfigDetails = []
+        tempDict = []
+        for child in parentConfigs:
+            childComponents = child.findall(children)
+            for component in childComponents:
+                # tempDict[child.attrib['id']]
+                # tempDict[component.attrib['id']] = {}
+                # tempDict[component.attrib['id']] = component.attrib
+                tempDict.append(component.attrib[prop])
         return tempDict
 
     def getCMScreenRelations(self,parent,children):
@@ -253,3 +267,33 @@ class ConfigManager(object):
             # return self._root
         except:
             pass
+
+
+    def getreportTypes(self):
+
+        # reporttypes=self.getNodeElements("reporttypes","reporttype")
+
+        # reportfiltersRelations = self.getNodeElements("reportfiltersrelations","reportfiltersrelation")
+        reporttypes = self.mergeTwoNodes(self.getNodeElements("reporttypes","reporttype"),self.getNodeElements("reportfiltersrelations","reportfiltersrelation"),"id")
+        quicklinks = self.getNodeElements("quicklinks","quicklink")
+
+        return self.mergeTwoNodes(reporttypes,quicklinks,"quicklinkid")
+
+        # for reporttype,value in reporttypes.iteritems():
+        #     for quicklinkProp,quicklinkValue in quicklinks[value['quicklinkid']].iteritems():
+        #         if quicklinkProp != "id":
+        #             reporttypes[reporttype][quicklinkProp]=quicklinkValue
+        # return reporttypes
+
+    def mergeTwoNodes(self,node1,node2,commonProp):
+
+        for key1,value1 in node1.iteritems():
+            for prop,value in node2[value1[commonProp]].iteritems():
+                if prop != "id":
+                    node1[key1][prop]=value
+        return node1
+
+
+
+
+

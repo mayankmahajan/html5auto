@@ -5,6 +5,8 @@ from Utils.UnitSystem import UnitSystem
 from Utils.ConfigManager import ConfigManager
 from selenium.common.exceptions import *
 import time
+from Utils.logger import *
+from selenium.webdriver.common.keys import *
 
 class BaseComponentClass:
     def click(self, elHandle):
@@ -115,13 +117,37 @@ class BaseComponentClass:
                 pass
         return activeElements
 
+    def clickCheckBox(self,h,index,parent="allcheckboxes",child="checkbox"):
+        try:
+            logger.debug("Going to Click Checkbox %d parent %s and child %s ",index,parent,child)
+            h[parent][child][index].click()
+            return True
+        except Exception as e:
+            logger.error("Exception found while clicking Checkbox %d",index)
+            return e
+
+    def sendkeys_input(self,value,h,index,clear=True,parent="allinputs",child="input"):
+        try:
+            if clear:
+                logger.debug("Clearing the text at input %d parent %s and child %s ",index,parent,child)
+                h[parent][child][index].send_keys(len(str(h[parent][child][index].get_attribute("value")))*Keys.BACKSPACE)
+            logger.debug("Going to send keys to input %d parent %s and child %s ",index,parent,child)
+
+            h[parent][child][index].send_keys(value)
+            return h[parent][child][index].get_attribute("value")
+        except Exception as e:
+            logger.error("Exception found while entering keys to input %d",index)
+            return e
+
+
     def selectRadioButton(self, value, h, childDiv="span", parent="radios", child="radio"):
-        childs = "..//" + childDiv
+        childs = ".//" + childDiv
 
         for el in h[parent][child]:
-            if value == el.find_elements_by_xpath(childs)[0].text:
+            if value == el.find_elements_by_xpath(childs)[0].text.strip().strip(':').strip():
                 try:
                     el.click()
+                    el.find_elements_by_xpath(".//input")[0].click()
                     time.sleep(2)
                     break
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
@@ -156,3 +182,23 @@ class BaseComponentClass:
             return ele.get_attribute("class")
         elif prop == "id":
             return ele.get_attribute("id")
+
+
+    def validateData(self,dataCollection,csvData):
+        result = {}
+        # for key,value in csvData.iteritems():
+        for key in dataCollection['btvData']['dimension']:
+            if "All " in key or "Others" in key:
+                pass
+            else:
+                UIData = 0.0
+                convertedData = float(dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[0])
+                unitString = dataCollection['btvData']['value'][dataCollection['btvData']['dimension'].index(key)].split(" ")[1]
+                UIData = self.unitSystem.getRawValue(convertedData,unitString)
+
+                if csvData[key]['AGGR_totalByteBuffer'] == UIData:
+                    result[key] = "Data Validation PASSED"
+                else:
+                    result[key] = "Data Validation FAILED --> Actual : "+str(UIData)+" and Expected : "+str(csvData[key]['AGGR_totalByteBuffer'])
+
+        return result

@@ -28,6 +28,9 @@ from classes.Components.BaseComponentClass import *
 import time
 import datetime
 import calendar
+from classes.Pages.GenerateReportsPopClass import *
+from classes.Pages.ReportsModuleClass import *
+from classes.Objects.Report import *
 
 # def setUp():
 #     obj={}
@@ -674,3 +677,93 @@ def FindWordInString(ar,grPopHandle):
 def getepoch(datestring,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIMEPATTERN):
     epoch = int(calendar.timegm(time.strptime(datestring.strip()+":00",tPattern)))
     return epoch - tOffset*3600
+
+
+
+def createreport(setup,reportType,reportObj,time):
+    '''
+    takes input as reporttype,time,filters,reportName,other optional params
+    :return:
+    '''
+
+    # creating a random number
+    rndmNum = random.randint(0,999999)
+
+    reportScreenInstance = ReportsModuleClass(setup.d)
+    reportScreenInstance.launchCreateReport1(setup.d)
+
+    grPopInstance = GenerateReportsPopClass(setup.d)
+    grPopInstance.reportspopup.selectRadioButton(reportType['id'], getHandle(setup,"report2_popup","radios"), "label")
+
+    # launching TimeRange Page in wizard
+    grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, "report2_popup", "allbuttons"))
+
+    # selecting quicklink
+    grPopInstance.reportspopup.selectRadioButton(reportType['locatorText'], getHandle(setup,"report2_popup","radios"), "label")
+
+    grPopHandle = getHandle(setup, "report2_popup", "generateReportDialog")
+    if 'starttime' in reportType.keys() and reportType['starttime'] == "True":
+        grPopHandle['generateReportDialog']['starttime'][0].click()
+        setCalendar(time[0].year, time[0].month, time[0].day, time[0].hour, time[0].min, grPopInstance, setup,"report2_popup")
+        grPopInstance.reportspopup.clickButton("Apply", getHandle(setup, "report2_popup", "allbuttons"))
+
+    # print "starttime", str(getInputText(grPopHandle,'generateReportDialog','starttime'))
+    if 'endtime' in reportType.keys() and reportType['endtime'] == "True":
+        grPopHandle['generateReportDialog']['endtime'][0].click()
+        setCalendar(time[1].year, time[1].month, time[1].day, time[1].hour, time[1].min, grPopInstance, setup,"report2_popup")
+        grPopInstance.reportspopup.clickButton("Apply", getHandle(setup, "report2_popup", "allbuttons"))
+
+    # print "endtime", str(getInputText(grPopHandle,'generateReportDialog','endtime'))
+    if 'recurringInterval' in reportType.keys() and reportType['recurringInterval'] != "":
+        grPopInstance.dropdown.doSelection(getHandle(setup,"report2_popup","recurring"),reportType['recurringInterval'],"recurring","dropdowns")
+
+    if 'recurInstances' in reportType.keys() and reportType['recurringInterval'] != "":
+        grPopInstance.dropdown.customSendkeys(getHandle(setup,"report2_popup","recurring")['recurring']["instances"],reportType['recurInstances'])
+
+    # launching Filters Page in wizard
+    grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, "report2_popup", "allbuttons"))
+
+
+    result={}
+    result['filters'] = []
+    if 'network' in reportType['filters']:
+        grPopInstance.clickLink("Network Topology",getHandle(setup, "report2_popup", "alllinks"))
+        for i in range(len(reportObj.filters['network'])):
+            if reportObj.filters['network'][i] != '':
+                grPopInstance.multiDropdown.domultipleSelection(getHandle(setup,"report2_popup","filterPopup"),reportObj.filters['network'][i],i)
+                result['filters'].append(['network',i,grPopInstance.multiDropdown.getSelection(getHandle(setup,"report2_popup","filterPopup"),i)])
+
+
+    if 'apnrat' in reportType['filters']:
+        grPopInstance.clickLink("APN/RAT",getHandle(setup, "report2_popup", "alllinks"))
+        for i in range(len(reportObj.filters['apnrat'])):
+            radioname= "APN" if i==0 else "Radio Type"
+            if reportObj.filters['apnrat'][i] != '':
+                grPopInstance.reportspopup.selectRadioButton(radioname, getHandle(setup,"report2_popup","radios"), "label")
+
+                grPopInstance.multiDropdown.domultipleSelection(getHandle(setup,"report2_popup","filterPopup"),reportObj.filters['apnrat'][i],i)
+                result['filters'].append(['apnrat',i,grPopInstance.multiDropdown.getSelection(getHandle(setup,"report2_popup","filterPopup"),i)])
+
+    if 'subscriber' in reportType['filters']:
+        grPopInstance.clickLink("Subscriber",getHandle(setup, "report2_popup", "alllinks"))
+        for i in range(len(reportObj.filters['subscriber'])):
+            if reportObj.filters['subscriber'][i] != '':
+                grPopInstance.dropdown.clickCheckBox(getHandle(setup, "report2_popup", "allcheckboxes"),0)
+                result['filters'].append(['subscriber',i,grPopInstance.dropdown.sendkeys_input(reportObj.filters['subscriber'][i],getHandle(setup, "report2_popup", "allinputs"),1)])
+
+
+
+
+    # launching Review Page in wizard
+    grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, "report2_popup", "allbuttons"))
+
+    grPopHandle = getHandle(setup, "report2_popup", "generateReportDialog")
+    print grPopHandle['generateReportDialog']['filters'][0].text
+
+    grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["reportName"],reportObj.reportName+str(rndmNum))
+    grPopInstance.dropdown.clickCheckBox(getHandle(setup, "report2_popup", "allcheckboxes"),0)
+    grPopInstance.dropdown.clickCheckBox(getHandle(setup, "report2_popup", "allcheckboxes"),1)
+    grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["emailInput"],reportObj.email)
+    grPopInstance.reportspopup.clickButton("Submit",getHandle(setup, "report2_popup", "allbuttons"))
+
+    return result

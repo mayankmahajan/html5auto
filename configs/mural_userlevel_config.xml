@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<data>
+
+    <reporttypes>
+        <reporttype id = "Gateway Traffic" customTime ="True" quicklinkid="hourly" />
+        <!--<reporttype id = "Tonnage Distribution based on Subscriber Percent" customTime ="True" quicklinkid="onetime" recurringInterval = "Daily" recurInstances = "3"/>-->
+        <!--<reporttype id = "Top Domains" customTime ="True" quicklinkid="recurring"/>-->
+    </reporttypes>
+
+    <availabletimerange>
+        <time id="starttime" year="2016" month ="12" date="31" hour="19" min="00"/>
+        <time id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
+    </availabletimerange>
+
+
+
+</data>

@@ -25,4 +25,5 @@ class BasePopClass():
                     return True
                 except ElementNotSelectableException or Exception as e:
                     return e
+        return False
 
