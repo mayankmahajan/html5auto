@@ -190,23 +190,6 @@ class PieLegendComponentClass(BaseComponentClass):
             data.append(elHandle['getToolTipData'][0].text)
         return data
 
-    def getToolTipInfo(self,driver,driverHelper,handlrs):
-        '''
-
-        :param tipHandle:
-        :return:
-        '''
-        data = []
-        handlers = self.compHandlers('btv',handlrs)
-
-        toolTipHandlers = {}
-        for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "hover":
-                toolTipHandlers['hover'] = value
-            elif self.configmanager.componentSelectors[key]["action"] == "getToolTipData":
-                toolTipHandlers['getToolTipData'] = value
-        return self.launchToolTip(driver,driverHelper,toolTipHandlers)
-
     def validateToolTipData(self,dataCollection):
 
         finalTTD = {}

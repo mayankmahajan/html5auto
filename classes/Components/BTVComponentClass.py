@@ -89,7 +89,7 @@ class BTVComponentClass(BaseComponentClass):
                 data[key] = self.getDataforColumn(value)
         return data
 
-    def setSelection(self,index,handlrs):
+    def setSelection(self,index,handlrs,parent="btv"):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
         :param index: Index to be selected
@@ -97,9 +97,9 @@ class BTVComponentClass(BaseComponentClass):
         :return: True/False
         '''
         # handlers = self.compHandlers('btv',handlrs)
-        handlers = handlrs['btv']
+        handlers = handlrs[parent]
         for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "click":
+            if self.configmanager.componentSelectors[parent][key]["action"] == "click":
                 selectedIndex = self.getSelectionIndex(value)
                 if selectedIndex == index:
                     return True
@@ -107,19 +107,19 @@ class BTVComponentClass(BaseComponentClass):
                     self.setSelectionIndex(index,value)
                     # self.setSelectionIndex(selectedIndex,value)
 
-    def getSelection(self,handlrs):
+    def getSelection(self,handlrs,parent="btv"):
         '''
         This method gives the selected Index, its Corresponding Text and Value
         :param handlers: handler to barChart
         :return: Selected Data
         '''
         data = {}
-        handlers = self.compHandlers('btv',handlrs)
+        handlers = self.compHandlers(parent,handlrs)
         for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "click":
+            if self.configmanager.componentSelectors[parent][key]["action"] == "click":
                 data['selIndex'] = self.getSelectionIndex(value)
         for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "getData":
+            if self.configmanager.componentSelectors[parent][key]["action"] == "getData":
                 if 'selIndex' in data:
                     data[key] = value[data['selIndex']].text
         return data
@@ -143,20 +143,20 @@ class BTVComponentClass(BaseComponentClass):
             data.append(elHandle['getToolTipData'][0].text)
         return data
 
-    def getToolTipInfo(self,driver,driverHelper,handlrs):
+    def getToolTipInfo(self,driver,driverHelper,handlrs,parent="btv"):
         '''
 
         :param tipHandle:
         :return:
         '''
         data = []
-        handlers = self.compHandlers('btv',handlrs)
+        handlers = self.compHandlers(parent,handlrs)
 
         toolTipHandlers = {}
         for key,value in handlers.iteritems():
-            if self.configmanager.componentSelectors[key]["action"] == "hover":
+            if self.configmanager.componentSelectors[parent][key]["action"] == "hover":
                 toolTipHandlers['hover'] = value
-            elif self.configmanager.componentSelectors[key]["action"] == "getToolTipData":
+            elif self.configmanager.componentSelectors[parent][key]["action"] == "getToolTipData":
                 toolTipHandlers['getToolTipData'] = value
         return self.launchToolTip(driver,driverHelper,toolTipHandlers)
 

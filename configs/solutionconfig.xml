@@ -36,7 +36,7 @@
         <screenConfig id = "report_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
             <component id = "report" parent="False" />
             <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
         </screenConfig>
@@ -57,7 +57,7 @@
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
 
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="class name" locator='col-md-12' parent="True"/>
 
 
 
@@ -66,7 +66,7 @@
         <screenConfig id ="interface_Screen">
 
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
 
             <!--class="measureselectors ng-scope"-->
 
@@ -94,20 +94,19 @@
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
             <!--<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>-->
             <component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
 
         </screenConfig>
 
          <screenConfig id = "qt_Screen">
-             <component id = "quicktrends" selector="id" locator='flexbox_trend' parent="True"/>
-
+             <component id = "quicktrends" selector="xpath" locator='//*[contains(@class, "trend_C")]' parent="True"/>
          </screenConfig>
 
             <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>-->
             <!--<component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>-->
             <!--&lt;!&ndash;<component id = "measureselectors" selector="class" locator='measureselectors' action="" parent="True"/>&ndash;&gt;-->
-            <!--<component id = "timeRangeDiv" selector="id" locator='timeRangeDiv' action="" parent="True"/>-->
-            <!--<component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>-->
+            <!--<component id = "timeRangeDiv" selector="[id" locator='timeRangeDiv' action="" parent="True"/>-->
+            <!--<component id = "cm" selector="id" locator='col-md-12' parent="True"/>-->
             <!--<component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>-->
 
 
@@ -121,7 +120,7 @@
         <screenConfig id = "site_Screen">
 
             <component id = "search" parent="False"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
 
             <!--class="measureselectors ng-scope"-->
 
@@ -133,7 +132,7 @@
             <!--<component id = "btv"/>-->
             <component id = "search" parent="False"/>
             <component id = "btv" selector="xpath" locator='//*[contains(@id, "site_barTabularView")]' action="" parent="True"/>
-            <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>-->
+            <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
             <!--<component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" />-->
 
 
@@ -157,7 +156,7 @@
              <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "networkFunction_SummaryBar")]' action="" parent="True"/>
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
              <component id = "search" parent="False"/>
-             <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+             <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
 
         </screenConfig>
 
@@ -179,7 +178,7 @@
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
 
             <component id = "search" parent="False"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
             <component id = "measureselectors" selector="xpath" locator='//*[contains(@class, "measureselectors")]' action="" parent="True"/>
 
             <!--Screen Components-->
@@ -200,7 +199,7 @@
             <!--<component id = "table" selector="xpath" locator='//*[contains(@id, "tableview") and contains(@class, "ng-hide"]' childOf="" action="" parent="True"/>-->
             <component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' childOf="" action="" parent="False"/>
             <component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True" wait="skip"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
+            <component id = "cm" selector="id" locator='col-md-12' parent="True"/>
         </screenConfig>
 
         <screenConfig id = "report_popup">
