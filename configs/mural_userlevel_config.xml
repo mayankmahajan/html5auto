@@ -2,7 +2,7 @@
 <data>
 
     <reporttypes>
-        <reporttype id = "Gateway Traffic" customTime ="True" quicklinkid="hourly" />
+        <reporttype id = "Gateway Traffic" customTime ="True" quicklinkid="yesterday" />
         <!--<reporttype id = "Tonnage Distribution based on Subscriber Percent" customTime ="True" quicklinkid="onetime" recurringInterval = "Daily" recurInstances = "3"/>-->
         <!--<reporttype id = "Top Domains" customTime ="True" quicklinkid="recurring"/>-->
     </reporttypes>

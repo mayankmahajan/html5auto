@@ -12,15 +12,12 @@ import random
 from classes.Objects.Report import *
 from classes.Objects.Time import *
 
-
 setup = SetUp()
+# reportFilters= setup.cM.getNodeElements("reportwizardfilters","filter")
 # onlyReportTypes = setup.cM.getAllNodeElements("reporttypes","reporttype")
 # availableTime = setup.cM.getNodeElements("availabletimerange","time")
 
 login(setup, "admin", "admin123")
-
-
-
 
 reportTypes = setup.cM.getreportTypes()
 
@@ -30,8 +27,14 @@ reportObj.filters['apnrat']=['Sushfone-1','']
 reportObj.filters['subscriber']=['11']
 
 
-print createreport(setup,reportTypes[reportTypes.keys()[0]],reportObj,[Time(),Time(2017,01,14,14)])
+response = createreport(setup,reportTypes[reportTypes.keys()[0]],reportObj,[Time(),Time(2017,01,14,14)])
 
+print response[0]
+print response[1]
+
+checkEqualAssert(response[0],response[1],"","","Checking report Review Page")
+
+setup.d.close()
 
 
 
