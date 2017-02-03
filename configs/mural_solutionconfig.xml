@@ -25,7 +25,7 @@
         <!--<quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>-->
 
         <quicklink id="recurring" locatorText ="Recurring report" starttime="True" endtime="False" frequency="True" recurringInterval = "Daily" recurInstances = "3"/>
-        <!--<quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False"/>-->
+        <!--<quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False" hourIntances="1"/>-->
 <!---->
         <!--<quicklink id="yesterday" locatorText ="Yesterday" starttime="False" endtime="False"/>-->
         <!--<quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>-->

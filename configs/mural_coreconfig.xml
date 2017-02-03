@@ -328,6 +328,7 @@
 
             <component id = "starttime" selector="xpath" locator='//*[contains(@id, "tartTime")]' />
             <component id = "endtime" selector="xpath" locator='//*[contains(@id, "ndTime")]' />
+            <component id = "instances" selector="css selector" locator='input[type="number"]'/>
 
         </componentConfig>
 

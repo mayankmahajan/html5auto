@@ -11,6 +11,7 @@ __maintainer__  = "Mayank Mahajan"
 
 from Utils.utility import *
 from Utils.MuralConstants import *
+from classes.Pages.GenerateReportsPopClass import GenerateReportsPopClass
 
 def createreport(setup,reportType,reportObj,time):
 
@@ -27,14 +28,28 @@ def createreport(setup,reportType,reportObj,time):
     inputinfo['reporttype'] = reportType['id']
     inputinfo['timerange'] = reportType['locatorText']
     inputinfo[MuralConstants.STARTTIME] = time[0].datestring
+    starttimeEpoch = getepoch(time[0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
     inputinfo[MuralConstants.ENDTIME] = ''
+
     # inputinfo[MuralConstants.ENDTIME] = time[1].datestring
     inputinfo['email'] = reportObj.email
     inputinfo['reportname'] = reportObj.reportName+str(rndmNum)
 
     # temp fix for recurring
-    arr1 = ["Daily","Weekly","Monthly"]
-    reportType['recurringInterval'] = arr1[random.randint(0,2)]
+    if 'ecurring' in reportType['locatorText']:
+        arr1 = ["Daily","Weekly","Monthly"]
+        arr2 = [86400,604800,2592000]
+        ran = random.randint(0,2)
+        reportType['recurringInterval'] = arr1[ran]
+        reportType['recurringIntervalValue'] = arr2[ran]
+        endtimeEpoch = int(starttimeEpoch) + int(reportType['recurringIntervalValue'])*int(reportType['recurInstances'])
+        inputinfo[MuralConstants.ENDTIME] = getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+
+    if 'Hourly' in reportType['locatorText']:
+        endtimeEpoch = int(starttimeEpoch) + int(3600)*int(reportType['hourIntances'])
+        inputinfo[MuralConstants.ENDTIME] = getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+
+
 
 
     reportScreenInstance = ReportsModuleClass(setup.d)
@@ -80,6 +95,10 @@ def createreport(setup,reportType,reportObj,time):
 
     if 'ourly' not in reportType['locatorText'] and 'ecurring' not in reportType['locatorText']:
         inputinfo[MuralConstants.ENDTIME] = grPopInstance.dropdown.getValue_input(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allinputs"),1)
+        endtimeEpoch = getepoch(str(inputinfo[MuralConstants.ENDTIME]),Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+
+
+    inputinfo["period"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%d %b %Y")) +" - "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%d %b %Y"))
 
     # launching Filters Page in wizard
     grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons"))
@@ -146,7 +165,10 @@ def createreport(setup,reportType,reportObj,time):
     reviewPageParams['reportname'] = grPopHandle['generateReportDialog']['reportName'][0].get_attribute("value")
     reviewPageParams['email'] = grPopHandle['generateReportDialog']['emailInput'][0].get_attribute("value")
     reviewPageParams[MuralConstants.STARTTIME] = grPopHandle['generateReportDialog'][MuralConstants.STARTTIME][0].get_attribute("value")
-    reviewPageParams[MuralConstants.ENDTIME] = grPopHandle['generateReportDialog'][MuralConstants.ENDTIME][0].get_attribute("value")
+    if 'ecurring' in reportType['locatorText']:
+        reviewPageParams["instances"] = grPopHandle['generateReportDialog']["instances"][0].get_attribute("value")
+    if 'ecurring' not in reportType['locatorText']:
+        reviewPageParams[MuralConstants.ENDTIME] = grPopHandle['generateReportDialog'][MuralConstants.ENDTIME][0].get_attribute("value")
     reviewPageParams['reporttype'] = tempArray[1][0].split("\n")[1]
     reviewPageParams['timerange'] = tempArray[2][1]
 
@@ -198,12 +220,12 @@ def checkReportTableForCreatedRecord(setup,request):
     actual['reporttype'] = data['rows'][0][2]
     actual['filters'] = getFiltersInfo(setup)
     # actual['requestedon'] = data['rows'][0][3]
-    # actual['period'] = data['rows'][0][4]
+    actual['period'] = data['rows'][0][5]
 
 
 
     for k,v in actual.iteritems():
-        checkEqualAssert(actual[k],request[k],"","","Checking Table for Report Created : "+k)
+        checkEqualAssert(request[k],actual[k],"","","Checking Table for Report Created : "+k)
 
     print data['rows'][0]
 

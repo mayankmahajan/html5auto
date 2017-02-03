@@ -62,8 +62,8 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
             resultlogger.info(msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
             logger.info(msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
         except KeyError:
-            resultlogger.info(msg+" Expected: "+str(f1[k])+" Actual: key not present "+str(k)+tcFail)
-            logger.info(msg+" Expected: "+str(f1[k])+" Actual: key not present "+str(k)+tcFail)
+            resultlogger.info(msg+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
+            logger.info(msg+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
 def checkEqualAssert(f1,f2,time="",measure="",message=""):
     msg = time + " " + measure + " " + message
@@ -698,6 +698,10 @@ def FindWordInString(ar,grPopHandle):
 def getepoch(datestring,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIMEPATTERN):
     epoch = int(calendar.timegm(time.strptime(datestring.strip()+":00",tPattern)))
     return epoch - tOffset*3600
+
+def getDateString(epoch,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIMEPATTERN):
+    tuple = time.gmtime(epoch+tOffset*3600)
+    return time.strftime(tPattern,tuple)
 
 
 
