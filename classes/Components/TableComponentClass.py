@@ -3,9 +3,12 @@ from copy import deepcopy
 from Utils.logger import *
 from time import *
 from selenium.webdriver import ActionChains
+from Utils.utility import *
 
 import random
 class TableComponentClass(BaseComponentClass):
+    def __init__(self):
+        self.utility = __import__("Utils.utility")
     colCount = 0
     rowCount = 0
     def doSingleSelection(self):
@@ -165,13 +168,13 @@ class TableComponentClass(BaseComponentClass):
         else:
             logger.debug("header is not present in table")
 
-    def getIterfaceRows(self,colcount,h):
+    def getIterfaceRows(self,colcount,h,length):
         elHandle=h['ROWS']
         rowCount = len(elHandle) / colcount
-        if rowCount < 15:
+        if rowCount < length:
             l = len(elHandle)
         else:
-            l = 15*colcount
+            l = length*colcount
         rows = []
         temp = []
 
@@ -180,6 +183,61 @@ class TableComponentClass(BaseComponentClass):
             rows.append([elHandle[j].text for j in range(j,j+colcount)])
 
         return rows
+
+    def getRows1(self,colcount,h,length,driver,scroll=False):
+
+        if scroll:
+            driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-1])
+            sleep(4)
+            h = self.utility.utility.getHandle(driver,"report_Screen","table")["table"]
+
+
+
+
+        elHandle=h['ROWS']
+
+
+        rowCount = len(elHandle) / colcount
+        rows = []
+        temp = []
+
+        for i in range(0,len(elHandle),colcount):
+            j=i
+            temp = [str(elHandle[j].text).strip() for j in range(j,j+colcount)]
+            if any(temp):
+                rows.append(temp)
+
+        data = {}
+        for row in rows:
+            data[row[0]] = row
+        return [data,h]
+        return rows
+
+    def addrows(self,colcount,h,driver,length):
+        rows = {}
+        while True:
+            flag = True
+            if not rows:
+                t = self.getRows1(colcount,h,length,driver)
+                rows = t[0]
+                h = t[1]
+                flag=False
+            else:
+                flag=True
+                t = self.getRows1(colcount,h,length,driver,True)
+                newrows = t[0]
+                h = t[1]
+
+                for k in newrows.keys():
+                    if k not in rows.keys():
+                        flag = False
+                        rows[k] = newrows[k]
+            if flag:
+                return rows
+
+
+    def getAllRowsAfterScroll(self,colcount,h,parent,driver,length):
+        return self.addrows(colcount,h[parent],driver,length)
 
 
 
@@ -204,7 +262,7 @@ class TableComponentClass(BaseComponentClass):
         handlers = self.compHandlers('table', h)
         data = {}
         data['header'] = self.getIterfaceHeaders(handlers)
-        data['rows'] = self.getIterfaceRows(len(data['header']),handlers)
+        data['rows'] = self.getIterfaceRows(len(data['header']),handlers,15)
         return data
 
 
@@ -229,17 +287,36 @@ class TableComponentClass(BaseComponentClass):
         handlers['CHECKSORT'][len(handlers['CHECKSORT'])-index].click()
 
 
+    def getTableDataMap(self, h, parent="table", driver="", length=15, child=""):
+        # handlers = self.compHandlers('table', h)
+        try:
+            data = {}
+            data['header'] = self.getIterfaceHeaders(h[parent])
+            data['rows'] = self.getAllRowsAfterScroll(len(data['header']),h,parent,driver,length)
+            # data['rows'] = self.getIterfaceRows(len(data['header']),h[parent],length,driver)
+            return data
+        except Exception as e:
+            return e
+    def setSelectionIndex(self,index,colCount,rowCount,h):
+        elHandle=h['ROWS']
+        newIndex = (colCount)*(index-1)+1
+
+        for i in range(len(elHandle)):
+            if i == newIndex:
+                elHandle[i].click()
+                return True
+
 
 
     def scrollVertical(self):
         pass
 
-    def getTableData1(self,h,parent,child=None):
+    def getTableData1(self,h,parent="table",length=15,child=""):
         # handlers = self.compHandlers('table', h)
         try:
             data = {}
             data['header'] = self.getIterfaceHeaders(h[parent])
-            data['rows'] = self.getIterfaceRows(len(data['header']),h[parent])
+            data['rows'] = self.getIterfaceRows(len(data['header']),h[parent],length)
             return data
         except Exception as e:
             return e
@@ -308,4 +385,52 @@ class TableComponentClass(BaseComponentClass):
                     return handler[i].text
                 except Exception as e:
                     return e
+
+    def sortTable1(self,h,columnName,sortOrder="ASC",parent="table",child=""):
+        try:
+            headersHandle=h[parent]['HEADERROW']
+            for el in headersHandle:
+                if el.text.strip() == columnName:
+                    logger.debug("Will Do Sort on Table Column %s",columnName)
+                    try:
+                        el.click()
+                        logger.info("Sorted Table Column %s",columnName)
+                        return True
+                    except Exception as e:
+                        logger.error("Exception %e found while sorting table on column %s",e,columnName)
+                        return e
+            logger.debug("Column Name %s not found on Table",columnName)
+            return False
+        except Exception as e:
+            logger.error("Exception found while getting handle for header row : %s",e)
+
+
+    # def sortTableAndValidateDate(self,h,columnName,sortOrder="ASC",parent="table",child=""):
+    #     d = self.getTableData1(h)
+    #     tableData = self.convertDataToDict(d)
+    #     isSorted = self.sortTable1(h,columnName)
+    #     sdata = self.getTableData1(h)
+    #     stableData = self.convertDataToDict(sdata)
+
+
+    def convertDataToDict(self,d,key="Id"):
+        columnIndex = self.getIndexForValueInArray(d['header'],key)
+        data={}
+        for row in d['rows']:
+            data[row[columnIndex]] = row
+        return data
+
+
+
+    def getIndexForValueInArray(self,arr,value):
+        for i in range(len(arr)):
+            if value == arr[i]:
+                return i
+        return -1
+
+
+
+
+
+
 

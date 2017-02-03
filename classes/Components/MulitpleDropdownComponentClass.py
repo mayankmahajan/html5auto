@@ -12,6 +12,7 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
 
     def getSelection(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
+        time.sleep(1)
         activeDropDowns[index].click()
         selections = []
 
@@ -20,6 +21,40 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         #         if str(e[0].get_attribute("checked")).upper() == "TRUE" or str(e[0].get_attribute("ng-reflect-checked")).upper() == "TRUE":
         #             selections.append(el.text)
         try:
+            for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[ng-reflect-checked="true"]'):
+                if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
+                    selections.append("ALL")
+                    activeDropDowns[index].click()
+                    return selections
+
+                selections.append(e.find_elements_by_xpath("..//div")[0].text)
+        except Exception as e:
+            try:
+                for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[checked="true"]'):
+                    if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
+                        selections.append("ALL")
+                        activeDropDowns[index].click()
+                        return selections
+                    selections.append(e.find_elements_by_xpath("..//div")[0].text)
+            except Exception as e:
+                logger.error("Exception %s found while getting current selection, Component: MulitpleDropdownComponentClass",e)
+
+
+        activeDropDowns[index].click()
+        time.sleep(1)
+        return selections
+
+    def getSelectionWithIndex(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
+        activeDropDowns[index].click()
+        selections = []
+
+        # for el in activeDropDowns[index].find_elements_by_class_name("menuitem"):
+        #     for e in  el.find_elements_by_tag_name("input"):
+        #         if str(e[0].get_attribute("checked")).upper() == "TRUE" or str(e[0].get_attribute("ng-reflect-checked")).upper() == "TRUE":
+        #             selections.append(el.text)
+        try:
+
             for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-checked="true"]'):
                 selections.append(e.find_elements_by_xpath("..//div")[0].text)
         except Exception as e:
@@ -33,13 +68,27 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
 
         return selections
 
+
     def domultipleSelection(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
         activeDropDowns[index].click()
+        time.sleep(2)
         for el in activeDropDowns[index].find_elements_by_class_name("menuitem"):
             if el.text == value:
                 el.click()
+        activeDropDowns[index].click()
+        return self.getSelection(h,index)
 
+    def domultipleSelectionWithIndex(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
+        activeDropDowns[index].click()
+        time.sleep(2)
+        elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
+        for i in range(len(elements)):
+            if i in value:
+                elements[i].click()
+
+        activeDropDowns[index].click()
         return self.getSelection(h,index)
 
     def getOptionsAvailable(self,h,index,parent="filterPopup",child="multiselect-dropdown"):

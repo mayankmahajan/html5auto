@@ -5,10 +5,9 @@ from classes.Components.QuicklinkTimeRangeComponentClass import *
 from classes.Components.SearchComponentClass import *
 from classes.Components.SwitcherComponentClass import *
 
-class BasePopClass():
+class BasePopClass(BaseComponentClass):
     def __init__(self,driver):
-        pass
-
+        BaseComponentClass.__init__(self)
 
         self.measure = MeasureComponentClass()
         self.summarybar = SummaryBarComponentClass()
@@ -26,4 +25,5 @@ class BasePopClass():
                 except ElementNotSelectableException or Exception as e:
                     return e
         return False
+
 

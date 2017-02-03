@@ -15,6 +15,7 @@ from xml.etree.ElementTree import TreeBuilder
 from xml.etree.ElementTree import ElementTree
 import glob
 from Utils.logger import *
+import copy
 
 from Utils.XMLCombiner import XMLCombiner
 
@@ -269,7 +270,7 @@ class ConfigManager(object):
             pass
 
 
-    def getreportTypes(self):
+    def getUserReportTypes(self):
 
         # reporttypes=self.getNodeElements("reporttypes","reporttype")
 
@@ -278,6 +279,8 @@ class ConfigManager(object):
         quicklinks = self.getNodeElements("quicklinks","quicklink")
 
         return self.mergeTwoNodes(reporttypes,quicklinks,"quicklinkid")
+
+
 
         # for reporttype,value in reporttypes.iteritems():
         #     for quicklinkProp,quicklinkValue in quicklinks[value['quicklinkid']].iteritems():
@@ -294,6 +297,27 @@ class ConfigManager(object):
         return node1
 
 
+    def mergeTwoNodes1(self,node1,node2,commonProp):
+        arr = []
+        for key1,value1 in node1.iteritems():
+            for key2,value2 in node2.iteritems():
+                for key in value2.keys():
+                    if key != 'id':
+                        node1[key1][key]=value2[key]
+                arr.append(copy.deepcopy(node1[key1]))
+
+        return arr
 
 
 
+
+
+    def getAllreportTypes(self):
+
+        # reporttypes=self.getNodeElements("reporttypes","reporttype")
+
+        # reportfiltersRelations = self.getNodeElements("reportfiltersrelations","reportfiltersrelation")
+        reporttypes = self.getNodeElements("reportfiltersrelations","reportfiltersrelation")
+        quicklinks = self.getNodeElements("quicklinks","quicklink")
+
+        return self.mergeTwoNodes1(reporttypes,quicklinks,"quicklinkid")

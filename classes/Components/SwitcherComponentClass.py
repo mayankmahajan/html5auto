@@ -37,7 +37,7 @@ class SwitcherComponentClass(BaseComponentClass):
                     return handlers[key][len(handlers[key]) - 1].text
 
 
-    def switchTo(self,index,h,parent=None,child=None):
+    def switchTo(self,index,h,parent="createdialog",child="switcher"):
         try:
             h[parent][child][len(h[parent][child])-1].find_elements_by_tag_name("li")[index].click()
             time.sleep(2)

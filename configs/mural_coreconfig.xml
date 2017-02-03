@@ -250,18 +250,22 @@
         <componentConfig id = 'table'>
             <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
             <!--<component id = "HEADERROW" selector="id" locator='agText' locatorDimension ='id' locatorText = 'agText' action="getData" wait = 'skip'/>-->
+            <component id = "table" selector="tag name" locator="ag-grid-ng2" wait="skip"/>
             <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
 
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
-            <component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>
-            <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
-            <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
-            <component id = "download1" selector="class name" locator='downloadIcon' />
-            <component id = "delete1" selector="class name" locator='deleteIcon' />
-            <component id = "download" selector="class name" locator='downloadGridIcon' wait = 'skip'/>
-            <component id = "delete" selector="class name" locator='deleteGridIcon' wait = 'skip'/>
+            <!--<component id = "SORTCOLUMN" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="sort" wait = 'skip'/>-->
+            <!--<component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>-->
+            <!--<component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>-->
+            <!--<component id = "download1" selector="class name" locator='downloadIcon' />-->
+            <!--<component id = "delete1" selector="class name" locator='deleteIcon' />-->
+            <component id = "download" selector="css selector" locator='[class*=download][class*=Icon]' wait = 'skip'/>
+            <component id = "info" selector="css selector" locator='[class*=info][class*=Icon]' wait = 'skip'/>
+            <component id = "delete" selector="css selector" locator='[class*=delete][class*=Icon]' wait = 'skip'/>
+            <!--<component id = "delete" selector="class name" locator='deleteGridIcon' wait = 'skip'/>-->
             <component id = "view" selector="class name" locator='viewGridIcon' wait = 'skip'/>
+            <!--<component id = "info" selector="class name" locator="info_GridIcon" wait="skip"/>-->
             <!--<component id = "download" selector="css selector" locator='[colid="download"]' wait = 'skip'/>-->
             <!--<component id = "delete" selector="css selector" locator='[colid="delete"]' wait = 'skip'/>-->
 
@@ -307,17 +311,17 @@
         </componentConfig>
 
         <componentConfig id = 'generateReportDialog'>
-            <component id = "reportName" selector="css selector" locator='[placeholder="Report Name"]'/>
-            <component id = "reportType" selector="css selector" locator='[ng-model="vm.selectedReportType"]'/>
+            <component id = "reportName" selector="css selector" locator='[placeholder="Report Name"]' wait="skip"/>
+            <component id = "reportType" selector="css selector" locator='[ng-model="vm.selectedReportType"]' wait="skip"/>
             <component id = "measureType" selector="css selector" locator='[ng-model="vm.selectedReportMeasureID"]'/>
-            <component id = "quicklink" selector="css selector" locator='[ng-model="vm.selectedReportPeriodID"]'/>
-            <component id = "addemail" selector="css selector" locator='[ng-model="vm.additionalEmailId"]'/>
+            <component id = "quicklink" selector="css selector" locator='[ng-model="vm.selectedReportPeriodID"]' wait="skip"/>
+            <component id = "addemail" selector="css selector" locator='[ng-model="vm.additionalEmailId"]' wait="skip"/>
 
 
             <!--below line is pure workaround it has to be fixed-->
             <component id = "emailInput" selector="css selector" locator='[placeholder="Maximum 5 comma separated mail ids."]'/>
-            <component id = "generate" selector="css selector" locator='[ng-click="vm.generateReport()"]'/>
-            <component id = "close" selector="css selector" locator='[ng-click="vm.closeReportPopup()"]'/>
+            <!--<component id = "generate" selector="css selector" locator='[ng-click="vm.generateReport()"]'/>-->
+            <!--<component id = "close" selector="css selector" locator='[ng-click="vm.closeReportPopup()"]'/>-->
 
             <component id = "leftBox" selector="class name" locator='leftBox' action="click"/>
             <component id = "filters" selector="class name" locator='rightBox' action="click"/>
@@ -360,6 +364,7 @@
             <component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>
             <component id = "ok" selector="id" locator="okBtn" wait="skip"/>
             <component id = "cancel" selector="id" locator="cancelBtn" wait="skip"/>
+            <component id = "refresh" selector="class name" locator="refreshIconReport" wait="skip"/>
         </componentConfig>
         <componentConfig id="switchApp">
             <component id="cellitem" selector="class name" locator="cellitem"/>
@@ -481,7 +486,8 @@
         </componentConfig>
 
         <componentConfig id="recurring">
-            <component id="dropdowns" selector="css selector" locator='[ng-model="vm.frequencyValue"]'/>
+
+            <component id="dropdowns" selector="css selector" locator='select[class*=dropdown-list],[ng-model="vm.frequencyValue"]'/>
             <component id="instances" selector="css selector" locator='[ng-model="vm.instanceValue"]'/>
         </componentConfig>
         <componentConfig id="footerbuttons">

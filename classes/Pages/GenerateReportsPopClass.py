@@ -36,4 +36,11 @@ class GenerateReportsPopClass(BasePopClass):
         return [e.text for e in h[parent][child] if e.is_displayed()]
 
 
+    def getFiltersAtReviewPage(self,h,parent="generateReportDialog",child="filters"):
+        tempArray = h[parent][child][0].text.split("\n")[1:-1]
+        return self.getFormattedFilters(tempArray)
+
+
+
+
 

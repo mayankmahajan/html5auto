@@ -6,13 +6,13 @@
         <reportfiltersrelation id = "Subscriber Activity" filters="network,subscriber"/>
         <reportfiltersrelation id = "Device Usage" filters="network,subscriber"/>
 
-        <reportfiltersrelation id = "Tonnage Distribution based on Subscriber Percent" filters="network,apnrat"/>
+        <!--<reportfiltersrelation id = "Tonnage Distribution based on Subscriber Percent" filters="network,apnrat"/>-->
 
         <reportfiltersrelation id = "Gateway Traffic" filters="network,apnrat,subscriber"/>
         <reportfiltersrelation id = "Content Type Analysis" filters="network,apnrat,subscriber"/>
         <reportfiltersrelation id = "Top Domains" filters="network,apnrat,subscriber"/>
         <reportfiltersrelation id = "Top Apps" filters="network,apnrat,subscriber"/>
-        <reportfiltersrelation id = "Tethering Usage" filters="network,apnrat,subscriber"/>
+        <!--<reportfiltersrelation id = "Tethering Usage" filters="network,apnrat,subscriber"/>-->
     </reportfiltersrelations>
 
     <availabletimerange>
@@ -22,15 +22,15 @@
 
     <quicklinks>
 
-        <quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>
+        <!--<quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>-->
 
-        <quicklink id="recurring" locatorText ="Recurring report" starttime="True" endtime="False" frequency="True"/>
-        <quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False"/>
-
-        <quicklink id="yesterday" locatorText ="Yesterday" starttime="False" endtime="False"/>
-        <quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>
-        <quicklink id="lastfifteendays" locatorText ="Last 15 days" starttime="False" endtime="False"/>
-        <quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>
+        <quicklink id="recurring" locatorText ="Recurring report" starttime="True" endtime="False" frequency="True" recurringInterval = "Daily" recurInstances = "3"/>
+        <!--<quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False"/>-->
+<!---->
+        <!--<quicklink id="yesterday" locatorText ="Yesterday" starttime="False" endtime="False"/>-->
+        <!--<quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>-->
+        <!--<quicklink id="lastfifteendays" locatorText ="Last 15 days" starttime="False" endtime="False"/>-->
+        <!--<quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>-->
 
     </quicklinks>
 
@@ -46,10 +46,12 @@
 
         <screenConfig id = "report_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
-            <!--component id = "table" selector="id" locator='tableview' childOf="" action="" parent="True"/>
-            <component id = "cm" selector="id" locator='dl-menucontextMenuDisplay' parent="True"/>
-            <component id = "report" parent="False" />-->
+
+            <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
+
+            <component id = "report" parent="False" />
             <component id = 'createdialog' selector="class name" locator="createNFbody" parent="True"/>
+            <component id = 'alert' selector="class name" locator="filterPopup" parent="True"/>
         </screenConfig>
 
 
@@ -77,6 +79,10 @@
 
 
     <componentConfigs>
+        <componentConfig id ="alert">
+            <component id="filters" selector="class name" locator="alertPopupMessage"/>
+            <component id="close" selector="class name" locator="closePopupIcon"/>
+        </componentConfig>
         <componentConfig id="allcheckboxes">
             <component id = "checkbox" selector="css selector" locator='[type="checkbox"]' />
         </componentConfig>

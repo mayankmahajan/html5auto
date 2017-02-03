@@ -26,7 +26,7 @@ class BaseComponentClass:
             elHandle[len(elHandle)-1].click()
             time.sleep(2)
             return True
-        except IndexError or Exception as e:
+        except TypeError or IndexError or Exception as e:
             elHandle.click()
             return e
         # return elHandle[len(elHandle)-1].click()
@@ -134,10 +134,16 @@ class BaseComponentClass:
             logger.debug("Going to send keys to input %d parent %s and child %s ",index,parent,child)
 
             h[parent][child][index].send_keys(value)
+            return self.getValue_input(h,index,parent,child)
             return h[parent][child][index].get_attribute("value")
         except Exception as e:
             logger.error("Exception found while entering keys to input %d",index)
             return e
+
+    def getValue_input(self,h,index,parent="allinputs",child="input"):
+        time.sleep(2)
+        return h[parent][child][index].get_attribute("value")
+
 
 
     def selectRadioButton(self, value, h, childDiv="span", parent="radios", child="radio"):
@@ -149,9 +155,10 @@ class BaseComponentClass:
                     el.click()
                     el.find_elements_by_xpath(".//input")[0].click()
                     time.sleep(2)
-                    break
+                    return True
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
+        return False
 
 
 
@@ -163,11 +170,11 @@ class BaseComponentClass:
                         el.click()
                         time.sleep(2)
                         return True
-                        break
                     except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                         return e
             except Exception as e:
                 return e
+        return False
 
     def runtimeValue(self,prop,ele):
         if prop == "text":
@@ -202,3 +209,13 @@ class BaseComponentClass:
                     result[key] = "Data Validation FAILED --> Actual : "+str(UIData)+" and Expected : "+str(csvData[key]['AGGR_totalByteBuffer'])
 
         return result
+
+    def getFormattedFilters(self,arr,skipIndex=2):
+        filters = {}
+        for i in range(0,len(arr),skipIndex):
+            filters[arr[i].strip().strip(':').strip()]=self.getCommaSeparatedValues(arr[i+1])
+        return filters
+
+
+    def getCommaSeparatedValues(self,string):
+        return [e.strip() for e in str(string).strip().split(',')]
