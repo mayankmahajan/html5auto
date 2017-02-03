@@ -10,6 +10,10 @@ setup = SetUp()
 
 login(setup, "admin", "admin123")
 
-ReportsHelper.getFiltersInfo(setup)
+print ReportsHelper.getFiltersInfo(setup,2)
+print ReportsHelper.downloadReport(setup,3)
+print ReportsHelper.deleteReport(setup,5)
+
+
 # Closing the browser
 setup.d.close()

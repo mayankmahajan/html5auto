@@ -82,6 +82,8 @@
         <componentConfig id ="alert">
             <component id="filters" selector="class name" locator="alertPopupMessage"/>
             <component id="close" selector="class name" locator="closePopupIcon"/>
+            <component id ='ok' selector="id" locator="ok"/>
+            <component id ='cancel' selector="id" locator="cancel"/>
         </componentConfig>
         <componentConfig id="allcheckboxes">
             <component id = "checkbox" selector="css selector" locator='[type="checkbox"]' />

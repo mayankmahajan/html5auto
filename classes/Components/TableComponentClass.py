@@ -311,6 +311,9 @@ class TableComponentClass(BaseComponentClass):
     def scrollVertical(self):
         pass
 
+    def getTableMap(self,h,parent="table",length=15,child=""):
+        return self.convertDataToDict(self.getTableData1(h))
+
     def getTableData1(self,h,parent="table",length=15,child=""):
         # handlers = self.compHandlers('table', h)
         try:
@@ -429,8 +432,11 @@ class TableComponentClass(BaseComponentClass):
         return -1
 
 
-
-
+    def getColumnValueMap(self,d,index,columnName="Id"):
+        columnIndex = self.getIndexForValueInArray(d['header'],columnName)
+        temp = {}
+        temp[str(d['rows'][index][columnIndex])] = d['rows'][index]
+        return temp
 
 
 

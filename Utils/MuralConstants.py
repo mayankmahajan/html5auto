@@ -1,4 +1,4 @@
-class Constants(object):
+class MuralConstants(object):
 
     #testcase based constants
     # URL = 'https://acume-staging.guavus.com:6443/'
@@ -54,3 +54,5 @@ class Constants(object):
     REPORTSCREEN = "report_Screen"
     REPORTWIZARDPOPUP = "report2_popup"
     TABLE = "table"
+    STARTTIME = "starttime"
+    ENDTIME = "endtime"
