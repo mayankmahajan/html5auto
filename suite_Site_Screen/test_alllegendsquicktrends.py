@@ -54,7 +54,7 @@ checkEqualAssert(sitesname,legends,"","","DATA IS VALIDATE FOR ALL THE LEGENDS I
 xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
 yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
 
 
 

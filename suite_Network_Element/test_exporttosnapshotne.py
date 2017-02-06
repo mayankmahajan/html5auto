@@ -38,7 +38,7 @@ neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 # Export to csv
 exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
 grPopInstance = GenerateReportsPopClass(setup.d)
-grPopHandle = getHandle(setup,"report2_popup")
+grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
 # Result logging
 checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT network elements")

@@ -116,3 +116,5 @@ while t < timeIteration:
 
 
     t+=1
+
+setup.d.close()

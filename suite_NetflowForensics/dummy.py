@@ -17,11 +17,12 @@ popupInstance = GenerateReportsPopClass(setup.d)
 ###### Get the Handles of the routers Popup#################
 popupHandler = getHandle(setup,"routers_popup","routertable")
 popupInstance.table.setSpecialSelection(setup.d,[2,4],Keys.COMMAND,popupHandler,"routertable")
+popupHandler = getHandle(setup,"routers_popup","routertable")
 data = popupInstance.table.getSelection(popupHandler,"routertable")
 print data
 popupHandler = getHandle(setup,"routers_popup","footerbuttons")
 fields = popupInstance.reportspopup.clickButton("OK",popupHandler,"footerbuttons")
-popuphandler = getHandle(setup,"routers_popup")
+# popuphandler = getHandle(setup,"routers_popup")
 forensicsScreenHandle = getHandle(setup,"forensics_Screen")
 # data1 = forensicsScreenInstance.table.getTableData1(forensicsScreenHandle,"routertable")
 data2 = forensicsScreenInstance.table.getTableData1(forensicsScreenHandle,"netflowtable")

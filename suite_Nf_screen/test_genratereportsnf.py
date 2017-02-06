@@ -46,6 +46,7 @@ nfScreenInstance.pielegend.setSelection1(setup.dH,[1],nfScreenHandle,'pielegend'
 ########################################################################
 nfScreenHandle = getHandle(setup,"nf_Screen")
 nfScreenInstance.cm.activateContextMenuOptions1(nfScreenHandle)
+nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS,"cm")
 nfScreenInstance.cm.GenerateReports(nfScreenHandle)
 
 grPopInstance = GenerateReportsPopClass(setup.d)
@@ -80,18 +81,18 @@ data = reportScreenInstance.table.getTableData1(getHandle(setup,"report_Screen")
 # reportid = IsreportIDvalid(data)
 # uidate = data['rows'][0][5]
 if (data['rows'][0][1] == reportname):
-    checkEqualAssert(data['rows'][0][1],reportname,"Today","","Network Function Report name")
-    checkEqualAssert(data['rows'][0][2],"Network Function Report Average","Today","","Network Function Report Type")
-    checkEqualAssert(IsreportIDvalid(data),True,"","","Network Function Report ID")
-    checkEqualAssert(data['rows'][0][5],date,"Today","","Network Function Time of the report")
+    checkEqualAssert(data['rows'][0][1],reportname,"Time :- Today","","Checking the name of the Network Function Report")
+    checkEqualAssert(data['rows'][0][2],"Network Function Report Average","Time :- Today","","Checking the Type of the Network Function Report")
+    checkEqualAssert(IsreportIDvalid(data),True,"","","Checking the Report ID of the Network Function Report")
+    checkEqualAssert(data['rows'][0][5],date,"Today","","Checking the Requested Time of the Network Function Report")
 else:
     reportScreenHandle = getHandle(setup,"report_Screen")
     reportScreenInstance.switcher.switchTo(0,reportScreenHandle,'createdialog','switcher')
     reportScreenHandle = getHandle(setup,"report_Screen")
     data = reportScreenInstance.table.getTableData1(reportScreenHandle,"table")
-    checkEqualAssert(data['rows'][0][1],reportname,"Today","","Network Function Report name")
-    checkEqualAssert(data['rows'][0][2],"Network Function Report Average","Today","","Network Function Report Type")
-    checkEqualAssert(IsreportIDvalid(data),True,"","","Network Function Report ID ")
-    checkEqualAssert(data['rows'][0][4],date,"Today","","Network Function Report Time")
+    checkEqualAssert(data['rows'][0][1],reportname,"Time :- Today","","Checking the name of the Network Function Report")
+    checkEqualAssert(data['rows'][0][2],"Network Function Report Average","Today","","Checking the Type of the Network Function Report")
+    checkEqualAssert(IsreportIDvalid(data),True,"","","Checking the Report ID of the Network Function Report")
+    checkEqualAssert(data['rows'][0][4],date,"Time :-Today","","Checking the Requested Time of the Network Function Report")
 # Closing the Testcase
 setup.d.close()

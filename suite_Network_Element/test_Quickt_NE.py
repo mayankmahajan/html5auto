@@ -91,7 +91,7 @@ xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
 print xaxis
 yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 print yaxis
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
 print t
 
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)

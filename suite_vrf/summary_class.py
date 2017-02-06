@@ -61,3 +61,6 @@ while t < timeIteration:
         checkEqualAssert(result[0], result[1], quicklinks[t], measures[i], result[2])
         i+=1
     t+=1
+
+
+setup.d.close()

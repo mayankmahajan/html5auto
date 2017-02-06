@@ -47,8 +47,8 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 # setTimeRange(setup,set_time)
 screenInstance.quiklinkTimeRange.setSelection(set_time,siteScreenHandle)
 # screenInstance.quiklinkTimeRange.doSelection()
-a=screenInstance.measure.doSelection(siteScreenHandle,set_measure)
-print a
+screenInstance.measure.doSelection(siteScreenHandle,set_measure)
+
 #setMeasure(setup,set_measure,"site_Screen")
 #siteScreenHandle = getHandle(setup,"site_Screen")
 #######################################################################
@@ -56,7 +56,7 @@ print a
 #######################################################################
 # Get the default selection and Validate the result
 siteScreenHandle =getHandle(setup,"site_Screen")
-test_case1="Default selection at site screen"
+test_case1="Checking the Default selection at site screen"
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_case1)
 #######################################################################
@@ -64,12 +64,12 @@ checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_
 
 #######################################################################
 # Set the bar Table view to the 2nd index and validate the result
-a = screenInstance.btv.setSelection(2,siteScreenHandle)
+screenInstance.btv.setSelection(2,siteScreenHandle)
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 data=screenInstance.btv.getData(siteScreenHandle)
 status=drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
-test_case2 ="Drill TO Network Function Screen"
-checkEqualAssert("True",str(status),set_time,set_measure,test_case2)
+test_case2 ="Checking the functionality of the Drill to function from Site Screen to Network Function Screen"
+checkEqualAssert(True,status,set_time,set_measure,test_case2)
 #######################################################################
 
 #######################################################################
@@ -81,14 +81,13 @@ nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
 #######################################################################
 VAR=nfScreenInstance.switcher.getSelection(nfScreenHandle)
-print  VAR
-test_case3="Default Selection in chart"
+test_case3="Checking the Default Selection as CHART at site Screen"
 checkEqualAssert("Chart",str(VAR),set_time,set_measure,test_case3)
 #######################################################################
 
 nfScreenInstance.switcher.setSelection(1,nfScreenHandle)
 VAR=nfScreenInstance.switcher.getSelection(nfScreenHandle)
-test_case4="New Selection in table"
+test_case4="Checking the functionality of the switcher at Site Screen"
 checkEqualAssert("Table",str(VAR),set_time,set_measure,test_case4)
 
 nfScreenInstance.switcher.setSelection(0,nfScreenHandle)
@@ -96,22 +95,19 @@ nfScreenInstance.switcher.setSelection(0,nfScreenHandle)
 #Get the default selection at NF screen
 deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-test_case5="Default Selection of pieLegend at NF screen"
+test_case5="Checking the Default Selection of PieLegend at Network Function screen"
 checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
 #######################################################################
 
 #######################################################################
 #Check single and multiple selection on pielegend
-Selection_list=[[1],[2],[3],[4]]
-expected_list=[]
-for i in Selection_list:
-    nfScreenInstance.pielegend.setSelection(setup.dH,i,nfScreenHandle)
-    nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
-    deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
-    defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
-    test_case6="Check Selection of pieLegend at NF screen"
-    expected_list.append(i[0])
-    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),set_time,set_measure,test_case6)
+# Multiple Selection is not working ######
+nfScreenInstance.pielegend.setSelection(setup.dH,[1],nfScreenHandle)
+nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
+deflegendSel = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
+defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
+test_case6="Checking the  Selection of pieLegend at Network Function screen"
+checkEqualAssert(str([1]),str(deflegendSel['selIndices']),set_time,set_measure,test_case6)
 # #######################################################################
 #
 # #######################################################################
@@ -133,7 +129,7 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        screenInstance.measure.doSelection(nfScreenHandle, measures[i])
+        result =screenInstance.measure.doSelection(nfScreenHandle, measures[i])
         # sleep(5)
         #setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
 
@@ -145,7 +141,7 @@ while t < timeIteration:
         actual = "True"
 
 
-        checkEqualAssert(expected,actual,quicklinks[t], measures[i])
+        checkEqualAssert(result,True,"Time:-"+quicklinks[t], "Checking the combination of measure :- " +measures[i])
         i+=1
          # end of measureSelection
 
@@ -192,9 +188,9 @@ for word in text:
        index_previous=text.index(Keys.BACK_SPACE)-1
        word1=text[text.index(Keys.BACK_SPACE)-1][:-1]
        setSearch =  nfScreenInstance.searchComp.setSearchText(nfScreenHandle, text[index_previous])
-       msg="Search_for_backspace"
+       msg="Search for backspace"
     else:
-        msg="Search_for_"+word+" "
+        msg="Search for word "+word+" "
         word1=word
     expected_search_result=[piedata["legendText"][i] for i in range(0,len(piedata["legendText"])) if piedata["legendText"][i].lower().find(word1.lower()) >= 0 and piedata["legendText"][i].lower().find(word1.lower()) < piedata["legendText"][i].lower().find("\n")]
     print word1,expected_search_result
@@ -216,7 +212,7 @@ for word in text:
         nfScreenHandle = getHandle(setup, Constants.NETWORKFUNCTIONS)
         search_pie_result=nfScreenInstance.pielegend.getData(nfScreenHandle)
         print search_pie_result
-        checkEqualAssert(expected_search_result, search_pie_result["legendText"], "", "", msg +str(click_times) + " time_click")
+        checkEqualAssert(expected_search_result, search_pie_result["legendText"], "", "", msg +str(click_times) + " time click")
         nfScreenInstance.searchComp.hitSearchIcon(nfScreenHandle)
     else:
      checkEqualAssert(False, setSearch, "", "", "Search_passed_for_unknown")

@@ -25,7 +25,7 @@ measures = setup.cM.getNodeElements("measures","measure").keys()
 login(setup, "admin", "Admin@123")
 
 exploreScreenInstance = ExplorePageClass(setup.d)
-exploreHandle = getHandle(setup,"explore_Screen")
+exploreHandle = getHandle(setup,"explore_Screen","exploreList")
 exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","site_Screen")
 
 # Get the Instance of the screen
@@ -57,16 +57,16 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
+        result = setMeasure(setup,measures[i],Constants.NETWORKFUNCTIONS)
 
         print measures[i]
         print i
 
          # Result Logging
-        expected = "True"
-        actual = "True"
 
-        checkEqualAssert(expected,actual,quicklinks[t], measures[i])
+
+
+        checkEqualAssert(result,True,"Time:-"+quicklinks[t], "Checking the combination of measure :- " +measures[i])
         i+=1
          # end of measureSelection
 

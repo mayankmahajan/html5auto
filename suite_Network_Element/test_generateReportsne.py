@@ -48,8 +48,9 @@ neScreenInstance.pielegend.setSelection1(setup.dH,[0],neScreenHandle,'pielegend'
 # exportTo(setup.d,setup.dH,Constants.EXPORTTOCSV)
 
 ########################################################################
-neScreenHandle = getHandle(setup,"nf_Screen")
+neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 neScreenInstance.cm.activateContextMenuOptions1(neScreenHandle)
+neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS,"cm")
 neScreenInstance.cm.GenerateReports(neScreenHandle)
 
 grPopInstance = GenerateReportsPopClass(setup.d)
@@ -85,19 +86,19 @@ data = reportScreenInstance.table.getTableData1(getHandle(setup,"report_Screen")
 # reportid = IsreportIDvalid(data)
 # uidate = data['rows'][0][5]
 if (data['rows'][0][1] == reportname):
-    checkEqualAssert(data['rows'][0][1],reportname,"Today","","Network Element Report name")
-    checkEqualAssert(data['rows'][0][2],"Site-Network Element Report Average","Today","","Network Element Report Type")
-    checkEqualAssert(IsreportIDvalid(data),True,"","","Network Element Report ID")
-    checkEqualAssert(data['rows'][0][5],date,"Today","","Network Element Time Report")
+    checkEqualAssert(data['rows'][0][1],reportname,"Today","","Checking the Network Element Report name")
+    checkEqualAssert(data['rows'][0][2],"Site-Network Element Report Average","Today","","Checking the Network Element Report Type")
+    checkEqualAssert(IsreportIDvalid(data),True,"","","Checking the Network Element Report ID")
+    checkEqualAssert(data['rows'][0][5],date,"Today","","Checking the Requested time for Network Element Report")
 else:
     reportScreenHandle = getHandle(setup,"report_Screen")
     reportScreenInstance.switcher.switchTo(0,reportScreenHandle,'createdialog','switcher')
     reportScreenHandle = getHandle(setup,"report_Screen")
     data = reportScreenInstance.table.getTableData1(reportScreenHandle,"table")
-    checkEqualAssert(data['rows'][0][1],reportname,"Today","","Network Element Report name")
-    checkEqualAssert(data['rows'][0][2],"Site-Network Element Report Average","Today","","Network Element Report Type")
-    checkEqualAssert(IsreportIDvalid(data),True,"","","Network Element Report ID ")
-    checkEqualAssert(data['rows'][0][4],date,"Today","","Network Element Time Report")
+    checkEqualAssert(data['rows'][0][1],reportname,"Today","","Checking the Network Element Report name")
+    checkEqualAssert(data['rows'][0][2],"Site-Network Element Report Average","Today","","Checking the Network Element Report Type")
+    checkEqualAssert(IsreportIDvalid(data),True,"","","Checking the Network Element Report ID ")
+    checkEqualAssert(data['rows'][0][4],date,"Today","","Checking the Requested Time for Network Element Report")
 # Closing the Testcase
 setup.d.close()
 

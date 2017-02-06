@@ -36,10 +36,10 @@ nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
  # Export to csv
 exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
 grPopInstance = GenerateReportsPopClass(setup.d)
-grPopHandle = getHandle(setup,"report2_popup")
+grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
 # Result logging
-checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT network function")
+checkEqualAssert(result,True,"","","Checking the functionality of EXPORT TO SNAPSHOT at Network Function Screen")
 
 #Closing the application
 setup.d.close()

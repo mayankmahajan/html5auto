@@ -60,6 +60,6 @@ while t < timeIteration:
         NEScreenHandle = getHandle(setup, Constants.NETWORKELEMENTS)
         result=ValidateSummarybar(NEScreenHandle,measures[i],"pielegend",screenInstance,setup,Constants.NETWORKELEMENTS)
         print result
-        checkEqualAssert(result[0], result[1], quicklinks[t], measures[i], result[2])
+        checkEqualAssert(result[0], result[1], "Checking the measures at Network Element Screen  "+"Time :- "+quicklinks[t]+",","Checking the combination of measures :- "+measures[i]+ ",", "Network Element"+result[2])
         i+=1
     t+=1

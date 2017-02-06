@@ -17,7 +17,7 @@ class SwitcherComponentClass(BaseComponentClass):
     def setSelection(self,index,h,parent="switcherView"):
         data = {}
         toSelect = 'Chart' if index==0 else 'Table'
-        handlers = self.compHandlers([parent],h)
+        handlers = self.compHandlers(parent,h)
         for key,value in handlers.iteritems():
             if toSelect.upper() in key.upper():
                 if self.configmanager.componentSelectors[parent][key]["action"] == "click":

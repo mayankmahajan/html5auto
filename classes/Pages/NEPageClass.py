@@ -17,7 +17,7 @@ class NEPageClass(BasePageClass):
         '''
         self.driver = driver
 
-
+        self.switcher = SwitcherComponentClass()
         self.measure = MeasureComponentClass()
         self.pielegend = PieLegendComponentClass()
         self.pie = PieComponentClass()
@@ -25,6 +25,7 @@ class NEPageClass(BasePageClass):
         self.quiklinkTimeRange = QuicklinkTimeRangeComponentClass()
         self.cm = ContextMenuComponentClass()
         self.searchComp = SearchComponentClass()
+
 
     def testComponents(self):
         return ""

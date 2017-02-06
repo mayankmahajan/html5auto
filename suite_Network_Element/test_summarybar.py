@@ -111,7 +111,7 @@ while t < timeIteration:
         # testcase body ends
         message = str(element_name)
         # Result Logging
-        checkEqualAssert(element_value,summarybarvalues,quicklinks[t],measures[i],message)
+        checkEqualAssert(element_value,summarybarvalues,"Validating the summary bar values with the pie legend"+"Time :- "+quicklinks[t],"Combinations of measures:- "+measures[i],message)
 
         i+=1
         # end of measureSelection

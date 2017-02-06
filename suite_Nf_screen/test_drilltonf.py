@@ -27,7 +27,7 @@ screenInstance = SitePageClass(setup.d)
 siteScreenHandle = getHandle(setup,screen_name)
 
 VAR=screenInstance.switcher.getSelection(siteScreenHandle)
-test_case2="Default Selection in chart"
+# test_case2="Default Selection in chart"
 # checkEqualAssert("Chart",str(status),set_time,set_measure,test_case3)
 
 
@@ -35,21 +35,23 @@ test_case2="Default Selection in chart"
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 
 # Validating the result
-checkEqualAssert(str(1),str(defSelection['selIndex']),"","","Default selection should be 1 ")
+checkEqualAssert(str(1),str(defSelection['selIndex']),"","","Checking the Default selection of the bar tabler view")
 
 # Set the bar Table view to the 2 index
 screenInstance.btv.setSelection(2,siteScreenHandle)
-drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
+drillnf = drilltoScreen(setup.d,setup.dH,Constants.NETWORKFUNCTIONS)
+checkEqualAssert(drillnf,True,"","","Checking the drill to functionality to the Network Function")
 
 nfScreenInstance = NFPageClass(setup.d)
 nfScreenHandle =getHandle(setup,Constants.NETWORKFUNCTIONS)
 
 #nfScreenInstance.pielegend.setSelection(setup.dH, [2], nfScreenHandle)
 
-first=nfScreenInstance.cm.activateContextMenuOptions(nfScreenHandle)
-print first
-nfScreenInstance.cm.launchTrends(nfScreenHandle)
+nfScreenInstance.cm.activateContextMenuOptions1(nfScreenHandle)
 
+nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS,"cm")
+launchtrends = nfScreenInstance.cm.launchTrends(nfScreenHandle)
+checkEqualAssert(launchtrends,True,"","","Checking the launch page of quick Trends")
 qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
@@ -59,6 +61,7 @@ yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 
 
 
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
+######## Toolip validation in quicktrends is still not implementing ####################
 # Closing the Testcase
 setup.d.close()

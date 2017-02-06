@@ -39,7 +39,7 @@ defaultSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 print defaultSelection
 # Log Result
 #to check def selection of pielegend that should  be null
-checkEqualAssert([],defaultSelection['selIndices'],"","","Null Default Selection at NFScreen for pielegend")
+checkEqualAssert([],defaultSelection['selIndices'],"","","Checking the Default Selection at Network Function Screen for pielegend")
 
 #def selection of pie
 #defpieSel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
@@ -59,11 +59,12 @@ updatedSelection = nfScreenInstance.pielegend.getSelection(nfScreenHandle)
 #print  updatedSelection
 
 #match if it is 2nd one
-checkEqualAssert([2],updatedSelection['selIndices'],"","","Match Selection  b/w pie and legend is 2")
+checkEqualAssert([2],updatedSelection['selIndices'],"","","Matching the selection b/w pie and legend at Network Function Screen")
 
 
 
 #Multiple selection at pie legend and validation
+#########
 nfScreenInstance.pielegend.setSelection(setup.dH, [1,2,3], nfScreenHandle)
 
 #get pielegend multiple selection in a var
@@ -74,7 +75,7 @@ mulpiesel = nfScreenInstance.pie.getPieSelections(nfScreenHandle)
 #print mulpiesel
 
 #match
-checkEqualAssert([1,2,3],mulpielegsel['selIndices'],"","","Match Selection b/w pie and legend is 1,2,3")
+checkEqualAssert([1,2,3],mulpielegsel['selIndices'],"","","Matching the multiple Selections b/w pie and legend at Network Function Screen")
 
 
 # GetChartData
@@ -85,7 +86,7 @@ piedata['tooltipdata'] = nfScreenInstance.pie.getToolTipInfo(setup.d,setup.dH,nf
 print piedata
 
 # Log Result
-checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],"","","Pie Tooltip Validations at NFScreen")
+checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],"","","Matching the data of tool tip with pie at Network Function Screen")
 
 # Closing the Testcase
 setup.d.close()

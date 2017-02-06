@@ -270,6 +270,7 @@ def getHandle(obj,pageName,parent="NA"):
     # screenInstance=getScreenInstance(obj.d,pageName)
     parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName,parent)
     handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles,parent)
+    time.sleep(2)
     return handles
 
 
@@ -548,9 +549,9 @@ def setMeasure(obj,measure,pageName):
     parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName)
     handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles)
 
-    screenInstance.measure.doSelection(handles,measure)
+    result = screenInstance.measure.doSelection(handles,measure)
 
-
+    return result
 
 def setSiteType(obj,sites,screenInstance,handles):
     # driver = obj.d

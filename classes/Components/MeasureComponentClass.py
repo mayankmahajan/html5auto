@@ -10,30 +10,33 @@ class MeasureComponentClass(BaseComponentClass):
 
 
     def doSelection(self,h,measure):
-        handlers = self.compHandlers('measureselectors',h)
-        measureArr=measure.split("_")
-        measureName=measureArr[0]
-        downUpTotal=measureArr[1]
-        absPerc=measureArr[2]
-
-        # Setting Measure name like bitrate,tonnage,etc.
-        self.setMeasureName(measureName,handlers['primaryMeasure'])
-
-        # Setting Downlink,Uplink,Total
-        self.select(handlers[downUpTotal])
-
-        # Setting Absolute,Percentage
-        time.sleep(2)
-        self.select(handlers[downUpTotal])
-        time.sleep(2)
-        self.select(handlers[absPerc])
-        time.sleep(2)
         try:
-            avgPeak=measureArr[3]
-            self.select(handlers[avgPeak])
-        except:
-            print "Got Measure without Peak/Average %s",measureName
+            handlers = self.compHandlers('measureselectors',h)
+            measureArr=measure.split("_")
+            measureName=measureArr[0]
+            downUpTotal=measureArr[1]
+            absPerc=measureArr[2]
 
+            # Setting Measure name like bitrate,tonnage,etc.
+            self.setMeasureName(measureName,handlers['primaryMeasure'])
+
+            # Setting Downlink,Uplink,Total
+            self.select(handlers[downUpTotal])
+
+            # Setting Absolute,Percentage
+            time.sleep(2)
+            self.select(handlers[downUpTotal])
+            time.sleep(2)
+            self.select(handlers[absPerc])
+            time.sleep(2)
+            try:
+                avgPeak=measureArr[3]
+                self.select(handlers[avgPeak])
+            except:
+                print "Got Measure without Peak/Average %s",measureName
+            return True
+        except Exception as e:
+            return e
 
 
     def doSelectionSite1(self,h,site,parent="measureselectors"):

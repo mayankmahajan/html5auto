@@ -16,12 +16,12 @@ setup = SetUp()
 
 login(setup, "admin", "Admin@123")
 exploreScreenInstance = ExplorePageClass(setup.d)
-exploreHandle = getHandle(setup,"explore_Screen",)
+exploreHandle = getHandle(setup,"explore_Screen")
 
 # exploreScreenInstance.exploreList.launchScreen(exploreHandle,"exploreList","nf_Screen")
 exploreScreenInstance.exploreList.switchApp(exploreHandle)
-result =exploreScreenInstance.exploreList.launchapp(getHandle(setup,"explore_Screen"),1)
-time.sleep(4)
+result = exploreScreenInstance.exploreList.launchapp(getHandle(setup,"explore_Screen"),1)
+
 setup.d.switch_to.window(setup.d.window_handles[1])
 checkEqualAssert(result,True,"","","Launch IB Configuration Validation")
 

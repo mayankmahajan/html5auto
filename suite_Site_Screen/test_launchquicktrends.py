@@ -31,7 +31,8 @@ singlesitename = selection['BTVCOLUMN1']
 siteScreenHandle = getHandle(setup,"site_Screen")
 
 
-screenInstance.cm.activateContextMenuOptions(siteScreenHandle)
+screenInstance.cm.activateContextMenuOptions1(siteScreenHandle)
+siteScreenHandle = getHandle(setup,"site_Screen","cm")
 
 screenInstance.cm.launchTrends(siteScreenHandle)
 
@@ -39,6 +40,7 @@ checkEqualAssert(True,True,"TODAY","","TREND IS SUCCESSFULLY LAUNCHED")
 
 
 qtScreenInstance = QuickTrendsPageClass(setup.d)
+# time.sleep(10)
 qtScreenHandle = getHandle(setup,"qt_Screen")
 
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)
@@ -51,7 +53,7 @@ yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 
 
 
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
 
 ############ MULTIPLE SELECTION IS NOT ADDED TILL NOW #################
 

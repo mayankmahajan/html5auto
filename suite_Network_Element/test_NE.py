@@ -43,7 +43,8 @@ siteScreenHandle = getHandle(setup,"site_Screen")
 # Get the default selection and Validate the result
 test_case1="Default selection of site screen"
 defSelection = screenInstance.btv.getSelection(siteScreenHandle)
-checkEqualAssert(str(1),str(defSelection['selIndex']),set_time,set_measure,test_case1)
+checkEqualAssert(str(1),str(defSelection['selIndex']),"Checking the default selection at Site Screen "+"Time :- "+set_time+",","Measures:-"
+                 +set_measure,"")
 #######################################################################
 
 
@@ -54,7 +55,8 @@ defSelection = screenInstance.btv.getSelection(siteScreenHandle)
 data=screenInstance.btv.getData(siteScreenHandle)
 status=drilltoScreen(setup.d,setup.dH,Constants.NETWORKELEMENTS)
 test_case2 ="Drill TO Network Element Screen"
-checkEqualAssert("True",str(status),set_time,set_measure,test_case2)
+checkEqualAssert("True",str(status),"Checking the Drill to functionality at Network Element Screen "+"Time :-"+set_time+",","Measures:-"
+                 +set_measure)
 #######################################################################
 
 #######################################################################
@@ -67,7 +69,8 @@ neScreenHandle = getHandle(setup,Constants.NETWORKELEMENTS)
 #######################################################################
 VAR=neScreenInstance.switcher.getSelection(neScreenHandle)
 test_case3="Default Selection in chart"
-checkEqualAssert("Chart",str(VAR),set_time,set_measure,test_case3)
+checkEqualAssert("Chart",str(VAR),"Checking the Default selection between Chart and Table "+"Time:-"+set_time+",",
+                 "Measures :- "+set_measure)
 #######################################################################
 
 
@@ -76,7 +79,8 @@ checkEqualAssert("Chart",str(VAR),set_time,set_measure,test_case3)
 deflegendSel = neScreenInstance.pielegend.getSelection(neScreenHandle)
 defpieSel = neScreenInstance.pie.getPieSelections(neScreenHandle)
 test_case4="Default Selection of pieLegend in NE screen"
-checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),set_time,set_measure,test_case4)
+checkEqualAssert(str("[]"),str(deflegendSel['selIndices']),"Checking the deafult selection at Network Function Screen"+","+"Time :-"+set_time+",",
+                 "Measures:-"+set_measure)
 #######################################################################
 
 #######################################################################
@@ -90,7 +94,8 @@ for i in Selection_list:
     defpieSel = neScreenInstance.pie.getPieSelections(neScreenHandle)
     test_case5="Check Selection of pieLegend in NE screen"
     expected_list.append(i[0])
-    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),set_time,set_measure,test_case5)
+    checkEqualAssert(str(expected_list),str(deflegendSel['selIndices']),"Checking the selection at pielegend:-"+","+"Time:-"+set_time,
+                     "Measures"+set_measure)
 #######################################################################
 
 #######################################################################
@@ -98,28 +103,28 @@ for i in Selection_list:
 test_case6="Pie Tooltip Validations at NFScreen"
 piedata = neScreenInstance.pielegend.getData(neScreenHandle)
 piedata['tooltipdata'] = neScreenInstance.pie.getToolTipInfo(setup.d,setup.dH,neScreenHandle)
-checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],set_time,set_measure,test_case6)
+checkEqualAssert(piedata['legendText'],piedata['tooltipdata'],"Validating the tooltip data with pie legend"+","+"Time",set_time,set_measure)
 #######################################################################
 
 
 #######################################################################
-#measuse and time range selection and data validation
-while t < timeIteration:
-    i=0
-    setTimeRange(setup,quicklinks[t])
-
-    # while loop is to iterate over all the measure
-    while i < measureIteration:
-        print measures[i]
-        screenInstance.measure.doSelection(neScreenHandle, measures[i])
-        neScreenHandle = getHandle(setup, Constants.NETWORKELEMENTS)
-        piedata1 = neScreenInstance.pielegend.getData(neScreenHandle)
-        piedata1['tooltipdata'] = neScreenInstance.pie.getToolTipInfo(setup.d, setup.dH, neScreenHandle)
-        print piedata
-        checkEqualAssert(piedata1['legendText'], piedata1['tooltipdata'], quicklinks[t], measures[i],"Pie Tooltip Validations in NEScreen for " + measures[i])
-
-        i+=1
-    t+=1
+# #measuse and time range selection and data validation
+# while t < timeIteration:
+#     i=0
+#     setTimeRange(setup,quicklinks[t])
+#
+#     # while loop is to iterate over all the measure
+#     while i < measureIteration:
+#         print measures[i]
+#         screenInstance.measure.doSelection(neScreenHandle, measures[i])
+#         neScreenHandle = getHandle(setup, Constants.NETWORKELEMENTS)
+#         piedata1 = neScreenInstance.pielegend.getData(neScreenHandle)
+#         piedata1['tooltipdata'] = neScreenInstance.pie.getToolTipInfo(setup.d, setup.dH, neScreenHandle)
+#         print piedata
+#         checkEqualAssert(piedata1['legendText'], piedata1['tooltipdata'], quicklinks[t], measures[i],"Pie Tooltip Validations in NEScreen for " + measures[i])
+#
+#         i+=1
+#     t+=1
 
 #######################################################################
 
@@ -163,3 +168,5 @@ for word in text:
     else:
      checkEqualAssert(False, setSearch, set_time,set_measure, "Search_passed_for_word_"+str(word))
 #######################################################################
+
+setup.d.close()

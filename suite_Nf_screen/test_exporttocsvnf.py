@@ -33,7 +33,9 @@ nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
 
 result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT NETWORK FUNCTIONS SCREEN")
+checkEqualAssert(result,True,"","","Checking the functionality of EXPORT TO CSV at network Function Screen")
 
+setup.d.close()
+setup.d.switch_to.window(setup.d.window_handles[0])
 setup.d.close()
 

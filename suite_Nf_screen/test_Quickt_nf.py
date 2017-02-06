@@ -81,10 +81,10 @@ print element_name
 #Drill to nene screen and verify
 
 nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS)
-nfScreenInstance.cm.activateContextMenuOptions(nfScreenHandle)
-launched = nfScreenInstance.cm.launchTrends(nfScreenHandle)
-print launched
-checkEqualAssert(launched, True, "","", "TREND IS SUCCESSFULLY LAUNCHED")
+nfScreenInstance.cm.activateContextMenuOptions1(nfScreenHandle)
+nfScreenHandle = getHandle(setup,Constants.NETWORKFUNCTIONS,"cm")
+launchtrends = nfScreenInstance.cm.launchTrends(nfScreenHandle)
+checkEqualAssert(launchtrends,True,"","","Checking the launch page of quick Trends")
 
 qtScreenInstance = QuickTrendsPageClass(setup.d)
 qtScreenHandle = getHandle(setup,"qt_Screen")
@@ -92,7 +92,7 @@ qtScreenHandle = getHandle(setup,"qt_Screen")
 xaxis  = qtScreenInstance.quicktrends.getXAxis(qtScreenHandle)
 print xaxis
 yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
 print t
 
 list = qtScreenInstance.quicktrends.getLegendList(qtScreenHandle)

@@ -48,6 +48,6 @@ yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 
 
 
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
 # Closing the Testcase
 setup.d.close()

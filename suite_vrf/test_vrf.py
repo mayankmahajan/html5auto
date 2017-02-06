@@ -176,5 +176,5 @@ for word in text:
     else:
      checkEqualAssert(False, setSearch,set_time,set_measure, "word_not_set_for_"+word)
 
-
+setup.d.close()
 ######################################################################

@@ -57,15 +57,14 @@ while t < timeIteration:
 
     # while loop is to iterate over all the measure
     while i < measureIteration:
-        setMeasure(setup,measures[i],"vrf_Screen")
+        result = setMeasure(setup,measures[i],"vrf_Screen")
 
 
 
          # Result Logging
-        expected = "True"
-        actual = "True"
 
-        checkEqualAssert(expected,actual,quicklinks[t], measures[i])
+
+        checkEqualAssert(result,True,"Checking the measuers at Vrf Screen "+"Time:-"+ quicklinks[t], "Measuers :- "+measures[i])
         i+=1
          # end of measureSelection
 

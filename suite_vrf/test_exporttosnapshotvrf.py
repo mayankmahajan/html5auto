@@ -37,10 +37,10 @@ vrfScreenHandle = getHandle(setup,Constants.VRF)
 # Export to csv
 exportTo(setup,setup.dH,'EXPORTTOSNAPSHOT')
 grPopInstance = GenerateReportsPopClass(setup.d)
-grPopHandle = getHandle(setup,"report2_popup")
+grPopHandle = getHandle(setup,"report2_popup","allbuttons")
 result = grPopInstance.reportspopup.clickButton("Download",grPopHandle)
 # Result logging
-checkEqualAssert(result,True,"","","EXPORT TO SNAPSHOT VRF screen")
+checkEqualAssert(result,True,"","","Checking the functionality of the EXPORT TO SNAPSHOT at Vrf Screen")
 
 #Closing the application
 setup.d.close()

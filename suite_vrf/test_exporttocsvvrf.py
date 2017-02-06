@@ -38,6 +38,8 @@ vrfScreenInstance.btv.setSelection(2,vrfScreenHandle)
 
 result = exportTo(setup,setup.dH,'EXPORTTOCSV')
 
-checkEqualAssert(result,True,"","","EXPORT TO CSV IS COMPLETED SUCCESSFULL AT VRF SCREEN")
+checkEqualAssert(result,True,"","","Checking the functionality of the EXPORT TO CSV at Vrf Screen")
 
+setup.d.close()
+setup.d.switch_to.window(setup.d.window_handles[0])
 setup.d.close()

@@ -110,7 +110,7 @@ while t < timeIteration:
         # testcase body ends
         message = str(element_name)
         # Result Logging
-        checkEqualAssert(element_value,summarybarvalues,quicklinks[t],measures[i],message)
+        checkEqualAssert(element_value,summarybarvalues,"Checking the values of summary bar with the bar tabler view"+"Time :- "+quicklinks[t]+",","Combination of measures :- "+" "+measures[i],"with network function :-" + message)
 
         i+=1
         # end of measureSelection

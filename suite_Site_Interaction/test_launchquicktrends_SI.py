@@ -64,6 +64,6 @@ yaxis  = qtScreenInstance.quicktrends.getYAxis(qtScreenHandle)
 
 
 
-t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle)
+t = qtScreenInstance.quicktrends.moveTotick(setup.dH,qtScreenHandle,setup)
 
 ############ MULTIPLE SELECTION IS NOT ADDED TILL NOW #################
