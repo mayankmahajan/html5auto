@@ -1,6 +1,7 @@
 from BaseComponentClass import BaseComponentClass
 from Utils.ConfigManager import ConfigManager
 import time
+from Utils.logger import *
 
 class MeasureComponentClass(BaseComponentClass):
 
@@ -19,7 +20,7 @@ class MeasureComponentClass(BaseComponentClass):
 
             # Setting Measure name like bitrate,tonnage,etc.
             self.setMeasureName(measureName,handlers['primaryMeasure'])
-
+            logger.debug("Selecting the measures :: Measurename :- %s  Down/UP/Total :- %s  Abs/Per :- %s ",measureName,downUpTotal,absPerc)
             # Setting Downlink,Uplink,Total
             self.select(handlers[downUpTotal])
 
@@ -31,11 +32,15 @@ class MeasureComponentClass(BaseComponentClass):
             time.sleep(2)
             try:
                 avgPeak=measureArr[3]
+                logger.debug("Selecting the measure avg/peak :- %s",avgPeak)
                 self.select(handlers[avgPeak])
             except:
+                logger.debug("Got Measure without Peak/Average %s",measureName)
                 print "Got Measure without Peak/Average %s",measureName
             return True
         except Exception as e:
+            logger.debug("Exception found while selecting the measures %s %s %s %s",measureName,downUpTotal,absPerc,avgPeak)
+            logger.error("Exception found while selecting the measures",e)
             return e
 
 
