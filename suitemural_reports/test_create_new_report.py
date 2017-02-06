@@ -1,10 +1,9 @@
-from Utils.SetUp import *
-from classes.Pages.GenerateReportsPopClass import *
-from classes.Pages.ReportsModuleClass import *
 import os
-from classes.Objects.Report import *
+
+from MuralUtils import ReportsHelper
+from Utils.SetUp import *
 from classes.Objects.Time import *
-from Utils import ReportsHelper
+from classes.Pages.ReportsModuleClass import *
 
 setup = SetUp()
 
@@ -24,8 +23,8 @@ print os.path.relpath(__file__)
 for reportType in reportTypes:
     logger.debug("Creating Report %s",reportType)
     print reportType
-    response = ReportsHelper.createreport(setup,reportType,reportObj,[Time(),Time(2017,01,14,14)])
-    ReportsHelper.checkReportTableForCreatedRecord(setup,response[0])
+    response = ReportsHelper.createreport(setup, reportType, reportObj, [Time(), Time(2017, 01, 14, 14)])
+    ReportsHelper.checkReportTableForCreatedRecord(setup, response[0])
 
 # Closing the browser
 setup.d.close()

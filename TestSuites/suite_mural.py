@@ -9,7 +9,7 @@ if platform.system() == "Windows":
 else:
     delimiter = "/"
 
-test_file_strings = glob.glob('../suite_mural*/test_*.py')
+test_file_strings = glob.glob('../suitemural*/test_*.py')
 
 # module_strings = [str.split('/')[1] + "." + str.split('/')[2].split('.')[0] for str in test_file_strings]
 module_strings = [str.split(delimiter)[1] + "." + str.split(delimiter)[2].split('.')[0] for str in test_file_strings]

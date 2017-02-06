@@ -1,6 +1,7 @@
 from BaseComponentClass import BaseComponentClass
 from Utils.ConfigManager import ConfigManager
 import time
+from Utils.logger import *
 
 class DropdownComponentClass(BaseComponentClass):
 
@@ -22,13 +23,22 @@ class DropdownComponentClass(BaseComponentClass):
         except:
             h = handle
 
+
         for ele in h.find_elements_by_xpath(".//*"):
             if ele.text == value:
-                ele.click()
-                break
+                try:
+                    logger.debug("Setting DropDown to %s",value)
+                    ele.click()
+                    logger.debug("DropDown Selected to %s",value)
+                    return True
+                except Exception as e:
+                    logger.error("Exception found while selecting %s on DropDown",value)
+                    return e
+            logger.error("Option : %s not present in dropdown",value)
+            return False
 
 
     def doSelectionOnVisibleDropDown(self,h,value,index=0,parent="allselects",child="select"):
         activedrops  = self.getAllActiveElements(h[parent][child])
-        self.set(value, activedrops[index])
+        return self.set(value, activedrops[index])
 

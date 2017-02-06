@@ -22,15 +22,15 @@
 
     <quicklinks>
 
-        <!--<quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>-->
+        <quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>
 
         <quicklink id="recurring" locatorText ="Recurring report" starttime="True" endtime="False" frequency="True" recurringInterval = "Daily" recurInstances = "3"/>
-        <!--<quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False" hourIntances="1"/>-->
-<!---->
-        <!--<quicklink id="yesterday" locatorText ="Yesterday" starttime="False" endtime="False"/>-->
-        <!--<quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>-->
-        <!--<quicklink id="lastfifteendays" locatorText ="Last 15 days" starttime="False" endtime="False"/>-->
-        <!--<quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>-->
+        <quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False" hourIntances="1"/>
+
+        <quicklink id="yesterday" locatorText ="Yesterday" starttime="False" endtime="False"/>
+        <quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>
+        <quicklink id="lastfifteendays" locatorText ="Last 15 days" starttime="False" endtime="False"/>
+        <quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>
 
     </quicklinks>
 
@@ -73,12 +73,19 @@
 
         </screenConfig>
 
+        <screenConfig id="createrule_popup">
+            <component id = "addrule" parent="False"/>
+        </screenConfig>
+
 
 
     </screenConfigs>
 
 
     <componentConfigs>
+        <componentConfig id = "addrule">
+            <component id="addrule" selector="class name" locator="filterPopup"/>
+        </componentConfig>
         <componentConfig id ="alert">
             <component id="filters" selector="class name" locator="alertPopupMessage"/>
             <component id="close" selector="class name" locator="closePopupIcon"/>

@@ -56,3 +56,5 @@ class MuralConstants(object):
     TABLE = "table"
     STARTTIME = "starttime"
     ENDTIME = "endtime"
+    CREATERULEPOPUP = "createrule_popup"
+    ADDRULE = "addrule"

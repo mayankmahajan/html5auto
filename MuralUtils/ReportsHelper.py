@@ -10,8 +10,9 @@ __maintainer__  = "Mayank Mahajan"
 ##############################################################
 
 from Utils.utility import *
-from Utils.MuralConstants import *
 from classes.Pages.GenerateReportsPopClass import GenerateReportsPopClass
+from MuralConstants import *
+
 
 def createreport(setup,reportType,reportObj,time):
 
