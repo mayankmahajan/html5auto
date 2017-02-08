@@ -23,6 +23,7 @@ class BaseComponentClass:
 
     def customClick(self, elHandle):
         try:
+            logger.info("Going to perform Custom Click")
             elHandle[len(elHandle)-1].click()
             time.sleep(2)
             return True
@@ -126,7 +127,7 @@ class BaseComponentClass:
             logger.error("Exception found while clicking Checkbox %d",index)
             return e
 
-    def sendkeys_input(self,value,h,index,clear=True,parent="allinputs",child="input"):
+    def sendkeys_input(self,value,h,index,parent="allinputs",child="input",clear=True):
         try:
             if clear:
                 logger.debug("Clearing the text at input %d parent %s and child %s ",index,parent,child)
@@ -145,6 +146,19 @@ class BaseComponentClass:
         return h[parent][child][index].get_attribute("value")
 
 
+    def clickSpanWithTitle(self,value,h,parent="allspans",child="span"):
+        for el in h[parent][child]:
+            logger.info("Searching span with title = %s",str(value))
+            if str(value) == el.text:
+                try:
+                    logger.info("Got span with title = %s, now clicking it",str(value))
+                    el.click()
+                    return True
+                except Exception as e:
+                    logger.error("Exception found while clicking Span with Title = %s",str(value))
+                    return e
+        logger.debug("Span with title = %s not found",str(value))
+        return False
 
     def selectRadioButton(self, value, h, childDiv="span", parent="radios", child="radio"):
         childs = ".//" + childDiv
@@ -165,7 +179,7 @@ class BaseComponentClass:
     def clickButton(self,value,h,parent="allbuttons",child="button"):
         for el in h[parent][child]:
             try:
-                if value == el.text:
+                if value == el.text.strip():
                     try:
                         el.click()
                         time.sleep(2)
@@ -175,6 +189,21 @@ class BaseComponentClass:
             except Exception as e:
                 return e
         return False
+
+    def clickInputButton(self,value,h,parent="allbuttons",child="ibutton"):
+        for el in h[parent][child]:
+            try:
+                if value == el.get_attribute('value').strip():
+                    try:
+                        el.click()
+                        time.sleep(2)
+                        return True
+                    except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                        return e
+            except Exception as e:
+                return e
+        return False
+
 
     def runtimeValue(self,prop,ele):
         if prop == "text":

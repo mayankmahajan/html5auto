@@ -15,10 +15,25 @@
         <!--<reportfiltersrelation id = "Tethering Usage" filters="network,apnrat,subscriber"/>-->
     </reportfiltersrelations>
 
-    <availabletimerange>
-        <time id="starttime" year="2016" month ="12" date="31" hour="19" min="00"/>
-        <time id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
-    </availabletimerange>
+    <measures>
+        <measure id = "hits" locatorText="Hits" unitSystem = "metric"/>
+        <measure id = "uplinktonnage" locatorText="Uplink Tonnage" unitSystem = "bytes"/>
+        <measure id = "downlinktonnage" locatorText="Downlink Tonnage" unitSystem = "bytes"/>
+        <measure id = "uplinktonnage" locatorText="Uplink Tonnage" unitSystem = "bytes"/>
+        <measure id = "uniquesubscribers" locatorText="Unique Subscribers" unitSystem = "metric"/>
+    </measures>
+
+    <unitsystem>
+        <unit id="bytes" unitvalues = "B,KB,MB" />
+
+        <unit id="metric" unitvalues = "K,M"/>
+
+    </unitsystem>
+
+    <!--<availabletimerange>-->
+        <!--<time id="starttime" year="2016" month ="12" date="31" hour="19" min="00"/>-->
+        <!--<time id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>-->
+    <!--</availabletimerange>-->
 
     <quicklinks>
 
@@ -40,6 +55,12 @@
         <filter id = 'apnrat' locatorText="APN/RAT"/>
         <filter id = 'subscriber' locatorText="Subscriber"/>
     </reportwizardfilters>
+
+    <measuretypes>
+        <type id = "Absolute" />
+        <type id = "Rate Of Change"/>
+    </measuretypes>
+
 
 
     <screenConfigs>
@@ -72,9 +93,26 @@
             <component id = "allinputs" selector="id" locator="filterPopup" parent="True"/>
 
         </screenConfig>
+        <screenConfig id="alert_Screen">
+            <component id="allspans" selector="tag name" locator="kiwik-alerts-navbar" parent="True"/>
+            <component id= "settings" selector="tag name" locator="kiwik-settings" parent="True"/>
+            <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
+        </screenConfig>
 
         <screenConfig id="createrule_popup">
             <component id = "addrule" parent="False"/>
+            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
+            <component id = "createrule" selector="id" locator="filterPopup" parent="True"/>
+
+            <component id = "allselects" selector="id" locator="filterPopup" parent="True" />
+            <component id = "allcheckboxes" selector="id" locator="filterPopup" parent="True"/>
+            <component id = "allinputs" selector="id" locator="filterPopup" parent="True"/>
+            <component id = "allbuttons" selector="id" locator="filterPopup" parent="True"/>
+
+
+        </screenConfig>
+        <screenConfig id ='error_popup'>
+            <component id = "errorbody" selector="tag name" locator="" parent="True"/>
         </screenConfig>
 
 
@@ -83,9 +121,24 @@
 
 
     <componentConfigs>
+        <componentConfig id ="errorbody">
+            <component id ="errorclose" selector="css selector" locator="[class*=close][class*=Popup]" />
+            <component id ="errormessage" selector="css selector" locator="[class*=alert][class*=Message]" />
+        </componentConfig>
         <componentConfig id = "addrule">
             <component id="addrule" selector="class name" locator="filterPopup"/>
         </componentConfig>
+        <componentConfig id = "createrule">
+            <component id = "starttime" selector="xpath" locator='//img[contains(@id, "tartTime")]' />
+            <component id = "endtime" selector="xpath" locator='//img[contains(@id, "ndTime")]' />
+        </componentConfig>
+
+
+        <componentConfig id = "settings">
+        <component id="createrule" selector="class name" locator="createImage"/>
+        </componentConfig>
+
+
         <componentConfig id ="alert">
             <component id="filters" selector="class name" locator="alertPopupMessage"/>
             <component id="close" selector="class name" locator="closePopupIcon"/>
@@ -95,6 +148,13 @@
         <componentConfig id="allcheckboxes">
             <component id = "checkbox" selector="css selector" locator='[type="checkbox"]' />
         </componentConfig>
+        <componentConfig id="allbuttons">
+            <component id = "ibutton" selector="css selector" locator='input[type="button"]' />
+        </componentConfig>
+        <componentConfig id="allinputs">
+            <component id = "number" selector="css selector" locator='input[type="number"]' />
+        </componentConfig>
+
 
         <componentConfig id="filterPopup">
             <component id="header" selector="class name" locator="headerDiv"/>

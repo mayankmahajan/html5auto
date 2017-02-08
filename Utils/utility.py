@@ -255,6 +255,28 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
     except ValueError:
         return ValueError
 
+def getTableDataMap(setup,screenName,parent='table'):
+    reportScreenInstance = ReportsModuleClass(setup.d)
+    tableHandle = getHandle(setup,screenName,parent)
+    return reportScreenInstance.table.getTableDataMap(tableHandle, "table", setup)
+
+
+def isError(setup):
+    eHandle = getHandle(setup,Constants.ERRORPOPUP,Constants.ERRORBODY)
+    if len(eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE]) >0:
+        logger.error("Error Pop Up found")
+        errorMessage = eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE][0].text
+        logger.error("Error Pop Up Message = %s",errorMessage)
+        logger.debug("Closing Error Pop Up")
+        eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
+        try:
+            eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
+        except:
+            pass
+
+        return [True,errorMessage]
+    else:
+        return [False,""]
 
 
 def getHandle(obj,pageName,parent="NA"):
@@ -270,7 +292,7 @@ def getHandle(obj,pageName,parent="NA"):
     # screenInstance=getScreenInstance(obj.d,pageName)
     parentHandles = getHandlersForParentComponent(driver,driverHelper,configmanager,pageName,parent)
     handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles,parent)
-    time.sleep(2)
+    # time.sleep(2)
     return handles
 
 

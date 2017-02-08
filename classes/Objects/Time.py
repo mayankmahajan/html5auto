@@ -5,7 +5,7 @@ class Time:
         months=["January","February","March","April","May","June","July","August","September","October","November","December"]
 
         self.year = self.st(year)
-        self.month = self.st(months[month-1])
+        self.month = self.st(months[int(month)-1])
         self.day = self.st(day)
         self.hour = self.st(hour)
         self.min = self.st(min)

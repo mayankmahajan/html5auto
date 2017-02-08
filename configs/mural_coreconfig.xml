@@ -10,55 +10,55 @@
     </wizardquicklinks>
 
 
-    <measures>
-        <measure id = "Bitrate_downlink_absolute_average"/>
-        <measure id = "Tonnage_downlink_absolute_average"/>
-        <measure id = "Wan-Cost($)_total_absolute"/>
-        <measure id = "Flows_downlink_percentage_peak"/>
-        <measure id = "Wan-Cost($)_downlink_absolute"/>
-        <measure id = "Bitrate_downlink_absolute_average"/>
-        <measure id = "Bitrate_downlink_absolute_peak"/>
-        <measure id = "Bitrate_downlink_percentage_average"/>
-        <measure id = "Bitrate_downlink_percentage_peak"/>
-        <measure id = "Bitrate_uplink_absolute_average"/>
-        <measure id = "Bitrate_uplink_absolute_peak"/>
-        <measure id = "Bitrate_uplink_percentage_average"/>
-        <measure id = "Bitrate_uplink_percentage_peak"/>
-        <measure id = "Bitrate_total_absolute_average"/>
-        <measure id = "Bitrate_total_absolute_peak"/>
-        <measure id = "Bitrate_total_percentage_average"/>
-        <measure id = "Bitrate_total_percentage_peak"/>
-        <measure id = "Tonnage_downlink_absolute_average"/>
-        <measure id = "Tonnage_downlink_absolute_peak"/>
-        <measure id = "Tonnage_downlink_percentage_average"/>
-        <measure id = "Tonnage_downlink_percentage_peak"/>
-        <measure id = "Tonnage_uplink_absolute_average"/>
-        <measure id = "Tonnage_uplink_absolute_peak"/>
-        <measure id = "Tonnage_uplink_percentage_average"/>
-        <measure id = "Tonnage_uplink_percentage_peak"/>
-        <measure id = "Tonnage_total_absolute_average"/>
-        <measure id = "Tonnage_total_absolute_peak"/>
-        <measure id = "Tonnage_total_percentage_average"/>
-        <measure id = "Tonnage_total_percentage_peak"/>
-        <measure id = "Flows_downlink_absolute_average"/>
-        <measure id = "Flows_downlink_absolute_peak"/>
-        <measure id = "Flows_downlink_percentage_average"/>
-        <measure id = "Flows_downlink_percentage_peak"/>
-        <measure id = "Flows_uplink_absolute_average"/>
-        <measure id = "Flows_uplink_absolute_peak"/>
-        <measure id = "Flows_uplink_percentage_average"/>
-        <measure id = "Flows_uplink_percentage_peak"/>
-        <measure id = "Flows_total_absolute_average"/>
-        <measure id = "Flows_total_absolute_peak"/>
-        <measure id = "Flows_total_percentage_average"/>
-        <measure id = "Flows_total_percentage_peak"/>
-        <measure id = "Wan-Cost($)_downlink_absolute"/>
-        <measure id = "Wan-Cost($)_downlink_percentage"/>
-        <measure id = "Wan-Cost($)_uplink_absolute"/>
-        <measure id = "Wan-Cost($)_uplink_percentage"/>
-        <measure id = "Wan-Cost($)_total_absolute"/>
-        <measure id = "Wan-Cost($)_total_percentage"/>
-    </measures>
+    <!--<measures>-->
+        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
+        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
+        <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
+        <!--<measure id = "Flows_downlink_percentage_peak"/>-->
+        <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
+        <!--<measure id = "Bitrate_downlink_absolute_average"/>-->
+        <!--<measure id = "Bitrate_downlink_absolute_peak"/>-->
+        <!--<measure id = "Bitrate_downlink_percentage_average"/>-->
+        <!--<measure id = "Bitrate_downlink_percentage_peak"/>-->
+        <!--<measure id = "Bitrate_uplink_absolute_average"/>-->
+        <!--<measure id = "Bitrate_uplink_absolute_peak"/>-->
+        <!--<measure id = "Bitrate_uplink_percentage_average"/>-->
+        <!--<measure id = "Bitrate_uplink_percentage_peak"/>-->
+        <!--<measure id = "Bitrate_total_absolute_average"/>-->
+        <!--<measure id = "Bitrate_total_absolute_peak"/>-->
+        <!--<measure id = "Bitrate_total_percentage_average"/>-->
+        <!--<measure id = "Bitrate_total_percentage_peak"/>-->
+        <!--<measure id = "Tonnage_downlink_absolute_average"/>-->
+        <!--<measure id = "Tonnage_downlink_absolute_peak"/>-->
+        <!--<measure id = "Tonnage_downlink_percentage_average"/>-->
+        <!--<measure id = "Tonnage_downlink_percentage_peak"/>-->
+        <!--<measure id = "Tonnage_uplink_absolute_average"/>-->
+        <!--<measure id = "Tonnage_uplink_absolute_peak"/>-->
+        <!--<measure id = "Tonnage_uplink_percentage_average"/>-->
+        <!--<measure id = "Tonnage_uplink_percentage_peak"/>-->
+        <!--<measure id = "Tonnage_total_absolute_average"/>-->
+        <!--<measure id = "Tonnage_total_absolute_peak"/>-->
+        <!--<measure id = "Tonnage_total_percentage_average"/>-->
+        <!--<measure id = "Tonnage_total_percentage_peak"/>-->
+        <!--<measure id = "Flows_downlink_absolute_average"/>-->
+        <!--<measure id = "Flows_downlink_absolute_peak"/>-->
+        <!--<measure id = "Flows_downlink_percentage_average"/>-->
+        <!--<measure id = "Flows_downlink_percentage_peak"/>-->
+        <!--<measure id = "Flows_uplink_absolute_average"/>-->
+        <!--<measure id = "Flows_uplink_absolute_peak"/>-->
+        <!--<measure id = "Flows_uplink_percentage_average"/>-->
+        <!--<measure id = "Flows_uplink_percentage_peak"/>-->
+        <!--<measure id = "Flows_total_absolute_average"/>-->
+        <!--<measure id = "Flows_total_absolute_peak"/>-->
+        <!--<measure id = "Flows_total_percentage_average"/>-->
+        <!--<measure id = "Flows_total_percentage_peak"/>-->
+        <!--<measure id = "Wan-Cost($)_downlink_absolute"/>-->
+        <!--<measure id = "Wan-Cost($)_downlink_percentage"/>-->
+        <!--<measure id = "Wan-Cost($)_uplink_absolute"/>-->
+        <!--<measure id = "Wan-Cost($)_uplink_percentage"/>-->
+        <!--<measure id = "Wan-Cost($)_total_absolute"/>-->
+        <!--<measure id = "Wan-Cost($)_total_percentage"/>-->
+    <!--</measures>-->
 
     <sitetypes>
         <sitetype id = "WDC"/>
@@ -92,10 +92,10 @@
 
         <!--EXPLORE SCREEN-->
         <screenConfig id = "explore_Screen">
-            <component id="switchApp" selector="class name" locator="switchTable" parent="True"/>
+            <!--<component id="switchApp" selector="class name" locator="switchTable" parent="True"/>-->
 
             <component id = "appHeader" selector="class name" locator="appHeader" parent="True"/>
-            <component id = "exploreList" parent="False"/>
+            <!--<component id = "exploreList" parent="False"/>-->
             <!--<component id = "exploreList" selector = 'class name' locator="row" parent="True"/>-->
         </screenConfig>
 
@@ -263,6 +263,7 @@
             <component id = "download" selector="css selector" locator='[class*=download][class*=Icon]' wait = 'skip'/>
             <component id = "info" selector="css selector" locator='[class*=info][class*=Icon]' wait = 'skip'/>
             <component id = "delete" selector="css selector" locator='[class*=delete][class*=Icon]' wait = 'skip'/>
+            <component id = "edit" selector="css selector" locator='[class*=edit][class*=Icon]' wait = 'skip'/>
             <!--<component id = "delete" selector="class name" locator='deleteGridIcon' wait = 'skip'/>-->
             <component id = "view" selector="class name" locator='viewGridIcon' wait = 'skip'/>
             <!--<component id = "info" selector="class name" locator="info_GridIcon" wait="skip"/>-->
@@ -483,7 +484,8 @@
             <component id = "image" selector="tag name" locator='img' />
         </componentConfig>
         <componentConfig id="allinputs">
-            <component id = "input" selector="tag name" locator='input' />
+            <!--<component id = "input" selector="tag name" locator='input' />-->
+            <component id = "input" selector="css selector" locator='input[type="text"]' />
         </componentConfig>
 
         <componentConfig id="recurring">

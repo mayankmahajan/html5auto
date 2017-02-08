@@ -3,12 +3,24 @@ from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import *
 
 
 
 class SetUp:
     def __init__(self):
-        self.d = webdriver.Chrome('/Users/mayank.mahajan/Downloads/chromedriver54')
+
+        security = True
+
+        if security:
+            self.d = webdriver.Chrome(Constants.chromedriverpath)
+        else:
+
+            chromeOptions = webdriver.ChromeOptions()
+            chromeOptions.add_argument("--disable-web-security")
+            chromeOptions.add_argument("--user-data-dir")
+            self.d = webdriver.Chrome(Constants.chromedriverpath,chrome_options=chromeOptions)
+
 
         # firefox_capabilities = DesiredCapabilities.FIREFOX
         # firefox_capabilities['marionette'] = True

@@ -2,14 +2,14 @@
 <data>
 
     <reporttypes>
-        <reporttype id = "Gateway Traffic" customTime ="True" quicklinkid="yesterday" />
-        <!--<reporttype id = "Tonnage Distribution based on Subscriber Percent" customTime ="True" quicklinkid="onetime" recurringInterval = "Daily" recurInstances = "3"/>-->
-        <!--<reporttype id = "Top Domains" customTime ="True" quicklinkid="recurring"/>-->
+        <reporttype id = "Gateway Traffic" quicklinkid="yesterday" />
+        <reporttype id = "Tonnage Distribution based on Subscriber Percent" quicklinkid="onetime" />
+        <reporttype id = "Top Domains" quicklinkid="recurring"/>
     </reporttypes>
 
     <availabletimerange>
-        <time id="starttime" year="2016" month ="12" date="31" hour="19" min="00"/>
-        <time id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
+        <time id="starttime" year="2017" month ="02" day="10" hour="19" min="00"/>
+        <time id ="endtime" year="2017" month ="02" day="13" hour="00" min="00"/>
     </availabletimerange>
 
 

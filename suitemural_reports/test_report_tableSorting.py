@@ -1,13 +1,14 @@
 from MuralUtils import ReportsHelper
 from Utils.SetUp import *
 from classes.Pages.ReportsModuleClass import *
+from MuralUtils.MuralConstants import *
 
 setup = SetUp()
 
 login(setup, "admin", "admin123")
 setup.d.save_screenshot('../screenshots/screenie.png')
 
-tableMap = ReportsHelper.getTableDataMap(setup)
+tableMap = ReportsHelper.getTableDataMap(setup,MuralConstants.REPORTSCREEN)
 
 columnName = "Name"
 sortedData = ReportsHelper.sortTable(setup, columnName)
