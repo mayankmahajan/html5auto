@@ -27,8 +27,18 @@ for str in module_strings:
             logger.debug('Executing  "taskkill /im chromedriver.exe /f"')
             print os.system("taskkill /im chromedriver.exe /f")
             logger.debug('ChromeDriver killed by taskkill /im chromedriver.exe /f')
+            print os.system("taskkill /im chrome.exe /f")
+            logger.debug('ChromeBrowser killed by taskkill /im chrome.exe /f')
+
         except Exception as e:
             logger.error('Got Exception %s while executing "taskkill /im chromedriver.exe /f"', e)
+            try:
+                logger.debug('Executing  "taskkill /im chrome.exe /f"')
+                print os.system("taskkill /im chrome.exe /f")
+            except:
+                logger.error('Got Exception %s while executing "taskkill /im chrome.exe /f"', e)
+
+
 
     except Exception as e:
         # driver.save_screenshot('screenshots/screenie.png')

@@ -112,15 +112,26 @@
 
         </screenConfig>
         <screenConfig id ='error_popup'>
-            <component id = "errorbody" selector="tag name" locator="" parent="True"/>
+            <component id = "errorbody" selector="class name" locator="errorBody" parent="True"/>
         </screenConfig>
 
 
 
     </screenConfigs>
 
-
     <componentConfigs>
+        <componentConfig id ="alertsPane">
+            <component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />
+            <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />
+        </componentConfig>
+        <componentConfig id = "alertinfo">
+            <component id = "alarm-row" selector="tag name" locator="kiwik-threshold-alarm-row"/>
+            <component id = "timecount" selector="tag name" locator="mural-time-and-count"/>
+            <component id = "links" selector="tag name" locator="kiwik-threshold-state-links"/>
+            <component id = "state" selector="tag name" locator="kiwik-threshold-state"/>
+            <component id = "alerttable" selector="tag name" locator="table"/>
+
+        </componentConfig>
         <componentConfig id ="errorbody">
             <component id ="errorclose" selector="css selector" locator="[class*=close][class*=Popup]" />
             <component id ="errormessage" selector="css selector" locator="[class*=alert][class*=Message]" />
