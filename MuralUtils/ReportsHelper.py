@@ -67,7 +67,7 @@ def createreport(setup,reportTypes,reportObj,time):
         checkEqualDict(inputinfo,reviewPageParams,"","","Checking report Review Page")
         # return [inputinfo,reviewPageParams]
 
-        return checkReportTableForCreatedRecord(setup, inputinfo)
+        checkReportTableForCreatedRecord(setup, inputinfo)
 
 
 def checkReportsReviewPage(setup,reportType,reportObj,time):
