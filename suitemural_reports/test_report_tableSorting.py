@@ -5,7 +5,7 @@ from MuralUtils.MuralConstants import *
 from Utils.utility import *
 
 setup = SetUp()
-# sleep(120)
+sleep(15)
 login(setup, "admin", "admin123")
 
 # print isError(setup)

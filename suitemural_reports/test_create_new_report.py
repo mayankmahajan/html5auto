@@ -9,7 +9,7 @@ from Utils.utility import *
 # Launches the application
 setup = SetUp()
 
-# sleep(120)
+sleep(15)
 # Logins to app with credentials provided
 login(setup, "admin", "admin123")
 

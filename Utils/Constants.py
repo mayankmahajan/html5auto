@@ -40,7 +40,7 @@ class Constants(object):
     DRILLTONE="DRILLTONE"
     DRILLTONENE="DRILLTONENE"
     # driver based constants
-    WEBDRIVERTIMEOUT = 12
+    WEBDRIVERTIMEOUT = 3
 
     # Component based constants
     ## BTV
