@@ -18,7 +18,7 @@ exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
 
 
 
-print ReportsHelper.getFiltersInfo(setup, 2)
+# print ReportsHelper.getFiltersInfo(setup, 2)
 print ReportsHelper.downloadReport(setup, 3)
 print ReportsHelper.deleteReport(setup, 5)
 
