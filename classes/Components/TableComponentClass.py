@@ -184,7 +184,7 @@ class TableComponentClass(BaseComponentClass):
 
         return rows
 
-    def getRows1(self,colcount,h,length,driver,scroll=False):
+    def getRows1(self,colcount,h,length,driver,colIndex=0,scroll=False):
 
         if scroll:
             driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-1])
@@ -209,11 +209,11 @@ class TableComponentClass(BaseComponentClass):
 
         data = {}
         for row in rows:
-            data[row[0]] = row
+            data[row[colIndex]] = row
         return [data,h]
         return rows
 
-    def addrows(self,colcount,h,driver,length):
+    def addrows(self,colcount,h,driver,length,colIndex):
         rows = {}
         while True:
             flag = True
@@ -224,7 +224,7 @@ class TableComponentClass(BaseComponentClass):
                 flag=False
             else:
                 flag=True
-                t = self.getRows1(colcount,h,length,driver,True)
+                t = self.getRows1(colcount,h,length,driver,colIndex,True)
                 newrows = t[0]
                 h = t[1]
 
@@ -236,8 +236,8 @@ class TableComponentClass(BaseComponentClass):
                 return rows
 
 
-    def getAllRowsAfterScroll(self,colcount,h,parent,driver,length):
-        return self.addrows(colcount,h[parent],driver,length)
+    def getAllRowsAfterScroll(self,colcount,h,parent,driver,length,colIndex):
+        return self.addrows(colcount,h[parent],driver,length,colIndex)
 
 
 
@@ -287,12 +287,12 @@ class TableComponentClass(BaseComponentClass):
         handlers['CHECKSORT'][len(handlers['CHECKSORT'])-index].click()
 
 
-    def getTableDataMap(self, h, parent="table", driver="", length=15, child=""):
+    def getTableDataMap(self, h, parent="table", driver="", colIndex=0,length=15, child=""):
         # handlers = self.compHandlers('table', h)
         try:
             data = {}
             data['header'] = self.getIterfaceHeaders(h[parent])
-            data['rows'] = self.getAllRowsAfterScroll(len(data['header']),h,parent,driver,length)
+            data['rows'] = self.getAllRowsAfterScroll(len(data['header']),h,parent,driver,length,colIndex)
             # data['rows'] = self.getIterfaceRows(len(data['header']),h[parent],length,driver)
             return data
         except Exception as e:

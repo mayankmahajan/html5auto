@@ -20,10 +20,26 @@ class BasePopClass(BaseComponentClass):
         for el in handle[parent][child]:
             if el.text == value:
                 try:
+                    logger.info("Going to click link %s",el.text)
                     el.click()
                     return True
                 except ElementNotSelectableException or Exception as e:
+                    logger.error("Exception found while clicking %s = %s",el.text,e)
                     return e
+        logger.error("Link Text not found = %s",el.text)
+        return False
+
+    def clickLinkByIndex(self,index,handle,parent="alllinks",child="a"):
+        for i in range(len(handle[parent][child])):
+            if i == index:
+                try:
+                    logger.info("Going to click link %s",handle[parent][child][i].text)
+                    handle[parent][child][i].click()
+                    return handle[parent][child][i].text
+                except ElementNotSelectableException or Exception as e:
+                    logger.error("Exception found while clicking %s = %s",handle[parent][child][i].text,e)
+                    return e
+        logger.error("Link Text '%s' not found at index = %s",str(index),handle[parent][child][i].text)
         return False
 
 

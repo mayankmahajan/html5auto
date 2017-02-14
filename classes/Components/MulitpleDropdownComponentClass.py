@@ -22,10 +22,12 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         #             selections.append(el.text)
         try:
             for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[ng-reflect-checked="true"]'):
-                if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
-                    selections.append("ALL")
-                    activeDropDowns[index].click()
-                    return selections
+
+                # commenting below lines to get all selected values in dropdown
+                # if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
+                #     selections.append("ALL")
+                #     activeDropDowns[index].click()
+                #     return selections
 
                 selections.append(e.find_elements_by_xpath("..//div")[0].text)
         except Exception as e:

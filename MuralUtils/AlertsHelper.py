@@ -83,6 +83,10 @@ def createAlert(setup,request = {}):
 def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
 
     reportScreenInstance = ReportsModuleClass(setup.d)
+
+    # saving the table data as keys
+    tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
+
     # reportScreenInstance.switcher.switchTo(1,getHandle(setup,MuralConstants.REPORTSCREEN,"createdialog"))
 
 
@@ -92,18 +96,30 @@ def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
     data = reportScreenInstance.table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"),"table")
 
     actual ={}
-    actual['ruleName'] = data['rows'][index][0]
-    actual['gran'] = data['rows'][index][1]
-    actual['filters'] = data['rows'][index][2]
-    actual['measure'] = data['rows'][index][3]
-    actual['conditions'] = [data['rows'][index][4],data['rows'][index][5],data['rows'][index][6]]
-    actual['range'] = data['rows'][index][7]
-    actual['status'] = data['rows'][index][8]
+    row = tableMap['rows'][request['ruleName']]
+    print row
+
+    actual['ruleName'] = row[0]
+    actual['gran'] = row[1]
+    actual['filters'] = row[2]
+    actual['measure'] = row[3]
+    actual['conditions'] = [row[4],row[5],row[6]]
+    actual['range'] = row[7]
+    actual['status'] = row[8]
+
+
+    # actual['ruleName'] = data['rows'][index][0]
+    # actual['gran'] = data['rows'][index][1]
+    # actual['filters'] = data['rows'][index][2]
+    # actual['measure'] = data['rows'][index][3]
+    # actual['conditions'] = [data['rows'][index][4],data['rows'][index][5],data['rows'][index][6]]
+    # actual['range'] = data['rows'][index][7]
+    # actual['status'] = data['rows'][index][8]
 
     for k,v in actual.iteritems():
         checkEqualAssert(request[k],actual[k],"","","Checking Table for DPI Alert Rule Created : "+k)
 
-    print data['rows'][0]
+    # print data['rows'][0]
 
 
 

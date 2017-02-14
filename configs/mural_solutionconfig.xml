@@ -37,15 +37,15 @@
 
     <quicklinks>
 
-        <quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>
+        <!--<quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>-->
 
-        <quicklink id="recurring" locatorText ="Recurring report" starttime="True" endtime="False" frequency="True" recurringInterval = "Daily" recurInstances = "3"/>
-        <quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False" hourIntances="1"/>
+        <!--<quicklink id="recurring" locatorText ="Recurring report" starttime="True" endtime="False" frequency="True" recurringInterval = "Daily" recurInstances = "3"/>-->
+        <!--<quicklink id="hourly" locatorText ="Hourly report" starttime="True" endtime="False" hourIntances="1"/>-->
 
         <quicklink id="yesterday" locatorText ="Yesterday" starttime="False" endtime="False"/>
-        <quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>
-        <quicklink id="lastfifteendays" locatorText ="Last 15 days" starttime="False" endtime="False"/>
-        <quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>
+        <!--<quicklink id="lastweek" locatorText ="Last week" starttime="False" endtime="False"/>-->
+        <!--<quicklink id="lastfifteendays" locatorText ="Last 15 days" starttime="False" endtime="False"/>-->
+        <!--<quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>-->
 
     </quicklinks>
 
@@ -53,7 +53,7 @@
     <reportwizardfilters>
         <filter id = 'network' locatorText="Network Topology"/>
         <filter id = 'apnrat' locatorText="APN/RAT"/>
-        <filter id = 'subscriber' locatorText="Subscriber"/>
+        <filter id = 'subscriber' locatorText="Top N Apps"/>
     </reportwizardfilters>
 
     <measuretypes>
@@ -91,12 +91,16 @@
             <component id = "allcheckboxes" selector="id" locator="filterPopup" parent="True"/>
             <component id = "recurring" selector="id" locator="filterPopup" parent="True"/>
             <component id = "allinputs" selector="id" locator="filterPopup" parent="True"/>
+            <component id = "errorText" parent="False"/>
 
         </screenConfig>
+
         <screenConfig id="alert_Screen">
             <component id="allspans" selector="tag name" locator="kiwik-alerts-navbar" parent="True"/>
             <component id= "settings" selector="tag name" locator="kiwik-settings" parent="True"/>
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
+            <component id = "alertsPane" selector="tag name" locator="kiwik-alerts" parent="True"/>
+
         </screenConfig>
 
         <screenConfig id="createrule_popup">
@@ -120,6 +124,10 @@
     </screenConfigs>
 
     <componentConfigs>
+        <componentConfig id ="errorText">
+            <component id = "errorText" selector="class name" locator="errorMsgClass" />
+        </componentConfig>
+
         <componentConfig id ="alertsPane">
             <component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />
             <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />
@@ -164,7 +172,15 @@
         </componentConfig>
         <componentConfig id="allinputs">
             <component id = "number" selector="css selector" locator='input[type="number"]' />
+            <component id = "password" selector="css selector" locator='input[type="password"]' />
         </componentConfig>
+        <componentConfig id="alllabels">
+            <component id = "label" selector="tag name" locator='label' />
+        </componentConfig>
+        <componentConfig id="allcircles">
+            <component id = "circle" selector="tag name" locator='circle' />
+        </componentConfig>
+
 
 
         <componentConfig id="filterPopup">

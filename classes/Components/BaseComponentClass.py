@@ -127,11 +127,15 @@ class BaseComponentClass:
             logger.error("Exception found while clicking Checkbox %d",index)
             return e
 
+    def clear_input(self,h,parent,child,index=0):
+        h[parent][child][index].send_keys(len(str(h[parent][child][index].get_attribute("value")))*Keys.BACKSPACE)
+
     def sendkeys_input(self,value,h,index,parent="allinputs",child="input",clear=True):
         try:
             if clear:
                 logger.debug("Clearing the text at input %d parent %s and child %s ",index,parent,child)
-                h[parent][child][index].send_keys(len(str(h[parent][child][index].get_attribute("value")))*Keys.BACKSPACE)
+                # h[parent][child][index].send_keys(len(str(h[parent][child][index].get_attribute("value")))*Keys.BACKSPACE)
+                self.clear_input(h,parent,child,index)
             logger.debug("Going to send keys to input %d parent %s and child %s ",index,parent,child)
 
             h[parent][child][index].send_keys(value)
@@ -189,6 +193,19 @@ class BaseComponentClass:
             except Exception as e:
                 return e
         return False
+
+    def isButtonEnabled(self,value,h,parent="allbuttons",child="button"):
+        for el in h[parent][child]:
+            try:
+                if value == el.text.strip():
+                    try:
+                        return el.is_enabled()
+                    except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                        return e
+            except Exception as e:
+                return e
+        return False
+
 
     def clickInputButton(self,value,h,parent="allbuttons",child="ibutton"):
         for el in h[parent][child]:

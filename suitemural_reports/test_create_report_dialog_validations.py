@@ -9,12 +9,8 @@ from Utils.utility import *
 # Launches the application
 setup = SetUp()
 
-# sleep(120)
 # Logins to app with credentials provided
 login(setup, "admin", "admin123")
-
-# grPopInstance = GenerateReportsPopClass(setup.d)
-# ReportsHelper.checkErrorMessageAndType(setup,grPopInstance)
 
 print isError(setup)
 
@@ -37,7 +33,7 @@ reportObj.filters['apnrat']=[[1,2],'']  #sample of selection of filters based on
 reportObj.filters['subscriber']=['11']
 
 # creates all reporttypes and log results
-ReportsHelper.createreport(setup, reportTypes, reportObj, [Time(), Time(2017, 01, 14, 14)])
+ReportsHelper.checkReportsReviewPage(setup, reportTypes[0], reportObj, [Time(), Time(2017, 01, 14, 14)])
 
 # Closing the browser
 setup.d.close()

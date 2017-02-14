@@ -255,10 +255,15 @@ def testScreen1(driver,driverHelper,pageName,isStartScreen=False,componentList=[
     except ValueError:
         return ValueError
 
-def getTableDataMap(setup,screenName,parent='table'):
+def merge_dictionaries(d1,d2):
+    n = d1.copy()
+    n.update(d2)
+    return n
+
+def getTableDataMap(setup,screenName,parent='table',colIndex=0):
     reportScreenInstance = ReportsModuleClass(setup.d)
     tableHandle = getHandle(setup,screenName,parent)
-    return reportScreenInstance.table.getTableDataMap(tableHandle, "table", setup)
+    return reportScreenInstance.table.getTableDataMap(tableHandle, parent, setup,colIndex)
 
 
 def isError(setup):
