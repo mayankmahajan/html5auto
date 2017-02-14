@@ -43,7 +43,7 @@ def createreport(setup,reportTypes,reportObj,time):
         # launching TimeRange Page in wizard
         grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons"))
 
-        inputinfo = merge_dictionaries(inputinfo,doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeEpoch,time))
+        inputinfo = merge_dictionaries(inputinfo,doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeEpoch,endtimeEpoch,time))
         # launching Filters Page in wizard
         grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons"))
 
@@ -86,7 +86,7 @@ def checkReportsReviewPage(setup,reportType,reportObj,time):
     # launching TimeRange Page in wizard
     grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons"))
 
-    inputinfo = merge_dictionaries(inputinfo,doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeEpoch,time))
+    inputinfo = merge_dictionaries(inputinfo,doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeEpoch,endtimeEpoch,time))
     # launching Filters Page in wizard
     grPopInstance.reportspopup.clickButton("Next Step", getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons"))
     inputinfo['filters'] = doActionsOnFiltersPage(setup,grPopInstance,reportType,reportObj)
@@ -138,7 +138,7 @@ def createInputInfo(setup,reportType,reportObj,time,rndmNum):
     return inputinfo,starttimeEpoch,endtimeEpoch
 
 
-def doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeEpoch,time):
+def doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeEpoch,endtimeEpoch,time):
     grPopInstance.reportspopup.selectRadioButton(inputinfo['timerange'], getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"radios"), "label")
 
     grPopHandle = getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "generateReportDialog")
