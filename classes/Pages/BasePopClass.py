@@ -42,4 +42,18 @@ class BasePopClass(BaseComponentClass):
         logger.error("Link Text '%s' not found at index = %s",str(index),handle[parent][child][i].text)
         return False
 
+    def clickLinkByPartialText(self,value,handle,parent="alllinks",child="a"):
+        for el in handle[parent][child]:
+            if value in el.text:
+                try:
+                    logger.info("Going to click link %s",el.text)
+                    el.click()
+                    return el.text
+                except ElementNotSelectableException or Exception as e:
+                    logger.error("Exception found while clicking %s = %s",el.text,e)
+                    return e
+        logger.error("Link Text not found = %s",el.text)
+        return False
+
+
 

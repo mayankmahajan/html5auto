@@ -237,7 +237,8 @@ def doActionsOnFiltersPage(setup,grPopInstance,reportType,reportObj):
                 inputinfo['filters'][radioname] = grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)
 
     if 'subscriber' in reportType['filters']:
-        linkText = grPopInstance.clickLinkByIndex(2,getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLLINKS))
+        linkText = grPopInstance.clickLinkByPartialText(reportFilters['apnrat']['locatorText'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "alllinks"))
+        # linkText = grPopInstance.clickLinkByIndex(2,getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLLINKS))
         for i in range(len(reportObj.filters['subscriber'])):
             if reportObj.filters['subscriber'][i] != '':
                 grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),0)
