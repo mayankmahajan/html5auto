@@ -24,6 +24,8 @@ def createreport(setup,reportTypes,reportObj,time):
     takes input as reporttype,time,filters,reportName,other optional params
     :return: request and response dictionaries
     '''
+    pendingReports = getReportStatus(setup)
+
     for reportType in reportTypes:
         logger.debug("Creating Report %s",reportType)
 
@@ -67,7 +69,24 @@ def createreport(setup,reportTypes,reportObj,time):
         checkEqualDict(inputinfo,reviewPageParams,"","","Checking report Review Page")
         # return [inputinfo,reviewPageParams]
 
-        return checkReportTableForCreatedRecord(setup, inputinfo)
+        checkReportTableForCreatedRecord(setup, inputinfo)
+    latestPendingData = getReportStatus(setup,pendingReports['rows'])
+
+def getReportStatus(setup,pendingReports={}):
+    reportScreenInstance = ReportsModuleClass(setup.d)
+    reportScreenInstance.switcher.switchTo(0,getHandle(setup,MuralConstants.REPORTSCREEN,"createdialog"))
+    reportScreenInstance.switcher.switchTo(1,getHandle(setup,MuralConstants.REPORTSCREEN,"createdialog"))
+    tableMap = getTableDataMap(setup,MuralConstants.REPORTSCREEN)
+
+    if pendingReports == {}:
+        return tableMap
+
+    resultlogger.info("****** Checking for the reports in Pending Tab ******")
+    for k,v in tableMap['rows']:
+        if k not in pendingReports.keys():
+            resultlogger.info("Report with ID %s and name %s and Status = %s",k,v[1],v[6])
+    return tableMap
+
 
 
 def checkReportsReviewPage(setup,reportType,reportObj,time):
@@ -355,22 +374,27 @@ def isPasswordOptimal(passwordEntered):
     else:
         return False
 
+    lower=False
+    upper=False
+    special=False
+    numeric=False
+
     for s in passwordEntered:
-        if s in string.ascii_lowercase:
+        if not lower and s in string.ascii_lowercase:
             lower = True
-        else:
-            return False
-        if s in string.ascii_uppercase:
+        if not upper and s in string.ascii_uppercase:
             upper = True
-        else:
-            return False
-        if s in string.ascii_uppercase:
+        if not special and s in "!@#$%^&*":
             special = True
-        else:
-            return False
+        if not numeric and s in "0123456789":
+            numeric = True
+        if count and lower and upper and special:
+            return True
 
     if count and lower and upper and special:
         return True
+    else:
+        return False
 
 
 
