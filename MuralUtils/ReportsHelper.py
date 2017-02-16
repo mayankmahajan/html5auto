@@ -82,7 +82,7 @@ def getReportStatus(setup,pendingReports={}):
         return tableMap
 
     resultlogger.info("****** Checking for the reports in Pending Tab ******")
-    for k,v in tableMap['rows']:
+    for k,v in tableMap['rows'].iteritems():
         if k not in pendingReports.keys():
             resultlogger.info("Report with ID %s and name %s and Status = %s",k,v[1],v[6])
     return tableMap
@@ -237,7 +237,7 @@ def doActionsOnFiltersPage(setup,grPopInstance,reportType,reportObj):
                 inputinfo['filters'][radioname] = grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)
 
     if 'subscriber' in reportType['filters']:
-        linkText = grPopInstance.clickLinkByPartialText(reportFilters['apnrat']['locatorText'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "alllinks"))
+        linkText = grPopInstance.clickLinkByPartialText(reportFilters['subscriber']['locatorText'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "alllinks"))
         # linkText = grPopInstance.clickLinkByIndex(2,getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLLINKS))
         for i in range(len(reportObj.filters['subscriber'])):
             if reportObj.filters['subscriber'][i] != '':
