@@ -4,7 +4,7 @@ from MuralUtils.MuralConstants import *
 from classes.Objects.Time import *
 
 class CreateAlert:
-    def __init__(self,ruleName="automationrule",measure={},type=0,gran=0,conditions=[],time=[],filters=0):
+    def __init__(self,ruleName="automationrule",measure={},type=0,gran=0,conditions=[],time=[],filters=0,status="Active"):
 
         c = ConfigManager()
         maxFilters  = 5
@@ -30,7 +30,7 @@ class CreateAlert:
 
 
         self.ruleName = ruleName
-
+        self.status = status
         self.measure = measuretypes[measures[random.randint(0,len(measures)-1)]]
         unitValues = self.measure['unitvalues'].split(',')
 
@@ -56,6 +56,7 @@ class CreateAlert:
         self.dict['filters'] = self.filters
         self.dict['measure'] = self.measure
         self.dict['ruleName'] = self.ruleName
+        self.dict['status'] = self.status
 
         # self.filters = filters
         # return self

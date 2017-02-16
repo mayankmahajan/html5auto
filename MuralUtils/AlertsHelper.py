@@ -48,9 +48,13 @@ def createAlert(setup,request = {}):
     response['conditions'].append(setDPICondition(1,request['conditions'][1],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
     response['conditions'].append(setDPICondition(2,request['conditions'][2],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
     response[MuralConstants.STARTTIME]=setTime(setup,0,request['time'][0])
+    starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+
+    request['time'][1]= getEndtime(setup, response['type'], response['gran'], starttimeEpoch,Constants.TIMEZONEOFFSET)
+
     response[MuralConstants.ENDTIME] = setTime(setup,1,request['time'][1])
     #
-    starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+    # starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
     endtimeEpoch = getepoch(request['time'][1].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
     request["range"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y")) +" to "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y"))
 
@@ -79,6 +83,27 @@ def createAlert(setup,request = {}):
 
     print "DONE"
 
+def getEndtime(setup, type, gran, starttimeEpoch,timezone):
+    epoch = calculateEndtimeEpoch(setup,type,gran,starttimeEpoch)
+    return createTimeFromEpoch(epoch,timezone)
+
+def calculateEndtimeEpoch(setup, type, gran, starttimeEpoch):
+    ran = random.randint(2,3)
+    if setup.cM.getAllNodeElements("measuretypes","type")[1] == type:
+        if gran == "Hourly":
+            return int(starttimeEpoch) + int(ran)*3600
+        if gran == "Daily":
+            return int(starttimeEpoch) + int(ran)*86400
+        if gran == "Monthly":
+            return int(starttimeEpoch) + int(ran)*2592000
+    return int(starttimeEpoch) + int(ran)*2592000
+
+def createTimeFromEpoch(epoch,timezone):
+    pattern = "%Y-%m-%d-%H-%M"
+    parts=getDateString(epoch,timezone,pattern).split("-")
+    return Time(parts[0],parts[1],parts[2],parts[3])
+
+     # = getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%Y-%m-%d-%H-%M")
 
 def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
 
@@ -138,20 +163,35 @@ def setDrop(value,index,handle,selectionByIndex=False):
 
 def setDPICondition(priorty, cond, handle, setup):
 
-    operator=re.findall('[=<>]+',cond)
-    number_value=re.findall(r'\d+',cond)
-    unitSystem=re.findall('[a-zA-Z]+',cond)
+    # operator=re.findall('[=<>]+',cond)
+    # number_value=re.findall(r'\d+',cond)
+    # unitSystem=re.findall('[a-zA-Z]+',cond)
     #
     # operator=cond[0]
     # number_value=cond[1]
     # unitSystem=cond[2]
 
-    if priorty==0:
-        index = 3
-    elif priorty==1:
-        index = 5
-    elif priorty==2:
-        index = 7
+    operator=re.findall('[=<>]+',cond)[0]
+    number_value=re.findall(r'\d+',cond)[0]
+
+    try:
+        unitSystem=re.findall('[a-zA-Z]+',cond)[0]
+        if priorty==0:
+            index = 3
+        elif priorty==1:
+            index = 5
+        elif priorty==2:
+            index = 7
+
+    except:
+        unitSystem = ''
+        if priorty==0:
+            index = 3
+        elif priorty==1:
+            index = 4
+        elif priorty==2:
+            index = 5
+
 
     try:
         instance = DropdownComponentClass()
@@ -166,11 +206,18 @@ def setDPICondition(priorty, cond, handle, setup):
         op=instance.doSelectionOnVisibleDropDown(handle,operator,index)
         logger.info("Operator %s for Priority %s is selected",str(operator),str(priorty))
 
+        # handling a minor UI bug
+
         logger.info("Entering value %s for operator %s and Priority %s",str(number_value),str(operator),str(priorty))
-        num_value = instance.sendkeys_input(number_value, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty,"allinputs","number")
+
+        if priorty == 2:
+            num_value = instance.sendkeys_input(number_value, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),0,"allinputs","number")
+        else:
+            num_value = instance.sendkeys_input(number_value, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
+
         logger.info("Value %s set for operator %s and Priority %s",str(num_value),str(operator),str(priorty))
 
-        if unitSystem == ['']:
+        if unitSystem == '':
             return str(op).strip()+str(num_value).strip()
         else:
             logger.info("Selecting unitsystem %s for operator %s and Priority %s",str(unitSystem),str(operator),str(priorty))
