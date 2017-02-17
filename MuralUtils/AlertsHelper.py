@@ -17,6 +17,7 @@ from classes.Pages.GenerateReportsPopClass import GenerateReportsPopClass
 from MuralConstants import *
 import re
 from classes.Objects.Time import *
+from classes.Components.AlertsComponentClass import *
 
 
 def createDPIAlert(setup, request = {}):
@@ -83,8 +84,6 @@ def createDPIAlert(setup, request = {}):
 
     print "DONE"
 
-
-
 def createKPIAlert(setup, request = {}):
     response = {}
 
@@ -118,12 +117,9 @@ def createKPIAlert(setup, request = {}):
 
     checkKPIAlertTableForCreatedRecord(setup,request)
 
-
-
-
-
-
-
+def checkDPIAlerts(setup):
+    screenInstance = AlertsComponentClass()
+    alertlist = screenInstance.getAlertList()
 
 
 
@@ -195,7 +191,6 @@ def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
 
     # print data['rows'][0]
 
-
 def checkKPIAlertTableForCreatedRecord(setup,request,index=0):
     reportScreenInstance = ReportsModuleClass(setup.d)
     # saving the table data as keys
@@ -214,7 +209,6 @@ def checkKPIAlertTableForCreatedRecord(setup,request,index=0):
 
     for k,v in actual.iteritems():
         checkEqualAssert(request[k],actual[k],"","","Checking Table for KPI Alert Rule Created : "+k)
-
 
 def setName(name,handle,index=0):
     instance = DropdownComponentClass()
@@ -355,7 +349,6 @@ def setTime(setup,startEnd,timeObj):
         logger.error("Exception found while Selecting date %s for %s = %s",str(timeObj),str(t),str(e))
         return e
 
-
 def setFilters(setup,valueArray,selectionByIndex=True):
     handles = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
 
@@ -364,7 +357,6 @@ def setFilters(setup,valueArray,selectionByIndex=True):
     return str(filterDimension)+":"+str(filterValue)
     return [filterDimension,filterValue]
 
-
 def clickButton(setup,buttonName,input=False):
     instance = DropdownComponentClass()
     buttonHandle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLBUTTONS)
@@ -372,5 +364,4 @@ def clickButton(setup,buttonName,input=False):
         return instance.clickInputButton(buttonName,buttonHandle)
     else:
         return instance.clickButton(buttonName,buttonHandle)
-
 
