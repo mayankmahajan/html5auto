@@ -308,6 +308,9 @@ def setKPICondition(priorty, handle, setup,firstDrop=3):
         index = firstDrop+1
     elif priorty==2:
         index = firstDrop+2
+    elif priorty==3:
+        index = firstDrop+3
+
     try:
         instance = DropdownComponentClass()
         logger.info("Enabling Priority %s",str(priorty))
