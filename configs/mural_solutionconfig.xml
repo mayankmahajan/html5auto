@@ -100,7 +100,8 @@
             <component id="allspans" selector="tag name" locator="kiwik-alerts-navbar" parent="True"/>
             <component id= "settings" selector="tag name" locator="kiwik-settings" parent="True"/>
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
-            <component id = "alertsPane" selector="tag name" locator="kiwik-alerts" parent="True"/>
+            <component id = "alertlist" selector="tag name" locator="kiwik-alerts" parent="True"/>
+            <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" parent="True"/>
 
             <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' parent="False"/>-->
 
@@ -132,11 +133,14 @@
             <component id = "errorText" selector="class name" locator="errorMsgClass" />
         </componentConfig>
 
-        <componentConfig id ="alertsPane">
-            <component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />
-            <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />
+        <componentConfig id ="alertlist">
+            <!--<component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />-->
+            <component id = "list" selector="css selector" locator=".child,.evenChild" />
+
+            <!--<component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />-->
         </componentConfig>
         <componentConfig id = "alertinfo">
+            <component id = "header" selector="class" locator="alert-title" />
             <component id = "alarm-row" selector="tag name" locator="kiwik-threshold-alarm-row"/>
             <component id = "timecount" selector="tag name" locator="mural-time-and-count"/>
             <component id = "links" selector="tag name" locator="kiwik-threshold-state-links"/>
