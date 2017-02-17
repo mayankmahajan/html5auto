@@ -220,7 +220,7 @@ def setName(name,handle,index=0):
     instance = DropdownComponentClass()
     return instance.sendkeys_input(name,handle,index)
 
-def setDropRandomly(value, index, handle):
+def setDropRandomly(index, handle):
     instance = DropdownComponentClass()
     return instance.doRandomSelectionOnVisibleDropDown(handle,index)
 
