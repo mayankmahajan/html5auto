@@ -120,10 +120,9 @@ def createKPIAlert(setup, request = {}):
 def checkDPIAlerts(setup):
     popInstance = GenerateReportsPopClass(setup.d)
     # Launching Settings Page
-    popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
-    # popInstance.switcher.switchTo(1, getHandle(setup, MuralConstants.ALERTSCREEN, "settings"), "settings")
-
-    alertRuleMap= getTableDataMap(setup, MuralConstants.ALERTSCREEN)
+    # popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+    alertRuleMap = {}
+    # alertRuleMap= getTableDataMap(setup, MuralConstants.ALERTSCREEN)
     popInstance.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
     screenInstance = AlertsComponentClass()
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")

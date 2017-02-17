@@ -101,7 +101,7 @@
             <component id= "settings" selector="tag name" locator="kiwik-settings" parent="True"/>
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
             <component id = "alertlist" selector="tag name" locator="kiwik-alerts" parent="True"/>
-            <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" parent="True"/>
+            <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-details" parent="True"/>
 
             <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' parent="False"/>-->
 
@@ -140,7 +140,9 @@
             <!--<component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />-->
         </componentConfig>
         <componentConfig id = "alertinfo">
-            <component id = "header" selector="class" locator="alert-title" />
+            <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" parent="True"/>
+
+            <component id = "header" selector="class name" locator="alert-title" />
             <component id = "alarm-row" selector="tag name" locator="kiwik-threshold-alarm-row"/>
             <component id = "timecount" selector="tag name" locator="mural-time-and-count"/>
             <component id = "links" selector="tag name" locator="kiwik-threshold-state-links"/>

@@ -11,7 +11,7 @@ class AlertsComponentClass(BaseComponentClass):
 
     def getAlertList(self,h,parent,child):
         list = []
-        for row in h[parent][child].find_elements_by_css_selector(".child,.evenChild"):
+        for row in h[parent][child]:
             list.append(self.createAlertListObject(row))
             # list[temp['header']+"$$"+temp['duration']] = temp
         return list
@@ -30,7 +30,7 @@ class AlertsComponentClass(BaseComponentClass):
 
     def createAlertListObject(self,h):
         alertObject={}
-        alertObject['handled'] = self.getAlertHandledIcon(h)
+        alertObject['state'] = self.getAlertHandledIcon(h)
         alertObject['header'] = self.getAlertLabels(h)[0]
         alertObject['duration'] = self.getAlertLabels(h)[1]
         alertObject['alarmcount'] = self.getAlertLabels(h)[2]
@@ -55,33 +55,33 @@ class AlertsComponentClass(BaseComponentClass):
     def createAlertBodyObject(self,h):
 
         alertBOdyObject = {}
-        alertBOdyObject['handled'] = self.getAlertHandledIcon(h)
+        alertBOdyObject['state'] =  False if "UnHandled".upper() in h['state'][0].text.upper() else True
         alertBOdyObject['header'] = self.getAlertHeader(h)
         alertBOdyObject['range'],alertBOdyObject['alarmcount'] = self.getAlertDuration(h)
+        alertBOdyObject['alarmrows'] = self.getAlarmRows(h)
+        alertBOdyObject['ruleName'], alertBOdyObject['gran'], alertBOdyObject['type'] = self.getRuleInfo(h)
 
 
         alertBOdyObject['measure'] = self.getAlertHandledIcon(h)
         alertBOdyObject['color'] = self.getAlertHandledIcon(h)
-        alertBOdyObject['alarmrows'] = self.getAlarmRows(h)
-        alertBOdyObject['ruleName'],alertBOdyObject['gran'],alertBOdyObject['type'] = self.getRuleInfo(h)
 
-        alertBOdyObject['state']
-        alertBOdyObject['links']
-        alertBOdyObject['alerttable']
+
+        alertBOdyObject['links'] = h['links']
+        alertBOdyObject['alerttable'] = h['alerttable']
 
 
     def getAlarmRows(self,h):
         alarmsrows = []
-        for el in h['kiwik-threshold-alarm-row']:
+        for el in h['alarm-row']:
             alarmsrows.append(el.text)
         return alarmsrows
 
     def getAlertHeader(self,h,child="header"):
-        return h[child].text
+        return h[child][0].text
 
     def getAlertDuration(self,h,child="timecount"):
-        time = h[child].find_elements_by_class_name("time")[0].text
-        count = h[child].find_elements_by_class_name("count")[0].text
+        time = h[child][0].find_elements_by_class_name("time")[0].text
+        count = h[child][0].find_elements_by_class_name("count")[0].text
         return time,count
 
     def getRuleInfo(self,h,child=""):
@@ -89,15 +89,15 @@ class AlertsComponentClass(BaseComponentClass):
         siblings = []
         for el in handleTosiblings:
             siblings.append(el.text)
-        return siblings
+        return siblings[2],siblings[4],siblings[6]
 
-    def getAllRuleSiblings(self,h,child=""):
-        for el in h.find_elements_by_tag_name("span"):
+    def getAllRuleSiblings(self,h,child="alertinfo"):
+        for el in h[child][0].find_elements_by_tag_name("span"):
             if el.text == "Rule":
                 return el.find_elements_by_xpath("..//span")
 
 
-    def getAlertHeader(self,h):
-        pass
+    #def getAlertHeader(self,h):
+     #   pass
 
 
