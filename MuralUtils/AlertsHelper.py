@@ -329,7 +329,7 @@ def setKPICondition(priorty, handle, setup,firstDrop=3):
                 return str(op).strip()+str(num_value).strip()
             else:
                 logger.info("Disabling Priority %s",str(priorty))
-                instance.clickCheckBox(handle,priorty)
+                instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
                 logger.info("Priority %s is Disabled",str(priorty))
                 return "-"
 
