@@ -3,6 +3,7 @@ from Utils.ConfigManager import ConfigManager
 import time
 from Utils.logger import *
 from selenium.webdriver.common.keys import *
+import random
 
 class DropdownComponentClass(BaseComponentClass):
 
@@ -62,6 +63,31 @@ class DropdownComponentClass(BaseComponentClass):
         logger.error("Option with index %s not present in dropdown and returning the currentValue selected = %s",str(indexToBeSelected),currentValue)
         return currentValue
 
+    def randomSet(self, handle):
+        try:
+            l = len(handle)
+            h = handle[len(handle)-1]
+        except:
+            h = handle
+
+        elements = h.find_elements_by_xpath(".//*")
+        indexToBeSelected = random.randint(0,len(elements)-1)
+
+        for i in range(len(elements)):
+            if i == indexToBeSelected:
+                try:
+                    logger.debug("Selecting DropDown with Index = %s and Text = %s",str(i),str(elements[i].text))
+                    elements[i].click()
+                    logger.debug("DropDown with Index = %s and Text = %s is selected",str(i),str(elements[i].text))
+                    return self.get(h)
+                except Exception as e:
+                    logger.error("Exception found while selecting DropDown with Index = %s and Text = %s = %s",str(i),str(elements[i].text),str(e))
+                    return e
+        currentValue = self.get(h)
+        logger.error("Option with index %s not present in dropdown and returning the currentValue selected = %s",str(indexToBeSelected),currentValue)
+        return currentValue
+
+
 
 
 
@@ -72,6 +98,11 @@ class DropdownComponentClass(BaseComponentClass):
     def doSelectionOnVisibleDropDownByIndex(self,h,indexToBeSelected=1,index=0,parent="allselects",child="select"):
         activedrops  = self.getAllActiveElements(h[parent][child])
         return self.setByIndex(indexToBeSelected, activedrops[index])
+
+    def doRandomSelectionOnVisibleDropDown(self,h,index=0,parent="allselects",child="select"):
+        activedrops  = self.getAllActiveElements(h[parent][child])
+        return self.randomSet(activedrops[index])
+
 
 
 

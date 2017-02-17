@@ -19,7 +19,7 @@ import re
 from classes.Objects.Time import *
 
 
-def createAlert(setup,request = {}):
+def createDPIAlert(setup, request = {}):
 
     response = {}
 
@@ -83,19 +83,68 @@ def createAlert(setup,request = {}):
 
     print "DONE"
 
+
+
+def createKPIAlert(setup, request = {}):
+    response = {}
+
+    # creating a random number
+    rndmNum = random.randint(0,999999)
+    popInstance = GenerateReportsPopClass(setup.d)
+
+    # Launching Settings Page
+    popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
+    popInstance.switcher.switchTo(1,getHandle(setup,MuralConstants.ALERTSCREEN,"settings"),"settings")
+    popInstance.dropdown.customClick(getHandle(setup,MuralConstants.ALERTSCREEN,"settings")['settings']['createrule'])
+
+    rulename = "automationrule"+str(rndmNum)
+    request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
+    #
+    allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+
+    request['gateway'] = setDropRandomly(0, allselects)
+    request['schema'] = setDropRandomly(1, allselects)
+    request['kpi'] = setDropRandomly(2, allselects)
+    request['index'] = setDropRandomly(3, allselects)
+    request['gran'] = setDropRandomly(4, allselects)
+
+    request['conditions'] = []
+    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+
+    clickButton(setup,"Create")
+
+    checkKPIAlertTableForCreatedRecord(setup,request)
+
+
+
+
+
+
+
+
+
+
 def getEndtime(setup, type, gran, starttimeEpoch,timezone):
     epoch = calculateEndtimeEpoch(setup,type,gran,starttimeEpoch)
     return createTimeFromEpoch(epoch,timezone)
 
 def calculateEndtimeEpoch(setup, type, gran, starttimeEpoch):
     ran = random.randint(2,3)
-    if setup.cM.getAllNodeElements("measuretypes","type")[1] == type:
+    if type == setup.cM.getAllNodeElements("measuretypes","type")[0]:
         if gran == "Hourly":
             return int(starttimeEpoch) + int(ran)*3600
         if gran == "Daily":
             return int(starttimeEpoch) + int(ran)*86400
         if gran == "Monthly":
             return int(starttimeEpoch) + int(ran)*2592000
+    else:
+        if gran == "Monthly":
+            return int(starttimeEpoch) + (3+random.randint(1,3))*86400*30
+        else:
+            return int(starttimeEpoch) + (21+random.randint(1,3))*86400
     return int(starttimeEpoch) + int(ran)*2592000
 
 def createTimeFromEpoch(epoch,timezone):
@@ -147,12 +196,33 @@ def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
     # print data['rows'][0]
 
 
+def checkKPIAlertTableForCreatedRecord(setup,request,index=0):
+    reportScreenInstance = ReportsModuleClass(setup.d)
+    # saving the table data as keys
+    tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
+    data = reportScreenInstance.table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"),"table")
 
+    actual ={}
+    row = tableMap['rows'][request['ruleName']]
+    print row
+    actual['ruleName'] = row[0]
+    actual['schema'] = row[1]
+    actual['kpi'] = row[2]
+    actual['index'] = row[3]
+    actual['conditions'] = [row[4],row[5],row[6],row[7]]
+    actual['status'] = row[8]
+
+    for k,v in actual.iteritems():
+        checkEqualAssert(request[k],actual[k],"","","Checking Table for KPI Alert Rule Created : "+k)
 
 
 def setName(name,handle,index=0):
     instance = DropdownComponentClass()
     return instance.sendkeys_input(name,handle,index)
+
+def setDropRandomly(value, index, handle):
+    instance = DropdownComponentClass()
+    return instance.doRandomSelectionOnVisibleDropDown(handle,index)
 
 def setDrop(value,index,handle,selectionByIndex=False):
     instance = DropdownComponentClass()
@@ -161,7 +231,7 @@ def setDrop(value,index,handle,selectionByIndex=False):
     else:
         return instance.doSelectionOnVisibleDropDown(handle,value,index)
 
-def setDPICondition(priorty, cond, handle, setup):
+def setDPICondition(priorty, cond, handle, setup,firstDrop=3):
 
     # operator=re.findall('[=<>]+',cond)
     # number_value=re.findall(r'\d+',cond)
@@ -177,20 +247,20 @@ def setDPICondition(priorty, cond, handle, setup):
     try:
         unitSystem=re.findall('[a-zA-Z]+',cond)[0]
         if priorty==0:
-            index = 3
+            index = firstDrop
         elif priorty==1:
-            index = 5
+            index = firstDrop+2
         elif priorty==2:
-            index = 7
+            index = firstDrop+4
 
     except:
         unitSystem = ''
         if priorty==0:
-            index = 3
+            index = firstDrop
         elif priorty==1:
-            index = 4
+            index = firstDrop+1
         elif priorty==2:
-            index = 5
+            index = firstDrop+2
 
 
     try:
@@ -231,7 +301,39 @@ def setDPICondition(priorty, cond, handle, setup):
                      str(priorty),str(operator),str(number_value),str(unitSystem), str(e) )
         return e
 
+def setKPICondition(priorty, handle, setup,firstDrop=3):
+    if priorty==0:
+        index = firstDrop
+    elif priorty==1:
+        index = firstDrop+1
+    elif priorty==2:
+        index = firstDrop+2
+    try:
+        instance = DropdownComponentClass()
+        logger.info("Enabling Priority %s",str(priorty))
+        instance.clickCheckBox(handle,priorty)
+        logger.info("Priority %s is selected",str(priorty))
+        handle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+        op=instance.doRandomSelectionOnVisibleDropDown(handle,index)
+        logger.info("Operator %s for Priority %s is selected",str(op),str(priorty))
+        num_value = instance.sendkeys_input(random.randint(0,100), getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
+        logger.info("Value %s set for operator %s and Priority %s",str(num_value),str(op),str(priorty))
 
+        if random.choice([True, False]):
+            return str(op).strip()+str(num_value).strip()
+        else:
+            if random.choice([True, False]):
+                return str(op).strip()+str(num_value).strip()
+            else:
+                logger.info("Disabling Priority %s",str(priorty))
+                instance.clickCheckBox(handle,priorty)
+                logger.info("Priority %s is Disabled",str(priorty))
+                return "-"
+
+    except Exception as e:
+        logger.error("Exception found while setting condition at CreateRule for KPI [Priority: %s, Operator: %s, Value: %s  =  %s",
+                     str(priorty),str(op),str(num_value), str(e) )
+        return e
 
 def setTime(setup,startEnd,timeObj):
     instance = GenerateReportsPopClass(setup.d)

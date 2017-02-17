@@ -27,6 +27,7 @@
         <unit id="bytes" unitvalues = "B,KB,MB" />
 
         <unit id="metric" unitvalues = "K,M"/>
+        <unit id="metric" unitvalues = "K,M"/>
 
     </unitsystem>
 
@@ -101,6 +102,8 @@
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
             <component id = "alertsPane" selector="tag name" locator="kiwik-alerts" parent="True"/>
 
+            <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' parent="False"/>-->
+
         </screenConfig>
 
         <screenConfig id="createrule_popup">
@@ -154,7 +157,8 @@
 
 
         <componentConfig id = "settings">
-        <component id="createrule" selector="class name" locator="createImage"/>
+            <component id="createrule" selector="class name" locator="createImage"/>
+            <component id = 'switcher' selector="class name" locator="switcherContainer"/>
         </componentConfig>
 
 

@@ -21,4 +21,5 @@ setup=SetUp()
 # login(setup,"admin","Admin@123")
 sleep(6)
 login(setup,"admin","admin123")
-print createAlert(setup,x.dict)
+print createKPIAlert(setup, x.dict)
+# GUIDE_INFO
