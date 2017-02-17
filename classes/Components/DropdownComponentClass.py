@@ -71,7 +71,11 @@ class DropdownComponentClass(BaseComponentClass):
             h = handle
 
         elements = h.find_elements_by_xpath(".//*")
-        indexToBeSelected = random.randint(0,len(elements)-1)
+        try:
+            indexToBeSelected = random.randint(0,len(elements)-1)
+        except ValueError or Exception as e:
+            logger.error("Exception found (No options available) for selection in DropDown = %s",str(e))
+            return e
 
         for i in range(len(elements)):
             if i == indexToBeSelected:

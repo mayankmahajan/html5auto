@@ -111,10 +111,11 @@
             <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
             <component id = "createrule" selector="id" locator="filterPopup" parent="True"/>
 
-            <component id = "allselects" selector="id" locator="filterPopup" parent="True" />
-            <component id = "allcheckboxes" selector="id" locator="filterPopup" parent="True"/>
-            <component id = "allinputs" selector="id" locator="filterPopup" parent="True"/>
-            <component id = "allbuttons" selector="id" locator="filterPopup" parent="True"/>
+            <component id = "allselects" selector="css selector" locator="#filterPopup,.filterPopup" parent="True" />
+            <component id = "allcheckboxes" selector="css selector" locator="#filterPopup,.filterPopup" parent="True"/>
+            <component id = "allinputs" selector="css selector" locator="#filterPopup,.filterPopup" parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator="#filterPopup,.filterPopup" parent="True"/>
+
 
 
         </screenConfig>
