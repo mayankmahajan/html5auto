@@ -50,7 +50,7 @@ class AlertsComponentClass(BaseComponentClass):
     def getAlertFullBody(self,h,parent="alertinfo",child=""):
         alertBOdyObject = self.createAlertBodyObject(h[parent])
 
-        pass
+        return alertBOdyObject
 
     def createAlertBodyObject(self,h):
 
@@ -62,12 +62,41 @@ class AlertsComponentClass(BaseComponentClass):
         alertBOdyObject['ruleName'], alertBOdyObject['gran'], alertBOdyObject['type'] = self.getRuleInfo(h)
 
 
-        alertBOdyObject['measure'] = self.getAlertHandledIcon(h)
-        alertBOdyObject['color'] = self.getAlertHandledIcon(h)
+        alertBOdyObject['measure'] =  h['alerttable'][2].find_elements_by_xpath(".//td")[0].text
+        alertBOdyObject['filters'] = self.getFormattedFilters(h)
+        alertBOdyObject['color'] = self.getColor(h)
 
 
-        alertBOdyObject['links'] = h['links']
-        alertBOdyObject['alerttable'] = h['alerttable']
+        # alertBOdyObject['links'] = h['links']
+        alertBOdyObject['conditions'] = self.createConditions(h)
+        return alertBOdyObject
+
+    def getColor(self,h,child='color'):
+        color = h[child][0].get_attribute('style').strip(";").split('rgb')[1]
+        for el in h[child]:
+           if color !=el.get_attribute('style').strip(";").split('rgb')[1]:
+               return False
+        return self.rgb_to_hex(color)
+
+    def createConditions(self,h,child="alerttable"):
+        arr = ["-","-","-"]
+
+        condition = h[child][2].find_elements_by_xpath(".//td")[1].text.replace(" ","")
+        if "critical" in h[child][2].find_elements_by_xpath(".//td")[2].text.lower():
+            arr[2] = condition
+        elif "minor" in h[child][2].find_elements_by_xpath(".//td")[2].text.lower():
+            arr[0] = condition
+        elif "major" in h[child][2].find_elements_by_xpath(".//td")[2].text.lower():
+                arr[1] = condition
+        return arr
+
+
+    def getFormattedFilters(self,h,child="alerttable"):
+        tds = h[child][1].find_elements_by_xpath(".//td")
+        filters = ''
+        for i in range(0,len(tds),2):
+            filters=filters+tds[i].text+":"+tds[i+1].text+","
+        return filters.strip(",")
 
 
     def getAlarmRows(self,h):
@@ -100,4 +129,7 @@ class AlertsComponentClass(BaseComponentClass):
     #def getAlertHeader(self,h):
      #   pass
 
-
+    def rgb_to_hex(self,rgb):
+        x = rgb.strip('\(').strip('\)').split(',')
+        rgb = (int(x[0]),int(x[1]),int(x[2]))
+        return '#%02x%02x%02x' % rgb

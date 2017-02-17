@@ -148,6 +148,7 @@
             <component id = "links" selector="tag name" locator="kiwik-threshold-state-links"/>
             <component id = "state" selector="tag name" locator="kiwik-threshold-state"/>
             <component id = "alerttable" selector="tag name" locator="table"/>
+            <component id = "color" selector="class name" locator="shape-circle"/>
 
         </componentConfig>
         <componentConfig id ="errorbody">
