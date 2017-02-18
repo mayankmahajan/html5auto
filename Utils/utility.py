@@ -731,7 +731,10 @@ def getDateString(epoch,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIME
     tuple = time.gmtime(epoch+tOffset*3600)
     return time.strftime(tPattern,tuple)
 
-
+def parseTimeRange(datestring,timezone,pattern="%Y-%m-%d",delimiter = '-'):
+    startime = getepoch(datestring.split(delimiter)[0].strip(), timezone, pattern)
+    endtime = getepoch(datestring.split(delimiter)[1].strip(), timezone, pattern)
+    return startime,endtime
 
 def createreport(setup,reportType,reportObj,time):
     '''
