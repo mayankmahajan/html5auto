@@ -120,9 +120,9 @@ def createKPIAlert(setup, request = {}):
 def checkDPIAlerts(setup):
     popInstance = GenerateReportsPopClass(setup.d)
     # Launching Settings Page
-    # popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
-    alertRuleMap = {}
-    # alertRuleMap= getTableDataMap(setup, MuralConstants.ALERTSCREEN)
+    popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+    # alertRuleMap = {}
+    alertRuleMap= getTableDataMap(setup, MuralConstants.ALERTSCREEN)
     popInstance.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
     screenInstance = AlertsComponentClass()
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
@@ -132,10 +132,28 @@ def checkAlertsPresent(setup,alertRuleMap,alertlist):
     for i in range(len(alertlist)):
         screenInstance = AlertsComponentClass()
         screenInstance.selectAlert(i,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
-        screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+        alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+
+        request = merge_dictionaries(alertlist[i],getDPIAlertsDataAsDict(alertRuleMap['rows'][alertFullBody['ruleName']]))
+        resultlogger.info("**** Logging results for Alert List and Alert Main Body checks ****")
+        resultlogger.info("Expected : %s \n",str(request))
+        resultlogger.info("Actual : %s \n", str(alertFullBody))
+        for k, v in request.iteritems():
+            checkEqualAssert(request[k], alertFullBody[k], "", "", "Checking DPI Alerts : " + k)
 
 
 
+
+def getDPIAlertsDataAsDict(row):
+    d={}
+    d['ruleName'] = row[0]
+    d['gran'] = row[1]
+    d['filters'] = row[2]
+    d['measure'] = row[3]
+    d['conditions'] = [row[4], row[5], row[6]]
+    d['range'] = row[7]
+    #d['status'] = row[8]
+    return d
 
 
 
@@ -181,17 +199,18 @@ def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
 
     data = reportScreenInstance.table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"),"table")
 
-    actual ={}
+
     row = tableMap['rows'][request['ruleName']]
     print row
+    actual = getDPIAlertsDataAsDict(row)
 
-    actual['ruleName'] = row[0]
-    actual['gran'] = row[1]
-    actual['filters'] = row[2]
-    actual['measure'] = row[3]
-    actual['conditions'] = [row[4],row[5],row[6]]
-    actual['range'] = row[7]
-    actual['status'] = row[8]
+    #actual['ruleName'] = row[0]
+    #actual['gran'] = row[1]
+    #actual['filters'] = row[2]
+    #actual['measure'] = row[3]
+    #actual['conditions'] = [row[4],row[5],row[6]]
+    #actual['range'] = row[7]
+    #actual['status'] = row[8]
 
 
     # actual['ruleName'] = data['rows'][index][0]

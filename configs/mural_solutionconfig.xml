@@ -135,7 +135,7 @@
 
         <componentConfig id ="alertlist">
             <!--<component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />-->
-            <component id = "list" selector="css selector" locator=".child,.evenChild" />
+            <component id = "list" selector="css selector" locator=".child,.evenChild,.selectedChild" />
 
             <!--<component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />-->
         </componentConfig>

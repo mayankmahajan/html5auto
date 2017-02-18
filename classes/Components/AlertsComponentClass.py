@@ -32,7 +32,7 @@ class AlertsComponentClass(BaseComponentClass):
         alertObject={}
         alertObject['state'] = self.getAlertHandledIcon(h)
         alertObject['header'] = self.getAlertLabels(h)[0]
-        alertObject['duration'] = self.getAlertLabels(h)[1]
+        # alertObject['duration'] = self.getAlertLabels(h)[1]
         alertObject['alarmcount'] = self.getAlertLabels(h)[2]
         alertObject['measure'] = self.getAlertLabels(h)[3]
         alertObject['color'] = self.getThresholdIconColor(h)
