@@ -724,7 +724,7 @@ def FindWordInString(ar,grPopHandle):
 # def getAbsolutePath(filename):
 
 def getepoch(datestring,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIMEPATTERN):
-    epoch = int(calendar.timegm(time.strptime(datestring.strip()+":00",tPattern)))
+    epoch = int(calendar.timegm(time.strptime(datestring.strip(),tPattern)))
     return epoch - tOffset*3600
 
 def getDateString(epoch,tOffset=Constants.TIMEZONEOFFSET,tPattern=Constants.TIMEPATTERN):

@@ -49,14 +49,14 @@ def createDPIAlert(setup, request = {}):
     response['conditions'].append(setDPICondition(1,request['conditions'][1],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
     response['conditions'].append(setDPICondition(2,request['conditions'][2],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
     response[MuralConstants.STARTTIME]=setTime(setup,0,request['time'][0])
-    starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+    starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
 
     request['time'][1]= getEndtime(setup, response['type'], response['gran'], starttimeEpoch,Constants.TIMEZONEOFFSET)
 
     response[MuralConstants.ENDTIME] = setTime(setup,1,request['time'][1])
     #
     # starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
-    endtimeEpoch = getepoch(request['time'][1].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+    endtimeEpoch = getepoch(request['time'][1].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     request["range"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y")) +" to "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y"))
 
 

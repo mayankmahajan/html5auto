@@ -135,7 +135,7 @@ def createInputInfo(setup,reportType,reportObj,time,rndmNum):
     inputinfo['reportname'] = reportObj.reportName+str(rndmNum)
     inputinfo['password'] = reportObj.password
 
-    starttimeEpoch = getepoch(time[0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+    starttimeEpoch = getepoch(time[0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     endtimeEpoch = 0
 
     # temp fix for recurring
@@ -190,7 +190,7 @@ def doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeE
 
     if 'ourly' not in reportType['locatorText'] and 'ecurring' not in reportType['locatorText']:
         inputinfo[MuralConstants.ENDTIME] = grPopInstance.dropdown.getValue_input(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allinputs"),1)
-        endtimeEpoch = getepoch(str(inputinfo[MuralConstants.ENDTIME]),Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+        endtimeEpoch = getepoch(str(inputinfo[MuralConstants.ENDTIME]),Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
 
 
     inputinfo["period"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%d %b %Y")) +" - "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%d %b %Y"))
