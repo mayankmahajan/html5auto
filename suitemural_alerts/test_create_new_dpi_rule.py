@@ -23,3 +23,5 @@ sleep(6)
 login(setup,"admin","admin123")
 print createDPIAlert(setup, x.dict)
 # GUIDE_INFO
+
+setup.d.close()

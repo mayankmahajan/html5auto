@@ -34,7 +34,7 @@ reportObj.filters['apnrat']=[[1,2],'']  #sample of selection of filters based on
 reportObj.filters['subscriber']=['11']
 
 # creates all reporttypes and log results
-ReportsHelper.checkReportsReviewPage(setup, reportTypes[0], reportObj, [Time(), Time(2017, 01, 14, 14)])
+ReportsHelper.checkReportsReviewPage(setup, reportTypes[0], reportObj, [Time(2015, 11, 30, 19), Time(2015, 11, 30, 21)])
 
 # Closing the browser
 setup.d.close()
