@@ -99,9 +99,14 @@ def createKPIAlert(setup, request = {}):
     #
     allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
 
-    request['gateway'] = setDropRandomly(0, allselects)
-    request['schema'] = setDropRandomly(1, allselects)
-    request['kpi'] = setDropRandomly(2, allselects)
+    # request['gateway'] = setDropRandomly(0, allselects)
+    # request['schema'] = setDropRandomly(1, allselects)
+    # request['kpi'] = setDropRandomly(2, allselects)
+
+    request['gateway'] = setDrop("Mumbai",0, allselects)
+    request['schema'] = setDrop("apn",1, allselects)
+    request['kpi'] = setDrop("Packet Drop",2, allselects)
+
     request['index'] = setDropRandomly(3, allselects)
     request['gran'] = setDropRandomly(4, allselects)
 
@@ -111,6 +116,7 @@ def createKPIAlert(setup, request = {}):
     request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
     request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
 
+    request['status'] = "Active"
     clickButton(setup,"Create")
 
     checkKPIAlertTableForCreatedRecord(setup,request)
@@ -234,6 +240,8 @@ def checkKPIAlertTableForCreatedRecord(setup,request,index=0):
     actual['index'] = row[3]
     actual['conditions'] = [row[4],row[5],row[6],row[7]]
     actual['status'] = row[8]
+    logger.info("Requested Parameters to create KPI Alert = %s",str(request))
+    logger.info("Actual Parameters shown in Table for KPI Alerts = %s",str(actual))
 
     for k,v in actual.iteritems():
         checkEqualAssert(request[k],actual[k],"","","Checking Table for KPI Alert Rule Created : "+k)
@@ -497,3 +505,25 @@ def checkAlertsCount(setup):
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
     count,calCount = screenInstance.getTotalAlerts(alertlist,getHandle(setup,MuralConstants.ALERTSCREEN,"counter"))
     checkEqualDict(count,calCount,"","","Checking Counts on AlertsPage")
+
+def editAlert(setup,h,index):
+    screenInstance = ReportsModuleClass(setup.d)
+    tableHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"table")
+    tableData = screenInstance.table.getTableData1(tableHandle)
+
+    # reportId = screenInstance.table.getColumnValueMap(tableData,index)
+    logger.info("Going to Edit Alert = %s",tableData['rows'][index])
+    try:
+        screenInstance.dropdown.customClick(tableHandle['table']['download'][index])
+        try:
+            screenInstance.dropdown.customClick(getHandle(setup,MuralConstants.REPORTSCREEN,"table")['table']['edit'][index])
+        except:
+            pass
+        logger.info("Editing Alert = %s",tableData['rows'][index])
+
+        # checkEqualAssert(True,True,"","","Check for Download Report"+str(reportId))
+        return True
+    except Exception as e:
+        # logger.error("Exception found while Downloading ReportId : %s",reportId)
+        # checkEqualAssert(True,e,"","","Check for Download Report"+str(reportId))
+        return e
