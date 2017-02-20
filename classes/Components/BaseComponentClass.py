@@ -178,6 +178,11 @@ class BaseComponentClass:
                     return e
         return False
 
+    def getAllSiblings(self, h, text="Rule", tag="span", child="alertinfo"):
+        tagpath = "..//"+tag
+        for el in h[child][0].find_elements_by_tag_name(tag):
+            if el.text == text:
+                return el.find_elements_by_xpath(tagpath)
 
 
     def clickButton(self,value,h,parent="allbuttons",child="button"):

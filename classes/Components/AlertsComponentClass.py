@@ -40,6 +40,7 @@ class AlertsComponentClass(BaseComponentClass):
         alertObject['alarmcount'] = self.getAlertLabels(h)[2]
         alertObject['measure'] = self.getAlertLabels(h)[3]
         alertObject['color'] = self.getThresholdIconColor(h)
+        alertObject['event'] = alertObject['measure']+" - crossed "+alertObject['color'] +" Threshold"
         return alertObject
 
     def getAlertHandledIcon(self,h):
@@ -69,7 +70,12 @@ class AlertsComponentClass(BaseComponentClass):
         alertBOdyObject['measure'] =  h['alerttable'][2].find_elements_by_xpath(".//td")[0].text
         alertBOdyObject['filters'] = self.getFormattedFilters(h)
         alertBOdyObject['color'] = self.getColor(h)
+        alertBOdyObject['event'] = ""
+        for el in self.getAllSiblings(h,alertBOdyObject['measure'],"span","alertinfo"):
+            alertBOdyObject['event'] = alertBOdyObject['event']+el.text
 
+        # alertBOdyObject['event'] = self.getAllSiblings(h,alertBOdyObject['measure'],"span","alertinfo")
+        #
 
         # alertBOdyObject['links'] = h['links']
         alertBOdyObject['conditions'] = self.createConditions(h)
@@ -118,16 +124,17 @@ class AlertsComponentClass(BaseComponentClass):
         return time,count
 
     def getRuleInfo(self,h,child=""):
-        handleTosiblings = self.getAllRuleSiblings(h)
+        handleTosiblings = self.getAllSiblings(h,"Rule","span","alertinfo")
         siblings = []
         for el in handleTosiblings:
             siblings.append(el.text)
         return siblings[2],siblings[4],siblings[6]
 
-    def getAllRuleSiblings(self,h,child="alertinfo"):
-        for el in h[child][0].find_elements_by_tag_name("span"):
-            if el.text == "Rule":
-                return el.find_elements_by_xpath("..//span")
+    # def getAllSiblings(self, h, text="Rule", tag="span", child="alertinfo"):
+    #     tagpath = "..//"+tag
+    #     for el in h[child][0].find_elements_by_tag_name(tag):
+    #         if el.text == text:
+    #             return el.find_elements_by_xpath(tagpath)
 
 
     #def getAlertHeader(self,h):
