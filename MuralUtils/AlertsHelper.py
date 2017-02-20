@@ -3,15 +3,13 @@
 '''
 Called Directly from TestCase
 '''
-from classes.Objects import CreateAlert
-
 __author__      = "Mayank Mahajan"
 __email__       = 'mayank.mahajan@guavus.com'
 __version__     = "1.0"
 __maintainer__  = "Mayank Mahajan"
 ##############################################################
 
-
+from classes.Objects import CreateAlert
 from Utils.utility import *
 from classes.Pages.GenerateReportsPopClass import GenerateReportsPopClass
 from MuralConstants import *
@@ -141,9 +139,6 @@ def checkAlertsPresent(setup,alertRuleMap,alertlist):
         for k, v in request.iteritems():
             checkEqualAssert(request[k], alertFullBody[k], "", "", "Checking DPI Alerts : " + k)
 
-
-
-
 def getDPIAlertsDataAsDict(row):
     d={}
     d['ruleName'] = row[0]
@@ -154,8 +149,6 @@ def getDPIAlertsDataAsDict(row):
     d['range'] = row[7]
     #d['status'] = row[8]
     return d
-
-
 
 def getEndtime(setup, type, gran, starttimeEpoch,timezone):
     epoch = calculateEndtimeEpoch(setup,type,gran,starttimeEpoch)
@@ -399,4 +392,103 @@ def clickButton(setup,buttonName,input=False):
         return instance.clickInputButton(buttonName,buttonHandle)
     else:
         return instance.clickButton(buttonName,buttonHandle)
+
+def doSearchAndValidateAlerts(setup):
+    screenInstance = AlertsComponentClass()
+    searchedtext = "Nokia"
+    textEntered = screenInstance.search.sendkeys_input(searchedtext,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","searchInput")
+    checkEqualAssert(searchedtext,textEntered,"","","Verify Search Text Entered")
+    # screenInstance.search.setSearchText(getHandle(setup,MuralConstants.ALERTSCREEN,"search"),searchedtext)
+    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+    for i in range(len(alertlist)):
+        if searchedtext in alertlist[i]['header']:
+            logger.info("Searched Text '%s' present in alert list '%s' ",searchedtext, alertlist[i]['header'])
+        else:
+            logger.info("Searched Text '%s' NOT present in alert list '%s' ",searchedtext, alertlist[i]['header'])
+        checkEqualAssert(True,searchedtext in alertlist[i]['header'],"","","Searched Text '"+searchedtext+"' present in alert list = " + alertlist[i]['header'])
+    t = screenInstance.search.sendkeys_input("",getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","searchInput")
+    # checkEqualAssert("",t,"","","Check Search Field Cleared")
+
+def doCalendarSearchOnAlerts(setup):
+    screenInstance = AlertsComponentClass()
+    calHandler = getHandle(setup,MuralConstants.ALERTSCREEN,"search")
+    logger.info("Launching Calendar from Search Panel")
+    calHandler['search']['datepicker'][0].click()
+    logger.info("Calendar picker is clicked")
+    stObj = Time(2015,11,19,00,00)
+    stEpoch = getepoch(stObj.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    instance = GenerateReportsPopClass(setup.d)
+    setCalendar(stObj.year,stObj.month, stObj.day, stObj.hour, stObj.min, instance, setup,MuralConstants.CREATERULEPOPUP)
+    etObj = Time(2015,11,27,00,00)
+    etEpoch = getepoch(etObj.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    setCalendar(etObj.year,etObj.month, etObj.day, etObj.hour, etObj.min, instance, setup,MuralConstants.CREATERULEPOPUP,"rightcalendar")
+    # Closing Calendar Pop Up
+    instance.reportspopup.clickButton("Apply", getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLBUTTONS))
+
+    logger.info("Calendar Selection done at Search Panel = StartTime : %s and EndTimer : %s ",stObj.datestring,etObj.datestring)
+
+    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+
+    for i in range(len(alertlist)):
+        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralConstants.TIMEZONEOFFSET,"%d %m %Y %H:%M","-")
+        # if (actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch):
+        checkEqualAssert(True,(actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch),"","",
+                         "Check for alert '%s' and duration = '%s' falling in filtered timerange (%s,%s) ",alertlist[i]['header'],alertlist[i]['duration'],stObj.datestring,etObj.datestring)
+
+def acknowledgeAlert(setup,index):
+    alertbodylinks = setup.cM.getNodeElements("alertbodylinks","link")
+    screenInstance = AlertsComponentClass()
+    screenInstance.selectAlert(index,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
+    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+    selectedAlertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","selected")
+
+    # assuming selection is single
+    selectedAlert=selectedAlertlist[0]
+
+    if selectedAlert['state']:
+        logger.debug("Alert is already acknowledged = %s",str(selectedAlert))
+    else:
+        logger.debug("Alert will be acknowledged = %s",str(selectedAlert))
+        alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+        logger.info("Got Acknowledge Status %s from Alert's Full Body = %s",str(alertFullBody['state']),str(alertFullBody))
+        checkEqualAssert(selectedAlert['setup'],alertFullBody['state'],"","","Check for Uniform Handled Alert Status")
+
+        screenInstance.dropdown.clickSpanWithTitle(alertbodylinks['acknowledge']['locatorText'],getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+        logger.info("Link %s is clicked",alertbodylinks['acknowledge']['locatorText'])
+
+        updated_alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","selected")[0]
+        updated_alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+        logger.info("Got Acknowledge Status %s from Alert's Full Body = %s",str(updated_alertFullBody['state']),str(updated_alertFullBody))
+
+        checkEqualAssert(True,updated_alertlist['state'],"","","Check for Alert status Handled or not in AlertList")
+        checkEqualAssert(True,updated_alertFullBody['state'],"","","Check for Alert status Handled or not in AlertFullBody")
+
+def deleteAllAlert(setup,index):
+    alertbodylinks = setup.cM.getNodeElements("alertbodylinks","link")
+    screenInstance = AlertsComponentClass()
+    screenInstance.selectAlert(index,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
+    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+    selectedAlertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","selected")
+
+    # assuming selection is single
+    selectedAlert=selectedAlertlist[0]
+
+    alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+    screenInstance.dropdown.clickSpanWithTitle(alertbodylinks['deleteall']['locatorText'],getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+
+    gHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"alert")
+    logger.debug("Confirming Delete from Pop up")
+    try:
+        gHandle['alert']['ok'][0].click()
+        try:
+            gHandle['alert']['ok'][0].click()
+        except:
+            pass
+    except Exception as e:
+        logger.error("Exception found while Deleting All Alerts %s with Rule %s  : %s",str(selectedAlert),alertFullBody['ruleName'],e)
+        return e
+
+
+    for el in alertlist:
+        checkEqualAssert(True,alertFullBody['ruleName'] != el['ruleName'],"","","Check for each alert : "+str(el)+" from list for rule "+alertFullBody['ruleName'] + " deleted")
 

@@ -1,12 +1,16 @@
 from BaseComponentClass import BaseComponentClass
 from Utils.ConfigManager import ConfigManager
 from Utils.logger import *
+from classes.Components.SearchComponentClass import *
+from classes.Components.DropdownComponentClass import *
 
 class AlertsComponentClass(BaseComponentClass):
 
     def __init__(self):
         BaseComponentClass.__init__(self)
         self.configmanager = ConfigManager()
+        self.search=SearchComponentClass()
+        self.dropdown = DropdownComponentClass()
 
 
     def getAlertList(self,h,parent,child):

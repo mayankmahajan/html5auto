@@ -57,6 +57,13 @@
         <filter id = 'subscriber' locatorText="Top N Apps"/>
     </reportwizardfilters>
 
+    <alertbodylinks>
+        <link id = 'acknowledge' locatorText="Acknowledge"/>
+        <link id = 'delete' locatorText="Delete"/>
+        <link id = 'deleteall' locatorText="Delete All Alerts From Same Rule"/>
+    </alertbodylinks>
+
+
     <measuretypes>
         <type id = "Absolute" />
         <type id = "Rate Of Change"/>
@@ -102,6 +109,11 @@
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
             <component id = "alertlist" selector="tag name" locator="kiwik-alerts" parent="True"/>
             <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-details" parent="True"/>
+            <component id = "search" selector="tag name" locator="kiwik-alerts-list-search" parent="True"/>
+            <component id = 'alert' selector="class name" locator="filterPopup" parent="True"/>
+            <!--selector="class name" locator="searchInput"-->
+
+
 
             <!--<component id = "switcherView" selector="xpath" locator='//*[contains(@class, "switcherContainer")]' parent="False"/>-->
 
@@ -109,7 +121,8 @@
 
         <screenConfig id="createrule_popup">
             <component id = "addrule" parent="False"/>
-            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
+            <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
+            <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
             <component id = "createrule" selector="id" locator="filterPopup" parent="True"/>
 
             <component id = "allselects" selector="css selector" locator="#filterPopup,.filterPopup" parent="True" />
@@ -136,6 +149,8 @@
         <componentConfig id ="alertlist">
             <!--<component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />-->
             <component id = "list" selector="css selector" locator=".child,.evenChild,.selectedChild" />
+            <component id = "selected" selector="css selector" locator=".selectedChild" />
+            selectedChild
 
             <!--<component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />-->
         </componentConfig>

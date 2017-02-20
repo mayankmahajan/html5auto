@@ -212,9 +212,10 @@
 
         <componentConfig id="search">
             <!--<component id = "signin" selector="css selector" locator='[ng-click = "vm.login()"]' action="click"/>-->
-            <component id = "searchIcon" selector="id" locator='searchIcon'/>
-            <component id = "searchInput" selector="id" locator='searchInput'/>
+            <component id = "searchIcon" selector="css selector" locator='#searchIcon,[class*=Icon][class*=earch]'/>
+            <component id = "searchInput" selector="css selector" locator='.searchInput,#searchInput'/>
             <component id = "searchlabelstyle" selector="class name" locator='searchlabelstyle'/>
+            <component id = "datepicker" selector="class name" locator="datePickerIcon"/>
         </componentConfig>
 
         <componentConfig id = 'exploreList'>
@@ -436,6 +437,14 @@
             <component id = "endtime" selector="id" locator="endtimecal"/>
         </componentConfig>
         <componentConfig id="leftcalendar">
+            <component id="month" selector="class name" locator="monthselect" />
+            <component id="year" selector="class name" locator="yearselect" />
+            <component id="hour" selector="class name" locator="hourselect" />
+            <component id="minute" selector="class name" locator="minuteselect" />
+            <component id="day" selector="class name" locator="calendar-date" />
+            <component id="selection" selector="class name" locator="selection" />
+        </componentConfig>
+        <componentConfig id="rightcalendar">
             <component id="month" selector="class name" locator="monthselect" />
             <component id="year" selector="class name" locator="yearselect" />
             <component id="hour" selector="class name" locator="hourselect" />
