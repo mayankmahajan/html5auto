@@ -492,3 +492,8 @@ def deleteAllAlert(setup,index):
     for el in alertlist:
         checkEqualAssert(True,alertFullBody['ruleName'] != el['ruleName'],"","","Check for each alert : "+str(el)+" from list for rule "+alertFullBody['ruleName'] + " deleted")
 
+def checkAlertsCount(setup):
+    screenInstance = AlertsComponentClass()
+    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+    count,calCount = screenInstance.getTotalAlerts(alertlist,getHandle(setup,MuralConstants.ALERTSCREEN,"counter"))
+    checkEqualDict(count,calCount,"","","Checking Counts on AlertsPage")

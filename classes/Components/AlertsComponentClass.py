@@ -134,6 +134,40 @@ class AlertsComponentClass(BaseComponentClass):
      #   pass
 
     def rgb_to_hex(self,rgb):
-        x = rgb.strip('\(').strip('\)').split(',')
+        if 'rgba' not in rgb:
+            x = rgb.strip('\(').strip('\)').split(',')
+        else:
+            # ignoring alpha property
+            x= rgb.split('rgba')[1].strip('\(').strip('\)').split(',')
+
         rgb = (int(x[0]),int(x[1]),int(x[2]))
         return '#%02x%02x%02x' % rgb
+
+    def getSeverityWiseCount(self,alertList):
+        calculatedcount = {}
+        calculatedcount['total'] = 0
+        for el in alertList:
+            if el['color'] in calculatedcount:
+                calculatedcount[el['color']]= calculatedcount[el['color']] +int(el['alarmcount'].split()[0])
+                calculatedcount['total'] = calculatedcount['total'] +int(el['alarmcount'].split()[0])
+            else:
+                calculatedcount[el['color']]= 0
+                calculatedcount[el['color']]= calculatedcount[el['color']] +int(el['alarmcount'].split()[0])
+                calculatedcount['total'] = calculatedcount['total']+int(el['alarmcount'].split()[0])
+
+        return calculatedcount
+
+    def getAlertsFromCounterBar(self,h):
+        d={}
+        d['total'] = int(h['total'][0].text.split()[0])
+        d[self.rgb_to_hex(h['colors'][0].value_of_css_property("background-color"))] =int(h['severity'][0].text)
+        d[self.rgb_to_hex(h['colors'][1].value_of_css_property("background-color"))] =int(h['severity'][1].text)
+        d[self.rgb_to_hex(h['colors'][2].value_of_css_property("background-color"))] =int(h['severity'][2].text)
+        return d
+
+    def getTotalAlerts(self,alertList,h,parent="counter",child=""):
+        count = self.getAlertsFromCounterBar(h[parent])
+        calculatedcount = self.getSeverityWiseCount(alertList)
+        logger.info("Got Counters from Bar  = %s",str(count))
+        logger.info("Got Calculated Counts from Alert Lists  = %s",str(calculatedcount))
+        return count,calculatedcount

@@ -4,6 +4,9 @@ setup=SetUp()
 # sleep(6)
 login(setup,"admin","admin123")
 
+checkAlertsCount(setup)
+
+
 popInstance = GenerateReportsPopClass(setup.d)
 # Launching DPI Alerts Page
 popInstance.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))

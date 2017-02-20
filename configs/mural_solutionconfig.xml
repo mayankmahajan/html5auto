@@ -111,6 +111,9 @@
             <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-details" parent="True"/>
             <component id = "search" selector="tag name" locator="kiwik-alerts-list-search" parent="True"/>
             <component id = 'alert' selector="class name" locator="filterPopup" parent="True"/>
+            <component id = "counter" selector="tag name" locator="kiwik-alerts-list-counter" parent="True"/>
+
+
             <!--selector="class name" locator="searchInput"-->
 
 
@@ -150,10 +153,19 @@
             <!--<component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />-->
             <component id = "list" selector="css selector" locator=".child,.evenChild,.selectedChild" />
             <component id = "selected" selector="css selector" locator=".selectedChild" />
-            selectedChild
 
             <!--<component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />-->
         </componentConfig>
+
+        <componentConfig id ="counter">
+            <!--<component id = "list" selector="tag name" locator="kiwik-kpi-alerts-list" />-->
+            <component id = "total" selector="css selector" locator=".counterLabel" />
+            <component id = "colors" selector="css selector" locator=".confidenceCircle" />
+            <component id = "severity" selector="css selector" locator=".severity-span" />
+
+            <!--<component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" />-->
+        </componentConfig>
+
         <componentConfig id = "alertinfo">
             <component id = "alertinfo" selector="tag name" locator="kiwik-dpi-alerts-anomaly-all-info-card" parent="True"/>
 
