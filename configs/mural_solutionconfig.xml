@@ -30,6 +30,28 @@
         <unit id="metric" unitvalues = "K,M"/>
 
     </unitsystem>
+    <rulenames>
+        <rulename id="1" text="CAPITAL LETTERS CHECK" expected = "CAPITALLETTERSCHECK" />
+        <rulename id="2" text="small letters check" expected = "smallletterscheck" />
+        <rulename id="3" text="0123456789 0123456789" expected = "01234567890123456789" />
+        <rulename id="4" text="_" expected = "_" />
+        <rulename id="5" text="_small CAPITAL_0123456789" expected = "_smallCAPITAL_0123456789" />
+        <rulename id="6" text="~!@#_specials" expected = "_specials" />
+        <!--<rulename id="6" text="~!@#$%^*(){}[]';><_specials" expected = "_specials" />-->
+        <rulename id="7" text="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_ab" expected = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_a" />
+    </rulenames>
+    <kpithresholds>
+        <threshold id="1" text="0123456789" expected = "123456789" />
+        <threshold id="2" text="-0123456789" expected = "-123456789" />
+        <threshold id="3" text="1234567890" expected = "1234567890" />
+        <threshold id="4" text="-1234567890" expected = "-1234567890" />
+        <threshold id="5" text="12345678901234567890" expected = "1234567890123456" />
+        <threshold id="6" text="-12345678901234567890" expected = "-123456789012345" />
+        <threshold id="7" text="_small CAPITAL_" expected = "" />
+        <!--<threshold id="7" text="~!@#$%^*(){}[]';><_specials" expected = "" />-->
+        <threshold id="8" text="2.0" expected = "20" />
+        <threshold id="9" text="-12.0" expected = "-120" />
+    </kpithresholds>
 
     <!--<availabletimerange>-->
         <!--<time id="starttime" year="2016" month ="12" date="31" hour="19" min="00"/>-->

@@ -35,7 +35,7 @@ class DropdownComponentClass(BaseComponentClass):
                     return self.get(h)
                 except Exception as e:
                     logger.error("Exception found while selecting %s on DropDown",value)
-                    return e
+                    return "Exception : "+str(e)
         currentValue = self.get(h)
         logger.error("Option : %s not present in dropdown and returning the currentValue selected = %s",value,currentValue)
         return currentValue
@@ -75,7 +75,7 @@ class DropdownComponentClass(BaseComponentClass):
             indexToBeSelected = random.randint(0,len(elements)-1)
         except ValueError or Exception as e:
             logger.error("Exception found (No options available) for selection in DropDown = %s",str(e))
-            return e
+            return "Exception :"+str(e)
 
         for i in range(len(elements)):
             if i == indexToBeSelected:
@@ -86,7 +86,7 @@ class DropdownComponentClass(BaseComponentClass):
                     return elements[i].text
                 except Exception as e:
                     logger.error("Exception found while selecting DropDown with Index = %s and Text = %s = %s",str(i),str(elements[i].text),str(e))
-                    return e
+                    return "Exception :"+str(e)
         currentValue = self.get(h)
         logger.error("Option with index %s not present in dropdown and returning the currentValue selected = %s",str(indexToBeSelected),currentValue)
         return currentValue
@@ -124,7 +124,7 @@ class DropdownComponentClass(BaseComponentClass):
             return selection
         except Exception as e:
             logger.error("Exception found while getting DropDown Selection = %s",e)
-            return e
+            return "Exception : "+str(e)
 
 
 

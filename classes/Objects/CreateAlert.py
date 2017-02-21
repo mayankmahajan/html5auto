@@ -11,7 +11,7 @@ class CreateAlert:
         maxConditonValue = 1000
 
         t = c.getAllNodeElements("measuretypes","type")
-        g = ["Hourly","Daily","Weekly"]
+        g = ["Hourly","Daily","Monthly"]
         operator = ["=",">","<"]
         type=random.randint(0,len(t)-1)
         gran=random.randint(0,len(g)-1)

@@ -55,15 +55,17 @@ def createDPIAlert(setup, request = {}):
     #
     # starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
     endtimeEpoch = getepoch(request['time'][1].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    request["range"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y")) +" to "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y"))
-
+    # request["range"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y")) +" to "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y"))
+    request["range"] = str(request['time'][0].datestring) +" to "+ str(request['time'][1].datestring)
 
     response['filters'] = ""
     for i in range(len(request['filters'])):
         response['filters'] = response['filters']+setFilters(setup,request['filters'][i])+','
         if i < len(request['filters'])-1:
             clickButton(setup,"add",True)
-
+    response['filters']=response['filters'].strip(',')
+    request['filters']=response['filters']
+    request['measure']=response['measure']
     # filterSelected = setFilters(setup,["Device","Apple iPod"])
     # clickButton(setup,"add")
     # filterSelected = setFilters(setup,["Gateway","gurgaon"])
@@ -96,13 +98,10 @@ def createKPIAlert(setup, request = {}):
 
     rulename = "automationrule"+str(rndmNum)
     request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
-    #
     allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
-
     # request['gateway'] = setDropRandomly(0, allselects)
     # request['schema'] = setDropRandomly(1, allselects)
     # request['kpi'] = setDropRandomly(2, allselects)
-
     request['gateway'] = setDrop("Mumbai",0, allselects)
     request['schema'] = setDrop("apn",1, allselects)
     request['kpi'] = setDrop("Packet Drop",2, allselects)
@@ -155,6 +154,16 @@ def getDPIAlertsDataAsDict(row):
     d['range'] = row[7]
     #d['status'] = row[8]
     return d
+def getKPIAlertsDataAsDict(row):
+    d={}
+    d['ruleName'] = row[0]
+    d['schema'] = row[1]
+    d['kpi'] = row[2]
+    d['index'] = row[3]
+    d['conditions'] = [row[4],row[5],row[6],row[7]]
+    d['status'] = row[8]
+    #d['status'] = row[8]
+    return d
 
 def getEndtime(setup, type, gran, starttimeEpoch,timezone):
     epoch = calculateEndtimeEpoch(setup,type,gran,starttimeEpoch)
@@ -171,9 +180,9 @@ def calculateEndtimeEpoch(setup, type, gran, starttimeEpoch):
             return int(starttimeEpoch) + int(ran)*2592000
     else:
         if gran == "Monthly":
-            return int(starttimeEpoch) + (3+random.randint(1,3))*86400*30
+            return int(starttimeEpoch) + ((3*30*24)+random.randint(1,(3*24)))*3600
         else:
-            return int(starttimeEpoch) + (21+random.randint(1,3))*86400
+            return int(starttimeEpoch) + ((21*24)+random.randint(1,(3*24)))*3600
     return int(starttimeEpoch) + int(ran)*2592000
 
 def createTimeFromEpoch(epoch,timezone):
@@ -184,33 +193,16 @@ def createTimeFromEpoch(epoch,timezone):
      # = getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%Y-%m-%d-%H-%M")
 
 def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
-
-    reportScreenInstance = ReportsModuleClass(setup.d)
-
     # saving the table data as keys
     tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
 
     # reportScreenInstance.switcher.switchTo(1,getHandle(setup,MuralConstants.REPORTSCREEN,"createdialog"))
-
-
     # r = reportScreenInstance.table.sortTable1(getHandle(setup,MuralConstants.REPORTSCREEN,"table"),"Name")
     # r = reportScreenInstance.table.sortTable1(getHandle(setup,MuralConstants.REPORTSCREEN,"table"),"Id")
-
-    data = reportScreenInstance.table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"),"table")
-
-
+    # data = reportScreenInstance.table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"),"table")
     row = tableMap['rows'][request['ruleName']]
     print row
     actual = getDPIAlertsDataAsDict(row)
-
-    #actual['ruleName'] = row[0]
-    #actual['gran'] = row[1]
-    #actual['filters'] = row[2]
-    #actual['measure'] = row[3]
-    #actual['conditions'] = [row[4],row[5],row[6]]
-    #actual['range'] = row[7]
-    #actual['status'] = row[8]
-
 
     # actual['ruleName'] = data['rows'][index][0]
     # actual['gran'] = data['rows'][index][1]
@@ -226,23 +218,13 @@ def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
     # print data['rows'][0]
 
 def checkKPIAlertTableForCreatedRecord(setup,request,index=0):
-    reportScreenInstance = ReportsModuleClass(setup.d)
     # saving the table data as keys
     tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
-    data = reportScreenInstance.table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"),"table")
-
-    actual ={}
     row = tableMap['rows'][request['ruleName']]
     print row
-    actual['ruleName'] = row[0]
-    actual['schema'] = row[1]
-    actual['kpi'] = row[2]
-    actual['index'] = row[3]
-    actual['conditions'] = [row[4],row[5],row[6],row[7]]
-    actual['status'] = row[8]
+    actual = getKPIAlertsDataAsDict(row)
     logger.info("Requested Parameters to create KPI Alert = %s",str(request))
     logger.info("Actual Parameters shown in Table for KPI Alerts = %s",str(actual))
-
     for k,v in actual.iteritems():
         checkEqualAssert(request[k],actual[k],"","","Checking Table for KPI Alert Rule Created : "+k)
 
@@ -331,7 +313,7 @@ def setDPICondition(priorty, cond, handle, setup,firstDrop=3):
                      str(priorty),str(operator),str(number_value),str(unitSystem), str(e) )
         return e
 
-def setKPICondition(priorty, handle, setup,firstDrop=3):
+def setKPICondition(priorty, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA"):
     if priorty==0:
         index = firstDrop
     elif priorty==1:
@@ -341,6 +323,11 @@ def setKPICondition(priorty, handle, setup,firstDrop=3):
     elif priorty==3:
         index = firstDrop+3
 
+    if thresholdValue == "NA":
+            thresholdValue = random.randint(0,100)
+
+
+
     try:
         instance = DropdownComponentClass()
         logger.info("Enabling Priority %s",str(priorty))
@@ -349,19 +336,27 @@ def setKPICondition(priorty, handle, setup,firstDrop=3):
         handle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
         op=instance.doRandomSelectionOnVisibleDropDown(handle,index)
         logger.info("Operator %s for Priority %s is selected",str(op),str(priorty))
-        num_value = instance.sendkeys_input(random.randint(0,100), getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
+        num_value = instance.sendkeys_input(thresholdValue, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
         logger.info("Value %s set for operator %s and Priority %s",str(num_value),str(op),str(priorty))
 
-        if random.choice([True, False]):
+        if enableCondition == "":
+            enableCondition = random.choice([True, False])
+        else:
+            if not enableCondition:
+                instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
+            return str(op).strip()+str(num_value).strip()
+
+
+        if enableCondition:
             return str(op).strip()+str(num_value).strip()
         else:
-            if random.choice([True, False]):
-                return str(op).strip()+str(num_value).strip()
-            else:
-                logger.info("Disabling Priority %s",str(priorty))
-                instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
-                logger.info("Priority %s is Disabled",str(priorty))
-                return "-"
+            # if random.choice([True, False]):
+            #     return str(op).strip()+str(num_value).strip()
+            # else:
+            logger.info("Disabling Priority %s",str(priorty))
+            instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
+            logger.info("Priority %s is Disabled",str(priorty))
+            return "-"
 
     except Exception as e:
         logger.error("Exception found while setting condition at CreateRule for KPI [Priority: %s, Operator: %s, Value: %s  =  %s",
@@ -527,3 +522,119 @@ def editAlert(setup,h,index):
         # logger.error("Exception found while Downloading ReportId : %s",reportId)
         # checkEqualAssert(True,e,"","","Check for Download Report"+str(reportId))
         return e
+
+
+def launchAlertWizard(setup,index):
+    popInstance = GenerateReportsPopClass(setup.d)
+    popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
+    popInstance.switcher.switchTo(index,getHandle(setup,MuralConstants.ALERTSCREEN,"settings"),"settings")
+    popInstance.dropdown.customClick(getHandle(setup,MuralConstants.ALERTSCREEN,"settings")['settings']['createrule'])
+    return popInstance
+
+
+def validateKPIAlertWizard(setup, request = {}):
+    response = {}
+    # mandatory conditions
+    flag_rule = False
+    flag_Gateway = False
+    flag_Schema = False
+    flag_KPI = False
+    flag_Index = False
+    flag_Gran = False
+    flag_Threshold = False
+
+    # bool = getBool
+    max_character_length = 64
+
+    # creating a random number
+    rndmNum = random.randint(0,999999)
+    popInstance = launchAlertWizard(setup,1)
+
+    # Set each dropdown
+    allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+    request['gateway'] = setDrop("Mumbai",0, allselects)
+    flag_Gateway = False if "Exception" in  request['gateway'] else True
+    request['schema'] = setDrop("apn",1, allselects)
+    flag_Schema = False if "Exception" in  request['schema'] else True
+    request['kpi'] = setDrop("Packet Drop",2, allselects)
+    flag_KPI = False if "Exception" in  request['kpi'] else True
+
+    request['index'] = setDropRandomly(3, allselects)
+    flag_Index = False if "Exception" in  request['index'] else True
+    request['gran'] = setDropRandomly(4, allselects)
+    flag_Gran = False if "Exception" in  request['gran'] else True
+
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+    # check for all the options in RuleName
+    rulenames = setup.cM.getNodeElements("rulenames","rulename")
+    for k,rulename in rulenames.iteritems():
+        checkEqualAssert(rulename['expected'],setName(rulename['text'],getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS)),
+                         "","","Verified for rule Name :"+rulename['text'])
+
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+    thresholds = setup.cM.getNodeElements("kpithresholds","threshold")
+    for severity in range(4):
+        for k,threshold in thresholds.iteritems():
+            request['conditions'] = []
+            request['conditions'].append(setKPICondition(severity,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5,enableCondition=False,thresholdValue=threshold['text']))
+            # number_value=re.findall(r'\d+',request['conditions'][0])[0]
+            number_value = request['conditions'][0].split(re.findall('[=<>]+',request['conditions'][0])[0])[1]
+            checkEqualAssert(threshold['expected'],str(number_value),
+                         "","","Verified for Threshold Values :"+threshold['text'])
+        dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+    request['conditions'] = []
+    request['conditions'].append(setKPICondition(random.randint(0,3),getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5,enableCondition=True,thresholdValue=""))
+    flag_Threshold = False
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+
+
+
+
+    rulename = "automationrule"+str(rndmNum)
+    request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
+    flag_rule = True
+
+    request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
+
+
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+
+
+    request['conditions'] = []
+    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    if request['conditions'][0] != "-":
+        flag_Threshold = True
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+    request['conditions'].append(setKPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    if request['conditions'][1] != "-":
+        flag_Threshold = True
+
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+    request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    if request['conditions'][2] != "-":
+        flag_Threshold = True
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+    request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    if request['conditions'][3] != "-":
+        flag_Threshold = True
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+
+    request['status'] = "Active"
+
+    clickButton(setup,"Create")
+
+def dumpResultForButton(condition,request,popInstance,setup):
+    checkEqualAssert(condition,popInstance.reportspopup.isButtonEnabled("Create",getHandle(setup, MuralConstants.CREATERULEPOPUP, "allbuttons")),
+                     "","","Checking State of Create/Submit Button for Fields entered : "+str(request))
+
+def getBool(*args):
+    bool = False
+    for arg in args:
+        bool = bool and arg
+    return bool
