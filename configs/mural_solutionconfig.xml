@@ -53,10 +53,10 @@
         <threshold id="9" text="-12.0" expected = "-120" />
     </kpithresholds>
 
-    <!--<availabletimerange>-->
-        <!--<time id="starttime" year="2016" month ="12" date="31" hour="19" min="00"/>-->
-        <!--<time id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>-->
-    <!--</availabletimerange>-->
+    <dpiWizardtimerange>
+        <starttime id="starttime" year="2016" month ="06" date="10" hour="10" min="00"/>
+        <endtime id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
+    </dpiWizardtimerange>
 
     <quicklinks>
 

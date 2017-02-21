@@ -243,7 +243,7 @@ def setDrop(value,index,handle,selectionByIndex=False):
     else:
         return instance.doSelectionOnVisibleDropDown(handle,value,index)
 
-def setDPICondition(priorty, cond, handle, setup,firstDrop=3):
+def setDPICondition(priorty, cond, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA"):
 
     # operator=re.findall('[=<>]+',cond)
     # number_value=re.findall(r'\d+',cond)
@@ -255,6 +255,8 @@ def setDPICondition(priorty, cond, handle, setup,firstDrop=3):
 
     operator=re.findall('[=<>]+',cond)[0]
     number_value=re.findall(r'\d+',cond)[0]
+    if thresholdValue != "NA":
+            number_value = thresholdValue
 
     try:
         unitSystem=re.findall('[a-zA-Z]+',cond)[0]
@@ -300,12 +302,28 @@ def setDPICondition(priorty, cond, handle, setup,firstDrop=3):
         logger.info("Value %s set for operator %s and Priority %s",str(num_value),str(operator),str(priorty))
 
         if unitSystem == '':
-            return str(op).strip()+str(num_value).strip()
+            returnValue = str(op).strip()+str(num_value).strip()
         else:
             logger.info("Selecting unitsystem %s for operator %s and Priority %s",str(unitSystem),str(operator),str(priorty))
             unit=instance.doSelectionOnVisibleDropDown(handle,unitSystem,index+1)
             logger.info("Unitsystem %s is set for operator %s and Priority %s",str(unitSystem),str(operator),str(priorty))
-            return str(op).strip()+str(num_value).strip()+str(unit).strip()
+            returnValue = str(op).strip()+str(num_value).strip()+str(unit).strip()
+
+        if enableCondition == "":
+            enableCondition = random.choice([True, False])
+        else:
+            if not enableCondition:
+                instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
+            return returnValue
+
+        if enableCondition:
+            return returnValue
+        else:
+            logger.info("Disabling Priority %s",str(priorty))
+            instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
+            logger.info("Priority %s is Disabled",str(priorty))
+            return "-"
+
 
 
     except Exception as e:
@@ -534,6 +552,7 @@ def launchAlertWizard(setup,index):
 
 def validateKPIAlertWizard(setup, request = {}):
     response = {}
+
     # mandatory conditions
     flag_rule = False
     flag_Gateway = False
@@ -572,7 +591,7 @@ def validateKPIAlertWizard(setup, request = {}):
         checkEqualAssert(rulename['expected'],setName(rulename['text'],getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS)),
                          "","","Verified for rule Name :"+rulename['text'])
 
-    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
+        dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
     thresholds = setup.cM.getNodeElements("kpithresholds","threshold")
     for severity in range(4):
@@ -626,9 +645,9 @@ def validateKPIAlertWizard(setup, request = {}):
         flag_Threshold = True
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
-    request['status'] = "Active"
+    # request['status'] = "Active"
 
-    clickButton(setup,"Create")
+    # clickButton(setup,"Create")
 
 def dumpResultForButton(condition,request,popInstance,setup):
     checkEqualAssert(condition,popInstance.reportspopup.isButtonEnabled("Create",getHandle(setup, MuralConstants.CREATERULEPOPUP, "allbuttons")),
@@ -639,3 +658,129 @@ def getBool(*args):
     for arg in args:
         bool = bool and arg
     return bool
+
+def validateDPIAlertWizard(setup,request={}):
+    # creating a random number
+    rndmNum = random.randint(0,999999)
+
+    popInstance = launchAlertWizard(setup,0)
+
+    # mandatory conditions
+    flag_rule = False
+    flag_measure = False
+    flag_type = False
+    flag_gran = False
+    flag_st = False
+    flag_et = False
+    flag_threshold = False
+
+    allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+    request['measure'] = setDrop(request['measure']['locatorText'],0,allselects)
+    request['type'] = setDrop(request['type'],1,allselects)
+    request['gran'] = setDrop(request['gran'],2,allselects)
+    flag_measure = False if "Exception" in  request['measure'] else True
+    flag_type = False if "Exception" in  request['type'] else True
+    flag_gran = False if "Exception" in  request['gran'] else True
+
+    # check for all the options in RuleName
+    rulenames = setup.cM.getNodeElements("rulenames","rulename")
+    for k,rulename in rulenames.iteritems():
+        checkEqualAssert(rulename['expected'],setName(rulename['text'],getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS)),
+                         "","","Verified for rule Name :"+rulename['text'])
+        dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    thresholds = setup.cM.getNodeElements("dpithresholds","threshold")
+    for severity in range(4):
+        for k,threshold in thresholds.iteritems():
+            request['conditions'] = []
+            request['conditions'].append(setDPICondition(severity,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3,enableCondition=False,thresholdValue=threshold['text']))
+            number_value=re.findall(r'\d+',request['conditions'][0])[0]
+            # number_value = request['conditions'][0].split(re.findall('[=<>]+',request['conditions'][0])[0])[1]
+            checkEqualAssert(threshold['expected'],str(number_value),
+                         "","","Verified for Threshold Values :"+threshold['text'])
+        dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    request['conditions'] = []
+    request['conditions'].append(setDPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3,enableCondition=True,thresholdValue=""))
+    flag_threshold = False if re.findall(r'\d+', request['conditions'][0]) == [] else True
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    num_value = popInstance.sendkeys_input("123", getHandle(setup, MuralConstants.CREATERULEPOPUP, "allinputs"),1, "allinputs")
+    flag_threshold = False if not num_value else True
+
+    request['conditions'] = []
+    request['conditions'].append(setDPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3,enableCondition=True,thresholdValue="0"))
+    flag_threshold = False if re.findall(r'\d+', request['conditions'][0]) == [] else True
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    num_value = popInstance.sendkeys_input("123", getHandle(setup, MuralConstants.CREATERULEPOPUP, "allinputs"),1, "allinputs")
+    flag_threshold = False if not num_value else True
+
+
+
+    request['ruleName'] = setName("", getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLINPUTS))
+    flag_rule = False if request['ruleName'] == "" else True
+
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    rulename = "automationrule"+str(rndmNum)
+    request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
+    flag_rule = False if request['ruleName'] == "" else True
+
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    request['conditions'] = []
+    request['conditions'].append(setDPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3))
+    if request['conditions'][0] != "-":
+        flag_threshold = True
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    request['conditions'].append(setDPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3))
+    if request['conditions'][1] != "-":
+        flag_threshold = True
+
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+    request['conditions'].append(setDPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3))
+    if request['conditions'][2] != "-":
+        flag_threshold = True
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+    request['conditions'].append(setDPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3))
+    if request['conditions'][3] != "-":
+        flag_threshold = True
+    dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
+
+    startEndTimeValidations(setup,request)
+
+def startEndTimeValidations(setup,request = {}):
+
+    allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+    request['measure'] = setDrop(request['measure']['locatorText'],0,allselects)
+    request['type'] = setDrop(request['type'],1,allselects)
+    request['gran'] = setDrop(request['gran'],2,allselects)
+    flag_measure = False if "Exception" in  request['measure'] else True
+    flag_type = False if "Exception" in  request['type'] else True
+    flag_gran = False if "Exception" in  request['gran'] else True
+
+    starttime = setup.cM.getNodeElements("dpiWizardtimerange","startime")
+    for k,starttime in starttime.iteritems():
+        st = Time(starttime['year'],starttime['month'],starttime['day'],starttime['hour'],starttime['minute'])
+
+    starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+
+    request[MuralConstants.STARTTIME]=setTime(setup,0,st)
+
+    request['time'][1]= getEndtime(setup, request['type'], request['gran'], starttimeEpoch,Constants.TIMEZONEOFFSET)
+
+    request[MuralConstants.ENDTIME] = setTime(setup,1,request['time'][1])
+
+
+
+
+
+
+
+
+
+
+
+
