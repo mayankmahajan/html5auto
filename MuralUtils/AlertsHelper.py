@@ -586,24 +586,25 @@ def validateKPIAlertWizard(setup, request = {}):
         dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
     request['conditions'] = []
-    request['conditions'].append(setKPICondition(random.randint(0,3),getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5,enableCondition=True,thresholdValue=""))
-    flag_Threshold = False
+    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5,enableCondition=True,thresholdValue=""))
+    flag_Threshold = False if re.findall(r'\d+', request['conditions'][0]) == [] else True
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
+    num_value = popInstance.sendkeys_input("123", getHandle(setup, MuralConstants.CREATERULEPOPUP, "allinputs"),1, "allinputs")
+    flag_Threshold = False if not num_value else True
 
+    request['ruleName'] = setName("", getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLINPUTS))
+    flag_rule = False if request['ruleName'] == "" else True
 
-
+    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule, request,popInstance, setup)
 
     rulename = "automationrule"+str(rndmNum)
     request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
-    flag_rule = True
+    flag_rule = False if request['ruleName'] == "" else True
 
-    request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
-
-
-    dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
-
-
+    dumpResultForButton(
+        flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule, request,
+        popInstance, setup)
 
     request['conditions'] = []
     request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
