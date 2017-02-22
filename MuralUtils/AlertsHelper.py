@@ -427,7 +427,7 @@ def doSearchAndValidateAlerts(setup):
         else:
             logger.info("Searched Text '%s' NOT present in alert list '%s' ",searchedtext, alertlist[i]['header'])
         checkEqualAssert(True,searchedtext in alertlist[i]['header'],"","","Searched Text '"+searchedtext+"' present in alert list = " + alertlist[i]['header'])
-    t = screenInstance.search.sendkeys_input("",getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","searchInput")
+    # t = screenInstance.search.sendkeys_input("",getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","searchInput")
     # checkEqualAssert("",t,"","","Check Search Field Cleared")
 
 def doCalendarSearchOnAlerts(setup):

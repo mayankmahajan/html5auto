@@ -10,9 +10,10 @@ checkAlertsCount(setup)
 popInstance = GenerateReportsPopClass(setup.d)
 # Launching DPI Alerts Page
 popInstance.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
-# doSearchAndValidateAlerts(setup)
-
+doSearchAndValidateAlerts(setup)
+checkAlertsCount(setup)
 doCalendarSearchOnAlerts(setup)
+
 
 
 # Launching KPI Alerts Page

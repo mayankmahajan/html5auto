@@ -65,7 +65,7 @@ class CalendarComponentClass(BaseComponentClass):
                 break
             if availableDates[i].text == day:
                 availableDates[i].click()
-                logger.info("Selected Day is  : %s",str(availableDates[i].text))
+                logger.info("Selected Day is  : %s",str(day))
                 return True
 
         logger.error("Day is not available for selection : %s",str(availableDates[i].text))
