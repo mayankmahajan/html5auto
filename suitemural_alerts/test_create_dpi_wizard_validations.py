@@ -11,3 +11,4 @@ x =CreateAlert()
 AlertsHelper.validateDPIAlertWizard(setup,x.dict)
 
 # GUIDE_INFO
+setup.d.close()

@@ -7,3 +7,4 @@ login(setup,"admin","admin123")
 createKPIAlert(setup)
 
 # GUIDE_INFO
+setup.d.close()
