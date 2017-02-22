@@ -119,7 +119,14 @@ class DropdownComponentClass(BaseComponentClass):
 
         try:
             logger.info("Getting DropDown Selection using ng-reflect-model property")
-            selection = h.get_attribute("ng-reflect-model")
+            for ele in h.find_elements_by_xpath(".//*"):
+                if str(ele.get_attribute('selected')).lower() == 'true':
+                    selection = ele.text
+                    break
+                else:
+                    selection = ''
+            if not selection:
+                selection = h.get_attribute("ng-reflect-model")
             logger.debug("Got Selection as %s",selection)
             return selection
         except Exception as e:

@@ -28,7 +28,7 @@ class CalendarComponentClass(BaseComponentClass):
     def set(self,child,year,h,parent="leftcalendar"):
         try:
             dropDown = DropdownComponentClass()
-            dropDown.doSelectionOnVisibleDropDown(h,year,0,parent,child)
+            return dropDown.doSelectionOnVisibleDropDown(h,year,0,parent,child)
             # dropDown.doSelection(h,year,parent,child)
         except NoSuchElementException or StaleElementReferenceException or ElementNotVisibleException or Exception as e:
             return e
@@ -36,8 +36,8 @@ class CalendarComponentClass(BaseComponentClass):
     def setDay(self,child,day,h,parent="leftcalendar"):
         try:
             availableDates = self.getAvailableDates(h[parent][child])
-            self.selectDay(day,availableDates)
-            return True
+            return self.selectDay(day,availableDates)
+            # return True
             # will handle below code later
 
             daySelection =  self.getDaySelection(h,parent,child)
@@ -59,10 +59,18 @@ class CalendarComponentClass(BaseComponentClass):
         return availableDates
 
     def selectDay(self,day,availableDates):
-        for el in availableDates:
-            if el.text == day:
-                el.click()
+        for i in range(len(availableDates)):
+            previousDay = availableDates[i].text if i==0 else availableDates[i-1].text
+            if int(previousDay)> int(availableDates[i].text):
                 break
+            if availableDates[i].text == day:
+                availableDates[i].click()
+                logger.info("Selected Day is  : %s",str(availableDates[i].text))
+                return True
+
+        logger.error("Day is not available for selection : %s",str(availableDates[i].text))
+        return False
+
 
     def getAllDates(self, h, tbody, td):
         return h[0].find_elements_by_tag_name(tbody)[0].find_elements_by_tag_name(td)

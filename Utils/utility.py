@@ -687,15 +687,15 @@ def validatesearchtable(data,columnname,searchtext):
 
 def setCalendar(y,m,d,h,min,intance,setup,page="routers_popup",parent="leftcalendar"):
     try:
-        intance.calendar.set("year",y,getHandle(setup,page,parent),parent)
-        intance.calendar.set("month",m,getHandle(setup,page,parent),parent)
-        intance.calendar.setDay("day",d,getHandle(setup,page,parent),parent)
-        intance.calendar.set("hour",h,getHandle(setup,page,parent),parent)
+        selectedYear = intance.calendar.set("year",y,getHandle(setup,page,parent),parent)
+        selectedMonth = intance.calendar.set("month",m,getHandle(setup,page,parent),parent)
+        selectedDay = intance.calendar.setDay("day",d,getHandle(setup,page,parent),parent)
+        selectedHour = intance.calendar.set("hour",h,getHandle(setup,page,parent),parent)
         try:
-            intance.calendar.set("minute",min,getHandle(setup,page,parent),parent)
+            selectedMinute = intance.calendar.set("minute",min,getHandle(setup,page,parent),parent)
         except:
-            pass
-        return True
+            selectedMinute = False
+        return selectedYear and selectedMonth and selectedDay and selectedHour
     except ElementNotSelectableException or ElementNotVisibleException or Exception as e:
         return e
 

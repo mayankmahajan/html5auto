@@ -51,10 +51,24 @@
         <!--<threshold id="7" text="~!@#$%^*(){}[]';><_specials" expected = "" />-->
         <threshold id="8" text="2.0" expected = "20" />
         <threshold id="9" text="-12.0" expected = "-120" />
+        <threshold id="10" text="12-01" expected = "NaN" />
     </kpithresholds>
+    <dpithresholds>
+        <threshold id="1" text="012345" expected = "1234" />
+        <threshold id="2" text="-012" expected = "12" />
+        <threshold id="3" text="1234" expected = "1234" />
+        <threshold id="4" text="-" expected = "" />
+        <threshold id="5" text="0" expected = "0" />
+        <threshold id="6" text="0.01" expected = "1" />
+        <threshold id="7" text="_small CAPITAL_" expected = "" />
+        <threshold id="8" text="2.0" expected = "20" />
+        <threshold id="9" text="12.01" expected = "1201" />
+        <threshold id="10" text="1 1" expected = "11" />
+        <threshold id="11" text="12-01" expected = "NaN" />
+    </dpithresholds>
 
     <dpiWizardtimerange>
-        <starttime id="starttime" year="2016" month ="06" date="10" hour="10" min="00"/>
+        <starttime id="starttime" year="2016" month ="06" day="10" hour="10" min="00"/>
         <endtime id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
     </dpiWizardtimerange>
 
