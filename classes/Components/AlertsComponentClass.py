@@ -11,6 +11,7 @@ class AlertsComponentClass(BaseComponentClass):
         self.configmanager = ConfigManager()
         self.search=SearchComponentClass()
         self.dropdown = DropdownComponentClass()
+        self.colors = self.configmanager.getNodeElements("colors","color")
 
 
     def getAlertList(self,h,parent,child):
@@ -50,7 +51,7 @@ class AlertsComponentClass(BaseComponentClass):
         return [el.text.strip() for el in h.find_elements_by_tag_name("label")]
 
     def getThresholdIconColor(self,h):
-        return h.find_element_by_tag_name("circle").get_attribute("fill").strip()
+        return self.getColorName(h.find_element_by_tag_name("circle").get_attribute("fill").strip())
 
     def getAlertFullBody(self,h,parent="alertinfo",child=""):
         alertBOdyObject = self.createAlertBodyObject(h[parent])
@@ -86,7 +87,7 @@ class AlertsComponentClass(BaseComponentClass):
         for el in h[child]:
            if color !=el.get_attribute('style').strip(";").split('rgb')[1]:
                return False
-        return self.rgb_to_hex(color)
+        return self.getColorName(self.rgb_to_hex(color))
 
     def createConditions(self,h,child="alerttable"):
         arr = ["-","-","-"]
@@ -167,9 +168,11 @@ class AlertsComponentClass(BaseComponentClass):
     def getAlertsFromCounterBar(self,h):
         d={}
         d['total'] = int(h['total'][0].text.split()[0])
-        d[self.rgb_to_hex(h['colors'][0].value_of_css_property("background-color"))] =int(h['severity'][0].text)
-        d[self.rgb_to_hex(h['colors'][1].value_of_css_property("background-color"))] =int(h['severity'][1].text)
-        d[self.rgb_to_hex(h['colors'][2].value_of_css_property("background-color"))] =int(h['severity'][2].text)
+
+
+        d[self.getColorName(self.rgb_to_hex(h['colors'][0].value_of_css_property("background-color")))] =int(h['severity'][0].text)
+        d[self.getColorName(self.rgb_to_hex(h['colors'][1].value_of_css_property("background-color")))] =int(h['severity'][1].text)
+        d[self.getColorName(self.rgb_to_hex(h['colors'][2].value_of_css_property("background-color")))] =int(h['severity'][2].text)
         return d
 
     def getTotalAlerts(self,alertList,h,parent="counter",child=""):
@@ -178,3 +181,9 @@ class AlertsComponentClass(BaseComponentClass):
         logger.info("Got Counters from Bar  = %s",str(count))
         logger.info("Got Calculated Counts from Alert Lists  = %s",str(calculatedcount))
         return count,calculatedcount
+
+    def getColorName(self,col):
+        for color in self.colors:
+            if col in color:
+                return str(color).split('#')[0]
+        return str(col)

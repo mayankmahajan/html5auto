@@ -71,7 +71,11 @@
         <starttime id="starttime" year="2016" month ="06" day="10" hour="10" min="00"/>
         <endtime id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
     </dpiWizardtimerange>
-
+    <colors>
+        <color id ="red#ff2b00#ff0000"/>
+        <color id ="yellow#ffd40f"/>
+        <color id ="orange#ff8300"/>
+    </colors>
     <quicklinks>
 
         <!--<quicklink id="onetime" locatorText ="One time report" starttime="True" endtime="True"/>-->
