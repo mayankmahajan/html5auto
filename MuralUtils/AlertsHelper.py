@@ -421,6 +421,12 @@ def doSearchAndValidateAlerts(setup):
     checkEqualAssert(searchedtext,textEntered,"","","Verify Search Text Entered")
     # screenInstance.search.setSearchText(getHandle(setup,MuralConstants.ALERTSCREEN,"search"),searchedtext)
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+
+    if not alertlist:
+        logger.debug("Alert List comes Empty when search is done for %s",searchedtext)
+        resultlogger.info("Alert List comes Empty when search is done for %s",searchedtext)
+
+
     for i in range(len(alertlist)):
         if searchedtext in alertlist[i]['header']:
             logger.info("Searched Text '%s' present in alert list '%s' ",searchedtext, alertlist[i]['header'])
@@ -449,7 +455,10 @@ def doCalendarSearchOnAlerts(setup):
     logger.info("Calendar Selection done at Search Panel = StartTime : %s and EndTimer : %s ",stObj.datestring,etObj.datestring)
 
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
-
+    if not alertlist:
+        logger.debug("Alert List comes Empty when filter is selected  starttime  = %s  and endtime = %s ",stObj.datestring,etObj.datestring)
+        resultlogger.info("Alert List comes Empty when filter is selected  starttime  = %s  and endtime = %s ",
+                     stObj.datestring, etObj.datestring)
     for i in range(len(alertlist)):
         actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralConstants.TIMEZONEOFFSET,"%d %m %Y %H:%M","-")
         # if (actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch):
