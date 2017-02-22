@@ -9,3 +9,4 @@ login(setup,"admin","admin123")
 AlertsHelper.validateKPIAlertWizard(setup)
 
 # GUIDE_INFO
+setup.d.close()
