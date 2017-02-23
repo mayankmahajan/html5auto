@@ -60,8 +60,9 @@ class CalendarComponentClass(BaseComponentClass):
 
     def selectDay(self,day,availableDates):
         for el in availableDates:
-            if el.text == day:
+            if int(el.text) == int(day):
                 el.click()
+                break
 
 
 

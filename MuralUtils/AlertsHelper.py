@@ -44,8 +44,15 @@ def createDPIAlert(setup, request = {}):
     #
     response['conditions'] = []
     response['conditions'].append(setDPICondition(0,response['type'],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
+    flag_Threshold = True if response['conditions'][0] != "-" else False
+
+
     response['conditions'].append(setDPICondition(1,response['type'],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
-    response['conditions'].append(setDPICondition(2,response['type'],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup))
+    flag_Threshold = True if response['conditions'][1] != "-" else False
+
+    response['conditions'].append(setDPICondition(2,response['type'],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,enableCondition=not flag_Threshold))
+    flag_Threshold = True if response['conditions'][2] != "-" else False
+
     response[MuralConstants.STARTTIME]=setTime(setup,0,request['time'][0])
     starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
 
@@ -70,7 +77,7 @@ def createDPIAlert(setup, request = {}):
     # clickButton(setup,"add")
     # filterSelected = setFilters(setup,["Gateway","gurgaon"])
     path = "screenshots/"+response['ruleName']+".png"
-    setup.d.save_screenshot(path)
+    setup.d.save_screenshot(response['ruleName']+".png")
     clickButton(setup,"Create")
 
     error = isError(setup)
@@ -404,7 +411,7 @@ def setFilters(setup,valueArray,selectionByIndex=True):
     handles = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
 
     filterDimension = setDrop(valueArray[0],len(handles[Constants.ALLSELECTS]["select"])-2,handles,selectionByIndex)
-    filterValue = setDrop(valueArray[1],len(handles)-1,handles,selectionByIndex)
+    filterValue = setDrop(valueArray[1],len(handles[Constants.ALLSELECTS]["select"])-1,handles,selectionByIndex)
     return str(filterDimension)+":"+str(filterValue)
     return [filterDimension,filterValue]
 
