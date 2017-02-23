@@ -36,8 +36,8 @@ class CalendarComponentClass(BaseComponentClass):
     def setDay(self,child,day,h,parent="leftcalendar"):
         try:
             availableDates = self.getAvailableDates(h[parent][child])
-            return self.selectDay(day,availableDates)
-            # return True
+            self.selectDay(day,availableDates)
+            return True
             # will handle below code later
 
             daySelection =  self.getDaySelection(h,parent,child)
@@ -59,17 +59,23 @@ class CalendarComponentClass(BaseComponentClass):
         return availableDates
 
     def selectDay(self,day,availableDates):
-        for i in range(len(availableDates)):
-            previousDay = availableDates[i].text if i==0 else availableDates[i-1].text
-            if int(previousDay)> int(availableDates[i].text):
-                break
-            if availableDates[i].text == day:
-                availableDates[i].click()
-                logger.info("Selected Day is  : %s",str(day))
-                return True
+        for el in availableDates:
+            if el.text == day:
+                el.click()
 
-        logger.error("Day is not available for selection : %s",str(availableDates[i].text))
-        return False
+
+
+        # for i in range(len(availableDates)):
+        #     previousDay = availableDates[i].text if i==0 else availableDates[i-1].text
+        #     if int(previousDay)> int(availableDates[i].text):
+        #         break
+        #     if availableDates[i].text == day:
+        #         availableDates[i].click()
+        #         logger.info("Selected Day is  : %s",str(day))
+        #         return True
+        #
+        # logger.error("Day is not available for selection : %s",str(availableDates[i].text))
+        # return False
 
 
     def getAllDates(self, h, tbody, td):

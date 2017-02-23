@@ -7,7 +7,7 @@ logger.setLevel(logging.DEBUG)
 
 
 # Create a log handler
-handler = logging.FileHandler('../logs/logs'+time.strftime("%d_%m_%y_%H_%M_%S")+'.txt')
+handler = logging.FileHandler('../logs/logs_'+time.strftime("%d_%m_%y_%H_%M_%S")+'.txt')
 handler.setLevel(logging.DEBUG)
 
 # Format Logs

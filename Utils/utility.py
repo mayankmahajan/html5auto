@@ -696,6 +696,8 @@ def setCalendar(y,m,d,h,min,intance,setup,page="routers_popup",parent="leftcalen
             selectedMinute = intance.calendar.set("minute",min,getHandle(setup,page,parent),parent)
         except:
             selectedMinute = False
+        return True
+        # will handle below later
         return selectedYear and selectedMonth and selectedDay and selectedHour
     except ElementNotSelectableException or ElementNotVisibleException or Exception as e:
         return e
