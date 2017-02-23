@@ -69,6 +69,8 @@ def createDPIAlert(setup, request = {}):
     # filterSelected = setFilters(setup,["Device","Apple iPod"])
     # clickButton(setup,"add")
     # filterSelected = setFilters(setup,["Gateway","gurgaon"])
+    path = "screenshots/"+response['ruleName']+".png"
+    setup.d.save_screenshot(path)
     clickButton(setup,"Create")
 
     error = isError(setup)
@@ -142,7 +144,7 @@ def checkAlertsPresent(setup,alertRuleMap,alertlist):
         resultlogger.info("Expected : %s \n",str(request))
         resultlogger.info("Actual : %s \n", str(alertFullBody))
         for k, v in request.iteritems():
-            checkEqualAssert(request[k], alertFullBody[k], "", "", "Checking DPI Alerts : " + k)
+            checkEqualAssert(request[k], alertFullBody[k], "", "", "Checking DPI Alerts :: " + k + " :: ")
 
 def getDPIAlertsDataAsDict(row):
     d={}
@@ -465,10 +467,19 @@ def doCalendarSearchOnAlerts(setup):
         checkEqualAssert(True,(actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch),"","",
                          "Check for alert '%s' and duration = '%s' falling in filtered timerange (%s,%s) ",alertlist[i]['header'],alertlist[i]['duration'],stObj.datestring,etObj.datestring)
 
+def gotoAlerts(setup,value):
+    popInstance = GenerateReportsPopClass(setup.d)
+    popInstance.dropdown.clickSpanWithTitle(value,getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+    # screenInstance = AlertsComponentClass()
+    # alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+
 def acknowledgeAlert(setup,index):
+    gotoAlerts(setup,"DPI Alerts")
     alertbodylinks = setup.cM.getNodeElements("alertbodylinks","link")
+
     screenInstance = AlertsComponentClass()
-    screenInstance.selectAlert(index,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
+    selectedAlert = screenInstance.selectAlert(index,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
+
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
     selectedAlertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","selected")
 

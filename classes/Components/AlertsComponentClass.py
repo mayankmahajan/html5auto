@@ -25,7 +25,7 @@ class AlertsComponentClass(BaseComponentClass):
     def selectAlert(self,index,h,parent='alertlist',child="list"):
         try:
             h[parent][child][index].click()
-            return True
+            return self.getAlertList(h,parent,"selected")
         except:
             return False
 

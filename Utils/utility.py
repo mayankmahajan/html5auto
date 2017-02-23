@@ -50,6 +50,7 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     for k,v in f1.iteritems():
+        msg = msg + "  :: " +k+" ::  "
         try:
             assert f1[k] == f2[k]
             # msg = msg+" : "+k+" "+tcPass
