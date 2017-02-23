@@ -17,8 +17,8 @@ doCalendarSearchOnAlerts(setup)
 
 
 # Launching KPI Alerts Page
-popInstance.dropdown.clickSpanWithTitle("KPI Alerts",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
-doSearchAndValidateAlerts(setup)
+# popInstance.dropdown.clickSpanWithTitle("KPI Alerts",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
+# doSearchAndValidateAlerts(setup)
 
 
 
