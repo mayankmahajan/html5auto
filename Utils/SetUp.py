@@ -13,7 +13,10 @@ class SetUp:
         security = True
 
         if security:
-            self.d = webdriver.Chrome(Constants.chromedriverpath)
+            chromeOptions = webdriver.ChromeOptions()
+            chromeOptions.add_argument("--start-maximized")
+            self.d = webdriver.Chrome(Constants.chromedriverpath, chrome_options=chromeOptions)
+            # self.d = webdriver.Chrome(Constants.chromedriverpath)
         else:
 
             chromeOptions = webdriver.ChromeOptions()

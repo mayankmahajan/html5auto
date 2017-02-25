@@ -597,6 +597,3 @@ def downloadReport(setup,index):
 
 
 
-
-
-

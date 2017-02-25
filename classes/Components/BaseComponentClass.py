@@ -126,6 +126,15 @@ class BaseComponentClass:
         except Exception as e:
             logger.error("Exception found while clicking Checkbox %d",index)
             return e
+    def isCheckBoxEnabled(self,h,index,parent="allcheckboxes",child="checkbox"):
+        try:
+            logger.debug("Going to get State of Checkbox %d parent %s and child %s ",index,parent,child)
+            state = True if str(h[parent][child][index].get_attribute("ng-reflect-model")).lower() == 'true' else False
+            logger.debug("Got State of Checkbox %d parent %s and child %s as %s",index,parent,child,str(state))
+            return state
+        except Exception as e:
+            logger.error("Exception found while clicking Checkbox %d",index)
+            return e
 
     def clear_input(self,h,parent,child,index=0):
         h[parent][child][index].send_keys(len(str(h[parent][child][index].get_attribute("value")))*Keys.BACKSPACE)

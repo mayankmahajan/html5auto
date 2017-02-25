@@ -54,17 +54,17 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
         try:
             assert f1[k] == f2[k]
             # msg = msg+" : "+k+" "+tcPass
-            resultlogger.info(msg+" : "+k+" "+tcPass)
-            logger.info(msg+" : "+k+" "+tcPass)
+            resultlogger.info(msg+"  :: " +k+" ::  "+tcPass)
+            logger.info(msg+"  :: " +k+" ::  "+tcPass)
 
         except AssertionError :
 
             # msg = msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail
-            resultlogger.info(msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
-            logger.info(msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
+            resultlogger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
+            logger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
         except KeyError:
-            resultlogger.info(msg+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
-            logger.info(msg+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
+            resultlogger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
+            logger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
 def checkEqualAssert(f1,f2,time="",measure="",message=""):
     msg = time + " " + measure + " " + message
@@ -887,3 +887,57 @@ def hex_to_rgb(value):
     value = value.lstrip('#')
     lv = len(value)
     return tuple(int(value[i:i+lv/3], 16) for i in range(0, lv, lv/3))
+
+
+def deleteTableEntry(setup,screen,index,columnName,flag=True):
+
+    screenInstance = ReportsModuleClass(setup.d)
+    tableHandle = getHandle(setup,screen,"table")
+    tableData = screenInstance.table.getTableData1(tableHandle)
+    # tableDataMap = screenInstance.table.convertDataToDict(tableData,columnName)
+    rowToDelete = screenInstance.table.getColumnValueMap(tableData,index,columnName)
+    logger.info("Going to delete table entry %s",str(rowToDelete))
+
+    screenInstance.dropdown.customClick(tableHandle['table']['delete'][index])
+    try:
+        screenInstance.dropdown.customClick(getHandle(setup,screen,"table")['table']['delete'][index])
+    except:
+        pass
+    return checkDeletedRow(setup, screen, screenInstance,columnName, rowToDelete, flag)
+
+
+
+def checkDeletedRow(setup, screen, screenInstance,columnName, rowToDelete, flag):
+    gHandle = getHandle(setup,screen,"alert")
+    button="OK" if flag else "Cancel"
+
+    popUpMessage = gHandle['alert']['filters'][0].text.strip().strip('\n').strip()
+    expectedMessage = "Do you want to delete \""+rowToDelete.keys()[0]+"\" alert ?"
+
+    actualHeader = gHandle['alert']['header'][0].text.strip().strip('\n').strip()
+    expectedHeader = "Delete Alert"
+    checkEqualAssert(expectedMessage,popUpMessage,"","","Verify Delete Dialog text")
+    checkEqualAssert(expectedHeader,actualHeader,"","","Verify Delete Dialog Header")
+
+    try:
+        logger.debug("Clicking Button from Pop up %s",button)
+        screenInstance.clickButton(button,gHandle,"alert")
+        try:
+            screenInstance.clickButton(button,gHandle,"alert")
+            # gHandle['alert'][button][0].click()
+        except:
+            pass
+        tableHandle = getHandle(setup,screen,"table")
+        newTableData = screenInstance.table.getTableMap(tableHandle,columnName=columnName)
+
+        checkEqualAssert(flag, rowToDelete.keys()[0] not in newTableData.keys(), "", "", "Check for Delete Table Entry" + str(rowToDelete))
+        return True
+    except Exception as e:
+        logger.error("Exception found while Deleting Row %s : %s", rowToDelete, e)
+        return e
+
+
+
+
+
+

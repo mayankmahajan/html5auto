@@ -15,6 +15,7 @@ checkAlertsCount(setup)
 doCalendarSearchOnAlerts(setup)
 
 
+# commenting below only because kpi alerts page is not working
 
 # Launching KPI Alerts Page
 # popInstance.dropdown.clickSpanWithTitle("KPI Alerts",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))

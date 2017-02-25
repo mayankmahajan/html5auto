@@ -311,8 +311,8 @@ class TableComponentClass(BaseComponentClass):
     def scrollVertical(self):
         pass
 
-    def getTableMap(self,h,parent="table",length=15,child=""):
-        return self.convertDataToDict(self.getTableData1(h))
+    def getTableMap(self,h,parent="table",length=15,child="",columnName="Id"):
+        return self.convertDataToDict(self.getTableData1(h),columnName)
 
     def getTableData1(self,h,parent="table",length=15,child=""):
         # handlers = self.compHandlers('table', h)

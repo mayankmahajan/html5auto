@@ -67,7 +67,7 @@ def createDPIAlert(setup, request = {}):
 
     response['filters'] = ""
     for i in range(len(request['filters'])):
-        response['filters'] = response['filters']+setFilters(setup,request['filters'][i])+','
+        response['filters'] = response['filters']+setFilters(setup,valueArray=request['filters'][i])+','
         if i < len(request['filters'])-1:
             clickButton(setup,"add",True)
     response['filters']=response['filters'].strip(',')
@@ -241,6 +241,14 @@ def setName(name,handle,index=0):
     instance = DropdownComponentClass()
     return instance.sendkeys_input(name,handle,index)
 
+def getName(handle,index=0):
+    instance = DropdownComponentClass()
+    return instance.getValue_input(handle,index)
+
+def getDrop(index,handle):
+    instance = DropdownComponentClass()
+    return instance.getSelectionOnVisibleDropDown(handle,index)
+
 def setDropRandomly(index, handle):
     instance = DropdownComponentClass()
     return instance.doRandomSelectionOnVisibleDropDown(handle,index)
@@ -290,12 +298,18 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
         instance = DropdownComponentClass()
 
         logger.info("Enabling Priority %s",str(priorty))
-        instance.clickCheckBox(handle,priorty)
-        logger.info("Priority %s is selected",str(priorty))
+        try:
+            oldState = instance.isCheckBoxEnabled(handle,priorty)
+            instance.clickCheckBox(handle,priorty)
+            newState = instance.isCheckBoxEnabled(handle,priorty)
+        except Exception as e:
+            newState = instance.isCheckBoxEnabled(handle,priorty)
+
+            logger.info("Priority %s is disabled",str(priorty))
 
         handle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
-
         logger.info("Selecting operator for Priority %s",str(priorty))
+
         op=instance.doRandomSelectionOnVisibleDropDown(handle,index)
         logger.info("Operator %s for Priority %s is selected",str(op),str(priorty))
 
@@ -323,10 +337,10 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
         else:
             if not enableCondition:
                 instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
-            return returnValue
+            return returnValue if not newState else "-"
 
         if enableCondition:
-            return returnValue
+            return returnValue if not newState else "-"
         else:
             logger.info("Disabling Priority %s",str(priorty))
             instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
@@ -405,9 +419,17 @@ def setTime(setup,startEnd,timeObj):
         return dateSelected
     except Exception as e:
         logger.error("Exception found while Selecting date %s for %s = %s",str(timeObj),str(t),str(e))
-        return e
+        return "Exception as "+str(e)
 
-def setFilters(setup,valueArray,selectionByIndex=True):
+def getTime(setup,startEnd):
+    instance = GenerateReportsPopClass(setup.d)
+    t = MuralConstants.STARTTIME if startEnd==0 else MuralConstants.ENDTIME
+    dateSelected =  instance.dropdown.getValue_input(getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS),startEnd+4)
+    logger.info("Got Date Selected %s for %s",str(dateSelected),str(t))
+    return str(dateSelected)
+
+
+def setFilters(setup,state="",valueArray=[],selectionByIndex=True):
     handles = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
 
     filterDimension = setDrop(valueArray[0],len(handles[Constants.ALLSELECTS]["select"])-2,handles,selectionByIndex)
@@ -546,27 +568,122 @@ def checkAlertsCount(setup):
     count,calCount = screenInstance.getTotalAlerts(alertlist,getHandle(setup,MuralConstants.ALERTSCREEN,"counter"))
     checkEqualDict(count,calCount,"","","Checking Counts on AlertsPage")
 
-def editAlert(setup,h,index):
+def editAlert(setup,index,columnName,flag=True):
     screenInstance = ReportsModuleClass(setup.d)
     tableHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"table")
     tableData = screenInstance.table.getTableData1(tableHandle)
-
-    # reportId = screenInstance.table.getColumnValueMap(tableData,index)
+    key = screenInstance.table.getColumnValueMap(tableData,index,columnName)
     logger.info("Going to Edit Alert = %s",tableData['rows'][index])
     try:
-        screenInstance.dropdown.customClick(tableHandle['table']['download'][index])
+        screenInstance.dropdown.customClick(tableHandle['table']['edit'][index])
         try:
             screenInstance.dropdown.customClick(getHandle(setup,MuralConstants.REPORTSCREEN,"table")['table']['edit'][index])
         except:
             pass
         logger.info("Editing Alert = %s",tableData['rows'][index])
 
-        # checkEqualAssert(True,True,"","","Check for Download Report"+str(reportId))
+        oldEditWizardDetails = getDPIDetails(setup)
+        checkEqualAssert(tableData['rows'][index],oldEditWizardDetails,"","","Verifying Table Data with Edit Wizard Info")
+
+        setup.d.save_screenshot(oldEditWizardDetails[0]+"_before_edit.png")
+        detailsEdited = editDPIDetails(setup)
+        setup.d.save_screenshot(oldEditWizardDetails[0]+"_after_edit.png")
+
+        newEditWizardDetails = getDPIDetails(setup)
+        button = "Update" if flag else "Cancel"
+        clickButton(setup,button)
+
+        tableHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"table")
+        tableData = screenInstance.table.getTableData1(tableHandle)
+        for i in range(len(tableData['rows'][index])):
+            checkEqualAssert(detailsEdited[i],tableData['rows'][index][i]!=newEditWizardDetails[i],"","","Verifying Table Data with Edit Wizard Info, Column :: "+tableData['header'][i])
+
+
+
+
         return True
     except Exception as e:
         # logger.error("Exception found while Downloading ReportId : %s",reportId)
         # checkEqualAssert(True,e,"","","Check for Download Report"+str(reportId))
         return e
+
+def editDPIDetails(setup):
+    allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+    details = []
+
+    rulename = "_edited"+str(random.randint(10000,999999))
+    details.append(setName(rulename,getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLINPUTS))) #rulename
+    details.append(setDropRandomly(2,allselects)) #gran
+    setDropRandomly(1,allselects) #type
+    type=getDrop(1,allselects) #type
+    details.append(setFilters1(setup,type,allselects)) #filters
+    details.append(setDropRandomly(0,allselects)) #measure
+
+    details.append(setDPICondition(0,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition0
+    details.append(setDPICondition(1,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition1
+    details.append(setDPICondition(2,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition2
+
+    st = setTime(setup,0,Time())
+    et = setTime(setup,1,Time())
+    checkEqualAssert(True,"Exception" in st,"","","StartTime Date Picker Disable Check")
+    checkEqualAssert(True,"Exception" in et,"","","EndTime Date Picker Disable Check")
+    details.append(getTime(setup,0)+" to "+getTime(setup,1)) #range
+
+    details.append("Active") #status
+    details.append("") #edit
+    details.append("") #delete
+    cond0=True if getDPICondition(0,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup) != "-" else False
+    cond1=True if getDPICondition(1,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup) != "-" else False
+    cond2=True if getDPICondition(2,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup) != "-" else False
+    return [False,False,True,False,cond0,cond1,cond2,False,False,False,False]
+    return details
+
+
+def getDPIDetails(setup):
+
+    allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
+
+    details = []
+
+    details.append(getName(getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLINPUTS))) #rulename
+    details.append(getDrop(2,allselects)) #gran
+    type=getDrop(1,allselects) #type
+    details.append(getFilters(setup,type,allselects)) #filters
+    details.append(getDrop(0,allselects)) #measure
+    details.append(getDPICondition(0,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition0
+    details.append(getDPICondition(1,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition1
+    details.append(getDPICondition(2,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition2
+    details.append(getTime(setup,0)+" to "+getTime(setup,1)) #range
+    details.append("Active") #status
+    details.append("") #edit
+    details.append("") #delete
+
+    return details
+def getFilters(setup,type,h):
+    if type == setup.cM.getAllNodeElements("measuretypes","type")[0]:
+        startingDrop=9
+    else:
+        startingDrop=6
+    f=''
+    for i in range(startingDrop,len(h[MuralConstants.ALLSELECTS]['select']),2):
+        fD=getDrop(i,h)
+        fV=getDrop(i+1,h)
+        f=f+fD+":"+fV+","
+    return f.strip(',')
+
+def setFilters1(setup,type,h):
+    if type == setup.cM.getAllNodeElements("measuretypes","type")[0]:
+        startingDrop=9
+    else:
+        startingDrop=6
+    f=''
+    for i in range(startingDrop,len(h[MuralConstants.ALLSELECTS]['select']),2):
+        fD=setDropRandomly(i,h)
+        fV=setDropRandomly(i+1,h)
+        f=f+fD+":"+fV+","
+    return f.strip(',')
+
+
 
 
 def launchAlertWizard(setup,index):
@@ -749,8 +866,6 @@ def validateDPIAlertWizard(setup,request={}):
     # num_value = popInstance.sendkeys_input("123", getHandle(setup, MuralConstants.CREATERULEPOPUP, "allinputs"),1, "allinputs")
     # flag_threshold = False if not num_value else True
 
-
-
     request['ruleName'] = setName("", getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLINPUTS))
     flag_rule = False if request['ruleName'] == "" else True
 
@@ -777,8 +892,6 @@ def validateDPIAlertWizard(setup,request={}):
     if request['conditions'][2] != "-":
         flag_threshold = True
     dumpResultForButton(flag_rule and flag_measure and flag_type and flag_gran and flag_st and flag_et and flag_threshold,request,popInstance,setup)
-
-
 
 def startEndTimeValidations(setup,request = {}):
 
@@ -820,13 +933,51 @@ def startEndTimeValidations(setup,request = {}):
 
     return st,et
 
+def updateIndexAsPerPriority(setup,type,priorty,firstDrop):
+    if type == setup.cM.getAllNodeElements("measuretypes","type")[0]:
+        unitSystem = True
+        if priorty==0:
+            index = firstDrop
+        elif priorty==1:
+            index = firstDrop+2
+        elif priorty==2:
+            index = firstDrop+4
+    else:
+        unitSystem = False
+        if priorty==0:
+            index = firstDrop
+        elif priorty==1:
+            index = firstDrop+1
+        elif priorty==2:
+            index = firstDrop+2
+    return index,unitSystem
 
+def getDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA"):
+    index,unitSystem = updateIndexAsPerPriority(setup,type,priorty,firstDrop)
+    try:
+        instance = DropdownComponentClass()
+        if instance.isCheckBoxEnabled(handle,priorty):
+            logger.info("Got Priority %s as Enabled",str(priorty))
+            handle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
 
+            op=instance.getSelectionOnVisibleDropDown(handle,index)
+            num_value = instance.getValue_input(getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
+            logger.info("Got Selected Operator = %s for Priority = %s and Value = %s",str(op),str(priorty),str(num_value))
 
+            if not unitSystem:
+                return str(op).strip()+str(num_value).strip()
+            else:
+                unit=instance.getSelectionOnVisibleDropDown(handle,index+1)
+                logger.info("Got Selected Priority = %s with Operator = %s , Value = %s and Unit = %s",str(priorty),str(op),str(num_value),str(unit))
+                return  str(op).strip()+str(num_value).strip()+str(unit).strip()
+        else:
+            logger.info("Got Priority = %s as disabled",str(priorty))
+            return "-"
 
-
-
-
+    except Exception as e:
+        logger.error("Exception found while getting condition at CreateRule for DPI [Priority: %s, Operator: %s, Value: %s, Unit: %s  =  %s",
+                     str(priorty),str(op),str(num_value),str(unitSystem), str(e) )
+        return e
 
 
 

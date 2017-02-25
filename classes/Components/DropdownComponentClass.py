@@ -83,7 +83,7 @@ class DropdownComponentClass(BaseComponentClass):
                     logger.debug("Selecting DropDown with Index = %s and Text = %s",str(i),str(elements[i].text))
                     elements[i].click()
                     logger.debug("DropDown with Index = %s and Text = %s is selected",str(i),str(elements[i].text))
-                    return elements[i].text
+                    return self.get(h)
                 except Exception as e:
                     logger.error("Exception found while selecting DropDown with Index = %s and Text = %s = %s",str(i),str(elements[i].text),str(e))
                     return "Exception :"+str(e)
@@ -108,8 +108,6 @@ class DropdownComponentClass(BaseComponentClass):
         return self.randomSet(activedrops[index])
 
 
-
-
     def get(self, handle):
         try:
             l = len(handle)
@@ -132,9 +130,6 @@ class DropdownComponentClass(BaseComponentClass):
         except Exception as e:
             logger.error("Exception found while getting DropDown Selection = %s",e)
             return "Exception : "+str(e)
-
-
-
 
     def getSelectionOnVisibleDropDown(self,h,index=0,parent="allselects",child="select"):
         activedrops  = self.getAllActiveElements(h[parent][child])
