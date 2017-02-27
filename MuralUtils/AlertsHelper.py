@@ -78,7 +78,22 @@ def createDPIAlert(setup, request = {}):
     # filterSelected = setFilters(setup,["Gateway","gurgaon"])
     path = "screenshots/"+response['ruleName']+".png"
     setup.d.save_screenshot(response['ruleName']+".png")
-    clickButton(setup,"Create")
+
+    if clickButton(setup,"Create") != True:
+        logger.info("*** Create Button is disabled")
+        logger.info("Request : %s",str(request))
+        logger.info("Response : %s",str(response))
+        resultlogger.info("*** Create Button is disabled")
+        resultlogger.info("Request : %s",str(request))
+        resultlogger.info("Response : %s",str(response))
+    else:
+        logger.info("*** Create Button is clicked and Report with below parameters is triggered")
+        logger.info("Request : %s",str(request))
+        logger.info("Response : %s",str(response))
+        resultlogger.info("*** Create Button is clicked and Report with below parameters is triggered")
+        resultlogger.info("Request : %s",str(request))
+        resultlogger.info("Response : %s",str(response))
+
 
     error = isError(setup)
     if error[0]:
@@ -273,7 +288,7 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
     # operator=re.findall('[=<>]+',cond)[0]
     # number_value=re.findall(r'\d+',cond)[0]
     if thresholdValue == "NA":
-        thresholdValue = random.randint(0,100)
+        thresholdValue = random.randint(1,100)
 
 
     if type == setup.cM.getAllNodeElements("measuretypes","type")[0]:
