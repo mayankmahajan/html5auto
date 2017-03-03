@@ -187,6 +187,7 @@ def doActionsOnTimeRangePage(setup,grPopInstance,inputinfo,reportType,starttimeE
     # getting info from TimeRange Page
 
     inputinfo[MuralConstants.STARTTIME] = grPopInstance.dropdown.getValue_input(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allinputs"),0)
+    starttimeEpoch = getepoch(str(inputinfo[MuralConstants.STARTTIME]),Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
 
     if 'ourly' not in reportType['locatorText'] and 'ecurring' not in reportType['locatorText']:
         inputinfo[MuralConstants.ENDTIME] = grPopInstance.dropdown.getValue_input(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allinputs"),1)
