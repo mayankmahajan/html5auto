@@ -5,9 +5,19 @@
         <wizardquicklink id = "Today"/>
         <wizardquicklink id = "Yesterday"/>
         <wizardquicklink id = "This Week"/>
-        <wizardquicklink id = "Last week"/>
+        <wizardquicklink id = "Last Week"/>
         <wizardquicklink id = "This Month"/>
+        <wizardquicklink id = "Last Month"/>
     </wizardquicklinks>
+
+    <wizardquicklinks1>
+        <wizardquicklink id = "today" locatorText="Today"/>
+        <wizardquicklink id = "yesterday" locatorText="Yesterday"/>
+        <wizardquicklink id = "thisweek" locatorText="This Week"/>
+        <wizardquicklink id = "lastweek" locatorText="Last Week"/>
+        <wizardquicklink id = "thismonth" locatorText="This Month"/>
+        <wizardquicklink id = "lastmonth" locatorText="Last Month"/>
+    </wizardquicklinks1>
 
 
     <!--<measures>-->

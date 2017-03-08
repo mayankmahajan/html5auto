@@ -55,6 +55,8 @@ class Constants(object):
 
     TIMEZONEOFFSET = -6
     TIMEPATTERN = '%d %b %Y %H:%M:%S'
+    FLAGDAILY = 24
+    FLAGHOURLY = 1
 
 
     chromedriverpath = "/Users/mayank.mahajan/Downloads/chromedriver54"

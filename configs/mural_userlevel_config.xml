@@ -2,15 +2,32 @@
 <data>
 
     <reporttypes>
-        <reporttype id = "Gateway Traffic" quicklinkid="yesterday" />
-        <reporttype id = "Tonnage Distribution based on Subscriber Percent" quicklinkid="onetime" />
+        <!--<reporttype id = "Gateway Traffic" quicklinkid="yesterday" />-->
+        <!--<reporttype id = "Tonnage Distribution based on Subscriber Percent" quicklinkid="onetime" />-->
         <reporttype id = "Top Domains" quicklinkid="recurring"/>
     </reporttypes>
 
     <availabletimerange>
-        <time id="starttime" year="2017" month ="02" day="10" hour="19" min="00"/>
-        <time id ="endtime" year="2017" month ="02" day="13" hour="00" min="00"/>
+
+        <starttime id="0" year="2017" month ="02" day="13" hour="00" min="00"/>
+        <endtime id ="0" year="2017" month ="02" day="14" hour="00" min="00"/>
+
+        <starttime id="1" year="2017" month ="02" day="10" hour="19" min="00"/>
+        <endtime id ="1" year="2017" month ="02" day="13" hour="05" min="00"/>
+
+        <starttime id="2" year="2017" month ="02" day="04" hour="11" min="00"/>
+        <endtime id ="2" year="2017" month ="02" day="13" hour="00" min="00"/>
+
+        <starttime id="3" year="2017" month ="02" day="13" hour="01" min="00"/>
+        <endtime id ="3" year="2017" month ="02" day="13" hour="05" min="00"/>
+
+        <starttime id="4" year="2017" month ="01" day="15" hour="10" min="00"/>
+        <endtime id ="4" year="2017" month ="02" day="13" hour="00" min="00"/>
+
+
+
     </availabletimerange>
+
 
 
 
