@@ -37,6 +37,7 @@ class SetUp:
 
         # self.d = webdriver.Firefox()
         self.d.get(Constants.URL)
+        self.d.maximize_window()
         self.dH = DriverHelper(self.d)
         self.cM = ConfigManager()
 

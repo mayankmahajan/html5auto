@@ -46,6 +46,31 @@ class SwitcherComponentClass(BaseComponentClass):
             raise e("%s %s",parent,child)
             return e
 
+    # for mural
+    def measureChangeSwitcher(self,index,h,parent="measureChangeSection",child="switcher"):
+        try:
+            h[parent][child][0].find_elements_by_tag_name('div')[index].click()
+            time.sleep(2)
+            return True
+        except Exception as e:
+            logger.error("Got Exception while using Measure Switcher %s",str(e))
+            return e
+
+    # for mural
+    def getMeasureChangeSelectedSwitcher(self,h,parent="measureChangeSection",child="switcher"):
+        try:
+            if not h[parent][child]:
+                return False
+            divs = h[parent][child][0].find_elements_by_tag_name('div')
+            selectedSwitcher = []
+            for i in range(len(divs)):
+                if "active" in str(divs[i].get_attribute("class")).lower:
+                    selectedSwitcher.append(i)
+            time.sleep(2)
+            return selectedSwitcher
+        except Exception as e:
+            logger.error("Got Exception while getting Measure Switcher Selection = %s",str(e))
+            return e
 
 
 

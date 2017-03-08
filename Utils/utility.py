@@ -86,6 +86,8 @@ def checkEqualAssert(f1,f2,time="",measure="",message=""):
 
 def login(obj,username,password):
     try:
+        if Constants.isOffline:
+            return True
         driver = obj.d
         driverHelper = obj.dH
         configmanager = obj.cM

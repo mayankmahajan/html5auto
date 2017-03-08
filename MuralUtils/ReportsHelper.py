@@ -217,7 +217,7 @@ def doActionsOnFiltersPage(setup,grPopInstance,reportType,reportObj):
             if reportObj.filters['network'][i] != '':
                 # grPopInstance.multiDropdown.domultipleSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),reportObj.filters['network'][i],i)
                 handle = getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup")
-                grPopInstance.multiDropdown.domultipleSelectionWithIndex(handle,[0],i)
+                # grPopInstance.multiDropdown.domultipleSelectionWithIndex(handle,[0],i)
                 grPopInstance.multiDropdown.domultipleSelectionWithIndex(handle,reportObj.filters['network'][i],i)
                 # inputinfo['filters'].append(['network',i,grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)])
             inputinfo['filters'][subfilter[i]] = grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)

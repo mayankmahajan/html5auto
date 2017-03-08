@@ -105,3 +105,63 @@ class ContextMenuComponentClass(BaseComponentClass):
     #     pass
     #     # handles['trends']
 
+
+    def activate(self,h,parent='exploreBar',child='cm'):
+        try:
+            logger.info("Going to click Context Menu Option")
+            h[parent][child][0].click()
+            logger.info("Context Menu Option Clicked")
+            return True
+        except Exception as e:
+            logger.error("Got Exception while clicking Context Menu = %s",str(e))
+            return e
+
+    def goto(self,value,h,parent='exploreBar',child='a'):
+        try:
+            for e in h[parent][child]:
+                if value == str(e.text):
+                    logger.info("Going to click Option = %s",e.text)
+                    e.click()
+                    return True
+        except Exception as e:
+            logger.error("Got Exception while clicking Option %s = %s",value,str(e))
+            return e
+
+
+    def gotoScreenViaBreadCrumb(self,screenName,h,parent="breadcrumb",child='bar'):
+        for e in h[parent][child]:
+            if str(e.text) == screenName:
+                e.click()
+                break
+
+    def gotoScreenViaWorkFlowDrop(self,screenName,h,parent="breadcrumb",child='workflow'):
+        for e in h[parent][child][0].find_elements_by_xpath(".//*"):
+            if str(e.text).strip().strip('\n').strip() == screenName:
+                e.click()
+                break
+
+    def activateWorkFlowDropDown(self,h,parent="breadcrumb",child='workflow'):
+        try:
+            h[parent][child][0].click()
+            return True
+        except Exception as e:
+            logger.error("Got Exception while launching WorkFlow Dropdown = %s",str(e))
+            return e
+
+    def getScreenName(self,h,parent="exploreBar",child='labels'):
+        try:
+            screenName =  str(h[parent][child][0].text)
+            logger.info("Got Screen Name = %s",screenName)
+            return screenName
+        except Exception as e:
+            logger.error("Got Exception while getting Screen Name = %s",str(e))
+            return e
+
+    def getRHSBreadCrumbLabel(self,h,parent="exploreBar",child='labels'):
+        try:
+            screenName =  str(h[parent][child][1].text)
+            logger.info("Got BreadCrumb Label = %s",screenName)
+            return screenName
+        except Exception as e:
+            logger.error("Got Exception while getting Breadcrumb Label = %s",str(e))
+            return e
