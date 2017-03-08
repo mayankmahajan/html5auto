@@ -91,7 +91,7 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
                 elements[i].click()
 
         activeDropDowns[index].click()
-        return self.getSelection(h,index)
+        return self.getSelection(h,index,parent,child)
 
     def getOptionsAvailable(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
@@ -105,4 +105,19 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             if el.get_attribute("type") == "text":
                 el.send_keys(value)
         return self.getOptionsAvailable(h,index)
+
+    def getHeader(self,h,index,parent="picker",child="multiselect-dropdown"):
+        return h[parent][child][index].find_elements_by_css_selector("[class*=PickerHeaderClass]")[0].text.strip().strip('\n').strip()
+
+
+    def domultipleSelectionWithName(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
+        activeDropDowns = h[parent][child]
+        activeDropDowns[index].click()
+        time.sleep(2)
+
+        for el in activeDropDowns[index].find_elements_by_class_name("menuitemDiv"):
+            if str(el.text).strip() == value:
+                el.click()
+                return str(activeDropDowns[index].find_elements_by_xpath("./div/*")[0].text)
+
 

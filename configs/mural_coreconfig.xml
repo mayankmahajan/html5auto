@@ -194,6 +194,7 @@
 
         <componentConfig id ='summarybar'>
             <component id="summaryBarTable" selector="class name" locator="summaryBarTable" locatorDimension="class" locatorText="summaryBarTable"/>
+            <component id ='button' selector="tag name" locator="button"/>
         </componentConfig>
 
 
@@ -235,7 +236,7 @@
 
         <componentConfig id = 'btv'>
             <!--<component id = "barchart" selector="xpath" locator='//*[contains(@id, "chartDiv")]'/>-->
-            <!--<component id = "btv" selector="xpath" locator='//*[contains(@id, "_barTabularView")]' action="" parent="True"/>-->
+            <component id = "btv1" selector="class name" locator='btvContainer' action=""/>
             <component id = "BTVCOLUMN0" selector="xpath" locator='//*[contains(@class, "column0")]' locatorDimension ='class' locatorText = 'column0' action="click" wait = 'skip'/>
             <component id = "BTVCOLUMN1" selector="xpath" locator='//*[contains(@class, "column1")]' locatorDimension ='class' locatorText = 'column1' action="getData" wait = 'skip'/>
             <component id = "BTVCOLUMN2" selector="xpath" locator='//*[contains(@class, "column2")]' locatorDimension ='class' locatorText = 'column2' action="getData" wait = 'skip'/>

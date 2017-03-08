@@ -21,7 +21,20 @@
         <measure id = "downlinktonnage" locatorText="Downlink Tonnage" unitSystem = "bytes"/>
         <measure id = "uplinktonnage" locatorText="Uplink Tonnage" unitSystem = "bytes"/>
         <measure id = "uniquesubscribers" locatorText="Unique Subscribers" unitSystem = "metric"/>
+        <measure id = "uniquesubscribers" locatorText="Unique Subscribers" unitSystem = "metric"/>
     </measures>
+
+    <networkdimeas>
+        <measure id = "volume" locatorText="Volume" options="direction" unitSystem = "metric"/>
+        <measure id = "bitrate" locatorText="Bitrate" options="direction,operation" unitSystem = "bytes"/>
+        <measure id = "flows" locatorText="Flows" options="operation" unitSystem = "bytes"/>
+        <measure id = "flowduration" locatorText="Flow Duration" options="operation" unitSystem = "bytes"/>
+        <measure id = "subscribers" locatorText="Unique Subscribers" options="operation" unitSystem = "metric" summaryCard="only" />
+
+        <dimension id = "area" expectedText="Area"/>
+        <dimension id = "region" expectedText="Region"/>
+        <dimension id = "gateway" expectedText="Gateway"/>
+    </networkdimeas>
 
     <unitsystem>
         <unit id="bytes" unitvalues = "B,KB,MB" />
@@ -89,6 +102,15 @@
         <!--<quicklink id="lastthirtydays" locatorText ="Last 30 days" starttime="False" endtime="False"/>-->
 
     </quicklinks>
+    <summaryCardOptions>
+        <option1 id ="downlink" locatorText="DownLink"/>
+        <option1 id ="uplink" locatorText="Uplink"/>
+        <option1 id ="both" locatorText="Both"/>
+
+        <option2 id ="average" locatorText="Average"/>
+        <option2 id ="peak" locatorText="Peak"/>
+        <option2 id ="total" locatorText="total"/>
+    </summaryCardOptions>
 
 
     <reportwizardfilters>
@@ -112,6 +134,25 @@
 
 
     <screenConfigs>
+        <screenConfig id = "workflowstart_Screen">
+            <component id ="screenbody" selector="tag name" locator="kiwik-workflow" parent="True"/>
+        </screenConfig>
+        <screenConfig id = "network_Screen">
+            <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
+            <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
+            <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
+            <component id = "btv" selector="class name" locator='networkbtvcolumn' parent="True"/>
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "network_SummaryBar")]' action="" parent="True"/>
+            <component id = "picker" selector="css selector" locator="table.networkTable" parent="True" />
+            <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
+            <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
+            <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
+
+            <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
+            <component id = "filterArea" selector="tag name " locator="kiwik-filter-layout" parent="True"/>
+
+        </screenConfig>
+
 
         <screenConfig id = "report_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
@@ -144,7 +185,9 @@
         </screenConfig>
 
         <screenConfig id="alert_Screen">
-            <component id="allspans" selector="tag name" locator="kiwik-alerts-navbar" parent="True"/>
+
+            <component id="allspans" selector="tag name" locator="kiwik-landing-page" parent="True"/>
+            <!--<component id="allspans" selector="tag name" locator="kiwik-alerts-navbar" parent="True"/>-->
             <component id= "settings" selector="tag name" locator="kiwik-settings" parent="True"/>
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
             <component id = "alertlist" selector="tag name" locator="kiwik-alerts" parent="True"/>
@@ -185,6 +228,9 @@
     </screenConfigs>
 
     <componentConfigs>
+        <componentConfig id ="screenbody">
+            <component id = "workflowstart" selector="tag name" locator="mural-workflow-start"/>
+        </componentConfig>
         <componentConfig id ="errorText">
             <component id = "errorText" selector="class name" locator="errorMsgClass" />
         </componentConfig>
@@ -263,12 +309,16 @@
         </componentConfig>
 
 
+        <componentConfig id ="picker">
+            <component id ="multiselect-dropdown" selector="tag name" locator="kiwik-pickerlist"/>
+        </componentConfig>
 
-        <componentConfig id="filterPopup">
-            <component id="header" selector="class name" locator="headerDiv"/>
+
+        <componentConfig id = "filterPopup">
+            <component id = "header" selector="class name" locator="headerDiv"/>
             <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
             <component id = "tree" selector="tag name" locator="tree" wait="skip"/>
-            <component id="allfilters" selector="class name" locator="filterTextDiv" wait="skip"/>
+            <component id = "allfilters" selector="class name" locator="filterTextDiv" wait="skip"/>
 
             <!--<component id = 'edit' selector="class name" locator="drop-down-list" wait="skip"/>-->
         </componentConfig>
@@ -277,6 +327,34 @@
         <componentConfig id = "wizards">
             <component id = 'qb' selector="tag name" locator="app-querybuilder" parent="False" />
 
+        </componentConfig>
+        <componentConfig id = "ktrs">
+            <component id = "bar" selector="css selector" locator="div.timeRangeBar"/>
+            <component id = "a" selector="tag name" locator='a' />
+            <component id = "label" selector="id" locator="timeRangeValueSpanID"/>
+            <component id = "calicon" selector="css selector" locator="timeRangeCustom"/>
+        </componentConfig>
+
+        <componentConfig id = "exploreBar">
+            <component id = "labels" selector="css selector" locator="label"/>
+            <component id = "export" selector="tag name" locator='kiwik-context-menu-export' />
+            <component id = "cm" selector="xpath" locator="//kiwik-context-menu/div[1]"/>
+            <component id = "a" selector="tag name" locator='a' />
+        </componentConfig>
+
+        <componentConfig id ="measureChangeSection">
+            <component id = "measure" selector="tag name" locator="kiwik-multiselect-dropdown"/>
+            <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
+        </componentConfig>
+
+        <componentConfig id ="breadcrumb">
+            <component id = "workflow" selector="xpath" locator="./div[1]"/>
+            <component id = "bar" selector="xpath" locator="//kiwik-breadcrumb-bar/div"/>
+        </componentConfig>
+
+        <componentConfig id = "filterArea">
+            <component id = "filterIcon" selector="xpath" locator="./div[1]"/>
+            <component id = "filterText" selector="xpath" locator="./div[2]"/>
         </componentConfig>
     </componentConfigs>
 

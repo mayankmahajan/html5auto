@@ -80,6 +80,7 @@ class AlertsComponentClass(BaseComponentClass):
 
         # alertBOdyObject['links'] = h['links']
         alertBOdyObject['conditions'] = self.createConditions(h)
+
         return alertBOdyObject
 
     def getColor(self,h,child='color'):
@@ -187,3 +188,16 @@ class AlertsComponentClass(BaseComponentClass):
             if col in color:
                 return str(color).split('#')[0]
         return str(col)
+
+
+# http://stackoverflow.com/questions/37090653/iterating-through-table-rows-in-selenium-python
+# from lxml import html
+# xml = html.fromstring(h)
+# # gets the table
+# table =  xml.xpath("//table[@class='datadisplaytable']")[0]
+#
+#
+# # iterate over all the rows
+# for row in table.xpath(".//tr"):
+#      # get the text from all the td's from each row
+#     print([td.text for td in row.xpath(".//td[@class='dddefault'][text()])

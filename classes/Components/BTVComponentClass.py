@@ -288,3 +288,8 @@ class BTVComponentClass(BaseComponentClass):
             tooltip = False
         print tooltip
         return result[key]
+
+
+    # added for network Mural Screen
+    def getHeader(self,h,index,parent="btv",child="btv1"):
+        return h[parent][child][index].find_elements_by_css_selector("[class*=PickerHeaderClass]")[0].text.strip().strip('\n').strip()

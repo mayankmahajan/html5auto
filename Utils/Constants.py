@@ -2,12 +2,16 @@ class Constants(object):
 
     #testcase based constants
     # URL = 'https://acume-staging.guavus.com:6443/'
-    # URL = 'localhost:3333/ui/app/'
+    # URL = 'localhost:3333'
     # URL = 'https://nrmca.guavus.com:44710/'
     # URL = "https://muralautomation.cisco.com:6443/"
     # URL = "https://scrum.jalapeno.com:6443"
     # URL = "https://uiscrummural.cisco.com:6443/"
-    URL = "https://murala-ca.guavus.com:6443/"
+    isOffline = True
+    if isOffline:
+        URL = 'localhost:3333'
+    else:
+        URL = "https://murala-ca.guavus.com:6443/"
 
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
@@ -40,7 +44,7 @@ class Constants(object):
     DRILLTONE="DRILLTONE"
     DRILLTONENE="DRILLTONENE"
     # driver based constants
-    WEBDRIVERTIMEOUT = 3
+    WEBDRIVERTIMEOUT = 6
 
     # Component based constants
     ## BTV

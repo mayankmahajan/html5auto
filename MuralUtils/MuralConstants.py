@@ -29,3 +29,5 @@ class MuralConstants(Constants):
     CREATERULE = "createrule"
     ADDRULE = "addrule"
     ALERTSCREEN = "alert_Screen"
+    NWSCREEN = "network_Screen"
+    WFSTARTSCREEN = "workflowstart_Screen"

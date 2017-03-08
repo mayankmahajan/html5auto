@@ -6,7 +6,7 @@ from Utils.utility import *
 setup = SetUp()
 sleep(6)
 
-# login(setup, "admin", "admin123")
+login(setup, "admin", "admin123")
 
 print isError(setup)
 
@@ -24,11 +24,11 @@ print isError(setup)
 # columns = ["DPI Alert Rule Name","Frequency","Measure","Range","Status"]
 columnName = "DPI Alert Rule Name"
 
-# print AlertsHelper.deleteTableEntry(setup,MuralConstants.ALERTSCREEN,1,columnName)
+print AlertsHelper.deleteTableEntry(setup,MuralConstants.ALERTSCREEN,1,columnName)
 # print AlertsHelper.deleteTableEntry(setup,MuralConstants.ALERTSCREEN,0,columnName,False)
+# print AlertsHelper.editAlert(setup, 0,columnName)
 
 
-print AlertsHelper.editAlert(setup, 0,columnName)
 
 
 

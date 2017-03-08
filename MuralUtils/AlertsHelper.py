@@ -157,16 +157,26 @@ def checkDPIAlerts(setup):
 
 def checkAlertsPresent(setup,alertRuleMap,alertlist):
     for i in range(len(alertlist)):
-        screenInstance = AlertsComponentClass()
-        screenInstance.selectAlert(i,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
-        alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+        alertListWithRule,alertFullBody = appendAlertListWithRule(i,setup,alertRuleMap,alertlist)
+        for k, v in alertListWithRule.iteritems():
+            checkEqualAssert(alertListWithRule[k], alertFullBody[k], "", "", "Checking DPI Alerts :: " + k + " :: ")
 
-        request = merge_dictionaries(alertlist[i],getDPIAlertsDataAsDict(alertRuleMap['rows'][alertFullBody['ruleName']]))
-        resultlogger.info("**** Logging results for Alert List and Alert Main Body checks ****")
-        resultlogger.info("Expected : %s \n",str(request))
-        resultlogger.info("Actual : %s \n", str(alertFullBody))
-        for k, v in request.iteritems():
-            checkEqualAssert(request[k], alertFullBody[k], "", "", "Checking DPI Alerts :: " + k + " :: ")
+def appendAlertListWithRule(i,setup,alertRuleMap,alertlist):
+    screenInstance = AlertsComponentClass()
+    screenInstance.selectAlert(i,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
+    alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+    alertListWithRule = merge_dictionaries(alertlist[i],getDPIAlertsDataAsDict(alertRuleMap['rows'][alertFullBody['ruleName']]))
+    resultlogger.info("**** Logging results for Alert List and Alert Main Body checks ****")
+    resultlogger.info("Expected : %s \n",str(alertListWithRule))
+    resultlogger.info("Actual : %s \n", str(alertFullBody))
+    return alertListWithRule,alertFullBody
+
+def getAllAlertsAppendedWithRule(setup,alertRuleMap,alertlist):
+    allAlertListWithRule = []
+    for i in range(len(alertlist)):
+        x,y=appendAlertListWithRule(i,setup,alertRuleMap,alertlist)
+        allAlertListWithRule.append(x)
+    return allAlertListWithRule
 
 def getDPIAlertsDataAsDict(row):
     d={}
@@ -332,10 +342,13 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
 
         logger.info("Entering value %s for operator %s and Priority %s",str(thresholdValue),str(op),str(priorty))
 
-        if priorty == 2:
-            num_value = instance.sendkeys_input(thresholdValue, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),0,"allinputs","number")
-        else:
-            num_value = instance.sendkeys_input(thresholdValue, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
+        # if priorty == 2:
+        #     num_value = instance.sendkeys_input(thresholdValue, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),0,"allinputs","number")
+        # else:
+        # MUR-1484 (commenting as it fixed now)
+
+        num_value = instance.sendkeys_input(thresholdValue, getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
+        num_value = instance.getValue_input(getHandle(setup,MuralConstants.CREATERULEPOPUP,"allinputs"),priorty+1,"allinputs")
 
         logger.info("Value %s set for operator %s and Priority %s",str(num_value),str(op),str(priorty))
 
@@ -343,9 +356,12 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
             returnValue = str(op).strip()+str(num_value).strip()
         else:
             logger.info("Selecting unitsystem %s for operator %s and Priority %s",str(unitSystem),str(op),str(priorty))
-            unit=instance.doSelectionOnVisibleDropDown(handle,unitSystem,index+1)
+            unit=instance.doRandomSelectionOnVisibleDropDown(handle,index+1)
             logger.info("Unitsystem %s is set for operator %s and Priority %s",str(unitSystem),str(op),str(priorty))
             returnValue = str(op).strip()+str(num_value).strip()+str(unit).strip()
+
+        if enableCondition == "edit":
+            return returnValue if not newState else "-"
 
         if enableCondition == "":
             enableCondition = random.choice([True, False])
@@ -548,11 +564,16 @@ def acknowledgeAlert(setup,index):
         checkEqualAssert(True,updated_alertlist['state'],"","","Check for Alert status Handled or not in AlertList")
         checkEqualAssert(True,updated_alertFullBody['state'],"","","Check for Alert status Handled or not in AlertFullBody")
 
-def deleteAllAlert(setup,index):
+def deleteAllAlert(setup,index,flag=True):
     alertbodylinks = setup.cM.getNodeElements("alertbodylinks","link")
     screenInstance = AlertsComponentClass()
+
+    screenInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+    alertRuleMap= getTableDataMap(setup, MuralConstants.ALERTSCREEN)
+    screenInstance.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+
     screenInstance.selectAlert(index,getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"))
-    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
+
     selectedAlertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","selected")
 
     # assuming selection is single
@@ -562,6 +583,19 @@ def deleteAllAlert(setup,index):
     screenInstance.dropdown.clickSpanWithTitle(alertbodylinks['deleteall']['locatorText'],getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
 
     gHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"alert")
+
+    button="OK" if flag else "Cancel"
+
+    popUpMessage = gHandle['alert']['filters'][0].text.strip().strip('\n').strip()
+    expectedMessage = "delete all alert same rule ?"
+
+    for message in expectedMessage.split():
+        checkEqualAssert(True,message in popUpMessage,"","","Verify Delete Dialog text for = "+message+" in "+popUpMessage)
+
+    actualHeader = gHandle['alert']['header'][0].text.strip().strip('\n').strip()
+    expectedHeader = "Delete All"
+    checkEqualAssert(expectedHeader,actualHeader,"","","Verify Delete All Dialog Header")
+
     logger.debug("Confirming Delete from Pop up")
     try:
         gHandle['alert']['ok'][0].click()
@@ -573,9 +607,11 @@ def deleteAllAlert(setup,index):
         logger.error("Exception found while Deleting All Alerts %s with Rule %s  : %s",str(selectedAlert),alertFullBody['ruleName'],e)
         return e
 
+    alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
 
-    for el in alertlist:
-        checkEqualAssert(True,alertFullBody['ruleName'] != el['ruleName'],"","","Check for each alert : "+str(el)+" from list for rule "+alertFullBody['ruleName'] + " deleted")
+    allAlerts = getAllAlertsAppendedWithRule(setup,alertRuleMap,alertlist)
+    for aList in allAlerts:
+        checkEqualAssert(True,alertFullBody['ruleName'] != aList['ruleName'],"","","Check for each alert : "+str(aList)+" from list for rule "+alertFullBody['ruleName'] + " deleted")
 
 def checkAlertsCount(setup):
     screenInstance = AlertsComponentClass()
@@ -590,7 +626,7 @@ def editAlert(setup,index,columnName,flag=True):
     key = screenInstance.table.getColumnValueMap(tableData,index,columnName)
     logger.info("Going to Edit Alert = %s",tableData['rows'][index])
     try:
-        screenInstance.dropdown.customClick(tableHandle['table']['edit'][index])
+        screenInstance.dropdown.customClick(getHandle(setup,MuralConstants.REPORTSCREEN,"table")['table']['edit'][index])
         try:
             screenInstance.dropdown.customClick(getHandle(setup,MuralConstants.REPORTSCREEN,"table")['table']['edit'][index])
         except:
@@ -634,9 +670,9 @@ def editDPIDetails(setup):
     details.append(setFilters1(setup,type,allselects)) #filters
     details.append(setDropRandomly(0,allselects)) #measure
 
-    details.append(setDPICondition(0,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition0
-    details.append(setDPICondition(1,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition1
-    details.append(setDPICondition(2,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup)) #condition2
+    details.append(setDPICondition(0,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,enableCondition="edit")) #condition0
+    details.append(setDPICondition(1,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,enableCondition="edit")) #condition1
+    details.append(setDPICondition(2,type,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,enableCondition="edit")) #condition2
 
     st = setTime(setup,0,Time())
     et = setTime(setup,1,Time())
@@ -680,11 +716,14 @@ def getFilters(setup,type,h):
     else:
         startingDrop=6
     f=''
-    for i in range(startingDrop,len(h[MuralConstants.ALLSELECTS]['select']),2):
-        fD=getDrop(i,h)
-        fV=getDrop(i+1,h)
-        f=f+fD+":"+fV+","
-    return f.strip(',')
+    try:
+        for i in range(startingDrop,len(h[MuralConstants.ALLSELECTS]['select']),2):
+            fD=getDrop(i,h)
+            fV=getDrop(i+1,h)
+            f=f+fD+":"+fV+","
+        return f.strip(',')
+    except IndexError or Exception as e:
+        return logger.error("Exception found while getting Filters = %s",str(e))
 
 def setFilters1(setup,type,h):
     if type == setup.cM.getAllNodeElements("measuretypes","type")[0]:
