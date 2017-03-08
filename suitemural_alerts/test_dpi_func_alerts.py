@@ -1,3 +1,5 @@
+# This Script tests Delete,DeleteAll,Acknowledge Functionalities
+
 from Utils.SetUp import *
 from MuralUtils.AlertsHelper import *
 setup=SetUp()
@@ -8,7 +10,13 @@ exploreHandle = getHandle(setup,"explore_Screen")
 exploreScreenInstance.exploreList.launchModule(exploreHandle,"ALERTS")
 
 
-checkDPIAlerts(setup)
+deleteAllAlert(setup,1,False)
+deleteAlert(setup,1,False)
+
+
+deleteAlert(setup,1,True)
+deleteAllAlert(setup,1,True)
+
 setup.d.close()
 
 # createKPIAlert(setup)

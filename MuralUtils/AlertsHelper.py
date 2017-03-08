@@ -564,7 +564,9 @@ def acknowledgeAlert(setup,index):
         checkEqualAssert(True,updated_alertlist['state'],"","","Check for Alert status Handled or not in AlertList")
         checkEqualAssert(True,updated_alertFullBody['state'],"","","Check for Alert status Handled or not in AlertFullBody")
 
-def deleteAllAlert(setup,index,flag=True):
+
+def delete(linkname,setup,index,flag=True):
+
     alertbodylinks = setup.cM.getNodeElements("alertbodylinks","link")
     screenInstance = AlertsComponentClass()
 
@@ -580,11 +582,11 @@ def deleteAllAlert(setup,index,flag=True):
     selectedAlert=selectedAlertlist[0]
 
     alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
-    screenInstance.dropdown.clickSpanWithTitle(alertbodylinks['deleteall']['locatorText'],getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
+    screenInstance.dropdown.clickSpanWithTitle(alertbodylinks[linkname]['locatorText'],getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS))
 
     gHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"alert")
 
-    button="OK" if flag else "Cancel"
+    button="ok" if flag else "cancel"
 
     popUpMessage = gHandle['alert']['filters'][0].text.strip().strip('\n').strip()
     expectedMessage = "delete all alert same rule ?"
@@ -598,15 +600,29 @@ def deleteAllAlert(setup,index,flag=True):
 
     logger.debug("Confirming Delete from Pop up")
     try:
-        gHandle['alert']['ok'][0].click()
+        gHandle['alert'][button][0].click()
         try:
-            gHandle['alert']['ok'][0].click()
+            gHandle['alert'][button][0].click()
         except:
             pass
     except Exception as e:
         logger.error("Exception found while Deleting All Alerts %s with Rule %s  : %s",str(selectedAlert),alertFullBody['ruleName'],e)
         return e
 
+    return screenInstance,alertRuleMap,alertFullBody
+
+
+def deleteAlert(setup,index,flag=True):
+    screenInstance,alertRuleMap,alertFullBody = delete("delete",setup,index,flag)
+
+    updated_alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
+    checkEqualAssert(1,len(alertFullBody['alarmrows'])-len(updated_alertFullBody['alarmrows']),"","","Verify difference of alarm rows after delete")
+
+    checkEqualAssert(alertFullBody['alarmrows'][1],updated_alertFullBody['alarmrows'][0],"","","Verify Second Alert should become First in New List")
+
+
+def deleteAllAlert(setup,index,flag=True):
+    screenInstance,alertRuleMap,alertFullBody = delete("deleteall",setup,index,flag)
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
 
     allAlerts = getAllAlertsAppendedWithRule(setup,alertRuleMap,alertlist)
