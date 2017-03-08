@@ -81,8 +81,20 @@
     </dpithresholds>
 
     <dpiWizardtimerange>
-        <starttime id="starttime" year="2016" month ="06" day="10" hour="10" min="00"/>
-        <endtime id ="endtime" year="2017" month ="01" date="25" hour="00" min="00"/>
+        <starttime id="0" year="2017" month ="01" day="13" hour="00" min="00"/>
+        <endtime id ="0" year="2017" month ="01" day="14" hour="00" min="00"/>
+
+        <starttime id="1" year="2017" month ="01" day="10" hour="19" min="00"/>
+        <endtime id ="1" year="2017" month ="01" day="13" hour="05" min="00"/>
+
+        <starttime id="2" year="2017" month ="02" day="04" hour="11" min="00"/>
+        <endtime id ="2" year="2017" month ="02" day="13" hour="00" min="00"/>
+
+        <starttime id="3" year="2017" month ="02" day="13" hour="01" min="00"/>
+        <endtime id ="3" year="2017" month ="02" day="13" hour="05" min="00"/>
+
+        <starttime id="4" year="2017" month ="01" day="15" hour="10" min="00"/>
+        <endtime id ="4" year="2017" month ="02" day="13" hour="00" min="00"/>
     </dpiWizardtimerange>
     <colors>
         <color id ="red#ff2b00#ff0000"/>
@@ -137,6 +149,8 @@
         <screenConfig id = "workflowstart_Screen">
             <component id ="screenbody" selector="tag name" locator="kiwik-workflow" parent="True"/>
         </screenConfig>
+
+
         <screenConfig id = "network_Screen">
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
             <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />

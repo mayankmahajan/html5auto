@@ -498,17 +498,22 @@ def doSearchAndValidateAlerts(setup):
     # t = screenInstance.search.sendkeys_input("",getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","searchInput")
     # checkEqualAssert("",t,"","","Check Search Field Cleared")
 
-def doCalendarSearchOnAlerts(setup):
+def doCalendarSearchOnAlerts(setup,stEtCombID=0):
+    st = setup.cM.getNodeElements("dpiWizardtimerange", "starttime")[str(stEtCombID)]
+    et = setup.cM.getNodeElements("dpiWizardtimerange", "endtime")[str(stEtCombID)]
+    stObj = Time(st['year'], st['month'], st['day'], st['hour'],st['min'])
+    etObj = Time(et['year'], et['month'], et['day'], et['hour'],et['min'])
+
     screenInstance = AlertsComponentClass()
     calHandler = getHandle(setup,MuralConstants.ALERTSCREEN,"search")
     logger.info("Launching Calendar from Search Panel")
     calHandler['search']['datepicker'][0].click()
     logger.info("Calendar picker is clicked")
-    stObj = Time(2015,11,19,00,00)
+    # stObj = Time(st[''],11,19,00,00)
     stEpoch = getepoch(stObj.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     instance = GenerateReportsPopClass(setup.d)
     setCalendar(stObj.year,stObj.month, stObj.day, stObj.hour, stObj.min, instance, setup,MuralConstants.CREATERULEPOPUP)
-    etObj = Time(2015,11,27,00,00)
+    # etObj = Time(2015,11,27,00,00)
     etEpoch = getepoch(etObj.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     setCalendar(etObj.year,etObj.month, etObj.day, etObj.hour, etObj.min, instance, setup,MuralConstants.CREATERULEPOPUP,"rightcalendar")
     # Closing Calendar Pop Up
@@ -522,10 +527,11 @@ def doCalendarSearchOnAlerts(setup):
         resultlogger.info("Alert List comes Empty when filter is selected  starttime  = %s  and endtime = %s ",
                      stObj.datestring, etObj.datestring)
     for i in range(len(alertlist)):
-        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralConstants.TIMEZONEOFFSET,"%d %m %Y %H:%M","-")
+        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralConstants.TIMEZONEOFFSET,"%d %b %Y %H:%M","-")
         # if (actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch):
         checkEqualAssert(True,(actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch),"","",
-                         "Check for alert '%s' and duration = '%s' falling in filtered timerange (%s,%s) ",alertlist[i]['header'],alertlist[i]['duration'],stObj.datestring,etObj.datestring)
+                         "Check for alert "+alertlist[i]['header']+" and duration = "+alertlist[i]['duration']+
+                         " falling in filtered timerange ("+stObj.datestring+","+etObj.datestring+") ")
 
 def gotoAlerts(setup,value):
     popInstance = GenerateReportsPopClass(setup.d)

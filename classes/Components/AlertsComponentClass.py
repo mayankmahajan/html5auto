@@ -3,6 +3,7 @@ from Utils.ConfigManager import ConfigManager
 from Utils.logger import *
 from classes.Components.SearchComponentClass import *
 from classes.Components.DropdownComponentClass import *
+from Utils.UnitSystem import *
 
 class AlertsComponentClass(BaseComponentClass):
 
@@ -12,6 +13,7 @@ class AlertsComponentClass(BaseComponentClass):
         self.search=SearchComponentClass()
         self.dropdown = DropdownComponentClass()
         self.colors = self.configmanager.getNodeElements("colors","color")
+        self.unitSystem = UnitSystem()
 
 
     def getAlertList(self,h,parent,child):
@@ -37,7 +39,7 @@ class AlertsComponentClass(BaseComponentClass):
         alertObject={}
         alertObject['state'] = self.getAlertHandledIcon(h)
         alertObject['header'] = self.getAlertLabels(h)[0]
-        # alertObject['duration'] = self.getAlertLabels(h)[1]
+        alertObject['duration'] = self.getAlertLabels(h)[1]
         alertObject['alarmcount'] = self.getAlertLabels(h)[2]
         alertObject['measure'] = self.getAlertLabels(h)[3]
         alertObject['color'] = self.getThresholdIconColor(h)
@@ -168,12 +170,39 @@ class AlertsComponentClass(BaseComponentClass):
 
     def getAlertsFromCounterBar(self,h):
         d={}
-        d['total'] = int(h['total'][0].text.split()[0])
+        try:
+            d['total'] = int(h['total'][0].text.split()[0])
+        except ValueError as e:
+            d['total'] = int(self.unitSystem.getRawValue(float(h['total'][0].text.split()[0]),str(h['total'][0].text.split()[1])))
+        except Exception as e:
+            return e
 
 
-        d[self.getColorName(self.rgb_to_hex(h['colors'][0].value_of_css_property("background-color")))] =int(h['severity'][0].text)
-        d[self.getColorName(self.rgb_to_hex(h['colors'][1].value_of_css_property("background-color")))] =int(h['severity'][1].text)
-        d[self.getColorName(self.rgb_to_hex(h['colors'][2].value_of_css_property("background-color")))] =int(h['severity'][2].text)
+        text = h['severity'][0].text
+        def _getUIValue(text):
+            splits = text.split()
+            if len(splits)>1:
+                return float(splits[0]),str(splits[1])
+            else:
+                return float(splits[0]),""
+
+
+
+        # d[self.getColorName(self.rgb_to_hex(h['colors'][0].value_of_css_property("background-color")))] =\
+        #     int(self.unitSystem.getRawValue(float(h['severity'][0].text.split()[0]),str(h['severity'][0].text.split()[1])))
+        # d[self.getColorName(self.rgb_to_hex(h['colors'][1].value_of_css_property("background-color")))] =\
+        #     int(self.unitSystem.getRawValue(float(h['severity'][1].text.split()[0]),str(h['severity'][1].text.split()[1])))
+        # d[self.getColorName(self.rgb_to_hex(h['colors'][2].value_of_css_property("background-color")))] =\
+        #     int(self.unitSystem.getRawValue(float(h['severity'][2].text.split()[0]),str(h['severity'][2].text.split()[1])))
+
+        d[self.getColorName(self.rgb_to_hex(h['colors'][0].value_of_css_property("background-color")))] =\
+            int(self.unitSystem.getRawValue(*_getUIValue(h['severity'][0].text)))
+        d[self.getColorName(self.rgb_to_hex(h['colors'][1].value_of_css_property("background-color")))] =\
+            int(self.unitSystem.getRawValue(*_getUIValue(h['severity'][1].text)))
+        d[self.getColorName(self.rgb_to_hex(h['colors'][2].value_of_css_property("background-color")))] =\
+            int(self.unitSystem.getRawValue(*_getUIValue(h['severity'][2].text)))
+
+
         return d
 
     def getTotalAlerts(self,alertList,h,parent="counter",child=""):
