@@ -17,8 +17,9 @@ from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 from selenium.webdriver.support.select import Select
 import time
-
+from Utils.logger import *
 from selenium.webdriver import ActionChains
+import  re
 
 
 
@@ -58,6 +59,35 @@ class SummaryBarComponentClass(BaseComponentClass):
                 d[measures[i]]['Peak'] = summaryBarHandler.find_elements_by_class_name("BottomRow")[i].text
 
             data[dimensionSelected] = d
+
+            return data
+        except Exception as e:
+            return e
+
+
+    def getSelection2(self,handlrs):
+        '''
+        This method gives the selected Index, its Corresponding Text and Value
+        :param handlers: handler to pieChart
+        :return: Selected Data
+        '''
+        try:
+            data = {}
+            handlers = self.compHandlers('summarybar',handlrs)
+            summaryBarHandler =handlers['summaryBarTable'][len(handlers['summaryBarTable'])-1]
+            dimensionSelected = str(summaryBarHandler.find_elements_by_class_name("LeftCell")[0].text.split('\n')[0].strip())
+            measures = [ele.text for ele in summaryBarHandler.find_elements_by_class_name("Row")]
+            buttons = summaryBarHandler.find_elements_by_class_name("LeftCell")[0].find_elements_by_tag_name("button")
+
+            for i in range(len(buttons)):
+                logger.info("Going to click Button = %s",str(buttons[i].text))
+                buttons[i].click()
+                time.sleep(2)
+                for j in range(1,len(measures)):
+                    data[(dimensionSelected,i,
+                          summaryBarHandler.find_elements_by_class_name("Row")[j].text)]=\
+                        summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text
+                        # self.unitSystem.getRawValueFromUI(summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text)
 
             return data
         except Exception as e:

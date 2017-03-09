@@ -68,19 +68,19 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
             resultlogger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
             logger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
-def checkEqualAssert(f1,f2,time="",measure="",message=""):
+def checkEqualAssert(expected, actual, time="", measure="", message=""):
     msg = time + " " + measure + " " + message
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     try:
-        assert f1 == f2
+        assert expected == actual
         msg = msg+tcPass
         resultlogger.info(msg)
         logger.info(msg)
 
     except AssertionError:
 
-        msg = msg+" Expected: "+str(f1)+" Actual: "+str(f2)+tcFail
+        msg = msg+" Expected: "+str(expected) + " Actual: " + str(actual) + tcFail
         resultlogger.info(msg)
         logger.info(msg)
 

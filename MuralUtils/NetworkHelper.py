@@ -27,58 +27,96 @@ def doActionsOnNetwork(networkScreenInstance,setup):
     btv['data'] = networkScreenInstance.btv.getData(getHandle(setup,MuralConstants.NWSCREEN,"btv"))
     btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"btv"),0)
     btv['tooltip']  = networkScreenInstance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
-    return picker1,picker2,btv
+
+    summary = {}
+    summary['data'] = networkScreenInstance.summarybar.getSelection2(setup,getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
+
+    return picker1,picker2,btv,summary
+
+def testScreenFunc(setup):
+    try:
+        networkScreenInstance = NetworkScreenClass(setup.d)
+        screenDetails = {}
+        screenDetails['screenName'] = networkScreenInstance.cm.getScreenName(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
+        screenDetails['breadCrumbLabel'] = networkScreenInstance.cm.getRHSBreadCrumbLabel(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
+
+        # timerange iteractions
+        quicklinks = {}
+        quicklinks[str(networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup,MuralConstants.NWSCREEN,"ktrs")))]=\
+            [True,networkScreenInstance.timeBar.getLabel(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))]
+
+        checkEqualAssert("Yesterday",networkScreenInstance.timeBar.getSelectedQuickLink(
+                getHandle(setup,MuralConstants.NWSCREEN,"ktrs")),"","","Verify Quicklink Selected")
+
+        print networkScreenInstance.timeBar.setQuickLink("Today",getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
+
+        quicklinks[str(networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup,MuralConstants.NWSCREEN,"ktrs")))]=\
+            [True,networkScreenInstance.timeBar.getLabel(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))]
+
+        selectedQuicklink = networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
+
+        checkEqualAssert("Today","selectedQuicklink","","","Verify Quicklink Selected")
+
+        # networkScreenInstance.timeBar.launchCalendar(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
+        #
+        # timeObj = Time()
+        # setCalendar(timeObj.year,timeObj.month, timeObj.day, timeObj.hour, timeObj.min, networkScreenInstance, setup,MuralConstants.CREATERULEPOPUP)
+        #
+        screenDetails['timeRange']={}
+        screenDetails['timeRange'][str(networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup,MuralConstants.NWSCREEN,"ktrs")))]=\
+            [True,networkScreenInstance.timeBar.getLabel(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))]
+
+        p1={}
+        p2={}
+        btv={}
+        summary = {}
+
+        screenDetails['p1']=p1
+        screenDetails['p2']=p2
+        screenDetails['btv']=btv
+        screenDetails['summary']=summary
+
+        # setting up measures
+        measures = setup.cM.getNodeElements("networkdimeas","measure")
+        for k,measure in measures.iteritems():
+            if not hasattr(measure,"summaryCard"):
+                measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(
+                        getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")
+                        ,measure['locatorText'],0,"measureChangeSection","measure")
+                checkEqualAssert(measure['locatorText'],measureSelected,"","","Verify Selected measure")
+                if hasattr(measure,"options") and 'direction' in measure['options']:
+                    for e in range(3):
+                        if networkScreenInstance.switcher.measureChangeSwitcher(e,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")):
+                            selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(
+                                    getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"))
+                            checkEqualAssert([e],selectedSwitcher,"","","Verify Selected Measure Direction")
+                        p1[(selectedQuicklink,measureSelected,e)], \
+                        p2[(selectedQuicklink,measureSelected,e)], \
+                        btv[(selectedQuicklink,measureSelected, e)], \
+                        summary[(selectedQuicklink,measureSelected, e)]\
+                            =doActionsOnNetwork(networkScreenInstance,setup)
 
 
+                        # launch
+                        networkScreenInstance.cm.activate(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
+                        networkScreenInstance.cm.goto("Access Technology",getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
+                        networkScreenInstance.cm.gotoScreenViaBreadCrumb("Network",getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
+                        networkScreenInstance.cm.activateWorkFlowDropDown(getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
+                        networkScreenInstance.cm.gotoScreenViaWorkFlowDrop("Trend & Monitoring",getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
 
-try:
 
+                else:
+                    isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"))
+                    checkEqualAssert(False,isDirectionsPresent,"","","Verify presence of Directions for Measure = "+measureSelected)
+                    e=None
 
-    setup = SetUp()
-    wfstart = WorkflowStartComponentClass()
-    #
-    sleep(8)
-    wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
-
-    networkScreenInstance = NetworkScreenClass(setup.d)
-
-    screenName = networkScreenInstance.cm.getScreenName(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
-    breadCrumbLabel = networkScreenInstance.cm.getRHSBreadCrumbLabel(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
-
-    # timerange iteractions
-    print networkScreenInstance.timeBar.getLabel(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
-    print networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
-    print networkScreenInstance.timeBar.setQuickLink("Today",getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
-    selectedQuicklink = networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
-    # networkScreenInstance.timeBar.launchCalendar(getHandle(setup,MuralConstants.NWSCREEN,"ktrs"))
-    #
-    # timeObj = Time()
-    # setCalendar(timeObj.year,timeObj.month, timeObj.day, timeObj.hour, timeObj.min, networkScreenInstance, setup,MuralConstants.CREATERULEPOPUP)
-    #
-
-    p1={}
-    p2={}
-    btv={}
-    # setting up measures
-    measures = setup.cM.getNodeElements("networkdimeas","measure")
-    for k,measure in measures.iteritems():
-        if not hasattr(measure,"summaryCard"):
-            measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(
-                    getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")
-                    ,measure['locatorText'],0,"measureChangeSection","measure")
-            checkEqualAssert(measure['locatorText'],measureSelected,"","","Verify Selected measure")
-            if hasattr(measure,"options") and 'direction' in measure['options']:
-                for e in range(3):
-                    if networkScreenInstance.switcher.measureChangeSwitcher(e,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")):
-                        selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(
-                                getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"))
-                        checkEqualAssert([e],selectedSwitcher,"","","Verify Selected Measure Direction")
-                    p1[(selectedQuicklink,measureSelected,e)], \
-                    p2[(selectedQuicklink,measureSelected,e)], \
-                    btv[(selectedQuicklink,measureSelected, e)]\
+                    p1[(selectedQuicklink,measureSelected,e)],\
+                    p2[(selectedQuicklink,measureSelected,e)],\
+                    btv[(selectedQuicklink,measureSelected, e)],\
+                    summary[(selectedQuicklink,measureSelected, e)]\
                         =doActionsOnNetwork(networkScreenInstance,setup)
 
-                    # launch
+
                     networkScreenInstance.cm.activate(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
                     networkScreenInstance.cm.goto("Access Technology",getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
                     networkScreenInstance.cm.gotoScreenViaBreadCrumb("Network",getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
@@ -86,36 +124,5 @@ try:
                     networkScreenInstance.cm.gotoScreenViaWorkFlowDrop("Trend & Monitoring",getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
 
 
-            else:
-                isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"))
-                checkEqualAssert(False,isDirectionsPresent,"","","Verify presence of Directions for Measure = "+measureSelected)
-                e=None
-
-                p1[(selectedQuicklink,measureSelected,e)], \
-                    p2[(selectedQuicklink,measureSelected,e)], \
-                    btv[(selectedQuicklink,measureSelected, e)]\
-                        =doActionsOnNetwork(networkScreenInstance,setup)
-
-
-                networkScreenInstance.cm.activate(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
-                networkScreenInstance.cm.goto("Access Technology",getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
-                networkScreenInstance.cm.gotoScreenViaBreadCrumb("Network",getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
-                networkScreenInstance.cm.activateWorkFlowDropDown(getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
-                networkScreenInstance.cm.gotoScreenViaWorkFlowDrop("Trend & Monitoring",getHandle(setup,MuralConstants.NWSCREEN,"breadcrumb"))
-
-
-    # summary = networkScreenInstance.summarybar.getSelection1(setup,getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
-    # print selections
-
-
-
-
-
-
-    setup.d.close()
-except Exception as e:
-    print str(e)
-    # sys._current_frames()
-    setup.d.close()
-
-
+    except Exception as e:
+        return e

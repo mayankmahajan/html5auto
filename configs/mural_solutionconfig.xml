@@ -156,7 +156,7 @@
             <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
             <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
             <component id = "btv" selector="class name" locator='networkbtvcolumn' parent="True"/>
-            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "network_SummaryBar")]' action="" parent="True"/>
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "_SummaryBar")]' action="" parent="True"/>
             <component id = "picker" selector="css selector" locator="table.networkTable" parent="True" />
             <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
             <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
