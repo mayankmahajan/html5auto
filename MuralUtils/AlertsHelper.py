@@ -977,12 +977,12 @@ def startEndTimeValidations(setup,request = {}):
         st = Time(starttime['year'],starttime['month'],starttime['day'],starttime['hour'],starttime['min'])
 
     starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-
+    request[MuralConstants.STARTTIME] = setTime(setup,0,st)
     et = st
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(et.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
 
@@ -996,15 +996,15 @@ def startEndTimeValidations(setup,request = {}):
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])-1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(et.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])+1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(et.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     return st,et
