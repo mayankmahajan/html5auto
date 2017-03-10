@@ -4,6 +4,7 @@ from Utils.utility import *
 from classes.Pages.MuralScreens.NetworkScreenClass import *
 from classes.Components.WorkflowStartComponent import *
 from classes.Components.TimeRangeComponentClass import *
+from classes.Pages.GlobalFiltersPopClass import *
 import sys
 
 from classes.Objects.Time import *
@@ -29,7 +30,7 @@ def doActionsOnNetwork(networkScreenInstance,setup):
     btv['tooltip']  = networkScreenInstance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
 
     summary = {}
-    summary['data'] = networkScreenInstance.summarybar.getSelection2(setup,getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
+    summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection2(setup,getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
 
     return picker1,picker2,btv,summary
 
@@ -126,3 +127,64 @@ def testScreenFunc(setup):
 
     except Exception as e:
         return e
+
+
+
+
+
+
+
+
+
+def setGlobalFilters(setup):
+    globalFilterInstance = GlobalFiltersPopClass(setup.d)
+
+    global_network= setup.cM.getNodeElements("globalScreenFilters","network")
+    global_apnrat= setup.cM.getNodeElements("globalScreenFilters","apnrat")
+    global_device= setup.cM.getNodeElements("globalScreenFilters","device")
+
+
+
+    print global_apnrat
+
+    #
+    # # for k in reportFilters:
+    # #     if k in reportType['filters']:
+    #
+    # if 'network' in reportType['filters']:
+    #     grPopInstance.clickLink(reportFilters['network']['locatorText'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "alllinks"))
+    #     for i in range(len(reportObj.filters['network'])):
+    #         subfilter = ["Area","Region","Gateway"]
+    #
+    #         if reportObj.filters['network'][i] != '':
+    #             # grPopInstance.multiDropdown.domultipleSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),reportObj.filters['network'][i],i)
+    #             handle = getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup")
+    #             # grPopInstance.multiDropdown.domultipleSelectionWithIndex(handle,[0],i)
+    #             grPopInstance.multiDropdown.domultipleSelectionWithIndex(handle,reportObj.filters['network'][i],i)
+    #             # inputinfo['filters'].append(['network',i,grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)])
+    #         inputinfo['filters'][subfilter[i]] = grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)
+    #
+    #
+    # if 'apnrat' in reportType['filters']:
+    #     grPopInstance.clickLink(reportFilters['apnrat']['locatorText'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "alllinks"))
+    #     for i in range(len(reportObj.filters['apnrat'])):
+    #         radioname= "APN" if i==0 else "Radio Type"
+    #         if reportObj.filters['apnrat'][i] != '':
+    #             grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"),0)
+    #             grPopInstance.reportspopup.selectRadioButton(radioname, getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"radios"), "label")
+    #
+    #             # grPopInstance.multiDropdown.domultipleSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),reportObj.filters['apnrat'][i],i)
+    #             grPopInstance.multiDropdown.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),reportObj.filters['apnrat'][i],i)
+    #             # inputinfo['filters'].append(['apnrat',i,grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)])
+    #             inputinfo['filters'][radioname] = grPopInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.REPORTWIZARDPOPUP,"filterPopup"),i)
+    #
+    # if 'subscriber' in reportType['filters']:
+    #     linkText = grPopInstance.clickLinkByPartialText(reportFilters['subscriber']['locatorText'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "alllinks"))
+    #     # linkText = grPopInstance.clickLinkByIndex(2,getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLLINKS))
+    #     for i in range(len(reportObj.filters['subscriber'])):
+    #         if reportObj.filters['subscriber'][i] != '':
+    #             grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),0)
+    #             # inputinfo['filters'].append(['subscriber',i,grPopInstance.dropdown.sendkeys_input(reportObj.filters['subscriber'][i],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allinputs"),1)])
+    #             inputinfo['filters'][linkText] = grPopInstance.dropdown.sendkeys_input(reportObj.filters['subscriber'][i],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allinputs"),0)
+    #
+    # return inputinfo['filters']

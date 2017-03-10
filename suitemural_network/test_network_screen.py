@@ -13,7 +13,9 @@ try:
 
 
     # Test All functionality on the screen
+    NetworkHelper.setGlobalFilters(setup)
     NetworkHelper.testScreenFunc(setup)
+
 
 
     setup.d.close()

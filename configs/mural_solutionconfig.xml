@@ -163,8 +163,16 @@
             <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
 
             <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
-            <component id = "filterArea" selector="tag name " locator="kiwik-filter-layout" parent="True"/>
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
 
+        </screenConfig>
+
+        <screenConfig id = "globalfilters_popup">
+            <component id = "filterPopup" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
+            <component id = "allcheckboxes" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
+            <component id = "alllinks" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
+            <component id = "filterText" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
         </screenConfig>
 
 

@@ -28,7 +28,19 @@
 
     </availabletimerange>
 
+    <globalScreenFilters>
+        <network id ="0" filters = '2::1::1'/>
+        <apnrat id = "0" filters = '2,4:: '/>
+        <device id = "0" filters = '2,4:: :: ::1'/>
 
+        <network id ="1" filters = '1,2:: ::1'/>
+        <apnrat id = "1" filters = ' ::2,4'/>
+        <device id = "1" filters = ' ::1:: ::1'/>
+
+        <network id ="2" filters = ' :: :: '/>
+        <apnrat id = "2" filters = ' :: '/>
+        <device id = "2" filters = ' :: ::1,3:: '/>
+    </globalScreenFilters>
 
 
 </data>

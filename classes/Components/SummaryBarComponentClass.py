@@ -89,7 +89,7 @@ class SummaryBarComponentClass(BaseComponentClass):
                         summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text
                         # self.unitSystem.getRawValueFromUI(summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text)
 
-            return data
+            return data,dimensionSelected
         except Exception as e:
             return e
 
