@@ -1,0 +1,161 @@
+'''
+Script will check following points:
+1. Validate all the quicklnks
+2. Use all the Measures + Directions
+3. Set Selection from Pie Chart
+4. Set Selection from Pie Legend
+5. Check pie-pielegend sync
+6. Validate Screen Name and Selection Label
+7. Is CM enabled or disabled
+8. Export to CSV
+9. Goto Trends and Monitoring
+10. Get BreadCrumb List (Active and Non-Active)
+11. Get Tooltip from Pie Chart
+'''
+from Utils.SetUp import *
+from MuralUtils.MuralConstants import *
+from Utils.utility import *
+from classes.Pages.MuralScreens.NetworkScreenClass import *
+from classes.Components.WorkflowStartComponent import *
+from classes.Components.TimeRangeComponentClass import *
+from classes.Pages.MuralScreens.AccessTechnologyClass import *
+import sys
+
+
+'''
+
+    :param setup: driver and config instance
+    :param intance: screen Instance
+    :return: True/False
+
+    ######
+    1. Set legend -> check pie and legend selection
+    2. Set pie -> check pie and legend selection
+    3. UnSet legend -> check pie and legend selection
+    4. UnSet pie -> check pie and legend selection
+    5. Tooltip PieChart
+    6. Validate data of tooltip with legend
+
+
+    '''
+def checkPie(setup, instance):
+    p = instance.pielegend.getData(getHandle(setup, MuralConstants.ATSCREEN,"piechart"))
+    for i in range(0,len(p['legendText'])):
+        instance.piecomponent.setSelection(i,getHandle(setup, MuralConstants.ATSCREEN),True)
+        j=instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN))
+        k=instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN))
+        checkEqualAssert(int(j[0]),int(k['selIndices'][0]),"","","Verify Selections on Pie and Pie Legend")
+    print i
+    instance.piecomponent.setSelection(i,getHandle(setup, MuralConstants.ATSCREEN),True)
+    return True
+
+def checkLegend(setup, instance):
+    p = instance.pielegend.getData(getHandle(setup, MuralConstants.ATSCREEN))
+    for i in range(0, len(p['legendText'])):
+        instance.pielegend.setSelection(setup.dH,[i],getHandle(setup, MuralConstants.ATSCREEN),True)
+        j = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN))
+        k = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN))
+        checkEqualAssert(int(j[0]), int(k['selIndices'][0]), "", "", "Verify Selections on PieLegend and Pie for index ")
+    instance.pielegend.setSelection(setup.dH, [i], getHandle(setup, MuralConstants.ATSCREEN),True)
+    return True
+
+def unSetPie(setup,instance):
+
+    instance.piecomponent.setSelection(1, getHandle(setup, MuralConstants.ATSCREEN),True)
+    instance.piecomponent.setSelection(1, getHandle(setup, MuralConstants.ATSCREEN),True)
+
+    i = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN))
+    j = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN))
+
+    checkEqualAssert(len(i), len(j['selIndices']), "", "","Verify UnsetPie ")
+    return True
+
+
+
+def unSetPieLegend(setup, instance):
+
+    instance.pielegend.setSelection(setup.dH, [2], getHandle(setup, MuralConstants.ATSCREEN),True)
+    instance.pielegend.setSelection(setup.dH, [2], getHandle(setup, MuralConstants.ATSCREEN),True)
+
+    i = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN))
+    j = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN))
+
+    checkEqualAssert(len(i), len(j['selIndices']), "", "", "Verify UnsetPie ")
+    return True
+
+def toolTipPieAndPieLegend(setup,instance):
+    p = instance.pielegend.getData(getHandle(setup, MuralConstants.ATSCREEN))
+    q = accesstechnologyScreenInstance.piecomponent.getToolTipInfo(setup, setup.dH,getHandle(setup, MuralConstants.ATSCREEN))
+    # print str(q[i].split('\n')[0])
+    r = instance.pielegend.getData11(getHandle(setup, MuralConstants.ATSCREEN))
+    # print str(r['legendText'][i].split('\n')[0])
+    for i in range(0, len(p['legendText'])):
+        checkEqualAssert(str(q[i].split('\n')[0]),str(r['legendText'][i].split('\n')[0]),"","","Tootip Text Validation")
+        checkEqualAssert(str(q[i].split('\n')[1]),str(r['legendText'][i].split('\n')[1]),"","","Tootip Value Validation")
+    return True
+
+try:
+
+    setup = SetUp()
+    wfstart = WorkflowStartComponentClass()
+    sleep(8)
+    wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
+
+    networkScreenInstance = NetworkScreenClass(setup.d)
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    networkScreenInstance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+
+    accesstechnologyScreenInstance = AccessTechnolohyScreenClass(setup.d)
+
+    qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
+    quicklink = setup.cM.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
+
+    for e in quicklink:
+        print qs[e]['locatorText']
+
+    #for q in quicklink:
+
+        accesstechnologyScreenInstance.timeBar.getLabel(getHandle(setup, MuralConstants.ATSCREEN, "ktrs"))
+        accesstechnologyScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MuralConstants.ATSCREEN, "ktrs"))
+        accesstechnologyScreenInstance.timeBar.setQuickLink(qs[e]['locatorText'],getHandle(setup, MuralConstants.ATSCREEN, "ktrs"))
+        selectedQuicklink = networkScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MuralConstants.ATSCREEN, "ktrs"))
+
+        screenName = accesstechnologyScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+        breadCrumbLabel = accesstechnologyScreenInstance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+
+        measures = setup.cM.getNodeElements("networkdimeas", "measure")
+        for k, measure in measures.iteritems():
+            measureSelected = accesstechnologyScreenInstance.picker.domultipleSelectionWithName(getHandle(setup, MuralConstants.ATSCREEN, "measureChangeSection"), measure['locatorText'], 0,"measureChangeSection", "measure")
+            checkEqualAssert(measure['locatorText'], measureSelected, "", "", "Verify Selected measure")
+            for e in range(0,3):
+                if accesstechnologyScreenInstance.switcher.measureChangeSwitcher(e,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
+                    selectedSwitcher = accesstechnologyScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection"))
+                    checkEqualAssert([e],selectedSwitcher,"","","Verify Selected Measure Direction")
+                    checkPie(setup,accesstechnologyScreenInstance)
+                    print "checkPie Pass"
+                    checkLegend(setup,accesstechnologyScreenInstance)
+                    print "checkPieLegend Pass"
+                    unSetPie(setup,accesstechnologyScreenInstance)
+                    print "unSetPie Pass"
+                    unSetPieLegend(setup,accesstechnologyScreenInstance)
+                    print "unSetPieLegend Pass"
+                    toolTipPieAndPieLegend(setup,accesstechnologyScreenInstance)
+                    print "Validation pass for Tooltip"
+
+#   breadCrumbLabel = networkScreenInstance.cm.getRHSBreadCrumbLabel(getHandle(setup,MuralConstants.NWSCREEN,"exploreBar"))
+
+
+    accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb("Network", getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
+    accesstechnologyScreenInstance.cm.activateWorkFlowDropDown(getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
+    accesstechnologyScreenInstance.cm.gotoScreenViaWorkFlowDrop("Trend & Monitoring",getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
+
+
+except Exception as e:
+    print str(e)
+    # sys._current_frames()
+    setup.d.close()
+
+
+
+
+

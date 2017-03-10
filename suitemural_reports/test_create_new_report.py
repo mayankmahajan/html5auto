@@ -9,9 +9,10 @@ from Utils.utility import *
 # Launches the application
 setup = SetUp()
 
-sleep(15)
+sleep(5)
 # Logins to app with credentials provided
 login(setup, "admin", "admin123")
+sleep(5)
 
 # grPopInstance = GenerateReportsPopClass(setup.d)
 # ReportsHelper.checkErrorMessageAndType(setup,grPopInstance)
@@ -25,8 +26,8 @@ exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
 print isError(setup)
 
 # Getting reporttypes from xmls
-reportTypes = setup.cM.getAllreportTypes()  # gets all reporttype combinations (56 for mural)
-# reportTypes = setup.cM.getUserReportTypes() # gets only userspecific reporttypes
+# reportTypes = setup.cM.getAllreportTypes()  # gets all reporttype combinations (56 for mural)
+reportTypes = setup.cM.getUserReportTypes() # gets only userspecific reporttypes
 
 
 # Create Report Object that contains reportName,email,filters

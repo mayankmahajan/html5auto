@@ -13,10 +13,10 @@
     <wizardquicklinks1>
         <wizardquicklink id = "today" locatorText="Today"/>
         <wizardquicklink id = "yesterday" locatorText="Yesterday"/>
-        <wizardquicklink id = "thisweek" locatorText="This Week"/>
+        <!--<wizardquicklink id = "thisweek" locatorText="This Week"/>
         <wizardquicklink id = "lastweek" locatorText="Last Week"/>
         <wizardquicklink id = "thismonth" locatorText="This Month"/>
-        <wizardquicklink id = "lastmonth" locatorText="Last Month"/>
+        <wizardquicklink id = "lastmonth" locatorText="Last Month"/>-->
     </wizardquicklinks1>
 
 
@@ -179,6 +179,8 @@
             <component id = "pieView" selector="id" locator='pieView' locatorDimension ='id' locatorText = 'pieView' action="hover" wait = 'skip'/>
             <component id = "arcs" selector="xpath" locator='//*[contains(@id, "_segment")]' action="hover" wait = 'skip'/>
             <component id = "wedgeselected" selector="xpath" locator='//*[contains(@class, "_expanded")]' wait = 'skip'/>
+            <component id = "selectionText" selector="css selector" locator="text" />
+
 
 
             <!--selector="xpath" locator='//*[contains(@id, "p1_segment0")]'-->

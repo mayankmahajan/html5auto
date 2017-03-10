@@ -31,3 +31,4 @@ class MuralConstants(Constants):
     ALERTSCREEN = "alert_Screen"
     NWSCREEN = "network_Screen"
     WFSTARTSCREEN = "workflowstart_Screen"
+    ATSCREEN = "accesstechnology_Screen"

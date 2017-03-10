@@ -164,15 +164,31 @@
 
             <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
-
         </screenConfig>
-
         <screenConfig id = "globalfilters_popup">
             <component id = "filterPopup" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "allcheckboxes" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "allbuttons" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "alllinks" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "filterText" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+        </screenConfig>
+
+        <screenConfig id ="accesstechnology_Screen">
+            <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
+            <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
+            <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
+
+
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "network_SummaryBar")]' action="" parent="True"/>
+
+            <component id = "piechart" selector="tag name" locator='kiwik-pie-chart'  action="" parent="True" />
+            <component id = "pielegend" selector="tag name" locator='kiwik-pie-legend' action="" parent="True" />
+
+            <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
+            <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
+            <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
+            <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
         </screenConfig>
 
 

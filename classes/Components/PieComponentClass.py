@@ -16,6 +16,7 @@ from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 import time
+from Utils.logger import *
 
 from selenium.webdriver import ActionChains
 
@@ -79,7 +80,7 @@ class PieComponentClass(BaseComponentClass):
     #
     #     return data
 
-    def setSelection(self,index,handlrs):
+    def setSelection(self,index,handlrs,force=False):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
         :param index: Index to be selected
@@ -88,7 +89,7 @@ class PieComponentClass(BaseComponentClass):
         '''
         handlers = self.compHandlers('pielegend',handlrs)
         selectedIndex = self.getSelectionIndex(handlers['legendText'])
-        if selectedIndex == index:
+        if not force and selectedIndex == index :
             return True
         else:
             self.setSelectionIndex(index,handlers['legendText'])
@@ -119,7 +120,7 @@ class PieComponentClass(BaseComponentClass):
         data = []
         # driverHelper.action.move_to_element()
         for i in range(0,len(elHandle['hover'])):
-            print "element",elHandle['hover'][i]
+            # print "element",elHandle['hover'][i]
             try:
                 driverHelper.action.move_to_element(elHandle['hover'][i]).perform()
             except:
@@ -261,3 +262,11 @@ class PieComponentClass(BaseComponentClass):
                     result[key] = "Data Validation FAILED --> Actual : "+str(UIData)+" and Expected : "+str(csvData[key]['AGGR_totalByteBuffer'])
 
         return result
+
+    def getPieSelectionText(self,h,parent='piechart',child='selectionText'):
+        logger.info("Going to get Selection Text from Pie Chart")
+
+        dim,value= str(h[parent][child][0].text),str(h[parent][child][1].text)
+        logger.debug("Got Selection Text, Dimension = %s and Value = %s",dim,value)
+
+        return dim,value

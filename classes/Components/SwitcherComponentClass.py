@@ -64,7 +64,7 @@ class SwitcherComponentClass(BaseComponentClass):
             divs = h[parent][child][0].find_elements_by_tag_name('div')
             selectedSwitcher = []
             for i in range(len(divs)):
-                if "active" in str(divs[i].get_attribute("class")).lower:
+                if "active" in str(divs[i].get_attribute("class")).lower():
                     selectedSwitcher.append(i)
             time.sleep(2)
             return selectedSwitcher

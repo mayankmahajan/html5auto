@@ -85,7 +85,33 @@ class PieLegendComponentClass(BaseComponentClass):
         data['legendIcon'] =tempArr
         return data
 
-    def setSelection(self,driverHelper,indices,handlrs,comp=None):
+    def getData11(self,handlrs):
+        '''
+        Returns Data as Dictionary with Name and Value
+        :param handlers: Handlers to all the components
+        :return: Data from the Bar Chart
+        '''
+        data = {}
+        handlers = self.compHandlers('pielegend',handlrs)
+        print "handle of get data",handlers
+
+        data['legendText'] = []
+        childs = handlers['legendText']
+        for child in handlers['legendText']:
+            subChilds = child.find_elements_by_xpath("./*")
+            data['legendText'].append(str(subChilds[0].text) +"\n"+str(subChilds[1].text))
+
+        tempArr = []
+        for i in range(len(handlers['legendIcon'])):
+            for child in handlers['legendIcon'][i].find_elements_by_xpath(".//*"):
+                if child.get_attribute("class") == "circle":
+                    tempArr.append(child.value_of_css_property('background-color'))
+        data['legendIcon'] =tempArr
+        return data
+
+
+
+    def setSelection(self,driverHelper,indices,handlrs,comp=None,force=False):
         '''
         This method do the Selection on the Bar Chart as per the index supplied
         :param indices: indices to be selected
@@ -95,7 +121,7 @@ class PieLegendComponentClass(BaseComponentClass):
         # handlers = self.compHandlers('pielegend',handlrs)
         handlers = handlrs['pielegend']
         selectedIndex = self.getSelectionIndex(handlers['legendText'])
-        if selectedIndex in indices:
+        if not force and selectedIndex in indices:
             return True
         else:
             return self.setSelectionIndex(driverHelper,indices,handlers['legendText'])

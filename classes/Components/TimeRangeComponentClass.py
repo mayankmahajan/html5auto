@@ -53,7 +53,7 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
         else:
             return starttime+" to "+endtime
 
-    def getLabel(self, quicklink, flag=Constants.FLAGHOURLY, stEtCombID=0):
+    def get_Label(self, quicklink, flag=Constants.FLAGHOURLY, stEtCombID=0):
 
         st = self.configmanager.getNodeElements("availabletimerange", "starttime")[str(stEtCombID)]
         et = self.configmanager.getNodeElements("availabletimerange", "endtime")[str(stEtCombID)]

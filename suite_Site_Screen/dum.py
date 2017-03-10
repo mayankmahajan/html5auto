@@ -1,43 +1,54 @@
-import unittest
-from Utils.logger import *
-from selenium import webdriver
+from classes.Components.TimeRangeComponentClass import *
 
-from Utils.utility import *
-from classes.DriverHelpers.DriverHelper import DriverHelper
-from Utils.Constants import *
-from Utils.SetUp import *
-from classes.Pages.NFPageClass import *
-from classes.Pages.QuickTrendsPageClass import *
-from classes.Pages.GenerateReportsPopClass import *
-from classes.Pages.ReportsModuleClass import *
+#quicklinks=TimeRangeComponentClass().configmanager.getAllNodeElements("wizardquicklinks","wizardquicklink")
 
-setup = SetUp()
+# for i in range(0,5):
+#     for e in qList:
+#        print qs[e]
+        # print qs[e]['locatorText']
+        # print TimeRangeComponentClass().getLabel(e, stEtCombID=str(i))
 
-# login(setup, "cmathieu", "a")
+print TimeRangeComponentClass().getAllquicklinkLable(flag=Constants.FLAGHOURLY,stEtCombID='0')
 
-
-reportname = "site"
-login(setup, "admin", "Admin@123")
-
-reports = ["Site Interaction Report","Site-Network Function Report","Site-Network Element Report","Site-VRF Report"
-    ,"Site Interaction-Network Function Report","Site Interaction-Network Element Report","Site Interaction-VRF Report"]
-n=[3,3,3,3,4,4,4]
-for i in range(len(reports)):
+# for i in range(0,5):
+#     for quicklink in quicklinks:
+#         print quicklink
+#         print TimeRangeComponentClass().getLable(quicklink,stEtCombID=str(i))
 
 
-    grPopInstance = GenerateReportsPopClass(setup.d)
-    # grPopHandle = getHandle(setup,"report2_popup")
-    # grPopInstance.reportspopup.selectRadioButton("Average",grPopHandle)
-    # grPopInstance.reportspopup.selectRadioButton(reports[i],grPopHandle)
+#        quicklink = 'NA'
+ #       quicklinks = {}
+  #      qList = TimeRangeComponentClass().configmanager.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
 
-    ### Get table Data has to different for different reports####
-    for el in n:
-        for j in range(1,el):
+#        quicklink[qList[0]] =
 
-            grPopHandle = getHandle(setup,"report2_popup")
-            grPopInstance.table.getTableData1(grPopHandle,"table")
-            grPopInstance.reportspopup.clickButton("Next Step",grPopHandle)
-            #######################    END     ###############################################
-        break
-    grPopHandle = getHandle(setup,"report2_popup")
-setup.d.close()
+ #       def getTodayLabel():
+ #
+ #            if int(h) == 0:
+ #                h=24
+            # if (etepoch - stepoch)<= int(h)*3600 :
+            #     return True, stime.datestring + "  " + etime.datestring
+            # else:
+            #     return True, time.strftime('%Y-%m-%d %H:%M', time.localtime(etepoch  - (3600 * (int(h) + Constants.TIMEZONE))))+ "  " + etime.datestring
+        #
+        # if quicklink == "today" :
+        #     getTodayLabel()
+
+                # if int(h) == 0:
+                #     h=24
+                # if (etepoch - stepoch)<= int(h)*3600 :
+                #     return True, stime.datestring + "  " + etime.datestring
+                # else:
+                    # return True, time.strftime('%Y-%m-%d %H:%M', time.localtime(etepoch  - (3600 * (int(h) + Constants.TIMEZONE))))+ "  " + etime.datestring
+
+        # elif quicklink == "yesterday":
+        #     if int(h) == 0:
+        #         h=24
+            # if (etepoch - stepoch) <= int(h)*3600:
+            #     return False,""
+            # else:
+            #         if (etepoch - stepoch) > (int(h)+24)*3600 :
+            #             return True,time.strftime('%Y-%m-%d %H:%M', time.localtime(etepoch  - (3600 * (int(h) + 24 + Constants.TIMEZONE)))) + "  " + time.strftime('%Y-%m-%d %H:%M', time.localtime(etepoch  - (3600 * (int(h) + Constants.TIMEZONE))))
+                    # else:
+                    #     return True,stime.datestring + "  " + time.strftime('%Y-%m-%d %H:%M', time.localtime(etepoch - (3600 * (int(h) + Constants.TIMEZONE))))
+

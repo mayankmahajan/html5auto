@@ -9,7 +9,7 @@ class Constants(object):
     # URL = "https://uiscrummural.cisco.com:6443/"
     isOffline = True
     if isOffline:
-        URL = 'localhost:3333'
+        URL = 'localhost:8888'
     else:
         URL = "https://murala-ca.guavus.com:6443/"
 
@@ -59,7 +59,7 @@ class Constants(object):
     FLAGHOURLY = 1
 
 
-    chromedriverpath = "/Users/mayank.mahajan/Downloads/chromedriver54"
+    chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
 
     # common components
     ALLBUTTONS = "allbuttons"
@@ -76,4 +76,5 @@ class Constants(object):
     ERRORCLOSE = "errorclose"
     ERRORMESSAGE = "errormessage"
     ERRORPOPUP = "error_popup"
+
 
