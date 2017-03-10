@@ -24,10 +24,10 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[ng-reflect-checked="true"]'):
 
                 # commenting below lines to get all selected values in dropdown
-                # if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
-                #     selections.append("ALL")
-                #     activeDropDowns[index].click()
-                #     return selections
+                if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
+                    selections.append("ALL")
+                    activeDropDowns[index].click()
+                    return selections
 
                 selections.append(e.find_elements_by_xpath("..//div")[0].text)
         except Exception as e:
@@ -87,7 +87,7 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         time.sleep(2)
         elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
         for i in range(len(elements)):
-            if i in value:
+            if i in value or str(i) in value:
                 elements[i].click()
 
         activeDropDowns[index].click()

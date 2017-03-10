@@ -9,6 +9,10 @@
 
     <availabletimerange>
 
+        <time id="starttime" year="2017" month ="03" day="13" hour="00" min="00"/>
+        <time id ="endtime" year="2017" month ="03" day="14" hour="00" min="00"/>
+
+
         <starttime id="0" year="2017" month ="02" day="13" hour="00" min="00"/>
         <endtime id ="0" year="2017" month ="02" day="14" hour="00" min="00"/>
 
@@ -41,6 +45,19 @@
         <apnrat id = "2" filters = ' :: '/>
         <device id = "2" filters = ' :: ::1,3:: '/>
     </globalScreenFilters>
+    <globalScreenFilters2>
+        <network id ="0" region = '1' gateway = '1'/>
+        <apnrat id = "0" apn = '2,4'/>
+        <device id = "0" os = '2,4'/>
+
+        <network id ="1" area = '2'/>
+        <apnrat id = "1" radio = '2,4'/>
+        <device id = "1" manufacturer = '2,4'/>
+
+        <network id ="2" area = '2' region = '1' gateway = '1'/>
+        <apnrat id = "2" />
+        <device id = "2" group = '2'/>
+    </globalScreenFilters2>
 
 
 </data>

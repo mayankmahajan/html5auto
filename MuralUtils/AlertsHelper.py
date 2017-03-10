@@ -361,17 +361,17 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
             returnValue = str(op).strip()+str(num_value).strip()+str(unit).strip()
 
         if enableCondition == "edit":
-            return returnValue if not newState else "-"
+            return returnValue if newState else "-"
 
         if enableCondition == "":
             enableCondition = random.choice([True, False])
         else:
             if not enableCondition:
                 instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
-            return returnValue if not newState else "-"
+            return returnValue if newState else "-"
 
         if enableCondition:
-            return returnValue if not newState else "-"
+            return returnValue if newState else "-"
         else:
             logger.info("Disabling Priority %s",str(priorty))
             instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
