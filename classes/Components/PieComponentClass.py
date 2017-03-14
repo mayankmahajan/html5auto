@@ -270,3 +270,12 @@ class PieComponentClass(BaseComponentClass):
         logger.debug("Got Selection Text, Dimension = %s and Value = %s",dim,value)
 
         return dim,value
+
+    def setTotalSelectionOnPie(self,h,parent='piechart',child='selectionText'):
+        logger.info("Going to set Total Selection on Pie Chart")
+        try:
+            h[parent][child][1].click()
+            return True
+        except Exception as e:
+            logger.error("Exception found while setting total selection = %s" ,str(e))
+            return e
