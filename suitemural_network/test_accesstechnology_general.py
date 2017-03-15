@@ -104,7 +104,7 @@ def checkLegend(setup, instance):
 
 
 
-def checkAllComponentRelatedToPie(setup,instance,measureSelected,index,flag):
+def checkAllComponentRelatedToPie(setup,instance,quicklink,measureSelected,index,flag):
     summary = {}
     pie = getHandle(setup, MuralConstants.ATSCREEN, "piechart")
     pielegend= getHandle(setup, MuralConstants.ATSCREEN,"pielegend")
@@ -116,18 +116,18 @@ def checkAllComponentRelatedToPie(setup,instance,measureSelected,index,flag):
     if not flag:
         j = instance.piecomponent.getPieSelections(pie)
         k = instance.pielegend.getSelection(pielegend)
-        checkEqualAssert(len(j), len(k['selIndices']), "", "", "Verify PieLegend with PieChart ")
+        checkEqualAssert(len(j), len(k['selIndices']), quicklink, measureSelected['locatorText'], "Verify PieLegend with PieChart ")
 
         pieheader = instance.pielegend.getHeader(pielegend)
         # for offline demo
         # pieheader=pieheader+":"+"220.3"
         dim, value = str(pieheader.split(":")[0]),str(pieheader.split(":")[1]).strip()
 
-        checkEqualAssert(True, dim_tooltip.strip("...") in dim, "", measureSelected['locatorText'],"Tootip Text Validation with PieLegend Header")
-        checkEqualAssert(dim, breadCrumbLabel, "", "", "Verify Label")
-        checkEqualAssert(dim, str(summary['header']), "", "", "Verify Summary Header with breadCrumbLabel ")
+        checkEqualAssert(True, dim_tooltip.strip("...") in dim, quicklink, measureSelected['locatorText'],"Tootip Text Validation with PieLegend Header")
+        checkEqualAssert(dim, breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify Label")
+        checkEqualAssert(dim, str(summary['header']), quicklink, measureSelected['locatorText'], "Verify Summary Header with breadCrumbLabel ")
 
-        checkEqualAssert(str(value_tooltip), value, "", "", "Tootip Value Validation with PieLegend")
+        checkEqualAssert(str(value_tooltip), value, quicklink, measureSelected['locatorText'], "Tootip Value Validation with PieLegend")
         #checkEqualAssert(value, str(summary['data'][(dim, 0, measureSelected['locatorText'])]),"", "", "Verify Summary Data Value for All Sub")
 
         # Need clarifications on How to calculate PerSub Value
@@ -137,18 +137,18 @@ def checkAllComponentRelatedToPie(setup,instance,measureSelected,index,flag):
         j = instance.piecomponent.getPieSelections(pie)
         k = instance.pielegend.getSelection(pielegend)
         r = instance.pielegend.getData11(pielegend)
-        checkEqualAssert(int(j[0]), int(k['selIndices'][0]), "", "","Verify Selections on PieLegend and Pie for index ")
+        checkEqualAssert(int(j[0]), int(k['selIndices'][0]), quicklink, measureSelected['locatorText'],"Verify Selections on PieLegend and Pie for index ")
         dim, value = str(r['legendText'][index].split('\n')[0]), str(r['legendText'][index].split('\n')[1])
 
 
-        checkEqualAssert(True, dim_tooltip.strip("...") in dim, "", "","Tootip Text Validation with PieLegend")
-        checkEqualAssert(dim,breadCrumbLabel,"","","Verify Label")
-        checkEqualAssert(dim, str(summary['header']), "", "", "Verify Summary Header with breadCrumbLabel ")
+        checkEqualAssert(True, dim_tooltip.strip("...") in dim, quicklink, measureSelected['locatorText'],"Tootip Text Validation with PieLegend")
+        checkEqualAssert(dim,breadCrumbLabel,quicklink, measureSelected['locatorText'],"Verify Label")
+        checkEqualAssert(dim, str(summary['header']), quicklink, measureSelected['locatorText'], "Verify Summary Header with breadCrumbLabel ")
 
-        checkEqualAssert(str(value_tooltip),value,"", "", "Tootip Value Validation with PieLegend")
-        checkEqualAssert(value,str(summary['data'][(dim, 0, measureSelected['locatorText'])]), "", "", "Verify Summary Data value with pielegend (All Sub)")
+        checkEqualAssert(str(value_tooltip),value,quicklink, measureSelected['locatorText'], "Tootip Value Validation with PieLegend")
+        checkEqualAssert(value,str(summary['data'][(dim, 0, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'], "Verify Summary Data value with pielegend (All Sub)")
         # Need clarifications on How to calculate PerSub Value
-        checkEqualAssert(value, str(summary['data'][(dim, 1, measureSelected['locatorText'])]), "", "","Verify Summary Data value with pielegend (Per Sub)")
+        checkEqualAssert(value, str(summary['data'][(dim, 1, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'],"Verify Summary Data value with pielegend (Per Sub)")
 
     return True
 
