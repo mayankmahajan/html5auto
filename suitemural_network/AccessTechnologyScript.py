@@ -14,7 +14,7 @@ try:
     sleep(8)
     login(setup,"admin","admin123")
     wfstart = WorkflowStartComponentClass()
-    # sleep(8)
+    sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     networkScreenInstance = NetworkScreenClass(setup.d)
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
