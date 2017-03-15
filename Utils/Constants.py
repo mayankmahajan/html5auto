@@ -11,7 +11,8 @@ class Constants(object):
     if isOffline:
         URL = 'localhost:8888'
     else:
-        URL = "https://murala-ca.guavus.com:6443/"
+        # URL = "https://muralautomation.cisco.com:6443"
+        URL = "https://murala-ca.guavus.com:6443"
 
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
@@ -44,7 +45,7 @@ class Constants(object):
     DRILLTONE="DRILLTONE"
     DRILLTONENE="DRILLTONENE"
     # driver based constants
-    WEBDRIVERTIMEOUT = 6
+    WEBDRIVERTIMEOUT = 16
 
     # Component based constants
     ## BTV
