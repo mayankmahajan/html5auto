@@ -9,8 +9,8 @@
 
     <availabletimerange>
 
-        <time id="starttime" year="2017" month ="03" day="13" hour="00" min="00"/>
-        <time id ="endtime" year="2017" month ="03" day="14" hour="00" min="00"/>
+        <time id="starttime" year="2017" month ="03" day="14" hour="01" min="00"/>
+        <time id ="endtime" year="2017" month ="03" day="15" hour="00" min="00"/>
 
 
         <starttime id="0" year="2017" month ="02" day="13" hour="00" min="00"/>

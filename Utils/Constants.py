@@ -59,7 +59,8 @@ class Constants(object):
     FLAGHOURLY = 1
 
 
-    chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
+    # chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
+    chromedriverpath = "C:\Users\Administrator\Downloads\chromedriver_win32\chromedriver.exe"
 
     # common components
     ALLBUTTONS = "allbuttons"

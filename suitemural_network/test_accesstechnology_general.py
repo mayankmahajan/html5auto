@@ -120,7 +120,7 @@ def checkAllComponentRelatedToPie(setup,instance,measureSelected,index,flag):
 
         pieheader = instance.pielegend.getHeader(pielegend)
         # for offline demo
-        pieheader=pieheader+":"+"220.3"
+        # pieheader=pieheader+":"+"220.3"
         dim, value = str(pieheader.split(":")[0]),str(pieheader.split(":")[1]).strip()
 
         checkEqualAssert(True, dim_tooltip.strip("...") in dim, "", measureSelected['locatorText'],"Tootip Text Validation with PieLegend Header")
