@@ -52,21 +52,22 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     for k,v in f1.iteritems():
-        msg = msg + "  :: " +k+" ::  "
+        msg1 = ''
+        msg1 = msg + "  :: " +k+" ::  "
         try:
             assert f1[k] == f2[k]
             # msg = msg+" : "+k+" "+tcPass
-            resultlogger.info(msg+"  :: " +k+" ::  "+tcPass)
-            logger.info(msg+"  :: " +k+" ::  "+tcPass)
+            resultlogger.info(msg1+"  :: " +k+" ::  "+tcPass)
+            logger.info(msg1+"  :: " +k+" ::  "+tcPass)
 
         except AssertionError :
 
             # msg = msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail
-            resultlogger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
-            logger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
+            resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
+            logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
         except KeyError:
-            resultlogger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
-            logger.info(msg+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
+            resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
+            logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
 def checkEqualAssert(expected, actual, time="", measure="", message=""):
     msg = time + " " + measure + " " + message

@@ -279,3 +279,17 @@ class BaseComponentClass:
 
     def getCommaSeparatedValues(self,string):
         return [e.strip() for e in str(string).strip().split(',')]
+
+    def selectRadioButtonByIndex(self, index, h, childDiv="span", parent="radios", child="radio"):
+        childs = ".//" + childDiv
+
+        for i in range(len(h[parent][child])):
+            if i == index:
+                try:
+                    h[parent][child][i].click()
+                    h[parent][child][i].find_elements_by_xpath(".//input")[0].click()
+                    time.sleep(2)
+                    return h[parent][child][i].find_elements_by_xpath(childs)[0].text.strip().strip(':').strip()
+                except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                    return e
+        return False

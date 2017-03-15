@@ -130,6 +130,11 @@
         <filter id = 'apnrat' locatorText="APN/RAT"/>
         <filter id = 'subscriber' locatorText="Top N Apps"/>
     </reportwizardfilters>
+    <globalfilters>
+        <filter id = 'network' locatorText="Network Topology"/>
+        <filter id = 'apnrat' locatorText="APN/RAT"/>
+        <filter id = 'device' locatorText="Device"/>
+    </globalfilters>
 
     <alertbodylinks>
         <link id = 'acknowledge' locatorText="Acknowledge"/>
@@ -164,13 +169,18 @@
 
             <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
         </screenConfig>
+
         <screenConfig id = "globalfilters_popup">
+            <component id = "radios" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "filterPopup" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "allcheckboxes" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "allbuttons" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
             <component id = "alllinks" selector="css selector" locator="div[class*=filterPopup]" parent="True"/>
-            <component id = "filterText" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
+
         </screenConfig>
 
         <screenConfig id ="accesstechnology_Screen">
@@ -391,8 +401,21 @@
         </componentConfig>
 
         <componentConfig id = "filterArea">
-            <component id = "filterIcon" selector="xpath" locator="./div[1]"/>
-            <component id = "filterText" selector="xpath" locator="./div[2]"/>
+            <!--<component id = "filterIcon" selector="xpath" locator="./div/div[1]"/>-->
+
+            <component id = "filterIcon" selector="css selector" locator="div[class*=filter][class*=con]"/>
+            <component id = "filterText" selector="css selector" locator=".filterItemContainer"/>
+            <component id = "filter" selector="xpath" locator="./div[1]"/>
+            <component id = "clearIcon" selector="css selector" locator=".filterClearIcon" />
+        </componentConfig>
+
+        <componentConfig id = "globalfiltertooltip">
+            <component id = "filterText" selector="css selector" locator=".filterItemContainer"/>
+        </componentConfig>
+
+
+        <componentConfig id = "filterText">
+            <component id = "filters" selector="xpath" locator="./div[1]/div[2]/div[1]/div[1]/div[1]/span"/>
         </componentConfig>
     </componentConfigs>
 

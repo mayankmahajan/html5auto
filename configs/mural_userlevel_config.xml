@@ -32,8 +32,23 @@
 
     </availabletimerange>
 
+    <networkFilters>
+        <filter id = "Area"/>
+        <filter id = "Region"/>
+        <filter id = "Gateway"/>
+    </networkFilters>
+    <apnratFilters>
+        <filter id = "APN"/>
+        <filter id = "Radio Type"/>
+    </apnratFilters>
+    <deviceFilters>
+        <filter id = "OS"/>
+        <filter id = "Manufacturer"/>
+        <filter id = "Device Group"/>
+        <filter id = "Models"/>
+    </deviceFilters>
     <globalScreenFilters>
-        <network id ="0" filters = '2::1::1'/>
+        <network id ="0" filters = '1,2:: ::1'/>
         <apnrat id = "0" filters = '2,4:: '/>
         <device id = "0" filters = '2,4:: :: ::1'/>
 
