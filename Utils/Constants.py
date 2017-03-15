@@ -60,7 +60,8 @@ class Constants(object):
 
 
     # chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
-    chromedriverpath = "C:\Users\Administrator\Downloads\chromedriver_win32\chromedriver.exe"
+    # chromedriverpath = "C:\Users\Administrator\Downloads\chromedriver_win32\chromedriver.exe"
+    chromedriverpath = "/Users/mayank.mahajan/PycharmProjects/html5automation/chromedriver/chromedriver"
 
     # common components
     ALLBUTTONS = "allbuttons"
