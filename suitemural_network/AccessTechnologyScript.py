@@ -12,7 +12,7 @@ screen="Access Technology"
 try:
     setup = SetUp()
     sleep(8)
-    #login(setup,"admin","admin123")
+    login(setup,"admin","admin123")
     wfstart = WorkflowStartComponentClass()
     # sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
