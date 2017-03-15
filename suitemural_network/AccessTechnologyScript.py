@@ -21,8 +21,8 @@ try:
     networkScreenInstance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     accesstechnologyScreenInstance = AccessTechnolohyScreenClass(setup.d)
 
-    accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"), child="export")
-    accesstechnologyScreenInstance.cm.goto(MuralConstants.TandMScreen,getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+    #accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"), child="export")
+    #accesstechnologyScreenInstance.cm.goto(MuralConstants.TandMScreen,getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
 
     qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
     quicklink = setup.cM.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
@@ -50,7 +50,7 @@ try:
 
                 if measure.has_key("options") and 'direction' in measure['options']:
                     isDirectionsPresent = accesstechnologyScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
-                    checkEqualAssert(not False, isDirectionsPresent, "", "","Verify presence of Directions for Measure = " + measureSelected)
+                    checkEqualAssert(list,type(isDirectionsPresent), "", "","Verify presence of Directions for Measure = " + measureSelected)
 
                     for d in range(0,3):
                         if accesstechnologyScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
