@@ -8,6 +8,7 @@ from classes.Components.DropdownComponentClass import *
 from classes.Components.SwitcherComponentClass import *
 from classes.Components.PieComponentClass import *
 from classes.Components.PieLegendComponentClass import *
+from classes.Components.SummaryBarComponentClass import *
 
 
 class AccessTechnolohyScreenClass(BasePageClass):
@@ -25,6 +26,7 @@ class AccessTechnolohyScreenClass(BasePageClass):
         self.switcher = SwitcherComponentClass()
         self.piecomponent= PieComponentClass()
         self.pielegend= PieLegendComponentClass()
+        self.summarybar= SummaryBarComponentClass()
 
 
         # Common Components

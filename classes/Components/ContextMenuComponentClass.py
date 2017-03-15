@@ -123,6 +123,7 @@ class ContextMenuComponentClass(BaseComponentClass):
                     logger.info("Going to click Option = %s",e.text)
                     e.click()
                     return True
+            logger.debug("No option with %s present to be clicked",str(value))
         except Exception as e:
             logger.error("Got Exception while clicking Option %s = %s",value,str(e))
             return e

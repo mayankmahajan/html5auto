@@ -80,12 +80,17 @@ def testScreenFunc(setup,networkScreenInstance):
         # setting up measures
         measures = setup.cM.getNodeElements("networkdimeas","measure")
         for k,measure in measures.iteritems():
-            if not hasattr(measure,"summaryCard"):
+            if not measure.has_key("summaryCard"):
                 measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(
                         getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")
                         ,measure['locatorText'],0,"measureChangeSection","measure")
                 checkEqualAssert(measure['locatorText'],measureSelected,"","","Verify Selected measure")
-                if hasattr(measure,"options") and 'direction' in measure['options']:
+                if measure.has_key("options") and 'direction' in measure['options']:
+                    isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(
+                        getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
+                    checkEqualAssert(not False, isDirectionsPresent, "", "",
+                                     "Verify presence of Directions for Measure = " + measureSelected)
+
                     for e in range(3):
                         if networkScreenInstance.switcher.measureChangeSwitcher(e,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")):
                             selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(

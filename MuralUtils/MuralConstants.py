@@ -33,3 +33,5 @@ class MuralConstants(Constants):
     WFSTARTSCREEN = "workflowstart_Screen"
     ATSCREEN = "accesstechnology_Screen"
     GFPOPUP = "globalfilters_popup"
+    TandMScreen = "Trending and Monitoring"
+

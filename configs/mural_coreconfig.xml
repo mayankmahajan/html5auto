@@ -154,6 +154,8 @@
             <component id = "legendText_col1" selector="class" locator='col1' locatorDimension ='class' locatorText = 'col1' action="click" wait = 'skip'/>
             <component id = "legendText" selector="class" locator='legendText' locatorDimension ='class' locatorText = 'legendText' action="click" wait = 'skip'/>
             <component id = "legendIcon" selector="class" locator='legendIcon' locatorDimension ='class' locatorText = 'legendIcon' wait = 'skip'/>
+            <component id = "header" selector="xpath" locator="../div[1]"/>
+
 
         </componentConfig>
 

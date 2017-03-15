@@ -45,6 +45,7 @@ class PieLegendComponentClass(BaseComponentClass):
                 # driverHelper.action.release().perform()
                 try:
                     elHandle[i].click()
+                    time.sleep(2)
                     return True
                 except Exception:
                     return Exception
@@ -258,3 +259,10 @@ class PieLegendComponentClass(BaseComponentClass):
                             result[key] = "Tooltip Validation FAILED"
 
         return result
+
+    def getHeader(self,handlrs):
+        try:
+            handlers = self.compHandlers('pielegend',handlrs)
+            return handlers['header'][0].text
+        except Exception as e:
+            return e
