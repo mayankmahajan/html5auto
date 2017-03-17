@@ -13,7 +13,7 @@ import copy
 import sys
 
 try:
-    for i in range(3):
+    for i in range(29):
         setup = SetUp()
         sleep(8)
         login(setup,"admin","Admin@123")
@@ -49,7 +49,7 @@ try:
         globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.NWSCREEN, globalFilterInstance, setup)
         #popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
 
-        checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for %s",screenName)
+        checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for "+screenName)
 
         setup.d.close()
 
