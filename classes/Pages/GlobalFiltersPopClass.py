@@ -67,7 +67,7 @@ class GlobalFiltersPopClass(BasePopClass):
         globalFilterInstance.clickLink(
                 globalfilters[tab_name]['locatorText'],self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,MuralConstants.ALLLINKS))
 
-        if isCheckBox:
+        if isCheckBox and not globalFilterInstance.isCheckBoxEnabled(self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,MuralConstants.ALLCHECKBOXES),0):
             globalFilterInstance.clickCheckBox(
                 self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,MuralConstants.ALLCHECKBOXES),
                 0
