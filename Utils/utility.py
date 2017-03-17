@@ -53,7 +53,7 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     for k,v in f1.iteritems():
         msg1 = ''
-        msg1 = msg + "  :: " +k+" ::  "
+        msg1 = msg
         try:
             assert f1[k] == f2[k]
             # msg = msg+" : "+k+" "+tcPass
@@ -280,7 +280,7 @@ def isError(setup):
         errorMessage = eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE][0].text
         logger.error("Error Pop Up Message = %s",errorMessage)
         logger.debug("Closing Error Pop Up")
-        resultlogger.info("******* Error Pop Up found = %s *******",errorMessage)
+        resultlogger.info("******* Error Pop Up found = %s *******<br>",errorMessage)
         eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
         try:
             eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()

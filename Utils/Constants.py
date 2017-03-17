@@ -7,12 +7,13 @@ class Constants(object):
     # URL = "https://muralautomation.cisco.com:6443/"
     # URL = "https://scrum.jalapeno.com:6443"
     # URL = "https://uiscrummural.cisco.com:6443/"
-    isOffline = True
+    isOffline = False
     if isOffline:
         URL = 'localhost:8888'
     else:
-        # URL = "https://muralautomation.cisco.com:6443"
-        URL = "https://murala-ca.guavus.com:6443"
+        #URL = "https://muralautomation.cisco.com:6443"
+        #URL = "https://murala-ca.guavus.com:6443"
+        URL = "https://uiscrum-mural.cisco.com:6443"
 
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'

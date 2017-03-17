@@ -20,12 +20,35 @@ def setGlobalFilters(globalFilterInstance,setup,k='0'):
 
     expectedFilters = merge_dictionaries(merge_dictionaries(networkFilters,apnratFilters),deviceFilters)
 
-    actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,MuralConstants.GFPOPUP)),networkKeys+apnratKeys+deviceKeys)
+    #actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,MuralConstants.GFPOPUP)),networkKeys+apnratKeys+deviceKeys)
 
-    checkEqualDict(expectedFilters,actualFilters,"","","Verify Filters Selections")
-    return expectedFilters,actualFilters
+    #checkEqualDict(expectedFilters,actualFilters,"","","Verify Filters Selections")
+    return expectedFilters
 
-    # global_network= parseFilters(setup.cM.getNodeElements("globalScreenFilters","network"))
+def setGlobalFilters_old(globalFilterInstance, setup, k='0'):
+    # globalFilterInstance = GlobalFiltersPopClass(setup.d)
+
+    networkKeys = setup.cM.getAllNodeElements("networkFilters", "filter")
+    apnratKeys = setup.cM.getAllNodeElements("apnratFilters", "filter")
+    deviceKeys = setup.cM.getAllNodeElements("deviceFilters", "filter")
+
+    networkFilters = createFilterMap(globalFilterInstance.setFilters(setup, globalFilterInstance, "network", k=k),
+                                         networkKeys)
+    apnratFilters = createFilterMap(
+            globalFilterInstance.setFilters(setup, globalFilterInstance, "apnrat", True, k=k), apnratKeys)
+    deviceFilters = createFilterMap(
+            globalFilterInstance.setFilters(setup, globalFilterInstance, "device", True, k=k), deviceKeys)
+
+    expectedFilters = merge_dictionaries(merge_dictionaries(networkFilters, apnratFilters), deviceFilters)
+
+    actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup, getHandle(setup, MuralConstants.GFPOPUP)),
+                                   networkKeys + apnratKeys + deviceKeys)
+
+    checkEqualDict(expectedFilters, actualFilters, "", "", "Verify Filters Selections")
+    return expectedFilters, actualFilters
+
+
+        # global_network= parseFilters(setup.cM.getNodeElements("globalScreenFilters","network"))
     # global_apnrat= parseFilters(setup.cM.getNodeElements("globalScreenFilters","apnrat"))
     # global_device= parseFilters(setup.cM.getNodeElements("globalScreenFilters","device"))
     # globalfilters= setup.cM.getNodeElements("reportwizardfilters","filter")
