@@ -201,6 +201,15 @@
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
         </screenConfig>
 
+        <screenConfig id ="tm_Screen">
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+        </screenConfig>
+
+
+        <screenConfig id ="device_Screen">
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+        </screenConfig>
+
 
         <screenConfig id = "report_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
@@ -227,6 +236,7 @@
             <component id = "filterPopup" selector="id" locator="filterPopup" parent="True"/>
             <component id = "allcheckboxes" selector="id" locator="filterPopup" parent="True"/>
             <component id = "recurring" selector="id" locator="filterPopup" parent="True"/>
+
             <component id = "allinputs" selector="id" locator="filterPopup" parent="True"/>
             <component id = "errorText" parent="False"/>
 
@@ -479,4 +489,15 @@
             <option id = "Sites"/>
         </contextMenu>
     </contextMenus>
+
+    <screenDetails>
+        <screen id = "network_Screen" breadcrumbTitle = "MURAL Network Insights" dimensions="Area,Region,Gateway"/>
+        <screen id = "accesstechnology_Screen" breadcrumbTitle = "Access Technology" dimensions="RadioAccess"/>
+        <screen id = "tm_Screen" breadcrumbTitle = "Trending and Monitoring" dimensions=""/>
+        <screen id = "device_Screen" breadcrumbTitle= "Devices" dimensions=""/>
+
+
+    </screenDetails>
+
+
 </data>

@@ -1,16 +1,22 @@
 from Utils.utility import *
 from MuralConstants import *
 
-def setGlobalFilters(globalFilterInstance,setup):
+def clickOnfilterIcon(setup,screen):
+    logger.info("Clicking on FilterIcon")
+    h=getHandle(setup,screen,"filterArea")
+    h['filterArea']['filterIcon'][0].click()
+    return True
+
+def setGlobalFilters(globalFilterInstance,setup,k='0'):
     # globalFilterInstance = GlobalFiltersPopClass(setup.d)
 
     networkKeys = setup.cM.getAllNodeElements("networkFilters","filter")
     apnratKeys = setup.cM.getAllNodeElements("apnratFilters","filter")
     deviceKeys = setup.cM.getAllNodeElements("deviceFilters","filter")
 
-    networkFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"network"),networkKeys)
-    apnratFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"apnrat",True),apnratKeys)
-    deviceFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"device",True),deviceKeys)
+    networkFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"network",k=k),networkKeys)
+    apnratFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"apnrat",True,k=k),apnratKeys)
+    deviceFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"device",True,k=k),deviceKeys)
 
     expectedFilters = merge_dictionaries(merge_dictionaries(networkFilters,apnratFilters),deviceFilters)
 

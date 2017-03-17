@@ -188,11 +188,7 @@ def toolTipPieAndPieLegend(setup,instance):
     return True
 
 
-def clickOnfilterIcon(setup):
-    logger.info("Clicking on FilterIcon")
-    h=getHandle(setup,MuralConstants.ATSCREEN,"filterArea")
-    h['filterArea']['filterIcon'][0].click()
-    return True
+
 
 
 '''
