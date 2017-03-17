@@ -17,7 +17,7 @@ def setGlobalFilters(globalFilterInstance,setup):
     actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,MuralConstants.GFPOPUP)),networkKeys+apnratKeys+deviceKeys)
 
     checkEqualDict(expectedFilters,actualFilters,"","","Verify Filters Selections")
-    return actualFilters
+    return expectedFilters,actualFilters
 
     # global_network= parseFilters(setup.cM.getNodeElements("globalScreenFilters","network"))
     # global_apnrat= parseFilters(setup.cM.getNodeElements("globalScreenFilters","apnrat"))

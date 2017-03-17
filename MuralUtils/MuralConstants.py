@@ -34,4 +34,5 @@ class MuralConstants(Constants):
     ATSCREEN = "accesstechnology_Screen"
     GFPOPUP = "globalfilters_popup"
     TandMScreen = "Trending and Monitoring"
+    TMSCREEN = "tm_Screen"
 

@@ -273,12 +273,14 @@ def getTableDataMap(setup,screenName,parent='table',colIndex=0):
 
 
 def isError(setup):
+    sleep(6)
     eHandle = getHandle(setup,Constants.ERRORPOPUP,Constants.ERRORBODY)
     if len(eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE]) >0:
         logger.error("Error Pop Up found")
         errorMessage = eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE][0].text
         logger.error("Error Pop Up Message = %s",errorMessage)
         logger.debug("Closing Error Pop Up")
+        resultlogger.info("******* Error Pop Up found = %s *******",errorMessage)
         eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
         try:
             eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()

@@ -25,6 +25,7 @@ try:
 
     # apply global filters
     globalFilterInstance.clickButton("Apply",getHandle(setup,MuralConstants.GFPOPUP,MuralConstants.ALLBUTTONS))
+    isError(setup)
 
     # get global filter from Screen
     f = Helper.getGlobalFiltersFromScreen(MuralConstants.NWSCREEN,globalFilterInstance,setup)

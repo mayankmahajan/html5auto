@@ -267,6 +267,21 @@
 
 
         </screenConfig>
+        <screenConfig id = "tm_Screen">
+
+            <!--<component id = "quicktrends" selector="css selector" locator=".trendChartContainer" parent="True"/>-->
+            <!--<component id = "trend-compare" selector="xpath" locator="//kiwik-trends/div[1]/div[3]" parent="True"/>-->
+
+
+            <!--<component id = "trends" selector="xpath" locator="//kiwik-trends" parent="True"/>-->
+            <!--<component id = "trend-header" selector="xpath" locator="//kiwik-trends/div[1]/div[1]" parent="True"/>-->
+            <component id = "trend-main" selector="xpath" locator="//kiwik-trends/div[1]/div[2]" parent="True"/>
+            <component id = "trend-compare" selector="xpath" locator="//kiwik-trends/div[1]/div[3]" parent="True"/>
+            <component id = "trend-legend" selector="tag name" locator="kiwik-trend-legend" parent="True"/>
+
+
+
+        </screenConfig>
         <screenConfig id ='error_popup'>
             <component id = "errorbody" selector="class name" locator="errorBody" parent="True"/>
         </screenConfig>
@@ -276,6 +291,39 @@
     </screenConfigs>
 
     <componentConfigs>
+
+        <componentConfig id ="trend-legend">
+            <component id = "legend" selector="tag name" locator="li" />
+        </componentConfig>
+
+        <componentConfig id ="trend-compare">
+            <component id = "select" selector="css selector" locator="select" />
+            <component id = "qttooltip" selector="css selector" locator=".trend-compare-header"/>
+            <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
+        </componentConfig>
+        <componentConfig id = "trend-header">
+            <component id = "select" selector="xpath" locator="//kiwik-trends/div[1]/div[1]/select"/>
+            <!--<component id = "label" selector="xpath" locator="//label"/>-->
+            <component id = "qttooltip" selector="xpath" locator="//kiwik-trends/div[1]/div[1]/div"/>
+        </componentConfig>
+
+
+        <componentConfig id = "trend-main">
+            <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
+            <component id = "select" selector="xpath" locator="../div[1]/select"/>
+            <!--<component id = "label" selector="xpath" locator="//label"/>-->
+            <component id = "qttooltip" selector="xpath" locator="../div[1]/div"/>
+            <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
+        </componentConfig>
+        <!--<componentConfig id = "trend-compare">-->
+            <!--<component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>-->
+            <!--<component id = "select" selector="xpath" locator="../div[1]/select"/>-->
+            <!--<component id = "label" selector="xpath" locator="//label"/>-->
+            <!--<component id = "qttooltip" selector="xpath" locator="../div[1]/div"/>-->
+            <!--<component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>-->
+        <!--</componentConfig>-->
+
+
         <componentConfig id ="screenbody">
             <component id = "workflowstart" selector="tag name" locator="mural-workflow-start"/>
         </componentConfig>

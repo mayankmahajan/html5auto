@@ -293,3 +293,15 @@ class BaseComponentClass:
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
         return False
+
+    def rgb_to_hex(self,rgb):
+        if '#' in rgb:
+            return rgb
+        elif 'rgba' not in rgb:
+            x = rgb.strip('\(').strip('\)').split(',')
+        else:
+            # ignoring alpha property
+            x= rgb.split('rgba')[1].strip('\(').strip('\)').split(',')
+
+        rgb = (int(x[0]),int(x[1]),int(x[2]))
+        return '#%02x%02x%02x' % rgb

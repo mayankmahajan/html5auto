@@ -70,6 +70,21 @@ class QuickTrendsComponentClass(BaseComponentClass):
                 print el.tag_name
         return tooltipText
 
+    def hoverOverTicks(self, setup, h1, screenName,parent="trend-main", child="trendchart",parent_tooltip="trend-main",child_tooltip="qttooltip"):
+        h = self.__getHandler1(h1[parent][child])
+        hxaxis = self.__getHandleAxis(h['chart'], 'wm-axis')
+        for el in hxaxis:
+            if el.tag_name == 'g':
+                hticks = self.__getHandleTicks(el, 'tick')
+                tooltipText=[]
+                for el in hticks:
+                    setup.dH.action.move_to_element(el).perform()
+                    tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
+                    time.sleep(1) # only to show in demo
+                    tooltipText.append(tempHandlers[parent_tooltip][child_tooltip][0].text)
+            else:
+                print el.tag_name
+        return tooltipText
 
 
     def __getHandler(self, handlrs):
@@ -82,9 +97,62 @@ class QuickTrendsComponentClass(BaseComponentClass):
              # if len(svg.find_elements_by_class_name('legend')) > 0 else
         return h
 
+    def __getHandler1(self, handlrs):
+        h = {}
+        for svg in self.getAllActiveElements(handlrs[0].find_elements_by_tag_name("svg")):
+            if len(svg.find_elements_by_class_name('legend')) > 0:
+                h['legend']= svg
+            else:
+                h['chart']= svg
+             # if len(svg.find_elements_by_class_name('legend')) > 0 else
+        return h
+
+
+
     def getLegendList(self,handlrs):
         h = self.__getHandler(handlrs)
         return (h['legend'].text).split('\n')
+
+    def getLegends_tm(self,h,parent="trend-legend",child="legend"):
+        try:
+            legends = []
+            for legend in h[parent][child]:
+                temp = {}
+                temp['color'] = self.rgb_to_hex(legend.find_elements_by_xpath("./div[1]")[0].value_of_css_property("background-color"))
+                temp['state'] = legend.find_elements_by_xpath("./div[1]/img")[0].is_displayed()
+                temp['value'] = legend.find_elements_by_xpath("./div[2]")[0].text
+                temp['handle'] = legend
+                legends.append(temp)
+            return legends
+        except Exception as e:
+            return e
+
+
+    def clickLegendByIndex_tm(self,index, h,parent="trend-legend",child="legend"):
+        legends = self.getAllActiveElements(h[parent][child])
+        for i in range(len(legends)):
+            if i == index:
+                try:
+                    color = self.rgb_to_hex(legends[i].find_elements_by_xpath("./div[1]")[0].value_of_css_property("background-color"))
+                    legends[i].find_elements_by_xpath("./div[1]")[0].click()
+                    return color
+                except Exception as e:
+                    return e
+        return False
+
+    def getPaths(self,h,parent="trend-main", child="trendchart",indexOfComp=0):
+        paths = []
+        # for el in h[parent][child][indexOfComp].find_elements_by_tag_name("path"):img[contains(@id, "tartTime")]
+        for el in h[parent][child][indexOfComp].find_elements_by_css_selector("g.series path"):
+            paths.append(self.rgb_to_hex(el.get_attribute("stroke")))
+        return paths
+
+
+
+
+
+
+
 
 
 
