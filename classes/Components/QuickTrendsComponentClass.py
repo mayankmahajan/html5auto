@@ -147,7 +147,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
             paths.append(self.rgb_to_hex(el.get_attribute("stroke")))
         return paths
 
-    def getChartsCount(self, h, parent="trend-main", child="trendchart", indexOfComp=0):
+    def getChartsCount(self, h, parent="trend-main", child="trendchart"):
         return len(h[parent][child])
 
     def getSelectedCompareChartIndex(self, h, parent="trend-compare", child="trendchart",selectedColor="#ffffff"):

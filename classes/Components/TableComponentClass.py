@@ -427,7 +427,7 @@ class TableComponentClass(BaseComponentClass):
 
     def getIndexForValueInArray(self,arr,value):
         for i in range(len(arr)):
-            if value == arr[i]:
+            if str(value) == str(arr[i]).strip():
                 return i
         return -1
 

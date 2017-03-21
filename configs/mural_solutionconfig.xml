@@ -1,6 +1,36 @@
 <?xml version="1.0"?>
 <data>
 
+
+    <measureswithdirection>  
+        <measure id = "volumeD" locatorText="Volume (Downlink)" /> 
+        <measure id = "volumeU" locatorText="Volume (Uplink)" /> 
+        <measure id = "volumeT" locatorText="Volume (Total)" />  
+        <measure id = "bitrateD" locatorText="Bitrate (Downlink)" /> 
+        <measure id = "bitrateU" locatorText="Bitrate (Uplink)" /> 
+        <measure id = "bitrateT" locatorText="Bitrate (Total)" />  
+        <measure id = "flows" locatorText="Flows" /> 
+        <measure id = "flowduration" locatorText="Avg Flow Duration" /> 
+        <measure id = "subscribers" locatorText="Unique Subscribers" />   
+    </measureswithdirection>    
+    <tmdimension> 
+        <dimension id = 'none' locatorText="None" /> 
+        <dimension id = 'gateway' locatorText="Gateway" /> 
+        <dimension id = 'devicemodel' locatorText="Device Model" /> 
+        <dimension id = 'devicemanufacture' locatorText="Device Manufacture" /> 
+        <dimension id = 'deviceos' locatorText="Device OS" /> 
+        <dimension id = 'devicegroup' locatorText="Device Group" /> 
+        <dimension id = 'radioaccesstype' locatorText="Radio Access Type" /> 
+        <dimension id = 'apn' locatorText="APN" /> 
+        <dimension id = 'traffictypeapplication' locatorText="Traffic Type Application" /> 
+        <dimension id = 'traffictypecategory' locatorText="Traffic Type Category" /> 
+        <dimension id = 'mobileapplication' locatorText="Mobile Application" /> 
+        <dimension id = 'mobileappscategory' locatorText="Mobile Apps Category" /> 
+        <dimension id = 'serviceprovider' locatorText="Service Provider" /> 
+        <dimension id = 'webprotocol' locatorText="Web Protocol" /> 
+    </tmdimension>
+
+
     <reportfiltersrelations>
 
         <reportfiltersrelation id = "Subscriber Activity" filters="network,subscriber"/>
@@ -201,11 +231,6 @@
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
         </screenConfig>
 
-        <screenConfig id ="tm_Screen">
-            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
-        </screenConfig>
-
-
         <screenConfig id ="device_Screen">
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
         </screenConfig>
@@ -290,6 +315,7 @@
             <component id = "trend-main" selector="css selector" locator="div.trend-main-container" parent="True"/>
             <component id = "trend-compare" selector="css selector" locator="div.trend-compare-container" parent="True"/>
             <component id = "trend-legend" selector="tag name" locator="kiwik-trend-legend" parent="True"/>
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
 
 
 
@@ -319,6 +345,11 @@
             <component id = "qttooltip" selector="xpath" locator="//kiwik-trends/div[1]/div[1]/div"/>
         </componentConfig>
 
+        <componentConfig id = "kiwiktrendsbase"> 
+            <component id = "measures" selector="id" locator="measureSelect"/> 
+            <component id = "dimension" selector="id" locator='dimensionSelect' /> 
+            <component id = "header" selector="css selector" locator="[class*=trend-main-header]"/> 
+        </componentConfig>
 
         <componentConfig id = "trend-main">
             <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
