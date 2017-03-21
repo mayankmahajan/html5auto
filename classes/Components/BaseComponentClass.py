@@ -208,6 +208,20 @@ class BaseComponentClass:
                 return e
         return False
 
+    def clickImage(self,value,h,parent="allimages",child="image"):
+        for el in h[parent][child]:
+            try:
+                if value in str(el.get_attribute("class")).strip():
+                    try:
+                        el.click()
+                        time.sleep(2)
+                        return True
+                    except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                        return e
+            except Exception as e:
+                return e
+        return False
+
     def isButtonEnabled(self,value,h,parent="allbuttons",child="button"):
         for el in h[parent][child]:
             try:

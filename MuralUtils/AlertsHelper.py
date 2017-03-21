@@ -54,22 +54,22 @@ def createDPIAlert(setup, request = {}):
     flag_Threshold = True if response['conditions'][2] != "-" else False
 
     response[MuralConstants.STARTTIME]=setTime(setup,0,request['time'][0])
-    starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request['time'][0].datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
 
-    request['time'][1]= getEndtime(setup, response['type'], response['gran'], starttimeEpoch,Constants.TIMEZONEOFFSET)
+    request['time'][1]= getEndtime(setup, response['type'], response['gran'], starttimeEpoch,MuralConstants.TIMEZONEOFFSET)
 
     response[MuralConstants.ENDTIME] = setTime(setup,1,request['time'][1])
     #
-    # starttimeEpoch = getepoch(request['time'][0].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
-    endtimeEpoch = getepoch(request['time'][1].datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    # request["range"] = str(getDateString(starttimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y")) +" to "+ str(getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%a %b %d %Y"))
-    request["range"] = str(request['time'][0].datestring) +" to "+ str(request['time'][1].datestring)
+    # starttimeEpoch = getepoch(request['time'][0].datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M:%S")
+    endtimeEpoch = getepoch(request['time'][1].datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    request["range"] = str(getDateString(starttimeEpoch,MuralConstants.TIMEZONEOFFSET,MuralConstants.TIMEPATTERN)) +" to "+ str(getDateString(endtimeEpoch,MuralConstants.TIMEZONEOFFSET,MuralConstants.TIMEPATTERN))
+    # request["range"] = str(request['time'][0].datestring) +" to "+ str(request['time'][1].datestring)
 
     response['filters'] = ""
     for i in range(len(request['filters'])):
         response['filters'] = response['filters']+setFilters(setup,valueArray=request['filters'][i])+','
         if i < len(request['filters'])-1:
-            clickButton(setup,"add",True)
+            clickButton(setup,"add",img=True)
     response['filters']=response['filters'].strip(',')
     request['filters']=response['filters']
     request['measure']=response['measure']
@@ -91,6 +91,8 @@ def createDPIAlert(setup, request = {}):
 
         resultlogger.info("Screenshot has been saved with name  = " + "issue_"+response['ruleName']+".png")
         logger.info("Screenshot has been saved with name  = " + "issue_"+response['ruleName']+".png")
+
+        clickButton(setup,"Cancel")
 
         return False
 
@@ -233,7 +235,7 @@ def createTimeFromEpoch(epoch,timezone):
     parts=getDateString(epoch,timezone,pattern).split("-")
     return Time(parts[0],parts[1],parts[2],parts[3])
 
-     # = getDateString(endtimeEpoch,Constants.TIMEZONEOFFSET,"%Y-%m-%d-%H-%M")
+     # = getDateString(endtimeEpoch,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d-%H-%M")
 
 def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
     # saving the table data as keys
@@ -477,10 +479,13 @@ def setFilters(setup,state="",valueArray=[],selectionByIndex=True):
     return str(filterDimension)+":"+str(filterValue)
     return [filterDimension,filterValue]
 
-def clickButton(setup,buttonName,input=False):
+def clickButton(setup,buttonName,input=False,img=False):
     instance = DropdownComponentClass()
     buttonHandle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLBUTTONS)
-    if input:
+    if img:
+        buttonHandle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLIMAGES)
+        return instance.clickImage("add",buttonHandle)
+    elif input:
         return instance.clickInputButton(buttonName,buttonHandle)
     else:
         return instance.clickButton(buttonName,buttonHandle)
@@ -519,11 +524,11 @@ def doCalendarSearchOnAlerts(setup,stEtCombID=0):
     calHandler['search']['datepicker'][0].click()
     logger.info("Calendar picker is clicked")
     # stObj = Time(st[''],11,19,00,00)
-    stEpoch = getepoch(stObj.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    stEpoch = getepoch(stObj.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     instance = GenerateReportsPopClass(setup.d)
     setCalendar(stObj.year,stObj.month, stObj.day, stObj.hour, stObj.min, instance, setup,MuralConstants.CREATERULEPOPUP)
     # etObj = Time(2015,11,27,00,00)
-    etEpoch = getepoch(etObj.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    etEpoch = getepoch(etObj.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     setCalendar(etObj.year,etObj.month, etObj.day, etObj.hour, etObj.min, instance, setup,MuralConstants.CREATERULEPOPUP,"rightcalendar")
     # Closing Calendar Pop Up
     instance.reportspopup.clickButton("Apply", getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLBUTTONS))
@@ -536,7 +541,7 @@ def doCalendarSearchOnAlerts(setup,stEtCombID=0):
         resultlogger.info("Alert List comes Empty when filter is selected  starttime  = %s  and endtime = %s ",
                      stObj.datestring, etObj.datestring)
     for i in range(len(alertlist)):
-        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralConstants.TIMEZONEOFFSET,"%d %b %Y %H:%M","-")
+        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralMuralConstants.TIMEZONEOFFSET,"%d %b %Y %H:%M","-")
         # if (actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch):
         checkEqualAssert(True,(actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch),"","",
                          "Check for alert "+alertlist[i]['header']+" and duration = "+alertlist[i]['duration']+
@@ -985,35 +990,35 @@ def startEndTimeValidations(setup,request = {}):
     for k,starttime in starttime.iteritems():
         st = Time(starttime['year'],starttime['month'],starttime['day'],starttime['hour'],starttime['min'])
 
-    starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(st.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     request[MuralConstants.STARTTIME] = setTime(setup,0,st)
     et = st
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
 
     et = Time(starttime['year'],starttime['month'],starttime['day'],int(starttime['hour'])-1,starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(st.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(et.datestring,Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(st.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(et.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])-1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])+1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],Constants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     return st,et

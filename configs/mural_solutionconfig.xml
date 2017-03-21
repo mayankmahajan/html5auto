@@ -298,8 +298,7 @@
             <component id = "allcheckboxes" selector="css selector" locator="#filterPopup,.filterPopup" parent="True"/>
             <component id = "allinputs" selector="css selector" locator="#filterPopup,.filterPopup" parent="True"/>
             <component id = "allbuttons" selector="css selector" locator="#filterPopup" parent="True"/>
-
-
+            <component id = "allimages" selector="css selector" locator="#filterPopup" parent="True"/>
 
         </screenConfig>
         <screenConfig id = "tm_Screen">

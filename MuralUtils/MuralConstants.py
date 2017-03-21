@@ -15,7 +15,7 @@ class MuralConstants(Constants):
     # driver based constants
     WEBDRIVERTIMEOUT = 12
 
-    TIMEZONEOFFSET = -6
+    TIMEZONEOFFSET = -1
     TIMEPATTERN = '%d %b %Y %H:%M:%S'
 
     chromedriverpath = "/Users/mayank.mahajan/Downloads/chromedriver54"

@@ -75,6 +75,7 @@ class Constants(object):
     ALLCIRCLES = "allcircles"
     ALLCHECKBOXES = "allcheckboxes"
     ALLLINKS = "alllinks"
+    ALLIMAGES = "allimages"
 
     ERRORBODY = "errorbody"
     ERRORCLOSE = "errorclose"

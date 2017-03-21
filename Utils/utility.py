@@ -273,7 +273,7 @@ def getTableDataMap(setup,screenName,parent='table',colIndex=0):
 
 
 def isError(setup):
-    sleep(6)
+    sleep(10)
     eHandle = getHandle(setup,Constants.ERRORPOPUP,Constants.ERRORBODY)
     if len(eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE]) >0 and len(eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE]) >0:
         r = "issue_" + str(random.randint(99999,9999999))+".png"
