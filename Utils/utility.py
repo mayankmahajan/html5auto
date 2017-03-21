@@ -276,10 +276,14 @@ def isError(setup):
     sleep(6)
     eHandle = getHandle(setup,Constants.ERRORPOPUP,Constants.ERRORBODY)
     if len(eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE]) >0 and len(eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE]) >0:
+        r = "issue_" + str(random.randint(99999,9999999))+".png"
+        setup.d.save_screenshot(r)
+        logger.debug("ERROR :: Screenshot with name = %s is saved",r)
         logger.error("Error Pop Up found")
         errorMessage = eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE][0].text
         logger.error("Error Pop Up Message = %s",errorMessage)
         logger.debug("Closing Error Pop Up")
+        resultlogger.info("ERROR :: Screenshot with name = %s is saved <br>",r)
         resultlogger.info("******* Error Pop Up found = %s *******<br>",errorMessage)
         eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
         try:
