@@ -309,7 +309,7 @@
 
 
             <!--<component id = "trends" selector="xpath" locator="//kiwik-trends" parent="True"/>-->
-            <!--<component id = "trend-header" selector="xpath" locator="//kiwik-trends/div[1]/div[1]" parent="True"/>-->
+            <component id = "trend-header" selector="css selector" locator="div.trend-header-container" parent="True"/>
             <!--<component id = "trend-main" selector="xpath" locator="//kiwik-trends/div[1]/div[2]" parent="True"/>-->
             <!--<component id = "trend-compare" selector="xpath" locator="//kiwik-trends/div[1]/div[3]" parent="True"/>-->
             <component id = "trend-main" selector="css selector" locator="div.trend-main-container" parent="True"/>
@@ -340,7 +340,7 @@
             <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
         </componentConfig>
         <componentConfig id = "trend-header">
-            <component id = "select" selector="xpath" locator="//kiwik-trends/div[1]/div[1]/select"/>
+            <component id = "select" selector="tag name" locator="select"/>
             <!--<component id = "label" selector="xpath" locator="//label"/>-->
             <component id = "qttooltip" selector="xpath" locator="//kiwik-trends/div[1]/div[1]/div"/>
         </componentConfig>
@@ -353,7 +353,7 @@
 
         <componentConfig id = "trend-main">
             <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
-            <component id = "select" selector="xpath" locator="../div[1]/select"/>
+            <component id = "select" selector="tag name" locator="select"/>
             <!--<component id = "label" selector="xpath" locator="//label"/>-->
             <component id = "qttooltip" selector="xpath" locator="../div[1]/div"/>
             <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>

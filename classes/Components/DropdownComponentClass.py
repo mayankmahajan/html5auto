@@ -55,7 +55,7 @@ class DropdownComponentClass(BaseComponentClass):
                     logger.debug("Selecting DropDown with Index = %s and Text = %s",str(i),str(elements[i].text))
                     elements[i].click()
                     logger.debug("DropDown with Index = %s and Text = %s is selected",str(i),str(elements[i].text))
-                    return self.get(h)
+                    return str(self.get(h).strip().strip('\n').strip())
                 except Exception as e:
                     logger.error("Exception found while selecting DropDown with Index = %s and Text = %s = %s",str(i),str(elements[i].text),str(e))
                     return e
