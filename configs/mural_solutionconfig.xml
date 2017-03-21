@@ -285,8 +285,10 @@
 
             <!--<component id = "trends" selector="xpath" locator="//kiwik-trends" parent="True"/>-->
             <!--<component id = "trend-header" selector="xpath" locator="//kiwik-trends/div[1]/div[1]" parent="True"/>-->
-            <component id = "trend-main" selector="xpath" locator="//kiwik-trends/div[1]/div[2]" parent="True"/>
-            <component id = "trend-compare" selector="xpath" locator="//kiwik-trends/div[1]/div[3]" parent="True"/>
+            <!--<component id = "trend-main" selector="xpath" locator="//kiwik-trends/div[1]/div[2]" parent="True"/>-->
+            <!--<component id = "trend-compare" selector="xpath" locator="//kiwik-trends/div[1]/div[3]" parent="True"/>-->
+            <component id = "trend-main" selector="css selector" locator="div.trend-main-container" parent="True"/>
+            <component id = "trend-compare" selector="css selector" locator="div.trend-compare-container" parent="True"/>
             <component id = "trend-legend" selector="tag name" locator="kiwik-trend-legend" parent="True"/>
 
 
