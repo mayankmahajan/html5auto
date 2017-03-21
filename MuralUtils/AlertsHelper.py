@@ -73,6 +73,7 @@ def createDPIAlert(setup, request = {}):
     response['filters']=response['filters'].strip(',')
     request['filters']=response['filters']
     request['measure']=response['measure']
+    request['conditions']=response['conditions']
     # filterSelected = setFilters(setup,["Device","Apple iPod"])
     # clickButton(setup,"add")
     # filterSelected = setFilters(setup,["Gateway","gurgaon"])
@@ -86,6 +87,13 @@ def createDPIAlert(setup, request = {}):
         resultlogger.info("*** Create Button is disabled")
         resultlogger.info("Request : %s",str(request))
         resultlogger.info("Response : %s",str(response))
+        setup.d.save_screenshot("issue_"+response['ruleName']+".png")
+
+        resultlogger.info("Screenshot has been saved with name  = " + "issue_"+response['ruleName']+".png")
+        logger.info("Screenshot has been saved with name  = " + "issue_"+response['ruleName']+".png")
+
+        return False
+
     else:
         logger.info("*** Create Button is clicked and Report with below parameters is triggered")
         logger.info("Request : %s",str(request))
@@ -93,6 +101,7 @@ def createDPIAlert(setup, request = {}):
         resultlogger.info("*** Create Button is clicked and Report with below parameters is triggered")
         resultlogger.info("Request : %s",str(request))
         resultlogger.info("Response : %s",str(response))
+        setup.d.save_screenshot(response['ruleName']+".png")
 
 
     error = isError(setup)
@@ -356,7 +365,7 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
             returnValue = str(op).strip()+str(num_value).strip()
         else:
             logger.info("Selecting unitsystem %s for operator %s and Priority %s",str(unitSystem),str(op),str(priorty))
-            unit=instance.doRandomSelectionOnVisibleDropDown(handle,index+1)
+            unit=" "+instance.doRandomSelectionOnVisibleDropDown(handle,index+1)
             logger.info("Unitsystem %s is set for operator %s and Priority %s",str(unitSystem),str(op),str(priorty))
             returnValue = str(op).strip()+str(num_value).strip()+str(unit).strip()
 
