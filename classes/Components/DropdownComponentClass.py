@@ -133,5 +133,6 @@ class DropdownComponentClass(BaseComponentClass):
 
     def getSelectionOnVisibleDropDown(self,h,index=0,parent="allselects",child="select"):
         activedrops  = self.getAllActiveElements(h[parent][child])
-        return self.get(activedrops[index])
+        return str(self.get(activedrops[index]).strip().strip('\n').strip())
+
 
