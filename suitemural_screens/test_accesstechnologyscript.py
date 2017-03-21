@@ -1,19 +1,11 @@
-from Utils.SetUp import *
-from MuralUtils.MuralConstants import *
-from Utils.utility import *
-from classes.Pages.MuralScreens.NetworkScreenClass import *
-from classes.Components.WorkflowStartComponent import *
+from MuralUtils.AccessTechnologyHelper import *
 from classes.Components.TimeRangeComponentClass import *
-from classes.Pages.MuralScreens.AccessTechnologyClass import *
-from suitemural_network.test_accesstechnology_general import *
-from classes.Components.TimeRangeComponentClass import *
-import sys
 
 screen="Access Technology"
 try:
     setup = SetUp()
     sleep(8)
-    login(setup,"admin","admin123")
+    login(setup,"admin","Admin@123")
     wfstart = WorkflowStartComponentClass()
     sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))

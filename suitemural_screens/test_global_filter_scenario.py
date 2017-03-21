@@ -1,16 +1,6 @@
-from Utils.SetUp import *
-from MuralUtils.MuralConstants import *
-from Utils.utility import *
-from classes.Pages.MuralScreens.NetworkScreenClass import *
-from classes.Components.WorkflowStartComponent import *
-from classes.Components.TimeRangeComponentClass import *
-from classes.Pages.MuralScreens.AccessTechnologyClass import *
-from suitemural_network.test_accesstechnology_general import *
 from MuralUtils import Helper
+from MuralUtils.AccessTechnologyHelper import *
 from classes.Pages.GlobalFiltersPopClass import *
-import copy
-
-import sys
 
 try:
     for i in range(29):

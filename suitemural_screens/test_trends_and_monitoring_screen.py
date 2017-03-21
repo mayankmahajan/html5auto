@@ -12,15 +12,18 @@ from Utils.utility import *
 setup =SetUp()
 # Launching Network Screen
 sleep(8)
-login(setup,"admin","admin123")
+login(setup,"admin","Admin@123")
 wfstart = WorkflowStartComponentClass()
 sleep(8)
 wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
 
 globalFilterInstance = GlobalFiltersPopClass(setup.d)
+
+
 tmScreenInstance = TrendingMonitoringPageClass(setup.d)
 
 qtScreenHandle = getHandle(setup,MuralConstants.TMSCREEN)
+tmScreenInstance.quicktrends.getChartsCount(getHandle(setup,MuralConstants.TMSCREEN))
 
 tmScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(
         getHandle(setup,MuralConstants.TMSCREEN,"trend-main"),

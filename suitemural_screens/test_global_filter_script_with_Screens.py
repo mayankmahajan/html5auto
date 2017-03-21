@@ -5,7 +5,7 @@ from classes.Pages.MuralScreens.NetworkScreenClass import *
 from classes.Components.WorkflowStartComponent import *
 from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MuralScreens.AccessTechnologyClass import *
-from suitemural_network.test_accesstechnology_general import *
+from suitemural_screens.test_accesstechnology_general import *
 from MuralUtils import Helper
 from classes.Pages.GlobalFiltersPopClass import *
 import copy

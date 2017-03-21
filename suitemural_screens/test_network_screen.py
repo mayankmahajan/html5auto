@@ -1,5 +1,6 @@
 from MuralUtils import NetworkHelper
 from Utils.SetUp import *
+from Utils.SetUp_new import *
 from classes.Pages.MuralScreens.NetworkScreenClass import *
 from MuralUtils.MuralConstants import *
 from classes.Components.WorkflowStartComponent import *
@@ -7,10 +8,13 @@ from MuralUtils import Helper
 from classes.Pages.GlobalFiltersPopClass import *
 
 try:
-    setup =SetUp()
+    setup =SetUp_new()
+    sleep(8)
+    login(setup,"admin","Admin@123")
+
     # Launching Network Screen
     wfstart = WorkflowStartComponentClass()
-    # sleep(8)
+    sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
 
     globalFilterInstance = GlobalFiltersPopClass(setup.d)
