@@ -289,7 +289,10 @@ def isError(setup):
         try:
             eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
         except:
-            pass
+            try:
+                eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
+            except:
+                pass
 
         return [True,errorMessage]
     else:

@@ -1,4 +1,4 @@
-from MuralUtils import NetworkHelper
+from MuralUtils import NetworkHelper_dummy
 from Utils.SetUp import *
 from Utils.SetUp_new import *
 from classes.Pages.MuralScreens.NetworkScreenClass import *
@@ -20,6 +20,8 @@ try:
     globalFilterInstance = GlobalFiltersPopClass(setup.d)
     networkScreenInstance = NetworkScreenClass(setup.d)
 
+    x,y,z,a=NetworkHelper_dummy.getSelectionsFromNetwork(networkScreenInstance, setup)
+
     # launch Global Filters PopUp
     ### code will come here to launch it
 
@@ -36,7 +38,7 @@ try:
     popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN,globalFilterInstance,setup)
 
     # Test All functionality on the screen
-    NetworkHelper.testScreenFunc(setup,networkScreenInstance)
+    NetworkHelper_dummy.testScreenFunc(setup, networkScreenInstance)
 
     setup.d.close()
 except Exception as e:

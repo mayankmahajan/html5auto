@@ -16,6 +16,7 @@ from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 import time
+from Utils.logger import *
 
 from selenium.webdriver import ActionChains
 
@@ -65,6 +66,17 @@ class BTVComponentClass(BaseComponentClass):
         for i in range(1,len(elHandle)):
             if "255" not in elHandle[i].value_of_css_property('background-color') :
                 return i
+    def getSelectionIndex1(self,elHandle):
+        '''
+        This method gives the Selected Index of the BarChart
+        :param elHandle: Handler to CheckBox Column
+        :return: Selected Index
+        '''
+        indices = []
+        for i in range(1,len(elHandle)):
+            if "255" not in elHandle[i].value_of_css_property('background-color') :
+                indices.append(i)
+        return indices
 
 
     def totalCheck(self,handlers):
@@ -98,6 +110,11 @@ class BTVComponentClass(BaseComponentClass):
         '''
         # handlers = self.compHandlers('btv',handlrs)
         handlers = handlrs[parent]
+        if len(handlers) <1 or (len(handlers) > 0 and len(handlers['BTVCOLUMN1']) < 1):
+            logger.error("Bar Tabular Value Chart is not present or loaded")
+            raise Exception
+            return False
+
         for key,value in handlers.iteritems():
             if self.configmanager.componentSelectors[parent][key]["action"] == "click":
                 selectedIndex = self.getSelectionIndex(value)
@@ -123,6 +140,27 @@ class BTVComponentClass(BaseComponentClass):
                 if 'selIndex' in data:
                     data[key] = value[data['selIndex']].text
         return data
+
+
+    def getAllSelections(self,handlrs,parent="btv"):
+        '''
+        This method gives the selected Index, its Corresponding Text and Value
+        :param handlers: handler to barChart
+        :return: Selected Data
+        '''
+        data = {}
+        handlers = self.compHandlers(parent,handlrs)
+        for key,value in handlers.iteritems():
+            if self.configmanager.componentSelectors[parent][key]["action"] == "click":
+                data['selIndex'] = self.getSelectionIndex1(value)
+        for key,value in handlers.iteritems():
+            if self.configmanager.componentSelectors[parent][key]["action"] == "getData":
+                if 'selIndex' in data:
+                    data[key] = []
+                    for e in data['selIndex']:
+                        data[key].append(value[e].text)
+        return data
+
 
     # def compHandlers(self,handlers):
     #     return self.configmanager.componentChildRelations['btv']

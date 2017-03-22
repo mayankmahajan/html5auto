@@ -34,6 +34,45 @@ def doActionsOnNetwork(networkScreenInstance,setup):
 
     return picker1,picker2,btv,summary
 
+
+
+def getSelectionsFromNetwork(networkScreenInstance,setup,measureSelected):
+    # set picker 1
+    picker1={}
+    p1sel = networkScreenInstance.picker.getSelection(getHandle(setup,MuralConstants.NWSCREEN,"picker"),0,"picker")
+    picker1['dim'] = str(p1sel[0]).split('\n')[0]
+    picker1['value'] = str(p1sel[0]).split('\n')[1]
+    picker1['header'] =  networkScreenInstance.picker.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"picker"),0)
+
+
+
+    # set picker 2
+    picker2={}
+    p2sel = networkScreenInstance.picker.getSelection(getHandle(setup,MuralConstants.NWSCREEN,"picker"),1,"picker")
+    picker2['dim'] = str(p2sel[0]).split('\n')[0]
+    picker2['value'] = str(p2sel[0]).split('\n')[1]
+    picker2['header'] =  networkScreenInstance.picker.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"picker"),1)
+
+
+    # get btvdata
+    btv = {}
+    btvSel = networkScreenInstance.btv.getSelection(getHandle(setup,MuralConstants.NWSCREEN,"btv"))
+    btv['dim'] = btvSel['BTVCOLUMN1']
+    btv['value'] = btvSel['BTVCOLUMN2']
+    btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"btv"),0)
+
+    summary = {}
+    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
+    summary['dim'] = summary['header']
+    summary['value']=[sumSel[0](summary['dim'],0,measureSelected),
+                      sumSel[0](summary['dim'],1,measureSelected)]
+
+    return picker1,picker2,btv,summary
+
+
+
+
+
 def testScreenFunc(setup,networkScreenInstance):
     try:
         # networkScreenInstance = NetworkScreenClass(setup.d)
