@@ -44,7 +44,9 @@ try:
         setup.d.close()
 
 except Exception as e:
+    isError(setup)
+    r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+    setup.d.save_screenshot(r)
+    logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     raise e
-    print str(e)
-    # sys._current_frames()
     setup.d.close()
