@@ -8,6 +8,8 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
     def __init__(self):
         DropdownComponentClass.__init__(self)
         self.configmanager = ConfigManager()
+        self.utility = __import__("Utils.utility")
+
 
 
     def getSelection(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
@@ -81,17 +83,23 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         activeDropDowns[index].click()
         return self.getSelection(h,index)
 
-    def domultipleSelectionWithIndex(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
-        activeDropDowns = self.getAllActiveElements(h[parent][child])
-        activeDropDowns[index].click()
-        time.sleep(2)
-        elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
-        for i in range(len(elements)):
-            if i in value or str(i) in value:
-                elements[i].click()
+    def domultipleSelectionWithIndex(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False):
+        try:
+            activeDropDowns = self.getAllActiveElements(h[parent][child])
+            activeDropDowns[index].click()
+            time.sleep(2)
+            elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
+            for i in range(len(elements)):
+                if i in value or str(i) in value:
+                    elements[i].click()
 
-        activeDropDowns[index].click()
-        return self.getSelection(h,index,parent,child)
+            activeDropDowns[index].click()
+            return self.getSelection(h,index,parent,child)
+        except Exception as e:
+            if setup != False:
+                self.utility.utility.isError(setup)
+            raise e
+            return e
 
     def getOptionsAvailable(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])

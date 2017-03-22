@@ -9,6 +9,8 @@ from Utils.logger import *
 from selenium.webdriver.common.keys import *
 
 class BaseComponentClass:
+    def __init__(self):
+        self.utility = __import__("Utils.utility")
     def click(self, elHandle):
 
         try:
