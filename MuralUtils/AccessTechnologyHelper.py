@@ -21,8 +21,6 @@ from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MuralScreens.AccessTechnologyClass import *
 
 import sys
-
-
 '''
 
     :param setup: driver and config instance
@@ -40,34 +38,33 @@ import sys
 
     '''
 
-def checkPie(setup, instance):
+def checkPie(setup, instance,quicklink,measureSelected):
     p = getHandle(setup, MuralConstants.ATSCREEN,"piechart")
     r = instance.pielegend.getData11(getHandle(setup, MuralConstants.ATSCREEN, "pielegend"))
 
     for i in range(0,len(p['piechart']['arcs'])):
-        instance.piecomponent.setSelection(i,getHandle(setup, MuralConstants.ATSCREEN),True)
+        instance.piecomponent.setSelection(i,getHandle(setup, MuralConstants.ATSCREEN,"piechart"),True)
         j=instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN))
         k=instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN))
-        checkEqualAssert(int(j[0]),int(k['selIndices'][0]),"","","Verify Selections on Pie and Pie Legend")
+        checkEqualAssert(int(j[0]),int(k['selIndices'][0]),quicklink, measureSelected['locatorText'],"Verify Selections on Pie and Pie Legend")
 
         dim, value = instance.piecomponent.getPieSelectionText(p, "piechart", "selectionText")
-        checkEqualAssert(True, dim.strip("...") in str(r['legendText'][i].split('\n')[0]), "", "","Tootip Text Validation")
-        checkEqualAssert(value,str(r['legendText'][i].split('\n')[1]), "", "","Tootip Value Validation")
-
+        checkEqualAssert(True, dim.strip("...") in str(r['legendText'][i].split('\n')[0]), quicklink, measureSelected['locatorText'],"Verify PieSelection Text with legend text")
+        checkEqualAssert(value,str(r['legendText'][i].split('\n')[1]), quicklink, measureSelected['locatorText'],"Verify PieSelection Value with Pie legend value")
     instance.piecomponent.setSelection(i,getHandle(setup, MuralConstants.ATSCREEN),True)
-
-
     return True
 
-def checkTotalSelectionOnPie(setup, instance):
+
+def checkTotalSelectionOnPie(setup, instance,quicklink,measureSelected):
     p = getHandle(setup, MuralConstants.ATSCREEN, "piechart")
     instance.pielegend.setSelection(setup.dH, [2], getHandle(setup, MuralConstants.ATSCREEN,"pielegend"), True)
     instance.piecomponent.setTotalSelectionOnPie(p, "piechart", "selectionText")
     j = instance.piecomponent.getPieSelections(p)
     k = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
-    checkEqualAssert(len(j), len(k['selIndices']), "", "", "Verify Selections on PieLegend and Pie for index ")
+    checkEqualAssert(0, len(j),quicklink, measureSelected['locatorText'], "Verify Selections on Pie after clicking on PieSelectiontext ")
+    checkEqualAssert(0, len(k['selIndices']), quicklink, measureSelected['locatorText'], "Verify Selections on PieLegend after clicking on PieSelectiontext ")
 
-
+'''
 def checkSummaryBar(setup,instance,measureSelected):
     p = instance.pielegend.getData(getHandle(setup, MuralConstants.ATSCREEN, "pielegend"))
     for i in range(0, len(p['legendText'])):
@@ -80,7 +77,7 @@ def checkSummaryBar(setup,instance,measureSelected):
         piedata[(dim, 0, measureSelected['locatorText'])] = value
         summary['data'], summary['header'] = instance.summarybar.getSelection2(getHandle(setup,MuralConstants.ATSCREEN,"summarybar"))
         checkEqualAssert(piedata[(dim, 0, measureSelected)], summary['data'][(dim, 0, measureSelected['locatorText'])], "", "","Verify Summary card")
-
+'''
 
 def cheackHeader(setup,instance,measureSelected):
     k=instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
@@ -90,7 +87,7 @@ def cheackHeader(setup,instance,measureSelected):
         breadCrumbLabel = instance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
         checkEqualAssert(str(breadCrumbLabel), str(summary['header']), "", "","Verify Summary Header ")
 
-
+'''
 def checkLegend(setup, instance):
     p = instance.pielegend.getData(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
     for i in range(0, len(p['legendText'])):
@@ -98,20 +95,20 @@ def checkLegend(setup, instance):
         j = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN,"piechart"))
         k = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
         checkEqualAssert(int(j[0]), int(k['selIndices'][0]), "", "", "Verify Selections on PieLegend and Pie for index ")
-
     instance.pielegend.setSelection(setup.dH, [i], getHandle(setup, MuralConstants.ATSCREEN,"pielegend"),True)
     return True
+'''
 
 
-
-def checkAllComponentRelatedToPie(setup,instance,quicklink,measureSelected,index,flag):
+#def checkAllComponentRelatedToPie(setup,instance,quicklink,measureSelected,index,flag):
+def checkAllComponentRelatedToPie(setup, instance, quicklink, measureSelected,flag):
     summary = {}
     pie = getHandle(setup, MuralConstants.ATSCREEN, "piechart")
     pielegend= getHandle(setup, MuralConstants.ATSCREEN,"pielegend")
 
     breadCrumbLabel = instance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
     summary['data'], summary['header'] = instance.summarybar.getSelection2(getHandle(setup, MuralConstants.ATSCREEN, "summarybar"))
-    dim_tooltip, value_tooltip = instance.piecomponent.getPieSelectionText(pie, "piechart", "selectionText")
+    dim_PieSelectionText, value_PieSelectionText = instance.piecomponent.getPieSelectionText(pie, "piechart", "selectionText")
 
     if not flag:
         j = instance.piecomponent.getPieSelections(pie)
@@ -120,14 +117,14 @@ def checkAllComponentRelatedToPie(setup,instance,quicklink,measureSelected,index
 
         pieheader = instance.pielegend.getHeader(pielegend)
         # for offline demo
-        # pieheader=pieheader+":"+"220.3"
+        pieheader=pieheader+":"+"220.3"
         dim, value = str(pieheader.split(":")[0]),str(pieheader.split(":")[1]).strip()
 
-        checkEqualAssert(True, dim_tooltip.strip("...") in dim, quicklink, measureSelected['locatorText'],"Tootip Text Validation with PieLegend Header")
-        checkEqualAssert(dim, breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify Label")
-        checkEqualAssert(dim, str(summary['header']), quicklink, measureSelected['locatorText'], "Verify Summary Header with breadCrumbLabel ")
+        checkEqualAssert(True, dim_PieSelectionText.strip("...") in dim, quicklink, measureSelected['locatorText'],"Tootip Text Validation with PieLegend Header")
+        checkEqualAssert(dim, breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
+        checkEqualAssert(dim, str(summary['header']), quicklink, measureSelected['locatorText'], "Verify Summary Header with Pie Header ")
 
-        checkEqualAssert(str(value_tooltip), value, quicklink, measureSelected['locatorText'], "Tootip Value Validation with PieLegend")
+        checkEqualAssert(str(value_PieSelectionText), value, quicklink, measureSelected['locatorText'], "Value from PieSelectionText  Validate with PieLegend")
         #checkEqualAssert(value, str(summary['data'][(dim, 0, measureSelected['locatorText'])]),"", "", "Verify Summary Data Value for All Sub")
 
         # Need clarifications on How to calculate PerSub Value
@@ -138,43 +135,44 @@ def checkAllComponentRelatedToPie(setup,instance,quicklink,measureSelected,index
         k = instance.pielegend.getSelection(pielegend)
         r = instance.pielegend.getData11(pielegend)
         checkEqualAssert(int(j[0]), int(k['selIndices'][0]), quicklink, measureSelected['locatorText'],"Verify Selections on PieLegend and Pie for index ")
-        dim, value = str(r['legendText'][index].split('\n')[0]), str(r['legendText'][index].split('\n')[1])
+        dim, value = str(r['legendText'][int(k['selIndices'][0])].split('\n')[0]), str(r['legendText'][int(k['selIndices'][0])].split('\n')[1])
 
 
-        checkEqualAssert(True, dim_tooltip.strip("...") in dim, quicklink, measureSelected['locatorText'],"Tootip Text Validation with PieLegend")
+        checkEqualAssert(True, dim_PieSelectionText.strip("...") in dim, quicklink, measureSelected['locatorText'],"Tootip Text Validation with PieLegend")
         checkEqualAssert(dim,breadCrumbLabel,quicklink, measureSelected['locatorText'],"Verify Label")
         checkEqualAssert(dim, str(summary['header']), quicklink, measureSelected['locatorText'], "Verify Summary Header with breadCrumbLabel ")
 
-        checkEqualAssert(str(value_tooltip),value,quicklink, measureSelected['locatorText'], "Tootip Value Validation with PieLegend")
+        checkEqualAssert(str(value_PieSelectionText),value,quicklink, measureSelected['locatorText'], "Tootip Value Validation with PieLegend")
         checkEqualAssert(value,str(summary['data'][(dim, 0, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'], "Verify Summary Data value with pielegend (All Sub)")
         # Need clarifications on How to calculate PerSub Value
         checkEqualAssert(value, str(summary['data'][(dim, 1, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'],"Verify Summary Data value with pielegend (Per Sub)")
 
     return True
 
-def unSetPie(setup,instance):
+def unSetPie(setup,instance,quicklink,measureSelected):
 
-    instance.piecomponent.setSelection(1, getHandle(setup, MuralConstants.ATSCREEN,"piechart"),True)
-    instance.piecomponent.setSelection(1, getHandle(setup, MuralConstants.ATSCREEN,"piechart"),True)
+    instance.piecomponent.setSelection(0, getHandle(setup, MuralConstants.ATSCREEN,"piechart"),True)
+    instance.piecomponent.setSelection(0, getHandle(setup, MuralConstants.ATSCREEN,"piechart"),True)
 
     i = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN,"piechart"))
-    j = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN,"piechart"))
-
-    checkEqualAssert(len(i), len(j['selIndices']), "", "","Verify UnsetPie ")
-    return True
-
-
-
-def unSetPieLegend(setup, instance):
-
-    instance.pielegend.setSelection(setup.dH, [2], getHandle(setup, MuralConstants.ATSCREEN,"pielegend"),True)
-    instance.pielegend.setSelection(setup.dH, [2], getHandle(setup, MuralConstants.ATSCREEN,"pielegend"),True)
-
-    i = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
     j = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
 
-    checkEqualAssert(len(i), len(j['selIndices']), "", "", "Verify UnsetPie ")
+    checkEqualAssert(len(i), len(j['selIndices']), quicklink, measureSelected['locatorText'],"Verify UnsetPie ")
     return True
+
+
+
+def unSetPieLegend(setup, instance,quicklink,measureSelected):
+
+    instance.pielegend.setSelection(setup.dH, [0], getHandle(setup, MuralConstants.ATSCREEN,"pielegend"),True)
+    instance.pielegend.setSelection(setup.dH, [0], getHandle(setup, MuralConstants.ATSCREEN,"pielegend"),True)
+
+    i = instance.piecomponent.getPieSelections(getHandle(setup, MuralConstants.ATSCREEN,"piechart"))
+    j = instance.pielegend.getSelection(getHandle(setup, MuralConstants.ATSCREEN,"pielegend"))
+
+    checkEqualAssert(len(i), len(j['selIndices']), quicklink, measureSelected['locatorText'], "Verify UnsetPieLegend")
+    return True
+
 
 def toolTipPieAndPieLegend(setup,instance):
     p = getHandle(setup, MuralConstants.ATSCREEN,"piechart")

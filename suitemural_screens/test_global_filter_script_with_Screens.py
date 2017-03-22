@@ -5,7 +5,6 @@ from classes.Pages.MuralScreens.NetworkScreenClass import *
 from classes.Components.WorkflowStartComponent import *
 from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MuralScreens.AccessTechnologyClass import *
-from suitemural_screens.test_accesstechnology_general import *
 from MuralUtils import Helper
 from classes.Pages.GlobalFiltersPopClass import *
 import copy
@@ -95,6 +94,7 @@ try:
 
 
     #set and get main chart (pielegend) for global filter
+
     value = []
     value.append(setAndGetPieLegend(accesstechnologyScreenInstance,setup.dH,0,getHandle(setup, MuralConstants.ATSCREEN, "pielegend"),True))
 
@@ -109,19 +109,11 @@ try:
 
 
     screenInfo = setup.cM.getNodeElements("screenDetails", "screen")
-
-    #accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"), child="export")
-    #accesstechnologyScreenInstance.cm.goto(str(screenInfo[MuralConstants.TandMScreen]['breadcrumbTitle']),getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
-
-    #globalFilterFromScreen_TAM = Helper.getGlobalFiltersFromScreen(MuralConstants.TandMScreen, globalFilterInstance, setup)
-
     globalFilterFromScreen_Device = Helper.getGlobalFiltersFromScreen(MuralConstants.DeviceScreen, globalFilterInstance,setup)
-
     checkEqualDict(updatedGFs,globalFilterFromScreen_Device, "", "", "Verify Global Filter across Screen")
 
 
     screenNamefrombreadcrumb = str(screenInfo[MuralConstants.ATSCREEN]['breadcrumbTitle'])
-
     accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb(screenNamefrombreadcrumb, getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
     globalFilterFromPreviousScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.ATSCREEN, globalFilterInstance,setup)
 
