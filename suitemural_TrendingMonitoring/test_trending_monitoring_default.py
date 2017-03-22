@@ -50,7 +50,7 @@ try:
     checkEqualAssert(str(measure),"Volume (Downlink)", str(selectedQuicklink), "", "Verify default measure")
 
     dimension=TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(h,index=1, parent="trend-header")
-    checkEqualAssert(str(measure), "None", str(selectedQuicklink), "", "Verify default dimension")
+    checkEqualAssert(str(dimension), "None", str(selectedQuicklink), "", "Verify default dimension")
 
     chartIndex=TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN))
     checkEqualAssert(int(chartIndex), 0, str(selectedQuicklink), "", "Verify default compare chart")
