@@ -125,7 +125,7 @@ try:
     accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb(screenNamefrombreadcrumb, getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
     globalFilterFromPreviousScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.ATSCREEN, globalFilterInstance,setup)
 
-    checkEqualAssert(previousGFs,globalFilterFromPreviousScreen,"","","Verify Global filter on previous screen "+screenNamefrombreadcrumb)
+    checkEqualDict(previousGFs,globalFilterFromPreviousScreen,"","","Verify Global filter on previous screen "+screenNamefrombreadcrumb)
     setup.d.close()
 
 except Exception as e:
