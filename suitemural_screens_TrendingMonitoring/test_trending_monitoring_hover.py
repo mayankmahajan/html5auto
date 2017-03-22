@@ -47,7 +47,7 @@ try:
     p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN))
     chartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN))
     compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN),parent="trend-compare", indexOfComp=chartIndex)
-    checkEqualAssert(p1, compareTrend1, selectedQuicklink, measure,"Verify equal activated dimension on main chart and compare chart")
+    checkEqualAssert(p1, compareTrend1, str(selectedQuicklink), selectedMeasure,"Verify equal activated dimension on main chart and compare chart")
 
     hover_data = TMScreenInstance.quicktrends.hoverOverTicks(setup, getHandle(setup, MuralConstants.TMSCREEN),MuralConstants.TMSCREEN)
 
@@ -57,7 +57,7 @@ try:
     index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], str(measure))
     value_list = [e[index] for e in data['rows']]
 
-    checkEqualAssert(value_list, hover_data, "", measure, "Verify hover data with table data")
+    checkEqualAssert(value_list, hover_data, str(selectedQuicklink), selectedMeasure, "Verify hover data with table data")
 
 
 
