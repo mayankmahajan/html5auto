@@ -6,7 +6,7 @@ try:
     for i in range(29):
         setup = SetUp()
         sleep(8)
-        login(setup,"admin","Admin@123")
+        login(setup, MuralConstants.USERNAME, MuralConstants.PASSWORD)
         wfstart = WorkflowStartComponentClass()
         sleep(8)
         wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))

@@ -29,7 +29,7 @@ def updateGlobalFilters(setup,screenName,expected,value):
 try:
     setup = SetUp()
     sleep(8)
-    login(setup,"admin","Admin@123")
+    login(setup, MuralConstants.USERNAME, MuralConstants.PASSWORD)
     wfstart = WorkflowStartComponentClass()
     sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))

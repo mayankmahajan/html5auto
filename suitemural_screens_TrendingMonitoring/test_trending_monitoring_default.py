@@ -12,7 +12,7 @@ import sys
 try:
     setup = SetUp()
     sleep(4)
-    login(setup,"admin","Admin@123")
+    login(setup, MuralConstants.USERNAME, MuralConstants.PASSWORD)
     wfstart = WorkflowStartComponentClass()
     sleep(4)
     wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
