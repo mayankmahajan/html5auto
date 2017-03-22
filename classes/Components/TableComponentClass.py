@@ -432,11 +432,27 @@ class TableComponentClass(BaseComponentClass):
         return -1
 
 
+    def getIndexForValueInArray1(self,arr,value):
+        for i in range(len(arr)):
+            if str(value) in str(arr[i]).strip():
+                return i
+        return -1
+
     def getColumnValueMap(self,d,index,columnName="Id"):
         columnIndex = self.getIndexForValueInArray(d['header'],columnName)
         temp = {}
         temp[str(d['rows'][index][columnIndex])] = d['rows'][index]
         return temp
 
-
-
+    def getValueFromTable(self,list, iscount):
+        l = []
+        for i in range(len(list)):
+            l.append(UnitSystem().getRawValueFromUI(str(list[i])))
+        if iscount=='sum':
+            return(str(sum(l)))
+        elif iscount=='avg':
+             return str(sum(l) / float(len(l)))
+        else:
+            return " "
+            # if iscount=="sum":
+            #   return value

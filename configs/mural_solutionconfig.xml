@@ -318,6 +318,7 @@
             <component id = "trend-compare" selector="css selector" locator="div.trend-compare-container" parent="True"/>
             <component id = "trend-legend" selector="tag name" locator="kiwik-trend-legend" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>
 
 
 

@@ -13,6 +13,7 @@ from classes.Components.MenuComponentClass import *
 from classes.Components.CollapseChartsComponentClass import *
 from classes.Components.QuickTrendsComponentClass import *
 from classes.Components.DropdownComponentClass import *
+from classes.Components.TimeRangeComponentClass import *
 
 class TrendingMonitoringPageClass(BasePageClass):
     def __init__(self, driver):
@@ -28,3 +29,4 @@ class TrendingMonitoringPageClass(BasePageClass):
         self.collapseCharts = CollapseChartsComponentClass()
         self.quicktrends = QuickTrendsComponentClass()
         self.dropdown = DropdownComponentClass()
+        self.timeBar = TimeRangeComponentClass()
