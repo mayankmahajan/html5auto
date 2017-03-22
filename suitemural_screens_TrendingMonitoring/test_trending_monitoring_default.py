@@ -20,7 +20,7 @@ try:
 
     selectedQuicklink = TMScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MuralConstants.TMSCREEN, "ktrs"))
     checkEqualAssert(str(selectedQuicklink), "Yesterday","", "", "verify quicklink ")
-    t = TimeRangeComponentClass().get_Label(selectedQuicklink)
+    t = TimeRangeComponentClass().get_Label(str(selectedQuicklink).lower())
     t1 = TMScreenInstance.timeBar.getLabel(getHandle(setup, MuralConstants.TMSCREEN, "ktrs"))
     checkEqualAssert(t[1], t1, selectedQuicklink, "", "verify quicklink label")
 
