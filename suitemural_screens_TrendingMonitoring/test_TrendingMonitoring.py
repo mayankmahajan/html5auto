@@ -58,13 +58,13 @@ try:
 
         for m in range(3):
             for d in range(len(dim)):
-                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN),str(mes[m*3]),index=0,parent="trend-header")
+                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(mes[m*3]),index=0,parent="trend-header")
                 isError(setup)
-                selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN),str(dim[d]), index=1, parent="trend-header")
+                selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(dim[d]), index=1, parent="trend-header")
                 isError(setup)
 
                 numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
-                numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN), parent="trend-compare")
+                numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), parent="trend-compare")
                 checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, mes[m * 3], "Verify total number of Chart")
 
                 TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
