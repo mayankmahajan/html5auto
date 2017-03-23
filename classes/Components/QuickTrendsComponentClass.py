@@ -120,7 +120,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
             for legend in h[parent][child]:
                 temp = {}
                 temp['color'] = self.rgb_to_hex(legend.find_elements_by_xpath("./div[1]")[0].value_of_css_property("background-color"))
-                temp['state'] = legend.find_elements_by_xpath("./div[1]/img")[0].is_displayed()
+                temp['state'] = not legend.find_elements_by_xpath("./div[1]/img")[0].is_displayed()
                 temp['value'] = legend.find_elements_by_xpath("./div[2]")[0].text
                 temp['handle'] = legend
                 legends.append(temp)
