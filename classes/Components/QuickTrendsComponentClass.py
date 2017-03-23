@@ -16,6 +16,7 @@ from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 import time
+from Utils.logger import *
 
 from selenium.webdriver import ActionChains
 
@@ -129,12 +130,17 @@ class QuickTrendsComponentClass(BaseComponentClass):
 
 
     def clickLegendByIndex_tm(self,index, h,parent="trend-legend",child="legend"):
+
         legends = self.getAllActiveElements(h[parent][child])
+        logger.info("Got total legends = %d",len(legends))
+
         for i in range(len(legends)):
             if i == index:
                 try:
                     color = self.rgb_to_hex(legends[i].find_elements_by_xpath("./div[1]")[0].value_of_css_property("background-color"))
+                    value = legends[i].find_elements_by_xpath("./div[2]")[0].text
                     legends[i].find_elements_by_xpath("./div[1]")[0].click()
+                    logger.info("Legend clicked = %s with name = %s",str(color),str(value))
                     return color
                 except Exception as e:
                     return e
