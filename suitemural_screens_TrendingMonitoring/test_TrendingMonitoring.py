@@ -88,20 +88,20 @@ try:
                 if dim[d]=='None':
                     l1 = []
                 else:
-                    l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN))
+                    l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
 
                 for i in range(len(l1)):
-                    p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN))
+                    p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
                     c1 = TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
                     checkEqualAssert(True, c1 in p1, str(e), mes[m * 3], "Checking disabled color in previous view. Color = " + c1)
 
-                    p2 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN))
+                    p2 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
                     checkEqualAssert(False, p1 == p2, str(e), mes[m * 3], "Line Chart should not show deactivated Dimension")
                     checkEqualAssert(True, c1 in p1, str(e), mes[m * 3], "Line Chart should not show deactivated Dimension Color = " + c1)
                     checkEqualAssert(False, p1 == p2, str(e), mes[m * 3], "Line Chart should not show deactivated Dimension")
-                    chartIndex=TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN))
+                    chartIndex=TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
 
-                    compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN),
+                    compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),
                                                                   parent="trend-compare", indexOfComp=chartIndex)
                     checkEqualAssert(p2, compareTrend1, selectedQuicklink, mes[m * 3], "Verify equal activated dimension on main chart and compare chart")
 
