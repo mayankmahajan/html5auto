@@ -86,7 +86,7 @@ try:
                 #actual value from main chart---> Pending
                     checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, mes[m * 3], "Verify Main Chart Value from Table")
                 # actual value from compare chart---> Pending
-                    comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN))
+                    comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
                     checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, mes[m * 3], "Verify Compare Chart Value from Table")
 
                     TMScreenInstance.switcher.measureChangeSwitcher(0,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
