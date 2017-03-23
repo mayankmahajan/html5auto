@@ -68,16 +68,15 @@ try:
         checkEqualAssert(t[1], t1, selectedQuicklink, "", "verify quicklink label")
 
 
-        for m in range(3):
+        for m in range(9):
             for d in range(len(dim)):
-                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(mes[m*3]),index=0,parent="trend-header")
+                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(mes[m]),index=0,parent="trend-header")
                 isError(setup)
                 selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(dim[d]), index=1, parent="trend-header")
                 isError(setup)
 
                 numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
                 numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), parent="trend-compare")
-                checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, mes[m * 3], "Verify total number of Chart")
                 checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, selectedMeasure, "Verify total number of Chart")
 
                 TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
@@ -93,7 +92,7 @@ try:
 
                 else:
                     value_list =[element[index] for element in data['rows']]
-                    valueformtable=TMScreenInstance.table.getValueFromTable(value_list,c[m*3])
+                    valueformtable=TMScreenInstance.table.getValueFromTable(value_list,c[m])
 
                     #actual value from main chart---> Pending
                     checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, selectedMeasure, "Verify Main Chart Value from Table")
@@ -110,7 +109,7 @@ try:
                         # main chart value --> Pending
                         #compare chart value --> Pending
                         l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
-                        active_legend_value_before_clicking=getTotalActiveLegendValue(l1,c[m*3])
+                        active_legend_value_before_clicking=getTotalActiveLegendValue(l1,c[m])
                         checkEqualAssert(active_legend_value_before_clicking,main_chart_value,selectedQuicklink,selectedMeasure,"Verify value from active legend with main chart value")
                         checkEqualAssert(active_legend_value_before_clicking,compare_chart_value,selectedQuicklink,selectedMeasure, "Verify value from active legend with compare chart value")
                         checkEqualAssert(valueformtable, active_legend_value_before_clicking, selectedQuicklink, selectedMeasure,"Verify value from active legend with Table")
@@ -122,7 +121,7 @@ try:
 
                         #main chart value --> Pending
                         l2 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
-                        active_legend_value_after_clicking=getTotalActiveLegendValue(l2, c[m * 3])
+                        active_legend_value_after_clicking=getTotalActiveLegendValue(l2, c[m])
                         checkEqualAssert(active_legend_value_after_clicking, main_chart_value, selectedQuicklink,selectedMeasure, "Verify value from active legend with main chart value")
 
 
