@@ -27,16 +27,16 @@ class DropdownComponentClass(BaseComponentClass):
 
 
         for ele in h.find_elements_by_xpath(".//*"):
-            if ele.text == value:
+            if str(ele.text).strip().strip('\n').strip() == value:
                 try:
                     logger.debug("Setting DropDown to %s",value)
                     ele.click()
                     logger.debug("DropDown Selected to %s",value)
-                    return self.get(h)
+                    return str(self.get(h).strip().strip('\n').strip())
                 except Exception as e:
                     logger.error("Exception found while selecting %s on DropDown",value)
                     return "Exception : "+str(e)
-        currentValue = self.get(h)
+        currentValue = str(self.get(h).strip().strip('\n').strip())
         logger.error("Option : %s not present in dropdown and returning the currentValue selected = %s",value,currentValue)
         return currentValue
 
