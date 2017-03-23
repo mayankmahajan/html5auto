@@ -74,7 +74,8 @@ try:
                 index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], mes[m * 3])
                 print index
                 if index== -1:
-                    logger.debug("Column for %s in %s not found", selectedMeasure, selectedDimension)
+                    logger.error("Column for %s in %s not found", selectedMeasure, selectedDimension)
+                    resultlogger.info(" ************Column for %s in %s not found **********************", selectedMeasure, selectedDimension)
                     continue
 
                 else:
