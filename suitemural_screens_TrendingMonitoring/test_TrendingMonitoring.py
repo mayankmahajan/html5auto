@@ -13,6 +13,18 @@ main_chart_value = '2919000000.0'
 compare_chart_value='2919000000.0'
 
 
+def getTotalActiveLegendValue(list, iscount):
+    active_legend_value = []
+    for i in range(len(list)):
+        if list[i]['state'] == True:
+            active_legend_value.append(UnitSystem().getRawValueFromUI(str(list[i]['value']).split('\n')[1].strip()))
+    if iscount == 'sum':
+        return (str(sum(active_legend_value)))
+    elif iscount == 'avg':
+        return str(sum(active_legend_value) / float(len(active_legend_value)))
+    else:
+        return " "
+
 try:
     setup = SetUp()
     sleep(8)
@@ -66,12 +78,13 @@ try:
                 numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
                 numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), parent="trend-compare")
                 checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, mes[m * 3], "Verify total number of Chart")
+                checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, selectedMeasure, "Verify total number of Chart")
 
                 TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                 data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
-                print mes[m * 3]
-                index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], mes[m * 3])
+                print selectedMeasure
+                index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], selectedMeasure)
                 print index
                 if index== -1:
                     logger.error("Column for %s in %s not found", selectedMeasure, selectedDimension)
@@ -79,40 +92,52 @@ try:
                     continue
 
                 else:
-                    value_list =[e[index] for e in data['rows']]
-
+                    value_list =[element[index] for element in data['rows']]
                     valueformtable=TMScreenInstance.table.getValueFromTable(value_list,c[m*3])
 
-                #actual value from main chart---> Pending
-                    checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, mes[m * 3], "Verify Main Chart Value from Table")
-                # actual value from compare chart---> Pending
-                    comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
-                    checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, mes[m * 3], "Verify Compare Chart Value from Table")
+                    #actual value from main chart---> Pending
+                    checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, selectedMeasure, "Verify Main Chart Value from Table")
+
+                    # actual value from compare chart---> Pending
+                    #comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
+                    checkEqualAssert(valueformtable, main_chart_value, selectedQuicklink, selectedMeasure, "Verify Compare Chart Value from Table")
 
                     TMScreenInstance.switcher.measureChangeSwitcher(0,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                     if dim[d]=='None':
                         l1 = []
                     else:
+                        # main chart value --> Pending
+                        #compare chart value --> Pending
                         l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
+                        active_legend_value_before_clicking=getTotalActiveLegendValue(l1,c[m*3])
+                        checkEqualAssert(active_legend_value_before_clicking,main_chart_value,selectedQuicklink,selectedMeasure,"Verify value from active legend with main chart value")
+                        checkEqualAssert(active_legend_value_before_clicking,compare_chart_value,selectedQuicklink,selectedMeasure, "Verify value from active legend with compare chart value")
+                        checkEqualAssert(valueformtable, active_legend_value_before_clicking, selectedQuicklink, selectedMeasure,"Verify value from active legend with Table")
 
                     for i in range(len(l1)):
+
                         p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
                         c1 = TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
-                        checkEqualAssert(True, c1 in p1, str(e), mes[m * 3], "Checking disabled color in previous view. Color = " + c1)
+
+                        #main chart value --> Pending
+                        l2 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
+                        active_legend_value_after_clicking=getTotalActiveLegendValue(l2, c[m * 3])
+                        checkEqualAssert(active_legend_value_after_clicking, main_chart_value, selectedQuicklink,selectedMeasure, "Verify value from active legend with main chart value")
+
+
+                        checkEqualAssert(True, c1 in p1, selectedQuicklink, selectedMeasure, "Checking disabled color in previous view. Color = " + c1)
 
                         p2 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
-                        checkEqualAssert(False, p1 == p2, str(e), mes[m * 3], "Line Chart should not show deactivated Dimension")
-                        checkEqualAssert(True, c1 in p1, str(e), mes[m * 3], "Line Chart should not show deactivated Dimension Color = " + c1)
-                        checkEqualAssert(False, p1 == p2, str(e), mes[m * 3], "Line Chart should not show deactivated Dimension")
+                        checkEqualAssert(False, p1 == p2, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension")
+                        checkEqualAssert(True, c1 in p1, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension Color = " + c1)
+                        checkEqualAssert(False, p1 == p2, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension")
                         chartIndex=TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
 
-                        compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),
-                                                                  parent="trend-compare", indexOfComp=chartIndex)
-                        checkEqualAssert(p2, compareTrend1, selectedQuicklink, mes[m * 3], "Verify equal activated dimension on main chart and compare chart")
+                        compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),parent="trend-compare", indexOfComp=chartIndex)
+                        checkEqualAssert(p2, compareTrend1, selectedQuicklink, selectedMeasure, "Verify equal activated dimension on main chart and compare chart")
 
-                        TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,
-                                                                                "trend-legend"))
+                        TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
 
     setup.d.close()
 

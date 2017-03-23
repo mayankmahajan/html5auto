@@ -37,15 +37,15 @@ try:
     selectedQuicklink = TMScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MuralConstants.TMSCREEN, "ktrs"))
 
     numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
-    numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN), parent="trend-compare")
+    numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), parent="trend-compare")
     checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink,"","Verify total number of Chart")
 
 
     for i in range(6):
         TMScreenInstance.dropdown.customClick(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare")["trend-compare"]["trendchart"][i])
-        selectedMeasure = TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN), random.randint(0,len(mes)-1), index=0, parent="trend-header")
+        selectedMeasure = TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), random.randint(0,len(mes)-1), index=0, parent="trend-header")
         isError(setup)
-        selectedDimension = TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN), random.randint(0,len(dim)-1), index=1, parent="trend-header")
+        selectedDimension = TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), random.randint(0,len(dim)-1), index=1, parent="trend-header")
         isError(setup)
 
 

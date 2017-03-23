@@ -3,9 +3,10 @@ import math
 class UnitSystem :
     def __init__(self):
         pass
-    metricUnits = ["", "K", "M", "B", "T", "P", "E", "Z", "Y"]
+    # metricUnits = ["", "K", "M", "B", "T", "P", "E", "Z", "Y"]
     metricValues = [1,1000,1000,1000,1000, 1000, 1000, 1000, 1000]
     byteUnits = ["", "K", "M", "G", "T", "P", "E", "Z", "Y"]
+    metricUnits= ["", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
     byteValues = [1,1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024]
     timeUnits = ["s","m"]
     timeValues = [1,"60"]
@@ -14,9 +15,9 @@ class UnitSystem :
         convertedValue = float(convertedValue)
         if "bps" in unitString:
             unit = unitString.strip('bps')
-            rawValue = convertedValue*self.byteValues[self.byteUnits.index(unit)]*math.pow(10,self.byteUnits.index(unit))
+            rawValue = convertedValue*self.byteValues[self.byteUnits.index(unitString)]**self.byteUnits.index(unitString)
         else:
-            rawValue = convertedValue*self.metricValues[self.metricUnits.index(unitString)]*math.pow(10,self.byteUnits.index(unitString))
+            rawValue = convertedValue*self.metricValues[self.metricUnits.index(unitString)]**self.metricUnits.index(unitString)
         return rawValue
 
     def getRawValueFromUI(self,uiValue):
