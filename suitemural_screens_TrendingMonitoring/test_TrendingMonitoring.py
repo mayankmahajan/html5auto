@@ -58,9 +58,9 @@ try:
 
         for m in range(3):
             for d in range(len(dim)):
-                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN),m*3,index=0,parent="trend-header")
+                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN),str(mes[m*3]),index=0,parent="trend-header")
                 isError(setup)
-                selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN),d, index=1, parent="trend-header")
+                selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN),str(dim[d]), index=1, parent="trend-header")
                 isError(setup)
 
                 numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
