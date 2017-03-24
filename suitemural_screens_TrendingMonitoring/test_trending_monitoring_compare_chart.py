@@ -52,6 +52,7 @@ try:
 
     for i in range(6):
         TMScreenInstance.dropdown.customClick(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare")["trend-compare"]["trendchart"][i])
+        isError(setup)
         comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
         checkEqualAssert(i,comparechartIndex,selectedQuicklink,"","Verify click on compare Chart with index %s"+str(i))
 
