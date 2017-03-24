@@ -138,7 +138,7 @@ class BaseComponentClass:
             logger.error("Exception found while clicking Checkbox %d",index)
             return e
 
-    def clear_input(self,h,parent,child,index=0):
+    def clear_input(self,h,parent="allinputs",child="input",index=0):
         h[parent][child][index].send_keys(len(str(h[parent][child][index].get_attribute("value")))*Keys.BACKSPACE)
 
     def sendkeys_input(self,value,h,index,parent="allinputs",child="input",clear=True):
