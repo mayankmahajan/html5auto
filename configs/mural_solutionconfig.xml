@@ -15,6 +15,14 @@
     </measureswithdirection>    
 
 
+    <subscribersorttablecolumn>
+        <column id="bitrate(uplink)" locatorText="Bitrate (Uplink)"/>
+        <column id="bitrate(downlink)" locatorText="Bitrate (Downlink)"/>
+        <column id="volume(uplink)" locatorText="Volume (Uplink)"/>
+        <column id="volume(downlink)" locatorText="Volume (Downlink)"/>
+        <column id="flows" locatorText="Flows"/>
+    </subscribersorttablecolumn>
+
     <tmdimension> 
         <dimension id = 'none' locatorText="None" /> 
         <dimension id = 'gateway' locatorText="Gateway" /> 
@@ -193,7 +201,7 @@
             <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
             <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
 
-            <component id = "allinputs" selector="css selector" locator="div.ScreenArea"/>
+            <component id = "allinputs" selector="css selector" locator="div.ScreenArea" parent="True"/>
             <component id = "tableheader" selector="css selector" locator="label.gridHeaderText"/>
 
             <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>

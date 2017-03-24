@@ -48,6 +48,16 @@
         <filter id = "Models"/>
     </deviceFilters>
 
+
+    <subscriber>
+        <sub id="0" value="100"/>
+        <sub id="1" value="200"/>
+        <sub id="2" value="50"/>
+        <sub id="3" value="300"/>
+
+    </subscriber>
+
+
     <globalScreenFilters>
 
         <network id ="0" filters = '0,1::2::1'/>
