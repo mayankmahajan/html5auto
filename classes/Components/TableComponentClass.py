@@ -209,7 +209,10 @@ class TableComponentClass(BaseComponentClass):
 
         data = {}
         for row in rows:
-            data[row[colIndex]] = row
+            if colIndex == -1:
+                data[str(row)] = row
+            else:
+                data[row[colIndex]] = row
         return [data,h]
         return rows
 
@@ -218,7 +221,7 @@ class TableComponentClass(BaseComponentClass):
         while True:
             flag = True
             if not rows:
-                t = self.getRows1(colcount,h,length,driver)
+                t = self.getRows1(colcount,h,length,driver,colIndex)
                 rows = t[0]
                 h = t[1]
                 flag=False

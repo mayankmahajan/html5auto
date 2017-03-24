@@ -369,11 +369,12 @@
             <component id = "select" selector="css selector" locator="select" />
             <component id = "qttooltip" selector="css selector" locator=".trend-compare-header"/>
             <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
+            <component id = "comparedimension" selector="css selector" locator="div.trend-compare-dimension"/>
         </componentConfig>
         <componentConfig id = "trend-header">
             <component id = "select" selector="tag name" locator="select"/>
             <!--<component id = "label" selector="xpath" locator="//label"/>-->
-            <component id = "qttooltip" selector="xpath" locator="//kiwik-trends/div[1]/div[1]/div"/>
+            <component id = "qttooltip" selector="css selector" locator="div.trend-main-header"/>
         </componentConfig>
 
         <componentConfig id = "kiwiktrendsbase"> 
@@ -386,8 +387,9 @@
             <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
             <component id = "select" selector="tag name" locator="select"/>
             <!--<component id = "label" selector="xpath" locator="//label"/>-->
-            <component id = "qttooltip" selector="xpath" locator="../div[1]/div"/>
+            <!--<component id = "qttooltip" selector="xpath" locator="../div[1]/div"/>-->
             <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
+            <component id = "qttooltip" selector="css selector" locator="div.trend-hover-date"/>
         </componentConfig>
         <!--<componentConfig id = "trend-compare">-->
             <!--<component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>-->

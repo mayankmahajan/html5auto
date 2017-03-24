@@ -65,27 +65,89 @@ class QuickTrendsComponentClass(BaseComponentClass):
                     driverHelper.action.move_to_element(el).perform()
                     tempHandlers = self.util.utility.getHandle(setup,"qt_Screen","quicktrends")
                     # time.sleep(1) # only to show in demo
-
                     tooltipText.append(tempHandlers['quicktrends']['qttooltip'][len(tempHandlers['quicktrends']['qttooltip'])-1].text)
             else:
                 print el.tag_name
         return tooltipText
 
-    def hoverOverTicks(self, setup, h1, screenName,parent="trend-main", child="trendchart",parent_tooltip="trend-main",child_tooltip="qttooltip"):
-        h = self.__getHandler1(h1[parent][child])
-        hxaxis = self.__getHandleAxis(h['chart'], 'wm-axis')
-        for el in hxaxis:
-            if el.tag_name == 'g':
-                hticks = self.__getHandleTicks(el, 'tick')
-                tooltipText=[]
-                for el in hticks:
-                    setup.dH.action.move_to_element(el).perform()
-                    tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
-                    time.sleep(1) # only to show in demo
-                    tooltipText.append(tempHandlers[parent_tooltip][child_tooltip][0].text)
-            else:
-                print el.tag_name
-        return tooltipText
+    def hoverOverTicksGetMainChartText(self, setup, h1, screenName, parent="trend-main", child="trendchart", parent_tooltip="trend-header", child_tooltip="qttooltip"):
+        try:
+            h = self.__getHandler1(h1[parent][child])
+            hxaxis = self.__getHandleAxis(h['chart'], 'wm-axis')
+            for el in hxaxis:
+                if el.tag_name == 'g':
+                    hticks = self.__getHandleTicks(el, 'tick')
+                    tooltipText={}
+                    for el in hticks:
+                        logger.info("Going to perform Hover Action")
+                        setup.dH.action.move_to_element(el).perform()
+                        logger.info("Hover Action Performed")
+                        tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
+                        time.sleep(1) # only to show in demo
+                        headerhandles = self.util.utility.getHandle(setup,screenName,parent_tooltip)
+                        time.sleep(1) # only to show in demo
+                        tooltipText[str(tempHandlers[parent][child_tooltip][0].text)] = str(headerhandles[parent_tooltip][child_tooltip][0].text)
+                else:
+                    print el.tag_name
+            logger.debug("Got tooltip data =  %s",str(tooltipText))
+            return tooltipText
+        except Exception as e:
+            logger.error("Got Exception while performing hover actions = %s",str(e))
+            return e
+
+    def hoverOverTicksGetMainAndCompareChartText(self, setup, h1, screenName, parent="trend-main", child="trendchart",compare_parent = "trend-compare",active_compare_chart = 0, parent_tooltip="trend-header", child_tooltip="qttooltip"):
+        try:
+            h = self.__getHandler1(h1[parent][child])
+            hxaxis = self.__getHandleAxis(h['chart'], 'wm-axis')
+            for el in hxaxis:
+                if el.tag_name == 'g':
+                    hticks = self.__getHandleTicks(el, 'tick')
+                    tooltipText={}
+                    compareTooltipText={}
+                    for el in hticks:
+                        logger.info("Going to perform Hover Action")
+                        setup.dH.action.move_to_element(el).perform()
+                        logger.info("Hover Action Performed")
+                        tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
+                        time.sleep(1) # only to show in demo
+
+                        compareHandlers = self.util.utility.getHandle(setup,screenName,compare_parent)
+                        time.sleep(1) # only to show in demo
+
+                        headerhandles = self.util.utility.getHandle(setup,screenName,parent_tooltip)
+                        time.sleep(1) # only to show in demo
+
+                        tooltipText[str(tempHandlers[parent][child_tooltip][0].text)] = str(headerhandles[parent_tooltip][child_tooltip][0].text)
+
+                        compareTooltipText[str(tempHandlers[parent][child_tooltip][0].text)] = str(compareHandlers[compare_parent][child_tooltip][active_compare_chart].text)
+                else:
+                    print el.tag_name
+            logger.debug("Got tooltip data from main Chart =  %s and from compare chart = %s",str(tooltipText),str(compareTooltipText))
+            return tooltipText,compareTooltipText
+        except Exception as e:
+            logger.error("Got Exception while performing hover actions = %s",str(e))
+            return e
+
+
+    def getHoverText(self, h,parent="trend-header", child="qttooltip"):
+        return str(h[parent][child][0].text)
+        return str(h[parent_tooltip][child][0].text),str(h[parent][child_tooltip][0].text)
+
+
+    def getDimensionFromCompareChart(self,h,index=0,parent="trend-compare",child="comparedimension",removeChar="By"):
+        try:
+            logger.info("Getting Dimension Selected on CompareChart %d",index)
+            dim = str(h[parent][child][index].text).strip().strip('\n').strip().split(removeChar)[1].strip()
+            logger.info("Got Dimension Selected on CompareChart %d = %s",index,dim)
+            return dim
+        except Exception as e:
+            logger.error("Got Exception while Getting Dimension Selected on CompareChart %d = %s",index,str(e))
+            return e
+
+
+
+
+
 
 
     def __getHandler(self, handlrs):
@@ -163,9 +225,6 @@ class QuickTrendsComponentClass(BaseComponentClass):
             if color == selectedColor:
                 return index
         return False
-
-
-
 
 
 

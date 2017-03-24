@@ -12,7 +12,7 @@ from Utils.utility import *
 setup =SetUp()
 # Launching Network Screen
 sleep(8)
-login(setup,"admin","Admin@123")
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 wfstart = WorkflowStartComponentClass()
 sleep(8)
 wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
@@ -23,15 +23,17 @@ globalFilterInstance = GlobalFiltersPopClass(setup.d)
 tmScreenInstance = TrendingMonitoringPageClass(setup.d)
 
 qtScreenHandle = getHandle(setup,MuralConstants.TMSCREEN)
-tmScreenInstance.quicktrends.getChartsCount(getHandle(setup,MuralConstants.TMSCREEN))
+print tmScreenInstance.quicktrends.getChartsCount(getHandle(setup,MuralConstants.TMSCREEN))
 
-tmScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(
-        getHandle(setup,MuralConstants.TMSCREEN,"trend-main"),
-    1,
-    index=1,
-    parent="trend-main"
-)
-data = tmScreenInstance.quicktrends.hoverOverTicks(setup,getHandle(setup,MuralConstants.TMSCREEN),MuralConstants.TMSCREEN)
+# print tmScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(
+#         getHandle(setup,MuralConstants.TMSCREEN,"trend-main"),
+#     1,
+#     index=1,
+#     parent="trend-main"
+# )
+print tmScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"))
+data = tmScreenInstance.quicktrends.hoverOverTicksGetMainChartText(setup, getHandle(setup, MuralConstants.TMSCREEN), MuralConstants.TMSCREEN)
+dat1 = tmScreenInstance.quicktrends.hoverOverTicksGetMainAndCompareChartText(setup, getHandle(setup, MuralConstants.TMSCREEN), MuralConstants.TMSCREEN)
 l1  = tmScreenInstance.quicktrends.getLegends_tm(getHandle(setup,MuralConstants.TMSCREEN))
 p1 = tmScreenInstance.quicktrends.getPaths(getHandle(setup,MuralConstants.TMSCREEN))
 c1 = tmScreenInstance.quicktrends.clickLegendByIndex_tm(2,getHandle(setup,MuralConstants.TMSCREEN,"trend-legend"))

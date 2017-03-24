@@ -49,7 +49,7 @@ try:
     compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN),parent="trend-compare", indexOfComp=chartIndex)
     checkEqualAssert(p1, compareTrend1, str(selectedQuicklink), selectedMeasure,"Verify equal activated dimension on main chart and compare chart")
 
-    hover_data = TMScreenInstance.quicktrends.hoverOverTicks(setup, getHandle(setup, MuralConstants.TMSCREEN),MuralConstants.TMSCREEN)
+    hover_data = TMScreenInstance.quicktrends.hoverOverTicksGetMainChartText(setup, getHandle(setup, MuralConstants.TMSCREEN), MuralConstants.TMSCREEN)
 
     TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
     data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
