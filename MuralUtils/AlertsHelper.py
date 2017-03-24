@@ -10,12 +10,14 @@ __maintainer__  = "Mayank Mahajan"
 ##############################################################
 
 from classes.Objects import CreateAlert
+from ReportsHelper import *
 from Utils.utility import *
 from classes.Pages.GenerateReportsPopClass import GenerateReportsPopClass
 from MuralConstants import *
 import re
 from classes.Objects.Time import *
 from classes.Components.AlertsComponentClass import *
+
 
 
 def createDPIAlert(setup, request = {}):
