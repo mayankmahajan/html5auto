@@ -37,4 +37,4 @@ class MuralConstants(Constants):
     TMSCREEN = "tm_Screen"
     TandMScreen = "tm_Screen"
     DeviceScreen = "device_Screen"
-
+    SubscriberScreen = "subscriber_Screen"
