@@ -164,7 +164,7 @@ class TableComponentClass(BaseComponentClass):
         if h['HEADERROW'] != "":
             elHandle=h['HEADERROW']
             self.colCount = len(elHandle)
-            return [eachHandler.text for eachHandler in elHandle]
+            return [str(eachHandler.text).strip() for eachHandler in elHandle]
         else:
             logger.debug("header is not present in table")
 
@@ -180,7 +180,7 @@ class TableComponentClass(BaseComponentClass):
 
         for i in range(0,l,colcount):
             j=i
-            rows.append([elHandle[j].text for j in range(j,j+colcount)])
+            rows.append([str(elHandle[j].text).strip() for j in range(j,j+colcount)])
 
         return rows
 
@@ -426,7 +426,12 @@ class TableComponentClass(BaseComponentClass):
             data[row[columnIndex]] = row
         return data
 
-
+    def convertDataToDictWithKeyAsRow(self, d):
+        #columnIndex = self.getIndexForValueInArray(d['header'], key)
+        data = {}
+        for row in d['rows']:
+            data[str(row)] = row
+        return data
 
     def getIndexForValueInArray(self,arr,value):
         for i in range(len(arr)):
