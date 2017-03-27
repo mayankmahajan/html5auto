@@ -75,7 +75,7 @@ try:
 
         dimensionfrommain = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), index=1, parent="trend-header")
         #dimensionfromcompare ----> pending
-        dimensionfromcompare ="None"
+        dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=i)
         checkEqualAssert(str(dimensionfrommain), str(dimensionfromcompare), str(selectedQuicklink), "", "Verify dimension on Main and Comaper Chart")
         TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 

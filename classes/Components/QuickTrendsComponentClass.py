@@ -129,9 +129,13 @@ class QuickTrendsComponentClass(BaseComponentClass):
             return e
 
 
-    def getHoverText(self, h,parent="trend-header", child="qttooltip"):
-        return str(h[parent][child][0].text)
-        return str(h[parent_tooltip][child][0].text),str(h[parent][child_tooltip][0].text)
+    def getHoverText(self, h,parent="trend-header", child="qttooltip",index=0):
+        return str(h[parent][child][index].text).strip()
+        # return str(h[parent_tooltip][child][0].text),str(h[parent][child_tooltip][0].text)
+
+    # def getHoverTextFromCompareChart(self, h,parent="trend-compare", child="qttooltip",index=0):
+    #     return  str(h[parent][child][index].text).strip()
+
 
 
     def getDimensionFromCompareChart(self,h,index=0,parent="trend-compare",child="comparedimension",removeChar="By"):

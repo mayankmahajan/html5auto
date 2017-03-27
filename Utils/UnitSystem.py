@@ -1,4 +1,5 @@
 import math
+import decimal
 
 class UnitSystem :
     def __init__(self):
@@ -19,6 +20,24 @@ class UnitSystem :
         else:
             rawValue = convertedValue*self.metricValues[self.metricUnits.index(unitString)]**self.metricUnits.index(unitString)
         return rawValue
+
+    def getValueFromRawValue(self,convertedValue,unitValue=1000.0):
+        convertedValue=float(convertedValue)
+        unitValue=float(unitValue)
+        count=0
+        while (convertedValue / unitValue) > unitValue:
+            convertedValue = convertedValue / unitValue
+            count = count + 1
+        if convertedValue>unitValue:
+            convertedValue = convertedValue / unitValue
+            count = count+1
+
+        a = decimal.Decimal(str(convertedValue))
+        if unitValue == 1000.0:
+            return str(round(a, 2))+ " "+ self.metricUnits[count]
+        else:
+            return str(round(a, 2)) + " " + self.byteUnits[count]+"bps"
+
 
     def getRawValueFromUI(self,uiValue):
         import re
