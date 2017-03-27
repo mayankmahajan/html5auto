@@ -11,6 +11,8 @@ from selenium.webdriver.common.keys import *
 class BaseComponentClass:
     def __init__(self):
         self.utility = __import__("Utils.utility")
+        self.unitsystem = UnitSystem()
+
     def click(self, elHandle):
 
         try:
