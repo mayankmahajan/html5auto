@@ -60,7 +60,7 @@ def getSelectionsFromContent(networkScreenInstance, setup, measureSelected):
     summary['value']=[sumSel[summary['dim'],0,measureSelected],
                       sumSel[summary['dim'],1,measureSelected]]
 
-    return picker1,picker2,btv,summary
+    return btv0,btv1,summary
 
 
 
@@ -149,23 +149,6 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag):
 
     return True
 
-def unSetBTV(setup,instance):
-
-    instance.btv.setSelection(0,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
-    k=instance.btv.getSelection(getHandle(setup,MuralConstants.NWSCREEN,"btv"))
-
-
-    # checkEqualAssert(len(i), len(j['selIndices']), "", "","Verify UnsetPie ")
-    return True
-
-
-
-def unSetpicker(index,setup, instance):
-    selection = instance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[2,4],index,"picker")
-
-    # checkEqualAssert(len(i), len(j['selIndices']), "", "", "Verify UnsetPie ")
-    return True
-
 def toolTip(setup,instance):
     toolTipData = instance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
     btvdata = instance.btv.getData(getHandle(setup,MuralConstants.NWSCREEN,"btv"))
@@ -175,7 +158,7 @@ def toolTip(setup,instance):
     return True
 
 
-def doActionsOnNetwork(networkScreenInstance,setup,index=2):
+def doActionsOnContent(networkScreenInstance, setup, index=2):
     # set picker 1
     picker1={}
     picker1['data'] = networkScreenInstance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[index,index-2],0,"picker",setup=setup)

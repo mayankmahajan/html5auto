@@ -6,6 +6,7 @@ from Utils.ConfigManager import ConfigManager
 from selenium.common.exceptions import *
 import time
 from Utils.logger import *
+from Utils.resultlogger import *
 from selenium.webdriver.common.keys import *
 from Utils.Constants import *
 
@@ -26,6 +27,7 @@ class BaseComponentClass:
     def send_keys(self, elHandle, value):
         return elHandle.send_keys(value)
 
+    
     def customClick(self, elHandle):
         try:
             logger.info("Going to perform Custom Click")
@@ -324,3 +326,10 @@ class BaseComponentClass:
 
         rgb = (int(x[0]),int(x[1]),int(x[2]))
         return '#%02x%02x%02x' % rgb
+
+    def takeScreenshot(self,driver):
+        import random
+        r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+        driver.save_screenshot(r)
+        logger.error("Chart is not present or loaded. Screenshot dumped with %s", str(r))
+        resultlogger.info("*******Chart is not present or loaded. Screenshot dumped with %s", str(r))

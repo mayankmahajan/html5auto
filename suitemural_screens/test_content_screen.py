@@ -3,7 +3,7 @@ from MuralUtils.ContentHelper import *
 
 # new apis
 
-# btv = networkScreenInstance.multibtv.getBTVData(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"))
+btv = networkScreenInstance.multibtv.getBTVData(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"))
 # setSel = networkScreenInstance.multibtv.setSelection([2,3],getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1)
 # getSel = networkScreenInstance.multibtv.getSelections(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1)
 #
@@ -61,7 +61,7 @@ try:
                     checkEqualAssert([0],isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify Default Direction Selected for Measure = " + measureSelected)
 
                     linkSelected = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcherText(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"),occurence=1)
-                    checkEqualAssert("Traffic Type",)
+                    checkEqualAssert("Traffic Type",linkSelected,selectedQuicklink,measureSelected,"Verify default selected link ")
 
                     for d in range(0,3):
                         if networkScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
@@ -73,7 +73,7 @@ try:
                             p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                             for i in range(1,len(p['BTVCOLUMN1'])):
 
-                                doActionsOnNetwork(networkScreenInstance,setup,i)
+                                doActionsOnContent(networkScreenInstance, setup, i)
                                 # sleep(8)
                                 checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,i,True)
 
@@ -87,7 +87,7 @@ try:
 
                     p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                     for i in range(len(p['BTVCOLUMN1'])):
-                        doActionsOnNetwork(networkScreenInstance,setup,i)
+                        doActionsOnContent(networkScreenInstance, setup, i)
                         checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure, i, True)
 
     toolTip(setup, networkScreenInstance)

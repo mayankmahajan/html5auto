@@ -58,7 +58,14 @@ class MultipleBTVComponentClass(BaseComponentClass):
         return indices
 
 
-    def getBTVData(self,h,parent="btvGroup",child1="BTVCOLUMN1",child2="BTVCOLUMN2"):
+    def getBTVData(self,setup,h,parent="btvGroup",child1="BTVCOLUMN1",child2="BTVCOLUMN2"):
+
+        if not h[parent][child1]:
+            self.takeScreenshot(setup.d)
+            return False
+        if not h[parent][child2]:
+            self.takeScreenshot(setup.d)
+            return False
         data = {}
         data[child1] = self.getData(h,child=child1)
         data[child2] = self.getData(h,child=child2)
@@ -69,19 +76,30 @@ class MultipleBTVComponentClass(BaseComponentClass):
         handlers = handlrs[parent][child][occurence]
         return self.getDataforColumn(handlers)
 
-    def setSelection(self,index,h,parent="btvGroup",child="BTVCOLUMN0",occurence=0):
+    def setSelection(self,setup,index,h,parent="btvGroup",child="BTVCOLUMN0",occurence=0):
         if not h[parent][child]:
-            logger.error("Bar Tabular Value Chart is not present or loaded")
-            resultlogger.info("******* Bar Tabular Value Chart is not present or loaded")
+            self.takeScreenshot(setup.d)
             return False
         return self.setSelectionIndex(index,h[parent][child][occurence])
-                    # self.setSelectionIndex(selectedIndex,value)
 
-    def getSelections(self,h,parent="btvGroup",child1="BTVCOLUMN0",child2="BTVCOLUMN1",child3="BTVCOLUMN2",occurence=0):
+    def getSelections(self,setup,h,parent="btvGroup",child1="BTVCOLUMN0",child2="BTVCOLUMN1",child3="BTVCOLUMN2",occurence=0):
+
+        if not h[parent][child1]:
+            self.takeScreenshot(setup.d)
+            return False
+        if not h[parent][child2]:
+            self.takeScreenshot(setup.d)
+            return False
+        if not h[parent][child3]:
+            self.takeScreenshot(setup.d)
+            return False
+
         data = {}
         data['selIndices']=self.getSelection(h[parent][child1][occurence])
         data['dim'] = self.getSelection(h[parent][child2][occurence],returnText=True)
         data['value'] = self.getSelection(h[parent][child3][occurence],returnText=True)
+        data['dimSelected']
+        data['totalValue']
         return data
 
     def launchToolTip(self,driverHelper,elHandle):
@@ -106,6 +124,6 @@ class MultipleBTVComponentClass(BaseComponentClass):
         toolTipHandlers['getToolTipData'] = handlers.find_elements_by_css_selector("div#barTabularChartToolTip")
         return self.launchToolTip(setup.dH,toolTipHandlers)
 
-    # added for network Mural Screen
+    # added for Content Mural Screen
     def getHeader(self,h,index,parent="btvGroup",child="selectionlabel"):
         return h[parent][child][0].text.strip().strip('\n').strip()
