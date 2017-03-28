@@ -69,7 +69,7 @@ try:
     globalFilterInstance.clearGlobalFilters(getHandle(setup,MuralConstants.SubscriberScreen,"filterArea"))
     isError(setup)
     globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.SubscriberScreen, globalFilterInstance,setup)
-    checkEqualDict("No filters", globalFilterFromScreen, "", "", "Verify clear Global Filter on screen " + screenName)
+    checkEqualAssert("No filters", globalFilterFromScreen, "", "", "Verify clear Global Filter on screen " + screenName)
     setup.d.close()
 
 except Exception as e:
