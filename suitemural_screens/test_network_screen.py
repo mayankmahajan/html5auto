@@ -45,6 +45,7 @@ try:
                 if measure.has_key("options") and 'direction' in measure['options']:
                     isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
                     checkEqualAssert(list,type(isDirectionsPresent), selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
+                    checkEqualAssert([0],isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify Default Direction Selected for Measure = " + measureSelected)
 
                     for d in range(0,3):
                         if networkScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):

@@ -47,9 +47,10 @@ class SwitcherComponentClass(BaseComponentClass):
             return e
 
     # for mural
-    def measureChangeSwitcher(self,index,h,parent="measureChangeSection",child="switcher"):
+    def measureChangeSwitcher(self,index,h,parent="measureChangeSection",child="switcher",occurence = 0):
         try:
-            h[parent][child][0].find_elements_by_tag_name('div')[index].click()
+            logger.info("Going to click Switcher index = %d",index)
+            h[parent][child][occurence].find_elements_by_tag_name('div')[index].click()
             time.sleep(2)
             return True
         except Exception as e:
@@ -57,15 +58,30 @@ class SwitcherComponentClass(BaseComponentClass):
             return e
 
     # for mural
-    def getMeasureChangeSelectedSwitcher(self,h,parent="measureChangeSection",child="switcher"):
+    def getMeasureChangeSelectedSwitcher(self,h,parent="measureChangeSection",child="switcher",occurence = 0):
         try:
             if not h[parent][child]:
                 return False
-            divs = h[parent][child][0].find_elements_by_tag_name('div')
+            divs = h[parent][child][occurence].find_elements_by_tag_name('div')
             selectedSwitcher = []
             for i in range(len(divs)):
                 if "active" in str(divs[i].get_attribute("class")).lower():
                     selectedSwitcher.append(i)
+            time.sleep(2)
+            return selectedSwitcher
+        except Exception as e:
+            logger.error("Got Exception while getting Measure Switcher Selection = %s",str(e))
+            return e
+
+    def getMeasureChangeSelectedSwitcherText(self,h,parent="measureChangeSection",child="switcher",occurence=0):
+        try:
+            if not h[parent][child]:
+                return False
+            divs = h[parent][child][occurence].find_elements_by_tag_name('div')
+            selectedSwitcher = []
+            for i in range(len(divs)):
+                if "active" in str(divs[i].get_attribute("class")).lower():
+                    selectedSwitcher.append(str(divs[i].text).strip().strip('\n').strip())
             time.sleep(2)
             return selectedSwitcher
         except Exception as e:

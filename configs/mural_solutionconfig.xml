@@ -225,6 +225,25 @@
 
         </screenConfig>
 
+        <screenConfig id = "content_Screen">
+            <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
+            <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
+            <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
+
+            <component id = "btvGroup" selector="css selector" locator='mural-workflow-shell' parent="True"/>
+
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "_SummaryBar")]' action="" parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
+            <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
+
+            <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
+
+            <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
+        </screenConfig>
+
+
 
         <screenConfig id = "cellsector_Screen">
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
@@ -579,6 +598,20 @@
         <componentConfig id = "filterText">
             <component id = "filters" selector="xpath" locator="./div[1]/div[2]/div[1]/div[1]/div[1]/span"/>
         </componentConfig>
+
+        <componentConfig id = "btvGroup">
+            <component id = "selectionlabel" selector="css selector" locator="label.viewSelectionDisplay"/>
+            <component id = "BTVCOLUMN0" selector="css selector" locator="div#column0Div"/>
+            <component id = "BTVCOLUMN1" selector="css selector" locator="div#column1Div"/>
+            <component id = "BTVCOLUMN2" selector="css selector" locator="div#column2Div"/>
+            <component id = "BTVHOVERAREA" selector="css selector" locator="div#chartDiv"/>
+            <!--<component id = "btv" selector="css selector" locator="kiwik-bartabular-view"/>-->
+            <!--<component id = "BTVTOOLTIP" selector="css selector" locator='div#barTabularChartToolTip'/>-->
+            <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='class' locatorText = 'bar1' action="hover" wait = 'skip'/>-->
+
+        </componentConfig>
+
+        
     </componentConfigs>
 
 

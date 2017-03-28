@@ -1,3 +1,4 @@
+from classes.Components import MultipleBTVComponentClass
 from classes.Pages.BasePageClass import *
 
 from classes.Components.MulitpleDropdownComponentClass import *
@@ -6,6 +7,7 @@ from classes.Components.TimeRangeComponentClass import *
 from classes.Components.CalendarComponentClass import *
 from classes.Components.DropdownComponentClass import *
 from classes.Components.SwitcherComponentClass import *
+from classes.Components.MultipleBTVComponentClass import *
 
 
 class NetworkScreenClass(BasePageClass):
@@ -21,6 +23,7 @@ class NetworkScreenClass(BasePageClass):
         self.calendar =  CalendarComponentClass()
         self.dropdown = DropdownComponentClass()
         self.switcher = SwitcherComponentClass()
+        self.multibtv = MultipleBTVComponentClass()
 
         # Common Components
         BasePageClass.__init__(self,driver)

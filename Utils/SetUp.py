@@ -14,6 +14,8 @@ class SetUp:
 
         if security:
             chromeOptions = webdriver.ChromeOptions()
+
+            # chromeOptions.add_argument("--kiosk")
             chromeOptions.add_argument("--start-maximized")
             self.d = webdriver.Chrome(Constants.chromedriverpath, chrome_options=chromeOptions)
             # self.d = webdriver.Chrome(Constants.chromedriverpath)
