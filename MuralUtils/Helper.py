@@ -13,12 +13,14 @@ def setGlobalFilters(globalFilterInstance,setup,k='0'):
     networkKeys = setup.cM.getAllNodeElements("networkFilters","filter")
     apnratKeys = setup.cM.getAllNodeElements("apnratFilters","filter")
     deviceKeys = setup.cM.getAllNodeElements("deviceFilters","filter")
+    contentKeys = setup.cM.getAllNodeElements("contentFilters","filter")
 
     networkFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"network",k=k),networkKeys)
     apnratFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"apnrat",True,k=k),apnratKeys)
     deviceFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"device",True,k=k),deviceKeys)
+    contentFilters = createFilterMap(globalFilterInstance.setFilters(setup,globalFilterInstance,"content",True,k=k),contentKeys)
 
-    expectedFilters = merge_dictionaries(merge_dictionaries(networkFilters,apnratFilters),deviceFilters)
+    expectedFilters = merge_dictionaries(merge_dictionaries(merge_dictionaries(networkFilters,apnratFilters),deviceFilters),contentFilters)
 
     #actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,MuralConstants.GFPOPUP)),networkKeys+apnratKeys+deviceKeys)
 
@@ -65,7 +67,8 @@ def getGlobalFiltersFromScreen(screenName,globalFilterInstance, setup):
     networkKeys = setup.cM.getAllNodeElements("networkFilters","filter")
     apnratKeys = setup.cM.getAllNodeElements("apnratFilters","filter")
     deviceKeys = setup.cM.getAllNodeElements("deviceFilters","filter")
-    actualFilters = insertKeys(globalFilterInstance.getAllSelectedFilters(getHandle(setup,screenName,"filterArea")),networkKeys+apnratKeys+deviceKeys)
+    contentKeys = setup.cM.getAllNodeElements("contentFilters","filter")
+    actualFilters = insertKeys(globalFilterInstance.getAllSelectedFilters(getHandle(setup,screenName,"filterArea")),networkKeys+apnratKeys+deviceKeys+contentKeys)
     return actualFilters
 
 def insertKeys(dictionary,keys):
@@ -84,5 +87,6 @@ def getGlobalFiltersToolTipData(screenName,globalFilterInstance,setup):
     networkKeys = setup.cM.getAllNodeElements("networkFilters","filter")
     apnratKeys = setup.cM.getAllNodeElements("apnratFilters","filter")
     deviceKeys = setup.cM.getAllNodeElements("deviceFilters","filter")
-    actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,screenName)),networkKeys+apnratKeys+deviceKeys)
+    contentKeys = setup.cM.getAllNodeElements("contentFilters","filter")
+    actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,screenName)),networkKeys+apnratKeys+deviceKeys+contentKeys)
     return actualFilters

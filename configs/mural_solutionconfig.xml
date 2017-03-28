@@ -185,6 +185,7 @@
         <filter id = 'network' locatorText="Network Topology"/>
         <filter id = 'apnrat' locatorText="APN/RAT"/>
         <filter id = 'device' locatorText="Device"/>
+        <filter id = 'content' locatorText="Content"/>
     </globalfilters>
 
     <alertbodylinks>

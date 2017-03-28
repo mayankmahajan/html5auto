@@ -39,14 +39,20 @@
     </networkFilters>
     <apnratFilters>
         <filter id = "APN"/>
-        <filter id = "Radio Type"/>
+        <filter id = "Radio Access Type"/>
     </apnratFilters>
     <deviceFilters>
+        <filter id = "Device Group"/>
         <filter id = "OS"/>
         <filter id = "Manufacturer"/>
-        <filter id = "Device Group"/>
         <filter id = "Models"/>
     </deviceFilters>
+    <contentFilters>
+        <filter id = "Traffic Type Category"/>
+        <filter id = "Mobile Apps Category"/>
+        <filter id = "Web Protocol"/>
+        <filter id = "Service Provider"/>
+    </contentFilters>
 
 
     <subscriber>
@@ -63,6 +69,7 @@
         <network id ="0" filters = '0,1::2::1'/>
         <apnrat id = "0" filters = ' :: '/>
         <device id = "0" filters = ' :: :: :: '/>
+        <content id = "0" filters = ' :: ::1::1'/>
 
         <network id ="1" filters = ' :: :: '/>
         <apnrat id = "1" filters = ' ::2'/>
