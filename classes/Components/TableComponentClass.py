@@ -5,6 +5,7 @@ from time import *
 from selenium.webdriver import ActionChains
 from Utils.utility import *
 
+
 import random
 class TableComponentClass(BaseComponentClass):
     def __init__(self):
@@ -174,7 +175,7 @@ class TableComponentClass(BaseComponentClass):
 
         if len(elHandle) <1:
             logger.info("No DATA On Table")
-            return str(Constants.NODATA)
+            return Constants.NODATA
 
 
         rowCount = len(elHandle) / colcount
@@ -205,7 +206,8 @@ class TableComponentClass(BaseComponentClass):
 
         if len(elHandle)<1:
             logger.info("No DATA On Table")
-            return str(Constants.NODATA)
+            return Constants.NODATA
+
 
 
         rowCount = len(elHandle) / colcount
@@ -233,7 +235,7 @@ class TableComponentClass(BaseComponentClass):
             flag = True
             if not rows:
                 t = self.getRows1(colcount,h,length,driver,colIndex)
-                if t==str(Constants.NODATA):
+                if t==Constants.NODATA:
                     return t
                 rows = t[0]
                 h = t[1]

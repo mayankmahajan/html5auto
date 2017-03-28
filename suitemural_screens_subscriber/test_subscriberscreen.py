@@ -76,7 +76,7 @@ try:
                 tableHandle=getHandle(setup, MuralConstants.SubscriberScreen, "table")
                 tableMap=subscriberScreenInstance.table.getTableDataMap(tableHandle,driver=setup,colIndex=-1)
 
-                if tableMap['rows'] == str(Constants.NODATA):
+                if tableMap['rows'] == Constants.NODATA:
                     logger.info("No Table Data for Top Subscriber=%s ", value)
                     break
 

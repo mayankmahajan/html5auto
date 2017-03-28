@@ -42,6 +42,7 @@ try:
                 if measure.has_key("options") and 'direction' in measure['options']:
                     isDirectionsPresent = accesstechnologyScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
                     checkEqualAssert(list,type(isDirectionsPresent), selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
+                    checkEqualAssert([0], isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify Default Directions for Measure = " + measureSelected)
 
                     for d in range(0,3):
                         if accesstechnologyScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):

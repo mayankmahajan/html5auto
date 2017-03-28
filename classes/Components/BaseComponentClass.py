@@ -7,6 +7,7 @@ from selenium.common.exceptions import *
 import time
 from Utils.logger import *
 from selenium.webdriver.common.keys import *
+from Utils.Constants import *
 
 class BaseComponentClass:
     def __init__(self):
