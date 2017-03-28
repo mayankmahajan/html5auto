@@ -169,7 +169,14 @@ class TableComponentClass(BaseComponentClass):
             logger.debug("header is not present in table")
 
     def getIterfaceRows(self,colcount,h,length):
+
         elHandle=h['ROWS']
+
+        if len(elHandle) <1:
+            logger.info("No DATA On Table")
+            return str(Constants.NODATA)
+
+
         rowCount = len(elHandle) / colcount
         if rowCount < length:
             l = len(elHandle)
@@ -195,6 +202,10 @@ class TableComponentClass(BaseComponentClass):
 
 
         elHandle=h['ROWS']
+
+        if len(elHandle)<1:
+            logger.info("No DATA On Table")
+            return str(Constants.NODATA)
 
 
         rowCount = len(elHandle) / colcount
@@ -222,6 +233,8 @@ class TableComponentClass(BaseComponentClass):
             flag = True
             if not rows:
                 t = self.getRows1(colcount,h,length,driver,colIndex)
+                if t==str(Constants.NODATA):
+                    return t
                 rows = t[0]
                 h = t[1]
                 flag=False
@@ -326,6 +339,7 @@ class TableComponentClass(BaseComponentClass):
             return data
         except Exception as e:
             return e
+
     def setSelectionIndex(self,index,colCount,rowCount,h):
         elHandle=h['ROWS']
         newIndex = (colCount)*(index-1)+1
@@ -353,12 +367,6 @@ class TableComponentClass(BaseComponentClass):
             ActionChains(driver).key_down(key).perform()
             self.setSelectionIndex(indices[1],colCount,rowCount,h[parent])
             ActionChains(driver).key_up(key).perform()
-
-
-
-
-
-
 
 
 

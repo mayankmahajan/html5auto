@@ -81,5 +81,5 @@ class Constants(object):
     ERRORCLOSE = "errorclose"
     ERRORMESSAGE = "errormessage"
     ERRORPOPUP = "error_popup"
-
+    NODATA= "No Data"
 

@@ -23,6 +23,17 @@
         <column id="flows" locatorText="Flows"/>
     </subscribersorttablecolumn>
 
+
+    <cellsectorsorttablecolumn>
+        <column id= "cellid" locatorText="Cell ID"/>
+        <column id="bitrate(uplink)" locatorText="Bitrate (Uplink)"/>
+        <column id="bitrate(downlink)" locatorText="Bitrate (Downlink)"/>
+        <column id="volume(uplink)" locatorText="Volume (Uplink)"/>
+        <column id="volume(downlink)" locatorText="Volume (Downlink)"/>
+        <column id="flows" locatorText="Flows"/>
+
+    </cellsectorsorttablecolumn>
+
     <tmdimension> 
         <dimension id = 'none' locatorText="None" /> 
         <dimension id = 'gateway' locatorText="Gateway" /> 
@@ -205,15 +216,38 @@
 
 
             <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>
-
-
             <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
 
             <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
             <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
 
+
         </screenConfig>
+
+
+        <screenConfig id = "cellsector_Screen">
+            <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
+            <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
+            <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
+            <component id ="dropdowncontainer" selector="css selector" locator="div.dropDownContainer" parent="True"/>
+            <!--<component id = "screenarea" selector="css selector" locator="div.ScreenArea" parent="True"/>-->
+            <!--<component id = "allinputs" selector="css selector" locator="div.ScreenArea" parent="True"/>-->
+
+            <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>
+            <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
+
+            <!--<component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>-->
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
+
+        </screenConfig>
+
+        <componentConfig id ="dropdowncontainer"> 
+            <component id = "label" selector="tag name" locator="label"/>
+            <component id ="select" selector="tag name" locator="select"/>
+         </componentConfig>
+
 
 
         <screenConfig id = "network_Screen">

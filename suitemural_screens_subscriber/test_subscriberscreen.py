@@ -71,9 +71,14 @@ try:
             subscriberScreenInstance.cm.sendkeys_input(Keys.ENTER, h, 0,clear=False)
             isError(setup)
 
+
             for columnname in column_names:
-                tableHandle=getHandle(setup, MuralConstants.TMSCREEN, "table")
+                tableHandle=getHandle(setup, MuralConstants.SubscriberScreen, "table")
                 tableMap=subscriberScreenInstance.table.getTableDataMap(tableHandle,driver=setup,colIndex=-1)
+
+                if tableMap['rows'] == str(Constants.NODATA):
+                    logger.info("No Table Data for Top Subscriber=%s ", value)
+                    break
 
                 sortedData = ReportsHelper.sortTable2(setup,subscriberScreenInstance,columnName=columnname)
                 #sortedData=subscriberScreenInstance.table.sortTable1(tableHandle, columnname)
@@ -81,8 +86,8 @@ try:
                 resultlogger.debug('<br>*********** Logging Results for checkSortTable on Column %s ***********<br><br>', columnname)
                 #checkEqualDict(sortedData, tableMap['rows'], "", "", "Checking each row of Table")
                 for k, v in sortedData.iteritems():
-                    if tableMap.has_key(k):
-                        checkEqualAssert(tableMap[k], sortedData[k], selectedQuicklink, "", "verify sorted Table rows present in table with key : " + k)
+                    if tableMap['rows'].has_key(k):
+                        checkEqualAssert(tableMap['rows'][k], sortedData[k], selectedQuicklink, "", "verify sorted Table rows present in table with key : " + k)
                     else:
                         logger.info("table not contain row with key : " + k)
 
