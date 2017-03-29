@@ -86,6 +86,12 @@
         <dimension id = "region" expectedText="Region"/>
         <dimension id = "gateway" expectedText="Gateway"/>
     </networkdimeas>
+    <devicedimeas>
+        <dimension id = "models" locatorText="Models"/>
+        <dimension id = "os" locatorText="OS"/>
+        <dimension id = "manufacturer" locatorText="Manufacturer"/>
+    </devicedimeas>
+
 
     <unitsystem>
         <unit id="bytes" unitvalues = "B,KB,MB" />
@@ -284,6 +290,20 @@
             <component id = "btv" selector="class name" locator='networkbtvcolumn' parent="True"/>
             <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "_SummaryBar")]' action="" parent="True"/>
             <component id = "picker" selector="css selector" locator="table.networkTable" parent="True" />
+            <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
+            <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
+            <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
+
+            <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
+        </screenConfig>
+        <screenConfig id = "device_Screen">
+            <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
+            <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
+            <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
+            <component id = "btv" selector="css selector" locator='kiwik-bartabular-view' parent="True"/>
+            <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "_SummaryBar")]' action="" parent="True"/>
             <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
             <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
             <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
