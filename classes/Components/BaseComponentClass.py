@@ -27,7 +27,18 @@ class BaseComponentClass:
     def send_keys(self, elHandle, value):
         return elHandle.send_keys(value)
 
-    
+    def totalvalueformlist(self,list,flag="sum",unitValue=1000.0):
+            l = []
+            for i in range(len(list)):
+                l.append(UnitSystem().getRawValueFromUI(str(list[i])))
+            if flag == 'sum':
+                return UnitSystem().getValueFromRawValue(sum(l),unitValue)
+            elif flag == 'avg':
+                return UnitSystem().getValueFromRawValue(sum(l)/float(len(l)),unitValue)
+            else:
+                return " "
+
+
     def customClick(self, elHandle):
         try:
             logger.info("Going to perform Custom Click")

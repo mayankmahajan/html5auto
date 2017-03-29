@@ -1,5 +1,8 @@
 import math
 import decimal
+from Utils.logger import *
+from Utils.resultlogger import *
+
 
 class UnitSystem :
     def __init__(self):
@@ -16,9 +19,12 @@ class UnitSystem :
         convertedValue = float(convertedValue)
         if "bps" in unitString:
             unit = unitString.strip('bps')
-            rawValue = convertedValue*self.byteValues[self.byteUnits.index(unitString)]**self.byteUnits.index(unitString)
-        else:
+            rawValue = convertedValue*self.byteValues[self.byteUnits.index(unit)]**self.byteUnits.index(unit)
+        elif unitString in self.metricUnits:
             rawValue = convertedValue*self.metricValues[self.metricUnits.index(unitString)]**self.metricUnits.index(unitString)
+        else:
+            logger.info("%s Unit not present in unit system hence retrun 0.0",unitString)
+            rawValue=0.0
         return rawValue
 
     def getValueFromRawValue(self,convertedValue,unitValue=1000.0):
@@ -33,10 +39,11 @@ class UnitSystem :
             count = count+1
 
         a = decimal.Decimal(str(convertedValue))
-        if unitValue == 1000.0:
-            return str(round(a, 2))+ " "+ self.metricUnits[count]
+        if unitValue == 1024.0:
+            return str(round(a, 2)) + " " + self.byteUnits[count] + "bps"
         else:
-            return str(round(a, 2)) + " " + self.byteUnits[count]+"bps"
+            return str(round(a, 2))+ " "+ self.metricUnits[count]
+
 
 
     def getRawValueFromUI(self,uiValue):

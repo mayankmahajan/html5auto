@@ -121,11 +121,21 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
     def domultipleSelectionWithName(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = h[parent][child]
         activeDropDowns[index].click()
-        time.sleep(2)
+        time.sleep(5)
 
         for el in activeDropDowns[index].find_elements_by_class_name("menuitemDiv"):
             if str(el.text).strip() == value:
                 el.click()
+                return str(activeDropDowns[index].find_elements_by_xpath("./div/*")[0].text)
+
+    def domultipleSelectionWithIndex_type2(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
+        activeDropDowns = h[parent][child]
+        activeDropDowns[index].click()
+        time.sleep(2)
+        elements = activeDropDowns[index].find_elements_by_class_name("menuitemDiv")
+        for i in range(len(elements)):
+            if i == value:
+                elements[i].click()
                 return str(activeDropDowns[index].find_elements_by_xpath("./div/*")[0].text)
 
 

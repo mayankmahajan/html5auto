@@ -45,14 +45,13 @@ import sys
 
 def getSelectionsFromContent(networkScreenInstance, setup, measureSelected):
 
-
     summary={}
     summary['dim'] = []
     summary['value'] = []
 
-    btv0 = networkScreenInstance.multibtv.getSelections(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=0)
+    btv0 = networkScreenInstance.multibtv.getSelections(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=0,measureSelected=measureSelected)
 
-    btv1 = networkScreenInstance.multibtv.getSelections(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1)
+    btv1 = networkScreenInstance.multibtv.getSelections(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1,measureSelected=measureSelected)
     btv1['header'] = networkScreenInstance.multibtv.getHeader(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"))
 
     sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
@@ -105,47 +104,51 @@ def checkLegend(setup, instance):
 
 
 
-def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag):
+def checkAllComponent(setup,instance,quicklink,measureSelected,flag):
     breadCrumbLabel = instance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
 
     if not flag:
-        p1,p2,b1,s1=getSelectionsFromContent(instance, setup, measureSelected['locatorText'])
+        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected['locatorText'])
 
-        checkEqualAssert("All",p1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at picker = "+p1['header'])
-        checkEqualAssert("All",p2['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at picker = "+p2['header'])
-        checkEqualAssert("All",b1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at BTV = "+b1['header'])
-        checkEqualAssert("All",s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
-        checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
-        checkEqualAssert(s1['value'][0],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(s1['value'][1],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        #checkEqualAssert(True,"All" in b1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at  = "+p1['header'])
+        #checkEqualAssert("All",p2['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at picker = "+p2['header'])
+        checkEqualAssert(True,"All" in b2['header'], quicklink, measureSelected['locatorText'], "Verify BTV header")
+        checkEqualAssert(True, "All" in s1['header'], quicklink, measureSelected['locatorText'], "Verify Default summary header")
+        #checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
+        checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(str(s1['value'][1]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(b2['dimSelected'],s1['dim'],quicklink,measureSelected['locatorText'],"Verify Summary Card Header with BTV Header")
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
+        checkEqualAssert(b1['totalValue'],b1['value'][0],quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
     else:
-        p1,p2,b1,s1=getSelectionsFromContent(instance, setup, measureSelected['locatorText'])
-        checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary = "+s1['header'])
+        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected['locatorText'])
+        checkEqualAssert(b2['dimSelected'],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary = "+s1['header'])
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
-        checkEqualAssert(s1['value'][0],b1['value'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(s1['value'][1],b1['value'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(str(s1['value'][1]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(b1['dimSelected'],b2['header'],quicklink,measureSelected['locatorText'], "Verify Selection at BTV 1 with BTV 2 Header")
+        checkEqualAssert(b1['totalValue'],b1['value'][0],quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
 
-        instance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
-        isError(setup)
-        instance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
-        isError(setup)
-        globalFilterInstance = GlobalFiltersPopClass(setup.d)
-        actualFilters = getGlobalFiltersFromScreen(MuralConstants.NWSCREEN, globalFilterInstance, setup)
-        for k,v in actualFilters.iteritems():
-            if k in p1['header']:
-                for i in range(len(p1['dim'])):
-                    checkEqualAssert(p1['dim'][i],v[i],quicklink,measureSelected['locatorText'],"Verify Previous Screen Selected Dimension = "+p1['header']+"  at next Screen")
-            elif k in p2['header']:
-                for j in range(len(p2['dim'])):
-                    checkEqualAssert(p2['dim'][j],v[j],quicklink,measureSelected['locatorText'],"Verify Previous Screen Selected Dimension = "+p2['header']+"  at next Screen")
-            elif k in b1['header']:
-                for l in range(len(b1['dim'])):
-                    checkEqualAssert(b1['dim'][l],v[l],quicklink,measureSelected['locatorText'],"Verify Previous Screen Selected Dimension = "+b1['header']+"  at next Screen")
+        #instance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+        #isError(setup)
+        #instance.cm.goto("Devices", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+        #isError(setup)
+        #globalFilterInstance = GlobalFiltersPopClass(setup.d)
+        #actualFilters = getGlobalFiltersFromScreen(MuralConstants.NWSCREEN, globalFilterInstance, setup)
+        #for k,v in actualFilters.iteritems():
+         #   if k in p1['header']:
+           #     for i in range(len(p1['dim'])):
+          #          checkEqualAssert(p1['dim'][i],v[i],quicklink,measureSelected['locatorText'],"Verify Previous Screen Selected Dimension = "+p1['header']+"  at next Screen")
+            #elif k in p2['header']:
+              #  for j in range(len(p2['dim'])):
+             #      checkEqualAssert(p2['dim'][j],v[j],quicklink,measureSelected['locatorText'],"Verify Previous Screen Selected Dimension = "+p2['header']+"  at next Screen")
+            #elif k in b1['header']:
+             #   for l in range(len(b1['dim'])):
+              #      checkEqualAssert(b1['dim'][l],v[l],quicklink,measureSelected['locatorText'],"Verify Previous Screen Selected Dimension = "+b1['header']+"  at next Screen")
 
         # instance.cm.gotoScreenViaBreadCrumb("Network",getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
-        instance.cm.gotoScreenViaBreadCrumb("MURAL Network Insights",getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
-        isError(setup)
+        #instance.cm.gotoScreenViaBreadCrumb("MURAL Network Insights",getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
+        #isError(setup)
 
     return True
 
@@ -158,30 +161,32 @@ def toolTip(setup,instance):
     return True
 
 
-def doActionsOnContent(networkScreenInstance, setup, index=2):
+def doActionsOnContent(networkScreenInstance, setup, listofindextobeselectedonbtv0,listofindextobeselectedonbtv1):
     # set picker 1
-    picker1={}
-    picker1['data'] = networkScreenInstance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[index,index-2],0,"picker",setup=setup)
-    picker1['header'] =  networkScreenInstance.picker.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"picker"),0)
-
-
+    #picker1={}
+    #picker1['data'] = networkScreenInstance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[index,index-2],0,"picker",setup=setup)
+    #picker1['header'] =  networkScreenInstance.picker.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"picker"),0)
+    networkScreenInstance.multibtv.setSelection(setup,listofindextobeselectedonbtv0, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=0)
+    isError(setup)
+    networkScreenInstance.multibtv.setSelection(setup,listofindextobeselectedonbtv1, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1)
+    isError(setup)
 
     # set picker 2
-    picker2={}
-    picker2['data'] = networkScreenInstance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[index,index-2],1,"picker",setup=setup)
-    picker2['header'] =  networkScreenInstance.picker.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"picker"),1)
+    #picker2={}
+    #picker2['data'] = networkScreenInstance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[index,index-2],1,"picker",setup=setup)
+    #picker2['header'] =  networkScreenInstance.picker.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"picker"),1)
 
 
     # get btvdata
-    btv = {}
-    btv['data'] = networkScreenInstance.btv.setSelection(index,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
-    btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"btv"),0)
+    #btv = {}
+    #btv['data'] = networkScreenInstance.btv.setSelection(index,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
+    #btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"btv"),0)
     # btv['tooltip']  = networkScreenInstance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
 
-    summary = {}
-    summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
+    #summary = {}
+    #summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
 
-    return picker1,picker2,btv,summary
+    return True
 
 
 '''

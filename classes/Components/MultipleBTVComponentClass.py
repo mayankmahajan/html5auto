@@ -18,6 +18,7 @@ from Utils.ConfigManager import ConfigManager
 import time
 from Utils.logger import *
 from Utils.resultlogger import *
+from Utils.UnitSystem import *
 
 from selenium.webdriver import ActionChains
 
@@ -58,7 +59,7 @@ class MultipleBTVComponentClass(BaseComponentClass):
         return indices
 
 
-    def getBTVData(self,setup,h,parent="btvGroup",child1="BTVCOLUMN1",child2="BTVCOLUMN2"):
+    def getBTVData(self,setup,h,parent="btvGroup",child1="BTVCOLUMN1",child2="BTVCOLUMN2",occurence=0):
 
         if not h[parent][child1]:
             self.takeScreenshot(setup.d)
@@ -67,8 +68,8 @@ class MultipleBTVComponentClass(BaseComponentClass):
             self.takeScreenshot(setup.d)
             return False
         data = {}
-        data[child1] = self.getData(h,child=child1)
-        data[child2] = self.getData(h,child=child2)
+        data[child1] = self.getData(h,child=child1,occurence=occurence)
+        data[child2] = self.getData(h,child=child2,occurence=occurence)
         return data
 
     def getData(self,handlrs,parent="btvGroup",child="BTVCOLUMN1",occurence=0):
@@ -82,7 +83,7 @@ class MultipleBTVComponentClass(BaseComponentClass):
             return False
         return self.setSelectionIndex(index,h[parent][child][occurence])
 
-    def getSelections(self,setup,h,parent="btvGroup",child1="BTVCOLUMN0",child2="BTVCOLUMN1",child3="BTVCOLUMN2",occurence=0):
+    def getSelections(self,setup,h,parent="btvGroup",child1="BTVCOLUMN0",child2="BTVCOLUMN1",child3="BTVCOLUMN2",occurence=0,measureSelected=""):
 
         if not h[parent][child1]:
             self.takeScreenshot(setup.d)
@@ -98,8 +99,21 @@ class MultipleBTVComponentClass(BaseComponentClass):
         data['selIndices']=self.getSelection(h[parent][child1][occurence])
         data['dim'] = self.getSelection(h[parent][child2][occurence],returnText=True)
         data['value'] = self.getSelection(h[parent][child3][occurence],returnText=True)
-        data['dimSelected']
-        data['totalValue']
+        if "Bitrate" in measureSelected and len(data['value'])!=0:
+            data['totalValue']=self.totalvalueformlist(data['value'],unitValue=1024)
+        elif len(data['value'])!=0:
+            data['totalValue'] = self.totalvalueformlist(data['value'])
+        else:
+            data['totalValue'] = ""
+
+        data['dimSelected'] =""
+        if len(data['dim'])!=0:
+            for dim in data['dim']:
+                if data['dimSelected']=="":
+                    data['dimSelected']=str(dim)
+                else:
+                    data['dimSelected']=data['dimSelected']+","+str(dim)
+
         return data
 
     def launchToolTip(self,driverHelper,elHandle):
@@ -125,5 +139,5 @@ class MultipleBTVComponentClass(BaseComponentClass):
         return self.launchToolTip(setup.dH,toolTipHandlers)
 
     # added for Content Mural Screen
-    def getHeader(self,h,index,parent="btvGroup",child="selectionlabel"):
-        return h[parent][child][0].text.strip().strip('\n').strip()
+    def getHeader(self,h,index="",parent="btvGroup",child="selectionlabel"):
+        return str(h[parent][child][0].text.strip().strip('\n').strip())
