@@ -207,6 +207,13 @@
             <component id ="screenbody" selector="tag name" locator="kiwik-workflow" parent="True"/>
         </screenConfig>
 
+        <screenConfig id = "bulkstats_Screen">
+            <component id = "leftListContainer" selector="css selector" locator="div.leftListContainer" parent="True"/>
+            <component id = "rightListContainer" selector="css selector" locator="div.rightListContainer" parent="True"/>
+            <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
+
+        </screenConfig>
+
 
         <screenConfig id = "subscriber_Screen">
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
@@ -609,6 +616,20 @@
             <!--<component id = "btv" selector="css selector" locator="kiwik-bartabular-view"/>-->
             <!--<component id = "BTVTOOLTIP" selector="css selector" locator='div#barTabularChartToolTip'/>-->
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='class' locatorText = 'bar1' action="hover" wait = 'skip'/>-->
+
+        </componentConfig>
+
+        <componentConfig id = "leftListContainer">
+            <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
+            <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
+        </componentConfig>
+        <componentConfig id = "rightListContainer">
+            <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
+            <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
+        </componentConfig>
+        <componentConfig id ="compareContainer">
+            <component id = "drop" selector="css selector" locator="kiwik-drop-container"/>
+            <component id = "trendchart" selector="css selector" locator="kiwik-line-chart"/>
 
         </componentConfig>
 
