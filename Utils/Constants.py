@@ -7,20 +7,22 @@ class Constants(object):
     # URL = "https://muralautomation.cisco.com:6443/"
     # URL = "https://scrum.jalapeno.com:6443"
     # URL = "https://uiscrummural.cisco.com:6443/"
+    # BROWSER = "chrome"
+    BROWSER = "ff"
     isOffline = False
     if isOffline:
-        URL = 'localhost:8888'
+        URL = 'localhost:3333'
     else:
         #URL = "https://muralautomation.cisco.com:6443"
-        #URL = "https://murala-ca.guavus.com:6443"
-        URL = "https://uiscrum-mural.cisco.com:6443"
+        URL = "https://murala-ca.guavus.com:6443"
+        # URL = "https://uiscrum-mural.cisco.com:6443"
 
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
     # URL = 'https://nrmca-upgrade-setup.sprintspectrum.com:6443/'
     # URL = 'https://nrmca-perf.guavus.com:44710/'
     USERNAME = 'admin'
-    PASSWORD = 'Admin@123'
+    PASSWORD = 'admin123'
 
     SITES = 'site_Screen'
 
@@ -64,6 +66,7 @@ class Constants(object):
     # chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
     # chromedriverpath = "C:\Users\Administrator\Downloads\chromedriver_win32\chromedriver.exe"
     chromedriverpath = "/Users/mayank.mahajan/PycharmProjects/html5automation/chromedriver/chromedriver228"
+    firefoxdriverpath = "/Users/mayank.mahajan/Downloads/geckodriver"
 
     # common components
     ALLBUTTONS = "allbuttons"

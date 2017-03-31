@@ -13,11 +13,17 @@ class SetUp:
         security = True
 
         if security:
-            chromeOptions = webdriver.ChromeOptions()
+            if "chrome" == Constants.BROWSER:
+                chromeOptions = webdriver.ChromeOptions()
+                # chromeOptions.add_argument("--kiosk")
+                chromeOptions.add_argument("--start-maximized")
 
-            # chromeOptions.add_argument("--kiosk")
-            chromeOptions.add_argument("--start-maximized")
-            self.d = webdriver.Chrome(Constants.chromedriverpath, chrome_options=chromeOptions)
+                # self.d = webdriver.Firefox()
+                self.d = webdriver.Chrome(Constants.chromedriverpath, chrome_options=chromeOptions)
+            elif "ff" == Constants.BROWSER:
+                self.d = webdriver.Firefox()
+
+
             # self.d = webdriver.Chrome(Constants.chromedriverpath)
         else:
 
