@@ -1,5 +1,5 @@
 from classes.Components.TimeRangeComponentClass import *
-from MuralUtils.NetworkHelper import *
+from MuralUtils.DeviceHelper import *
 
 screen="Network Topology"
 try:
@@ -11,6 +11,13 @@ try:
     sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     networkScreenInstance = NetworkScreenClass(setup.d)
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    networkScreenInstance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    networkScreenInstance.cm.goto("Devices", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+
+
+
 
     qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
     quicklink = setup.cM.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
@@ -35,44 +42,48 @@ try:
         breadCrumbLabel = networkScreenInstance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
 
         measures = setup.cM.getNodeElements("networkdimeas", "measure")
+        dimensions = setup.cM.getNodeElements("devicedimeas", "dimension")
+        for kk, dimension in dimensions.iteritems():
+            dimensionSelected = networkScreenInstance.picker.domultipleSelectionWithName(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),dimension['locatorText'],0,"measureChangeSection","measure")
+            isError(setup)
+            for k, measure in measures.iteritems():
+                checkEqualAssert(dimension['locatorText'],dimensionSelected,selectedQuicklink,measure['locatorText'],"Verify Selected dimension")
+                if not measure.has_key("summaryCard"):
+                    measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),measure['locatorText'],1,"measureChangeSection","measure")
+                    isError(setup)
+                    checkEqualAssert(measure['locatorText'],measureSelected,selectedQuicklink,measure['locatorText'],"Verify Selected measure")
 
-        for k, measure in measures.iteritems():
-            if not measure.has_key("summaryCard"):
-                measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),measure['locatorText'],0,"measureChangeSection","measure")
-                isError(setup)
-                checkEqualAssert(measure['locatorText'],measureSelected,selectedQuicklink,measure['locatorText'],"Verify Selected measure")
+                    if measure.has_key("options") and 'direction' in measure['options']:
+                        isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
+                        checkEqualAssert(list,type(isDirectionsPresent), selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
+                        checkEqualAssert([0],isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify Default Direction Selected for Measure = " + measureSelected)
 
-                if measure.has_key("options") and 'direction' in measure['options']:
-                    isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
-                    checkEqualAssert(list,type(isDirectionsPresent), selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
-                    checkEqualAssert([0],isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify Default Direction Selected for Measure = " + measureSelected)
+                        for d in range(0,3):
+                            if networkScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
+                                selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection"))
+                                checkEqualAssert([d],selectedSwitcher,selectedQuicklink,measure['locatorText'],"Verify Selected Measure Direction")
+                                checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measure,0,False)
+                                #checkAllComponent(setup, instance, measureSelected, index, flag)
 
-                    for d in range(0,3):
-                        if networkScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
-                            selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection"))
-                            checkEqualAssert([d],selectedSwitcher,selectedQuicklink,measure['locatorText'],"Verify Selected Measure Direction")
-                            checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measure,0,False)
-                            #checkAllComponent(setup, instance, measureSelected, index, flag)
+                                p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
+                                for i in range(1,len(p['BTVCOLUMN1'])):
 
-                            p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
-                            for i in range(1,len(p['BTVCOLUMN1'])):
+                                    doActionsOnDevice(networkScreenInstance, setup, i)
+                                    # sleep(8)
+                                    checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,i,True)
 
-                                doActionsOnNetwork(networkScreenInstance,setup,i)
-                                # sleep(8)
-                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,i,True)
+                    else:
+                        isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
+                        checkEqualAssert(False, isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
+                        d = None
 
-                else:
-                    isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
-                    checkEqualAssert(False, isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
-                    d = None
+                        ##
+                        checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure, 0,False)
 
-                    ##
-                    checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure, 0,False)
-
-                    p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
-                    for i in range(len(p['BTVCOLUMN1'])):
-                        doActionsOnNetwork(networkScreenInstance,setup,i)
-                        checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure, i, True)
+                        p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
+                        for i in range(len(p['BTVCOLUMN1'])):
+                            doActionsOnDevice(networkScreenInstance, setup, i)
+                            checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure, i, True)
 
     toolTip(setup, networkScreenInstance)
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
