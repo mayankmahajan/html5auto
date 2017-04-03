@@ -91,3 +91,30 @@ def getGlobalFiltersToolTipData(screenName,globalFilterInstance,setup):
     contentKeys = setup.cM.getAllNodeElements("contentFilters","filter")
     actualFilters = insertKeys(globalFilterInstance.getToolTipData(setup,getHandle(setup,screenName)),networkKeys+apnratKeys+deviceKeys+contentKeys)
     return actualFilters
+
+
+def sortTable(setup,insatnce,columnName="Name"):
+
+    tableHandle = getHandle(setup, MuralConstants.SubscriberScreen, "table")
+
+    #
+    # data1 = reportScreenInstance.table.getTableData1(tableHandle)
+    # cdata1 = reportScreenInstance.table.convertDataToDict(data1)
+
+    insatnce.table.sortTable1(tableHandle, columnName)
+
+    tableHandle = getHandle(setup, MuralConstants.SubscriberScreen, "table")
+
+    data2 = insatnce.table.getTableData1(tableHandle)
+    columnIndex = insatnce.table.getIndexForValueInArray(data2['header'], columnName)
+
+    col = []
+    for i in range(len(data2['rows'])):
+        col.append(data2['rows'][i][columnIndex])
+
+    checkEqualAssert(sorted(col, reverse=True), col, "", "", "Checking ColumnName Sort : " + columnName)
+    logger.info("Sorted")
+    cdata2 = insatnce.table.convertDataToDictWithKeyAsRow(data2)
+
+    return cdata2
+

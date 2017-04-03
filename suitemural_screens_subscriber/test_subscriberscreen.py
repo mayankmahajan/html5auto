@@ -7,7 +7,7 @@ from classes.Components.WorkflowStartComponent import *
 from classes.Components.TimeRangeComponentClass import *
 #from classes.Pages.MuralScreens.AccessTechnologyClass import *
 from classes.Pages.MuralScreens.SubscriberClass import *
-from MuralUtils import ReportsHelper
+from MuralUtils import Helper
 Keys.ENTER
 
 import sys
@@ -80,7 +80,7 @@ try:
                     logger.info("No Table Data for Top Subscriber=%s ", value)
                     break
 
-                sortedData = ReportsHelper.sortTable2(setup,subscriberScreenInstance,columnName=columnname)
+                sortedData = Helper.sortTable(setup,subscriberScreenInstance,columnName=columnname)
                 #sortedData=subscriberScreenInstance.table.sortTable1(tableHandle, columnname)
 
                 resultlogger.debug('<br>*********** Logging Results for checkSortTable on Column %s ***********<br><br>', columnname)
