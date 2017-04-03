@@ -10,6 +10,7 @@ from Utils.Constants import *
 import random
 class TableComponentClass(BaseComponentClass):
     def __init__(self):
+        BaseComponentClass.__init__(self)
         self.utility = __import__("Utils.utility")
     colCount = 0
     rowCount = 0
@@ -196,7 +197,7 @@ class TableComponentClass(BaseComponentClass):
     def getRows1(self,colcount,h,length,driver,colIndex=0,scroll=False):
 
         if scroll:
-            driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-1])
+            driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-6*colcount])
             sleep(4)
             h = self.utility.utility.getHandle(driver,"report_Screen","table")["table"]
 
