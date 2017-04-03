@@ -22,6 +22,9 @@ class SetUp:
                 self.d = webdriver.Chrome(Constants.chromedriverpath, chrome_options=chromeOptions)
             elif "ff" == Constants.BROWSER:
                 self.d = webdriver.Firefox()
+            elif "safari" == Constants.BROWSER:
+                self.d = webdriver.Safari()
+
 
 
             # self.d = webdriver.Chrome(Constants.chromedriverpath)
