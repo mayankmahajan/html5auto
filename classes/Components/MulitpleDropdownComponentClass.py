@@ -138,4 +138,19 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
                 elements[i].click()
                 return str(activeDropDowns[index].find_elements_by_xpath("./div/*")[0].text)
 
+    def checkMeasureInActiveList(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",strToBeReplaced='Flow',strToBeReplacedWith='Hit'):
+        activeDropDowns = h[parent][child]
+        activeDropDowns[index].click()
+        time.sleep(5)
+
+        if strToBeReplaced in value:
+            for el in activeDropDowns[index].find_elements_by_class_name("menuitemDiv"):
+                if strToBeReplaced in str(el.text).strip():
+                    activeDropDowns[index].click()
+                    return value
+            activeDropDowns[index].click()
+            return str(value).replace(strToBeReplaced,strToBeReplacedWith)
+        activeDropDowns[index].click()
+        return value
+
 

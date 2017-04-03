@@ -56,6 +56,16 @@ def getSelectionsFromContent(networkScreenInstance, setup, measureSelected):
 
     sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
     summary['dim'] = summary['header']
+
+    # For handle issue of avg flow/hit duration in measure and flow/hit duration in summary bar
+    selectedlinkSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"), occurence=0)
+    if "Flow Duration" in measureSelected :
+        measureSelected="Flow Duration"
+
+    if "Hit Duration" in measureSelected:
+        measureSelected = "Hit Duration"
+
+
     summary['value']=[sumSel[summary['dim'],0,measureSelected],
                       sumSel[summary['dim'],1,measureSelected]]
 
@@ -108,26 +118,26 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,flag):
     breadCrumbLabel = instance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
 
     if not flag:
-        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected['locatorText'])
+        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected)
 
         #checkEqualAssert(True,"All" in b1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at  = "+p1['header'])
         #checkEqualAssert("All",p2['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at picker = "+p2['header'])
-        checkEqualAssert(True,"All" in b2['header'], quicklink, measureSelected['locatorText'], "Verify BTV header")
-        checkEqualAssert(True, "All" in s1['header'], quicklink, measureSelected['locatorText'], "Verify Default summary header")
+        checkEqualAssert(True,"All" in b2['header'], quicklink, measureSelected, "Verify BTV header")
+        checkEqualAssert(True, "All" in s1['header'], quicklink, measureSelected, "Verify Default summary header")
         #checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
-        checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(str(s1['value'][1]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
-        checkEqualAssert(b2['dimSelected'],s1['dim'],quicklink,measureSelected['locatorText'],"Verify Summary Card Header with BTV Header")
-        checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
-        checkEqualAssert(b1['totalValue'],b1['value'][0],quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
+        checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected,"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(str(s1['value'][1]),b2['totalValue'],quicklink,measureSelected,"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(b2['dimSelected'],s1['dim'],quicklink,measureSelected,"Verify Summary Card Header with BTV Header")
+        checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected, "Verify BreadCrumb Label")
+        checkEqualAssert(b1['totalValue'],str(b2['value'][0]),quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
     else:
-        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected['locatorText'])
-        checkEqualAssert(b2['dimSelected'],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary = "+s1['header'])
-        checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
-        checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(str(s1['value'][1]),b2['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
-        checkEqualAssert(b1['dimSelected'],b2['header'],quicklink,measureSelected['locatorText'], "Verify Selection at BTV 1 with BTV 2 Header")
-        checkEqualAssert(b1['totalValue'],b1['value'][0],quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
+        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected)
+        checkEqualAssert(b2['dimSelected'],s1['dim'], quicklink, measureSelected, "Verify Selection at summary = "+s1['header'])
+        checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected, "Verify BreadCrumb Label")
+        checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected,"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(str(s1['value'][1]),b2['totalValue'],quicklink,measureSelected,"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(b1['dimSelected'],b2['header'],quicklink,measureSelected, "Verify Selection at BTV 1 with BTV 2 Header")
+        checkEqualAssert(b1['totalValue'],str(b2['value'][0]),quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
 
         #instance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
         #isError(setup)

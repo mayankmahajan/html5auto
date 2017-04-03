@@ -79,9 +79,9 @@
         <measure id = "volume" locatorText="Volume" options="direction" unitSystem = "metric"/>
         <measure id = "bitrate" locatorText="Bitrate" options="direction,operation" unitSystem = "bytes"/>
         <measure id = "flows" locatorText="Flows" options="operation" unitSystem = "bytes"/>
-        <measure id = "flowduration" locatorText="Flow Duration" options="operation" unitSystem = "bytes"/>
+        <measure id = "flowduration" locatorText="Avg Flow Duration" options="operation" unitSystem = "bytes"/>
         <measure id = "subscribers" locatorText="Unique Subscribers" options="operation" unitSystem = "metric" summaryCard="only" />
-
+s
         <dimension id = "area" expectedText="Area"/>
         <dimension id = "region" expectedText="Region"/>
         <dimension id = "gateway" expectedText="Gateway"/>
@@ -245,6 +245,7 @@
             <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
 
             <component id = "btvGroup" selector="css selector" locator='mural-workflow-shell' parent="True"/>
+            <component id = "general" selector="css selector" locator="div.ScreenArea" parent="True" />
 
             <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "_SummaryBar")]' action="" parent="True"/>
             <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
@@ -257,7 +258,9 @@
             <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
         </screenConfig>
 
-
+        <componentConfig id = "general">
+            <component id = "drop" selector="tag name" locator="kiwik-multiselect-dropdown"/>
+        </componentConfig>
 
         <screenConfig id = "cellsector_Screen">
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
@@ -657,6 +660,7 @@
     </componentConfigs>
 
 
+
     <contextMenus>
         <contextMenu id = "site_Screen">
             <option id = "Network Functions"/>
@@ -674,6 +678,7 @@
         <screen id = "accesstechnology_Screen" breadcrumbTitle = "Access Technology" dimensions="RadioAccess"/>
         <screen id = "tm_Screen" breadcrumbTitle = "Trending and Monitoring" dimensions=""/>
         <screen id = "device_Screen" breadcrumbTitle= "Devices" dimensions=""/>
+        <screen id = "content_Screen" breadcrumbTitle="Content" dimensions=""/>
 
 
     </screenDetails>

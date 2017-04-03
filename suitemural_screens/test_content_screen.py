@@ -13,6 +13,7 @@ from MuralUtils.ContentHelper import *
 screen="Content"
 try:
     setup = SetUp()
+
     sleep(8)
     login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
     isError(setup)
@@ -23,10 +24,13 @@ try:
     networkScreenInstance = NetworkScreenClass(setup.d)
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     networkScreenInstance.cm.goto("Content", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    isError(setup)
 
     qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
     quicklink = setup.cM.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
 
+    linkSelected = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcherText(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"), occurence=1)
+    checkEqualAssert("Traffic Type",str(linkSelected[0]),"","","Verify default selected link ")
 
     for e in quicklink:
 
@@ -45,45 +49,60 @@ try:
 
         for k, measure in measures.iteritems():
             if not measure.has_key("summaryCard"):
-
-                measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),measure['locatorText'],0,"measureChangeSection","measure")
+                measureValue=networkScreenInstance.picker.checkMeasureInActiveList(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),measure['locatorText'],0,"measureChangeSection","measure")
+                measureSelected = networkScreenInstance.picker.domultipleSelectionWithName(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),measureValue,0,"measureChangeSection","measure")
                 isError(setup)
-                checkEqualAssert(measure['locatorText'],measureSelected,selectedQuicklink,measure['locatorText'],"Verify Selected measure")
+                checkEqualAssert(measureValue,measureSelected,selectedQuicklink,measureSelected,"Verify Selected measure")
 
                 if measure.has_key("options") and 'direction' in measure['options']:
                     isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
-                    checkEqualAssert(list,type(isDirectionsPresent), selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
-                    checkEqualAssert([0],isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify Default Direction Selected for Measure = " + measureSelected)
-
-                    linkSelected = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcherText(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"),occurence=1)
-                    checkEqualAssert("Traffic Type",str(linkSelected[0]),selectedQuicklink,measureSelected,"Verify default selected link ")
+                    checkEqualAssert(list,type(isDirectionsPresent), selectedQuicklink, measureSelected,"Verify presence of Directions for Measure = " + measureSelected)
+                    checkEqualAssert([0],isDirectionsPresent, selectedQuicklink, measureSelected,"Verify Default Direction Selected for Measure = " + measureSelected)
 
                     for d in range(0,3):
                         if networkScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection")):
+                            isError(setup)
                             selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"))
                             checkEqualAssert([d],selectedSwitcher,selectedQuicklink,measureSelected,"Verify Selected Measure Direction")
                             for l in range(0,3):
                                 if networkScreenInstance.switcher.measureChangeSwitcher(l,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),occurence = 1):
+                                    isError(setup)
                                     selectedlinkSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"),occurence=1)
                                     checkEqualAssert([l], selectedlinkSwitcher, selectedQuicklink, measureSelected,"Verify Selected Measure link")
+                                    if l != 0 and "Flow" in measureSelected:
+                                        measureSelected = measureSelected.replace("Flow", "Hit")
+                                    elif l == 0 and "Hit" in measureSelected:
+                                        measureSelected = measureSelected.replace("Hit", "Flow")
+
                                     h = getHandle(setup, MuralConstants.ContentScreen, "general")
 
                                     for secondmesindex in range(len(h['general']['drop'])):
+                                        btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
+                                        btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
+
                                         if len(h['general']['drop']) == 2:
                                             checkEqualAssert([2],selectedlinkSwitcher,selectedQuicklink,measureSelected,"Verify switcher between Service Provider and  Web Protocol present for Web Only")
                                             networkScreenInstance.picker.domultipleSelectionWithIndex_type2(getHandle(setup, MuralConstants.ContentScreen, "general"), secondmesindex, 1,"general", "drop")
                                             isError(setup)
-                                            valuefrommes = h['general']['drop'][1].find_elements_by_xpath("./div/*")[0].text
+                                            handle=getHandle(setup, MuralConstants.ContentScreen, "general")
+                                            valuefrommes = handle['general']['drop'][1].find_elements_by_xpath("./div/*")[0].text
                                             text=str(h['general']['drop'][1].find_elements_by_xpath("./div/*")[0].text).split('>')
-                                            btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
-                                            btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
-                                            checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + str(text[0]))
-                                            checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[1]))
+                                            #btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
+                                            #btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
+                                            checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + str(text[0]).strip())
+                                            checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[0]).strip())
+                                            if secondmesindex==0:
+                                                checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
+                                                checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
+                                            else:
+                                                checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in  second btv for (Web Protocol > Service Provider)")
+                                                checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in second btv for (Web Protocol > Service Provider)")
+                                        else:
 
+                                            checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
+                                            checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
 
-
-                                        checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measure,False)
-
+                                        checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measureSelected,False)
                                         #p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                                         #for i in range(1,len(p['BTVCOLUMN1'])):
                                         # p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
@@ -105,39 +124,54 @@ try:
                                         for j in range(numberofindex):
                                             btv1indcies.append(random.randint(1, len(btvdata1['BTVCOLUMN1'])) - 1)
 
-                                        #checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
-                                        #checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Unidentified must be at second last in btv")
 
                                         doActionsOnContent(networkScreenInstance, setup,btv0indcies,btv1indcies)
                                         # sleep(8)
-                                        checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,True)
+                                        checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measureSelected,True)
 
                 else:
-                    isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
-                    checkEqualAssert(False, isDirectionsPresent, selectedQuicklink, measure['locatorText'],"Verify presence of Directions for Measure = " + measureSelected)
+                    #isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
+                    #checkEqualAssert(False, isDirectionsPresent, selectedQuicklink, measureSelected,"Verify presence of Directions for Measure = " + measureSelected)
                     d = None
 
-                    linkSelected = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcherText(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"), occurence=1)
-                    checkEqualAssert("Traffic Type", str(linkSelected[0]), selectedQuicklink, measureSelected,"Verify default selected link ")
-
                     for l in range(0, 3):
-                        if networkScreenInstance.switcher.measureChangeSwitcher(l,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),occurence=1):
-                            selectedlinkSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"), occurence=1)
+                        if networkScreenInstance.switcher.measureChangeSwitcher(l,getHandle(setup,MuralConstants.NWSCREEN,"measureChangeSection"),occurence=0):
+                            isError(setup)
+                            selectedlinkSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"), occurence=0)
                             checkEqualAssert([l], selectedlinkSwitcher, selectedQuicklink, measureSelected,"Verify Selected link")
+                            if l!=0 and "Flow" in measureSelected:
+                                measureSelected=measureSelected.replace("Flow","Hit")
+                            elif l==0 and "Hit" in measureSelected:
+                                measureSelected = measureSelected.replace("Hit","Flow")
+
                             h = getHandle(setup, MuralConstants.ContentScreen, "general")
                             for secondmesindex in range(len(h['general']['drop'])):
+                                btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
+                                btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
+
                                 if len(h['general']['drop']) == 2:
                                     checkEqualAssert([2], selectedlinkSwitcher, selectedQuicklink, measureSelected,"Verify switcher between Service Provider and  Web Protocol present for Web Only")
                                     networkScreenInstance.picker.domultipleSelectionWithIndex_type2(getHandle(setup, MuralConstants.ContentScreen, "general"),secondmesindex, 1, "general", "drop")
                                     isError(setup)
                                     valuefrommes = h['general']['drop'][1].find_elements_by_xpath("./div/*")[0].text
                                     text = str(h['general']['drop'][1].find_elements_by_xpath("./div/*")[0].text).split('>')
-                                    btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
-                                    btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
-                                    checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + +str(text[0]))
-                                    checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[1]))
+                                    #btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
+                                    #btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
+                                    checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + str(text[0]).strip())
+                                    checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[0]).strip())
 
-                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink, measure, False)
+                                    if secondmesindex == 0:
+                                        checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
+                                        checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
+                                    else:
+                                        checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in  second btv for (Web Protocol > Service Provider)")
+                                        checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in second btv for (Web Protocol > Service Provider)")
+                                else:
+
+                                    checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
+                                    checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
+
+                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink, measureSelected, False)
 
                                 btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
                                 numberofindex = random.randint(1, len(btvdata0['BTVCOLUMN1']) - 1)
@@ -157,7 +191,7 @@ try:
 
                                 doActionsOnContent(networkScreenInstance, setup, btv0indcies, btv1indcies)
                                 # sleep(8)
-                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink, measure, True)
+                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink, measureSelected, True)
 
     #toolTip(setup, networkScreenInstance)
     #tooltipData = networkScreenInstance.multibtv.getToolTipInfo(setup, getHandle(setup, MuralConstants.ContentScreen,"btvGroup"), occurence=1)

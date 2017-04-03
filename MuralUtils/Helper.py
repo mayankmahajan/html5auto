@@ -1,5 +1,6 @@
 from Utils.utility import *
 from MuralConstants import *
+from classes.Pages.GlobalFiltersPopClass import *
 
 def clickOnfilterIcon(setup,screen):
     logger.info("Clicking on FilterIcon")

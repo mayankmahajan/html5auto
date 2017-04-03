@@ -5,7 +5,7 @@ from time import *
 from selenium.webdriver import ActionChains
 from Utils.utility import *
 from Utils.UnitSystem import *
-
+from Utils.Constants import *
 
 import random
 class TableComponentClass(BaseComponentClass):

@@ -99,8 +99,11 @@ class MultipleBTVComponentClass(BaseComponentClass):
         data['selIndices']=self.getSelection(h[parent][child1][occurence])
         data['dim'] = self.getSelection(h[parent][child2][occurence],returnText=True)
         data['value'] = self.getSelection(h[parent][child3][occurence],returnText=True)
-        if "Bitrate" in measureSelected and len(data['value'])!=0:
-            data['totalValue']=self.totalvalueformlist(data['value'],unitValue=1024)
+
+        if "Flows" in measureSelected and len(data['value'])!=0:
+            data['totalValue']=self.totalvalueformlist(data['value'],unitValue=1000)
+        elif "Avg" in measureSelected and len(data['value'])!=0:
+            data['totalValue']=self.totalvalueformlist(data['value'],flag="avg",unitValue=60)
         elif len(data['value'])!=0:
             data['totalValue'] = self.totalvalueformlist(data['value'])
         else:

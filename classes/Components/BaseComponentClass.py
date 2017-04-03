@@ -27,14 +27,16 @@ class BaseComponentClass:
     def send_keys(self, elHandle, value):
         return elHandle.send_keys(value)
 
-    def totalvalueformlist(self,list,flag="sum",unitValue=1000.0):
+    def totalvalueformlist(self,list,flag="sum",unitValue=1024.0):
+            import re
+            unitstring = str(re.findall(r'[a-zA-Z]+',str(list[0]))[0])
             l = []
             for i in range(len(list)):
                 l.append(UnitSystem().getRawValueFromUI(str(list[i])))
             if flag == 'sum':
-                return UnitSystem().getValueFromRawValue(sum(l),unitValue)
+                return UnitSystem().getValueFromRawValue(sum(l),unitValue,unitstring=unitstring)
             elif flag == 'avg':
-                return UnitSystem().getValueFromRawValue(sum(l)/float(len(l)),unitValue)
+                return UnitSystem().getValueFromRawValue(sum(l)/float(len(l)),unitValue,unitstring=unitstring)
             else:
                 return " "
 

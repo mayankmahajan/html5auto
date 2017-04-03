@@ -89,7 +89,7 @@ try:
                     if tableMap['rows'].has_key(k):
                         checkEqualAssert(tableMap['rows'][k], sortedData[k], selectedQuicklink, "", "verify sorted Table rows present in table with key : " + k)
                     else:
-                        logger.info("table not contain row with key : " + k)
+                        logger.info("********table not contain row with key********* : " + k)
 
                 tableheader = getHandle(setup, MuralConstants.SubscriberScreen, "screenarea")['screenarea']['tableheader'][0].text
                 checkEqualAssert("Top "+value+" Subscribers by "+columnname,tableheader,selectedQuicklink,"", "Verify default table header")
