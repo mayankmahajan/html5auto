@@ -81,11 +81,19 @@
         <measure id = "flows" locatorText="Flows" options="operation" unitSystem = "bytes"/>
         <measure id = "flowduration" locatorText="Avg Flow Duration" options="operation" unitSystem = "bytes"/>
         <measure id = "subscribers" locatorText="Unique Subscribers" options="operation" unitSystem = "metric" summaryCard="only" />
-s
+
         <dimension id = "area" expectedText="Area"/>
         <dimension id = "region" expectedText="Region"/>
         <dimension id = "gateway" expectedText="Gateway"/>
     </networkdimeas>
+
+    <specificrowsinbtv>
+        <row id="unidentified" locatorText="Unidentified"/>
+        <row id="uncategorized" locatorText="Uncategorized"/>
+        <row id="Miscellaneous" locatorText="Miscellaneous"/>
+    </specificrowsinbtv>
+
+
     <devicedimeas>
         <dimension id = "models" locatorText="Models"/>
         <dimension id = "os" locatorText="OS"/>
@@ -299,6 +307,7 @@ s
 
             <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+
             <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
         </screenConfig>
         <screenConfig id = "device_Screen">
@@ -310,7 +319,6 @@ s
             <component id = "allbuttons" selector="css selector" locator="div.ScreenArea" parent="True" />
             <component id = "measureChangeSection" selector="css selector" locator=".measureChangeContainer" parent ="True"/>
             <component id = "exploreBar" selector="tag name" locator='kiwik-explore-bar' parent="True"/>
-
             <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
             <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
@@ -331,7 +339,6 @@ s
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
             <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
             <component id = 'rightcalendar' selector="css selector" locator=".right.calendar" parent="True" />
-
 
             <component id = "summarybar" selector="xpath" locator='//*[contains(@id, "network_SummaryBar")]' action="" parent="True"/>
 
@@ -435,8 +442,11 @@ s
 
 
         </screenConfig>
+
+
         <screenConfig id ='error_popup'>
             <component id = "errorbody" selector="class name" locator="errorBody" parent="True"/>
+            <component id= "invalidboxwrapper" selector="css selector" locator="div.invalid-box-wrapper" parent="True"/>
         </screenConfig>
 
 
@@ -524,6 +534,8 @@ s
             <component id ="errorclose" selector="css selector" locator="[class*=close][class*=Popup]" />
             <component id ="errormessage" selector="css selector" locator="[class*=alert][class*=Message]" />
         </componentConfig>
+
+
         <componentConfig id = "addrule">
             <component id="addrule" selector="class name" locator="filterPopup"/>
         </componentConfig>
@@ -563,6 +575,11 @@ s
         <componentConfig id="allcircles">
             <component id = "circle" selector="tag name" locator='circle' />
         </componentConfig>
+
+
+       <componentConfig id ="invalidboxwrapper">
+           <component id ="invalidfilterbox" selector="css selector" locator="div.invalid-filter-box"/>
+       </componentConfig>
 
 
         <componentConfig id ="picker">
@@ -674,11 +691,13 @@ s
     </contextMenus>
 
     <screenDetails>
-        <screen id = "network_Screen" breadcrumbTitle = "MURAL Network Insights" dimensions="Area,Region,Gateway"/>
-        <screen id = "accesstechnology_Screen" breadcrumbTitle = "Access Technology" dimensions="RadioAccess"/>
-        <screen id = "tm_Screen" breadcrumbTitle = "Trending and Monitoring" dimensions=""/>
-        <screen id = "device_Screen" breadcrumbTitle= "Devices" dimensions=""/>
-        <screen id = "content_Screen" breadcrumbTitle="Content" dimensions=""/>
+        <screen id = "network_Screen" breadcrumbTitle = "MURAL Network Insights" dimensions="Area,Region,Gateway" incompatibleDimensions=""/>
+        <screen id = "accesstechnology_Screen" breadcrumbTitle = "Access Technology" dimensions="RadioAccess" incompatibleDimensions="APN"/>
+        <screen id = "tm_Screen" breadcrumbTitle = "Trending and Monitoring" dimensions="" incompatibleDimensions=""/>
+        <screen id = "device_Screen" breadcrumbTitle= "Devices" dimensions="" incompatibleDimensions=""/>
+        <screen id = "content_Screen" breadcrumbTitle="Content" dimensions="" incompatibleDimensions="Service Provider,Web Protocol"/>
+        <screen id = "cellsector_Screen" breadcrumbTitle="Cell Sectors" dimensions="" incompatibleDimensions="Device,Content"/>
+        <screen id = "subscriber_Screen" breadcrumbTitle="Top Subscribers" dimensions="" incompatibleDimensions="Device,Content"/>
 
 
     </screenDetails>

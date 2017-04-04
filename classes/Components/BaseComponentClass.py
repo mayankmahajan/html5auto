@@ -28,8 +28,13 @@ class BaseComponentClass:
         return elHandle.send_keys(value)
 
     def totalvalueformlist(self,list,flag="sum",unitValue=1024.0):
+            unitstring=""
             import re
-            unitstring = str(re.findall(r'[a-zA-Z]+',str(list[0]))[0])
+            for list_value in list:
+                if re.findall(r'[a-zA-Z]+',str(list_value))!=0:
+                    unitstring = str(re.findall(r'[a-zA-Z]+',str(list_value))[0])
+                    break
+
             l = []
             for i in range(len(list)):
                 l.append(UnitSystem().getRawValueFromUI(str(list[i])))
