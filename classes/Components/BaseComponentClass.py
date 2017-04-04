@@ -31,7 +31,7 @@ class BaseComponentClass:
             unitstring=""
             import re
             for list_value in list:
-                if re.findall(r'[a-zA-Z]+',str(list_value))!=0:
+                if len(re.findall(r'[a-zA-Z]+',str(list_value)))!=0:
                     unitstring = str(re.findall(r'[a-zA-Z]+',str(list_value))[0])
                     break
 
