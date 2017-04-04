@@ -84,5 +84,7 @@ class Constants(object):
     ERRORCLOSE = "errorclose"
     ERRORMESSAGE = "errormessage"
     ERRORPOPUP = "error_popup"
+    INVALIDFILTER= "invalidboxwrapper"
+    INVALIDFILTERBOX="invalidfilterbox"
     NODATA= "No Data"
 

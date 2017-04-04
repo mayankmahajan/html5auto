@@ -46,8 +46,15 @@ try:
     checkEqualDict(popUpTooltipData, expected, "", "", "Verify Filters Selections")
 
     # apply global filters
+
     globalFilterInstance.clickButton("Apply", getHandle(setup, MuralConstants.GFPOPUP, MuralConstants.ALLBUTTONS))
     isError(setup)
+    Flag,Msg=isInvalidFilter(setup)
+    if Flag==True:
+        validateIncompatibleFilter(setup,Msg,MuralConstants.ContentScreen)
+
+
+
     # get global filter from Screen
     globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance, setup)
     #popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
@@ -67,8 +74,10 @@ try:
 
     screenInfo = setup.cM.getNodeElements("screenDetails", "screen")
     screenNamefrombreadcrumb = str(screenInfo[MuralConstants.ContentScreen]['breadcrumbTitle'])
+    logger.info("Coming back on %s" + screenInfo[MuralConstants.ATSCREEN])
     networkScreenInstance.cm.gotoScreenViaBreadCrumb(screenNamefrombreadcrumb,getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
-    logger.info("Come back on %s" +screenInfo[MuralConstants.ATSCREEN])
+    isError(setup)
+    #logger.info("Come back on %s" +screenInfo[MuralConstants.ATSCREEN])
 
     globalFilterFromScreen_after_movefromdevice = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance,setup)
     checkEqualDict(globalFilterFromScreen,globalFilterFromScreen_after_movefromdevice,"","","Verify Global filter on Previous screen (Content Screen)")
@@ -77,6 +86,12 @@ try:
     isError(setup)
     globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance,setup)
     checkEqualAssert("No filters", globalFilterFromScreen, "", "", "Verify clear Global Filter on screen " + screenName)
+
+    #Helper.setGlobalFilters(globalFilterInstance, setup)
+    #wfstart.launchScreen("Trending", getHandle(setup, MuralConstants.WFSTARTSCREEN))
+    #isError(setup)
+    #globalFilterFromScreenafterswitchtoTM = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance,setup)
+    #checkEqualAssert("No filters", globalFilterFromScreenafterswitchtoTM, "", "", "Verify No Filter after switching workflow")
 
 
     setup.d.close()

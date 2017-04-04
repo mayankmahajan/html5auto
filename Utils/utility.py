@@ -30,6 +30,7 @@ import datetime
 import calendar
 from classes.Pages.GenerateReportsPopClass import *
 from classes.Pages.ReportsModuleClass import *
+from classes.Pages.GlobalFiltersPopClass import *
 from classes.Objects.Report import *
 
 # def setUp():
@@ -297,6 +298,53 @@ def isError(setup):
         return [True,errorMessage]
     else:
         return [False,""]
+
+
+def isInvalidFilter(setup):
+    sleep(5)
+    eHandle = getHandle(setup, Constants.ERRORPOPUP, Constants.INVALIDFILTER)
+    if len(eHandle[Constants.INVALIDFILTER][Constants.INVALIDFILTERBOX]) >0:
+        r = "issue_" + str(random.randint(99999,9999999))+".png"
+        setup.d.save_screenshot(r)
+        logger.debug("ERROR :: Screenshot with name = %s is saved",r)
+        logger.error("Invalid Filter View found")
+        errorMessage = eHandle[Constants.INVALIDFILTER][Constants.INVALIDFILTERBOX][0].text
+        logger.error("Invalid Filter Message = %s",errorMessage)
+        #logger.debug("Closing Error Pop Up")
+        resultlogger.info("ERROR :: Screenshot with name = %s is saved <br>",r)
+        resultlogger.info("******* Invalid Filter View found = %s *******<br>",errorMessage)
+        #eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
+        return [True,errorMessage]
+    else:
+        return [False,""]
+
+
+def validateIncompatibleFilter(setup,Msg,screen_name):
+
+    incompatible_filter_list = str(Msg).split('Incompatible')[1].split('\n')[1:]
+    screenInfo = setup.cM.getNodeElements("screenDetails", "screen")
+    incompatible_filter_list_from_xml = str(screenInfo[screen_name]['incompatibleDimensions'])
+    flag = 0
+    for filter in incompatible_filter_list:
+        checkEqualAssert(True, filter in incompatible_filter_list_from_xml, "", "","Verify Incompatible filter = %s" + str(filter))
+        if not (filter in incompatible_filter_list_from_xml):
+            flag = 1
+            break
+    if flag == 0:
+        globalFilterInstance = GlobalFiltersPopClass(setup.d)
+        globalFilterInstance.clearGlobalFilters(getHandle(setup, screen_name, "filterArea"))
+        isError(setup)
+        F, Msg = isInvalidFilter(setup)
+        if F == False:
+            logger.info('Clear incompatible filter and remove msg from screen')
+            resultlogger.info("Clear incompatible filter and remove msg from screen")
+        else:
+            logger.info('Incompatible filter msg not removed from screen')
+            resultlogger.info('Incompatible filter msg not removed from screen')
+    else:
+        logger.error("*********%s filter should be applied acc.to TDD But UI not allowed***********"+str(filter))
+
+
 
 
 def getHandle(obj,pageName,parent="NA"):
