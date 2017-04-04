@@ -12,6 +12,7 @@ __maintainer__  = "Mayank Mahajan"
 
 
 from BaseComponentClass import BaseComponentClass
+from classes.Components.DropdownComponentClass import *
 from classes.DriverHelpers.locators import *
 from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
@@ -28,6 +29,7 @@ class SummaryBarComponentClass(BaseComponentClass):
     def __init__(self):
         BaseComponentClass.__init__(self)
         self.configmanager = ConfigManager()
+        drop = DropdownComponentClass()
 
 
     def getSelection(self,handlrs):
@@ -92,7 +94,37 @@ class SummaryBarComponentClass(BaseComponentClass):
             buttons[0].click()
             return data,dimensionSelected
         except Exception as e:
-            return e
+            logger.error("Got Exception in Summary Bar = %s",str(e) )
+            return e,e
+
+    def getSelection3(self,handlrs,measureSelected,direction=0):
+
+        handlers = self.compHandlers('summarybar',handlrs)
+        summaryBarHandler =handlers['summaryBarTable'][len(handlers['summaryBarTable'])-1]
+        drops = summaryBarHandler.find_elements_by_tag_name("select")
+        drop = DropdownComponentClass()
+        if direction == 0:
+            return self.getSelection2(handlrs)
+        elif direction == 1:
+            drop.set("Uplink",drops[0])
+            drop.set("Uplink",drops[2])
+            return self.getSelection2(handlrs)
+        elif direction == 2:
+            drop.set("DownLink",drops[0])
+            drop.set("DownLink",drops[2])
+            d1,dim1 = self.getSelection2(handlrs)
+
+            drop.set("Uplink",drops[0])
+            drop.set("Uplink",drops[2])
+            d2,dim2 = self.getSelection2(handlrs)
+
+            temp ={}
+            for key in d1.keys():
+                temp[key] = [self.calTotal([d1[key],d2[key]],[d1[key],d2[key]],measureSelected)['totalValue']]
+
+            return temp,dim1
+
+
 
 
     # mural specific
