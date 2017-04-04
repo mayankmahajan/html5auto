@@ -16,6 +16,9 @@ from Utils.Constants import *
 from Utils.logger import *
 
 class ContextMenuComponentClass(BaseComponentClass):
+    def __init__(self):
+        BaseComponentClass.__init__(self)
+        self.utility = __import__("Utils.utility")
 
     def activateContextMenuOptions1(self,handle):
         handle['cm'][Constants.CONTEXTMENU][0].click()

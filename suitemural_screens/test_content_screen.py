@@ -80,6 +80,10 @@ try:
                                         btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
                                         btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
 
+                                        networkScreenInstance.cm.checkSpecificElement(setup,btvdata0['BTVCOLUMN1'])
+                                        networkScreenInstance.cm.checkSpecificElement(setup,btvdata1['BTVCOLUMN1'])
+
+
                                         if len(h['general']['drop']) == 2:
                                             checkEqualAssert([2],selectedlinkSwitcher,selectedQuicklink,measureSelected,"Verify switcher between Service Provider and  Web Protocol present for Web Only")
                                             networkScreenInstance.picker.domultipleSelectionWithIndex_type2(getHandle(setup, MuralConstants.ContentScreen, "general"), secondmesindex, 1,"general", "drop")
@@ -91,16 +95,16 @@ try:
                                             #btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
                                             checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + str(text[0]).strip())
                                             checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[0]).strip())
-                                            if secondmesindex==0:
-                                                checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
-                                                checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
-                                            else:
-                                                checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in  second btv for (Web Protocol > Service Provider)")
-                                                checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in second btv for (Web Protocol > Service Provider)")
-                                        else:
+                                            #if secondmesindex==0:
+                                             #   checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
+                                              #  checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
+                                            #else:
+                                             #   checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in  second btv for (Web Protocol > Service Provider)")
+                                              #  checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in second btv for (Web Protocol > Service Provider)")
+                                        #else:
 
-                                            checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
-                                            checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
+                                            #checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
+                                            #checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
 
                                         checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measureSelected,False)
                                         #p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
@@ -149,6 +153,9 @@ try:
                                 btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
                                 btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
 
+                                networkScreenInstance.cm.checkSpecificElement(setup, btvdata0['BTVCOLUMN1'])
+                                networkScreenInstance.cm.checkSpecificElement(setup, btvdata1['BTVCOLUMN1'])
+
                                 if len(h['general']['drop']) == 2:
                                     checkEqualAssert([2], selectedlinkSwitcher, selectedQuicklink, measureSelected,"Verify switcher between Service Provider and  Web Protocol present for Web Only")
                                     networkScreenInstance.picker.domultipleSelectionWithIndex_type2(getHandle(setup, MuralConstants.ContentScreen, "general"),secondmesindex, 1, "general", "drop")
@@ -160,16 +167,16 @@ try:
                                     checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + str(text[0]).strip())
                                     checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[0]).strip())
 
-                                    if secondmesindex == 0:
-                                        checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
-                                        checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
-                                    else:
-                                        checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in  second btv for (Web Protocol > Service Provider)")
-                                        checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in second btv for (Web Protocol > Service Provider)")
-                                else:
+                                    #if secondmesindex == 0:
+                                     #   checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
+                                      #  checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
+                                    #else:
+                                     #   checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in  second btv for (Web Protocol > Service Provider)")
+                                      #  checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in second btv for (Web Protocol > Service Provider)")
+                                #else:
 
-                                    checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
-                                    checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
+                                 #   checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
+                                  #  checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
 
                                 checkAllComponent(setup, networkScreenInstance, selectedQuicklink, measureSelected, False)
 
@@ -203,8 +210,21 @@ try:
         checkEqualAssert(str(btvdata1['BTVCOLUMN2'][i]), str(tooltipData[i - 1].split('\n')[1]).split(':')[1].strip(), selectedQuicklink, measureSelected, "Verify tooltip Value with btv for index= " + str(i))
 
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
-    networkScreenInstance.cm.goto(MuralConstants.TandMScreen, getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+    check_click=networkScreenInstance.cm.goto(MuralConstants.ExportToCSV, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    if check_click==True:
+        logger.info("Verify Export to CVS")
+    else:
+        logger.info("Not able to click on Export to CSV")
+
+    if len(setup.d.window_handles)==2:
+        setup.d.switch_to.window(setup.d.window_handles[1])
+        setup.d.close()
+        setup.d.switch_to.window(setup.d.window_handles[0])
+
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
+    networkScreenInstance.cm.goto(MuralConstants.T_MScreen, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     setup.d.close()
+
         #accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb("Network",getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
         #accesstechnologyScreenInstance.cm.activateWorkFlowDropDown(getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
         #accesstechnologyScreenInstance.cm.gotoScreenViaWorkFlowDrop("Trend & Monitoring",getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))

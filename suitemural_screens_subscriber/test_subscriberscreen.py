@@ -36,7 +36,7 @@ try:
     default_value=getHandle(setup, MuralConstants.SubscriberScreen, 'allinputs')['allinputs']['input'][0].get_attribute("value")
     checkEqualAssert("1000",str(default_value),defaultselectedQuicklink,"","Verify default number of subscriber")
     defaulttableheader=getHandle(setup,MuralConstants.SubscriberScreen,"screenarea")['screenarea']['tableheader'][0].text
-    checkEqualAssert("Top 1000 Subscribers by Volume (Downlink)",defaulttableheader,defaultselectedQuicklink,"","Verify default table header")
+    checkEqualAssert("Top 1000 Subscribers by Volume (Downlink)",str(defaulttableheader),defaultselectedQuicklink,"","Verify default table header")
 
 
     for e in quicklink:
@@ -93,6 +93,20 @@ try:
 
                 tableheader = getHandle(setup, MuralConstants.SubscriberScreen, "screenarea")['screenarea']['tableheader'][0].text
                 checkEqualAssert("Top "+value+" Subscribers by "+columnname,tableheader,selectedQuicklink,"", "Verify default table header")
+
+
+
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
+    check_click=networkScreenInstance.cm.goto(MuralConstants.ExportTableData, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    if check_click==True:
+        logger.info("Verify Export table data")
+    else:
+        logger.info("Not able to click on Export table data")
+
+    if len(setup.d.window_handles)==2:
+        setup.d.switch_to.window(setup.d.window_handles[1])
+        setup.d.close()
+        setup.d.switch_to.window(setup.d.window_handles[0])
 
     setup.d.close()
 

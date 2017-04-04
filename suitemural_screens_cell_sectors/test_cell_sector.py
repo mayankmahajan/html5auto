@@ -102,7 +102,19 @@ try:
                         else:
                             logger.info("table not contain row with key : " + k)
 
-            setup.d.close()
+            #setup.d.close()
+
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
+    check_click=networkScreenInstance.cm.goto(MuralConstants.ExportTableData, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    if check_click==True:
+        logger.info("Verify Export table data")
+    else:
+        logger.info("Not able to click on Export table data")
+
+    if len(setup.d.window_handles)==2:
+        setup.d.switch_to.window(setup.d.window_handles[1])
+        setup.d.close()
+        setup.d.switch_to.window(setup.d.window_handles[0])
 
     setup.d.close()
 

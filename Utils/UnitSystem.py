@@ -34,6 +34,9 @@ class UnitSystem :
 
     # updated unit system
     def getRawValue(self, convertedValue, unitString):
+        if unitString =="":
+            return convertedValue
+
         convertedValue = float(convertedValue)
         if unitString in self.timeUnits:
             rawValue = convertedValue * self.timeValues[self.timeUnits.index(unitString)]
@@ -82,7 +85,11 @@ class UnitSystem :
         elif len(vArr) ==2:
             value = float(str(vArr[0]+"."+vArr[1]))
 
-        unitstring = str(re.findall(r'[a-zA-Z]+',uiValue)[0])
+        if len(re.findall(r'[a-zA-Z]+',uiValue))==0:
+            unitstring=""
+        else:
+            unitstring = str(re.findall(r'[a-zA-Z]+',uiValue)[0])
+
         return self.getRawValue(value,unitstring)
 
 

@@ -347,15 +347,29 @@ class BaseComponentClass:
         logger.error("Chart is not present or loaded. Screenshot dumped with %s", str(r))
         resultlogger.info("*******Chart is not present or loaded. Screenshot dumped with %s", str(r))
 
+
+    def checkSpecificElement(self,setup,list):
+        elementtobechecked = setup.cM.getNodeElements("specificrowsinbtv", "row")
+        elements = []
+        for key, row in elementtobechecked.iteritems():
+            elements.append(row['locatorText'])
+
+        for element in elements:
+            if element in list:
+                self.utility.utility.checkEqualAssert(False,element in list[:-2],"","","Verify location of %s in component"+element)
+        return True
+
+
+
     @staticmethod
     def merge_dictionaries(d1,d2):
         n = d1.copy()
         n.update(d2)
         return n
 
-    def calTotal(self,dimList,valueList,measureSelected,metricMeasure='Flows',timeMeasure='Avg'):
+    def calTotal(self,dimList,valueList,measureSelected,metricMeasure='Flows',metricMeasure1='Hits',timeMeasure='Avg'):
         data = {}
-        if metricMeasure in measureSelected and len(valueList)!=0:
+        if (metricMeasure in measureSelected or metricMeasure1 in measureSelected) and len(valueList)!=0:
             data['totalValue']=self.totalvalueformlist(valueList,unitValue=1000)
         elif timeMeasure in measureSelected and len(valueList)!=0:
             data['totalValue']=self.totalvalueformlist(valueList,flag="avg",unitValue=60)
@@ -370,6 +384,6 @@ class BaseComponentClass:
                 if data['dimSelected']=="":
                     data['dimSelected']=str(dim)
                 else:
-                    data['dimSelected']=data['dimSelected']+","+str(dim)
+                    data['dimSelected']=data['dimSelected']+", "+str(dim)
 
         return data

@@ -81,8 +81,24 @@ try:
     #checkPie(setup,accesstechnologyScreenInstance,selectedQuicklink,measure)
     #need to be fix
     toolTipPieAndPieLegend(setup, accesstechnologyScreenInstance)
-    accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"), child="export")
-    accesstechnologyScreenInstance.cm.goto(MuralConstants.TandMScreen, getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+    #accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"), child="export")
+    #accesstechnologyScreenInstance.cm.goto(MuralConstants.TandMScreen, getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
+    check_click=networkScreenInstance.cm.goto(MuralConstants.ExportToCSV, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    if check_click==True:
+        logger.info("Verify Export to CVS")
+    else:
+        logger.info("Not able to click on Export to CSV")
+
+    if len(setup.d.window_handles)==2:
+        setup.d.switch_to.window(setup.d.window_handles[1])
+        setup.d.close()
+        setup.d.switch_to.window(setup.d.window_handles[0])
+
+    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
+    networkScreenInstance.cm.goto(MuralConstants.T_MScreen, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+
     setup.d.close()
 
 except Exception as e:
