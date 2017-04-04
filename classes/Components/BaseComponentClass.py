@@ -346,3 +346,30 @@ class BaseComponentClass:
         driver.save_screenshot(r)
         logger.error("Chart is not present or loaded. Screenshot dumped with %s", str(r))
         resultlogger.info("*******Chart is not present or loaded. Screenshot dumped with %s", str(r))
+
+    @staticmethod
+    def merge_dictionaries(d1,d2):
+        n = d1.copy()
+        n.update(d2)
+        return n
+
+    def calTotal(self,dimList,valueList,measureSelected,metricMeasure='Flows',timeMeasure='Avg'):
+        data = {}
+        if metricMeasure in measureSelected and len(valueList)!=0:
+            data['totalValue']=self.totalvalueformlist(valueList,unitValue=1000)
+        elif timeMeasure in measureSelected and len(valueList)!=0:
+            data['totalValue']=self.totalvalueformlist(valueList,flag="avg",unitValue=60)
+        elif len(valueList)!=0:
+            data['totalValue'] = self.totalvalueformlist(valueList)
+        else:
+            data['totalValue'] = ""
+
+        data['dimSelected'] =""
+        if len(dimList)!=0:
+            for dim in dimList:
+                if data['dimSelected']=="":
+                    data['dimSelected']=str(dim)
+                else:
+                    data['dimSelected']=data['dimSelected']+","+str(dim)
+
+        return data

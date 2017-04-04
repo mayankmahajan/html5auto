@@ -100,24 +100,30 @@ class MultipleBTVComponentClass(BaseComponentClass):
         data['dim'] = self.getSelection(h[parent][child2][occurence],returnText=True)
         data['value'] = self.getSelection(h[parent][child3][occurence],returnText=True)
 
-        if "Flows" in measureSelected and len(data['value'])!=0:
-            data['totalValue']=self.totalvalueformlist(data['value'],unitValue=1000)
-        elif "Avg" in measureSelected and len(data['value'])!=0:
-            data['totalValue']=self.totalvalueformlist(data['value'],flag="avg",unitValue=60)
-        elif len(data['value'])!=0:
-            data['totalValue'] = self.totalvalueformlist(data['value'])
-        else:
-            data['totalValue'] = ""
+        # if "Flows" in measureSelected and len(data['value'])!=0:
+        #     data['totalValue']=self.totalvalueformlist(data['value'],unitValue=1000)
+        # elif "Avg" in measureSelected and len(data['value'])!=0:
+        #     data['totalValue']=self.totalvalueformlist(data['value'],flag="avg",unitValue=60)
+        # elif len(data['value'])!=0:
+        #     data['totalValue'] = self.totalvalueformlist(data['value'])
+        # else:
+        #     data['totalValue'] = ""
+        #
+        # data['dimSelected'] =""
+        # if len(data['dim'])!=0:
+        #     for dim in data['dim']:
+        #         if data['dimSelected']=="":
+        #             data['dimSelected']=str(dim)
+        #         else:
+        #             data['dimSelected']=data['dimSelected']+","+str(dim)
 
-        data['dimSelected'] =""
-        if len(data['dim'])!=0:
-            for dim in data['dim']:
-                if data['dimSelected']=="":
-                    data['dimSelected']=str(dim)
-                else:
-                    data['dimSelected']=data['dimSelected']+","+str(dim)
 
-        return data
+        return self.merge_dictionaries(data,self.calTotal(data['dim'],data['value'],measureSelected))
+
+        # return data
+
+
+
 
     def launchToolTip(self,driverHelper,elHandle):
         data = []

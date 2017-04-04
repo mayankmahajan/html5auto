@@ -65,12 +65,13 @@ def getSelectionsFromDevice(networkScreenInstance, setup, measureSelected):
         btv['value'].append(btvSel['BTVCOLUMN2'][i])
     # btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.DeviceScreen,"btv"),0)
 
+    btv_new = networkScreenInstance.btv.merge_dictionaries(btv,networkScreenInstance.btv.calTotal(btv['dim'],btv['value'],measureSelected))
     sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.DeviceScreen,"summarybar"))
     summary['dim'] = summary['header']
     summary['value']=[sumSel[summary['dim'],0,measureSelected],
                       sumSel[summary['dim'],1,measureSelected]]
 
-    return btv,summary
+    return btv_new,summary
 
 
 
@@ -87,15 +88,20 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag):
         checkEqualAssert("All",b1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at BTV = ")
         checkEqualAssert("All",s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
         checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
-        checkEqualAssert(s1['value'][0],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(s1['value'][1],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(s1['value'][0],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
+        checkEqualAssert(s1['dim'], b1['dimSelected'], quicklink, measureSelected['locatorText'], "Verify Summary Label with BTV")
     else:
         b1,s1=getSelectionsFromDevice(instance, setup, measureSelected['locatorText'])
-        checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary = "+s1['header'])
+        checkEqualAssert(s1['dim'], b1['dimSelected'], quicklink, measureSelected['locatorText'], "Verify Summary Label with BTV")
+        # checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary = "+s1['header'])
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
-        checkEqualAssert(s1['value'][0],b1['value'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(s1['value'][1],b1['value'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        checkEqualAssert(s1['value'][0],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+
+        # checkEqualAssert(s1['value'][0],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
+        # checkEqualAssert(s1['value'][1],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
 
         # instance.cm.activate(getHandle(setup, MuralConstants.DeviceScreen, "exploreBar"))
         # isError(setup)
@@ -125,6 +131,7 @@ def toolTip(setup,instance):
 def doActionsOnDevice(networkScreenInstance, setup, index=2):
     # set btvdata
     btv = {}
+    networkScreenInstance.btv.setSelection(1,getHandle(setup,MuralConstants.DeviceScreen,"btv"))
     btv['data'] = networkScreenInstance.btv.setSelection(index,getHandle(setup,MuralConstants.DeviceScreen,"btv"))
     # btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.DeviceScreen,"btv"),0)
     # btv['tooltip']  = networkScreenInstance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
