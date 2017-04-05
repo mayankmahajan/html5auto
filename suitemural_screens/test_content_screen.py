@@ -9,22 +9,21 @@ from MuralUtils.ContentHelper import *
 #
 # tooltipData = networkScreenInstance.multibtv.getToolTipInfo(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1)
 
-
 screen="Content"
 try:
     setup = SetUp()
-
     sleep(8)
     login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
     isError(setup)
     wfstart = WorkflowStartComponentClass()
     sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
-
     networkScreenInstance = NetworkScreenClass(setup.d)
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     networkScreenInstance.cm.goto("Content", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     isError(setup)
+    screenName = networkScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    checkEqualAssert(screen, str(screenName), "", "", "Verify Screen Name after drill from Network Screen")
 
     qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
     quicklink = setup.cM.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
@@ -223,16 +222,14 @@ try:
 
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
     networkScreenInstance.cm.goto(MuralConstants.T_MScreen, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
-    setup.d.close()
 
-        #accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb("Network",getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
-        #accesstechnologyScreenInstance.cm.activateWorkFlowDropDown(getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
-        #accesstechnologyScreenInstance.cm.gotoScreenViaWorkFlowDrop("Trend & Monitoring",getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
+    setup.d.close()
 
 except Exception as e:
     isError(setup)
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
+    resultlogger.info("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     raise e
     setup.d.close()

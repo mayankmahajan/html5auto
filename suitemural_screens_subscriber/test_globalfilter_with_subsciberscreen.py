@@ -60,16 +60,28 @@ try:
     # apply global filters
     globalFilterInstance.clickButton("Apply", getHandle(setup, MuralConstants.GFPOPUP, MuralConstants.ALLBUTTONS))
     isError(setup)
-    # get global filter from Screen
-    globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.SubscriberScreen, globalFilterInstance, setup)
-    #popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
 
-    checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for "+screenName)
+    Flag, Msg = isInvalidFilter(setup)
+    if Flag == True:
+        validateIncompatibleFilter(setup, Msg, MuralConstants.SubscriberScreen)
+    else:
+        # get global filter from Screen
+        globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen,globalFilterInstance, setup)
+        # popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
+        checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for " + screenName)
+
+        tableHandle = getHandle(setup, MuralConstants.SubscriberScreen, "table")
+
+        data = subscriberScreenInstance.table.getTableData1(tableHandle, "table", length=5)
+        if data['rows'] == Constants.NODATA:
+            logger.info("No Table Data for globalfilter=%s ", globalFilterFromScreen)
+            sys.exit()
 
     globalFilterInstance.clearGlobalFilters(getHandle(setup,MuralConstants.SubscriberScreen,"filterArea"))
     isError(setup)
     globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.SubscriberScreen, globalFilterInstance,setup)
     checkEqualAssert("No filters", globalFilterFromScreen, "", "", "Verify clear Global Filter on screen " + screenName)
+
     setup.d.close()
 
 except Exception as e:
@@ -77,5 +89,6 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
+    resultlogger.info("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     raise e
     setup.d.close()

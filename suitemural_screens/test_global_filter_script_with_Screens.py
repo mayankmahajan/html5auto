@@ -60,11 +60,16 @@ try:
     globalFilterInstance.clickButton("Apply", getHandle(setup, MuralConstants.GFPOPUP, MuralConstants.ALLBUTTONS))
     isError(setup)
 
-    # get global filter from Screen
-    globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.NWSCREEN, globalFilterInstance, setup)
-    #popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
+    Flag, Msg = isInvalidFilter(setup)
+    if Flag == True:
+        validateIncompatibleFilter(setup, Msg, MuralConstants.SubscriberScreen)
+    else:
+        # get global filter from Screen
+        globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen,
+                                                                   globalFilterInstance, setup)
+        # popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
+        checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for " + screenName)
 
-    checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for "+screenName)
 
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     networkScreenInstance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
@@ -81,43 +86,48 @@ try:
     globalFilterInstance.clickButton("Apply", getHandle(setup, MuralConstants.GFPOPUP, MuralConstants.ALLBUTTONS))
     isError(setup)
 
-    accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb("MURAL Network Insights",getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
-    isError(setup)
-    screenName = accesstechnologyScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
-    logger.info("Going to %s", str(screenName))
+    Flag, Msg = isInvalidFilter(setup)
+    if Flag == True:
+        validateIncompatibleFilter(setup, Msg, MuralConstants.SubscriberScreen)
+    else:
 
-    networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
-    networkScreenInstance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
-    isError(setup)
-    screenName = accesstechnologyScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
-    logger.info("Going to %s", str(screenName))
+        accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb("MURAL Network Insights",getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
+        isError(setup)
+        screenName = accesstechnologyScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+        logger.info("Going to %s", str(screenName))
+
+        networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+        networkScreenInstance.cm.goto("Access Technology", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+        isError(setup)
+        screenName = accesstechnologyScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+        logger.info("Going to %s", str(screenName))
 
 
     #set and get main chart (pielegend) for global filter
 
-    value = []
-    value.append(setAndGetPieLegend(accesstechnologyScreenInstance,setup.dH,0,getHandle(setup, MuralConstants.ATSCREEN, "pielegend"),True))
+        value = []
+        value.append(setAndGetPieLegend(accesstechnologyScreenInstance,setup.dH,0,getHandle(setup, MuralConstants.ATSCREEN, "pielegend"),True))
 
-    previousGFs,updatedGFs = updateGlobalFilters(setup,MuralConstants.ATSCREEN,expected,value)
+        previousGFs,updatedGFs = updateGlobalFilters(setup,MuralConstants.ATSCREEN,expected,value)
 
-    logger.info("Global Filter value on Access Screen before the main chart selection (pielegend) on access screen  = %s", previousGFs)
-    logger.info("Global Filter value on Access Screen after the main chart selection (pielegend) on access screen = %s", updatedGFs)
-
-
-    accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
-    accesstechnologyScreenInstance.cm.goto("Devices", getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+        logger.info("Global Filter value on Access Screen before the main chart selection (pielegend) on access screen  = %s", previousGFs)
+        logger.info("Global Filter value on Access Screen after the main chart selection (pielegend) on access screen = %s", updatedGFs)
 
 
-    screenInfo = setup.cM.getNodeElements("screenDetails", "screen")
-    globalFilterFromScreen_Device = Helper.getGlobalFiltersFromScreen(MuralConstants.DeviceScreen, globalFilterInstance,setup)
-    checkEqualDict(updatedGFs,globalFilterFromScreen_Device, "", "", "Verify Global Filter across Screen")
+        accesstechnologyScreenInstance.cm.activate(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
+        accesstechnologyScreenInstance.cm.goto("Devices", getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
 
 
-    screenNamefrombreadcrumb = str(screenInfo[MuralConstants.ATSCREEN]['breadcrumbTitle'])
-    accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb(screenNamefrombreadcrumb, getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
-    globalFilterFromPreviousScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.ATSCREEN, globalFilterInstance,setup)
+        screenInfo = setup.cM.getNodeElements("screenDetails", "screen")
+        globalFilterFromScreen_Device = Helper.getGlobalFiltersFromScreen(MuralConstants.DeviceScreen, globalFilterInstance,setup)
+        checkEqualDict(updatedGFs,globalFilterFromScreen_Device, "", "", "Verify Global Filter across Screen")
 
-    checkEqualDict(previousGFs,globalFilterFromPreviousScreen,"","","Verify Global filter on previous screen "+screenNamefrombreadcrumb)
+
+        screenNamefrombreadcrumb = str(screenInfo[MuralConstants.ATSCREEN]['breadcrumbTitle'])
+        accesstechnologyScreenInstance.cm.gotoScreenViaBreadCrumb(screenNamefrombreadcrumb, getHandle(setup, MuralConstants.ATSCREEN, "breadcrumb"))
+        globalFilterFromPreviousScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.ATSCREEN, globalFilterInstance,setup)
+
+        checkEqualDict(previousGFs,globalFilterFromPreviousScreen,"","","Verify Global filter on previous screen "+screenNamefrombreadcrumb)
     setup.d.close()
 
 except Exception as e:
@@ -125,5 +135,6 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
+    resultlogger.info("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     raise e
     setup.d.close()

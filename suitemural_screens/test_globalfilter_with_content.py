@@ -22,7 +22,6 @@ try:
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     networkScreenInstance.cm.goto("Content", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     isError(setup)
-
     globalFilterInstance = GlobalFiltersPopClass(setup.d)
 
     #accesstechnologyScreenInstance = AccessTechnolohyScreenClass(setup.d)
@@ -52,19 +51,17 @@ try:
     Flag,Msg=isInvalidFilter(setup)
     if Flag==True:
         validateIncompatibleFilter(setup,Msg,MuralConstants.ContentScreen)
+    else:
+        # get global filter from Screen
+        globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance, setup)
+        #popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
+        checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for "+screenName)
 
+        btvdata0 = networkScreenInstance.multibtv.getBTVData(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=0)
 
-
-    # get global filter from Screen
-    globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance, setup)
-    #popUpTooltipData1 = Helper.getGlobalFiltersToolTipData(MuralConstants.NWSCREEN, globalFilterInstance, setup)
-    checkEqualDict(popUpTooltipData, globalFilterFromScreen, "", "", "Verify Global Filter for "+screenName)
-
-    btvdata0 = networkScreenInstance.multibtv.getBTVData(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=0)
-
-    if btvdata0 == False:
-        logger.info("No Data for globalfilter=%s ", globalFilterFromScreen)
-        sys.exit()
+        if btvdata0 == False:
+            logger.info("No Data for globalfilter=%s ", globalFilterFromScreen)
+            sys.exit()
 
     logger.info("Moving on Devices")
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
@@ -74,9 +71,10 @@ try:
 
     screenInfo = setup.cM.getNodeElements("screenDetails", "screen")
     screenNamefrombreadcrumb = str(screenInfo[MuralConstants.ContentScreen]['breadcrumbTitle'])
-    logger.info("Coming back on %s" + screenInfo[MuralConstants.ATSCREEN])
+    logger.info("Coming back on %s" ,screenInfo[MuralConstants.ATSCREEN])
     networkScreenInstance.cm.gotoScreenViaBreadCrumb(screenNamefrombreadcrumb,getHandle(setup, MuralConstants.NWSCREEN, "breadcrumb"))
     isError(setup)
+
     #logger.info("Come back on %s" +screenInfo[MuralConstants.ATSCREEN])
 
     globalFilterFromScreen_after_movefromdevice = Helper.getGlobalFiltersFromScreen(MuralConstants.CellSectorScreen, globalFilterInstance,setup)
@@ -101,5 +99,6 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
+    resultlogger.info("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     raise e
     setup.d.close()

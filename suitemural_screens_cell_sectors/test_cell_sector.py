@@ -24,6 +24,9 @@ try:
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     networkScreenInstance.cm.goto("Cell Sectors", getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
     isError(setup)
+    screenName = networkScreenInstance.cm.getScreenName(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
+    checkEqualAssert(screen, str(screenName), "", "", "Verify Screen Name after drill from Network Screen")
+
     cellsectorScreenInstance = CellSectorClass(setup.d)
 
     qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
@@ -102,7 +105,6 @@ try:
                         else:
                             logger.info("table not contain row with key : " + k)
 
-            #setup.d.close()
 
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"), child="export")
     check_click=networkScreenInstance.cm.goto(MuralConstants.ExportTableData, getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
@@ -116,6 +118,7 @@ try:
         setup.d.close()
         setup.d.switch_to.window(setup.d.window_handles[0])
 
+
     setup.d.close()
 
 except Exception as e:
@@ -124,5 +127,6 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
+    resultlogger.info("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     raise e
     setup.d.close()

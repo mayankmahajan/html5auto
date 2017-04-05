@@ -117,7 +117,7 @@ class ContextMenuComponentClass(BaseComponentClass):
             return True
         except Exception as e:
             logger.error("Got Exception while clicking Context Menu = %s",str(e))
-            return e
+            raise e
 
     def goto(self,value,h,parent='exploreBar',child='a'):
         try:
