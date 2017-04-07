@@ -85,14 +85,14 @@ try:
                 isError(setup)
                 checkEqualAssert(sgsn, sgsnSelected, selectedQuicklink, "", "Verify Selected SGSN")
 
+                tableHandle = getHandle(setup, MuralConstants.CellSectorScreen, "table")
+                tableMap = cellsectorScreenInstance.table.getTableDataMap(tableHandle, driver=setup, colIndex=-1)
+
+                if tableMap['rows'] == Constants.NODATA:
+                    logger.info("*********No Table Data for GGSN=%s SGSN=%s ************* ", ggsnSelected, sgsnSelected)
+                    break
 
                 for columnname in column_names:
-                    tableHandle = getHandle(setup, MuralConstants.CellSectorScreen, "table")
-                    tableMap = cellsectorScreenInstance.table.getTableDataMap(tableHandle, driver=setup, colIndex=-1)
-
-                    if tableMap['rows'] == Constants.NODATA:
-                        logger.info("*********No Table Data for GGSN=%s SGSN=%s ************* ", ggsnSelected, sgsnSelected)
-                        break
 
                     sortedData = ReportsHelper.sortTable2(setup, cellsectorScreenInstance, columnName=columnname)
                     # sortedData=subscriberScreenInstance.table.sortTable1(tableHandle, columnname)

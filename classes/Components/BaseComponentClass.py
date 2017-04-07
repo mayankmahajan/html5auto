@@ -333,10 +333,13 @@ class BaseComponentClass:
                     return e
         return False
 
-    def rgb_to_hex(self,rgb):
+    def rgb_to_hex(self,r):
+        rgb = str(r)
         if '#' in rgb:
             return rgb
-        elif 'rgba' not in rgb:
+        elif 'rgba' not in rgb and 'rgb' in rgb:
+            x = rgb.split('rgb')[1].strip('\(').strip('\)').split(',')
+        elif 'rgb' not in rgb:
             x = rgb.strip('\(').strip('\)').split(',')
         else:
             # ignoring alpha property

@@ -74,14 +74,14 @@ try:
             subscriberScreenInstance.cm.sendkeys_input(Keys.ENTER, h, 0,clear=False)
             isError(setup)
 
+            tableHandle = getHandle(setup, MuralConstants.SubscriberScreen, "table")
+            tableMap = subscriberScreenInstance.table.getTableDataMap(tableHandle, driver=setup, colIndex=-1)
+
+            if tableMap['rows'] == Constants.NODATA:
+                logger.info("No Table Data for Top Subscriber=%s ", value)
+                break
 
             for columnname in column_names:
-                tableHandle=getHandle(setup, MuralConstants.SubscriberScreen, "table")
-                tableMap=subscriberScreenInstance.table.getTableDataMap(tableHandle,driver=setup,colIndex=-1)
-
-                if tableMap['rows'] == Constants.NODATA:
-                    logger.info("No Table Data for Top Subscriber=%s ", value)
-                    break
 
                 sortedData = Helper.sortTable(setup,subscriberScreenInstance,columnName=columnname)
                 #sortedData=subscriberScreenInstance.table.sortTable1(tableHandle, columnname)
