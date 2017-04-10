@@ -227,6 +227,14 @@
             <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
 
         </screenConfig>
+        <screenConfig id = "kpi_popup">
+            <component id = "allinputs" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "allcheckboxes" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "alllinks" selector="xpath" locator="//kiwik-kpi-counters" parent="True"/>
+            <component id = "pop_hoverarea" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "alltextareas" selector="css selector" locator="div.filterPopup" parent="True"/>
+        </screenConfig>
 
 
         <screenConfig id = "subscriber_Screen">
@@ -660,6 +668,7 @@
         </componentConfig>
 
         <componentConfig id = "leftListContainer">
+            <component id = "draggables" selector="css selector" locator='div[draggable="true"]'/>
             <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
         </componentConfig>
@@ -668,12 +677,19 @@
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
         </componentConfig>
         <componentConfig id ="compareContainer">
-            <component id = "drop" selector="css selector" locator="kiwik-drop-container"/>
+            <!--<component id = "drop" selector="css selector" locator="kiwik-drop-container"/>-->
+            <component id = "drop" selector="css selector" locator="div#bsLeftDropContainerDiv"/>
             <component id = "trendchart" selector="css selector" locator="kiwik-line-chart"/>
 
         </componentConfig>
 
-        
+        <componentConfig id = "pop_hoverarea">
+            <component id = "hovericon" selector="css selector" locator="span.GUIDE_INFO"/>
+        </componentConfig>
+        <componentConfig id = "alltextareas">
+            <component id = "textarea" selector="css selector" locator="textarea"/>
+        </componentConfig>
+
     </componentConfigs>
 
 
