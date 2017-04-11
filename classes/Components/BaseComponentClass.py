@@ -151,10 +151,23 @@ class BaseComponentClass:
         except Exception as e:
             logger.error("Exception found while clicking Checkbox %d",index)
             return e
+
+    # def isCheckBoxEnabled(self,h,index,parent="allcheckboxes",child="checkbox"):
+    #     try:
+    #         logger.debug("Going to get State of Checkbox %d parent %s and child %s ",index,parent,child)
+    #         state = True if str(h[parent][child][index].get_attribute("ng-reflect-model")).lower() == 'true' else False
+    #         logger.debug("Got State of Checkbox %d parent %s and child %s as %s",index,parent,child,str(state))
+    #         return state
+    #     except Exception as e:
+    #         logger.error("Exception found while clicking Checkbox %d",index)
+    #         return e
+
     def isCheckBoxEnabled(self,h,index,parent="allcheckboxes",child="checkbox"):
         try:
             logger.debug("Going to get State of Checkbox %d parent %s and child %s ",index,parent,child)
-            state = True if str(h[parent][child][index].get_attribute("ng-reflect-model")).lower() == 'true' else False
+            state = True if str(h[parent][child][index].find_element_by_xpath("../input").get_attribute("ng-reflect-checked")).lower() == 'true' else False
+
+            # state = True if str(h[parent][child][index].get_attribute("ng-reflect-model")).lower() == 'true' else False
             logger.debug("Got State of Checkbox %d parent %s and child %s as %s",index,parent,child,str(state))
             return state
         except Exception as e:
@@ -326,9 +339,16 @@ class BaseComponentClass:
             if i == index:
                 try:
                     h[parent][child][i].click()
-                    h[parent][child][i].find_elements_by_xpath(".//input")[0].click()
+                    try:
+                        h[parent][child][i].find_elements_by_xpath(".//input")[0].click()
+                    except:
+                        pass
+
                     time.sleep(2)
-                    return h[parent][child][i].find_elements_by_xpath(childs)[0].text.strip().strip(':').strip()
+                    try:
+                        return h[parent][child][i].find_elements_by_xpath(childs)[0].text.strip().strip(':').strip()
+                    except:
+                        return h[parent][child][i].find_elements_by_xpath("."+childs)[0].text.strip().strip(':').strip()
                 except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
                     return e
         return False
@@ -395,3 +415,19 @@ class BaseComponentClass:
                     data['dimSelected']=data['dimSelected']+", "+str(dim)
 
         return data
+
+    def set_attribute(self,setup,elem,property,value):
+        setAtr = 'arguments[0].setAttribute(arguments[1],arguments[2])'
+        setup.d.execute_script(setAtr,elem,property,value)
+
+    def dragDrop(self,setup,source,target):
+        # selectedRows = setup.d.execute_script('return $(".selectedRowClass")')
+        with open("/Users/mayank.mahajan/PycharmProjects/html5automation/classes/DriverHelpers/drag_and_drop_helper.js","r") as f:
+            java_script = f.read()
+            method = ".simulateDragDrop"
+        src='$("#'+source+'")'
+        trg = '({"dropTarget":"#'+target+'"});'
+        setup.d.execute_script(java_script)
+        time.sleep(8)
+        print src+method+trg
+        setup.d.execute_script(src+method+trg)

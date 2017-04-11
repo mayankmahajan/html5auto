@@ -225,6 +225,14 @@
             <component id = "leftListContainer" selector="css selector" locator="div.leftListContainer" parent="True"/>
             <component id = "rightListContainer" selector="css selector" locator="div.rightListContainer" parent="True"/>
             <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
+            <component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>
+            <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
+            <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
+
+        </screenConfig>
+        <screenConfig id = "bulk_popup">
+            <component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator="div.basePopupView" parent="True"/>
 
         </screenConfig>
         <screenConfig id = "kpi_popup">
@@ -568,7 +576,7 @@
             <component id ='header' selector="css selector" locator="[class*=Title][class*=wizard]"/>
         </componentConfig>
         <componentConfig id="allcheckboxes">
-            <component id = "checkbox" selector="css selector" locator='[type="checkbox"]' />
+            <component id = "checkbox" selector="css selector" locator='div.kiwik-checkbox-indicator' />
         </componentConfig>
         <componentConfig id="allbuttons">
             <component id = "ibutton" selector="css selector" locator='input[type="button"]' />
@@ -668,9 +676,11 @@
         </componentConfig>
 
         <componentConfig id = "leftListContainer">
-            <component id = "draggables" selector="css selector" locator='div[draggable="true"]'/>
+            <component id = "draggables" selector="css selector" locator='[draggable="true"]'/>
             <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
+            <component id = "selected" selector="css selector" locator="[class*=selectedRowClass]"/>
+            <component id = "input" selector="css selector" locator="input"/>
         </componentConfig>
         <componentConfig id = "rightListContainer">
             <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
@@ -678,8 +688,12 @@
         </componentConfig>
         <componentConfig id ="compareContainer">
             <!--<component id = "drop" selector="css selector" locator="kiwik-drop-container"/>-->
-            <component id = "drop" selector="css selector" locator="div#bsLeftDropContainerDiv"/>
+            <!--<component id = "drop" selector="css selector" locator="div#bsLeftDropContainerDiv"/>-->
+
+            <component id = "drop" selector="css selector" locator="[class*=dropComponent]"/>
             <component id = "trendchart" selector="css selector" locator="kiwik-line-chart"/>
+            <component id = "qttooltip" selector="css selector" locator="div.divtooltip"/>
+            <component id = "colorIndicator" selector="css selector" locator="div.colorIndicator"/>
 
         </componentConfig>
 
@@ -688,6 +702,13 @@
         </componentConfig>
         <componentConfig id = "alltextareas">
             <component id = "textarea" selector="css selector" locator="textarea"/>
+        </componentConfig>
+
+        <componentConfig id = "loading-state">
+            <component id = "text" selector="css selector" locator="kiwik-state-loading"/>
+        </componentConfig>
+        <componentConfig id = "bulk_filter">
+            <component id = "list" selector="css selector" locator=".listContainer"/>
         </componentConfig>
 
     </componentConfigs>

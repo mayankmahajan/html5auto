@@ -19,7 +19,9 @@ class ExploreListComponentClass(BaseComponentClass):
         for el in handlres["appHeader"]["alllinks"]:
             if text in el.text:
                 el.click()
-                break
+                return True
+        return False
+
 
     def switchApp(self,h):
         h['appHeader']['switchertemplate'][0].click()

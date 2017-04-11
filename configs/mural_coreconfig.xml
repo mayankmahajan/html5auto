@@ -348,7 +348,9 @@
             <component id = "instances" selector="css selector" locator='input[type="number"]'/>
 
         </componentConfig>
-
+        <componentConfig id="allcheckboxes">
+            <component id = "checkbox" selector="css selector" locator='input[type*=checkbox]' />
+        </componentConfig>
 
         <componentConfig id = "successdialog">
             <component id = "ok" selector="tag name" locator="button" />
