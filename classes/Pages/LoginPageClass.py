@@ -14,14 +14,15 @@ class LoginPageClass(BasePageClass):
     def getUserNameText(self, elHandle):
         return self._username.text(elHandle)
 
-    def setUserName(self, elHandle, value):
-        self._username.send_keys(elHandle, value)
+    def setUserName(self, elHandle, value,parent="username",child="username",occurence=0):
+        self._username.sendkeys_input(value,elHandle,occurence,parent,child)
+        # self._username.send_keys(elHandle, value)
 
     def getPasswordText(self, elHandle):
         return self._password.text(elHandle)
 
-    def setPassword(self, elHandle, value):
-        self._password.send_keys(elHandle, value)
+    def setPassword(self, elHandle, value,parent="password",child="password",occurence=0):
+        self._password.sendkeys_input(value,elHandle,occurence,parent,child)
 
-    def signIn(self, elHandle):
-        self._signin.click(elHandle)
+    def signIn(self, elHandle,parent="signin",child="signin",occurence=0):
+        self._signin.click(elHandle[parent][child][occurence])
