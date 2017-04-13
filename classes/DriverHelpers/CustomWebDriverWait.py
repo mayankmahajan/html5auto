@@ -1,5 +1,4 @@
 from selenium.webdriver.support.wait import WebDriverWait
-from time import time
 from Utils.logger import *
 
 class CustomWebDriverWait(WebDriverWait):
@@ -8,9 +7,9 @@ class CustomWebDriverWait(WebDriverWait):
 
     def until(self, method, message=''):
         try:
-            startTime = time()
+            startTime = time.time()
             super(CustomWebDriverWait,self).until(method)
-            timeTaken = time() - startTime
+            timeTaken = time.time() - startTime
             logger.debug("Time Taken for %s element :: %s seconds", method.locator[1],timeTaken)
         except Exception as e:
             pass
