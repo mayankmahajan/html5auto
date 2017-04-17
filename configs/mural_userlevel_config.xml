@@ -236,6 +236,17 @@
         <device id = "2" group = '2'/>
     </globalScreenFilters2>
 
+    <kpiformulae>
+        <formula id ="0" value = 'x+x'/>
+        <formula id ="1" value = 'x*x'/>
+        <formula id ="2" value = 'x/x'/>
+        <formula id ="3" value = 'x+x-x'/>
+        <formula id ="4" value = 'x+x*x'/>
+        <formula id ="4" value = '(x+x)*x'/>
+        <formula id ="4" value = '(x+x)*x-x'/>
+        <formula id ="4" value = '(x+x)*(x-x)'/>
+    </kpiformulae>
+
 
      <userdetail>
         <user id="0" username="praveen" firstname="Praveen0" lastname="Garg" email="praveen10@guavus.com"  password="New@12345"  cpassword="New@12345" currentpassword='New@1450' newpassword="New@13245"  newcpassword="New@13245" userrole="Admin" value= "all" enabled="1" button="Create"/>

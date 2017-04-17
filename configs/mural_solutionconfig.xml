@@ -262,6 +262,16 @@
 
 
         </screenConfig>
+        <screenConfig id = "kpi_Screen">
+            <component id = "leftListContainer" selector="css selector" locator="div.leftListContainer" parent="True"/>
+            <component id = "rightListContainer" selector="css selector" locator="div.rightListContainer" parent="True"/>
+            <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
+            <component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>
+            <component id = "kpilegend" selector="css selector" locator="kiwik-legend" parent="True"/>
+            <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
+            <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
+
+        </screenConfig>
         <screenConfig id = "bulk_popup">
             <component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>
             <component id = "allbuttons" selector="css selector" locator="div.basePopupView" parent="True"/>
@@ -274,6 +284,7 @@
             <component id = "alllinks" selector="xpath" locator="//kiwik-kpi-counters" parent="True"/>
             <component id = "pop_hoverarea" selector="css selector" locator="div.filterPopup" parent="True"/>
             <component id = "alltextareas" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "bulk_filter" selector="css selector" locator="div.filterPopup" parent="True"/>
         </screenConfig>
 
         <screenConfig id = "changepassword_screen">
@@ -791,8 +802,11 @@
             <component id = "input" selector="css selector" locator="input"/>
         </componentConfig>
         <componentConfig id = "rightListContainer">
+            <component id = "draggables" selector="css selector" locator='[draggable="true"]'/>
             <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
+            <component id = "selected" selector="css selector" locator="[class*=selectedRowClass]"/>
+            <component id = "input" selector="css selector" locator="input"/>
         </componentConfig>
         <componentConfig id ="compareContainer">
             <!--<component id = "drop" selector="css selector" locator="kiwik-drop-container"/>-->
@@ -818,6 +832,11 @@
         <componentConfig id = "bulk_filter">
             <component id = "list" selector="css selector" locator=".listContainer"/>
         </componentConfig>
+        <componentConfig id = "kpilegend">
+            <component id = "color" selector="css selector" locator=".legendIndicator"/>
+            <component id = "name" selector="css selector" locator=".legendTitle"/>
+        </componentConfig>
+
 
         <componentConfig id="allsliders">
             <component id="slider" selector="css selector" locator="div.slider.round"/>

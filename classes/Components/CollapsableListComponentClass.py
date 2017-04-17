@@ -48,7 +48,7 @@ class CollapsableListComponentClass(BaseComponentClass):
     def setIndex(self,setup,h,index=0,parent="leftListContainer",child="draggables"):
         logger.info("Going to select Row : "+str(index)+" at Collapsable List" )
         try:
-            if not h['leftListContainer']['draggables']:
+            if not h[parent][child]:
                 self.takeScreenshot(setup.d)
                 logger.debug("No DATA on Collapsable List")
                 raise
@@ -59,7 +59,7 @@ class CollapsableListComponentClass(BaseComponentClass):
             raise
     def getData(self,setup,h,parent="leftListContainer",child="draggables"):
         logger.info("Going to get all Rows from Collapsable List")
-        drags = h['leftListContainer']['draggables']
+        drags = h[parent][child]
         try:
             if not drags:
                 self.takeScreenshot(setup.d)
@@ -67,5 +67,34 @@ class CollapsableListComponentClass(BaseComponentClass):
                 raise
             return [e.text for e in drags]
         except Exception as e:
+            raise e
+
+    def getParentChilds(self,h,parent="leftListContainer",child="draggables",separator_prop="class",prop_value="children"):
+        try:
+            drags = h[parent][child]
+            parents=[]
+            childs=[]
+            for e in drags:
+                if prop_value in e.get_attribute(separator_prop):
+                    childs.append(e)
+                else:
+                    parents.append(e)
+            return parents,childs
+        except Exception as e:
+            raise e
+
+    def getLegends(self,h,parent="kpilegend",child1="color",child2="name"):
+        try:
+            legends = []
+            for i in  range(len(h[parent][child1])):
+                t={}
+                t['color'] = self.rgb_to_hex(h[parent][child1][i].value_of_css_property("background-color"))
+                # t['color_handle'] = h[parent][child1][i]
+                t['name'] = h[parent][child2][i].text
+                # t['name_handle'] = h[parent][child2][i]
+                legends.append(t)
+            return legends
+        except Exception as e:
+            logger.error("Got Exception while getting Legends = %s",str(e))
             raise e
 

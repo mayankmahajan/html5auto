@@ -493,6 +493,23 @@ class BaseComponentClass:
                     return e
         return False
 
+    def getAllRadiosText(self, h, childDiv="span", parent="radios", child="radio"):
+        return [self.getRadioButtonText(e,h,childDiv,parent,child) for e in len(h[parent][child])]
+
+    def getRadioButtonText(self, index, h, childDiv="span", parent="radios", child="radio"):
+        childs = ".//" + childDiv
+
+        for i in range(len(h[parent][child])):
+            if i == index:
+                try:
+                    try:
+                        return h[parent][child][i].find_elements_by_xpath(childs)[0].text.strip().strip(':').strip()
+                    except:
+                        return h[parent][child][i].find_elements_by_xpath("."+childs)[0].text.strip().strip(':').strip()
+                except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                    return e
+        return False
+
     def rgb_to_hex(self,r):
         rgb = str(r)
         if '#' in rgb:
@@ -571,3 +588,35 @@ class BaseComponentClass:
         time.sleep(8)
         print src+method+trg
         setup.d.execute_script(src+method+trg)
+
+    def clickLink(self,value,handle,parent="alllinks",child="a"):
+        for el in handle[parent][child]:
+            if el.text == value:
+                try:
+                    logger.info("Going to click link %s",el.text)
+                    el.click()
+                    return True
+                except ElementNotSelectableException or Exception as e:
+                    logger.error("Exception found while clicking %s = %s",el.text,e)
+                    return e
+        logger.error("Link Text not found = %s",el.text)
+        return False
+
+    def clickLinkRandom(self,setup,handle,parent="alllinks",child="a"):
+        import random
+        try:
+            if len(handle[parent][child]) <1:
+                self.takeScreenshot(setup.d)
+                logger.debug("No Link available to click")
+                raise
+            index = random.randint(0,len(handle[parent][child]))
+            self.dispatchDoubleClick(setup,handle[parent][child][index])
+            return str(handle[parent][child][index].text)
+        except Exception as e:
+            logger.error("Got Exception while clicking Random Links = %s",str(e))
+            raise e
+
+    def dispatchDoubleClick(self,setup,el):
+        js = "var event = new MouseEvent('dblclick', {'view': window,'bubbles': true,'cancelable': true});"
+        script = "arguments[0].dispatchEvent(event);"
+        setup.d.execute_script(js+script,el)
