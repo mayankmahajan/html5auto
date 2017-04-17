@@ -106,7 +106,7 @@ def editUserDetail(setup,screenInstance,userDetail,button='Create'):
         return [],[]
 
     if button == "Update":
-        logger.info('Going to Click on %s Button', button)
+        logger.info('Going to Click on %s Button with details %s',button,str(detail))
         click_status = screenInstance.cm.clickButton(button, getHandle(setup,MuralConstants.UserPopUpScreen,'allbuttons'))
         checkEqualAssert(True, click_status, "", "", "Verify whether " + button + " button clicked or not")
         flag, msg = confirm(setup)
@@ -227,7 +227,7 @@ def setUserDetail(setup,screenInstance,userDetail,button='Create'):
         return [],[]
 
     if button_status and button=="Create":
-        logger.info('Going to Click on %s Button',button)
+        logger.info('Going to Click on %s Button with details ',button,str(detail))
         click_status=screenInstance.cm.clickButton(button,getHandle(setup,MuralConstants.UserPopUpScreen,"allbuttons"))
         checkEqualAssert(True,click_status,"","","Verify whether "+button+" button clicked or not")
         flag,msg=confirm(setup)
