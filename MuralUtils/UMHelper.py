@@ -457,9 +457,10 @@ def clickOnLinkByValue(setup,screenName,value,parent='appHeader',child='alllinks
                 exploreHandle[parent][child][i].click()
                 return True
         return False
-    except:
-        logger.debug("Not able to click on %s",value)
-        resultlogger.debug("Not able to click on %s", value)
+    except Exception as e:
+        logger.error("Not able to click on %s",value)
+        logger.error("Got Exception <method> %s",str(e))
+        resultlogger.error("Not able to click on %s", value)
         return False
 
 
