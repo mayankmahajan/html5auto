@@ -102,12 +102,12 @@ def editUserDetail(setup,screenInstance,userDetail,button='Create'):
 
     if button == "Cancel":
         logger.info('Going to Click on Cancel Button')
-        screenInstance.cm.clickButton(button, h)
+        screenInstance.cm.clickButton(button, getHandle(setup,MuralConstants.UserPopUpScreen,'allbuttons'))
         return [],[]
 
     if button == "Update":
         logger.info('Going to Click on %s Button', button)
-        click_status = screenInstance.cm.clickButton(button, h)
+        click_status = screenInstance.cm.clickButton(button, getHandle(setup,MuralConstants.UserPopUpScreen,'allbuttons'))
         checkEqualAssert(True, click_status, "", "", "Verify whether " + button + " button clicked or not")
         flag, msg = confirm(setup)
         if flag == True:
@@ -223,12 +223,12 @@ def setUserDetail(setup,screenInstance,userDetail,button='Create'):
 
     if button_status and button=="Cancel":
         logger.info('Going to Click on Cancel Button')
-        screenInstance.cm.clickButton(button, h)
+        screenInstance.cm.clickButton(button, getHandle(setup,MuralConstants.UserPopUpScreen,'allbuttons'))
         return [],[]
 
     if button_status and button=="Create":
         logger.info('Going to Click on %s Button',button)
-        click_status=screenInstance.cm.clickButton(button,h)
+        click_status=screenInstance.cm.clickButton(button,getHandle(setup,MuralConstants.UserPopUpScreen,"allbuttons"))
         checkEqualAssert(True,click_status,"","","Verify whether "+button+" button clicked or not")
         flag,msg=confirm(setup)
         if flag==True:
