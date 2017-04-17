@@ -16,6 +16,7 @@ class CheckPrivileges(BasePageClass):
         exploreScreenInstance = ExplorePageClass(setup.d)
         exploreHandle = getHandle(setup, "explore_Screen")
         checkEqualAssert(True, exploreScreenInstance.exploreList.launchModule(exploreHandle, "WORKFLOWS"), '', '',"Verify Workflows Privileges")
+        isError(setup)
         return
 
     def checkDPIAlerts(self,setup):
@@ -24,6 +25,7 @@ class CheckPrivileges(BasePageClass):
         if exploreScreenInstance.exploreList.launchModule(exploreHandle, "ALERTS"):
             isError(setup)
             checkEqualAssert(True,self.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup, MuralConstants.ALERTSCREEN, Constants.ALLSPANS)),"","","Verify DPI Alerts Privileges")
+            isError(setup)
             return
         else:
             checkEqualAssert(True,exploreScreenInstance.exploreList.launchModule(exploreHandle, "ALERTS"),"","","Verify DPI Alerts")
@@ -33,6 +35,7 @@ class CheckPrivileges(BasePageClass):
         exploreScreenInstance = ExplorePageClass(setup.d)
         exploreHandle = getHandle(setup, "explore_Screen")
         checkEqualAssert(True,exploreScreenInstance.exploreList.launchModule(exploreHandle, "REPORTS"),'','',"Verify Reports Privileges")
+        isError(setup)
         return
 
     def checkBulkstatsKPI(self,setup):
@@ -49,7 +52,7 @@ class CheckPrivileges(BasePageClass):
                 checkEqualAssert(True,value,'','','Verify Bulkstats KPI Privileges')
             else:
                 result = exploreScreenInstance.exploreList.launchappByName(getHandle(setup, "explore_Screen"),"Bulkstats / KPIs")
-                time.sleep(3)
+                isError(setup)
                 setup.d.switch_to.window(setup.d.window_handles[2])
                 time.sleep(5)
                 setup.d.close()
@@ -65,6 +68,7 @@ class CheckPrivileges(BasePageClass):
         if exploreScreenInstance.exploreList.launchModule(exploreHandle, "ALERTS"):
             isError(setup)
             checkEqualAssert(True, self.dropdown.clickSpanWithTitle("KPI Alerts",getHandle(setup, MuralConstants.ALERTSCREEN,Constants.ALLSPANS)), "", "","Verify KPI Alerts Privileges")
+            isError(setup)
             return
         else:
             checkEqualAssert(True,exploreScreenInstance.exploreList.launchModule(exploreHandle, "ALERTS"),"","","Verify KPI Alerts")
@@ -78,7 +82,7 @@ class CheckPrivileges(BasePageClass):
 
         if "User Management" in list:
             result = exploreScreenInstance.exploreList.launchappByName(getHandle(setup, "explore_Screen"),"User Management")
-            time.sleep(5)
+            isError(setup)
             setup.d.switch_to.window(setup.d.window_handles[2])
             time.sleep(5)
             setup.d.close()
@@ -97,7 +101,7 @@ class CheckPrivileges(BasePageClass):
 
         if "System Monitoring Interface" in list:
             result = exploreScreenInstance.exploreList.launchappByName(getHandle(setup, "explore_Screen"),"System Monitoring Interface")
-            time.sleep(5)
+            isError(setup)
             setup.d.switch_to.window(setup.d.window_handles[2])
             time.sleep(5)
             setup.d.close()
