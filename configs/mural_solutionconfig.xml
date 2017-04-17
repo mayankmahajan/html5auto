@@ -24,6 +24,16 @@
     </subscribersorttablecolumn>
 
 
+    <umsorttablecolumn>
+        <column id="username" locatorText="User Name"/>
+        <column id="name" locatorText="Name"/>
+        <column id="email" locatorText="Email"/>
+        <column id="userrole" locatorText="User Role"/>
+        <column id="privileges" locatorText="Privileges"/>
+        <column id="status" locatorText="Status"/>
+    </umsorttablecolumn>
+
+
     <cellsectorsorttablecolumn>
         <column id= "cellid" locatorText="Cell ID"/>
         <column id="bitrate(uplink)" locatorText="Bitrate (Uplink)"/>
@@ -228,6 +238,28 @@
             <component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
+        </screenConfig>
+
+
+
+        <screenConfig id = "userManagement_Screen">
+            <component id = "allspans" selector="css selector" locator="div.searchBar" parent="True"/>
+            <component id = "allimages" selector="css selector" locator="div.searchBar" parent="True"/>
+            <component id = "allinputs" selector="css selector" locator="div.searchBar" parent="True"/>
+            <component id = "table" selector="tag name" locator="div.gridContainer" parent="True"/>
+            <component id = 'umalert' selector="class name" locator="confirmationContainer" parent="True"/>
+        </screenConfig>
+
+        <screenConfig id = "userPopUp_Screen">
+            <!--<component id = "totalscreen" selector="css selector" locator="div.modalContent" parent="True"/>-->
+            <component id = "allinputs" selector="css selector" locator="div.modalContent" parent="True"/>
+            <component id = "alllabels" selector="css selector" locator='div.privilegesContainer' parent="True"/> 
+            <component id = "allcheckboxes" selector="css selector" locator="div.modalContent" parent="True"/>
+            <component id ="allbuttons" selector="css selector" locator="div.modalContent" parent="True"/>
+            <component id ="allselects" selector="css selector" locator="div.privilegeForm" parent="True"/>
+            <component id ="icons" selector="css selector" locator="div.modalContent" parent="True"/>
+            <component id ="allsliders" selector="css selector" locator="div.modalContent" parent="True"/>
+
 
         </screenConfig>
         <screenConfig id = "bulk_popup">
@@ -244,6 +276,29 @@
             <component id = "alltextareas" selector="css selector" locator="div.filterPopup" parent="True"/>
         </screenConfig>
 
+        <screenConfig id = "changepassword_screen">
+            <!--<component id = "totalscreen" selector="css selector" locator="div.modalContent" parent="True"/>-->
+            <component id = "allinputs" selector="css selector" locator="div.modal-content" parent="True"/>
+            <!--<component id = "alllabels" selector="css selector" locator='div.privilegesContainer' parent="True"/> -->
+            <!--<component id = "allcheckboxes" selector="css selector" locator="div.modalContent" parent="True"/>-->
+            <component id ="allbuttons" selector="css selector" locator="div.modal-content" parent="True"/>
+            <!--<component id ="allselects" selector="css selector" locator="div.searchBar" parent="True"/>-->
+            <component id ="icons" selector="css selector" locator="div.modal-content" parent="True"/>
+            <component id ='errormsg' selector="css selector" locator="div.modal-content" parent="True"/>
+            <!--<component id ="allsliders" selector="css selector" locator="div.modalContent" parent="True"/>-->
+
+        </screenConfig>
+
+        <!--<componentConfig id = "searchBar"> -->
+            <!--<component id = "searchInput" selector="css selector" locator="div.searchInput" parent="True"/> -->
+            <!--<component id = "text" selector="id" locator='div.createBotton' /> -->
+        <!--</componentConfig>-->
+
+        <!--<componentConfig id ="createButton">-->
+            <!--<component id = "title" selector="css selector" locator="span.crud_creat_img_title"/>-->
+            <!--<component id = "imageIcon" selector="css selector" locator="span.crud_creat_img_title"/>-->
+
+        <!--</componentConfig>-->
 
         <screenConfig id = "subscriber_Screen">
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
@@ -282,10 +337,6 @@
             <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
         </screenConfig>
 
-        <componentConfig id = "general">
-            <component id = "drop" selector="tag name" locator="kiwik-multiselect-dropdown"/>
-        </componentConfig>
-
         <screenConfig id = "cellsector_Screen">
             <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
             <component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />
@@ -307,6 +358,8 @@
             <component id = "label" selector="tag name" locator="label"/>
             <component id ="select" selector="tag name" locator="select"/>
          </componentConfig>
+
+
 
 
 
@@ -465,6 +518,14 @@
             <component id= "invalidboxwrapper" selector="css selector" locator="div.invalid-box-wrapper" parent="True"/>
         </screenConfig>
 
+        <screenConfig id ='user_popup'>
+            <component id ='popupcontainer' selector="css selector" locator="div.popupContainer" parent="True"/>
+        </screenConfig>
+
+        <screenConfig id = 'confirmation_popup'>
+            <component id ='confirm_popup' selector="css selector" locator="div.confirmationContainer" parent="True"/>
+        </screenConfig>
+
 
 
     </screenConfigs>
@@ -493,6 +554,10 @@
             <component id = "header" selector="css selector" locator="[class*=trend-main-header]"/> 
         </componentConfig>
 
+        <componentConfig id ='errormsg'>
+            <component id="msg" selector="css selector" locator="div.errorMessage"/>
+        </componentConfig>
+
         <componentConfig id = "trend-main">
             <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
             <component id = "select" selector="tag name" locator="select"/>
@@ -513,6 +578,7 @@
         <componentConfig id ="screenbody">
             <component id = "workflowstart" selector="tag name" locator="mural-workflow-start"/>
         </componentConfig>
+
         <componentConfig id ="errorText">
             <component id = "errorText" selector="class name" locator="errorMsgClass" />
         </componentConfig>
@@ -549,6 +615,7 @@
         <componentConfig id ="errorbody">
             <component id ="errorclose" selector="css selector" locator="[class*=close][class*=Popup]" />
             <component id ="errormessage" selector="css selector" locator="[class*=alert][class*=Message]" />
+            <component id ='button' selector="css selector" locator="button.errorCloseBtn"/>
         </componentConfig>
 
 
@@ -575,15 +642,34 @@
             <component id = "button" selector="tag name" locator='button' />
             <component id ='header' selector="css selector" locator="[class*=Title][class*=wizard]"/>
         </componentConfig>
-        <componentConfig id="allcheckboxes">
-            <component id = "checkbox" selector="css selector" locator='div.kiwik-checkbox-indicator' />
+
+
+        <componentConfig id ="umalert">
+            <component id="filters" selector="class name" locator="confirmText"/>
+            <component id="close" selector="class name" locator="closePopupIcon"/>
+            <!--<component id ='ok' selector="id" locator="ok"/>-->
+            <!--<component id ='cancel' selector="css selector" locator="#cancel,.Cancel"/>-->
+            <component id = "button" selector="tag name" locator='button' />-->
+            <component id ='header' selector="css selector" locator="div.alertPopupHeader"/>
+
         </componentConfig>
+
+        <componentConfig id="allcheckboxes">
+            <component id = "checkbox" selector="css selector" locator='div.kiwik-checkbox-indicator,input[type*=checkbox]' />
+        </componentConfig>
+
         <componentConfig id="allbuttons">
             <component id = "ibutton" selector="css selector" locator='input[type="button"]' />
         </componentConfig>
+
         <componentConfig id="allinputs">
             <component id = "number" selector="css selector" locator='input[type="number"]' />
             <component id = "password" selector="css selector" locator='input[type="password"]' />
+            <component id ="select" selector="tag name" locator="select"/>
+            <component id = "email" selector="css selector" locator='input[type="email"]'/>
+            <component id="editUserLabel" selector="css selector" locator='label.editUserLabel'/>
+            <component id ='updatePwd' selector="css selector" locator='label.updatePwd'/>
+
         </componentConfig>
         <componentConfig id="alllabels">
             <component id = "label" selector="tag name" locator='label' />
@@ -636,6 +722,7 @@
             <component id = "switcher" selector="css selector" locator="div.modeSwitcherBtnBar"/>
         </componentConfig>
 
+
         <componentConfig id ="breadcrumb">
             <component id = "workflow" selector="xpath" locator="./div[1]"/>
             <component id = "bar" selector="xpath" locator="//kiwik-breadcrumb-bar/div"/>
@@ -659,6 +746,11 @@
          </componentConfig>
 
 
+         <componentConfig id = "general">
+            <component id = "drop" selector="tag name" locator="kiwik-multiselect-dropdown"/>
+        </componentConfig>
+
+
         <componentConfig id = "filterText">
             <component id = "filters" selector="xpath" locator="./div[1]/div[2]/div[1]/div[1]/div[1]/span"/>
         </componentConfig>
@@ -674,6 +766,22 @@
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='class' locatorText = 'bar1' action="hover" wait = 'skip'/>-->
 
         </componentConfig>
+
+        <componentConfig id="popupcontainer">
+            <!--<component id ='span' selector="tag name" locator="span"/>-->
+            <component id ='userIcon' selector="css selector" locator="div.userIcon"/>
+            <component id ='popup' selector="css selector" locator="div.popup"/>
+        </componentConfig>
+
+        <componentConfig id ='confirm_popup'>
+            <component id ='closeIcon' selector="css selector" locator="div.closePopupIcon"/>
+            <component id ='header' selector="css selector" locator="div.alertPopupHeader"/>
+            <component id ='text' selector="css selector" locator="div.confirmText"/>
+            <component id ='button' selector="css selector" locator="button.changePasswordBtn"/>
+        </componentConfig>
+
+
+
 
         <componentConfig id = "leftListContainer">
             <component id = "draggables" selector="css selector" locator='[draggable="true"]'/>
@@ -710,6 +818,16 @@
         <componentConfig id = "bulk_filter">
             <component id = "list" selector="css selector" locator=".listContainer"/>
         </componentConfig>
+
+        <componentConfig id="allsliders">
+            <component id="slider" selector="css selector" locator="div.slider.round"/>
+        </componentConfig>
+
+        <!--<componentConfig id ="errormsg">-->
+            <!--<component id="msg" selector="css selector" locator="div.changepasswordPrompt"/>-->
+        <!--</componentConfig>-->
+
+        
 
     </componentConfigs>
 

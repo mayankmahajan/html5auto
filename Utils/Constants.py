@@ -84,7 +84,28 @@ class Constants(object):
     ERRORCLOSE = "errorclose"
     ERRORMESSAGE = "errormessage"
     ERRORPOPUP = "error_popup"
+    ERRORBUTTON = 'button'
     INVALIDFILTER= "invalidboxwrapper"
     INVALIDFILTERBOX="invalidfilterbox"
     NODATA= "No Data"
+    UM_PARENT_WORKFLOWS="Workflows"
+    UM_PARENT_BULKSTATS_KPI="Bulkstats/KPI"
+    REDCOLOR="#ff0000"
+    WHITECOLOR="#ffffff"
+    BACKGROUNDCOLOR='background-color'
+    BORDERCOLOR='border-color'
+    ACTIVE_STATUS='Active'
+    INACTIVE_STATUS='Inactive'
+
+    CONFIRMATIONPOPUP='confirmation_popup'
+    CONFIRMATIONBODY='confirm_popup'
+    CONFIRMATIONCLOSE='closeIcon'
+    CONFIRMATIONMESSAGE='text'
+    CONFIRMATIONHEADER='header'
+    CONFIRMATIONBUTTON='button'
+    LOGINSCREEN = "loginScreen"
+
+
+
+    ERRORHEADERINCONFIRMATIONPOPUP='Error'
 

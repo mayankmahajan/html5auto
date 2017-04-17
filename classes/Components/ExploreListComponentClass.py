@@ -15,13 +15,24 @@ class ExploreListComponentClass(BaseComponentClass):
         handlres[parent][child][0].click()
         return True
 
-    def launchModule(self,handlres,text):
-        for el in handlres["appHeader"]["alllinks"]:
-            if text in el.text:
-                el.click()
-                return True
-        return False
+    # def launchModule(self,handlres,text):
+    #     for el in handlres["appHeader"]["alllinks"]:
+    #         if text in el.text:
+    #             el.click()
+    #             break
 
+    def launchModule(self,handlres,text):
+        try:
+            for el in handlres["appHeader"]["alllinks"]:
+                if text in el.text:
+                    el.click()
+                    return True
+        except Exception as e:
+            logger.error("Exception found while clicking Module with Title = %s", str(text))
+            return e
+
+        logger.debug("Module with title = %s not found", str(text))
+        return False
 
     def switchApp(self,h):
         h['appHeader']['switchertemplate'][0].click()
@@ -39,3 +50,19 @@ class ExploreListComponentClass(BaseComponentClass):
             return True
         except Exception as e:
             return e
+
+    def launchappByName(self,h,value,parent="switchApp",child="apps"):
+        try:
+            for i in range(len(h[parent][child])):
+                if str(value)==str(h[parent][child][i].text).strip():
+                    h[parent][child][i].click()
+                    return True
+            return False
+        except Exception as e:
+            return e
+
+    def getAllApps(self,h,parent="switchApp",child="apps"):
+        list=[]
+        for i in range(len(h[parent][child])):
+            list.append(str(h[parent][child][i].text).strip())
+        return list

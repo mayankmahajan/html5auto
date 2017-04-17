@@ -40,5 +40,10 @@ class MuralConstants(Constants):
     SubscriberScreen = "subscriber_Screen"
     CellSectorScreen = "cellsector_Screen"
     ContentScreen = "content_Screen"
+    UserManagementScreen="userManagement_Screen"
     ExportToCSV= "Export to CSV"
     ExportTableData="Export table data"
+    UserPopUpScreen="userPopUp_Screen"
+    ConfirmationPopUp="confirmation_popup"
+    ChangePasswordScreen="changepassword_screen"
+    ExploreScreen='explore_Screen'

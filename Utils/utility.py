@@ -101,17 +101,19 @@ def login(obj,username,password):
         # configs = configmanager.getComponentConfigs()
         loginConfigs = deepcopy(configs)
 
-        usernameHandler = driverHelper.waitForVisibleElement((loginConfigs['username']['username']['selector'],loginConfigs['username']['username']['locator']))
-        passwordHandler = driverHelper.waitForVisibleElement((loginConfigs['password']['password']['selector'],loginConfigs['password']['password']['locator']))
-        signinHandler = driverHelper.waitForVisibleElement((loginConfigs['signin']['signin']['selector'],loginConfigs['signin']['signin']['locator']))
+        loginhandler= getHandle(obj,Constants.LOGINSCREEN)
+
+        # usernameHandler = driverHelper.waitForVisibleElement((loginConfigs['username']['username']['selector'],loginConfigs['username']['username']['locator']))
+        # passwordHandler = driverHelper.waitForVisibleElement((loginConfigs['password']['password']['selector'],loginConfigs['password']['password']['locator']))
+        # signinHandler = driverHelper.waitForVisibleElement((loginConfigs['signin']['signin']['selector'],loginConfigs['signin']['signin']['locator']))
 
         loginPage = LoginPageClass(driver)
         # usernameHandler = driverHelper.waitForVisibleElement(LoginPageLocators.USERNAME)
-        loginPage.setUserName(usernameHandler,username)
+        loginPage.setUserName(loginhandler,username)
         # passwordHandler = driverHelper.waitForVisibleElement(LoginPageLocators.PASSWORD)
-        loginPage.setPassword(passwordHandler,password)
+        loginPage.setPassword(loginhandler,password)
         # signinHandler = driverHelper.waitForVisibleElement(LoginPageLocators.SIGNIN)
-        loginPage.signIn(signinHandler)
+        loginPage.signIn(loginhandler)
 
         logger.info('Login Successful')
         logger.debug('Username : %s',username)
@@ -119,6 +121,7 @@ def login(obj,username,password):
         return True
     except ValueError:
         return ValueError
+
 
 def launchPage(obj,pageName,isStartScreen=False):
     try:
@@ -274,9 +277,9 @@ def getTableDataMap(setup,screenName,parent='table',colIndex=0):
 
 
 def isError(setup):
-    sleep(10)
+    #sleep(10)
     eHandle = getHandle(setup,Constants.ERRORPOPUP,Constants.ERRORBODY)
-    if len(eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE]) >0 and len(eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE]) >0:
+    if (len(eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE]) >0 and len(eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE]) >0) or len(eHandle[Constants.ERRORBODY][Constants.ERRORBUTTON]) > 0:
         r = "issue_" + str(random.randint(99999,9999999))+".png"
         setup.d.save_screenshot(r)
         logger.debug("ERROR :: Screenshot with name = %s is saved",r)
@@ -286,7 +289,18 @@ def isError(setup):
         logger.debug("Closing Error Pop Up")
         resultlogger.info("ERROR :: Screenshot with name = %s is saved <br>",r)
         resultlogger.info("******* Error Pop Up found = %s *******<br>",errorMessage)
-        eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
+        try:
+            logger.info('Going to click on Ok button')
+            eHandle[Constants.ERRORBODY][Constants.ERRORBUTTON][0].click()
+            time.sleep(3)
+        except:
+            try:
+                eHandle[Constants.ERRORBODY][Constants.ERRORBUTTON][0].click()
+            except:
+                try:
+                    eHandle[Constants.ERRORBODY][Constants.ERRORBUTTON][0].click()
+                except:
+                    pass
         try:
             eHandle[Constants.ERRORBODY][Constants.ERRORCLOSE][0].click()
         except:
@@ -298,6 +312,53 @@ def isError(setup):
         return [True,errorMessage]
     else:
         return [False,""]
+
+
+def confirm(setup,button='OK'):
+    #sleep(10)
+    eHandle=getHandle(setup,Constants.CONFIRMATIONPOPUP,Constants.CONFIRMATIONBODY)
+    if len(eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONCLOSE])>0 and len(eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONMESSAGE]) >0:
+        if str(eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONHEADER][0].text)==Constants.ERRORHEADERINCONFIRMATIONPOPUP:
+            r = "issue_" + str(random.randint(99999, 9999999)) + ".png"
+            setup.d.save_screenshot(r)
+            logger.debug("ERROR :: Screenshot with name = %s is saved", r)
+            logger.error("Error Pop Up found")
+            errorMessage = eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONMESSAGE][0].text
+            logger.error("Error Pop Up Message = %s", errorMessage)
+            logger.debug("Closing Error Pop Up")
+            resultlogger.info("ERROR :: Screenshot with name = %s is saved <br>", r)
+            resultlogger.info("******* Error Pop Up found = %s *******<br>", errorMessage)
+            eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONCLOSE][0].click()
+            try:
+                eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONCLOSE][0].click()
+            except:
+                try:
+                    eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONCLOSE][0].click()
+                except:
+                    pass
+
+            return [True, errorMessage]
+        else:
+            logger.info("Confirmation Pop Up found")
+            resultlogger.info("Confirmation Pop Up found")
+            h=eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONBUTTON]
+            for el in h:
+                try:
+                    if str(button) == str(el.text.strip()):
+                        try:
+                            logger.debug('Going to click on OK')
+                            el.click()
+                            time.sleep(2)
+                            break
+                        except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                            raise e
+                except Exception as e:
+                    raise e
+            return [False, ""]
+
+
+    else:
+        return [False, ""]
 
 
 def isInvalidFilter(setup):

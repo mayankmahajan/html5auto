@@ -162,6 +162,146 @@ class BaseComponentClass:
     #         logger.error("Exception found while clicking Checkbox %d",index)
     #         return e
 
+    def clickCheckBoxWithName_UMMural(self,h,value,parent="allcheckboxes",child="checkbox",UserRole='0',force=False):
+        try:
+            value_list=value.split(".")
+            logger.debug("Going to Click Checkbox with Name %s parent %s and child %s ",value_list[len(value_list)-1], parent, child)
+            info=self.getCheckBoxElementWithName_UMMural(h,str(value_list[len(value_list)-1]),UserRole=UserRole)
+            if str(info[2])=='True':
+                if str(info[1])=="1" and force==True:
+                    h[parent][child][int(info[0])].click()
+                    return self.getCheckBoxElementWithName_UMMural(h,str(value_list[len(value_list)-1]),UserRole=UserRole)
+
+                elif str(info[1])=="1" and force==False:
+                    return self.getCheckBoxElementWithName_UMMural(h,str(value_list[len(value_list)-1]),UserRole=UserRole)
+                else:
+                    h[parent][child][int(info[0])].click()
+                    return self.getCheckBoxElementWithName_UMMural(h,str(value_list[len(value_list)-1]),UserRole=UserRole)
+            else:
+                for l in range(len(value_list)):
+                    info=self.getCheckBoxElementWithName_UMMural(h,str(value_list[l]),UserRole=UserRole)
+                    h[parent][child][int(info[0])].click()
+
+                return self.getCheckBoxElementWithName_UMMural(h,str(value_list[len(value_list)-1]),UserRole=UserRole)
+
+        except Exception as e:
+            logger.error("Exception found while clicking Checkbox %s", value)
+            return e
+
+
+
+
+    def getAllCheckBoxElement_UMMural(self,h,parent="allcheckboxes",child="checkbox",UserRole="0"):
+        try:
+            data={}
+            checkedlist=[]
+            uncheckedlist=[]
+            logger.debug("Going to find all active and inactive elements of checkbox")
+            for i in range(len(h[parent][child])):
+                value=str(h[parent][child][i].find_elements_by_xpath('..')[0].text)
+                check_value=self.isCheckBoxSelected_UMMural(h,i)
+
+                if check_value==0:
+                    uncheckedlist.append(value)
+                else:
+                    checkedlist.append(value)
+
+                check_state=self.isCheckBoxEnabled_UMMural(h,i,UserRole=UserRole)
+                data[value]=[check_value,check_state]
+
+            return data,checkedlist,uncheckedlist
+        except Exception as e:
+            logger.error("Exception found while getting elements of checkbox")
+
+
+    def getCheckBoxElementWithName_UMMural(self,h,value,parent="allcheckboxes",child="checkbox",UserRole="0"):
+        try:
+            logger.debug("Going to find checkbox (state and value ) corresponding to %s",value)
+            for i in range(len(h[parent][child])):
+                if str(value)==str(h[parent][child][i].find_elements_by_xpath('..')[0].text):
+                    check_value=self.isCheckBoxSelected_UMMural(h,i)
+                    check_state=self.isCheckBoxEnabled_UMMural(h,i,UserRole=UserRole)
+                    return [i,check_value,check_state]
+            logger.error("%s not found in checkbox list",value)
+            return[-1,0,False]
+
+        except Exception as e:
+            logger.error("Exception found while getting elemennts of checkbox")
+
+
+    def isCheckBoxSelected_UMMural(self,h,index,parent="allcheckboxes",child="checkbox"):
+        try:
+            logger.debug("Going to get State of Checkbox %d parent %s and child %s ", index, parent, child)
+            state=h[parent][child][index].is_selected()
+            logger.debug("Got State of Checkbox %d parent %s and child %s as %s", index, parent, child, str(state))
+            if state==True:
+                return 1
+            else:
+                return 0
+        except Exception as e:
+            logger.error("Exception found while checking Checkbox %d", index)
+            return e
+
+
+
+    def isCheckBoxSelectedWithName_UMMural(self,h,value,parent="allcheckboxes",child="checkbox"):
+        try:
+            logger.debug("Going to get State of Checkbox %s parent %s and child %s ", value, parent, child)
+            for i in range(len(h[parent][child])):
+                if str(value) == str(h[parent][child][i].find_elements_by_xpath('..')[0].text):
+                    state = h[parent][child][i].is_selected()
+                    logger.debug("Got State of Checkbox %s parent %s and child %s as %s", value, parent, child, str(state))
+                    if state==True:
+                       return 1
+                    else:
+                        return 0
+            return -1
+        except Exception as e:
+            logger.error("Exception found while checking Checkbox %s", value)
+            return e
+
+
+
+
+    def isCheckBoxEnabledWithName_UMMural(self,h,value,parent="allcheckboxes",child="checkbox",UserRole="0"):
+        try:
+            logger.debug("Going to check whether Checkbox %s is enable or disable parent %s and child %s ", value, parent, child)
+            for i in range(len(h[parent][child])):
+                if str(value) == str(h[parent][child][i].find_elements_by_xpath('..')[0].text):
+                    logger.debug("Got State of Checkbox %s parent %s and child %s ", value, parent, child)
+                    if UserRole=="0":
+                        if h[parent][child][i].is_enabled():
+                            return True
+                        else:
+                            return False
+                    elif UserRole=="1":
+                        if len(h[parent][child][i].find_elements_by_xpath('../../../../div[@class="disableContainer"]')) != 0:
+                            return False
+                        else:
+                            return True
+        except Exception as e:
+            logger.error("Exception found while checking Checkbox having value = %s Enable or Disable", value)
+            return e
+
+    def isCheckBoxEnabled_UMMural(self,h,index,parent="allcheckboxes",child="checkbox",UserRole="0"):
+        try:
+            logger.debug("Going to check whether Checkbox at index %d is enable or disable parent %s and child %s ", index, parent, child)
+            if UserRole=="0":
+                if h[parent][child][index].is_enabled():
+                    return True
+                else:
+                        return False
+
+            elif UserRole=="1":
+                if len(h[parent][child][index].find_elements_by_xpath('../../../../div[@class="disableContainer"]')) != 0:
+                    return False
+                else:
+                    return True
+        except Exception as e:
+            logger.error("Exception found while checking Checkbox having value = %s Enable or Disable", value)
+            return e
+
+
     def isCheckBoxEnabled(self,h,index,parent="allcheckboxes",child="checkbox"):
         try:
             logger.debug("Going to get State of Checkbox %d parent %s and child %s ",index,parent,child)

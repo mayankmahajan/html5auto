@@ -69,7 +69,7 @@
         <network id ="0" filters = '0,1::2::1'/>
         <apnrat id = "0" filters = ' :: '/>
         <device id = "0" filters = ' :: :: :: '/>
-        <content id = "0" filters = '0,1:: :: :: '/>
+        <content id = "0" filters = '0,1:: :: ::'/>
 
         <network id ="1" filters = ' :: :: '/>
         <apnrat id = "1" filters = ' ::2'/>
@@ -235,6 +235,27 @@
         <apnrat id = "2" />
         <device id = "2" group = '2'/>
     </globalScreenFilters2>
+
+
+     <userdetail>
+        <user id="0" username="praveen" firstname="Praveen0" lastname="Garg" email="praveen10@guavus.com"  password="New@12345"  cpassword="New@12345" currentpassword='New@1450' newpassword="New@13245"  newcpassword="New@13245" userrole="Admin" value= "all" enabled="1" button="Create"/>
+        <user id="1" username="Pinni140" firstname="Praveen1" lastname="Garg" email="pp11@guaus.com"  password="T@1234567"  cpassword="T@1234567" currentpassword="T@1234567" newpassword="New@13245"  newcpassword="New@13245" userrole="Application" value="Workflows.Reports,Workflows.DPI Alerts,Bulkstats/KPI.KPI Alerts" enabled="0" button="Create"/>
+        <user id="2" username="test_789Test" firstname="Praveen2" lastname="Garg" email="p_312@gs.com"  password="tesT_1234"  cpassword="tesT_1234" currentpassword="tesT_1234" newpassword="Tew@13245"  newcpassword="Tew@13245" userrole="Application" value="Workflows,Bulkstats/KPI" enabled="1" button="Create"/>
+        <user id="3" username="_testpraveenTest123" firstname="Praveen3" lastname="Garg" email="123@guavus.in"  password="1234!T234"  cpassword="1234!T234" currentpassword="1234!T234" newpassword="New@54321"  newcpassword="New@54321" userrole="Application" value="Workflows.DPI Alerts,Bulkstats/KPI.KPI Alerts" enabled="1" button="Create"/>
+        <user id="4" username="123_aauuu" firstname="Praveen4" lastname="Garg" email="pr#23@guavus.com"  password="1Test#124"  cpassword="1Test#124" currentpassword="1Test#124" newpassword="New_13245"  newcpassword="New_13245" userrole="Application" value="Bulkstats/KPI" enabled="1" button="Create"/>
+        <!--<user id="5" username="1989_Guavus1" firstname="Praveen5" lastname="Garg" email="cug$15@gmail.com"  password="$H2311234"  cpassword="$H2311234" currentpassword="$H2311234" newpassword="$H2213245"  newcpassword="$H2213245" userrole="Application" value="Bulkstats/KPI.KPI Alerts" enabled="1" button="Create"/>-->
+        <!--<user id="6" username="Guavus_123" firstname="Praveen6" lastname="Garg" email="pini16@yahoo.com"  password="1234%Test"  cpassword="1234%Test" currentpassword="1234%Test" newpassword="Peak^13245"  newcpassword="Peak^13245" userrole="Application" value="Workflows.Reports" enabled="1" button="Create"/>-->
+        <!--<user id="7" username="123456_gua" firstname="Praveen7" lastname="Garg" email="123vee_17@guavus.co"  password="test^123K"  cpassword="test^123K" currentpassword="test^123K" newpassword="@New13245"  newcpassword="@New13245" userrole="Application" value="Workflows" enabled="1" button="Create"/>-->
+        <!--<user id="8" username="aapraveenddeeff" firstname="Praveen8" lastname="Garg" email="_r1v#en18@guavus.com"  password="T12Tt*123"  cpassword="T12Tt*123" currentpassword="T12Tt*123" newpassword="New*13245"  newcpassword="New*13245" userrole="Application" value="Workflows.DPI Alerts" enabled="1" button="Create"/>-->
+        <!--<user id="9" username="aaaaa_a_aaaa" firstname="Praveen9" lastname="Garg" email="*fgr19@guavus.com"  password="stpo@12P4"  cpassword="stpo@12P4" currentpassword="stpo@12P4" newpassword="PEd@13245"  newcpassword="PEd@13245" userrole="Application" value="Workflows.Reports,Workflows.DPI Alerts" enabled="0" button="Create"/>-->
+        <!--<user id="10" username="1234567890123praveen12345678901234567890123456789012345678901234" firstname="Praveen10" lastname="Garg10" email="12p210@gs.com"  password="Test@1234" cpassword="Test@1234" currentpassword="Test@1234" newpassword="Note@13245"  newcpassword="Note@13245"  userrole="Application" value="Workflows.Reports,Workflows.DPI Alerts" enabled="1" button="Create"/>&ndash;&gt;-->
+        <!--<user id="11" username="12334a_a_aaaa" firstname="Praveen11" lastname="Garg" email="_1223@cbse.com"  password="stpo@12P4"  cpassword="stpo@12P4" currentpassword="stpo@12P4" newpassword="Low@13452"  newcpassword="Low@13452" userrole="Application" value="Workflows.Reports,Workflows.DPI Alerts" enabled="1" button="Create"/>-->
+        <!--<user id="12" username="pp_praveendeeff" firstname="Praveen12" lastname="Garg" email="#w1212wede@gus.com"  password="T12Tt*123"  cpassword="T12Tt*123" currentpassword="T12Tt*123" newpassword="@Pa1133245"  newcpassword="@Pa1133245" userrole="Application" value="Workflows.DPI Alerts" enabled="1" button="Create"/>-->
+        <!--<user id="13" username="aa1234_a_1aaa" firstname="Praveen13" lastname="Garg" email="$ddewf123@guavus.com"  password="stop@12P4"  cpassword="stop@12P4" currentpassword="stop@12P4" newpassword="e@P013245"  newcpassword="e@P013245" userrole="Application" value="Workflows.Reports,Workflows.DPI Alerts" enabled="1" button="Cancel"/>-->
+        <edituser id="0" username="praveen" firstname="_Edit" lastname="Garg_edit" email="praveen10_edit@guavus.com"  password="New@12345"  cpassword="New@12345" currentpassword='New@1450' newpassword="New@13245"  newcpassword="New@13245" userrole="Application" value= "Workflows.Reports,Workflows.DPI Alerts" enabled="1" button="Update"/>
+        <edituser id="1" username="Pinni140" firstname="_edit" lastname="Garg_Edit" email="pp_edit11@guaus.com"  password="T@1234567"  cpassword="T@1234567" currentpassword="T@1234567" newpassword="New@13245"  newcpassword="New@13245" userrole="Admin" value="all" enabled="1" button="Update"/>
+        <edituser id="2" username="test_789Edit" firstname="Praveen2_Edit" lastname="Garg_edit" email="p_edit312@gs.com"  password="tesT_1234"  cpassword="tesT_1234" currentpassword="tesT_1234" newpassword="Tew@13245"  newcpassword="Tew@13245"  userrole="Application" value="Workflows.DPI Alerts" enabled="1" button="Cancel"/>
+    </userdetail>
 
 
 </data>
