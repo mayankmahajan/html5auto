@@ -25,15 +25,20 @@ def editUserDetail(setup,screenInstance,userDetail,button='Create'):
     detail = []
 
     h = getHandle(setup, MuralConstants.UserPopUpScreen)
-    logger.info("Going to update UserRole for user =" + userDetail['username'])
+    logger.info("Going to update UserRole = %s for user =",userDetail['userrole'],userDetail['username'])
     userRole_text = screenInstance.dropdown.doSelectionOnVisibleDropDown(h, str(userDetail['userrole']), index=0)
-    checkEqualAssert(str(userDetail['userrole']), userRole_text, "", "", "Verify selected User Role")
+
+    if (userDetail['username']).lower()!='admin':
+        checkEqualAssert(str(userDetail['userrole']), userRole_text, "", "", "Verify selected User Role")
+
+    else:
+        checkEqualAssert('Admin',userRole_text, "", "", "Verify User Role for admin")
+
 
     if str(userRole_text) == "Application":
         UserRole = '1'
     else:
         UserRole = '0'
-
 
     logger.info("Going to Update detail of user =" + userDetail['username'])
     userNameFromUI = str(h['allinputs']['editUserLabel'][0].text)
@@ -390,7 +395,7 @@ def VerifyChangePasswordAndUserPrivileges(setup,screenInstance,handle,usersDetai
             login(setup, usersDetail['username'], usersDetail['newpassword'])
             isError(setup)
 
-    if usersDetail['userrole']=='Admin':
+    if usersDetail['userrole']=='Admin' or (usersDetail['username']).lower=='admin':
         listOfPrivilegesFromTable.append('User Management')
         listOfPrivilegesFromTable.append('System Monitoring')
 
@@ -474,7 +479,7 @@ def getUserDetailFromUI(setup,screenInstance):
 
     firstNameFromUI = screenInstance.cm.getValue_input(h, 0)
     lastNameFromUI = screenInstance.cm.getValue_input( h, 1)
-    detail.append(str(firstNameFromUI) + " " + str(lastNameFromUI))
+    detail.append((str(firstNameFromUI) + " " + str(lastNameFromUI)).strip(' '))
 
     emailFromUI = screenInstance.cm.getValue_input(h, 0, child="email")
     detail.append(str(emailFromUI))

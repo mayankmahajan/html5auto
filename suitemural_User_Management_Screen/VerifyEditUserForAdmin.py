@@ -19,7 +19,7 @@ try:
     isError(setup)
     setup.d.switch_to.window(setup.d.window_handles[1])
 
-    usersDetails = setup.cM.getNodeElements("userdetail", "edituser")
+    usersDetails = setup.cM.getNodeElements("userdetail", "editadmin")
 
     for k, usersDetail in usersDetails.iteritems():
         h = getHandle(setup, MuralConstants.UserManagementScreen, 'allinputs')
@@ -73,6 +73,7 @@ try:
         updatedPrivilegesFromTable = updatedUserDetailFromTable.pop(4)
 
         updatedListOfPrivilegesFromTable = updatedPrivilegesFromTable.split(',')
+        updatedListOfPrivilegesFromTableForCheck=deepcopy(updatedListOfPrivilegesFromTable)
 
         if len(updatedUserDetailFromUIPopup)==0:
             checkEqualAssert(updatedUserDetailFromTable, userDetailFromTable, "", "","Verify that if we click on Cancel button than User's Detail remains same")
@@ -89,6 +90,20 @@ try:
             checkEqualAssert(0, len(updatedListOfPrivilegesFromTable), '', '', 'Verify updated Privileges From Table')
 
         userScreenInstance.cm.sendkeys_input(Keys.ENTER, h, 0, clear=False)
+
+        handle = getHandle(setup, "user_popup")
+
+        if len(handle['popupcontainer']['userIcon']) > 0:
+            handle['popupcontainer']['userIcon'][0].click()
+            handle1 = getHandle(setup, "user_popup")
+            handle1['popupcontainer']['popup'][0].click()
+            time.sleep(5)
+
+        login(setup, usersDetail['username'], usersDetail['password'])
+        flag, msg = isError(setup)
+
+        change_password_screen_handle = getHandle(setup, MuralConstants.ChangePasswordScreen)
+        UMHelper.VerifyChangePasswordAndUserPrivileges(setup, userScreenInstance, change_password_screen_handle,usersDetail, updatedListOfPrivilegesFromTableForCheck, button="Change")
 
     setup.d.close()
     setup.d.switch_to.window(setup.d.window_handles[0])

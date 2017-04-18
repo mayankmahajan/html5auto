@@ -31,8 +31,9 @@ class DropdownComponentClass(BaseComponentClass):
                 try:
                     logger.debug("Setting DropDown to %s",value)
                     ele.click()
-                    logger.debug("DropDown Selected to %s",value)
-                    return str(self.get(h).strip().strip('\n').strip())
+                    selected_option = str(self.get(h).strip().strip('\n').strip())
+                    logger.debug("DropDown Selected to %s",selected_option)
+                    return selected_option
                 except Exception as e:
                     logger.error("Exception found while selecting %s on DropDown",value)
                     return "Exception : "+str(e)

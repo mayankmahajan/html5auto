@@ -344,7 +344,7 @@ def confirm(setup,button='OK'):
             h=eHandle[Constants.CONFIRMATIONBODY][Constants.CONFIRMATIONBUTTON]
             for el in h:
                 try:
-                    if str(button) == str(el.text.strip()):
+                    if str(button) == str(el.text.strip()) or str('Ok')==str(el.text.strip()):
                         try:
                             logger.debug('Going to click on OK')
                             el.click()
