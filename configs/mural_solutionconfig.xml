@@ -235,7 +235,7 @@
             <component id = "leftListContainer" selector="css selector" locator="div.leftListContainer" parent="True"/>
             <component id = "rightListContainer" selector="css selector" locator="div.rightListContainer" parent="True"/>
             <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
-            <component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>
+            <!--<component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>-->
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
         </screenConfig>
@@ -266,7 +266,7 @@
             <component id = "leftListContainer" selector="css selector" locator="div.leftListContainer" parent="True"/>
             <component id = "rightListContainer" selector="css selector" locator="div.rightListContainer" parent="True"/>
             <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
-            <component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>
+            <!--<component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>-->
             <component id = "kpilegend" selector="css selector" locator="kiwik-legend" parent="True"/>
             <component id = "alllinks" selector="css selector" locator="kiwik-kpi" parent="True"/>
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->

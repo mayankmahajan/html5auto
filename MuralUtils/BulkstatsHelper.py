@@ -117,10 +117,11 @@ def checkTextAfterDrag(drags,drop,key1="drag",key2="drop",k=0,setup=""):
 
         drag_drop.set_attribute(setup,drags[i],"id",drag_id_1)
         drag_drop.set_attribute(setup,drop,"id",drop_id_1)
+        logger.info("Going to perform Drag and Drop")
         drag_drop.dragDrop(setup,drag_id_1,drop_id_1)
         text_drop_id_1 = drop.text
 
-        checkEqualAssert(True,text_drag_id_1 in text_drop_id_1,message="Checking text at drag and drop, after drag-drop" + "Drag  = "+
+        checkEqualAssert(True,text_drag_id_1.split("\n")[0].strip() in text_drop_id_1,message="Checking text at drag and drop, after drag-drop" + "Drag  = "+
                                                                        text_drag_id_1+ "Drop = "+text_drop_id_1)
         if k ==0:
             drags = getHandle(setup,"bulkstats_Screen","leftListContainer")['leftListContainer']['draggables']
