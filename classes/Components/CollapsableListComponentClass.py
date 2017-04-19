@@ -17,6 +17,7 @@ from Utils.Constants import *
 from Utils.ConfigManager import ConfigManager
 import time
 from Utils.logger import *
+from Utils.resultlogger import *
 
 from selenium.webdriver import ActionChains
 
@@ -64,6 +65,7 @@ class CollapsableListComponentClass(BaseComponentClass):
             if not drags:
                 self.takeScreenshot(setup.d)
                 logger.debug("No DATA on Collapsable List")
+                resultlogger.info("**** No Data Found on List. Hence stopping the testcase ****")
                 raise
             return [e.text for e in drags]
         except Exception as e:

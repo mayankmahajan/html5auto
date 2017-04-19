@@ -43,6 +43,7 @@ for iteration in setup.cM.getNodeElements("kpiformulae","formula"):
     input['desc']=str(commonelement.sendkeys_input("Description"+str(random.randint(111,9999)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),1))
     input['lthreshold']=str(commonelement.sendkeys_input(str(random.randint(0,50)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),0,child="number"))
     input['uthreshold']=str(commonelement.sendkeys_input(str(random.randint(50,100)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),1,child="number"))
+    logger.info("Going to Create KPI Rule = %s",str(input))
     commonelement.clickButton("Add",getHandle(setup,"kpi_popup",MuralConstants.ALLBUTTONS))
 
 
@@ -61,7 +62,7 @@ for iteration in setup.cM.getNodeElements("kpiformulae","formula"):
     data = cl.getData(setup,bulk_right,parent="rightListContainer")
     t=0
     for el in data:
-        t=t+int(el.split("\n")[1])
+        t=t+float(el.split("\n")[1])
     checkEqualAssert(t,total,message="Verifying Total from Indices")
     checkEqualAssert(True, input['rulename'] in data, message="Checking KPI Rule created")
     checkEqualAssert(input['formula'],str(selectedRowHandle.text.split("\n")[1]),message="Checking created KPI Rule for Formula")
@@ -69,6 +70,11 @@ for iteration in setup.cM.getNodeElements("kpiformulae","formula"):
 
     # editing
     getHandle(setup,MuralConstants.KPISCREEN,"leftListContainer")["leftListContainer"]["edit"][0].click()
+    try:
+        getHandle(setup,MuralConstants.KPISCREEN,"leftListContainer")["leftListContainer"]["edit"][0].click()
+    except:
+        pass
+
     checkEqualAssert(input['rulename'],
                      commonelement.getValue_input(getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),0),
                      message="Verifying RuleName on Edit KPI Screen"
@@ -76,25 +82,26 @@ for iteration in setup.cM.getNodeElements("kpiformulae","formula"):
 
     checkEqualAssert(input['desc'],
                      commonelement.getValue_input(getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),1),
-                     message="Verifying RuleName on Edit KPI Screen"
+                     message="Verifying Description on Edit KPI Screen"
                      )
 
     checkEqualAssert(input['lthreshold'],
                      commonelement.getValue_input(getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),0,child="number"),
-                     message="Verifying RuleName on Edit KPI Screen"
+                     message="Verifying Lower Threshold on Edit KPI Screen"
                      )
 
     checkEqualAssert(input['uthreshold'],
                      commonelement.getValue_input(getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),1,child="number"),
-                     message="Verifying RuleName on Edit KPI Screen"
+                     message="Verifying Upper Threshold on Edit KPI Screen"
                      )
 
     input['desc']=str(commonelement.sendkeys_input("Description"+str(random.randint(111,9999)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),1))
     input['lthreshold']=str(commonelement.sendkeys_input(str(random.randint(0,50)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),0,child="number"))
     input['uthreshold']=str(commonelement.sendkeys_input(str(random.randint(50,100)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),1,child="number"))
-    input['rulename']=str(commonelement.sendkeys_input("RuleName"+str(random.randint(111,9999)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),0))
+    # input['rulename']=str(commonelement.sendkeys_input("RuleName"+str(random.randint(111,9999)),getHandle(setup,"kpi_popup",MuralConstants.ALLINPUTS),0))
     input['formula']=BulkstatsHelper.setFormula(setup,getHandle(setup,MuralConstants.KPIPOPUP),formulaId=iteration,force_clear=True)
 
+    logger.info("Going to Update KPI Rule = %s",str(input))
     commonelement.clickButton("Update",getHandle(setup,"kpi_popup",MuralConstants.ALLBUTTONS))
 
     cl = CollapsableListComponentClass()
@@ -102,6 +109,7 @@ for iteration in setup.cM.getNodeElements("kpiformulae","formula"):
 
     commonelement.sendkeys_input(input['rulename'],bulk,0,parent="leftListContainer")
     bulk = getHandle(setup,MuralConstants.KPISCREEN,parent="leftListContainer")
+    _data = cl.getData(setup,bulk)
     clIndex = cl.setIndex(setup,bulk,index=0)
     selectedRowHandle = cl.getSelectedRowHandle(bulk)
     parents,childs = cl.getParentChilds(bulk)
