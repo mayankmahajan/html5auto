@@ -45,3 +45,9 @@ for el in searcheddata:
         break
 
 checkEqualAssert(True,flag,message="Checking List Container Fields after Search")
+cl.clear_input(bulk,0,parent="leftListContainer")
+
+bulk = getHandle(setup,MuralConstants.BULKSCREEN,parent="leftListContainer")
+checkEqualAssert(data,cl.getData(setup,bulk),"Checking Clear Search on List Container")
+
+setup.d.close()
