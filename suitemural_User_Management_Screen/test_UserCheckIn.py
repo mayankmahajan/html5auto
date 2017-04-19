@@ -70,7 +70,7 @@ try:
             exploreHandle = getHandle(setup, MuralConstants.ExploreScreen)
             if len(exploreHandle['appHeader']['alllinks'])>0:
                 UMHelper.clickOnLinkByValue(setup,MuralConstants.ExploreScreen,previousUserName)
-                UMHelper.clickOnLinkByValue(setup, MuralConstants.ExploreScreen, 'Logout')
+                UMHelper.clickOnLinkByValue(setup, MuralConstants.ExploreScreen, MuralConstants.Logout)
                 time.sleep(5)
 
             login(setup, usersDetail['username'], usersDetail['password'])

@@ -47,3 +47,5 @@ class MuralConstants(Constants):
     ConfirmationPopUp="confirmation_popup"
     ChangePasswordScreen="changepassword_screen"
     ExploreScreen='explore_Screen'
+    ChangePassword='Change Password'
+    Logout='Logout'

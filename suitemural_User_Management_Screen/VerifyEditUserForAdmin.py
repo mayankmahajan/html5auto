@@ -107,6 +107,14 @@ try:
 
     setup.d.close()
     setup.d.switch_to.window(setup.d.window_handles[0])
+
+    exploreHandle = getHandle(setup, MuralConstants.ExploreScreen)
+    if len(exploreHandle['appHeader']['alllinks']) > 0:
+        UMHelper.clickOnLinkByValue(setup, MuralConstants.ExploreScreen, usersDetail['username'])
+        UMHelper.clickOnLinkByValue(setup, MuralConstants.ExploreScreen, MuralConstants.ChangePassword)
+        change_password_screen_handle = getHandle(setup, MuralConstants.ChangePasswordScreen)
+        UMHelper.ChangePassword(setup, userScreenInstance, change_password_screen_handle,usersDetail,button="Change")
+
     setup.d.close()
 
 except Exception as e:

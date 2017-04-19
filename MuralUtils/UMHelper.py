@@ -21,9 +21,7 @@ def isColorValid(screenInstance, h, property, parent="allinputs", child='input',
 
 
 def editUserDetail(setup,screenInstance,userDetail,button='Create'):
-
     detail = []
-
     h = getHandle(setup, MuralConstants.UserPopUpScreen)
     logger.info("Going to update UserRole = %s for user =",userDetail['userrole'],userDetail['username'])
     userRole_text = screenInstance.dropdown.doSelectionOnVisibleDropDown(h, str(userDetail['userrole']), index=0)
@@ -120,8 +118,6 @@ def editUserDetail(setup,screenInstance,userDetail,button='Create'):
             return [], []
         checkEqualAssert(0, len(getHandle(setup, MuralConstants.UserPopUpScreen, 'allbuttons')['allbuttons']['button']),"", "", "Verify Popscreen close after click on button =" + button)
     return detail, checklist
-
-
 
 
 def setUserDetail(setup,screenInstance,userDetail,button='Create'):
@@ -344,57 +340,7 @@ def checkDeletedRow(setup, screen, screenInstance,columnName, rowToDelete, flag)
 
 
 def VerifyChangePasswordAndUserPrivileges(setup,screenInstance,handle,usersDetail,listOfPrivilegesFromTable,button='Change'):
-
-    if len(handle['allinputs']['password'])>0:
-
-        flag_current_password= False
-        flag_new_password = False
-        flag_new_cpassword=False
-
-        logger.info("Going to Enter Current Password =%s",usersDetail['currentpassword'])
-        currentpasswordfromUI = screenInstance.cm.sendkeys_input(usersDetail['currentpassword'], handle,0,child='password')
-        checkEqualAssert(str(currentpasswordfromUI), str(usersDetail['currentpassword']), "", "", "Verify Current Password")
-        #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password',index=0):
-         #   raise
-        flag_current_password = True
-        dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword , "Current Password", screenInstance, setup,button_label="Change")
-
-        logger.info("Going to Enter New Password =%s" + usersDetail['newpassword'])
-        newpasswordFromUI = screenInstance.cm.sendkeys_input(usersDetail['newpassword'], handle,1, child="password")
-        checkEqualAssert(str(newpasswordFromUI), str(usersDetail['newpassword']), "", "", "Verify Entered Password")
-        # if len(getHandle(setup, MuralConstants.ChangePasswordScreen,'errormsg')['errormsg']['msg'])>0:
-        #     logger.info('Password = %s is not valid',newpasswordFromUI)
-        #     resultlogger.info('Password = %s is not valid',newpasswordFromUI)
-        #     logger.debug()
-        #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password', index=1):
-        #    raise
-        flag_new_password = True
-        dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword, "New Password", screenInstance, setup,button_label="Change")
-
-        logger.info("Going to set Confirm Password =%s" + usersDetail['newcpassword'])
-        newcpasswordFromUI = screenInstance.cm.sendkeys_input(usersDetail['newcpassword'],handle, 2, child="password")
-        checkEqualAssert(str(newcpasswordFromUI), str(usersDetail['newcpassword']), "", "", "Verify Entered Password")
-        #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password', index=2):
-        #    raise
-        flag_newcpassword = True
-        button_status = dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword,"All Field on Change Password Screen", screenInstance, setup,button_label='Change')
-
-        if button_status and (button == "Change" or button == "Cancel"):
-            click_status = screenInstance.cm.clickButton(button, handle)
-            checkEqualAssert(True, click_status, "", "", "Verify whether " + button + " button clicked or not")
-            h=getHandle(setup, MuralConstants.ChangePasswordScreen)
-            if len(h)>0:
-                if len(h['errormsg']['msg'])>0:
-                    logger.error('Error found during Change Password =%s',str(h['errormsg']['msg'][0].text))
-                    resultlogger.error('Error found during Change Password =%s',str(h['errormsg']['msg'][0].text))
-                    logger.debug("Going to re-enter correct value")
-                    screenInstance.cm.sendkeys_input(usersDetail['password'], handle, 0,child='password')
-                    screenInstance.cm.clickButton(button, handle)
-                    checkEqualAssert(0,len(getHandle(setup, MuralConstants.ChangePasswordScreen)['errormsg']['msg']),'Verify Change Password PopUp close after correct Password ')
-            isError(setup)
-            login(setup, usersDetail['username'], usersDetail['newpassword'])
-            isError(setup)
-
+    ChangePassword(setup, screenInstance, handle, usersDetail, button=button)
     if usersDetail['userrole']=='Admin' or (usersDetail['username']).lower=='admin':
         listOfPrivilegesFromTable.append('User Management')
         listOfPrivilegesFromTable.append('System Monitoring')
@@ -407,7 +353,6 @@ def VerifyChangePasswordAndUserPrivileges(setup,screenInstance,handle,usersDetai
 
 
 def verifySearch(setup,value,minimumcount,instance):
-
     logger.info("Going to find User =%s through search",value)
     h = getHandle(setup, MuralConstants.UserManagementScreen, 'allinputs')
     valuefromscreen = instance.cm.sendkeys_input(value, h, 0)
@@ -497,3 +442,54 @@ def getUserDetailFromUI(setup,screenInstance):
 
     return detail, checklist
 
+
+
+def ChangePassword(setup,screenInstance,handle,usersDetail,button='Change'):
+    if len(handle['allinputs']['password'])>0:
+        flag_current_password= False
+        flag_new_password = False
+        flag_new_cpassword=False
+
+        logger.info("Going to Enter Current Password =%s",usersDetail['currentpassword'])
+        currentpasswordfromUI = screenInstance.cm.sendkeys_input(usersDetail['currentpassword'], handle,0,child='password')
+        checkEqualAssert(str(currentpasswordfromUI), str(usersDetail['currentpassword']), "", "", "Verify Current Password")
+        #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password',index=0):
+         #   raise
+        flag_current_password = True
+        dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword , "Current Password", screenInstance, setup,button_label="Change")
+
+        logger.info("Going to Enter New Password =%s" + usersDetail['newpassword'])
+        newpasswordFromUI = screenInstance.cm.sendkeys_input(usersDetail['newpassword'], handle,1, child="password")
+        checkEqualAssert(str(newpasswordFromUI), str(usersDetail['newpassword']), "", "", "Verify Entered Password")
+        # if len(getHandle(setup, MuralConstants.ChangePasswordScreen,'errormsg')['errormsg']['msg'])>0:
+        #     logger.info('Password = %s is not valid',newpasswordFromUI)
+        #     resultlogger.info('Password = %s is not valid',newpasswordFromUI)
+        #     logger.debug()
+        #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password', index=1):
+        #    raise
+        flag_new_password = True
+        dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword, "New Password", screenInstance, setup,button_label="Change")
+
+        logger.info("Going to set Confirm Password =%s" + usersDetail['newcpassword'])
+        newcpasswordFromUI = screenInstance.cm.sendkeys_input(usersDetail['newcpassword'],handle, 2, child="password")
+        checkEqualAssert(str(newcpasswordFromUI), str(usersDetail['newcpassword']), "", "", "Verify Entered Password")
+        #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password', index=2):
+        #    raise
+        flag_newcpassword = True
+        button_status = dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword,"All Field on Change Password Screen", screenInstance, setup,button_label='Change')
+
+        if button_status and (button == "Change" or button == "Cancel"):
+            click_status = screenInstance.cm.clickButton(button, handle)
+            checkEqualAssert(True, click_status, "", "", "Verify whether " + button + " button clicked or not")
+            h=getHandle(setup, MuralConstants.ChangePasswordScreen)
+            if len(h)>0:
+                if len(h['errormsg']['msg'])>0:
+                    logger.error('Error found during Change Password =%s',str(h['errormsg']['msg'][0].text))
+                    resultlogger.error('Error found during Change Password =%s',str(h['errormsg']['msg'][0].text))
+                    logger.debug("Going to re-enter correct value")
+                    screenInstance.cm.sendkeys_input(usersDetail['password'], handle, 0,child='password')
+                    screenInstance.cm.clickButton(button, handle)
+                    checkEqualAssert(0,len(getHandle(setup, MuralConstants.ChangePasswordScreen)['errormsg']['msg']),'Verify Change Password PopUp close after correct Password ')
+            isError(setup)
+            login(setup, usersDetail['username'], usersDetail['newpassword'])
+            isError(setup)
