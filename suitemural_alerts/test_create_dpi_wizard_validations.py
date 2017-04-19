@@ -8,6 +8,15 @@ sleep(6)
 login(setup,"admin","admin123")
 x =CreateAlert()
 
+print isError(setup)
+
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchModule(exploreHandle,"ALERTS")
+
+print isError(setup)
+
+
 AlertsHelper.validateDPIAlertWizard(setup,x.dict)
 
 # GUIDE_INFO
