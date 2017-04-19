@@ -49,3 +49,7 @@ class MuralConstants(Constants):
     ExploreScreen='explore_Screen'
     ChangePassword='Change Password'
     Logout='Logout'
+    KPIPOPUP = "kpi_popup"
+    BULKPOPUP = "bulk_popup"
+    BULKSCREEN = "bulkstats_Screen"
+    KPISCREEN = "kpi_Screen"

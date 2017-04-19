@@ -268,6 +268,7 @@
             <component id = "compareContainer" selector="css selector" locator="div.compareContainer" parent="True"/>
             <component id = "loading-state" selector="css selector" locator="kiwik-bulkstats" parent="True"/>
             <component id = "kpilegend" selector="css selector" locator="kiwik-legend" parent="True"/>
+            <component id = "alllinks" selector="css selector" locator="kiwik-kpi" parent="True"/>
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
             <!--<component id = "bulk_filter" selector="css selector" locator="div.basePopupView" parent="True"/>-->
 
@@ -686,7 +687,7 @@
             <component id = "label" selector="tag name" locator='label' />
         </componentConfig>
         <componentConfig id="allcircles">
-            <component id = "circle" selector="tag name" locator='circle' />
+            <component id = "circle" selector="tag name" locator='circle,div#circle' />
         </componentConfig>
 
 
@@ -795,13 +796,17 @@
 
 
         <componentConfig id = "leftListContainer">
+            <component id = 'circle' selector="css selector" locator="div#circle"/>
             <component id = "draggables" selector="css selector" locator='[draggable="true"]'/>
             <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
             <component id = "selected" selector="css selector" locator="[class*=selectedRowClass]"/>
             <component id = "input" selector="css selector" locator="input"/>
+            <component id = "edit" selector="css selector" locator="img.img-edit-class"/>
+            <component id = "saveas" selector="css selector" locator="img.img-save-as-class"/>
         </componentConfig>
         <componentConfig id = "rightListContainer">
+            <component id = 'circle' selector="css selector" locator="div#circle"/>
             <component id = "draggables" selector="css selector" locator='[draggable="true"]'/>
             <component id = "leftColumn" selector="css selector" locator="td.dualLetColumn"/>
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
