@@ -85,5 +85,5 @@ tooltipData = TMScreenInstance.quicktrends.hoverOverTicksGetMainChartText(
 isError(setup)
 
 setup.d.close()
-
+setup.d.switch_to.window(setup.d.window_handles[0])
 setup.d.close()

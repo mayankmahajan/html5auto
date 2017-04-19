@@ -119,8 +119,6 @@ for iteration in setup.cM.getNodeElements("kpiformulae","formula"):
     BulkstatsHelper.checkSeverity(setup,input,selectedRowHandle)
 
 
-
-
-
-
-
+setup.d.close()
+setup.d.switch_to.window(setup.d.window_handles[0])
+setup.d.close()

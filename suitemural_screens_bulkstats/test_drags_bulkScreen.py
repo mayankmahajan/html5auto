@@ -21,14 +21,19 @@ exploreScreenInstance.exploreList.switchApp(exploreHandle)
 h=getHandle(setup, "explore_Screen")
 list=exploreScreenInstance.exploreList.getAllApps(h)
 result = exploreScreenInstance.exploreList.launchappByName(getHandle(setup, "explore_Screen"),"Bulkstats / KPIs")
-if len(setup.d.window_handles)>1:
-    setup.d.switch_to.window(setup.d.window_handles[1])
+counter = 0
 
+while len(setup.d.window_handles)<=1:
+    counter=+1
+    time.sleep(1)
+    if counter == 5:
+        break
+setup.d.switch_to.window(setup.d.window_handles[1])
 
 cl = CollapsableListComponentClass()
 Helper.clickOnfilterIcon(setup,MuralConstants.ATSCREEN)
 isError(setup)
-bulk = getHandle(setup,MuralConstants.BULKSCREEN)
+# bulk = getHandle(setup,MuralConstants.BULKSCREEN)
 filters = {}
 f1=cl.merge_dictionaries(filters,BulkstatsHelper.setFilter(setup,index=0,h=getHandle(setup,"bulk_popup","bulk_filter"),occurence=0))
 isError(setup)
@@ -55,19 +60,19 @@ for key in f5.keys():
 
 
 
-bulk = getHandle(setup,MuralConstants.BULKSCREEN)
+bulk = getHandle(setup,MuralConstants.BULKSCREEN,"leftListContainer")
 data = cl.getData(setup,bulk)
 clIndex = cl.setIndex(setup,bulk,index=0)
 isError(setup)
-selections = cl.getSelectedRow(getHandle(setup,MuralConstants.BULKSCREEN))
+selections = cl.getSelectedRow(getHandle(setup,MuralConstants.BULKSCREEN,"leftListContainer"))
 
 # drag_drop = BaseComponentClass()
 # drag_drop = BaseComponentClass()
 drags = bulk['leftListContainer']['draggables']
 drops = bulk['compareContainer']['drop']
-bulk = getHandle(setup,MuralConstants.BULKSCREEN)
+# bulk = getHandle(setup,MuralConstants.BULKSCREEN)
 BulkstatsHelper.checkTextAfterDrag(drags,drops[0],k=0,setup=setup)
-bulk = getHandle(setup,MuralConstants.BULKSCREEN)
+bulk = getHandle(setup,MuralConstants.BULKSCREEN,"rightListContainer")
 drags_2 = bulk['rightListContainer']['draggables']
 BulkstatsHelper.checkTextAfterDrag(drags_2,drops[1],key1="dragg",key2="dropp",k=1,setup=setup)
 
@@ -79,3 +84,7 @@ tooltipData = TMScreenInstance.quicktrends.hoverOverTicksGetMainChartText(
         parent="compareContainer",
         parent_tooltip="compareContainer"
 )
+
+setup.d.close()
+setup.d.switch_to.window(setup.d.window_handles[0])
+setup.d.close()

@@ -444,9 +444,9 @@ def setKPICondition(priorty, handle, setup,firstDrop=3,enableCondition="",thresh
             return "-"
 
     except Exception as e:
-        logger.error("Exception found while setting condition at CreateRule for KPI [Priority: %s, Operator: %s, Value: %s  =  %s",
-                     str(priorty),str(op),str(num_value), str(e) )
-        return e
+        logger.error("Exception found while setting condition at CreateRule for KPI  =  %s", str(e) )
+        instance.takeScreenshot(setup.d)
+        raise e
 
 def setTime(setup,startEnd,timeObj):
     instance = GenerateReportsPopClass(setup.d)
