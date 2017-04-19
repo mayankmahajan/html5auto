@@ -172,7 +172,8 @@ def checkAlertsPresent(setup,alertRuleMap,alertlist):
     for i in range(len(alertlist)):
         alertListWithRule,alertFullBody = appendAlertListWithRule(i,setup,alertRuleMap,alertlist)
         for k, v in alertListWithRule.iteritems():
-            checkEqualAssert(alertListWithRule[k], alertFullBody[k], "", "", "Checking DPI Alerts :: " + k + " :: ")
+            if 'duration' not in k:
+                checkEqualAssert(alertListWithRule[k], alertFullBody[k], "", "", "Checking DPI Alerts :: " + k + " :: ")
 
 def appendAlertListWithRule(i,setup,alertRuleMap,alertlist):
     screenInstance = AlertsComponentClass()
@@ -458,7 +459,14 @@ def setTime(setup,startEnd,timeObj):
         handle[MuralConstants.CREATERULE][t][0].click()
         isCalendarSetProperly = setCalendar(timeObj.year,timeObj.month, timeObj.day, timeObj.hour, timeObj.min, instance, setup,MuralConstants.CREATERULEPOPUP)
         instance.reportspopup.clickButton("Apply", getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLBUTTONS))
-        dateSelected =  instance.dropdown.getValue_input(getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS),startEnd+1)
+        h=getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS)
+        handle = h[MuralConstants.ALLINPUTS]['input']
+        if not startEnd:
+            indx = len(handle)-2
+        else:
+            indx = len(handle)-1
+
+        dateSelected =  instance.dropdown.getValue_input(h,indx)
         logger.info("Date Selected %s for %s",str(dateSelected),str(t))
         return dateSelected
     except Exception as e:
@@ -993,12 +1001,12 @@ def startEndTimeValidations(setup,request = {}):
         st = Time(starttime['year'],starttime['month'],starttime['day'],starttime['hour'],starttime['min'])
 
     starttimeEpoch = getepoch(st.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    request[MuralConstants.STARTTIME] = setTime(setup,0,st)
+    request[MuralConstants.STARTTIME] = str(setTime(setup,0,st))
     et = st
-    request[MuralConstants.ENDTIME] = setTime(setup,1,et)
+    request[MuralConstants.ENDTIME] = str(setTime(setup,1,et))
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET)
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
 
@@ -1012,15 +1020,15 @@ def startEndTimeValidations(setup,request = {}):
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])-1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET)
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])+1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET)
     checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     return st,et
