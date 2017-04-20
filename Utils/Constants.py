@@ -58,7 +58,8 @@ class Constants(object):
     BTVCOLUMN2 = 'BTVCOLUMN2'
 
     TIMEZONEOFFSET = -6
-    TIMEPATTERN = '%d %b %Y %H:%M:%S'
+    # TIMEPATTERN = '%d %b %Y %H:%M:%S'
+    TIMEPATTERN = '%d %b %Y %H:%M'
     FLAGDAILY = 24
     FLAGHOURLY = 1
 

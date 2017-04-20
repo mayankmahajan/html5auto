@@ -11,7 +11,7 @@ setup = SetUp()
 sleep(15)
 
 # Logins to app with credentials provided
-login(setup, "admin", "admin123")
+login(setup, MuralConstants.USERNAME,MuralConstants.PASSWORD)
 
 print isError(setup)
 

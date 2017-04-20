@@ -2,10 +2,17 @@ from Utils.SetUp import *
 from MuralUtils.AlertsHelper import *
 setup=SetUp()
 sleep(6)
-login(setup,"admin","admin123")
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
+
+print isError(setup)
+
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
+exploreScreenInstance.exploreList.launchModule(exploreHandle,"ALERTS")
+
+print isError(setup)
 
 checkAlertsCount(setup)
-
 
 popInstance = GenerateReportsPopClass(setup.d)
 # Launching DPI Alerts Page

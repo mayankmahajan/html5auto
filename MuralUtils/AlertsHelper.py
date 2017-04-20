@@ -551,7 +551,7 @@ def doCalendarSearchOnAlerts(setup,stEtCombID=0):
         resultlogger.info("Alert List comes Empty when filter is selected  starttime  = %s  and endtime = %s ",
                      stObj.datestring, etObj.datestring)
     for i in range(len(alertlist)):
-        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralMuralConstants.TIMEZONEOFFSET,"%d %b %Y %H:%M","-")
+        actualStartTime,actualEndTime = parseTimeRange(alertlist[i]['duration'],MuralConstants.TIMEZONEOFFSET,"%d %b %Y %H:%M","-")
         # if (actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch):
         checkEqualAssert(True,(actualStartTime<=etEpoch and actualStartTime>=stEpoch) or (actualEndTime<=etEpoch and actualEndTime>=stEpoch),"","",
                          "Check for alert "+alertlist[i]['header']+" and duration = "+alertlist[i]['duration']+

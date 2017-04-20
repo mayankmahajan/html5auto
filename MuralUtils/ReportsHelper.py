@@ -299,7 +299,7 @@ def checkEmailValidations(setup,grPopInstance,inputinfo,emailStrings):
     emailStrings['invalid'] = ["gmail.com","3ewdc"]
     emailStrings['valid'] = ["2@gmail.com","m@m.com"]
     grPopHandle = getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "generateReportDialog")
-    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),1)
+    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),0)
     checkEqualAssert(False,grPopInstance.reportspopup.isButtonEnabled("Submit",getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons")),"","","Check Submit Button for Disability when Additional Email Field is empty")
     for email in emailStrings['invalid']:
         grPopInstance.dropdown.clear_input(grPopHandle,"generateReportDialog","emailInput")
@@ -322,7 +322,7 @@ def checkEmailValidations(setup,grPopInstance,inputinfo,emailStrings):
         checkEqualAssert("",errText,"","","Check for email validations")
         checkEqualAssert(True,grPopInstance.reportspopup.isButtonEnabled("Submit",getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons")),"","","Check Submit Button for Disability when Additional Email Field is wrong")
 
-    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),1)
+    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),0)
 
 
 def makePasswordProtected(setup,grPopInstance,inputinfo):
@@ -333,7 +333,7 @@ def makePasswordProtected(setup,grPopInstance,inputinfo):
 
 def checkPasswordFieldValidations(setup,grPopInstance,inputinfo):
 
-    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),2)
+    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),1)
     inputinfo['password'] = checkErrorMessageAndType(setup,grPopInstance)
     # grPopInstance.dropdown.sendkeys_input(inputinfo['password'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLINPUTS),0,MuralConstants.ALLINPUTS,"password")
     checkEqualAssert(False,grPopInstance.reportspopup.isButtonEnabled("Submit",getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allbuttons")),"","","Check Submit Button for Password and Confirm Password not matches")
