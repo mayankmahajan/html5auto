@@ -29,6 +29,8 @@ try:
     sleep(8)
     wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     TMScreenInstance = TrendingMonitoringPageClass(setup.d)
+    h = getHandle(setup, MuralConstants.TMSCREEN, 'trend-slider')
+    TMScreenInstance.quicktrends.clickOnExpandButton(h)
 
     measures = setup.cM.getNodeElements("measureswithdirection", "measure")
     dimensions = setup.cM.getNodeElements("tmdimension", "dimension")
@@ -77,6 +79,27 @@ try:
 
                 main_chart_value=TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-header"))
                 #main_chart_value =UnitSystem().getRawValueFromUI(main_chart_text)
+                if str(main_chart_value)=='':
+                    if dim[d]=='None':
+                        l1 = []
+                    else:
+                        l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
+                    for i in range(len(l1)):
+                        p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
+                        c1 = TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
+
+                        l2 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
+                        p2 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
+                        checkEqualAssert(False, p1 == p2, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension")
+                        checkEqualAssert(True, c1 in p1, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension Color = " + c1)
+
+                        chartIndex=TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
+
+                        compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),parent="trend-compare", indexOfComp=chartIndex)
+                        checkEqualAssert(p2, compareTrend1, selectedQuicklink, selectedMeasure, "Verify equal activated dimension on main chart and compare chart")
+
+                        TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
+                    continue
 
                 comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"))
                 compare_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"),parent="trend-compare",index=comparechartIndex)
@@ -84,7 +107,8 @@ try:
 
                 TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
-                data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
+                #data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
+                data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"),driver=setup)
                 print selectedMeasure
                 index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], selectedMeasure)
                 print index
@@ -94,13 +118,22 @@ try:
                     continue
 
                 else:
-                    value_list =[element[index] for element in data['rows']]
+                    value_list =[data['rows'][element][index] for element in data['rows']]
                     valueformtable=TMScreenInstance.table.getValueFromTable(value_list,c[m])
 
-                    if "Bitrate" in selectedMeasure and valueformtable!=" ":
-                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable,1024.0)
+                    if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and valueformtable != " ":
+                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=1000.0)
+                    elif 'Avg' in selectedMeasure and valueformtable != " ":
+                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=60)
+                    elif "Bitrate" in selectedMeasure and valueformtable!=" ":
+                         valueformtable = UnitSystem().getValueFromRawValue(valueformtable,unitValue=1024.0,unitstring='bps')
                     elif valueformtable!=" ":
-                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable, 1000.0)
+                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=1024.0)
+
+                    else:
+                        logger.debug('Not able to find value from table')
+                        resultlogger.debug('Not able to find value from table')
+                        valueformtable='None'
 
                     checkEqualAssert(valueformtable, str(main_chart_value), selectedQuicklink, selectedMeasure, "Verify Main Chart Value from Table (some limitation in getting value from Table data )")
                     checkEqualAssert(valueformtable, compare_chart_value, selectedQuicklink, selectedMeasure, "Verify Compare Chart Value from Table (some limitation in getting value from Table data )")
@@ -113,14 +146,21 @@ try:
                         l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
                         active_legend_value_before_clicking=getTotalActiveLegendValue(l1,c[m])
 
-                        if "Bitrate" in selectedMeasure and active_legend_value_before_clicking!=" ":
-                            print active_legend_value_before_clicking
-                            logger.info("Raw value from active legend before clicking",active_legend_value_before_clicking)
-                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, 1024.0)
+                        if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and active_legend_value_before_clicking!=" ":
+                            logger.info("Raw value from active legend before clicking = %s",active_legend_value_before_clicking)
+                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, unitValue=1000.0)
+
+                        elif 'Avg' in selectedMeasure and active_legend_value_before_clicking!=" ":
+                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_before_clicking)
+                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, unitValue=60)
+
+                        elif "Bitrate" in selectedMeasure and active_legend_value_before_clicking!=" ":
+                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_before_clicking)
+                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, unitValue=1024.0,unitstring='bps')
+
                         elif active_legend_value_before_clicking!=" ":
-                            print active_legend_value_before_clicking
-                            logger.info("Raw value from active legend before clicking",active_legend_value_before_clicking)
-                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, 1000.0)
+                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_before_clicking)
+                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, 1024.0)
 
                         checkEqualAssert(active_legend_value_before_clicking,main_chart_value,selectedQuicklink,selectedMeasure,"Verify value from active legend with main chart value")
                         checkEqualAssert(active_legend_value_before_clicking,compare_chart_value,selectedQuicklink,selectedMeasure, "Verify value from active legend with compare chart value")
@@ -144,20 +184,30 @@ try:
                         l2 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
                         active_legend_value_after_clicking=getTotalActiveLegendValue(l2, c[m])
 
-                        if "Bitrate" in selectedMeasure and active_legend_value_after_clicking!=" ":
+                        if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and active_legend_value_after_clicking != " ":
+                            logger.info("Raw value from active legend after clicking   = %s",active_legend_value_after_clicking)
+                            active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, unitValue=1000.0)
+
+                        elif 'Avg' in selectedMeasure and active_legend_value_after_clicking != " ":
+                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_after_clicking)
+                            active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, unitValue=60)
+
+                        elif "Bitrate" in selectedMeasure and active_legend_value_after_clicking != " ":
+                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_after_clicking)
+                            active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, unitValue=1024.0, unitstring='bps')
+
+                        elif active_legend_value_after_clicking != " ":
+                            logger.info("Raw value from active legend before clicking   = %s",active_legend_value_after_clicking)
                             active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, 1024.0)
-                        elif active_legend_value_after_clicking!=" ":
-                            active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, 1000.0)
+
 
                         checkEqualAssert(active_legend_value_after_clicking, main_chart_value, selectedQuicklink,selectedMeasure, "Verify value from active legend with main chart value")
-
-
                         checkEqualAssert(True, c1 in p1, selectedQuicklink, selectedMeasure, "Checking disabled color in previous view. Color = " + c1)
 
                         p2 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
                         checkEqualAssert(False, p1 == p2, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension")
                         checkEqualAssert(True, c1 in p1, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension Color = " + c1)
-                        checkEqualAssert(False, p1 == p2, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension")
+                        #checkEqualAssert(False, p1 == p2, selectedQuicklink, selectedMeasure, "Line Chart should not show deactivated Dimension")
                         chartIndex=TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"))
 
                         compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),parent="trend-compare", indexOfComp=chartIndex)

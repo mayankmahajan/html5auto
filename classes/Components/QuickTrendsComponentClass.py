@@ -233,13 +233,20 @@ class QuickTrendsComponentClass(BaseComponentClass):
 
 
 
+    def clickOnExpandButton(self,h,parent="trend-slider",child='expand-btn'):
+        if len(h[parent][child]) > 0:
+            h[parent][child][0].click()
+            try:
+                h[parent][child][0].click()
+            except:
+                pass
 
 
 
 
 
 
-    # def getTooltipInfo(self,handlrs):
+                # def getTooltipInfo(self,handlrs):
     #     h = self.getHandler(handlrs)
 
 

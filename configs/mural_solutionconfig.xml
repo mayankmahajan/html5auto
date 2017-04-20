@@ -516,6 +516,7 @@
             <!--<component id = "trend-compare" selector="xpath" locator="//kiwik-trends/div[1]/div[3]" parent="True"/>-->
             <component id = "trend-main" selector="css selector" locator="div.trend-main-container" parent="True"/>
             <component id = "trend-compare" selector="css selector" locator="div.trend-compare-container" parent="True"/>
+            <component id="trend-slider" selector="css selector" locator="div.compare-trend-slide" parent="True"/>
             <component id = "trend-legend" selector="tag name" locator="kiwik-trend-legend" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
             <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>
@@ -551,7 +552,7 @@
         <componentConfig id ="trend-compare">
             <component id = "select" selector="css selector" locator="select" />
             <component id = "qttooltip" selector="css selector" locator=".trend-compare-header"/>
-            <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
+            <component id = "trendchart" selector="css selector" locator="kiwik-trend-chart"/>
             <component id = "comparedimension" selector="css selector" locator="div.trend-compare-dimension"/>
         </componentConfig>
         <componentConfig id = "trend-header">
@@ -559,6 +560,12 @@
             <!--<component id = "label" selector="xpath" locator="//label"/>-->
             <component id = "qttooltip" selector="css selector" locator="div.trend-main-header"/>
         </componentConfig>
+
+        <componentConfig id="trend-slider">
+            <component id="label" selector="css selector" locator="div.trend-compare-label"/>
+            <component id="expand-btn" selector="css selector" locator="div.trend-expand-btn"/>
+        </componentConfig>
+
 
         <componentConfig id = "kiwiktrendsbase"> 
             <component id = "measures" selector="id" locator="measureSelect"/> 

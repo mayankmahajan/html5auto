@@ -17,6 +17,8 @@ try:
     sleep(4)
     wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     TMScreenInstance = TrendingMonitoringPageClass(setup.d)
+    h = getHandle(setup, MuralConstants.TMSCREEN, 'trend-slider')
+    TMScreenInstance.quicktrends.clickOnExpandButton(h)
 
     measures = setup.cM.getNodeElements("measureswithdirection", "measure")
     dimensions = setup.cM.getNodeElements("tmdimension", "dimension")
@@ -52,10 +54,15 @@ try:
     hover_data = TMScreenInstance.quicktrends.hoverOverTicksGetMainChartText(setup, getHandle(setup, MuralConstants.TMSCREEN), MuralConstants.TMSCREEN)
 
     TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
-    data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
+    #data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
+
+    data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"), driver=setup)
+
     measure = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN), index=0, parent="trend-header")
     index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], str(measure))
-    value_list = [e[index] for e in data['rows']]
+
+    value_list = [data['rows'][element][index] for element in data['rows']]
+    #value_list = [e[index] for e in data['rows']]
 
     checkEqualAssert(value_list, hover_data, str(selectedQuicklink), selectedMeasure, "Verify hover data with table data")
 

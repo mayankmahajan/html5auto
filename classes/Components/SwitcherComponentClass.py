@@ -51,6 +51,10 @@ class SwitcherComponentClass(BaseComponentClass):
         try:
             logger.info("Going to click Switcher index = %d",index)
             h[parent][child][occurence].find_elements_by_tag_name('div')[index].click()
+            try:
+                h[parent][child][occurence].find_elements_by_tag_name('div')[index].click()
+            except:
+                pass
             time.sleep(2)
             return True
         except Exception as e:
