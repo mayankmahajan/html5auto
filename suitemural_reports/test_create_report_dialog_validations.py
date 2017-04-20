@@ -8,7 +8,7 @@ from Utils.utility import *
 
 # Launches the application
 setup = SetUp()
-sleep(15)
+# sleep(15)
 
 # Logins to app with credentials provided
 login(setup, MuralConstants.USERNAME,MuralConstants.PASSWORD)

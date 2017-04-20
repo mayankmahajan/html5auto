@@ -1,7 +1,7 @@
 from Utils.SetUp import *
 from MuralUtils.AlertsHelper import *
 setup=SetUp()
-sleep(6)
+
 login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 
 print isError(setup)

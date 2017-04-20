@@ -6,10 +6,8 @@ from classes.Pages.MuralScreens.SubscriberClass import *
 try:
     for i in range(29):
         setup = SetUp()
-        sleep(8)
         login(setup, MuralConstants.USERNAME, MuralConstants.PASSWORD)
         wfstart = WorkflowStartComponentClass()
-        sleep(8)
         wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
         networkScreenInstance = NetworkScreenClass(setup.d)
         networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))

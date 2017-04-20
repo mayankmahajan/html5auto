@@ -2,22 +2,22 @@ from Utils.SetUp import *
 from MuralUtils.AlertsHelper import *
 from classes.Objects.CreateAlert import *
 
-x =CreateAlert()
+
 setup=SetUp()
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
+isError(setup)
 
-# units1=setup.cM.getNodeElements("unitsystem","unit")
-# measures1= setup.cM.getNodeElements("measures","measure")
-# measuretypes = setup.cM.mergeTwoNodes(measures1,units1,"unitSystem")
+exploreScreenInstance = ExplorePageClass(setup.d)
+exploreHandle = getHandle(setup,"explore_Screen")
 
-# request = {}
-# request['ruleName'] = "automationRuleName"
-# request['measureName'] = "Hits"
-# request['type'] = "Rate Of Change"
-# request['gran'] = "Daily"
-# sleep(6)
+# Alerts Module
+###################################
+exploreScreenInstance.exploreList.launchModule(exploreHandle,"ALERTS")
+isError(setup)
 
-login(setup,"admin","admin123")
-print createDPIAlert(setup, x.dict)
+for i in range(15):
+    x = CreateAlert()
+    print createDPIAlert(setup, x.dict)
 
 # GUIDE_INFO
 

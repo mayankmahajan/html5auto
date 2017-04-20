@@ -4,8 +4,8 @@ from classes.Pages.ReportsModuleClass import *
 from Utils.utility import *
 
 setup = SetUp()
-sleep(15)
-login(setup, "admin", "admin123")
+# sleep(15)
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 
 
 # print isError(setup)

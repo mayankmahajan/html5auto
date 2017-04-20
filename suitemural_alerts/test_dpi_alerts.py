@@ -1,8 +1,8 @@
 from Utils.SetUp import *
 from MuralUtils.AlertsHelper import *
 setup=SetUp()
-sleep(6)
-login(setup,"admin","admin123")
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
+
 exploreScreenInstance = ExplorePageClass(setup.d)
 exploreHandle = getHandle(setup,"explore_Screen")
 exploreScreenInstance.exploreList.launchModule(exploreHandle,"ALERTS")

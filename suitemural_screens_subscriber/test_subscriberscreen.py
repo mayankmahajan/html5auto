@@ -15,11 +15,9 @@ import sys
 screen="Top Subscribers"
 try:
     setup = SetUp()
-    sleep(8)
     login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
     isError(setup)
     wfstart = WorkflowStartComponentClass()
-    sleep(8)
     wfstart.launchScreen("Network",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     networkScreenInstance = NetworkScreenClass(setup.d)
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))

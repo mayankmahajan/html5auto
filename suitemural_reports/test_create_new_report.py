@@ -9,10 +9,9 @@ from Utils.utility import *
 # Launches the application
 setup = SetUp()
 
-sleep(5)
+
 # Logins to app with credentials provided
-login(setup, "admin", "admin123")
-sleep(5)
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 
 # grPopInstance = GenerateReportsPopClass(setup.d)
 # ReportsHelper.checkErrorMessageAndType(setup,grPopInstance)

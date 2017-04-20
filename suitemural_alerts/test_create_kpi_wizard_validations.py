@@ -3,7 +3,7 @@ from MuralUtils import AlertsHelper
 from Utils.utility import *
 
 setup=SetUp()
-login(setup,"admin","admin123")
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 
 print isError(setup)
 

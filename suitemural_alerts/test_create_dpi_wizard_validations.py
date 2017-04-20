@@ -5,7 +5,7 @@ from classes.Objects.CreateAlert import *
 
 setup=SetUp()
 sleep(6)
-login(setup,"admin","admin123")
+login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 x =CreateAlert()
 
 print isError(setup)
