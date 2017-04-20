@@ -86,9 +86,22 @@ class SummaryBarComponentClass(BaseComponentClass):
                 buttons[i].click()
                 time.sleep(2)
                 for j in range(1,len(measures)):
-                    data[(dimensionSelected,i,
-                          summaryBarHandler.find_elements_by_class_name("Row")[j].text)]=\
-                        summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text
+
+                    # Updated summary bar for (‘Flow Duration’ == > ‘Avg Flow Duration’)
+                    
+                    measureSelected=summaryBarHandler.find_elements_by_class_name("Row")[j].text
+
+                    if "Flow Duration" in measureSelected:
+                        measureSelected = "Avg Flow Duration"
+
+                    if "Hit Duration" in measureSelected:
+                        measureSelected = "Avg Hit Duration"
+
+                    data[(dimensionSelected, i,measureSelected)] = summaryBarHandler.find_elements_by_class_name("BottomRow")[j - 1].text
+
+                    # data[(dimensionSelected,i,
+                    #       summaryBarHandler.find_elements_by_class_name("Row")[j].text)]=\
+                    #     summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text
                         # self.unitSystem.getRawValueFromUI(summaryBarHandler.find_elements_by_class_name("BottomRow")[j-1].text)
 
             buttons[0].click()
