@@ -59,11 +59,11 @@ def getSelectionsFromContent(networkScreenInstance, setup, measureSelected):
 
     # For handle issue of avg flow/hit duration in measure and flow/hit duration in summary bar
     selectedlinkSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"), occurence=0)
-    if "Flow Duration" in measureSelected :
-        measureSelected="Flow Duration"
-
-    if "Hit Duration" in measureSelected:
-        measureSelected = "Hit Duration"
+    # if "Flow Duration" in measureSelected :
+    #     measureSelected="Flow Duration"
+    #
+    # if "Hit Duration" in measureSelected:
+    #     measureSelected = "Hit Duration"
 
 
     summary['value']=[sumSel[summary['dim'],0,measureSelected],
