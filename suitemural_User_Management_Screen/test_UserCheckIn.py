@@ -21,30 +21,30 @@ try:
     setup.d.switch_to.window(setup.d.window_handles[1])
 
     # verify basic table functionality
-    #logger.debug("Verify Basic Table functionality")
-    #UMHelper.VerifyBasicTableFuncationality(setup,userScreenInstance)
+    logger.debug("Verify Basic Table functionality")
+    UMHelper.VerifyBasicTableFuncationality(setup,userScreenInstance)
 
 
-    # UMHelper.verifyAdminNotDeletable(setup,userScreenInstance)
-    #
-    # usersDetails = setup.cM.getNodeElements("userdetail", "user")
-    # totalUserAddedFromXML = []
-    # listOfUserForSearch = []
-    #
-    # for k, usersDetail in usersDetails.iteritems():
-    #     if usersDetail['button']=='Create' and ( usersDetail['id']=='0' or usersDetail['id']=='1' or usersDetail['id']=='2'):
-    #         listOfUserForSearch.append(usersDetail['username'])
-    #
-    #     if usersDetail['button']=='Create':
-    #         totalUserAddedFromXML.append(usersDetail['username'])
-    #
-    # for value in listOfUserForSearch:
-    #     mini_count=0
-    #     for user in totalUserAddedFromXML:
-    #         if value in user:
-    #            mini_count=mini_count+1
-    #
-    #     UMHelper.verifySearch(setup,value,mini_count,userScreenInstance)
+    #UMHelper.verifyAdminNotDeletable(setup,userScreenInstance)
+
+    usersDetails = setup.cM.getNodeElements("userdetail", "user")
+    totalUserAddedFromXML = []
+    listOfUserForSearch = []
+
+    for k, usersDetail in usersDetails.iteritems():
+        if usersDetail['button']=='Create' and ( usersDetail['id']=='0' or usersDetail['id']=='1' or usersDetail['id']=='2'):
+            listOfUserForSearch.append(usersDetail['username'])
+
+        if usersDetail['button']=='Create':
+            totalUserAddedFromXML.append(usersDetail['username'])
+
+    for value in listOfUserForSearch:
+        mini_count=0
+        for user in totalUserAddedFromXML:
+            if value in user:
+               mini_count=mini_count+1
+
+        UMHelper.verifySearch(setup,value,mini_count,userScreenInstance)
 
 
     tableHandle = getHandle(setup, MuralConstants.UserManagementScreen, 'table')

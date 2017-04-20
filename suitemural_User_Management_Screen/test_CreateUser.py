@@ -26,7 +26,17 @@ try:
     usersDetails=setup.cM.getNodeElements("userdetail","user")
     for k, usersDetail in usersDetails.iteritems():
         wfstart.clickImage('icon', getHandle(setup, MuralConstants.UserManagementScreen,'allimages'))
-        userDetailFromUIPopup,listOfPrivileges=UMHelper.setUserDetail(setup,userScreenInstance,usersDetail,button=usersDetail['button'])
+
+        try:
+            userDetailFromUIPopup,listOfPrivileges=UMHelper.setUserDetail(setup,userScreenInstance,usersDetail,button=usersDetail['button'])
+        except:
+            r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+            setup.d.save_screenshot(r)
+            logger.debug("Got Exception because of invalid entry for New User:: Screenshot with name = %s is saved", r)
+            resultlogger.debug("Got Exception because of invalid entry for New User:: Screenshot with name = %s is saved", r)
+            getHandle(setup, MuralConstants.UserPopUpScreen,'icons')['icons']['closePopupIcon'][0].click()
+            continue
+
         tableHandle = getHandle(setup, MuralConstants.UserManagementScreen,'table')
         tableMap = userScreenInstance.table.getTableDataMap(tableHandle, driver=setup)
         if usersDetail['button']=='Create' and len(userDetailFromUIPopup)>0:
