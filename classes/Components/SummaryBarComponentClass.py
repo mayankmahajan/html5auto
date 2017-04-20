@@ -87,8 +87,6 @@ class SummaryBarComponentClass(BaseComponentClass):
                 time.sleep(2)
                 for j in range(1,len(measures)):
 
-                    # Updated summary bar for (‘Flow Duration’ == > ‘Avg Flow Duration’)
-                    
                     measureSelected=summaryBarHandler.find_elements_by_class_name("Row")[j].text
 
                     if "Flow Duration" in measureSelected:
@@ -106,6 +104,7 @@ class SummaryBarComponentClass(BaseComponentClass):
 
             buttons[0].click()
             return data,dimensionSelected
+
         except Exception as e:
             logger.error("Got Exception in Summary Bar = %s",str(e) )
             return e,e
