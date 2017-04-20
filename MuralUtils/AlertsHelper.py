@@ -630,9 +630,11 @@ def delete(linkname,setup,index,flag=True):
 
     logger.debug("Confirming Delete from Pop up")
     try:
-        gHandle['alert'][button][0].click()
+        screenInstance.dropdown.clickButton(button,gHandle,parent='alert')
+        # gHandle['alert'][button][0].click()
         try:
-            gHandle['alert'][button][0].click()
+            screenInstance.dropdown.clickButton(button,gHandle,parent='alert')
+            # gHandle['alert'][button][0].click()
         except:
             pass
     except Exception as e:

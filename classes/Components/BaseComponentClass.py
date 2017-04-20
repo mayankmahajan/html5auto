@@ -375,7 +375,7 @@ class BaseComponentClass:
     def clickButton(self,value,h,parent="allbuttons",child="button"):
         for el in h[parent][child]:
             try:
-                if value == el.text.strip():
+                if value == el.text.strip() or str(value).lower() == str(el.text.strip()).lower():
                     try:
                         el.click()
                         time.sleep(2)
