@@ -136,21 +136,22 @@ def createKPIAlert(setup, request = {}):
     rulename = "automationrule"+str(rndmNum)
     request['ruleName'] = setName(rulename,getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLINPUTS))
     allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
-    # request['gateway'] = setDropRandomly(0, allselects)
-    # request['schema'] = setDropRandomly(1, allselects)
-    # request['kpi'] = setDropRandomly(2, allselects)
-    request['gateway'] = setDrop("Mumbai",0, allselects)
-    request['schema'] = setDrop("apn",1, allselects)
-    request['kpi'] = setDrop("Packet Drop",2, allselects)
+    allmultiselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,"filterPopup")
+    request['gateway'] = setMultipleDropRandomly(0, allmultiselects)
+    request['schema'] = setMultipleDropRandomly(1, allmultiselects)
+    request['kpi'] = setMultipleDropRandomly(2, allmultiselects)
+    # request['gateway'] = setDrop("Mumbai",0, allselects)
+    # request['schema'] = setDrop("apn",1, allselects)
+    # request['kpi'] = setDrop("Packet Drop",2, allselects)
 
-    request['index'] = setDropRandomly(3, allselects)
-    request['gran'] = setDropRandomly(4, allselects)
+    request['index'] = setMultipleDropRandomly(3, allmultiselects)
+    request['gran'] = setDropRandomly(0, allselects)
 
     request['conditions'] = []
-    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
-    request['conditions'].append(setKPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
-    request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
-    request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
+    request['conditions'].append(setKPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
+    request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
+    request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
 
     request['status'] = "Active"
     clickButton(setup,"Create")
@@ -292,6 +293,12 @@ def setDropRandomly(index, handle):
     instance = DropdownComponentClass()
     return instance.doRandomSelectionOnVisibleDropDown(handle,index)
 
+def setMultipleDropRandomly(index, handle):
+    instance = MulitpleDropdownComponentClass()
+    return instance.domultipleSelectionWithIndex_type2_random(handle,occurence=index)
+
+
+
 def setDrop(value,index,handle,selectionByIndex=False):
     instance = DropdownComponentClass()
     if selectionByIndex:
@@ -402,15 +409,21 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
 def setKPICondition(priorty, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA"):
     if priorty==0:
         index = firstDrop
+        if thresholdValue == "NA":
+            thresholdValue = random.randint(0,30)
     elif priorty==1:
         index = firstDrop+1
+        if thresholdValue == "NA":
+            thresholdValue = random.randint(30,70)
     elif priorty==2:
         index = firstDrop+2
+        if thresholdValue == "NA":
+            thresholdValue = random.randint(70,150)
     elif priorty==3:
         index = firstDrop+3
+        if thresholdValue == "NA":
+            thresholdValue = random.randint(150,1000)
 
-    if thresholdValue == "NA":
-            thresholdValue = random.randint(0,100)
 
 
 
@@ -817,16 +830,18 @@ def validateKPIAlertWizard(setup, request = {}):
 
     # Set each dropdown
     allselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
-    request['gateway'] = setDrop("Mumbai",0, allselects)
+    allmultiselects = getHandle(setup,MuralConstants.CREATERULEPOPUP,"filterPopup")
+    request['gateway'] = setMultipleDropRandomly(0, allmultiselects)
+    # request['gateway'] = setDrop("Mumbai",0, allselects)
     flag_Gateway = False if "Exception" in  request['gateway'] else True
-    request['schema'] = setDrop("apn",1, allselects)
+    request['schema'] = setMultipleDropRandomly(1, allmultiselects)
     flag_Schema = False if "Exception" in  request['schema'] else True
-    request['kpi'] = setDrop("Packet Drop",2, allselects)
+    request['kpi'] = setMultipleDropRandomly(2, allmultiselects)
     flag_KPI = False if "Exception" in  request['kpi'] else True
 
-    request['index'] = setDropRandomly(3, allselects)
+    request['index'] = setMultipleDropRandomly(3, allmultiselects)
     flag_Index = False if "Exception" in  request['index'] else True
-    request['gran'] = setDropRandomly(4, allselects)
+    request['gran'] = setDropRandomly(0, allselects)
     flag_Gran = False if "Exception" in  request['gran'] else True
 
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
@@ -843,7 +858,7 @@ def validateKPIAlertWizard(setup, request = {}):
     for severity in range(4):
         for k,threshold in thresholds.iteritems():
             request['conditions'] = []
-            request['conditions'].append(setKPICondition(severity,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5,enableCondition=False,thresholdValue=threshold['text']))
+            request['conditions'].append(setKPICondition(severity,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1,enableCondition=False,thresholdValue=threshold['text']))
             # number_value=re.findall(r'\d+',request['conditions'][0])[0]
             number_value = request['conditions'][0].split(re.findall('[=<>]+',request['conditions'][0])[0])[1]
             checkEqualAssert(threshold['expected'],str(number_value),
@@ -851,7 +866,7 @@ def validateKPIAlertWizard(setup, request = {}):
         dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
     request['conditions'] = []
-    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5,enableCondition=True,thresholdValue=""))
+    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1,enableCondition=True,thresholdValue=""))
     flag_Threshold = False if re.findall(r'\d+', request['conditions'][0]) == [] else True
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
@@ -872,21 +887,21 @@ def validateKPIAlertWizard(setup, request = {}):
         popInstance, setup)
 
     request['conditions'] = []
-    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(0,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
     if request['conditions'][0] != "-":
         flag_Threshold = True
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
 
-    request['conditions'].append(setKPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(1,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
     if request['conditions'][1] != "-":
         flag_Threshold = True
 
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
-    request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(2,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
     if request['conditions'][2] != "-":
         flag_Threshold = True
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)
-    request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,5))
+    request['conditions'].append(setKPICondition(3,getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,1))
     if request['conditions'][3] != "-":
         flag_Threshold = True
     dumpResultForButton(flag_rule and flag_Threshold and flag_Gran and flag_Index and flag_KPI and flag_Schema and flag_rule,request,popInstance,setup)

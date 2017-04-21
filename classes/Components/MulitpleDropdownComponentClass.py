@@ -155,3 +155,18 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         return value
 
 
+    def domultipleSelectionWithIndex_type2_random(self,h,occurence=0,parent="filterPopup",child="multiselect-dropdown"):
+        activeDropDowns = h[parent][child]
+        activeDropDowns[occurence].click()
+        time.sleep(2)
+        elements = activeDropDowns[occurence].find_elements_by_class_name("menuitemDiv")
+        try:
+            import  random
+            indexToBeSelected = random.randint(0,len(elements)-1)
+        except ValueError or Exception as e:
+            logger.error("Exception found (No options available) for selection in DropDown = %s",str(e))
+            return "Exception :"+str(e)
+        for i in range(len(elements)):
+            if i == indexToBeSelected:
+                elements[i].click()
+                return str(activeDropDowns[occurence].find_elements_by_xpath("./div/*")[0].text)
