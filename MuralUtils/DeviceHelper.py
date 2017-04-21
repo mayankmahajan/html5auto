@@ -85,8 +85,8 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag,direct
     if not flag:
         b1,s1=getSelectionsFromDevice(instance, setup, measureSelected['locatorText'],direction)
 
-        checkEqualAssert("All",b1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at BTV = ")
-        checkEqualAssert("All",s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
+        checkEqualAssert(True,("All" in b1['dim'][0]) and (not (',' in b1['dim'][0])) , quicklink, measureSelected['locatorText'], "Verify Default Selection = " +b1['dim'][0]+" at BTV ")
+        checkEqualAssert(True,("All" in s1['dim']) and (not (',' in s1['dim'])), quicklink, measureSelected['locatorText'], "Verify Default Selection = "+s1['dim']+" at summary header")
         checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
         checkEqualAssert(s1['value'][0],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
         checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")

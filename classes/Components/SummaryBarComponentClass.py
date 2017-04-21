@@ -132,7 +132,7 @@ class SummaryBarComponentClass(BaseComponentClass):
 
             temp ={}
             for key in d1.keys():
-                temp[key] = [self.calTotal([d1[key],d2[key]],[d1[key],d2[key]],measureSelected)['totalValue']]
+                temp[key] = self.calTotal([d1[key],d2[key]],[d1[key],d2[key]],measureSelected)['totalValue']
 
             return temp,dim1
 

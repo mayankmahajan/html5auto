@@ -92,8 +92,8 @@ try:
                                             text=str(h['general']['drop'][1].find_elements_by_xpath("./div/*")[0].text).split('>')
                                             #btvdata0 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=0)
                                             #btvdata1 = networkScreenInstance.multibtv.getBTVData(setup, getHandle(setup, MuralConstants.ContentScreen, "btvGroup"), occurence=1)
-                                            checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value =%s from dropdowm with left btv" + str(text[0]).strip())
-                                            checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value =%s from dropdowm with right btv" + str(text[0]).strip())
+                                            checkEqualAssert(True, str(text[0]).strip() in str(btvdata0['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify left side value "+ str(text[0]).strip()+" from dropdowm with left btv")
+                                            checkEqualAssert(True, str(text[1]).strip() in str(btvdata1['BTVCOLUMN1'][0]), selectedQuicklink, measureSelected, "Verify right side value "+str(text[0]).strip()+" from dropdowm with right btv")
                                             #if secondmesindex==0:
                                              #   checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in first btv for (Service Provider > Web Protocol)")
                                               #  checkEqualAssert(str(btvdata0['BTVCOLUMN1'][len(btvdata0['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in first btv for (Service Provider > Web Protocol) ")
