@@ -16,7 +16,8 @@ try:
 
     isError(setup)
 
-    createKPIAlert(setup)
+    for i in range(15):
+        createKPIAlert(setup)
     # GUIDE_INFO
     setup.d.close()
 

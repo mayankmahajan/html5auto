@@ -17,6 +17,7 @@ from MuralConstants import *
 import re
 from classes.Objects.Time import *
 from classes.Components.AlertsComponentClass import *
+from selenium.webdriver.common.keys import *
 
 
 
@@ -131,6 +132,10 @@ def createKPIAlert(setup, request = {}):
     # Launching Settings Page
     popInstance.dropdown.clickSpanWithTitle("Settings",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
     popInstance.switcher.switchTo(1,getHandle(setup,MuralConstants.ALERTSCREEN,"settings"),"settings")
+
+    kpi_gateway_selected = setMultipleDropRandomly(0,getHandle(setup,MuralConstants.ALERTSCREEN,"filterPopup"))
+    logger.info("GateWay selected on KPI Alert Rules Settings page = %s",kpi_gateway_selected)
+
     popInstance.dropdown.customClick(getHandle(setup,MuralConstants.ALERTSCREEN,"settings")['settings']['createrule'])
 
     rulename = "automationrule"+str(rndmNum)
@@ -157,6 +162,35 @@ def createKPIAlert(setup, request = {}):
     clickButton(setup,"Create")
 
     checkKPIAlertTableForCreatedRecord(setup,request)
+    searchAlert(setup,"automation")
+
+
+def searchAlert(setup,searchText):
+    try:
+        ce = DropdownComponentClass()
+        searchedText = ce.sendkeys_input(searchText,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search")
+        ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search",clear=False)
+        checkEqualAssert(searchText,searchedText,message="Checking the Search text entered at KPI Settings Page")
+        tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
+        flag = True
+
+        for key in tableMap.keys():
+            if searchText not in key:
+                flag = False
+                break
+
+        checkEqualAssert(True,flag,message="Verifying all the table rows are as per the searched String = "+searchText)
+        logger.info("Current Searched String = %s",searchedText)
+        logger.info("Going to clear the search string")
+        cleared_SearchedText = ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search")
+
+        checkEqualAssert("",cleared_SearchedText,message="Verifying the Searched Text is cleared by ENTER key")
+    except Exception as e:
+        logger.error("Got Exception in Search at KPI Settings Page = %s",str(e))
+        return e
+
+
+
 
 def checkDPIAlerts(setup):
     popInstance = GenerateReportsPopClass(setup.d)
@@ -267,15 +301,23 @@ def checkDPIAlertTableForCreatedRecord(setup,request,index=0):
     # print data['rows'][0]
 
 def checkKPIAlertTableForCreatedRecord(setup,request,index=0):
-    # saving the table data as keys
-    tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
-    row = tableMap['rows'][request['ruleName']]
-    print row
-    actual = getKPIAlertsDataAsDict(row)
-    logger.info("Requested Parameters to create KPI Alert = %s",str(request))
-    logger.info("Actual Parameters shown in Table for KPI Alerts = %s",str(actual))
-    for k,v in actual.iteritems():
-        checkEqualAssert(request[k],actual[k],"","","Checking Table for KPI Alert Rule Created : "+k)
+    try:
+        # saving the table data as keys
+        tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
+        row = tableMap['rows'][request['ruleName']]
+        print row
+        actual = getKPIAlertsDataAsDict(row)
+        logger.info("Requested Parameters to create KPI Alert = %s",str(request))
+        logger.info("Actual Parameters shown in Table for KPI Alerts = %s",str(actual))
+        for k,v in actual.iteritems():
+            checkEqualAssert(request[k],actual[k],"","","Checking Table for KPI Alert Rule Created : "+k)
+    except KeyError as e:
+        logger.error("Got Exception : Rulename is not present in table = %s",str(request['ruleName']))
+        takeScreenshot(setup.d)
+
+    except Exception as e:
+        logger.error("Got Exception in checkKPIAlertTableForCreatedRecord")
+        takeScreenshot(setup.d)
 
 def setName(name,handle,index=0):
     instance = DropdownComponentClass()

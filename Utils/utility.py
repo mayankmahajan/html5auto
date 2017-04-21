@@ -1060,7 +1060,9 @@ def checkDeletedRow(setup, screen, screenInstance,columnName, rowToDelete, flag)
         return e
 
 
-
-
-
-
+def takeScreenshot(driver):
+        import random
+        r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+        driver.save_screenshot(r)
+        logger.error("UI is not present or loaded. Screenshot dumped with %s", str(r))
+        resultlogger.info("******* UI is not present or loaded. Screenshot dumped with %s", str(r))

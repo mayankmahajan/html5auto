@@ -480,6 +480,7 @@
             <component id = "search" selector="tag name" locator="kiwik-alerts-list-search" parent="True"/>
             <component id = 'alert' selector="class name" locator="filterPopup" parent="True"/>
             <component id = "counter" selector="tag name" locator="kiwik-alerts-list-counter" parent="True"/>
+            <component id = "filterPopup" selector="css selector" locator="kiwik-kpi-alert-rules" parent="True"/>
 
 
             <!--selector="class name" locator="searchInput"-->

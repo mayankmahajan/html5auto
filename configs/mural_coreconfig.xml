@@ -231,6 +231,7 @@
             <component id = "searchInput" selector="css selector" locator='.searchInput,#searchInput'/>
             <component id = "searchlabelstyle" selector="class name" locator='searchlabelstyle'/>
             <component id = "datepicker" selector="css selector" locator="img.datePickerIcon,img.alertCalenderIcon"/>
+            <component id = "input" selector="css selector" locator="input[type=search]"/>
         </componentConfig>
 
         <componentConfig id = 'exploreList'>
