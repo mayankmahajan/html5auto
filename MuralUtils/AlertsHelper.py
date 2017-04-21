@@ -162,29 +162,33 @@ def createKPIAlert(setup, request = {}):
     clickButton(setup,"Create")
 
     checkKPIAlertTableForCreatedRecord(setup,request)
-    searchAlert(setup,"automation")
+    searchAlert(setup,"automation",clear=True)
 
 
-def searchAlert(setup,searchText):
+def searchAlert(setup,searchText,clear=False):
     try:
         ce = DropdownComponentClass()
+        table = TableComponentClass()
         searchedText = ce.sendkeys_input(searchText,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search")
         ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search",clear=False)
         checkEqualAssert(searchText,searchedText,message="Checking the Search text entered at KPI Settings Page")
-        tableMap = getTableDataMap(setup,MuralConstants.ALERTSCREEN)
+        tabledata= table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"))
+        rulenames = [e[0]for e in tabledata['rows']]
         flag = True
 
-        for key in tableMap.keys():
+        for key in rulenames:
             if searchText not in key:
                 flag = False
                 break
 
         checkEqualAssert(True,flag,message="Verifying all the table rows are as per the searched String = "+searchText)
         logger.info("Current Searched String = %s",searchedText)
-        logger.info("Going to clear the search string")
-        cleared_SearchedText = ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search")
 
-        checkEqualAssert("",cleared_SearchedText,message="Verifying the Searched Text is cleared by ENTER key")
+        if clear:
+            logger.info("Going to clear the search string")
+            cleared_SearchedText = ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search")
+            checkEqualAssert("",cleared_SearchedText,message="Verifying the Searched Text is cleared by ENTER key")
+
     except Exception as e:
         logger.error("Got Exception in Search at KPI Settings Page = %s",str(e))
         return e
@@ -324,8 +328,9 @@ def setName(name,handle,index=0):
     return instance.sendkeys_input(name,handle,index)
 
 def getName(handle,index=0):
-    instance = DropdownComponentClass()
-    return instance.getValue_input(handle,index)
+    return str(handle[MuralConstants.ALLLABELS]["label"][index].text)
+    # instance = DropdownComponentClass()
+    # return instance.getValue_input(handle,index)
 
 def getDrop(index,handle):
     instance = DropdownComponentClass()
@@ -724,6 +729,7 @@ def checkAlertsCount(setup):
 
 def editAlert(setup,index,columnName,flag=True):
     screenInstance = ReportsModuleClass(setup.d)
+    searchAlert(setup,"automation")
     tableHandle = getHandle(setup,MuralConstants.ALERTSCREEN,"table")
     tableData = screenInstance.table.getTableData1(tableHandle)
     key = screenInstance.table.getColumnValueMap(tableData,index,columnName)
@@ -799,7 +805,7 @@ def getDPIDetails(setup):
 
     details = []
 
-    details.append(getName(getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLINPUTS))) #rulename
+    details.append(getName(getHandle(setup, MuralConstants.CREATERULEPOPUP, Constants.ALLLABELS))) #rulename
     details.append(getDrop(2,allselects)) #gran
     type=getDrop(1,allselects) #type
     details.append(getFilters(setup,type,allselects)) #filters
@@ -1115,7 +1121,9 @@ def getDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
     index,unitSystem = updateIndexAsPerPriority(setup,type,priorty,firstDrop)
     try:
         instance = DropdownComponentClass()
-        if instance.isCheckBoxEnabled(handle,priorty):
+        flag = True if instance.isCheckBoxSelected_UMMural(handle,priorty) != 0 else False
+
+        if instance.isCheckBoxEnabled_UMMural(handle,priorty) and flag:
             logger.info("Got Priority %s as Enabled",str(priorty))
             handle = getHandle(setup,MuralConstants.CREATERULEPOPUP,Constants.ALLSELECTS)
 

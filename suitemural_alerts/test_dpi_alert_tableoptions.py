@@ -13,7 +13,7 @@ try:
     exploreScreenInstance = ExplorePageClass(setup.d)
     exploreHandle = getHandle(setup,"explore_Screen")
     exploreScreenInstance.exploreList.launchModule(exploreHandle,"ALERTS")
-
+    print isError(setup)
 
     popInstance = GenerateReportsPopClass(setup.d)
     # Launching Settings Page
@@ -25,8 +25,8 @@ try:
     columnName = "DPI Alert Rule Name"
 
     print AlertsHelper.deleteTableEntry(setup,MuralConstants.ALERTSCREEN,1,columnName)
-    # print AlertsHelper.deleteTableEntry(setup,MuralConstants.ALERTSCREEN,0,columnName,False)
-    # print AlertsHelper.editAlert(setup, 0,columnName)
+    print AlertsHelper.deleteTableEntry(setup,MuralConstants.ALERTSCREEN,0,columnName,False)
+    print AlertsHelper.editAlert(setup, 0,columnName)
 
 
 

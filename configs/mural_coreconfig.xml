@@ -281,7 +281,7 @@
             <component id = "info" selector="css selector" locator='[class*=info][class*=Icon]' wait = 'skip'/>
             <!--<component id = "delete" selector="css selector" locator='[class*=delete][class*=Icon],div[class*=trash][class*=Div]' wait = 'skip'/>-->
 
-            <component id = "delete" selector="css selector" locator='[class*=delete][class*=Icon],div[title*=Delete]' wait = 'skip'/>
+            <component id = "delete" selector="css selector" locator='[class*=delete][class*=Icon],div[title*=Delete][title*=User]' wait = 'skip'/>
             <component id = "edit" selector="css selector" locator='[class*=edit][class*=Icon],div[class*=edit][class*=Div]' wait = 'skip'/>
             <!--<component id = "delete" selector="class name" locator='deleteGridIcon' wait = 'skip'/>-->
             <component id = "view" selector="class name" locator='viewGridIcon' wait = 'skip'/>

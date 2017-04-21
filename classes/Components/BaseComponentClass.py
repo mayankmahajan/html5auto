@@ -298,7 +298,7 @@ class BaseComponentClass:
                 else:
                     return True
         except Exception as e:
-            logger.error("Exception found while checking Checkbox having value = %s Enable or Disable", value)
+            logger.error("Exception found while checking Checkbox having value = %s Enable or Disable", str(e))
             return e
 
 

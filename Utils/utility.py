@@ -1035,10 +1035,10 @@ def checkDeletedRow(setup, screen, screenInstance,columnName, rowToDelete, flag)
     button="OK" if flag else "Cancel"
 
     popUpMessage = gHandle['alert']['filters'][0].text.strip().strip('\n').strip()
-    expectedMessage = "Do you want to delete \""+rowToDelete.keys()[0]+"\" alert ?"
+    expectedMessage = "Do you want to delete \""+rowToDelete.keys()[0]+"\" alert rule?"
 
     actualHeader = gHandle['alert']['header'][0].text.strip().strip('\n').strip()
-    expectedHeader = "Delete Alert"
+    expectedHeader = "Delete Alert Rule"
     checkEqualAssert(expectedMessage,popUpMessage,"","","Verify Delete Dialog text")
     checkEqualAssert(expectedHeader,actualHeader,"","","Verify Delete Dialog Header")
 
