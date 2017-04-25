@@ -7,9 +7,10 @@ from email.mime.image import MIMEImage
 
 
 # Define these once; use them twice!
-def sendResults(filePath):
+def sendResults(filePath,additional_text=""):
     strFrom = 'mayank.mahajan@guavus.com'
-    strTo = 'mayank.mahajan@guavus.com,Saikat.Prabhakar@guavus.com'
+    # strTo = 'mayank.mahajan@guavus.com,Saikat.Prabhakar@guavus.com'
+    strTo = 'mayank.mahajan@guavus.com'
     smtp_server = "smtp-relay.guavus.com"
 
     # Create the root message and fill in the from, to, and subject headers
@@ -28,7 +29,11 @@ def sendResults(filePath):
     msgAlternative.attach(msgText)
 
     # We reference the image in the IMG SRC attribute by the ID we give it below
-    msgText = MIMEText('<b>Find <i>Results</i></b>:<br><img src="cid:image1"><br><br>ui-automation', 'html')
+    txt = '<b>Find <i>Results</i></b>:<br><img src="cid:image1">'
+    mText = txt + additional_text
+
+
+    msgText = MIMEText(mText, 'html')
     msgAlternative.attach(msgText)
 
     # This example assumes the image is in the current directory
@@ -49,18 +54,30 @@ def sendResults(filePath):
     server.quit()
 
 
-# from pyvirtualdisplay import Display
-from selenium import webdriver
+def sendmail_selenium(additional_script_path= "",additional_text=""):
 
-# display = Display(size=(800, 600))
-# display.start()
+    # from pyvirtualdisplay import Display
+    from selenium import webdriver
 
-driver = webdriver.Firefox()
-driver.get("http://localhost:3333/index2.html")
-import time
-time.sleep(4)
-filenamePath = "result_graph.png"
-driver.save_screenshot(filenamePath)
-sendResults(filenamePath)
-driver.quit()
-# display.stop()
+    # display = Display(size=(800, 600))
+    # display.start()
+
+    driver = webdriver.Firefox()
+    driver.get("http://localhost:3333/index2.html")
+    import time
+    time.sleep(4)
+
+    driver.execute_script(additional_script_path)
+    # driver.execute_script('var script1 = document.createElement("script");'
+    #                       'script1.setAttribute("type", "text/javascript");'
+    #                       'script1.setAttribute("src", arguments[0]);'
+    #                       'document.getElementsByTagName("head")[0].appendChild(script1);',additional_script_path)
+
+
+    time.sleep(4)
+
+    filenamePath = "result_graph.png"
+    driver.save_screenshot(filenamePath)
+    sendResults(filenamePath,additional_text)
+    driver.quit()
+    # display.stop()

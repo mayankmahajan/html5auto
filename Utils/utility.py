@@ -60,18 +60,28 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
             # msg = msg+" : "+k+" "+tcPass
             resultlogger.info(msg1+"  :: " +k+" ::  "+tcPass)
             logger.info(msg1+"  :: " +k+" ::  "+tcPass)
+            try:
+                testcases.append({'title': msg1+"  :: " +k, 'expected': f1[k], 'actual': f2[k], 'status':'PASS'})
+            except:
+                pass
 
         except AssertionError :
 
             # msg = msg+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail
             resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
             logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: "+str(f2[k])+tcFail)
+            try:
+                testcases.append({'title': msg1+"  :: " +k, 'expected': f1[k], 'actual': f2[k], 'status':'FAIL'})
+            except:
+                pass
         except KeyError:
             resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
             logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
 def checkEqualAssert(expected, actual, time="", measure="", message=""):
+
     msg = time + " " + measure + " " + message
+    org_msg = msg
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     try:
@@ -80,11 +90,23 @@ def checkEqualAssert(expected, actual, time="", measure="", message=""):
         resultlogger.info(msg)
         logger.info(msg)
 
+        try:
+            testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'PASS'})
+        except:
+            pass
+
     except AssertionError:
 
         msg = msg+" Expected: "+str(expected) + " Actual: " + str(actual) + tcFail
         resultlogger.info(msg)
         logger.info(msg)
+
+        # import __builtin__
+        # if hasattr(__builtin__,"testcases"):
+        try:
+            testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'FAIL'})
+        except:
+            pass
 
 
 
