@@ -69,7 +69,7 @@
         <network id ="0" filters = '0,1::2::1'/>
         <apnrat id = "0" filters = ' :: '/>
         <device id = "0" filters = ' :: :: :: '/>
-        <content id = "0" filters = '0,1:: :: :: '/>
+        <content id = "0" filters = '1,2:: :: :: '/>
 
         <network id ="1" filters = ' :: :: '/>
         <apnrat id = "1" filters = ' ::2'/>
@@ -217,8 +217,8 @@
 
 
         <network id ="29" filters = ' :: :: '/>
-        <apnrat id = "29" filters = '0,1::0,1,2'/>
-        <device id = "29" filters = '0,2::0,1,4::0,4::0,3'/>
+        <apnrat id = "29" filters = '1::1,2'/>
+        <device id = "29" filters = '0,2::1,4::0,4::0,3'/>
         <content id = "29" filters = '0,2:: :: :: '/>
     </globalScreenFilters>
 
