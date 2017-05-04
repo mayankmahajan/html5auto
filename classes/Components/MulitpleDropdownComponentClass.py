@@ -22,25 +22,31 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         #     for e in  el.find_elements_by_tag_name("input"):
         #         if str(e[0].get_attribute("checked")).upper() == "TRUE" or str(e[0].get_attribute("ng-reflect-checked")).upper() == "TRUE":
         #             selections.append(el.text)
+        flag = False
         try:
             for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[ng-reflect-checked="true"]'):
 
-
+                flag = True
                 # commenting below lines to get all selected values in dropdown (Below if is only for Global Filter Scenario)
-                if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
+                if e.find_elements_by_xpath("../../div")[0].text.strip() == "Select All":
                     selections.append("ALL")
                     activeDropDowns[index].click()
                     return selections
                 selections.append(e.find_elements_by_xpath("../../div")[0].text)
                 # selections.append(e.find_elements_by_xpath("..//div")[0].text)
+            if not flag:
+                selections.append("")
         except Exception as e:
             try:
                 for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[checked="true"]'):
+                    flag=True
                     if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
                         selections.append("ALL")
                         activeDropDowns[index].click()
                         return selections
                     selections.append(e.find_elements_by_xpath("..//div")[0].text)
+                if not flag:
+                    selections.append("")
             except Exception as e:
                 logger.error("Exception %s found while getting current selection, Component: MulitpleDropdownComponentClass",e)
 
