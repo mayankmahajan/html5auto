@@ -560,10 +560,10 @@ def clickButton(setup,buttonName,input=False,img=False):
     else:
         return instance.clickButton(buttonName,buttonHandle)
 
-def doSearchAndValidateAlerts(setup):
+def doSearchAndValidateAlerts(setup,searchedtext="Nokia"):
     screenInstance = AlertsComponentClass()
-    searchedtext = "Nokia"
-    textEntered = screenInstance.search.sendkeys_input(searchedtext,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","searchInput")
+    #searchedtext = "Nokia"
+    textEntered = screenInstance.search.sendkeys_input(searchedtext,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","input")
     checkEqualAssert(searchedtext,textEntered,"","","Verify Search Text Entered")
     # screenInstance.search.setSearchText(getHandle(setup,MuralConstants.ALERTSCREEN,"search"),searchedtext)
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
