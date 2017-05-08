@@ -43,7 +43,7 @@ import sys
     '''
 
 
-def getSelectionsFromContent(networkScreenInstance, setup, measureSelected):
+def getSelectionsFromContent(networkScreenInstance, setup, measureSelected,direction=0):
 
     summary={}
     summary['dim'] = []
@@ -54,7 +54,7 @@ def getSelectionsFromContent(networkScreenInstance, setup, measureSelected):
     btv1 = networkScreenInstance.multibtv.getSelections(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1,measureSelected=measureSelected)
     btv1['header'] = networkScreenInstance.multibtv.getHeader(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"))
 
-    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection2(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"))
+    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),direction=direction)
     summary['dim'] = summary['header']
 
     # For handle issue of avg flow/hit duration in measure and flow/hit duration in summary bar
@@ -114,11 +114,11 @@ def checkLegend(setup, instance):
 
 
 
-def checkAllComponent(setup,instance,quicklink,measureSelected,flag):
+def checkAllComponent(setup,instance,quicklink,measureSelected,flag,direction=0):
     breadCrumbLabel = instance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
 
     if not flag:
-        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected)
+        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected,direction)
 
         #checkEqualAssert(True,"All" in b1['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at  = "+p1['header'])
         #checkEqualAssert("All",p2['dim'][0], quicklink, measureSelected['locatorText'], "Verify Default Selection at picker = "+p2['header'])
@@ -131,7 +131,7 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,flag):
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected, "Verify BreadCrumb Label")
         checkEqualAssert(b1['totalValue'],str(b2['value'][0]),quicklink,measureSelected,"Verify sum of selected btvdata0 with first row of btvdata1")
     else:
-        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected)
+        b1,b2,s1=getSelectionsFromContent(instance, setup, measureSelected,direction)
         checkEqualAssert(b2['dimSelected'],s1['dim'], quicklink, measureSelected, "Verify Selection at summary = "+s1['header'])
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected, "Verify BreadCrumb Label")
         checkEqualAssert(str(s1['value'][0]),b2['totalValue'],quicklink,measureSelected,"Verify Summary Card data with btv, All Sub")

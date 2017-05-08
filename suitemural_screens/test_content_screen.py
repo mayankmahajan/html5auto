@@ -105,7 +105,7 @@ try:
                                             #checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 1]),"Unidentified", selectedQuicklink, measureSelected,"Verify Unidentified must be at last in btv")
                                             #checkEqualAssert(str(btvdata1['BTVCOLUMN1'][len(btvdata1['BTVCOLUMN1']) - 2]),"Miscellaneous", selectedQuicklink, measureSelected,"Verify Miscellaneous must be at second last in btv")
 
-                                        checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measureSelected,False)
+                                        checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measureSelected,False,d)
                                         #p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                                         #for i in range(1,len(p['BTVCOLUMN1'])):
                                         # p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
@@ -130,7 +130,7 @@ try:
 
                                         doActionsOnContent(networkScreenInstance, setup,btv0indcies,btv1indcies)
                                         # sleep(8)
-                                        checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measureSelected,True)
+                                        checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measureSelected,True,d)
 
                 else:
                     #isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))

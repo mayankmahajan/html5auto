@@ -51,15 +51,15 @@ try:
                         if networkScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
                             selectedSwitcher = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection"))
                             checkEqualAssert([d],selectedSwitcher,selectedQuicklink,measure['locatorText'],"Verify Selected Measure Direction")
-                            checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measure,0,False)
+                            checkAllComponent(setup,networkScreenInstance,selectedQuicklink,measure,0,False,d)
                             #checkAllComponent(setup, instance, measureSelected, index, flag)
 
                             p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                             for i in range(1,len(p['BTVCOLUMN1'])):
 
-                                doActionsOnNetwork(networkScreenInstance,setup,i)
+                                doActionsOnNetwork(networkScreenInstance,setup,i,d)
                                 # sleep(8)
-                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,i,True)
+                                checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,i,True,d)
 
                 else:
                     isDirectionsPresent = networkScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))

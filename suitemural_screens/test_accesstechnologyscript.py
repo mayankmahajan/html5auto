@@ -53,7 +53,7 @@ try:
                         if accesstechnologyScreenInstance.switcher.measureChangeSwitcher(d,getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection")):
                             selectedSwitcher = accesstechnologyScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup,MuralConstants.ATSCREEN,"measureChangeSection"))
                             checkEqualAssert([d],selectedSwitcher,selectedQuicklink,measure['locatorText'],"Verify Selected Measure Direction")
-                            checkAllComponentRelatedToPie(setup,accesstechnologyScreenInstance,selectedQuicklink,measure,False)
+                            checkAllComponentRelatedToPie(setup,accesstechnologyScreenInstance,selectedQuicklink,measure,False,d)
 
                             #unSetPie(setup, accesstechnologyScreenInstance, selectedQuicklink, measure)
                             #need to be fix
@@ -64,7 +64,7 @@ try:
                             p = accesstechnologyScreenInstance.pielegend.getData(getHandle(setup, MuralConstants.ATSCREEN, "pielegend"))
                             for i in range(len(p['legendText'])):
                                 accesstechnologyScreenInstance.pielegend.setSelection(setup.dH, [i],getHandle(setup, MuralConstants.ATSCREEN, "pielegend"), True)
-                                checkAllComponentRelatedToPie(setup, accesstechnologyScreenInstance, selectedQuicklink,measure,True)
+                                checkAllComponentRelatedToPie(setup, accesstechnologyScreenInstance, selectedQuicklink,measure,True,d)
 
                 else:
                     isDirectionsPresent = accesstechnologyScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.NWSCREEN, "measureChangeSection"))
