@@ -62,7 +62,7 @@ class Constants(object):
     TIMEPATTERN = '%d %b %Y %H:%M'
     FLAGDAILY = 24
     FLAGHOURLY = 1
-
+    localserver = "http://localhost:3333/index2.html"
 
     # chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
     # chromedriverpath = "C:\Users\Administrator\Downloads\chromedriver_win32\chromedriver.exe"

@@ -9,21 +9,37 @@ try:
     # sleep(15)
     login(setup,MuralConstants.USERNAME,MuralConstants.PASSWORD)
 
-    # print isError(setup)
+    print isError(setup)
 
     exploreScreenInstance = ExplorePageClass(setup.d)
     exploreHandle = getHandle(setup,"explore_Screen")
     exploreScreenInstance.exploreList.launchModule(exploreHandle,"REPORTS")
 
-    # print isError(setup)
+    print isError(setup)
 
-
-
-    setup.d.save_screenshot('../screenshots/screenie.png')
+    # setup.d.save_screenshot('../screenshots/screenie.png')
 
     tableMap = ReportsHelper.getTableDataMap(setup,MuralConstants.REPORTSCREEN)
 
     columnName = "Name"
+    sortedData = ReportsHelper.sortTable(setup, columnName)
+
+    resultlogger.debug('<br>*********** Logging Results for checkSortTable on Column %s ***********<br><br>',columnName)
+    checkEqualDict(sortedData,tableMap['rows'],"","","Checking each row")
+
+    columnName = "Type"
+    sortedData = ReportsHelper.sortTable(setup, columnName)
+
+    resultlogger.debug('<br>*********** Logging Results for checkSortTable on Column %s ***********<br><br>',columnName)
+    checkEqualDict(sortedData,tableMap['rows'],"","","Checking each row")
+
+    columnName = "Requested by"
+    sortedData = ReportsHelper.sortTable(setup, columnName)
+
+    resultlogger.debug('<br>*********** Logging Results for checkSortTable on Column %s ***********<br><br>',columnName)
+    checkEqualDict(sortedData,tableMap['rows'],"","","Checking each row")
+
+    columnName = "Delivered on"
     sortedData = ReportsHelper.sortTable(setup, columnName)
 
     resultlogger.debug('<br>*********** Logging Results for checkSortTable on Column %s ***********<br><br>',columnName)

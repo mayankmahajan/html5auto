@@ -4,7 +4,7 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText  # Added
 from email.mime.image import MIMEImage
-
+from Utils.Constants import *
 
 # Define these once; use them twice!
 def sendResults(filePath,additional_text=""):
@@ -63,7 +63,7 @@ def sendmail_selenium(additional_script_path= "",additional_text=""):
     # display.start()
 
     driver = webdriver.Firefox()
-    driver.get("http://localhost:3333/index2.html")
+    driver.get(Constants.localserver)
     import time
     time.sleep(4)
 

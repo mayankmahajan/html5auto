@@ -103,7 +103,8 @@ module_strings = [module.split(delimiter)[1] + "." + module.split(delimiter)[2].
 
 for module in module_strings:
     try:
-        testcases = []
+        import __builtin__
+        __builtin__.testcases = []
         logger.debug('*********** TestCase Start ***********')
         resultlogger.debug('<br>*********** Logging Results for %s ***********<br>', module)
         logger.debug('Executing TestCase %s', module)
