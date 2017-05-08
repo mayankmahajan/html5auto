@@ -89,7 +89,7 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag,direct
         checkEqualAssert(True,("All" in s1['dim']) and (not (',' in s1['dim'])), quicklink, measureSelected['locatorText'], "Verify Default Selection = "+s1['dim']+" at summary header")
         checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Default Selection at summary = "+s1['header'])
         checkEqualAssert(s1['value'][0],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        # checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
         checkEqualAssert(s1['dim'], b1['dimSelected'], quicklink, measureSelected['locatorText'], "Verify Summary Label with BTV")
     else:
@@ -98,7 +98,7 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag,direct
         # checkEqualAssert(b1['dim'][0],s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary = "+s1['header'])
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
         checkEqualAssert(s1['value'][0],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
-        checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
+        # checkEqualAssert(s1['value'][1],b1['totalValue'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
 
         # checkEqualAssert(s1['value'][0],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
         # checkEqualAssert(s1['value'][1],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")

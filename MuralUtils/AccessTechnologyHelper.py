@@ -145,7 +145,7 @@ def checkAllComponentRelatedToPie(setup, instance, quicklink, measureSelected,fl
         checkEqualAssert(str(value_PieSelectionText),value,quicklink, measureSelected['locatorText'], "Tootip Value Validation with PieLegend")
         checkEqualAssert(value,str(summary['data'][(dim, 0, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'], "Verify Summary Data value with pielegend (All Sub)")
         # Need clarifications on How to calculate PerSub Value
-        checkEqualAssert(value, str(summary['data'][(dim, 1, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'],"Verify Summary Data value with pielegend (Per Sub)")
+        # checkEqualAssert(value, str(summary['data'][(dim, 1, measureSelected['locatorText'])]), quicklink, measureSelected['locatorText'],"Verify Summary Data value with pielegend (Per Sub)")
 
     return True
 
