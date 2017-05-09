@@ -19,7 +19,7 @@ try:
     popInstance = GenerateReportsPopClass(setup.d)
     # Launching DPI Alerts Page
     popInstance.dropdown.clickSpanWithTitle("DPI Alerts",getHandle(setup,MuralConstants.ALERTSCREEN,Constants.ALLSPANS))
-    doSearchAndValidateAlerts(setup)
+    doSearchAndValidateAlerts(setup,"Delhi")
     checkAlertsCount(setup)
 
     for el in setup.cM.getAllNodeElements("dpiWizardtimerange","starttime"):

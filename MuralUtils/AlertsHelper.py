@@ -169,8 +169,8 @@ def searchAlert(setup,searchText,clear=False):
     try:
         ce = DropdownComponentClass()
         table = TableComponentClass()
-        searchedText = ce.sendkeys_input(searchText,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search")
-        ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search",clear=False)
+        searchedText = ce.sendkeys_input(searchText,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search",child='input')
+        ce.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,parent="search",child='input',clear=False)
         checkEqualAssert(searchText,searchedText,message="Checking the Search text entered at KPI Settings Page")
         tabledata= table.getTableData1(getHandle(setup,MuralConstants.ALERTSCREEN,"table"))
         rulenames = [e[0]for e in tabledata['rows']]
@@ -567,6 +567,8 @@ def doSearchAndValidateAlerts(setup,searchedtext="Nokia"):
     screenInstance = AlertsComponentClass()
     #searchedtext = "Nokia"
     textEntered = screenInstance.search.sendkeys_input(searchedtext,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","input")
+    # Adding Enter
+    screenInstance.search.sendkeys_input(Keys.ENTER,getHandle(setup,MuralConstants.ALERTSCREEN,"search"),0,"search","input",clear=False)
     checkEqualAssert(searchedtext,textEntered,"","","Verify Search Text Entered")
     # screenInstance.search.setSearchText(getHandle(setup,MuralConstants.ALERTSCREEN,"search"),searchedtext)
     alertlist = screenInstance.getAlertList(getHandle(setup,MuralConstants.ALERTSCREEN,"alertlist"),"alertlist","list")
