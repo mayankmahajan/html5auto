@@ -568,7 +568,7 @@ def deleteReport(setup,index):
         tableHandle = getHandle(setup,MuralConstants.REPORTSCREEN,"table")
         newTableData = reportScreenInstance.table.getTableMap(tableHandle)
 
-        checkEqualAssert(True,newTableData.keys()[0] in tableDataMap.keys(),"","","Check for Delete Table Entry"+str(reportId))
+        checkEqualAssert(False,newTableData.keys()[0] in tableDataMap.keys(),"","","Check for Delete Table Entry"+str(reportId))
         return True
     except Exception as e:
         logger.error("Exception found while Deleting ReportId %s : %s",reportId,e)
