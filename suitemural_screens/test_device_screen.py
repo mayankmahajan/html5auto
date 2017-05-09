@@ -1,7 +1,7 @@
 from classes.Components.TimeRangeComponentClass import *
 from MuralUtils.DeviceHelper import *
 
-screen="Network Topology"
+screen="Devices"
 try:
     setup = SetUp()
     sleep(8)

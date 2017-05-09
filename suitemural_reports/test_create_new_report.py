@@ -26,9 +26,8 @@ try:
     print isError(setup)
 
     # Getting reporttypes from xmls
-    # reportTypes = setup.cM.getAllreportTypes()  # gets all reporttype combinations (56 for mural)
-    reportTypes = setup.cM.getUserReportTypes() # gets only userspecific reporttypes
-
+    reportTypes = setup.cM.getAllreportTypes()  # gets all reporttype combinations (56 for mural)
+    # reportTypes = setup.cM.getUserReportTypes() # gets only userspecific reporttypes
 
     # Create Report Object that contains reportName,email,filters
     reportObj = Report()
