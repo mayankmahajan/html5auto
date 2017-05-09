@@ -409,7 +409,7 @@ def validateIncompatibleFilter(setup,Msg,screen_name):
     incompatible_filter_list_from_xml = str(screenInfo[screen_name]['incompatibleDimensions'])
     flag = 0
     for filter in incompatible_filter_list:
-        checkEqualAssert(True, filter in incompatible_filter_list_from_xml, "", "","Verify Incompatible filter = %s" + str(filter))
+        checkEqualAssert(True, filter in incompatible_filter_list_from_xml, "", "","Verify Incompatible filter = " + str(filter) + " in " + str(incompatible_filter_list_from_xml))
         if not (filter in incompatible_filter_list_from_xml):
             flag = 1
             break

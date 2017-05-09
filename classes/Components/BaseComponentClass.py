@@ -13,6 +13,7 @@ from Utils.Constants import *
 class BaseComponentClass:
     def __init__(self):
         self.utility = __import__("Utils.utility")
+        self.colors = self.configmanager.getNodeElements("colors","color")
         self.unitsystem = UnitSystem()
 
     def click(self, elHandle):
@@ -620,3 +621,9 @@ class BaseComponentClass:
         js = "var event = new MouseEvent('dblclick', {'view': window,'bubbles': true,'cancelable': true});"
         script = "arguments[0].dispatchEvent(event);"
         setup.d.execute_script(js+script,el)
+
+    def getColorName(self,col):
+        for color in self.colors:
+            if col in color or str(col).lower() in color:
+                return str(color).split('#')[0]
+        return str(col)

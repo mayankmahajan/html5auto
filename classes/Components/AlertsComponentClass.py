@@ -214,7 +214,7 @@ class AlertsComponentClass(BaseComponentClass):
 
     def getColorName(self,col):
         for color in self.colors:
-            if col in color:
+            if col in color or str(col).lower() in color:
                 return str(color).split('#')[0]
         return str(col)
 

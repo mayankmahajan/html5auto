@@ -68,6 +68,14 @@ try:
     setup.d.switch_to.window(setup.d.window_handles[0])
     setup.d.close()
 
+
+    import suitemural_User_Management_Screen.UserCheckIn
+    import suitemural_User_Management_Screen.EditUser
+    import suitemural_User_Management_Screen.EditUserCheckIn
+    import suitemural_User_Management_Screen.VerifyDeleteUser
+    import suitemural_User_Management_Screen.VerifyEditUserForAdmin
+
+
 except Exception as e:
     isError(setup)
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"

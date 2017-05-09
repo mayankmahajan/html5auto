@@ -211,8 +211,11 @@ def checkAlertsPresent(setup,alertRuleMap,alertlist):
     for i in range(len(alertlist)):
         alertListWithRule,alertFullBody = appendAlertListWithRule(i,setup,alertRuleMap,alertlist)
         for k, v in alertListWithRule.iteritems():
-            if 'duration' not in k:
+            if 'duration' not in k and 'color' not in k:
                 checkEqualAssert(alertListWithRule[k], alertFullBody[k], "", "", "Checking DPI Alerts :: " + k + " :: ")
+            elif 'color' in k:
+                ce = BaseComponentClass()
+                checkEqualAssert(ce.getColorName(alertListWithRule[k]), ce.getColorName(alertFullBody[k]), "", "", "Checking DPI Alerts :: " + k + " :: ")
 
 def appendAlertListWithRule(i,setup,alertRuleMap,alertlist):
     screenInstance = AlertsComponentClass()
@@ -708,9 +711,15 @@ def deleteAlert(setup,index,flag=True):
     screenInstance,alertRuleMap,alertFullBody = delete("delete",setup,index,flag)
 
     updated_alertFullBody = screenInstance.getAlertFullBody(getHandle(setup,MuralConstants.ALERTSCREEN,"alertinfo"))
-    checkEqualAssert(1,len(alertFullBody['alarmrows'])-len(updated_alertFullBody['alarmrows']),"","","Verify difference of alarm rows after delete")
+    if flag:
+        checkEqualAssert(1,len(alertFullBody['alarmrows'])-len(updated_alertFullBody['alarmrows']),"","","Verify difference of alarm rows after delete")
 
-    checkEqualAssert(alertFullBody['alarmrows'][1],updated_alertFullBody['alarmrows'][0],"","","Verify Second Alert should become First in New List")
+        checkEqualAssert(alertFullBody['alarmrows'][1],updated_alertFullBody['alarmrows'][0],"","","Verify Second Alert should become First in New List")
+    else:
+        checkEqualAssert(0,len(alertFullBody['alarmrows'])-len(updated_alertFullBody['alarmrows']),"","","Verify difference of alarm rows after delete")
+
+        checkEqualAssert(alertFullBody['alarmrows'][0],updated_alertFullBody['alarmrows'][0],"","","Verify Second Alert should become First in New List")
+
 
 
 def deleteAllAlert(setup,index,flag=True):

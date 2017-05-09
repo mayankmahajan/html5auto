@@ -172,7 +172,8 @@
         <endtime id ="4" year="2017" month ="02" day="13" hour="00" min="00"/>
     </dpiWizardtimerange>
     <colors>
-        <color id ="red#ff2b00#ff0000"/>
+        <color id ="red#ff0000"/>
+        <!--<color id ="red#ff2b00#ff0000"/>-->
         <color id ="yellow#ffd40f"/>
         <color id ="orange#ff8300"/>
     </colors>
