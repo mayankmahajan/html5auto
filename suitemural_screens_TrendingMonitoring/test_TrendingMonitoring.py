@@ -85,6 +85,7 @@ try:
                         l1 = []
                     else:
                         l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
+                        checkEqualAssert(True,len(l1)<= MuralConstants.Maximum_Trend_Legend,selectedQuicklink,selectedMeasure,"Verify Maximum number of legand")
                     for i in range(len(l1)):
                         p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
                         c1 = TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
@@ -145,6 +146,7 @@ try:
                         l1 = []
                     else:
                         l1 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
+                        checkEqualAssert(True, len(l1)<= MuralConstants.Maximum_Trend_Legend, selectedQuicklink, selectedMeasure,"Verify Maximum number of legand")
                         active_legend_value_before_clicking=getTotalActiveLegendValue(l1,c[m])
 
                         if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and active_legend_value_before_clicking!=" ":
