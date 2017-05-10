@@ -105,6 +105,7 @@ class Constants(object):
     CONFIRMATIONHEADER='header'
     CONFIRMATIONBUTTON='button'
     LOGINSCREEN = "loginScreen"
+    Maximum_Trend_Legend = 10
 
 
 

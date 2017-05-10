@@ -9,6 +9,7 @@ from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.TrendingMonitoringPageClass import *
 import sys
 
+
 def getTotalActiveLegendValue(list, iscount):
     active_legend_value = []
     for i in range(len(list)):
