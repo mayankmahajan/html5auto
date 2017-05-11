@@ -57,7 +57,8 @@ class DriverHelper:
                     try:
                         CustomWebDriverWait(parentHandles[eachComp][len(parentHandles[eachComp])-1], Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
                     except Exception as e:
-                        logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                        if False:
+                            logger.debug("Exception occured while getting the component with %s %s",locator,e)
                         CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
                         # continue
 
@@ -85,7 +86,8 @@ class DriverHelper:
                     try:
                         CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
                     except Exception as e:
-                        logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                        if False:
+                            logger.debug("Exception occured while getting the component with %s %s",locator,e)
                         # continue
                 else:
                     pass
@@ -97,7 +99,8 @@ class DriverHelper:
                 try:
                     CustomWebDriverWait(self.driver, Constants.WEBDRIVERTIMEOUT).until(EC.visibility_of_element_located(locator))
                 except Exception as e:
-                    logger.debug("Exception occured while getting the component with %s %s",locator,e)
+                    if False:
+                        logger.debug("Exception occured while getting the component with %s %s",locator,e)
 
             tempChildHandles = tempChildHandles +  self.visibleCompsOnly(self.driver.find_elements(*locator))
             return tempChildHandles
