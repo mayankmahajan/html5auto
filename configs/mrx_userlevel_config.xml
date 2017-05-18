@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<data>
+
+
+    <segment_Filters>
+        <filter id = "Segment Name"/>
+        <filter id = "#Users"/>
+        <filter id = "Created on"/>
+        <filter id = "Status"/>
+        <filter id = "Source"/>
+        <filter id = "Owner"/>
+        <filter id = "Access"/>
+    </segment_Filters>
+
+    <segmentFilter>
+
+        <!-- leftSide of Created on can be in 0,1,2-->
+        <!--Date must be complete yyyy Month dd hh MM-->
+        <filter id="0" segmentname="praveen_0" user=" ::20" createdon="1::2017 May 12 05 10" status="1" source="0,1,2,3,4,5" owner="admin" access="0,1" />
+    </segmentFilter>
+
+    <subscriber>
+        <sub id="0" value="100"/>
+        <sub id="1" value="200"/>
+        <sub id="2" value="50"/>
+        <sub id="3" value="300"/>
+
+    </subscriber>
+
+
+    <globalScreenFilters>
+
+        <network id ="0" filters = '0,1::2::1'/>
+        <apnrat id = "0" filters = ' :: '/>
+        <device id = "0" filters = ' :: :: :: '/>
+        <content id = "0" filters = '1,2:: :: :: '/>
+
+        <network id ="1" filters = ' :: :: '/>
+        <apnrat id = "1" filters = ' ::2'/>
+        <device id = "1" filters = ' ::1:: ::2'/>
+        <content id = "1" filters = '1:: :: :: '/>
+
+        <network id ="2" filters = '0,1::1::1'/>
+        <apnrat id = "2" filters = '1::1'/>
+        <device id = "2" filters = '1::1::1::1'/>
+        <content id = "2" filters = ' :: :: :: '/>
+
+        <network id ="3" filters = '0,1::1::1'/>
+        <apnrat id = "3" filters = '1::1'/>
+        <device id = "3" filters = '0::0::0::0'/>
+        <content id = "3" filters = ' ::1:: :: '/>
+
+
+        <network id ="4" filters = '0,1::1::1'/>
+        <apnrat id = "4" filters = '1::1'/>
+        <device id = "4" filters = '1,2::1::3,4::1,2,3'/>
+        <content id = "4" filters = ' :: ::1::2,3'/>
+
+
+        <network id ="5" filters = '0,1::1::1'/>
+        <apnrat id = "5" filters = '0::0'/>
+        <device id = "5" filters = '1::1::1::1'/>
+        <content id = "5" filters = ' :: ::2,3::1'/>
+
+        <network id ="6" filters = '0,1::1::1'/>
+        <apnrat id = "6" filters = '0::0'/>
+        <device id = "6" filters = '0::0::0::0'/>
+        <content id = "6" filters = '2,3:: :: :: '/>
+
+        <network id ="7" filters = '0,1::1::1'/>
+        <apnrat id = "7" filters = '0::0'/>
+        <device id = "7" filters = '2::1,2::2,3,4::1'/>
+        <content id = "7" filters = ' ::1,2:: :: '/>
+
+
+        <network id ="8" filters = '0,1::1::1'/>
+        <apnrat id = "8" filters = '1,2::1'/>
+        <device id = "8" filters = '1::1::1::1'/>
+        <content id = "8" filters = '1,2:: :: :: '/>
+
+
+        <network id ="9" filters = '0,1::1::1'/>
+        <apnrat id = "9" filters = '1::1,2'/>
+        <device id = "9" filters = '0::0::0::0'/>
+        <content id = "9" filters = ' ::1,2:: :: '/>
+
+        <network id ="10" filters = '0,1::1::1'/>
+        <apnrat id = "10" filters = '1,2,3::1,2'/>
+        <device id = "10" filters = '2::1,4::4::2,3'/>
+        <content id = "10" filters = ' :: :: :: '/>
+
+        <network id ="11" filters = ' ::0::0'/>
+        <apnrat id = "11" filters = '1::1'/>
+        <device id = "11" filters = '1::1::1::1'/>
+        <content id = "11" filters = '2:: :: :: '/>
+
+        <network id ="12" filters = ' ::0::0'/>
+        <apnrat id = "12" filters = '1::1'/>
+        <device id = "12" filters = '0::0::0::0'/>
+        <content id = "12" filters = ':: ::1::1,3'/>
+
+        <network id ="13" filters = ' ::0::0'/>
+        <apnrat id = "13" filters = '1::1'/>
+        <device id = "13" filters = '1,2,3::1,2::3::2,3'/>
+        <content id = "13" filters = ' :: ::1::1'/>
+
+        <network id ="14" filters = ' ::0::0'/>
+        <apnrat id = "14" filters = '0::0'/>
+        <device id = "14" filters = '1::1::1::1'/>
+        <content id = "14" filters = ' ::1:: :: '/>
+
+        <network id ="15" filters = ' ::0::0'/>
+        <apnrat id = "15" filters = '0::0'/>
+        <device id = "15" filters = '0::0::0::0'/>
+        <content id = "15" filters = '1,3:: :: :: '/>
+
+        <network id ="16" filters = ' ::0::0'/>
+        <apnrat id = "16" filters = '0::0'/>
+        <device id = "16" filters = '1,2::1::3,4::1'/>
+        <content id = "16" filters = ' :: ::1,2::3'/>
+
+        <network id ="17" filters = ' ::0::0'/>
+        <apnrat id = "17" filters = '2::1,2'/>
+        <device id = "17" filters = '1::1::1::1'/>
+        <content id = "17" filters = '2:: :: :: '/>
+
+        <network id ="18" filters = ' ::0::0'/>
+        <apnrat id = "18" filters = '1::2'/>
+        <device id = "18" filters = '0::0::0::0'/>
+        <content id = "18" filters = ' :: ::2::1,3'/>
+
+        <network id ="19" filters = ' ::0::0'/>
+        <apnrat id = "19" filters = '2,3::1,2,3'/>
+        <device id = "19" filters = '1,2::1::4::2'/>
+        <content id = "19" filters = '1:: :: :: '/>
+
+        <network id ="20" filters = '0,1,2::1::1,2,3'/>
+        <apnrat id = "20" filters = '1::1'/>
+        <device id = "20" filters = '1::1::1::1'/>
+        <content id = "20" filters = '1:: :: :: '/>
+
+        <network id ="21" filters = '0,1,2::1::1,3'/>
+        <apnrat id = "21" filters = '1::1'/>
+        <device id = "21" filters = '0::0::0::0'/>
+        <content id = "21" filters = ' ::1:: :: '/>
+
+        <network id ="22" filters = '0,2::1,3::1'/>
+        <apnrat id = "22" filters = '1::1'/>
+        <device id = "22" filters = '1,2::1::4::2,3'/>
+        <content id = "22" filters = '3:: :: :: '/>
+
+        <network id ="23" filters = '0,1,3::1,4::2'/>
+        <apnrat id = "23" filters = '0::0'/>
+        <device id = "23" filters = '1::1::1::1'/>
+        <content id = "23" filters = '2:: :: :: '/>
+
+        <network id ="24" filters = '0,2,3::2::1,3,4'/>
+        <apnrat id = "24" filters = '0::0'/>
+        <device id = "24" filters = '0::0::0::0'/>
+        <content id = "24" filters = ' :: ::1::4,5'/>
+
+        <network id ="25" filters = '0,2::1,3::4'/>
+        <apnrat id = "25" filters = '0::0'/>
+        <device id = "25" filters = '2::1,2::2,4::1'/>
+        <content id = "25" filters = '3:: :: :: '/>
+
+        <network id ="26" filters = '0,1,2::1,3::1,2'/>
+        <apnrat id = "26" filters = '1::1,2'/>
+        <device id = "26" filters = '1::1::1::1'/>
+        <content id = "26" filters = ' :: :: :: '/>
+
+        <network id ="27" filters = '0,1,2::1::1'/>
+        <apnrat id = "27" filters = '1,2::1'/>
+        <device id = "27" filters = '0::0::0::0'/>
+        <content id = "27" filters = '1:: :: :: '/>
+
+        <network id ="28" filters = '0,1,3::1,4::1,2'/>
+        <apnrat id = "28" filters = '1,3::1,2,3'/>
+        <device id = "28" filters = '2::1,4::4::2,3'/>
+        <content id = "28" filters = '2:: :: :: '/>
+
+
+        <network id ="29" filters = ' :: :: '/>
+        <apnrat id = "29" filters = '1::1,2'/>
+        <device id = "29" filters = '0,2::1,4::0,4::0,3'/>
+        <content id = "29" filters = '0,2:: :: :: '/>
+    </globalScreenFilters>
+
+    <globalScreenFilters2>
+        <network id ="0" region = '1' gateway = '1'/>
+        <apnrat id = "0" apn = '2,4'/>
+        <device id = "0" os = '2,4'/>
+
+        <network id ="1" area = '2'/>
+        <apnrat id = "1" radio = '2,4'/>
+        <device id = "1" manufacturer = '2,4'/>
+
+        <network id ="2" area = '2' region = '1' gateway = '1'/>
+        <apnrat id = "2" />
+        <device id = "2" group = '2'/>
+    </globalScreenFilters2>
+
+
+  <segmentDetails>
+      <segment id="0" segmentname="praveen_0"  newsegmentname='edit_Praveen_0' access='Shared' file="/Users/praveen.garg1/Documents/segment_sample.csv" button="Import" status="Completed" />
+      <!--<segment id="1" segmentname="praveen_1" newsegmentname='edit_Praveen_1' access='Shared' file="/Users/praveen.garg1/Documents/segment_sample_1.csv" button="Import" status="Completed"/>-->
+      <!--<segment id="2" segmentname="praveen_2" newsegmentname='edit_Praveen_2' access='Private' file="/Users/praveen.garg1/Documents/segment_sample.csv" button="Import" status="Completed"/>-->
+      <segment id="3" segmentname="praveen_3" newsegmentname='edit_Praveen_3' access='Private' file="/Users/praveen.garg1/Documents/segment_sample_2.csv" button="Import" status="Rejected"/>
+      <!--<segment id="4" segmentname="praveen_4" newsegmentname='edit_Praveen_4 access='Shared' file="/Users/praveen.garg1/Documents/segment_sample.csv" button="Cancel" status="Completed"/>-->
+  </segmentDetails>
+
+
+  <editSegmentDetails>
+
+      <!--for edit-->
+      <segment id="0" segmentname="praveen_0" newsegmentname='edit_Praveen_0' access='Private' edit_info='edit' button="Update"/>
+
+      <!--for info-->
+      <segment id="3" segmentname="praveen_3" edit_info="info"/>
+
+  </editSegmentDetails>
+
+  <selectCheckBoxForPerformLogicalOpertion>
+      <segment id="0" segmentname="praveen_0" />
+      <segment id="1" segmentname="praveen_1" />
+      <segment id="2" segmentname="praveen_2" />
+  </selectCheckBoxForPerformLogicalOpertion>
+
+
+</data>

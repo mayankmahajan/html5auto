@@ -171,7 +171,7 @@ class TableComponentClass(BaseComponentClass):
         else:
             logger.debug("header is not present in table")
 
-    def getIterfaceRows(self,colcount,h,length):
+    def getIterfaceRows(self,colcount,h,length,selected=False):
 
         elHandle=h['ROWS']
 
@@ -187,10 +187,20 @@ class TableComponentClass(BaseComponentClass):
             l = length*colcount
         rows = []
         temp = []
+        #selected_rows=[]
 
         for i in range(0,l,colcount):
             j=i
-            rows.append([str(elHandle[j].text).strip() for j in range(j,j+colcount)])
+            if not selected:
+                rows.append([str(elHandle[j].text).strip() for j in range(j, j + colcount)])
+                continue
+            try:
+                propertycolor=self.runtimeValue('bgcolor', elHandle[j].find_elements_by_xpath('../../..')[0])
+                if self.rgb_to_hex(propertycolor) == Constants.TableSecltedColor and selected:
+                    rows.append([str(elHandle[j].text).strip() for j in range(j, j + colcount)])
+            except:
+                logger.debug("Check manually Selected Rows= %d", j/colcount)
+                pass
 
         return rows
 
@@ -199,7 +209,7 @@ class TableComponentClass(BaseComponentClass):
         if scroll:
             driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-6*colcount])
             sleep(4)
-            h = self.utility.utility.getHandle(driver,"report_Screen","table")["table"]
+            h = self.utility.utility.getHandle(driver,"TableDummy_Screen","table")["table"]
 
 
 

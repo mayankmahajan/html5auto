@@ -7,16 +7,17 @@ class Constants(object):
     # URL = "https://muralautomation.cisco.com:6443/"
     # URL = "https://scrum.jalapeno.com:6443"
     # URL = "https://uiscrummural.cisco.com:6443/"
-    # BROWSER = "chrome"
-    BROWSER = "ff"
+    BROWSER = "chrome"
+    #BROWSER = "ff"
     isOffline = False
     if isOffline:
         URL = 'localhost:3333'
     else:
         #URL = "https://muralautomation.cisco.com:6443"
-        URL = "https://murala-ca.guavus.com:6443"
+        #URL = "https://murala-ca.guavus.com:6443"
         # URL = "https://uiscrum-mural.cisco.com:6443"
-
+        #URL="http://192.168.192.204:28080/"
+        URL="http://192.168.195.57:28080/"
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
     # URL = 'https://nrmca-upgrade-setup.sprintspectrum.com:6443/'
@@ -48,7 +49,7 @@ class Constants(object):
     DRILLTONE="DRILLTONE"
     DRILLTONENE="DRILLTONENE"
     # driver based constants
-    WEBDRIVERTIMEOUT = 16
+    WEBDRIVERTIMEOUT = 1
 
     # Component based constants
     ## BTV
@@ -64,10 +65,10 @@ class Constants(object):
     FLAGHOURLY = 1
     localserver = "http://localhost:3333/index2.html"
 
-    # chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
+    chromedriverpath = "/Users/praveen.garg1/html5automation/chromedriver/chromedriver"
     # chromedriverpath = "C:\Users\Administrator\Downloads\chromedriver_win32\chromedriver.exe"
-    chromedriverpath = "/Users/mayank.mahajan/PycharmProjects/html5automation/chromedriver/chromedriver228"
-    firefoxdriverpath = "/Users/mayank.mahajan/Downloads/geckodriver"
+    #chromedriverpath = "/Users/mayank.mahajan/PycharmProjects/html5automation/chromedriver/chromedriver228"
+    #firefoxdriverpath = "/Users/mayank.mahajan/Downloads/geckodriver"
 
     # common components
     ALLBUTTONS = "allbuttons"
@@ -106,8 +107,17 @@ class Constants(object):
     CONFIRMATIONBUTTON='button'
     LOGINSCREEN = "loginScreen"
     Maximum_Trend_Legend = 10
+    TableSecltedColor='#00e0b8'
 
+    CONFIRMFILTERPOPUP = 'confirmation_filter_popup'
+    CONFIRMFILTERBODY = 'confirm_filter_popup'
+    CONFIRMFILTERCLOSE = 'closeIcon'
+    CONFIRMFILTERMESSAGE = 'text'
+    CONFIRMFILTERHEADER = 'header'
+    CONFIRMFILTERBUTTON = 'button'
+    CALENDERPOPUP = "calender_popUp"
 
 
     ERRORHEADERINCONFIRMATIONPOPUP='Error'
+    CONFIRMHEADERINCONFIRMFILTERPOPUP='Delete Segment'
 

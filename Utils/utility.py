@@ -383,6 +383,30 @@ def confirm(setup,button='OK'):
         return [False, ""]
 
 
+def confirm_Popup(setup,segment_name,button='OK',headerText=Constants.CONFIRMHEADERINCONFIRMFILTERPOPUP):
+    #sleep(10)
+    eHandle=getHandle(setup,Constants.CONFIRMFILTERPOPUP,Constants.CONFIRMFILTERBODY)
+    if len(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERCLOSE])>0 and len(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERMESSAGE]) >0:
+        checkEqualAssert(headerText,str(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERHEADER][0].text),"","","Verify Header for popUp")
+        msg=str(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERMESSAGE][0].text)
+        real_msg="Do you want to delete \""+segment_name+"\" segment ?"
+        checkEqualAssert(real_msg,msg,"","", "Verify Text on popUp for Segment deletion")
+        for el in eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERBUTTON]:
+            try:
+                if str(button) == str(el.text.strip()) or str('Ok')==str(el.text.strip()):
+                    try:
+                        logger.debug('Going to click on %s',str(button))
+                        el.click()
+                        time.sleep(2)
+                        return True
+                    except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                        raise e
+            except Exception as e:
+                raise e
+    return False
+
+
+
 def isInvalidFilter(setup):
     sleep(5)
     eHandle = getHandle(setup, Constants.ERRORPOPUP, Constants.INVALIDFILTER)

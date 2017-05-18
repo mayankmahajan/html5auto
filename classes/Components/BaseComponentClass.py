@@ -244,6 +244,24 @@ class BaseComponentClass:
             return e
 
 
+    def isCheckBoxSelected_MRX(self,h,index,parent="allcheckboxes",child="checkbox"):
+        try:
+            logger.debug("Going to get State of Checkbox %d parent %s and child %s ", index, parent, child)
+
+            propertycolor = self.runtimeValue('bgcolor', h[parent][child][index].find_elements_by_xpath('../../..')[0])
+            state=self.rgb_to_hex(propertycolor) == Constants.TableSecltedColor
+            logger.debug("Got State of Checkbox %d parent %s and child %s as %s", index, parent, child, str(state))
+            if state==True:
+                return 1
+            else:
+                return 0
+
+        except Exception as e:
+            logger.error("Exception found while checking Checkbox %d", index)
+            return e
+
+
+
 
     def isCheckBoxSelectedWithName_UMMural(self,h,value,parent="allcheckboxes",child="checkbox"):
         try:
@@ -366,6 +384,17 @@ class BaseComponentClass:
                     return e
         return False
 
+
+    def getSelectedRadioButtonText(self,h,childDiv="input", parent="radios", child="radio"):
+        for el in h[parent][child]:
+            logger.info("Searching Selected Button")
+            if el.find_elements_by_tag_name(childDiv)[0].is_selected():
+                return el.text
+
+        return False
+
+
+
     def getAllSiblings(self, h, text="Rule", tag="span", child="alertinfo"):
         tagpath = "..//"+tag
         for el in h[child][0].find_elements_by_tag_name(tag):
@@ -442,6 +471,8 @@ class BaseComponentClass:
             return ele.get_attribute("class")
         elif prop == "id":
             return ele.get_attribute("id")
+        elif prop == "bgcolor":
+            return ele.value_of_css_property("background-color")
 
 
     def validateData(self,dataCollection,csvData):

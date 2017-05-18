@@ -1,5 +1,16 @@
 <?xml version="1.0"?>
 <data>
+    <segmentsorttablecolumn>
+        <column id="segmentname" locatorText="SegmentName"/>
+        <column id="user" locatorText="#Users"/>
+        <column id="status" locatorText="Status"/>
+        <column id="source" locatorText="Source"/>
+        <column id="owner" locatorText="Owner"/>
+        <column id="access" locatorText="Access"/>
+        <column id="created_on" locatorText="Created on"/>
+    </segmentsorttablecolumn>
+
+
     <screenConfigs>
 
 
@@ -32,10 +43,55 @@
         </screenConfig>
 
 
+        <screenConfig id ='error_popup'>
+            <component id = "errorbody" selector="class name" locator="errorBody" parent="True"/>
+            <component id= "invalidboxwrapper" selector="css selector" locator="div.invalid-box-wrapper" parent="True"/>
+        </screenConfig>
+
+
         <screenConfig id = "segment_Screen">
              <!--<component id = "primaryMeasure" selector="css selector" locator='[ng-model="vm.primaryMeasure"]' action="click"/>-->
 
             <component id = "table" selector="css selector" locator='[class="ag-fresh"]' childOf="" action="" parent="True" />
+            <component id ="allbuttons" selector="css selector" locator='[class="crud_header"]' parent="True"/>
+            <component id ="filterArea" selector="css selector" locator="div.filterContainerBox" parent="True"/>
+            <component id ="screenheader" selector="css selector" locator='[class="crud_header"]' parent="True" />
+        </screenConfig>
+
+        <screenConfig id = "popUp_Screen">
+            <component id = "allspans" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "allinputs" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "alllabels" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <!--<component id ="allselects" selector="css selector" locator='[class="basePopupView"]' parent="True"/>-->
+            <component id = "icons" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "radios" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id= "browsebuttons" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id="footerText" selector="css selector" locator='[class="footerDiv"]' parent="True"/>
+
+        </screenConfig>
+
+
+        <screenConfig id="filter_Screen">
+            <component id="allspans" selector="css selector" locator='.basePopupView' parent="True"/>
+            <component id = "icons" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "allbuttons" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "allinputs" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id ="allsliders" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
+            <component id = "allselects" selector="tag name" locator='[class="basePopupView"]' parent="True" />
+            <component id = "allDropDown" selector="id" locator='[class="basePopupView"]' parent="True"/>
+        </screenConfig>
+
+
+        <screenConfig id ="calender_popUp">
+            <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
+            <component id ='allbuttons' selector="css selector" locator="div.range_inputs" parent="True"/>
+
+            dropdown-menu-daterangepicker
+        </screenConfig>
+
+        <screenConfig id = 'confirmation_filter_popup'>
+            <component id ='confirm_filter_popup' selector="css selector" locator="div.filterPopup" parent="True"/>
         </screenConfig>
 
 
@@ -109,28 +165,68 @@
             <component id = "startdrag" selector="id" locator="startHandle"/>
             <component id = "enddrag" selector="id" locator="endHandle"/>
         </componentConfig>
-        <componentConfig id="radios">
-            <component id = "radio" selector="css selector" locator='[type="radio"]' />
+
+        <componentConfig id = "icons">
+            <component id="closePopupIcon" selector="css selector" locator='[class="closePopupIconWithPadding"]'/>
+            <component id="datePickerIcon" selector="css selector" locator='[class*=datePickerIcon]'/>
         </componentConfig>
+
+        <componentConfig id="radios">
+            <component id = "radio" selector="css selector" locator='[class*=radio][class*=radio-info],[type="radio"]' />
+        </componentConfig>
+
         <componentConfig id="alllabels">
             <component id = "label" selector="tag name" locator='label' />
         </componentConfig>
+
         <componentConfig id="allspans">
             <component id = "span" selector="tag name" locator='span' />
         </componentConfig>
+
         <componentConfig id="allbuttons">
             <component id = "button" selector="tag name" locator='button' />
         </componentConfig>
+
         <componentConfig id="allselects">
             <component id = "select" selector="tag name" locator='select' />
         </componentConfig>
+
         <componentConfig id="alllinks">
             <component id = "a" selector="tag name" locator='a' />
         </componentConfig>
+
         <componentConfig id = "wizard2">
             <component id = 'qb' selector="tag name" locator="app-querybuilder" parent="False" />
-
         </componentConfig>
+
+        <componentConfig id ='footerText'>
+            <component id = "text" selector="css selector" locator='div.filepathlabel' />
+        </componentConfig>
+
+        <componentConfig id="allsliders">
+            <component id="slider" selector="css selector" locator="div.slider.round"/>
+        </componentConfig>
+
+
+        <componentConfig id="filterArea">
+            <component id="filterIcon" selector="css selector" locator="div.nofilterSelectedIcon"/>
+            <component id="filterClearIcon" selector="css selector" locator="div.filterClearIcon"/>
+        </componentConfig>
+
+        <componentConfig id="screenheader">
+            <component id="headertext" selector="css selector" locator="label.crud_header_title" />
+        </componentConfig>
+
+        <componentConfig id ="allDropDown">
+            <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
+        </componentConfig>
+
+
+
+        <!--<componentConfig id ='browsebuttons'>-->
+            <!--<component id="browsebutton" selector="css selector" locator='input[type=file]'/>-->
+        <!--</componentConfig>-->
+
     </componentConfigs>
 
     <contextMenus>
