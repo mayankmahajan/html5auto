@@ -56,6 +56,9 @@ class ExploreListComponentClass(BaseComponentClass):
             for i in range(len(h[parent][child])):
                 if str(value)==str(h[parent][child][i].text).strip():
                     h[parent][child][i].click()
+                    time.sleep(10)
+                    # adding only to make whole suite faster. We can give lesser timeout time for all components
+                    # this a page load and it takes longer time
                     return True
             return False
         except Exception as e:
