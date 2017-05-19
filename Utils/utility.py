@@ -75,7 +75,7 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
             except:
                 pass
         except KeyError:
-            resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
+            # resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
             logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
 def checkEqualAssert(expected, actual, time="", measure="", message=""):
