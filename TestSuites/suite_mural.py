@@ -94,7 +94,7 @@ if platform.system() == "Windows":
 else:
     delimiter = "/"
 
-test_file_strings = glob.glob('../dummy_package/test_*.py')
+test_file_strings = glob.glob('../suitemural*/test_*.py')
 
 # creating global object accessed through out all modules
 import __builtin__
