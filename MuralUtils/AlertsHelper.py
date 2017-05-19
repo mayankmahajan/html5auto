@@ -356,7 +356,7 @@ def setDrop(value,index,handle,selectionByIndex=False):
     else:
         return instance.doSelectionOnVisibleDropDown(handle,value,index)
 
-def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA"):
+def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA",always_return=False):
 
     # operator=re.findall('[=<>]+',cond)
     # number_value=re.findall(r'\d+',cond)
@@ -435,10 +435,16 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
             return returnValue if newState else "-"
 
         if enableCondition == "":
-            enableCondition = random.choice([True, False])
+            if always_return:
+                enableCondition = always_return
+            else:
+                enableCondition = random.choice([True, False])
         else:
             if not enableCondition:
                 instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
+            if always_return:
+                return returnValue
+
             return returnValue if newState else "-"
 
         if enableCondition:
@@ -456,7 +462,7 @@ def setDPICondition(priorty, type, handle, setup,firstDrop=3,enableCondition="",
                      str(priorty),str(op),str(thresholdValue),str(unitSystem), str(e) )
         return e
 
-def setKPICondition(priorty, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA"):
+def setKPICondition(priorty, handle, setup,firstDrop=3,enableCondition="",thresholdValue="NA",always_return=True):
     if priorty==0:
         index = firstDrop
         if thresholdValue == "NA":
@@ -489,10 +495,16 @@ def setKPICondition(priorty, handle, setup,firstDrop=3,enableCondition="",thresh
         logger.info("Value %s set for operator %s and Priority %s",str(num_value),str(op),str(priorty))
 
         if enableCondition == "":
-            enableCondition = random.choice([True, False])
+            if always_return:
+                enableCondition = always_return
+            else:
+                enableCondition = random.choice([True, False])
         else:
             if not enableCondition:
                 instance.clickCheckBox(getHandle(setup,MuralConstants.CREATERULEPOPUP,MuralConstants.ALLCHECKBOXES),priorty)
+            return str(op).strip()+str(num_value).strip()
+
+        if always_return:
             return str(op).strip()+str(num_value).strip()
 
 
@@ -1017,7 +1029,7 @@ def validateDPIAlertWizard(setup,request={}):
     for severity in range(3):
         for k,threshold in thresholds.iteritems():
             request['conditions'] = []
-            request['conditions'].append(setDPICondition(severity,request['type'],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3,enableCondition=False,thresholdValue=threshold['text']))
+            request['conditions'].append(setDPICondition(severity,request['type'],getHandle(setup,MuralConstants.CREATERULEPOPUP,"allcheckboxes"),setup,3,enableCondition=False,thresholdValue=threshold['text'],always_return=True))
             try:
                 number_value=re.findall(r'\d+',request['conditions'][0])[0]
             except:
@@ -1083,29 +1095,29 @@ def startEndTimeValidations(setup,request = {}):
 
     starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
     endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET)
-    checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
+    checkEqualAssert(True,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
 
     et = Time(starttime['year'],starttime['month'],starttime['day'],int(starttime['hour'])-1,starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(st.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    endtimeEpoch = getepoch(et.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
-    checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
+    #starttimeEpoch = getepoch(st.datestring,MuralConstants.TIMEZONEOFFSET,"%Y-%m-%d %H:%M")
+    endtimeEpoch = getepoch(request[MuralConstants.ENDTIME], MuralConstants.TIMEZONEOFFSET)
+    checkEqualAssert(True,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])-1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
+    #starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
     endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET)
-    checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
+    checkEqualAssert(True,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     et = Time(starttime['year'],starttime['month'],int(starttime['day'])+1,starttime['hour'],starttime['min'])
     request[MuralConstants.ENDTIME] = setTime(setup,1,et)
 
-    starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
+    #starttimeEpoch = getepoch(request[MuralConstants.STARTTIME],MuralConstants.TIMEZONEOFFSET)
     endtimeEpoch = getepoch(request[MuralConstants.ENDTIME],MuralConstants.TIMEZONEOFFSET)
-    checkEqualAssert(False,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
+    checkEqualAssert(True,starttimeEpoch<endtimeEpoch,"","","Verifing Starttime < Endtime. st and et entered = "+st.datestring + " and "+et.datestring)
 
     return st,et
 
