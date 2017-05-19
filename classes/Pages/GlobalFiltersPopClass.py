@@ -1,3 +1,4 @@
+# coding=utf-8
 from classes.Pages.BasePopClass import BasePopClass
 from classes.Components.GenerateReportsComponentClass import *
 from classes.Components.DropdownComponentClass import *
@@ -23,7 +24,7 @@ class GlobalFiltersPopClass(BasePopClass):
 
         BasePopClass.__init__(self,driver)
 
-    def getAllSelectedFilters(self,h,parent="filterArea",child="filterText"):
+    def getAllSelectedFilters(self,h,parent="filterArea",child="filterText",flag=True):
         filters = {}
         try:
             if not h[parent][child]:
@@ -32,12 +33,25 @@ class GlobalFiltersPopClass(BasePopClass):
             else:
                 for ele in h[parent][child]:
                     # sleep(2)
-                    temp = []
-                    # ele.send_keys(Keys.NULL)
-                    uifilter = str(ele.text).split(':')
-                    for s in uifilter[1].split(","):
-                        temp.append(s.strip())
-                    filters[uifilter[0].strip()] = temp
+                    if flag==True:
+                        temp = []
+                        # ele.send_keys(Keys.NULL)
+                        uifilter = str(ele.text).split(':')
+                        for s in uifilter[1].split(","):
+                            temp.append(s.strip())
+                        filters[uifilter[0].strip()] = temp
+                        # sleep(2)
+
+                    else:
+                        #for handling : and , for MRX Segment filter
+
+                        #import re
+                        #key, value = re.search('([a-zA-Z0-9]+)\s{0,}:\s{0,}([\-a-zA-Z0-9 \:]+)', ele.text).group(1), re.search('([a-zA-Z0-9]+)\s{0,}:\s{0,}([\-a-zA-Z0-9 \:]+)', ele.text).group(2)
+                        key_value=(ele.text).split(':', 1)
+                        try:
+                            filters[str(key_value[0]).strip()] = [str(key_value[1]).strip()]
+                        except Exception as e:
+                            filters[str(key_value[0]).strip()] = [key_value[1].strip()]
                     # sleep(2)
 
             return filters
@@ -90,12 +104,12 @@ class GlobalFiltersPopClass(BasePopClass):
 
         return filterSelected
 
-    def getToolTipData(self,setup,h,parent="filterArea",tooltip_parent = "globalfiltertooltip",child="filterText"):
+    def getToolTipData(self,setup,h,parent="filterArea",tooltip_parent = "globalfiltertooltip",child="filterText",screenName=MuralConstants.GFPOPUP,flag=True):
         try:
             logger.info("Performing Hover action on Golbal Filter text Area")
             setup.dH.action.move_to_element(h[parent][child][0]).perform()
-            tooltipHandle = self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,tooltip_parent)
-            filters = self.getAllSelectedFilters(tooltipHandle,tooltip_parent,child)
+            tooltipHandle = self.utility.utility.getHandle(setup,screenName,tooltip_parent)
+            filters = self.getAllSelectedFilters(tooltipHandle,tooltip_parent,child,flag=flag)
             logger.info("Got Tooltip data = %s",str(filters))
             return filters
         except Exception as e:

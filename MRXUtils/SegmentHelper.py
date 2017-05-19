@@ -1,9 +1,8 @@
 # coding=utf-8
 from Utils.utility import *
-from classes.Pages.GenerateReportsPopClass import GenerateReportsPopClass
 from MRXUtils.MRXConstants import *
 from classes.Pages.MRXScreens.SegmentScreenClass import *
-from classes.Pages.MuralScreens.CheckPrivileges import *
+
 
 
 def findPropertyColor(screenInstance,h,property,parent="allinputs",child="input",index=0):
@@ -266,82 +265,94 @@ def setSlider(screenInstance,h,index=0):
 
 def setFilters(setup,screenInstance,h,k=0):
 
-    filter_segmentName=[]
-    filter_user=[]
-    filter_createdon = []
-    filter_status=[]
-    filter_source=[]
-    filter_access=[]
-    filter_owner=[]
-
+    selected_filter=[]
     global_filter = setup.cM.getNodeElements("segmentFilter", "filter")
     filter_segmentName = setInputFilter(setup, screenInstance, h, global_filter, 0, 0, 'segmentname', k)
+    selected_filter.append(filter_segmentName)
 
-    # Set User limit
+    ##################################### Set User limit#####################################################
 
+    selectedFilter_listforUserlimit = []
     if str(global_filter[str(k)]['user']).split('::')[0]!=' ' or str(global_filter[str(k)]['user']).split('::')[1]!=' ':
         if setSlider(screenInstance,h,1):
             min=str(screenInstance.cm.sendkeys_input(str(global_filter[str(k)]['user']).split('::')[0], h, 1))
             max=str(screenInstance.cm.sendkeys_input(str(global_filter[str(k)]['user']).split('::')[1], h, 2))
 
+            le = u"\u2264"
+            ge= u"\u2265"
+
             if len(min.strip(''))!=0 and len(max.strip(''))!=0:
-                filter_user.append('≥'+min+" and "+'≤'+max)
+                selectedFilter_listforUserlimit.append(u"{0}".format(ge)+ min +" and "+u"{0}".format(le)+ max)
             elif len(min.strip(''))!=0:
-                filter_user.append('≥' + min)
+                selectedFilter_listforUserlimit.append(u"{0}".format(ge) + min)
             elif len(max.strip(''))!=0:
-                filter_user.append('≤' + max)
+                selectedFilter_listforUserlimit.append(u"{0}".format(le) + max)
 
         dumpResultForButton(True, "#User", screenInstance, setup, button_label="Apply Filters")
+    selected_filter.append(selectedFilter_listforUserlimit)
 
-    # Set Created On
+    ######################################### Set Created On#################################################
 
+    selectedFilter_listforCreatedOn = []
     if str(global_filter[str(k)]['createdon']).split('::')[0]!=' ' and str(global_filter[str(k)]['createdon']).split('::')[1]!=' ':
         if setSlider(screenInstance, h, 2):
             select=screenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(h,indexToBeSelected=int(str(global_filter[str(k)]['createdon']).split('::')[0].strip('')),index=0)
             dumpResultForButton(False, "Created on without Date", screenInstance, setup, button_label="Apply Filters")
             try:
-                #h['icons']['datePickerIcon'][0].click()
+                te = setup.d.execute_script("return document.getElementsByClassName('datePickerIcon')")
+                setup.d.execute_script("arguments[0].click()", te[0])
                 [year,month,day,hour,min]=str(global_filter[str(k)]['createdon']).split('::')[1].split(' ')
                 setCalendar(year, month, day, hour, min, screenInstance, setup, page=Constants.CALENDERPOPUP, parent="leftcalendar")
                 screenInstance.cm.clickButton("Apply",getHandle(setup, Constants.CALENDERPOPUP, "allbuttons"))
                 choosedate=screenInstance.cm.getValue_input(h,3)
-                filter_createdon.append(str(select) + " " + str(choosedate))
+                selectedFilter_listforCreatedOn.append(str(select) + " " + str(choosedate))
+                dumpResultForButton(True, "Created on with Date", screenInstance, setup, button_label="Apply Filters")
             except:
                 logger.debug('Not able to click on DatePickerIcon')
-        dumpResultForButton(True, "Created on with Date", screenInstance, setup, button_label="Apply Filters")
+                screenInstance.cm.click(h['allsliders']['slider'][2])
+                time.sleep(2)
+    selected_filter.append(selectedFilter_listforCreatedOn)
 
+    #############################################################################################################
 
     filter_status = setMultiDropDownFilter(setup, screenInstance, h, global_filter, 3, 0, 'status', 2, k)
-    filter_source = setMultiDropDownFilter(setup, screenInstance, h, global_filter, 4, 1, 'source', 6, k)
-    filter_owner = setInputFilter(setup, screenInstance, h, global_filter, 5, 4, 'owner', k)
-    filter_access = setMultiDropDownFilter(setup, screenInstance, h, global_filter, 6, 2, 'access', 2, k)
+    selected_filter.append(filter_status)
 
-    return [filter_segmentName,filter_user,filter_createdon,filter_status,filter_source,filter_access,filter_owner]
+    filter_source = setMultiDropDownFilter(setup, screenInstance, h, global_filter, 4, 1, 'source', 6, k)
+    selected_filter.append(filter_source)
+
+    filter_owner = setInputFilter(setup, screenInstance, h, global_filter, 5, 4, 'owner', k)
+    selected_filter.append(filter_owner)
+
+    filter_access = setMultiDropDownFilter(setup, screenInstance, h, global_filter, 6, 2, 'access', 2, k)
+    selected_filter.append(filter_access)
+
+    return selected_filter
 
 
 
 def setInputFilter(setup,screenInstance,h,global_filter,index,input_index,tab_name,k=0):
+    selectedFilter_list = []
     if str(global_filter[str(k)][tab_name]) != ' ':
-        selectedFilter_list=[]
         if setSlider(screenInstance, h, int(index)):
             selectedFilter_list.append(str(screenInstance.cm.sendkeys_input(str(global_filter[str(k)][tab_name]), h, input_index)))
-        dumpResultForButton(True, tab_name, screenInstance, setup, button_label="Apply Filters")
-
+            dumpResultForButton(True, tab_name, screenInstance, setup, button_label="Apply Filters")
+    return selectedFilter_list
 
 
 def setMultiDropDownFilter(setup,screenInstance,h,global_filter,index,multi_index,tab_name,max_selection_option,k=0):
+    selectedFilter_list = []
     if str(global_filter[str(k)][tab_name]) != ' ':
-        selectedFilter_list=[]
         if setSlider(screenInstance, h, int(index)):
             status_list = str(global_filter[str(k)][tab_name]).split(',')
             selected_list = screenInstance.picker.domultipleSelectionWithIndex(h, status_list, int(multi_index),parent="allDropDown")
             if len(selected_list) == int(max_selection_option):
                 selectedFilter_list.append('ALL')
             else:
-                selectedFilter_list.append(str(','.join(selected_list)))
+                selectedFilter_list.append(str(' , '.join(selected_list)))
 
-        dumpResultForButton(True,tab_name, screenInstance, setup, button_label="Apply Filters")
-        return selectedFilter_list
+            dumpResultForButton(True,tab_name, screenInstance, setup, button_label="Apply Filters")
+    return selectedFilter_list
 
 
 
@@ -354,22 +365,102 @@ def setSegmentFilter(setup,screenInstance,k='0'):
     return Expectedfilter
 
 
-def clickOnfilterIcon(setup,screen):
+def clickOnfilterIcon(setup,screen,filterIcon):
     logger.info("Clicking on FilterIcon")
     h=getHandle(setup,screen,"filterArea")
-    h['filterArea']['filterIcon'][0].click()
+    h['filterArea'][filterIcon][0].click()
     return True
 
 
+def getSegmentFilter(setup,screenInstance):
+    Expectedfilter=[]
+    handle=getHandle(setup,MRXConstants.FILTERSCREEN)
+    Keys = setup.cM.getAllNodeElements("segment_Filters", "filter")
+    Expectedfilter = createFilterMap(getFilters(setup,screenInstance,handle),Keys)
+    return Expectedfilter
 
-def getGlobalFiltersFromScreen(screenName,globalFilterInstance, setup):
 
-    networkKeys = setup.cM.getAllNodeElements("networkFilters","filter")
-    apnratKeys = setup.cM.getAllNodeElements("apnratFilters","filter")
-    deviceKeys = setup.cM.getAllNodeElements("deviceFilters","filter")
-    contentKeys = setup.cM.getAllNodeElements("contentFilters","filter")
-    actualFilters = insertKeys(globalFilterInstance.getAllSelectedFilters(getHandle(setup,screenName,"filterArea")),networkKeys+apnratKeys+deviceKeys+contentKeys)
+def getFilters(setup,screenInstance,h):
+
+    selected_filter=[]
+
+    filter_segmentName = getInputFilter(screenInstance, h, 0, 0)
+    selected_filter.append(filter_segmentName)
+
+#####################################################
+
+    selectedFilter_listforUserlimit = []
+    if checkSlider(screenInstance,h,1):
+        min=str(screenInstance.cm.getValue_input(h, 1))
+        max=str(screenInstance.cm.getValue_input(h, 2))
+
+        le = u"\u2264"
+        ge= u"\u2265"
+
+        if len(min.strip(''))!=0 and len(max.strip(''))!=0:
+            selectedFilter_listforUserlimit.append(u"{0}".format(ge)+ min +" and "+u"{0}".format(le)+ max)
+        elif len(min.strip(''))!=0:
+            selectedFilter_listforUserlimit.append(u"{0}".format(ge) + min)
+        elif len(max.strip(''))!=0:
+            selectedFilter_listforUserlimit.append(u"{0}".format(le) + max)
+    selected_filter.append(selectedFilter_listforUserlimit)
+
+#####################################################
+
+    selectedFilter_listforCreatedOn = []
+    if checkSlider(screenInstance, h, 2):
+        select=screenInstance.dropdown.getSelectionOnVisibleDropDown(h,index=0)
+        choosedate=screenInstance.cm.getValue_input(h,3)
+        selectedFilter_listforCreatedOn.append(str(select) + " " + str(choosedate))
+    selected_filter.append(selectedFilter_listforCreatedOn)
+
+#####################################################
+
+    filter_status = getMultiDropDownFilter(screenInstance, h,3, 0,2)
+    selected_filter.append(filter_status)
+
+    filter_source = getMultiDropDownFilter(screenInstance, h,4, 1,6)
+    selected_filter.append(filter_source)
+
+    filter_owner = getInputFilter(screenInstance, h,5, 4)
+    selected_filter.append(filter_owner)
+
+    filter_access = getMultiDropDownFilter(screenInstance, h,6, 2,2)
+    selected_filter.append(filter_access)
+
+    return selected_filter
+
+
+def getMultiDropDownFilter(screenInstance,h,index,multi_index,max_selection_option):
+    selectedFilter_list = []
+    if checkSlider(screenInstance, h, int(index)):
+        selected_list = screenInstance.picker.getSelection(h,int(multi_index),parent="allDropDown")
+        if len(selected_list) == int(max_selection_option):
+            selectedFilter_list.append('ALL')
+        else:
+            selectedFilter_list.append(str(' , '.join(selected_list)))
+    return selectedFilter_list
+
+
+def getInputFilter(screenInstance,h,index,input_index):
+    selectedFilter_list = []
+    if checkSlider(screenInstance, h, int(index)):
+        selectedFilter_list.append(str(screenInstance.cm.getValue_input(h,input_index)))
+    return selectedFilter_list
+
+
+
+def getGlobalFiltersFromScreen(screenName,screenInstance, setup,flag=True):
+    Keys = setup.cM.getAllNodeElements("segment_Filters", "filter")
+    actualFilters = insertKeys(screenInstance.globalfilter.getAllSelectedFilters(getHandle(setup,screenName,"filterArea"),flag=flag),Keys)
     return actualFilters
+
+
+def getGlobalFiltersToolTipData(screenName,filterScreenInstance,setup,flag=True):
+    Keys = setup.cM.getAllNodeElements("segment_Filters", "filter")
+    actualFilters = insertKeys(filterScreenInstance.globalfilter.getToolTipData(setup,getHandle(setup,screenName),screenName=MRXConstants.SEGMENTSCREEN,flag=flag),Keys)
+    return actualFilters
+
 
 def insertKeys(dictionary,keys):
     if type(dictionary) == dict:

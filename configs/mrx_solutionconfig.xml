@@ -56,6 +56,7 @@
             <component id ="allbuttons" selector="css selector" locator='[class="crud_header"]' parent="True"/>
             <component id ="filterArea" selector="css selector" locator="div.filterContainerBox" parent="True"/>
             <component id ="screenheader" selector="css selector" locator='[class="crud_header"]' parent="True" />
+            <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
         </screenConfig>
 
         <screenConfig id = "popUp_Screen">
@@ -71,7 +72,6 @@
 
         </screenConfig>
 
-
         <screenConfig id="filter_Screen">
             <component id="allspans" selector="css selector" locator='.basePopupView' parent="True"/>
             <component id = "icons" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
@@ -80,6 +80,7 @@
             <component id ="allsliders" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
             <component id = "allselects" selector="tag name" locator='[class="basePopupView"]' parent="True" />
             <component id = "allDropDown" selector="id" locator='[class="basePopupView"]' parent="True"/>
+
         </screenConfig>
 
 
@@ -209,8 +210,11 @@
 
 
         <componentConfig id="filterArea">
-            <component id="filterIcon" selector="css selector" locator="div.nofilterSelectedIcon"/>
+            <component id="nofilterIcon" selector="css selector" locator="div.nofilterSelectedIcon"/>
             <component id="filterClearIcon" selector="css selector" locator="div.filterClearIcon"/>
+            <component id ="filterText" selector="css selector" locator=".filterItemContainer"/>
+            <component id ='filterIcon' selector="css selector" locator=".filterIcon"/>
+            <!--<component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>-->
         </componentConfig>
 
         <componentConfig id="screenheader">
@@ -221,6 +225,9 @@
             <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
         </componentConfig>
 
+        <componentConfig id = "globalfiltertooltip">
+            <component id = "filterText" selector="css selector" locator=".filterItemContainer"/>
+        </componentConfig>
 
 
         <!--<componentConfig id ='browsebuttons'>-->

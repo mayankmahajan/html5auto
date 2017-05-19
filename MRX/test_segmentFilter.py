@@ -20,30 +20,27 @@ segmentScreenInstance = SegmentScreenClass(setup.d)
 segmentScreenHandle = getHandle(setup,MRXConstants.SEGMENTSCREEN)
 
 #click on Filter Icon
-SegmentHelper.clickOnfilterIcon(setup,MRXConstants.SEGMENTSCREEN)
-
+'''
+SegmentHelper.clickOnfilterIcon(setup,MRXConstants.SEGMENTSCREEN,'nofilterIcon')
 filterScreenHandle=getHandle(setup,"filter_Screen")
 checkEqualAssert("Filters",str(filterScreenHandle['allspans']['span'][0].text),'','',"Verify Filter Header Text on Filter Popup")
 
 
 #filterScenarios=setup.cM.getNodeElements('segmentFilter','filter')
 #for k, filterScenario in filterScenarios.iteritems():
+
 for i in range(1):
     expected = SegmentHelper.setSegmentFilter(setup,segmentScreenInstance,k=i)
+    #isError(setup)
+    segmentScreenInstance.cm.clickButton("Apply Filters", getHandle(setup, MRXConstants.FILTERSCREEN, 'allbuttons'))
     isError(setup)
+    popUpTooltipData = SegmentHelper.getGlobalFiltersToolTipData(MRXConstants.SEGMENTSCREEN, segmentScreenInstance, setup,flag=False)
+    checkEqualDict(popUpTooltipData, expected, "", "", "Verify Filters Selections")
+'''
 
-    popUpTooltipData = SegmentHelper.getGlobalFiltersToolTipData(MRXConstants.FILTERSCREEN, segmentScreenInstance, setup)
-
-    # get global filter from PopUpToolTipScreen
-    # popUpTooltipData = Helper.getGlobalFiltersToolTipData(MuralConstants.GFPOPUP, globalFilterInstance, setup)
-    #
-    # checkEqualDict(popUpTooltipData, expected, "", "", "Verify Filters Selections")
-    #
-    # # apply global filters
-    # globalFilterInstance.clickButton("Apply", getHandle(setup, MuralConstants.GFPOPUP, MuralConstants.ALLBUTTONS))
-    # isError(setup)
-    #
-    # # get global filter from Screen
-    # globalFilterFromScreen = Helper.getGlobalFiltersFromScreen(MuralConstants.ATSCREEN, globalFilterInstance, setup)
+filterFromScreen=SegmentHelper.getGlobalFiltersFromScreen(MRXConstants.SEGMENTSCREEN, segmentScreenInstance, setup,flag=False)
+SegmentHelper.clickOnfilterIcon(setup, MRXConstants.SEGMENTSCREEN,'filterIcon')
+expectedFromFilterPopUp = SegmentHelper.getSegmentFilter(setup, segmentScreenInstance)
+checkEqualDict(filterFromScreen, expectedFromFilterPopUp, "", "", "Verify Filters Selections")
 
 setup.d.close()
