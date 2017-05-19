@@ -112,6 +112,9 @@ def checkEqualAssert(expected, actual, time="", measure="", message=""):
 
 def login(obj,username,password):
     try:
+        time.sleep(10)
+        # adding only to make whole suite faster. We can give lesser timeout time for all components
+        # this a page load and it takes longer time
         if Constants.isOffline:
             return True
         driver = obj.d
