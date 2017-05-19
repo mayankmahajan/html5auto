@@ -47,6 +47,9 @@ class ExploreListComponentClass(BaseComponentClass):
     def launchapp(self,h,index,parent="switchApp",child="cellitem"):
         try:
             h[parent][child][index].click()
+            time.sleep(10)
+            # adding only to make whole suite faster. We can give lesser timeout time for all components
+            # this a page load and it takes longer time
             return True
         except Exception as e:
             return e
