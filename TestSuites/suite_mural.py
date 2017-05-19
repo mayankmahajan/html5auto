@@ -20,6 +20,18 @@ def appendTestCase(module):
 
 def dump_to_html(testsuite):
     with open(result_chart_file_path,"a") as f:
+
+        pass_count = 0
+        fail_count = 0
+        for sut,tcs in testsuite.iteritems():
+            fail_count = fail_count + tcs[len(tcs)-1]
+            pass_count = pass_count + tcs[len(tcs)-2]
+        total_count = fail_count + pass_count
+
+        f.write("<br>Results:")
+        f.write("<br>Total testcases excecuted: "+str(total_count))
+        f.write("<br>Total testcases failed: "+str(fail_count) + "<br><br>")
+
         f.write("<table>")
         f.write("<tr>")
         f.write("<td>"+str("Testcase")+"</td>")
@@ -37,15 +49,15 @@ def dump_to_html(testsuite):
             f.write("<td>"+str("Actual Result")+"</td>")
             f.write("</tr>")
             for i in range(len(testcases)-2):
-                # if testcases[i]['status'] == "FAIL":
-                f.write("<tr>")
-                f.write("<td>"+str(testcases[i]['title'])+"</td>")
-                f.write("<td><font color='red'>"+str(testcases[i]['status'])+"</font></td>")
-                f.write("<td>"+str(testcases[i]['expected'])+"</td>")
-                f.write("<td>"+str(testcases[i]['actual'])+"</td>")
-                # for k,v in testcases[i].iteritems():
-                #     f.write("<td>"+str(v)+"</td>")
-                f.write("</tr>")
+                if testcases[i]['status'] == "FAIL":
+                    f.write("<tr>")
+                    f.write("<td>"+str(testcases[i]['title'])+"</td>")
+                    f.write("<td><font color='red'>"+str(testcases[i]['status'])+"</font></td>")
+                    f.write("<td>"+str(testcases[i]['expected'])+"</td>")
+                    f.write("<td>"+str(testcases[i]['actual'])+"</td>")
+                    # for k,v in testcases[i].iteritems():
+                    #     f.write("<td>"+str(v)+"</td>")
+                    f.write("</tr>")
             f.write("</table>")
             f.write("<br><br>")
 
@@ -82,7 +94,7 @@ if platform.system() == "Windows":
 else:
     delimiter = "/"
 
-test_file_strings = glob.glob('../dummytest_screens_bulkstats/test_*.py')
+test_file_strings = glob.glob('../dummy_package/test_*.py')
 
 # creating global object accessed through out all modules
 import __builtin__
