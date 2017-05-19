@@ -62,7 +62,9 @@ def sendmail_selenium(additional_script_path= "",additional_text=""):
     # display = Display(size=(800, 600))
     # display.start()
 
-    driver = webdriver.Firefox()
+    # driver = webdriver.Firefox()
+    driver = webdriver.Chrome(Constants.chromedriverpath)
+
     driver.get(Constants.localserver)
     import time
     time.sleep(4)
