@@ -100,7 +100,7 @@ class GlobalFiltersPopClass(BasePopClass):
                 except:
                     pass
                 selected  = globalFilterInstance.multiDropdown.domultipleSelectionWithIndex(self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,"filterPopup"),global_filter[k][i],i)
-                if selected != "":
+                if selected != ['']:
                     filterSelected.append(selected)
                 else:
                     filterSelected.append([])

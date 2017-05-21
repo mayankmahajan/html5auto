@@ -43,9 +43,9 @@
     </apnratFilters>
     <deviceFilters>
         <filter id = "Device Group"/>
-        <filter id = "OS"/>
-        <filter id = "Manufacturer"/>
-        <filter id = "Models"/>
+        <filter id = "Device OS"/>
+        <filter id = "Device Manufacturer"/>
+        <filter id = "Device Models"/>
     </deviceFilters>
     <contentFilters>
         <filter id = "Traffic Type Category"/>
