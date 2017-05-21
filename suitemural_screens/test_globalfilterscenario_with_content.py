@@ -49,7 +49,7 @@ try:
 
             if btvdata0 == False:
                 logger.info("No Data for globalfilter=%s ", globalFilterFromScreen)
-                sys.exit()
+                raise
 
         setup.d.close()
 

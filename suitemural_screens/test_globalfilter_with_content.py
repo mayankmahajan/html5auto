@@ -61,7 +61,7 @@ try:
 
         if btvdata0 == False:
             logger.info("No Data for globalfilter=%s ", globalFilterFromScreen)
-            sys.exit()
+            raise
 
     logger.info("Moving on Devices")
     networkScreenInstance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))

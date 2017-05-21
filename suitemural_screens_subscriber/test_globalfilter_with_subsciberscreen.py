@@ -73,7 +73,7 @@ try:
         data = subscriberScreenInstance.table.getTableData1(tableHandle, "table", length=5)
         if data['rows'] == Constants.NODATA:
             logger.info("No Table Data for globalfilter=%s ", globalFilterFromScreen)
-            sys.exit()
+            raise
 
     globalFilterInstance.clearGlobalFilters(getHandle(setup,MuralConstants.SubscriberScreen,"filterArea"))
     isError(setup)

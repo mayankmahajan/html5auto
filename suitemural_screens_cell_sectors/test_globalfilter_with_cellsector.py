@@ -66,7 +66,7 @@ try:
 
         if data['rows'] == Constants.NODATA:
             logger.info("No Table Data for globalfilter=%s ", globalFilterFromScreen)
-            sys.exit()
+            raise
 
     globalFilterInstance.clearGlobalFilters(getHandle(setup,MuralConstants.CellSectorScreen,"filterArea"))
     isError(setup)
