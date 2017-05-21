@@ -57,7 +57,7 @@ try:
                             p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                             for i in range(1,len(p['BTVCOLUMN1'])):
 
-                                doActionsOnNetwork(networkScreenInstance,setup,i,d)
+                                doActionsOnNetwork(networkScreenInstance,setup,i,d,measureSelected=measureSelected)
                                 # sleep(8)
                                 checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure,i,True,d)
 
@@ -71,7 +71,7 @@ try:
 
                     p = networkScreenInstance.btv.getData(getHandle(setup, MuralConstants.NWSCREEN, "btv"))
                     for i in range(len(p['BTVCOLUMN1'])):
-                        doActionsOnNetwork(networkScreenInstance,setup,i)
+                        doActionsOnNetwork(networkScreenInstance,setup,i,measureSelected=measureSelected)
                         checkAllComponent(setup, networkScreenInstance, selectedQuicklink,measure, i, True)
 
     toolTip(setup, networkScreenInstance)

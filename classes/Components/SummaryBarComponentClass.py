@@ -109,10 +109,11 @@ class SummaryBarComponentClass(BaseComponentClass):
             logger.error("Got Exception in Summary Bar = %s",str(e) )
             return e,e
 
-    def getSelection3(self,handlrs,measureSelected,direction=0):
+    def getSelection3(self,handlrs,measureSelected,direction=0,setup=""):
 
         handlers = self.compHandlers('summarybar',handlrs)
         summaryBarHandler =handlers['summaryBarTable'][len(handlers['summaryBarTable'])-1]
+        setup.d.execute_script("return arguments[0].scrollIntoView();", summaryBarHandler)
         drops = summaryBarHandler.find_elements_by_tag_name("select")
         drop = DropdownComponentClass()
         if direction == 0:

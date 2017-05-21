@@ -78,7 +78,7 @@ def getSelectionsFromNetwork(networkScreenInstance,setup,measureSelected,directi
         btv['value'].append(btvSel['BTVCOLUMN2'][i])
     btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.NWSCREEN,"btv"),0)
 
-    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),direction=direction)
+    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),measureSelected,direction=direction,setup=setup)
     summary['dim'] = summary['header']
     summary['value']=[sumSel[summary['dim'],0,measureSelected],
                       sumSel[summary['dim'],1,measureSelected]]
@@ -198,7 +198,7 @@ def toolTip(setup,instance):
     return True
 
 
-def doActionsOnNetwork(networkScreenInstance,setup,index=2,direction=0):
+def doActionsOnNetwork(networkScreenInstance,setup,index=2,direction=0,measureSelected=""):
     # set picker 1
     picker1={}
     picker1['data'] = networkScreenInstance.picker.domultipleSelectionWithIndex(getHandle(setup,MuralConstants.NWSCREEN,"picker"),[index,index-2],0,"picker",setup=setup)
@@ -219,7 +219,7 @@ def doActionsOnNetwork(networkScreenInstance,setup,index=2,direction=0):
     # btv['tooltip']  = networkScreenInstance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
 
     summary = {}
-    summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),direction=direction)
+    summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),measureSelected,direction=direction,setup=setup)
 
     return picker1,picker2,btv,summary
 

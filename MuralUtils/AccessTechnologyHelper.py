@@ -107,7 +107,7 @@ def checkAllComponentRelatedToPie(setup, instance, quicklink, measureSelected,fl
     pielegend= getHandle(setup, MuralConstants.ATSCREEN,"pielegend")
 
     breadCrumbLabel = instance.cm.getRHSBreadCrumbLabel(getHandle(setup, MuralConstants.ATSCREEN, "exploreBar"))
-    summary['data'], summary['header'] = instance.summarybar.getSelection3(getHandle(setup, MuralConstants.ATSCREEN, "summarybar"),direction=direction)
+    summary['data'], summary['header'] = instance.summarybar.getSelection3(getHandle(setup, MuralConstants.ATSCREEN, "summarybar"),measureSelected,direction=direction,setup=setup)
     dim_PieSelectionText, value_PieSelectionText = instance.piecomponent.getPieSelectionText(pie, "piechart", "selectionText")
 
     if not flag:

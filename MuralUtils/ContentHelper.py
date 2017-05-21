@@ -54,7 +54,7 @@ def getSelectionsFromContent(networkScreenInstance, setup, measureSelected,direc
     btv1 = networkScreenInstance.multibtv.getSelections(setup,getHandle(setup, MuralConstants.ContentScreen, "btvGroup"),occurence=1,measureSelected=measureSelected)
     btv1['header'] = networkScreenInstance.multibtv.getHeader(getHandle(setup, MuralConstants.ContentScreen, "btvGroup"))
 
-    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),direction=direction)
+    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.NWSCREEN,"summarybar"),measureSelected,direction=direction,setup=setup)
     summary['dim'] = summary['header']
 
     # For handle issue of avg flow/hit duration in measure and flow/hit duration in summary bar

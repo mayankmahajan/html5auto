@@ -66,7 +66,7 @@ def getSelectionsFromDevice(networkScreenInstance, setup, measureSelected,direct
     # btv['header'] = networkScreenInstance.btv.getHeader(getHandle(setup,MuralConstants.DeviceScreen,"btv"),0)
 
     btv_new = networkScreenInstance.btv.merge_dictionaries(btv,networkScreenInstance.btv.calTotal(btv['dim'],btv['value'],measureSelected))
-    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.DeviceScreen,"summarybar"),measureSelected,direction=direction)
+    sumSel,summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.DeviceScreen,"summarybar"),measureSelected,direction=direction,setup=setup)
     summary['dim'] = summary['header']
     summary['value']=[sumSel[summary['dim'],0,measureSelected],
                       sumSel[summary['dim'],1,measureSelected]]
@@ -137,6 +137,6 @@ def doActionsOnDevice(networkScreenInstance, setup, index=2,measureSelected="",d
     # btv['tooltip']  = networkScreenInstance.btv.getToolTipInfo(setup.d,setup.dH,getHandle(setup,MuralConstants.NWSCREEN,"btv"))
 
     summary = {}
-    summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.DeviceScreen,"summarybar"),measureSelected,direction=direction)
+    summary['data'],summary['header'] = networkScreenInstance.summarybar.getSelection3(getHandle(setup,MuralConstants.DeviceScreen,"summarybar"),measureSelected,direction=direction,setup=setup)
 
     return btv,summary
