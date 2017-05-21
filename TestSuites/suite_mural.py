@@ -69,7 +69,7 @@ def dump_to_html(testsuite):
         failCounts.append(testsuite[suites[i]][len(testsuite[suites[i]])-1])
         passCounts.append(testsuite[suites[i]][len(testsuite[suites[i]])-2])
 
-    text_to_dump = "Highcharts.chart('container', {chart: {type: 'column'},title: {text: 'Test Results'},xAxis: {categories: " \
+    text_to_dump = "Highcharts.chart('container', {chart: {type: 'bar'},title: {text: 'Test Results'},xAxis: {categories: " \
                    +str(suites)+ \
                    "},yAxis: {min: 0,title: {text: 'TestCase Numbers'},stackLabels: {enabled: true,style: {fontWeight: 'bold',color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'}}},legend: {reversed: true},plotOptions: {series: {stacking: 'normal'}}," \
                    "series: [{name: 'Fail',data: " \
