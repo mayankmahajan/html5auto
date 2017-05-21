@@ -99,7 +99,11 @@ class GlobalFiltersPopClass(BasePopClass):
                     globalFilterInstance.multiDropdown.selectRadioButtonByIndex(i, self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,"radios"), "label")
                 except:
                     pass
-                filterSelected.append(globalFilterInstance.multiDropdown.domultipleSelectionWithIndex(self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,"filterPopup"),global_filter[k][i],i))
+                selected  = globalFilterInstance.multiDropdown.domultipleSelectionWithIndex(self.utility.utility.getHandle(setup,MuralConstants.GFPOPUP,"filterPopup"),global_filter[k][i],i)
+                if selected != "":
+                    filterSelected.append(selected)
+                else:
+                    filterSelected.append([])
                 # filterSelected.append(globalFilterInstance.multiDropdown.getSelection(getHandle(setup,MuralConstants.GFPOPUP,"filterPopup"),i))
 
         return filterSelected
