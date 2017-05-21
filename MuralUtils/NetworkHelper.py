@@ -146,7 +146,7 @@ def checkAllComponent(setup,instance,quicklink,measureSelected,index,flag,direct
         p1,p2,b1,s1=getSelectionsFromNetwork(instance,setup,measureSelected['locatorText'],direction=direction)
         checkEqualAssert(True,b1['dim'][0] in s1['dim'], quicklink, measureSelected['locatorText'], "Verify Selection at summary : expected ="+b1['dim'][0]+"actual= "+s1['header'])
         checkEqualAssert(s1['dim'], breadCrumbLabel, quicklink, measureSelected['locatorText'], "Verify BreadCrumb Label")
-        checkEqualAssert(s1['value'][0],b1['value'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
+        checkEqualAssert(s1['value'][0],b1['value'][0],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, All Sub")
         # checkEqualAssert(s1['value'][1],b1['value'],quicklink,measureSelected['locatorText'],"Verify Summary Card data with btv, Per Sub")
 
         instance.cm.activate(getHandle(setup, MuralConstants.NWSCREEN, "exploreBar"))
