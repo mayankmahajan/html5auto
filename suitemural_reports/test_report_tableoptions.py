@@ -21,7 +21,7 @@ try:
 
     # print ReportsHelper.getFiltersInfo(setup, 2)
     print ReportsHelper.downloadReport(setup, 3)
-    print ReportsHelper.deleteReport(setup, 5)
+    print ReportsHelper.deleteReport(setup, 3)
 
 
     # Closing the browser
