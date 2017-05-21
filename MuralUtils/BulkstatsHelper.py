@@ -66,7 +66,7 @@ def setFormula(setup,h,source_parent="alllinks",source_child="a",target_parent="
     actual_formulaText = commonElement.getValue_input(h,0,parent=target_parent,child=target_child)
 
     import Utils.utility as util
-    util.checkEqualAssert(runtime_formula,actual_formulaText,message="Verifying the Formula Value at Pop up only")
+    util.checkEqualAssert(runtime_formula.replace(" ",""),actual_formulaText.replace(" ",""),message="Verifying the Formula Value at Pop up only")
 
     return actual_formulaText
 

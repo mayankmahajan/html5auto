@@ -122,8 +122,9 @@ try:
         for el in data:
             t=t+int(el.split("\n")[1])
         checkEqualAssert(t,total,message="Verifying Total from Indices")
-        checkEqualAssert(True, input['rulename'] in data, message="Checking KPI Rule created")
-        checkEqualAssert(input['formula'],str(selectedRowHandle.text.split("\n")[1]),message="Checking created KPI Rule for Formula")
+        rulename = bulk_right['rightListContainer','label'][0].text
+        checkEqualAssert(True, input['rulename'] in rulename, message="Checking KPI Rule created")
+        checkEqualAssert(input['formula'].replace(" ",""),str(selectedRowHandle.text.split("\n")[1]).replace(" ",""),message="Checking created KPI Rule for Formula")
         BulkstatsHelper.checkSeverity(setup,input,selectedRowHandle)
 
 

@@ -26,9 +26,9 @@ class ConfigManager(object):
     def __init__(self):
         # self.tree = self.mergeScreenConfigs()
         # self.tree = self.parse()
-        #self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mural_solutionconfig.xml', '../configs/mural_userlevel_config.xml']).combine()
+        self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mural_solutionconfig.xml', '../configs/mural_userlevel_config.xml']).combine()
 
-        self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mrx_solutionconfig.xml','../configs/mrx_userlevel_config.xml']).combine()
+        # self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mrx_solutionconfig.xml','../configs/mrx_userlevel_config.xml']).combine()
 
         # self.tree = XMLCombiner(['../configs/copy_coreconfig.xml', '../configs/copy_solutionconfig.xml']).combine()
 

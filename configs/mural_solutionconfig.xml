@@ -824,6 +824,7 @@
             <component id = "rightColumn" selector="css selector" locator="td.dualRightAlignColumn"/>
             <component id = "selected" selector="css selector" locator="[class*=selectedRowClass]"/>
             <component id = "input" selector="css selector" locator="input"/>
+            <component id = "label" selector="css selector" locator="label"/>
         </componentConfig>
         <componentConfig id ="compareContainer">
             <!--<component id = "drop" selector="css selector" locator="kiwik-drop-container"/>-->
