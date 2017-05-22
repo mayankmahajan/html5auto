@@ -18,7 +18,7 @@ try:
     wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     TMScreenInstance = TrendingMonitoringPageClass(setup.d)
     h = getHandle(setup, MuralConstants.TMSCREEN, 'trend-slider')
-    TMScreenInstance.quicktrends.clickOnExpandButton(h)
+    TMScreenInstance.quicktrends.clickOnExpandButton(h,setup=setup)
 
     selectedQuicklink = TMScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MuralConstants.TMSCREEN, "ktrs"))
     checkEqualAssert(str(selectedQuicklink), "Yesterday","", "", "verify quicklink ")

@@ -31,7 +31,7 @@ try:
     wfstart.launchScreen("Trend",getHandle(setup,MuralConstants.WFSTARTSCREEN))
     TMScreenInstance = TrendingMonitoringPageClass(setup.d)
     h = getHandle(setup, MuralConstants.TMSCREEN, 'trend-slider')
-    TMScreenInstance.quicktrends.clickOnExpandButton(h)
+    TMScreenInstance.quicktrends.clickOnExpandButton(h,setup=setup)
 
     measures = setup.cM.getNodeElements("measureswithdirection", "measure")
     dimensions = setup.cM.getNodeElements("tmdimension", "dimension")

@@ -233,8 +233,9 @@ class QuickTrendsComponentClass(BaseComponentClass):
 
 
 
-    def clickOnExpandButton(self,h,parent="trend-slider",child='expand-btn'):
+    def clickOnExpandButton(self,h,parent="trend-slider",child='expand-btn',setup=""):
         if len(h[parent][child]) > 0:
+            setup.d.execute_script("return arguments[0].scrollIntoView();", h[parent][child][0])
             h[parent][child][0].click()
             try:
                 h[parent][child][0].click()
