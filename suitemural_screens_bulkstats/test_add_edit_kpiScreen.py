@@ -64,7 +64,7 @@ try:
         for el in data:
             t=t+float(el.split("\n")[1])
         checkEqualAssert(t,total,message="Verifying Total from Indices")
-        rulename = bulk_right['rightListContainer','label'][0].text
+        rulename = bulk_right['rightListContainer']['label'][0].text
         checkEqualAssert(True, input['rulename'] in rulename, message="Checking KPI Rule created : " + str(input['rulename']))
         checkEqualAssert(input['formula'].replace(" ",""),str(selectedRowHandle.text.split("\n")[1]).replace(" ",""),message="Checking created KPI Rule for Formula")
         BulkstatsHelper.checkSeverity(setup,input,selectedRowHandle)
@@ -123,7 +123,7 @@ try:
         for el in data:
             t=t+int(el.split("\n")[1])
         checkEqualAssert(t,total,message="Verifying Total from Indices")
-        rulename = bulk_right['rightListContainer','label'][0].text
+        rulename = bulk_right['rightListContainer']['label'][0].text
         checkEqualAssert(True, input['rulename'] in rulename, message="Checking KPI Rule created : " + str(input['rulename']))
         checkEqualAssert(input['formula'].replace(" ",""),str(selectedRowHandle.text.split("\n")[1]).replace(" ",""),message="Checking created KPI Rule for Formula")
         BulkstatsHelper.checkSeverity(setup,input,selectedRowHandle)
