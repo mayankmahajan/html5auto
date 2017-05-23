@@ -42,7 +42,13 @@ class UnitSystem :
             rawValue = convertedValue * self.timeValues[self.timeUnits.index(unitString)]
         elif unitString in self.byteUnits or "bps" in unitString:
             if "bps" in unitString:
-                unit=unitString.strip('bps')+"B"
+                import re
+                # unit=unitString.strip('bps')+"B"
+                unit=unitString.strip('bps')
+                if not re.findall(r'[a-zA-Z]',unit):
+                    pass
+                else:
+                    unit = unit + "B"
             else:
                 unit=unitString
             rawValue = convertedValue * self.byteValues[self.byteUnits.index(unit)] ** self.byteUnits.index(unit)
