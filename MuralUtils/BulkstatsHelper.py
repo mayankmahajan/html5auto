@@ -143,11 +143,11 @@ def checkSeverity(setup,input,selectedRowHandle):
     value = selectedRowHandle.text.split("\n")[2]
     commonelement = BaseComponentClass()
 
-    if int(value) >= int(input['lthreshold']) and int(value) <= int(input['uthreshold']):
+    if float(value) >= float(input['lthreshold']) and float(value) <= float(input['uthreshold']):
         color = commonelement.rgb_to_hex("rgb(51, 153, 102)")
-    elif int(value) < int(input['lthreshold']):
+    elif float(value) < float(input['lthreshold']):
         color = commonelement.rgb_to_hex("rgb(249, 245, 23)")
-    elif int(value) > int(input['uthreshold']):
+    elif float(value) > float(input['uthreshold']):
         color = commonelement.rgb_to_hex("rgb(240, 49, 23)")
     handle = getHandle(setup,MuralConstants.KPISCREEN)
 
