@@ -16,7 +16,19 @@
 
         <!-- leftSide of Created on can be in 0,1,2-->
         <!--Date must be complete yyyy Month dd hh MM-->
-        <filter id="0" segmentname="praveen_0" user=" ::20" createdon="1::2017 May 12 05 10" status="1" source="0,1,2,3,4,5" owner="admin" access="0,1" />
+
+        <filter id="0" segmentname="autopraveen_0" user="05::20" createdon="1::2017 May 12 05 10" status="0" source="1,2,3,4,5" owner="admin" access="1" />
+        <!--<filter id="0" segmentname="praveen_0" user=" ::20" createdon="1::2017 May 12 05 10" status=" " source="0,1,2,3,5" owner="admin" access="0,1" />-->
+
+        <filter id="1" segmentname="autopraveen" user=" :: " createdon=" :: " status=" " source=" " owner=" " access=" " />
+        <filter id="2" segmentname="autopraveen_0" user=" :: " createdon=" :: " status=" " source=" " owner=" " access=" " />
+        <filter id="3" segmentname=" " user="05::20" createdon=" :: " status=" " source=" " owner=" " access=" " />
+        <filter id="4" segmentname=" " user=" :: " createdon="1::2017 May 12 05 10" status=" " source=" " owner=" " access=" " />
+        <filter id="5" segmentname=" " user=" :: " createdon=" :: " status="0,1" source=" " owner=" " access=" " />
+        <filter id="6" segmentname=" " user=" :: " createdon=" :: " status=" " source="2,3,4" owner=" " access=" " />
+        <filter id="7" segmentname=" " user=" :: " createdon=" :: " status=" " source=" " owner="admin" access=" " />
+        <filter id="8" segmentname=" " user=" :: " createdon=" :: " status=" " source=" " owner=" " access="0" />
+
     </segmentFilter>
 
     <subscriber>
@@ -202,29 +214,54 @@
 
 
   <segmentDetails>
-      <segment id="0" segmentname="praveen_0"  newsegmentname='edit_Praveen_0' access='Shared' file="/Users/praveen.garg1/Documents/segment_sample.csv" button="Import" status="Completed" />
-      <!--<segment id="1" segmentname="praveen_1" newsegmentname='edit_Praveen_1' access='Shared' file="/Users/praveen.garg1/Documents/segment_sample_1.csv" button="Import" status="Completed"/>-->
-      <!--<segment id="2" segmentname="praveen_2" newsegmentname='edit_Praveen_2' access='Private' file="/Users/praveen.garg1/Documents/segment_sample.csv" button="Import" status="Completed"/>-->
-      <segment id="3" segmentname="praveen_3" newsegmentname='edit_Praveen_3' access='Private' file="/Users/praveen.garg1/Documents/segment_sample_2.csv" button="Import" status="Rejected"/>
-      <!--<segment id="4" segmentname="praveen_4" newsegmentname='edit_Praveen_4 access='Shared' file="/Users/praveen.garg1/Documents/segment_sample.csv" button="Cancel" status="Completed"/>-->
+      <segment id="0" segmentname="autopraveen_0" newsegmentname='autoedit_Praveen_0' access='Shared' file="/Users/praveen.garg1/html5automation/MRX/segment_sample.csv" button="Import" status="Completed" uniquecount="15"/>
+      <segment id="1" segmentname="autopraveen_1" newsegmentname='autoedit_Praveen_1' access='Shared' file="/Users/praveen.garg1/html5automation/MRX/segment_sample_1.csv" button="Import" status="Completed" uniquecount="15"/>
+      <segment id="2" segmentname="autopraveen_2" newsegmentname='autoedit_Praveen_2' access='Private' file="/Users/praveen.garg1/html5automation/MRX/segment_sample_2.csv" button="Import" status="Completed" uniquecount="15"/>
+      <segment id="3" segmentname="autopraveen_3" newsegmentname='autoedit_Praveen_3' access='Private' file="/Users/praveen.garg1/html5automation/MRX/segment_sample_3.csv" button="Import" status="Completed" uniquecount="15"/>
+
+      <segment id="4" segmentname="autopraveen_4" newsegmentname='autoedit_Praveen_4' access='Private' file="/Users/praveen.garg1/html5automation/MRX/segment_sample_5.csv" button="Import" status="Completed" uniquecount="15"/>
+      <segment id="5" segmentname="autopraveen_5" newsegmentname='autoedit_Praveen_5' access='Shared' file="/Users/praveen.garg1/html5automation/MRX/segment_sample_6.csv" button="Import" status="Completed" uniquecount="15"/>
+      <segment id="6" segmentname="autopraveen_6" newsegmentname='autoedit_Praveen_6' access='Shared' file="/Users/praveen.garg1/html5automation/MRX/segment_sample_4.csv" button="Import" status="Rejected" uniquecount="0"/>
+
+      <segment id="7" segmentname="autopraveen_7" newsegmentname='autoedit_Praveen_7' access='Shared' file="/Users/praveen.garg1/html5automation/MRX/segment_sample.csv" button="Cancel" status="Completed" uniquecount="15"/>
   </segmentDetails>
 
 
+
+
   <editSegmentDetails>
-
       <!--for edit-->
-      <segment id="0" segmentname="praveen_0" newsegmentname='edit_Praveen_0' access='Private' edit_info='edit' button="Update"/>
-
+      <segment id="0" segmentname="autopraveen_4" newsegmentname='autoedit_Praveen_4' access='Private' edit_info='edit' button="Cancel"/>
+      <segment id="1" segmentname="autopraveen_5" newsegmentname='autoedit_Praveen_5' access='Private' edit_info='edit' button="Update"/>
       <!--for info-->
-      <segment id="3" segmentname="praveen_3" edit_info="info"/>
-
+      <segment id="3" segmentname="autopraveen_6" edit_info="info"/>
   </editSegmentDetails>
 
+
+
   <selectCheckBoxForPerformLogicalOpertion>
-      <segment id="0" segmentname="praveen_0" />
-      <segment id="1" segmentname="praveen_1" />
-      <segment id="2" segmentname="praveen_2" />
+
+      <segment id="0" segmentname="autopraveen_0" button="Create" status="Completed"/>
+      <segment id="1" segmentname="autopraveen_1" button="Create" status="Completed"/>
+      <segment id="2" segmentname="autopraveen_2" button="Create" status="Completed"/>
+      <segment id="3" segmentname="autopraveen_3" button="Create" status="Completed"/>
+      <segment id="4" segmentname="autopraveen_4" button="Create" status="Completed"/>
+      <segment id="5" segmentname="autopraveen_5" button="Cancel" status="Completed"/>
+      <segment id="6" segmentname="autopraveen_6" button="Create" status="Rejected"/>
+
   </selectCheckBoxForPerformLogicalOpertion>
+
+  <segment_Table_Header>
+      <column id="segmentname" locatorText="SegmentName"/>
+      <column id="user" locatorText="#Users"/>
+      <column id="status" locatorText="Status"/>
+      <column id="source" locatorText="Source"/>
+      <column id="owner" locatorText="Owner"/>
+      <column id="access" locatorText="Access"/>
+      <column id="created_on" locatorText="Created on"/>
+      <column id="edit_info" locatorText="Edit/Info"/>
+      <column id="delete" locatorText="Delete"/>
+  </segment_Table_Header>
 
 
 </data>

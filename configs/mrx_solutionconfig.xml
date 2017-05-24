@@ -57,6 +57,7 @@
             <component id ="filterArea" selector="css selector" locator="div.filterContainerBox" parent="True"/>
             <component id ="screenheader" selector="css selector" locator='[class="crud_header"]' parent="True" />
             <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
+            <component id ='dropdown_open' selector="class name" locator="dropdown" parent="True"/>
         </screenConfig>
 
         <screenConfig id = "popUp_Screen">
@@ -214,6 +215,7 @@
             <component id="filterClearIcon" selector="css selector" locator="div.filterClearIcon"/>
             <component id ="filterText" selector="css selector" locator=".filterItemContainer"/>
             <component id ='filterIcon' selector="css selector" locator=".filterIcon"/>
+            <component id = "filter" selector="css selector" locator="[class*=filterTextDiv]"/>
             <!--<component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>-->
         </componentConfig>
 
@@ -227,6 +229,11 @@
 
         <componentConfig id = "globalfiltertooltip">
             <component id = "filterText" selector="css selector" locator=".filterItemContainer"/>
+        </componentConfig>
+
+        <componentConfig id ='dropdown_open'>
+            <component id ='text' selector="tag name" locator="label"/>
+            <component id ='exportdata' selector="css selector" locator='[class*=exportImg]'/>
         </componentConfig>
 
 

@@ -48,8 +48,10 @@ def setupTestcase(self):
     self.driverHelper = DriverHelper(self.driver)
     return True
 
-def checkEqualDict(f1,f2,time="",measure="",message=""):
-    msg = time + " " + measure + " " + message
+def checkEqualDict(f1,f2,time="",measure="",message="",testcase_id=""):
+    tc_id = "<font color='blue'>" + str(testcase_id) + "</font> "
+    msg = tc_id + time + " " + measure + " " + message
+
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
     for k,v in f1.iteritems():
@@ -78,9 +80,11 @@ def checkEqualDict(f1,f2,time="",measure="",message=""):
             # resultlogger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
             logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
-def checkEqualAssert(expected, actual, time="", measure="", message=""):
+def checkEqualAssert(expected, actual, time="", measure="", message="",testcase_id=""):
 
-    msg = time + " " + measure + " " + message
+    tc_id = "<font color='blue'>" + str(testcase_id) + "</font> "
+    msg = tc_id + time + " " + measure + " " + message
+
     org_msg = msg
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
@@ -386,14 +390,14 @@ def confirm(setup,button='OK'):
         return [False, ""]
 
 
-def confirm_Popup(setup,segment_name,button='OK',headerText=Constants.CONFIRMHEADERINCONFIRMFILTERPOPUP):
+def confirm_Popup(setup,segment_name,button='OK',headerText=Constants.CONFIRMHEADERINCONFIRMFILTERPOPUP,testCaseId=''):
     #sleep(10)
     eHandle=getHandle(setup,Constants.CONFIRMFILTERPOPUP,Constants.CONFIRMFILTERBODY)
     if len(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERCLOSE])>0 and len(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERMESSAGE]) >0:
         checkEqualAssert(headerText,str(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERHEADER][0].text),"","","Verify Header for popUp")
         msg=str(eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERMESSAGE][0].text)
         real_msg="Do you want to delete \""+segment_name+"\" segment ?"
-        checkEqualAssert(real_msg,msg,"","", "Verify Text on popUp for Segment deletion")
+        checkEqualAssert(real_msg,msg,"","", "Verify Text on popUp for Segment deletion",testcase_id=testCaseId)
         for el in eHandle[Constants.CONFIRMFILTERBODY][Constants.CONFIRMFILTERBUTTON]:
             try:
                 if str(button) == str(el.text.strip()) or str('Ok')==str(el.text.strip()):

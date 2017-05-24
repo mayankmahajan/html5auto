@@ -204,10 +204,32 @@ class TableComponentClass(BaseComponentClass):
 
         return rows
 
-    def getRows1(self,colcount,h,length,driver,colIndex=0,scroll=False):
+
+
+    def scrollUpTable(self,h,driver):
+        driver.d.execute_script("return arguments[0].scrollIntoView();", h['table']['ROWS'][0])
+        sleep(4)
+        while True:
+            handle = self.utility.utility.getHandle(driver, "TableDummy_Screen", "table")
+            if str(h['table']['ROWS'][0].text)==str(handle['table']['ROWS'][0].text):
+                return
+            else:
+                import copy
+                h=copy.deepcopy(handle)
+                driver.d.execute_script("return arguments[0].scrollIntoView();", h['table']['ROWS'][0])
+                # handle = self.utility.utility.getHandle(driver, "TableDummy_Screen", "table")["table"]
+
+
+
+
+    def getRows1(self,colcount,h,length,driver,colIndex=0,scroll=False,ForTableData=False):
 
         if scroll:
-            driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-6*colcount])
+            if len(h['ROWS']) > 7:
+                driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS'])-6*colcount])
+            else:
+                driver.d.execute_script("return arguments[0].scrollIntoView();", h['ROWS'][len(h['ROWS']) - 1 * colcount])
+
             sleep(4)
             h = self.utility.utility.getHandle(driver,"TableDummy_Screen","table")["table"]
 
@@ -238,7 +260,9 @@ class TableComponentClass(BaseComponentClass):
                 data[str(row)] = row
             else:
                 data[row[colIndex]] = row
-        return [data,h]
+        if ForTableData:
+            return [rows,h]
+        return [data, h]
         return rows
 
     def addrows(self,colcount,h,driver,length,colIndex):
@@ -266,9 +290,43 @@ class TableComponentClass(BaseComponentClass):
                 return rows
 
 
+
+    def addrowsFormTableData(self,colcount,h,driver,length,colIndex,ForTableData=True):
+        rowsList = []
+        while True:
+            flag = True
+            if not rowsList:
+                t = self.getRows1(colcount,h,length,driver,colIndex,ForTableData=ForTableData)
+                if t==Constants.NODATA:
+                    return t
+                rowsList = t[0]
+                h = t[1]
+                flag=False
+            else:
+                flag=True
+                t = self.getRows1(colcount,h,length,driver,colIndex,True,ForTableData=ForTableData)
+                newrowsList = t[0]
+                h = t[1]
+
+                for newrow in newrowsList:
+                    if newrow not in rowsList:
+                        flag = False
+                        rowsList.append(newrow)
+            if flag:
+                return rowsList
+
+
+
+
+
+
+
+
     def getAllRowsAfterScroll(self,colcount,h,parent,driver,length,colIndex):
         return self.addrows(colcount,h[parent],driver,length,colIndex)
 
+    def getAllRowsAfterScrollForTableData(self, colcount, h, parent, driver, length, colIndex):
+        return self.addrowsFormTableData(colcount, h[parent], driver, length, colIndex)
 
 
 
@@ -294,6 +352,25 @@ class TableComponentClass(BaseComponentClass):
         logger.info("row with column value  = %s not found in table",value)
         resultlogger.info("row with column value  = %s not found in table",value)
         return -1
+
+    def getRowIndexFromTableWithScroll(self,setup,columnIndex,tableHandle,value):
+        data2=self.getTableDataWithScroll(tableHandle,driver=setup)
+        for index in range(len(data2['rows'])):
+            if str(data2['rows'][index][columnIndex]).strip()==str(value):
+                return index
+
+        logger.info("row with column value  = %s not found in table",value)
+        resultlogger.info("row with column value  = %s not found in table",value)
+        return -1
+
+
+    def getColumnValueFromTable(self,columnIndex,tableHandle):
+        columnValue=[]
+        data2=self.getTableData1(tableHandle)
+        for index in range(len(data2['rows'])):
+            columnValue.append(str(data2['rows'][index][columnIndex]).strip())
+        return columnValue
+
 
     def getIterfaceTableData(self,h):
         handlers = self.compHandlers('table', h)
@@ -334,6 +411,21 @@ class TableComponentClass(BaseComponentClass):
             return data
         except Exception as e:
             return e
+
+
+
+
+    def getTableDataWithScroll(self, h, parent="table", driver="", colIndex=0,length=15, child=""):
+        try:
+            data = {}
+            data['header'] = self.getIterfaceHeaders(h[parent])
+            data['rows'] = self.getAllRowsAfterScrollForTableData(len(data['header']),h,parent,driver,length,colIndex)
+            # data['rows'] = self.getIterfaceRows(len(data['header']),h[parent],length,driver)
+            return data
+        except Exception as e:
+            return e
+
+
     def setSelectionIndex(self,index,colCount,rowCount,h):
         elHandle=h['ROWS']
         newIndex = (colCount)*(index-1)+1

@@ -17,7 +17,8 @@ class Constants(object):
         #URL = "https://murala-ca.guavus.com:6443"
         # URL = "https://uiscrum-mural.cisco.com:6443"
         #URL="http://192.168.192.204:28080/"
-        URL="http://192.168.195.57:28080/"
+        #URL="http://192.168.195.57:28080/"
+        URL="http://192.168.162.33:9080/"
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
     # URL = 'https://nrmca-upgrade-setup.sprintspectrum.com:6443/'

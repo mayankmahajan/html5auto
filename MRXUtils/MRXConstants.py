@@ -3,8 +3,8 @@ class MRXConstants(Constants):
 
     WEBDRIVERTIMEOUT = 12
 
-    TIMEZONEOFFSET = 2
-    TIMEPATTERN = '%d %b %Y %H:%M:%S'
+    TIMEZONEOFFSET = 0
+    TIMEPATTERN = '%d %B %Y %H:%M'
 
 
     SEGMENTSCREEN = "segment_Screen"
@@ -15,3 +15,5 @@ class MRXConstants(Constants):
     FILTERSCREEN="filter_Screen"
     Apply_Filter='Apply Filters'
     Clear_All='Clear All'
+    ALL='ALL'
+    REFRESH='Refresh'
