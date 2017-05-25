@@ -79,7 +79,7 @@ try:
 
     click_status = SegmentHelper.clickOnfilterIcon(setup, MRXConstants.SEGMENTSCREEN, 'nofilterIcon')
     segmentScreenInstance.cm.clickButton("Cancel", getHandle(setup, MRXConstants.FILTERSCREEN, 'allbuttons'))
-    checkEqualAssert(0, len(getHandle(setup, MRXConstants.FILTERSCREEN, 'allbuttons')['allbuttons']['button']), message='On pressing the "Cancel" button the filter window dissappears',testcase_id='MKR-1679')
+    checkEqualAssert(0, len(getHandle(setup, MRXConstants.FILTERSCREEN, 'allsliders')['allsliders']['slider']), message='On pressing the "Cancel" button the filter window dissappears',testcase_id='MKR-1679')
 
     setup.d.close()
 

@@ -27,8 +27,8 @@ try:
             if index!=-1:
                 data2 = segmentScreenInstance.table.getTableData1(handle)
                 segmentDetailFromTable = []
-                for value in data2['rows'][index]:
-                    segmentDetailFromTable.append(value)
+                for rowvalue in data2['rows'][index]:
+                    segmentDetailFromTable.append(rowvalue)
 
                 try:
                     handle['table']['delete'][index].click()
