@@ -85,6 +85,7 @@ try:
     import MRX.SegmentFilter
     import MRX.Filterscenario
     import MRX.DeleteSegment
+    import MRX.MultiWindowFunctionality
 
 
 except Exception as e:
