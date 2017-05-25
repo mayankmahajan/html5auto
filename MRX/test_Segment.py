@@ -10,7 +10,7 @@ from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MRXScreens.SegmentScreenClass import *
 from MRXUtils.MRXConstants import *
 from MRXUtils import SegmentHelper
-
+import os
 
 try:
     setup = SetUp()
@@ -18,16 +18,29 @@ try:
     segmentScreenInstance = SegmentScreenClass(setup.d)
     segmentScreenHandle = getHandle(setup,MRXConstants.SEGMENTSCREEN,'allbuttons')
     segmentDetails=setup.cM.getNodeElements("segmentDetails","segment")
+
+
 ######################################### Blank Segment Name scenario ##################################################
     segmentScreenInstance.cm.clickButton("Import", segmentScreenHandle)
     popUpHandle = getHandle(setup, MRXConstants.POPUPSCREEN)
     segmentScreenInstance.cm.sendkeys_input(' ', popUpHandle, 0)
-    popUpHandle['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys("/Users/praveen.garg1/html5automation/MRX/segment_sample.csv")
-
+    fileDir = os.path.realpath('segment_sample.csv')
+    popUpHandle['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(fileDir)
     button_Status=segmentScreenInstance.cm.isButtonEnabled('Import', getHandle(setup, MRXConstants.POPUPSCREEN, "allbuttons"))
     checkEqualAssert(False,button_Status,message='Verify that a user is not allowed to enter an empty segment name',testcase_id='MKR-1696')
     segmentScreenInstance.cm.clickButton('Cancel', popUpHandle)
-########################################################################################################################
+########################################## Error out segment can not be used ###########################################
+    segmentScreenInstance.cm.clickButton("Import", segmentScreenHandle)
+    popUpHandle1 = getHandle(setup, MRXConstants.POPUPSCREEN)
+    segmentScreenInstance.cm.sendkeys_input('MKR1740', popUpHandle1, 0)
+    fileDir1 = os.path.realpath('abc.pdf')
+    popUpHandle1['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(fileDir1)
+    checkEqualAssert(True, 'Incorrect file selected' in str(popUpHandle1['footerText']['text'][0].text),message=" An error out segment can not be used",testcase_id='MKR-1740')
+    button_Status = segmentScreenInstance.cm.isButtonEnabled('Import',getHandle(setup, MRXConstants.POPUPSCREEN, "allbuttons"))
+    checkEqualAssert(False, button_Status, message='An error out segment can not be used (Import Button should be disable)',testcase_id='MKR-1740')
+    segmentScreenInstance.cm.clickButton('Cancel', popUpHandle1)
+
+    ########################################################################################################################
 
     flag_Top_segment=True
     for k, segmentDetail in segmentDetails.iteritems():
