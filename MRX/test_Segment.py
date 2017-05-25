@@ -24,8 +24,8 @@ try:
     segmentScreenInstance.cm.clickButton("Import", segmentScreenHandle)
     popUpHandle = getHandle(setup, MRXConstants.POPUPSCREEN)
     segmentScreenInstance.cm.sendkeys_input(' ', popUpHandle, 0)
-    fileDir = os.path.realpath('segment_sample.csv')
-    popUpHandle['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(fileDir)
+    fileDir = find_realPath('segment_sample.csv')
+    popUpHandle['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(str(fileDir))
     button_Status=segmentScreenInstance.cm.isButtonEnabled('Import', getHandle(setup, MRXConstants.POPUPSCREEN, "allbuttons"))
     checkEqualAssert(False,button_Status,message='Verify that a user is not allowed to enter an empty segment name',testcase_id='MKR-1696')
     segmentScreenInstance.cm.clickButton('Cancel', popUpHandle)
@@ -33,8 +33,8 @@ try:
     segmentScreenInstance.cm.clickButton("Import", segmentScreenHandle)
     popUpHandle1 = getHandle(setup, MRXConstants.POPUPSCREEN)
     segmentScreenInstance.cm.sendkeys_input('MKR1740', popUpHandle1, 0)
-    fileDir1 = os.path.realpath('abc.pdf')
-    popUpHandle1['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(fileDir1)
+    fileDir1 = find_realPath('abc.pdf')
+    popUpHandle1['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(str(fileDir1))
     checkEqualAssert(True, 'Incorrect file selected' in str(popUpHandle1['footerText']['text'][0].text),message=" An error out segment can not be used",testcase_id='MKR-1740')
     button_Status = segmentScreenInstance.cm.isButtonEnabled('Import',getHandle(setup, MRXConstants.POPUPSCREEN, "allbuttons"))
     checkEqualAssert(False, button_Status, message='An error out segment can not be used (Import Button should be disable)',testcase_id='MKR-1740')
@@ -50,7 +50,7 @@ try:
             if flag_Top_segment:
                 tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN,'table')
                 data2 = segmentScreenInstance.table.getTableData1(tableHandle)
-                checkEqualAssert(segmentDetail['segmentname'],str(data2['rows'][0][0]),'','','Verify New added segment at Top when table sorted on \'Created on\' Column (Default)',testcase_id='MKR-1665')
+                checkEqualAssert(segmentDetail['segmentname'],str(data2['rows'][0][0]),message='Verify New added segment at Top when table sorted on \'Created on\' Column (Default)',testcase_id='MKR-1665')
                 flag_Top_segment=False
 
         except:

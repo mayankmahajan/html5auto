@@ -175,10 +175,8 @@ def importSegment(setup,screenInstance,segment_Input,source='Import'):
 
     logger.info('Going to Select .csv File from path= %s', segment_Input['file'])
     resultlogger.info('Going to Select .csv File form path = %s', segment_Input['file'])
-
-    import os
-    fileDir = os.path.realpath(segment_Input['file'])
-    popUpHandle['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(fileDir)
+    fileDir =find_realPath(segment_Input['file'])
+    popUpHandle['browsebuttons']['browsebutton'][0].find_elements_by_xpath('./*/*')[0].send_keys(str(fileDir))
 
     checkEqualAssert(False,'No File' in str(popUpHandle['footerText']['text'][0].text),message="Verify File Selected from Path  => " + str(fileDir))
     flag_filepath=not 'No File' in str(popUpHandle['footerText']['text'][0].text)

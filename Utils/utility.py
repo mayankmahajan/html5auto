@@ -26,6 +26,7 @@ from Utils.csvReader import CSVReader
 from classes.Components.ContextMenuComponentClass import *
 from classes.Components.BaseComponentClass import *
 import time
+import os
 import datetime
 import calendar
 from classes.Pages.GenerateReportsPopClass import *
@@ -476,6 +477,10 @@ def getHandle(obj,pageName,parent="NA"):
     handles = getHandlesForEachComponent(driver, driverHelper, configmanager, pageName, parentHandles,parent)
     # time.sleep(2)
     return handles
+
+def find_realPath(filename):
+    return os.path.realpath(str(filename))
+
 
 
 def testScreen(obj,pageName,isStartScreen=False):
