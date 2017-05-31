@@ -7,6 +7,7 @@ from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MuralScreens.AccessTechnologyClass import *
 from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.TrendingMonitoringPageClass import *
+
 import sys
 
 
@@ -32,6 +33,7 @@ try:
     TMScreenInstance = TrendingMonitoringPageClass(setup.d)
     h = getHandle(setup, MuralConstants.TMSCREEN, 'trend-slider')
     TMScreenInstance.quicktrends.clickOnExpandButton(h,setup=setup)
+    footerText = str(getHandle(setup, MuralConstants.TMSCREEN, 'footer')['footer']['label'][0].text.split(' ')[4])
 
     measures = setup.cM.getNodeElements("measureswithdirection", "measure")
     dimensions = setup.cM.getNodeElements("tmdimension", "dimension")
@@ -66,6 +68,17 @@ try:
         t1 = TMScreenInstance.timeBar.getLabel(getHandle(setup, MuralConstants.ATSCREEN, "ktrs"))
         checkEqualAssert(t[1], t1, selectedQuicklink, "", "verify quicklink label")
 
+        expectedTableLength=BaseComponentClass().getExpectedTableLengthForQuickLink(setup, footerText,t1,qs[e]['locatorText'])
+        TMScreenInstance.switcher.measureChangeSwitcher(2, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+        sleep(2)
+        data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"), driver=setup)
+
+        if data['rows']=='No Data':
+            logger.debug('Data not available for quickink =%s',selectedQuicklink)
+            continue
+
+        checkEqualAssert(expectedTableLength,len(data['rows']),selectedQuicklink,'','Verify total number of entry in Table')
+        TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
         for m in range(len(mes)):
             for d in range(len(dim)):
@@ -107,7 +120,7 @@ try:
                 compare_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"),parent="trend-compare",index=comparechartIndex)
                 #compare_chart_value = UnitSystem().getRawValueFromUI(compare_chart_text)
 
-                TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+                TMScreenInstance.switcher.measureChangeSwitcher(2,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                 #data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
                 data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"),driver=setup)
@@ -140,7 +153,7 @@ try:
                     checkEqualAssert(valueformtable, str(main_chart_value), selectedQuicklink, selectedMeasure, "Verify Main Chart Value from Table (some limitation in getting value from Table data )")
                     checkEqualAssert(valueformtable, compare_chart_value, selectedQuicklink, selectedMeasure, "Verify Compare Chart Value from Table (some limitation in getting value from Table data )")
 
-                    TMScreenInstance.switcher.measureChangeSwitcher(0,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+                    TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                     if dim[d]=='None':
                         l1 = []

@@ -70,6 +70,66 @@ class QuickTrendsComponentClass(BaseComponentClass):
                 print el.tag_name
         return tooltipText
 
+
+    def hoverOverTicksGetMainBarChartText(self, setup, h1, screenName, parent="trend-main", child="trendchart", parent_tooltip="trend-header", child_tooltip="qttooltip"):
+        try:
+
+            totalbar, barHandle = self.getAllBar(h1, parent=parent, child=child)
+
+            tooltipText={}
+            for el in barHandle:
+                logger.info("Going to perform Hover Action")
+                setup.dH.action.move_to_element(el).perform()
+                if float(el.find_elements_by_css_selector("g.target rect")[0].get_attribute("style").split('opacity:')[1].split(';')[0].strip())==0:
+                    logger.info('Not able to Perform Hover Action')
+                else:
+                    logger.info("Hover Action Performed")
+                    tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
+                    time.sleep(1) # only to show in demo
+                    headerhandles = self.util.utility.getHandle(setup,screenName,parent_tooltip)
+                    time.sleep(1) # only to show in demo
+                    tooltipText[str(tempHandlers[parent][child_tooltip][0].text)] = str(headerhandles[parent_tooltip][child_tooltip][0].text)
+
+            logger.debug("Got tooltip data =  %s",str(tooltipText))
+            return tooltipText
+
+        except Exception as e:
+            logger.error("Got Exception while performing hover actions = %s",str(e))
+            return e
+
+
+
+    def hoverOverTicksGetMainAndCompareBarChartText(self, setup, h1, screenName, parent="trend-main", child="trendchart",compare_parent = "trend-compare",active_compare_chart = 0, parent_tooltip="trend-header", child_tooltip="qttooltip"):
+        try:
+            totalbar, barHandle = self.getAllBar(h1, parent=parent, child=child)
+            tooltipText={}
+            compareTooltipText = {}
+            for el in barHandle:
+                logger.info("Going to perform Hover Action")
+                setup.dH.action.move_to_element(el).perform()
+                if float(el.find_elements_by_css_selector("g.target rect")[0].get_attribute("style").split('opacity:')[1].split(';')[0].strip())==0:
+                    logger.info('Not able to Perform Hover Action')
+                else:
+                    logger.info("Hover Action Performed")
+                    tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
+                    time.sleep(1) # only to show in demo
+
+                    compareHandlers = self.util.utility.getHandle(setup, screenName, compare_parent)
+                    time.sleep(1)  # only to show in demo
+
+                    headerhandles = self.util.utility.getHandle(setup,screenName,parent_tooltip)
+                    time.sleep(1) # only to show in demo
+                    tooltipText[str(tempHandlers[parent][child_tooltip][0].text)] = str(headerhandles[parent_tooltip][child_tooltip][0].text)
+                    compareTooltipText[str(tempHandlers[parent][child_tooltip][0].text)] = str(compareHandlers[compare_parent][child_tooltip][active_compare_chart].text)
+
+            logger.debug("Got tooltip data from main Chart =  %s and from compare chart = %s", str(tooltipText),str(compareTooltipText))
+            return tooltipText,compareTooltipText
+
+        except Exception as e:
+            logger.error("Got Exception while performing hover actions = %s",str(e))
+            return e
+
+
     def hoverOverTicksGetMainChartText(self, setup, h1, screenName, parent="trend-main", child="trendchart", parent_tooltip="trend-header", child_tooltip="qttooltip"):
         try:
             h = self.__getHandler1(h1[parent][child])
@@ -222,6 +282,48 @@ class QuickTrendsComponentClass(BaseComponentClass):
         for el in h[parent][child][indexOfComp].find_elements_by_css_selector("g.series path"):
             paths.append(self.rgb_to_hex(el.get_attribute("stroke")))
         return paths
+
+
+
+    def checkColorFromAllBar(self,h,parent="trend-main", child="trendchart",indexOfComp=0):
+        totalbar,handle= self.getAllBar(h,parent=parent,child=child,indexOfComp=indexOfComp)
+        if int(totalbar)==1:
+            return True
+
+        nextBarpaths = []
+        count=0
+        for bar in handle:
+            paths = []
+            for el in bar.find_elements_by_css_selector("g.bar rect"):
+                paths.append(self.rgb_to_hex(el.get_attribute("style").split(':')[1].split(';')[0]))
+                count=count+1
+
+            if count==1:
+                nextBarpaths = paths
+
+            if count>1:
+                if nextBarpaths==paths:
+                    nextBarpaths=paths
+                else:
+                     return False
+        return True
+
+
+
+
+
+    def getColorFromBar(self, h, parent="trend-main", child="trendchart", indexOfComp=0):
+        totalbar, handle = self.getAllBar(h, parent=parent, child=child, indexOfComp=indexOfComp)
+        paths = []
+        for el in handle[0].find_elements_by_css_selector("g.bar rect"):
+            paths.append(self.rgb_to_hex(el.get_attribute("style").split(':')[1].split(';')[0]))
+        return paths
+
+
+    def getAllBar(self,h,parent="trend-main", child="trendchart",indexOfComp=0):
+        handle = h[parent][child][indexOfComp].find_elements_by_css_selector("g.time-bin")
+        return len(handle),handle
+
 
     def getChartsCount(self, h, parent="trend-main", child="trendchart"):
         return len(h[parent][child])

@@ -19,6 +19,7 @@ try:
     TMScreenInstance = TrendingMonitoringPageClass(setup.d)
     h = getHandle(setup, MuralConstants.TMSCREEN, 'trend-slider')
     TMScreenInstance.quicktrends.clickOnExpandButton(h,setup=setup)
+    footerText = str(getHandle(setup, MuralConstants.TMSCREEN, 'footer')['footer']['label'][0].text.split(' ')[4])
 
     measures = setup.cM.getNodeElements("measureswithdirection", "measure")
     dimensions = setup.cM.getNodeElements("tmdimension", "dimension")
@@ -34,6 +35,9 @@ try:
 
 
     selectedQuicklink = TMScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MuralConstants.TMSCREEN, "ktrs"))
+    t1 = TMScreenInstance.timeBar.getLabel(getHandle(setup, MuralConstants.ATSCREEN, "ktrs"))
+    expectedTableLength = BaseComponentClass().getExpectedTableLengthForQuickLink(setup, footerText,t1,selectedQuicklink)
+
     selectedMeasure = TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN), random.randint(0, len(mes) - 1), index=0, parent="trend-header")
     isError(setup)
     selectedDimension = TMScreenInstance.dropdown.doSelectionOnVisibleDropDownByIndex(getHandle(setup, MuralConstants.TMSCREEN), random.randint(0, len(dim) - 1), index=1, parent="trend-header")
@@ -44,7 +48,7 @@ try:
     checkEqualAssert(7,numberofmainchart+numberofcomparechart,str(selectedQuicklink),"","Verify total number of Chart")
 
     view=TMScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
-    checkEqualAssert(int(view[0]),0, str(selectedQuicklink), "","Verify View ( It should be Line Chart)")
+    checkEqualAssert(int(view[0]),1, str(selectedQuicklink), "","Verify View ( It should be Line Chart)")
 
     p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN))
     chartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN))
@@ -53,7 +57,7 @@ try:
 
     hover_data = TMScreenInstance.quicktrends.hoverOverTicksGetMainChartText(setup, getHandle(setup, MuralConstants.TMSCREEN), MuralConstants.TMSCREEN)
 
-    TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+    TMScreenInstance.switcher.measureChangeSwitcher(2, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
     #data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
 
     data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"), driver=setup)
@@ -61,13 +65,13 @@ try:
     measure = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN), index=0, parent="trend-header")
     index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], str(measure))
 
-    value_list = [data['rows'][element][index] for element in data['rows']]
-    #value_list = [e[index] for e in data['rows']]
 
-    checkEqualAssert(value_list, hover_data, str(selectedQuicklink), selectedMeasure, "Verify hover data with table data")
+    value_list ={}
+    for element in data['rows']:
+        value_list[element]=data['rows'][element][index]
 
-
-
+    checkEqualAssert(expectedTableLength,len(value_list),selectedQuicklink,selectedMeasure,'Verify total number of entry in Table')
+    checkEqualDict(value_list, hover_data, str(selectedQuicklink), selectedMeasure, "Verify hover data with table data")
 
     setup.d.close()
 

@@ -9,8 +9,8 @@ from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.TrendingMonitoringPageClass import *
 import sys
 
-main_chart_value = '2919000000.0'
-compare_chart_value = '2919000000.0'
+#main_chart_value = '2919000000.0'
+#compare_chart_value = '2919000000.0'
 
 try:
     setup = SetUp()
@@ -59,7 +59,7 @@ try:
         checkEqualAssert(i,comparechartIndex,selectedQuicklink,"","Verify click on compare Chart with index %s"+str(i))
 
         view = TMScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"), parent="trend-main")
-        checkEqualAssert(int(view[0]), 0, str(selectedQuicklink), "", "Verify view (line chart) after click on compare chart")
+        checkEqualAssert(int(view[0]), 1, str(selectedQuicklink), "", "Verify view (line chart) after click on compare chart")
 
         numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
         numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),parent="trend-compare")
@@ -68,7 +68,10 @@ try:
         p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
         compareTrend1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),parent="trend-compare",indexOfComp=i)
         checkEqualAssert(compareTrend1,p1,selectedQuicklink,"","Verify equal activated dimension on main chart and compare chart")
-        #Main Chart and Compare Chart value --->Pending
+
+
+        main_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-header"))
+        compare_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"), parent="trend-compare", index=comparechartIndex)
         checkEqualAssert(compare_chart_value,main_chart_value,selectedQuicklink,"","Verify Main Chart Value with Compare Chart Value")
 
         measurefrommain = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), index=0, parent="trend-header")
@@ -76,10 +79,10 @@ try:
         checkEqualAssert(str(measurefrommain), str(measurefromcompare), str(selectedQuicklink), "", "Verify measure on Main and Comapre Chart")
 
         dimensionfrommain = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), index=1, parent="trend-header")
-        #dimensionfromcompare ----> pending
+
         dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=i)
         checkEqualAssert(str(dimensionfrommain), str(dimensionfromcompare), str(selectedQuicklink), "", "Verify dimension on Main and Comaper Chart")
-        TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+        TMScreenInstance.switcher.measureChangeSwitcher(2, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
     setup.d.close()
 

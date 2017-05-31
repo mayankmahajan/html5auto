@@ -13,11 +13,15 @@
     <wizardquicklinks1>
         <wizardquicklink id = "today" locatorText="Today"/>
         <wizardquicklink id = "yesterday" locatorText="Yesterday"/>
-        <!--<wizardquicklink id = "thisweek" locatorText="This Week"/>
-        <wizardquicklink id = "lastweek" locatorText="Last Week"/>
-        <wizardquicklink id = "thismonth" locatorText="This Month"/>
-        <wizardquicklink id = "lastmonth" locatorText="Last Month"/>-->
+        <wizardquicklink id = "last7day" locatorText="Last 7 days"/>
+        <wizardquicklink id = "last30day" locatorText="Last 30 days"/>
+        <!--<wizardquicklink id = "thismonth" locatorText="This Month"/>-->
+        <!--<wizardquicklink id = "lastmonth" locatorText="Last Month"/>-->
     </wizardquicklinks1>
+
+    <dst_list>
+        <dst id="US/Pacific" start2015="8 Mar 2015 02:00" end2015="1 Nov 2016 02:00" start2016="13 Mar 2016 02:00" end2016="6 Nov 2016 02:00" start2017="12 Mar 2016 02:00" end2017="5 Nov 2016 02:00" offset="-8" />
+    </dst_list>
 
 
     <!--<measures>-->
@@ -575,6 +579,9 @@
             <component id="browsebutton" selector="css selector" locator='[class*=fileUploadDiv]' />
         </componentConfig>
 
+        <componentConfig id="footer">
+            <component id = "label" selector="tag name" locator='label' />
+        </componentConfig>
 
     </componentConfigs>
 

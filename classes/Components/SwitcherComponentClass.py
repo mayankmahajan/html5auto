@@ -93,4 +93,16 @@ class SwitcherComponentClass(BaseComponentClass):
             return e
 
 
+    def isMeasureChangeSwitcherEnabled(self,index,h,parent="measureChangeSection",child="switcher",occurence = 0):
+        try:
+            if not h[parent][child]:
+                return False
+            logger.info("Going to check whether Switcher with index = %d enable or not",index)
+            if 'disable' in str(h[parent][child][occurence].find_elements_by_tag_name('div')[index].get_attribute('class')).lower():
+                return False
+            return True
+
+        except Exception as e:
+            logger.error("Got Exception while getting Measure Switcher status (Enable or Disable) = %s",str(e))
+            return e
 

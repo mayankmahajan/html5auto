@@ -47,15 +47,15 @@
     <tmdimension> 
         <dimension id = 'none' locatorText="None" /> 
         <dimension id = 'gateway' locatorText="Gateway" /> 
-        <dimension id = 'devicemodel' locatorText="Device Model" /> 
-        <dimension id = 'devicemanufacture' locatorText="Device Manufacture" /> 
+        <dimension id = 'devicemodels' locatorText="Device Models" /> 
+        <dimension id = 'devicemanufacturer' locatorText="Device Manufacturer" /> 
         <dimension id = 'deviceos' locatorText="Device OS" /> 
         <dimension id = 'devicegroup' locatorText="Device Group" /> 
         <dimension id = 'radioaccesstype' locatorText="Radio Access Type" /> 
         <dimension id = 'apn' locatorText="APN" /> 
-        <dimension id = 'traffictypeapplication' locatorText="Traffic Type Application" /> 
+        <dimension id = 'traffictypeapplications' locatorText="Traffic Type Applications" /> 
         <dimension id = 'traffictypecategory' locatorText="Traffic Type Category" /> 
-        <dimension id = 'mobileapplication' locatorText="Mobile Application" /> 
+        <dimension id = 'mobileapplications' locatorText="Mobile Applications" /> 
         <dimension id = 'mobileappscategory' locatorText="Mobile Apps Category" /> 
         <dimension id = 'serviceprovider' locatorText="Service Provider" /> 
         <dimension id = 'webprotocol' locatorText="Web Protocol" /> 
@@ -525,6 +525,7 @@
             <component id = "trend-legend" selector="tag name" locator="kiwik-trend-legend" parent="True"/>
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
             <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>
+            <component id = "footer" selector="css selector" locator="div.footerdivtimezone" parent="True"/>
 
 
 
@@ -588,6 +589,7 @@
             <!--<component id = "label" selector="xpath" locator="//label"/>-->
             <!--<component id = "qttooltip" selector="xpath" locator="../div[1]/div"/>-->
             <component id = "trendchart" selector="xpath" locator="./*//kiwik-trend-chart"/>
+
             <component id = "qttooltip" selector="css selector" locator="div.trend-hover-date"/>
         </componentConfig>
         <!--<componentConfig id = "trend-compare">-->

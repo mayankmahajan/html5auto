@@ -26,16 +26,6 @@ try:
     t1 = TMScreenInstance.timeBar.getLabel(getHandle(setup, MuralConstants.TMSCREEN, "ktrs"))
     checkEqualAssert(t[1], t1, selectedQuicklink, "", "verify quicklink label")
 
-    measures = setup.cM.getNodeElements("measureswithdirection", "measure")
-    dimensions = setup.cM.getNodeElements("tmdimension", "dimension")
-    j = []
-    for k, measure in measures.iteritems():
-        j.append(measure['locatorText'])
-
-    dim = []
-    for k, dimension in dimensions.iteritems():
-        dim.append(dimension['locatorText'])
-
 
     numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-main"))
     numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN),parent="trend-compare")

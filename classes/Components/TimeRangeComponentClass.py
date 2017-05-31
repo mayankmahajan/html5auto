@@ -209,7 +209,8 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
             else:
                 return False, ""
 
-
+        else:
+            return False,""
 
 
 

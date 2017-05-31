@@ -74,13 +74,21 @@ class UnitSystem :
             count = count+1
 
         a = decimal.Decimal(str(convertedValue))
-        if unitValue == 1000.0:
-            return str(round(a, 2)) + " " + self.metricUnits[count]
-        elif unitValue== 1024.0 and "bps" in unitstring:
-            return str(round(a, 2))+ " "+ (self.byteUnits[count]).strip('B') +"bps"
-        else:
-            return str(round(a, 2)) + " " + self.byteUnits[count]
 
+        if len(str(round(a,2)).split('.')[1])==1:
+            if unitValue == 1000.0:
+                return str(round(a, 2)) + "0 " + self.metricUnits[count]
+            elif unitValue== 1024.0 and "bps" in unitstring:
+                return str(round(a, 2))+ "0 "+ (self.byteUnits[count]).strip('B') +"bps"
+            else:
+                return str(round(a, 2)) + "0 " + self.byteUnits[count]
+        else:
+            if unitValue == 1000.0:
+                return str(round(a, 2)) + " " + self.metricUnits[count]
+            elif unitValue== 1024.0 and "bps" in unitstring:
+                return str(round(a, 2))+ " "+ (self.byteUnits[count]).strip('B') +"bps"
+            else:
+                return str(round(a, 2)) + " " + self.byteUnits[count]
 
 
     def getRawValueFromUI(self,uiValue):

@@ -13,8 +13,9 @@ from Utils.Constants import *
 class BaseComponentClass:
     def __init__(self):
         self.utility = __import__("Utils.utility")
-        self.colors = self.configmanager.getNodeElements("colors","color")
-        self.unitsystem = UnitSystem()
+        #self.colors = self.configmanager.getNodeElements("colors","color")
+        self.unitSystem = UnitSystem()
+        self.configmanager = ConfigManager()
 
     def click(self, elHandle):
 
@@ -99,9 +100,9 @@ class BaseComponentClass:
         else:
             return False
 
-    def __init__(self):
-        self.unitSystem = UnitSystem()
-        self.configmanager = ConfigManager()
+    # def __init__(self):
+    #     self.unitSystem = UnitSystem()
+    #     self.configmanager = ConfigManager()
 
 
     def compHandlers(self,comp,handlers):
@@ -658,3 +659,56 @@ class BaseComponentClass:
             if col in color or str(col).lower() in color:
                 return str(color).split('#')[0]
         return str(col)
+
+
+    def getExpectedTableLengthForQuickLink(self,setup,mapKey,quickLinkTime,quickLink):
+
+        if len(quickLinkTime.split('to'))>1:
+            starttime=quickLinkTime.split('to')[0].strip()
+            endtime=quickLinkTime.split('to')[1].strip()
+
+            if len(starttime.split(' '))==3:
+                starttime=starttime+' 00:00'
+
+            if len(endtime.split(' ')) == 3:
+                endtime = endtime + ' 23:00'
+
+        else:
+            starttime=quickLinkTime+' 00:00'
+            endtime=quickLinkTime+' 23:00'
+
+        if quickLink in ['Today', 'Yesterday', 'Last 7 days']:
+            startFlag,startOffset=self.checkDSTFlag(setup,starttime,mapKey)
+            endFlag,endOffset = self.checkDSTFlag(setup, endtime, mapKey)
+
+            startEpoch=self.utility.utility.getepoch(starttime, startOffset, Constants.TIMEPATTERN)
+            endEpoch=self.utility.utility.getepoch(endtime, endOffset, Constants.TIMEPATTERN)
+            if '23:00' in endtime:
+                return ((endEpoch-startEpoch)/3600)+1
+            else:
+                return ((endEpoch - startEpoch) / 3600)
+
+        else:
+            startEpoch = self.utility.utility.getepoch(starttime, 0, Constants.TIMEPATTERN)
+            endEpoch = self.utility.utility.getepoch(endtime, 0, Constants.TIMEPATTERN)
+            return (((endEpoch - startEpoch) / 3600)+1)/24
+
+
+    def checkDSTFlag(self,setup,time,mapKey):
+        dstValue = setup.cM.getNodeElements("dst_list", "dst")
+        Flag=True
+        for k, value in dstValue.iteritems():
+            if str(k) == mapKey:
+                dstStartEpoch=self.utility.utility.getepoch(dstValue[k]['start'+time.split(' ')[2]],0,Constants.TIMEPATTERN)
+                dstEndEpoch=self.utility.utility.getepoch(dstValue[k]['end'+time.split(' ')[2]],0,Constants.TIMEPATTERN)
+                uiTimeEpoch=self.utility.utility.getepoch(time,0,Constants.TIMEPATTERN)
+                if uiTimeEpoch<dstStartEpoch or uiTimeEpoch>dstEndEpoch:
+                    offset=int(dstValue[k]['offset'])
+                    Flag=False
+                else:
+                    offset=int(dstValue[k]['offset'])+1
+                return Flag,offset
+
+
+
+
