@@ -139,7 +139,7 @@ def setUserDetail(setup,screenInstance,userDetail,button='Create'):
     h = getHandle(setup, MuralConstants.UserPopUpScreen)
     logger.info("Going to Enter detail of user ="+userDetail['username'])
 
-    logger.info("Going to set UserName =%s" + userDetail['username'])
+    logger.info("Going to set UserName =%s",userDetail['username'])
     userNameFromUI = screenInstance.cm.sendkeys_input(userDetail['username'],h,0)
     checkEqualAssert(str(userNameFromUI),str(userDetail['username']),"","","Verify Entered User Name")
     if not isColorValid(screenInstance, h,property=Constants.BORDERCOLOR, index=0):
@@ -155,7 +155,7 @@ def setUserDetail(setup,screenInstance,userDetail,button='Create'):
     checkEqualAssert(str(lastNameFromUI), str(userDetail['lastname']), "", "", "Verify Entered Last Name")
     detail.append(str(firstNameFromUI)+" "+str(lastNameFromUI))
 
-    logger.info("Going to set Email =%s" + userDetail['email'])
+    logger.info("Going to set Email =%s",userDetail['email'])
     emailFromUI= screenInstance.cm.sendkeys_input(userDetail['email'],h,0,child="email")
     checkEqualAssert(str(emailFromUI), str(userDetail['email']), "", "", "Verify Entered Email")
     if not isColorValid(screenInstance, h, property=Constants.BORDERCOLOR,child='email', index=0):
@@ -228,7 +228,7 @@ def setUserDetail(setup,screenInstance,userDetail,button='Create'):
         return [],[]
 
     if button_status and button=="Create":
-        logger.info('Going to Click on %s Button with details ',button,str(detail))
+        logger.info('Going to Click on %s Button with User details = %s',button,str(detail))
         click_status=screenInstance.cm.clickButton(button,getHandle(setup,MuralConstants.UserPopUpScreen,"allbuttons"))
         checkEqualAssert(True,click_status,"","","Verify whether "+button+" button clicked or not")
         flag,msg=confirm(setup)
@@ -458,7 +458,7 @@ def ChangePassword(setup,screenInstance,handle,usersDetail,button='Change'):
         flag_current_password = True
         dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword , "Current Password", screenInstance, setup,button_label="Change")
 
-        logger.info("Going to Enter New Password =%s" + usersDetail['newpassword'])
+        logger.info("Going to Enter New Password =%s",usersDetail['newpassword'])
         newpasswordFromUI = screenInstance.cm.sendkeys_input(usersDetail['newpassword'], handle,1, child="password")
         checkEqualAssert(str(newpasswordFromUI), str(usersDetail['newpassword']), "", "", "Verify Entered Password")
         # if len(getHandle(setup, MuralConstants.ChangePasswordScreen,'errormsg')['errormsg']['msg'])>0:
@@ -470,7 +470,7 @@ def ChangePassword(setup,screenInstance,handle,usersDetail,button='Change'):
         flag_new_password = True
         dumpResultForButton(flag_current_password and flag_new_password and flag_new_cpassword, "New Password", screenInstance, setup,button_label="Change")
 
-        logger.info("Going to set Confirm Password =%s" + usersDetail['newcpassword'])
+        logger.info("Going to set Confirm Password =%s", usersDetail['newcpassword'])
         newcpasswordFromUI = screenInstance.cm.sendkeys_input(usersDetail['newcpassword'],handle, 2, child="password")
         checkEqualAssert(str(newcpasswordFromUI), str(usersDetail['newcpassword']), "", "", "Verify Entered Password")
         #if not isColorValid(screenInstance, handle, property=Constants.BORDERCOLOR,child='password', index=2):

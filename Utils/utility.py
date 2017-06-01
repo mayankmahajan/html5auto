@@ -314,7 +314,7 @@ def isError(setup):
         setup.d.save_screenshot(r)
         logger.debug("ERROR :: Screenshot with name = %s is saved",r)
         logger.error("Error Pop Up found")
-        errorMessage = eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE][0].text
+        errorMessage = str(eHandle[Constants.ERRORBODY][Constants.ERRORMESSAGE][0].text).split('\n')[0]
         logger.error("Error Pop Up Message = %s",errorMessage)
         logger.debug("Closing Error Pop Up")
         resultlogger.info("ERROR :: Screenshot with name = %s is saved <br>",r)
