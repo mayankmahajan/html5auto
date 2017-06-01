@@ -90,6 +90,9 @@ try:
                 if selectedDimension in MuralConstants.DimensionListForFlow_Hit:
                     selectedMeasure = selectedMeasure.replace("Flow", "Hit")
 
+                else:
+                    selectedMeasure = selectedMeasure.replace("Hit", "Flow")
+
                 numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
                 numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), parent="trend-compare")
                 checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, selectedMeasure, "Verify total number of Chart")
