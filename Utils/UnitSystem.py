@@ -60,9 +60,11 @@ class UnitSystem :
         return rawValue
 
     def getValueFromRawValue(self,convertedValue,unitValue=1024.0,unitstring=""):
-
-        convertedValue=float(convertedValue)
-        unitValue=float(unitValue)
+        try:
+            convertedValue=float(convertedValue)
+            unitValue=float(unitValue)
+        except:
+            return " "
         if unitValue == 60.0:
             return str(int(convertedValue))+ " "+'s'  # assume time in sec only ( s=>m Conversion not applied here)
         count=0

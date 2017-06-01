@@ -69,7 +69,7 @@ try:
         checkEqualAssert(t[1], t1, selectedQuicklink, "", "verify quicklink label")
 
         expectedTableLength=BaseComponentClass().getExpectedTableLengthForQuickLink(setup, footerText,t1,qs[e]['locatorText'])
-        TMScreenInstance.switcher.measureChangeSwitcher(2, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+        TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
         sleep(2)
         data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"), driver=setup)
 
@@ -78,12 +78,12 @@ try:
             continue
 
         checkEqualAssert(expectedTableLength,len(data['rows']),selectedQuicklink,'','Verify total number of entry in Table')
-        TMScreenInstance.switcher.measureChangeSwitcher(1, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+        TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.LineChartIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
         for m in range(len(mes)):
+            selectedMeasure = TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN, "trend-header"), str(mes[m]), index=0, parent="trend-header")
+            isError(setup)
             for d in range(len(dim)):
-                selectedMeasure=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(mes[m]),index=0,parent="trend-header")
-                isError(setup)
                 selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(dim[d]), index=1, parent="trend-header")
                 isError(setup)
 
@@ -120,7 +120,7 @@ try:
                 compare_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"),parent="trend-compare",index=comparechartIndex)
                 #compare_chart_value = UnitSystem().getRawValueFromUI(compare_chart_text)
 
-                TMScreenInstance.switcher.measureChangeSwitcher(2,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+                TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                 #data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
                 data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"),driver=setup)
@@ -150,10 +150,13 @@ try:
                         resultlogger.debug('Not able to find value from table')
                         valueformtable='None'
 
-                    checkEqualAssert(valueformtable, str(main_chart_value), selectedQuicklink, selectedMeasure, "Verify Main Chart Value from Table (some limitation in getting value from Table data )")
-                    checkEqualAssert(valueformtable, compare_chart_value, selectedQuicklink, selectedMeasure, "Verify Compare Chart Value from Table (some limitation in getting value from Table data )")
+                    if ('Avg' in selectedMeasure) or ('Unique' in selectedMeasure) and dim[d]=='None':
+                        pass
+                    else:
+                        checkEqualAssert(valueformtable, str(main_chart_value), selectedQuicklink, selectedMeasure, "Verify Main Chart Value from Table (some limitation in getting value from Table data )")
+                        checkEqualAssert(valueformtable, compare_chart_value, selectedQuicklink, selectedMeasure, "Verify Compare Chart Value from Table (some limitation in getting value from Table data )")
 
-                    TMScreenInstance.switcher.measureChangeSwitcher(1,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+                    TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.LineChartIndex,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                     if dim[d]=='None':
                         l1 = []
@@ -230,6 +233,8 @@ try:
                         checkEqualAssert(p2, compareTrend1, selectedQuicklink, selectedMeasure, "Verify equal activated dimension on main chart and compare chart")
 
                         TMScreenInstance.quicktrends.clickLegendByIndex_tm(i, getHandle(setup, MuralConstants.TMSCREEN,"trend-legend"))
+            selectedDimension = TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN, "trend-header"), 'None', index=1, parent="trend-header")
+            isError(setup)
 
     main_chart_dict, compare_chart_dict = TMScreenInstance.quicktrends.hoverOverTicksGetMainAndCompareChartText(setup,getHandle(setup,MuralConstants.TMSCREEN,"trend-main"),MuralConstants.TMSCREEN,active_compare_chart=chartIndex)
     checkEqualDict(main_chart_dict, compare_chart_dict, str(selectedQuicklink), selectedMeasure,"Verify hover text on Main and conpare chart")

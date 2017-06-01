@@ -53,3 +53,6 @@ class MuralConstants(Constants):
     BULKPOPUP = "bulk_popup"
     BULKSCREEN = "bulkstats_Screen"
     KPISCREEN = "kpi_Screen"
+    BarChartIndex=0
+    LineChartIndex=1
+    TableViewIndex=2

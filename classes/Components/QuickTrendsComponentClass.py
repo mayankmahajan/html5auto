@@ -296,7 +296,7 @@ class QuickTrendsComponentClass(BaseComponentClass):
             paths = []
             for el in bar.find_elements_by_css_selector("g.bar rect"):
                 paths.append(self.rgb_to_hex(el.get_attribute("style").split(':')[1].split(';')[0]))
-                count=count+1
+            count=count+1
 
             if count==1:
                 nextBarpaths = paths

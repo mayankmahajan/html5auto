@@ -48,7 +48,7 @@ try:
     checkEqualAssert(7,numberofmainchart+numberofcomparechart,str(selectedQuicklink),"","Verify total number of Chart")
 
     view=TMScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
-    checkEqualAssert(int(view[0]),1, str(selectedQuicklink), "","Verify View ( It should be Line Chart)")
+    checkEqualAssert(int(view[0]),int(MuralConstants.LineChartIndex), str(selectedQuicklink), "","Verify View ( It should be Line Chart)")
 
     p1 = TMScreenInstance.quicktrends.getPaths(getHandle(setup, MuralConstants.TMSCREEN))
     chartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN))
@@ -57,7 +57,7 @@ try:
 
     hover_data = TMScreenInstance.quicktrends.hoverOverTicksGetMainChartText(setup, getHandle(setup, MuralConstants.TMSCREEN), MuralConstants.TMSCREEN)
 
-    TMScreenInstance.switcher.measureChangeSwitcher(2, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+    TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
     #data = TMScreenInstance.table.getTableData1(getHandle(setup, MuralConstants.TMSCREEN, "table"), "table")
 
     data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"), driver=setup)

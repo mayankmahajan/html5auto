@@ -30,3 +30,6 @@ class TrendingMonitoringPageClass(BasePageClass):
         self.quicktrends = QuickTrendsComponentClass()
         self.dropdown = DropdownComponentClass()
         self.timeBar = TimeRangeComponentClass()
+
+        # Common Components
+        BasePageClass.__init__(self, driver)
