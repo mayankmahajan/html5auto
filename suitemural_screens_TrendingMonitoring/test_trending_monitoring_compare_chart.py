@@ -59,7 +59,7 @@ try:
         checkEqualAssert(i,comparechartIndex,selectedQuicklink,"","Verify click on compare Chart with index %s"+str(i))
 
         view = TMScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"), parent="trend-main")
-        checkEqualAssert(int(view[0]), 1, str(selectedQuicklink), "", "Verify view (line chart) after click on compare chart")
+        checkEqualAssert(int(view[0]), MuralConstants.LineChartIndex, str(selectedQuicklink), "", "Verify view (line chart) after click on compare chart")
 
         numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
         numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),parent="trend-compare")
@@ -82,7 +82,7 @@ try:
 
         dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=i)
         checkEqualAssert(str(dimensionfrommain), str(dimensionfromcompare), str(selectedQuicklink), "", "Verify dimension on Main and Comaper Chart")
-        TMScreenInstance.switcher.measureChangeSwitcher(2, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
+        TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
     setup.d.close()
 

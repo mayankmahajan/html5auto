@@ -56,3 +56,4 @@ class MuralConstants(Constants):
     BarChartIndex=0
     LineChartIndex=1
     TableViewIndex=2
+    DimensionListForFlow_Hit=['Mobile Applications','Mobile Apps Category','Service Provider','Web Protocol']

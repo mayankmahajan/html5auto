@@ -33,7 +33,7 @@ try:
     checkEqualAssert(7,numberofmainchart+numberofcomparechart,str(selectedQuicklink),"","Verify default total number of Chart")
 
     view=TMScreenInstance.switcher.getMeasureChangeSelectedSwitcher(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
-    checkEqualAssert(int(view[0]),0, str(selectedQuicklink), "","Verify default view")
+    checkEqualAssert(int(view[0]),MuralConstants.LineChartIndex, str(selectedQuicklink), "","Verify default view")
 
 
     h=getHandle(setup, MuralConstants.TMSCREEN)

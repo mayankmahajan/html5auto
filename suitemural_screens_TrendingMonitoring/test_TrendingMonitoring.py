@@ -87,10 +87,13 @@ try:
                 selectedDimension=TMScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"),str(dim[d]), index=1, parent="trend-header")
                 isError(setup)
 
+                if selectedDimension in MuralConstants.DimensionListForFlow_Hit:
+                    selectedMeasure = selectedMeasure.replace("Flow", "Hit")
+
                 numberofmainchart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN, "trend-main"))
                 numberofcomparechart = TMScreenInstance.quicktrends.getChartsCount(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), parent="trend-compare")
                 checkEqualAssert(7, numberofmainchart + numberofcomparechart, selectedQuicklink, selectedMeasure, "Verify total number of Chart")
-
+                TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.LineChartIndex,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
                 main_chart_value=TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-header"))
                 #main_chart_value =UnitSystem().getRawValueFromUI(main_chart_text)
                 if str(main_chart_value)=='':
@@ -136,12 +139,12 @@ try:
                     value_list =[data['rows'][element][index] for element in data['rows']]
                     valueformtable=TMScreenInstance.table.getValueFromTable(value_list,c[m])
 
-                    if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and valueformtable != " ":
-                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=1000.0)
-                    elif 'Avg' in selectedMeasure and valueformtable != " ":
+                    if 'Avg' in selectedMeasure and valueformtable != " ":
                         valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=60)
+                    elif ("Flows" in selectedMeasure or 'Unique' in selectedMeasure or "Hits" in selectedMeasure) and valueformtable != " ":
+                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=1000.0)
                     elif "Bitrate" in selectedMeasure and valueformtable!=" ":
-                         valueformtable = UnitSystem().getValueFromRawValue(valueformtable,unitValue=1024.0,unitstring='bps')
+                        valueformtable = UnitSystem().getValueFromRawValue(valueformtable,unitValue=1024.0,unitstring='bps')
                     elif valueformtable!=" ":
                         valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=1024.0)
 
@@ -165,13 +168,15 @@ try:
                         checkEqualAssert(True, len(l1)<= MuralConstants.Maximum_Trend_Legend, selectedQuicklink, selectedMeasure,"Verify Maximum number of legand")
                         active_legend_value_before_clicking=getTotalActiveLegendValue(l1,c[m])
 
-                        if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and active_legend_value_before_clicking!=" ":
+
+                        if 'Avg' in selectedMeasure and active_legend_value_before_clicking!=" ":
+                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_before_clicking)
+                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, unitValue=60)
+
+                        elif ("Flows" in selectedMeasure or 'Unique' in selectedMeasure or 'Hits' in selectedMeasure) and active_legend_value_before_clicking!=" ":
                             logger.info("Raw value from active legend before clicking = %s",active_legend_value_before_clicking)
                             active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, unitValue=1000.0)
 
-                        elif 'Avg' in selectedMeasure and active_legend_value_before_clicking!=" ":
-                            logger.info("Raw value from active legend before clicking  = %s",active_legend_value_before_clicking)
-                            active_legend_value_before_clicking = UnitSystem().getValueFromRawValue(active_legend_value_before_clicking, unitValue=60)
 
                         elif "Bitrate" in selectedMeasure and active_legend_value_before_clicking!=" ":
                             logger.info("Raw value from active legend before clicking  = %s",active_legend_value_before_clicking)
@@ -203,13 +208,14 @@ try:
                         l2 = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
                         active_legend_value_after_clicking=getTotalActiveLegendValue(l2, c[m])
 
-                        if ("Flows" in selectedMeasure or 'Unique' in selectedMeasure) and active_legend_value_after_clicking != " ":
-                            logger.info("Raw value from active legend after clicking   = %s",active_legend_value_after_clicking)
-                            active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, unitValue=1000.0)
 
-                        elif 'Avg' in selectedMeasure and active_legend_value_after_clicking != " ":
+                        if 'Avg' in selectedMeasure and active_legend_value_after_clicking != " ":
                             logger.info("Raw value from active legend before clicking  = %s",active_legend_value_after_clicking)
                             active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, unitValue=60)
+
+                        elif ("Flows" in selectedMeasure or 'Unique' in selectedMeasure or 'Hits' in selectedMeasure) and active_legend_value_after_clicking != " ":
+                            logger.info("Raw value from active legend after clicking   = %s",active_legend_value_after_clicking)
+                            active_legend_value_after_clicking = UnitSystem().getValueFromRawValue(active_legend_value_after_clicking, unitValue=1000.0)
 
                         elif "Bitrate" in selectedMeasure and active_legend_value_after_clicking != " ":
                             logger.info("Raw value from active legend before clicking  = %s",active_legend_value_after_clicking)
