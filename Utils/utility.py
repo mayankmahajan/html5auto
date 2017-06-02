@@ -113,6 +113,11 @@ def checkEqualAssert(expected, actual, time="", measure="", message="",testcase_
         except:
             pass
 
+def get_num(x):
+    return float(''.join(ele for ele in x if ele.isdigit() or ele == '.'))
+
+def get_str(x):
+    return str(''.join(ele for ele in x if not (ele.isdigit() or ele == '.')))
 
 def checkEqualValueAssert(expected, actual, time="", measure="", message="",testcase_id=""):
 
@@ -122,18 +127,26 @@ def checkEqualValueAssert(expected, actual, time="", measure="", message="",test
     org_msg = msg
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
-    try:
-        import re
-        r = re.compile("([0-9 .]+)([a-zA-Z]+)")
-        m = r.match(expected)
-        expectedValue=float(str(m.group(1)).strip())
 
-        m = r.match(actual)
-        actualValue = float((m.group(1)).strip())
+    # import re
+    # r = re.compile("([0-9 .]+)([a-zA-Z]+)")
+    # m = r.match(expected)
+    # expectedValue = float(str(m.group(1)).strip())
+    #
+    # m = r.match(actual)
+    # actualValue = float((m.group(1)).strip())
+
+    try:
+        expectedNum=float(get_num(expected))
+        actualNum=float(get_num(actual))
+
+        #expectedStr=get_str(expected)
+        #actualStr=get_str(actual)
+
     except:
         checkEqualAssert(expected, actual, time=time, measure=measure, message=message, testcase_id=testcase_id)
     try:
-        assert abs(expectedValue - actualValue)<= (Constants.PercentageAllowedinDiff*expectedValue)
+        assert abs(expectedNum - actualNum)<= (Constants.PercentageAllowedinDiff*expectedNum)
         msg = msg+tcPass
         resultlogger.info(msg)
         logger.info(msg)
