@@ -122,3 +122,5 @@ class Constants(object):
     ERRORHEADERINCONFIRMATIONPOPUP='Error'
     CONFIRMHEADERINCONFIRMFILTERPOPUP='Delete Segment'
 
+    PercentageAllowedinDiff=0.02
+

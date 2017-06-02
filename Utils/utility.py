@@ -114,6 +114,48 @@ def checkEqualAssert(expected, actual, time="", measure="", message="",testcase_
             pass
 
 
+def checkEqualValueAssert(expected, actual, time="", measure="", message="",testcase_id=""):
+
+    tc_id = "<font color='blue'>" + str(testcase_id) + "</font> "
+    msg = tc_id + time + " " + measure + " " + message
+
+    org_msg = msg
+    tcPass = "<b><font color='green'> PASS</font></b><br>"
+    tcFail = "<b><font color='red'> FAIL</font></b><br>"
+    try:
+        import re
+        r = re.compile("([0-9 .]+)([a-zA-Z]+)")
+        m = r.match(expected)
+        expectedValue=float(str(m.group(1)).strip())
+
+        m = r.match(actual)
+        actualValue = float((m.group(1)).strip())
+    except:
+        checkEqualAssert(expected, actual, time=time, measure=measure, message=message, testcase_id=testcase_id)
+    try:
+        assert abs(expectedValue - actualValue)<= (Constants.PercentageAllowedinDiff*expectedValue)
+        msg = msg+tcPass
+        resultlogger.info(msg)
+        logger.info(msg)
+        try:
+            testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'PASS'})
+        except:
+            pass
+
+    except AssertionError:
+
+        msg = msg+" Expected: "+str(expected) + " Actual: " + str(actual) + tcFail
+        resultlogger.info(msg)
+        logger.info(msg)
+
+        # import __builtin__
+        # if hasattr(__builtin__,"testcases"):
+        try:
+            testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'FAIL'})
+        except:
+            pass
+
+
 
 def login(obj,username,password):
     try:

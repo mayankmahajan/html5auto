@@ -49,6 +49,9 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
 
     def time_format(self,starttime,endtime):
         if starttime.split(" ")[3].split(":")[0]=='00' and endtime.split(" ")[3].split(":")[0]=='00':
+            endtimeEpoch=getepoch(endtime)
+            endtimeEpoch=endtimeEpoch-3600
+            endtime=getDateString(endtimeEpoch)
             return starttime.split(" ")[0] + " " + starttime.split(" ")[1] + " " + starttime.split(" ")[2] + " to " + endtime.split(" ")[0] + " " + endtime.split(" ")[1] + " " + endtime.split(" ")[2]
         else:
             return starttime+" to "+endtime
@@ -100,6 +103,18 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
                         return True, getDateString(etepoch-(3600*(int(h)+24)),tPattern ='%d %b %Y')
                     else:
                         return True, self.time_format(stime1,getDateString(etepoch-3600*int(h)))
+
+        elif quicklink=="last7day":
+            if int(h) == 0:
+                h=24
+            if (etepoch - stepoch) <= int(h)*3600:
+                return True, self.time_format(stime1, etime1)
+            else:
+                    if (etepoch - stepoch) > (int(h)+(24*6))*3600 :
+                        return True, self.time_format(getDateString(etepoch-(3600*(int(h)+(24*6)))),etime1)
+                    else:
+                        return True, self.time_format(stime1,etime1)
+
 
         elif quicklink == "thisweek":
             numberofdayfromsunday = int(dayNameToNumber[ds])
