@@ -526,6 +526,8 @@
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
             <component id = "table" selector="tag name" locator="ag-grid-ng2" parent="True"/>
             <component id = "footer" selector="css selector" locator="div.footerdivtimezone" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>
+            <component id =  "breadcrumb" selector="css selector" locator="nav.BreadcrumbsArea" parent="True"/>
 
 
 

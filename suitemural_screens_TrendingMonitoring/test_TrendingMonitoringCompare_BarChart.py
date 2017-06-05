@@ -76,12 +76,12 @@ try:
 
         measurefrommain = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), index=0, parent="trend-header")
         measurefromcompare = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"), index=i, parent="trend-compare")
-        checkEqualAssert(str(measurefrommain), str(measurefromcompare), str(selectedQuicklink), "", "Verify measure on Main and Comapre Chart")
+        checkEqualAssert(str(measurefrommain), str(measurefromcompare), str(selectedQuicklink), "", "Verify measure on Main and Compare Chart")
 
         dimensionfrommain = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), index=1, parent="trend-header")
-
-        dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=i)
-        checkEqualAssert(str(dimensionfrommain), str(dimensionfromcompare), str(selectedQuicklink), "", "Verify dimension on Main and Comaper Chart")
+        if str(dimensionfrommain).strip() != 'None':
+            dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=i)
+            checkEqualAssert(str(dimensionfrommain), str(dimensionfromcompare), str(selectedQuicklink), "", "Verify dimension on Main and Compare Chart")
         TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
     setup.d.close()
