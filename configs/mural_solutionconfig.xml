@@ -6,9 +6,9 @@
         <measure id = "volumeD" locatorText="Volume (Downlink)" isCount="sum" /> 
         <measure id = "volumeU" locatorText="Volume (Uplink)" isCount="sum" /> 
         <measure id = "volumeT" locatorText="Volume (Total)" isCount="sum" />  
-        <measure id = "bitrateD" locatorText="Bitrate (Downlink)" isCount="avg" /> 
-        <measure id = "bitrateU" locatorText="Bitrate (Uplink)" isCount="avg" /> 
-        <measure id = "bitrateT" locatorText="Bitrate (Total)" isCount="avg"/>  
+        <measure id = "bitrateD" locatorText="Bitrate (Downlink)" isCount="sum" /> 
+        <measure id = "bitrateU" locatorText="Bitrate (Uplink)" isCount="sum" /> 
+        <measure id = "bitrateT" locatorText="Bitrate (Total)" isCount="sum"/>  
         <measure id = "flows" locatorText="Flows" isCount="sum"/> 
         <measure id = "flowduration" locatorText="Avg Flow Duration" isCount="none"/> 
         <measure id = "subscribers" locatorText="Unique Subscribers" isCount="none"/>   
