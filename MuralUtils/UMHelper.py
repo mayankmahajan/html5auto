@@ -231,14 +231,39 @@ def setUserDetail(setup,screenInstance,userDetail,button='Create'):
         logger.info('Going to Click on %s Button with User details = %s',button,str(detail))
         click_status=screenInstance.cm.clickButton(button,getHandle(setup,MuralConstants.UserPopUpScreen,"allbuttons"))
         checkEqualAssert(True,click_status,"","","Verify whether "+button+" button clicked or not")
-        flag,msg=confirm(setup)
-        if flag==True:
+
+        erroFlag=errorMsgOnPopUp(setup,MuralConstants.UserPopUpScreen)
+
+        # flag,msg=confirm(setup)
+        # if flag==True:
+        if erroFlag:
             h['icons']['closePopupIcon'][0].click()
             return [],[]
         checkEqualAssert(0,len(getHandle(setup,MuralConstants.UserPopUpScreen,'allbuttons')['allbuttons']['button']),"","","Verify Popscreen close after click on button ="+button)
 
     return detail,checklist
 
+
+
+def errorMsgOnPopUp(setup,screenName,parent='errorMsgContainer',child='msg'):
+    sleep(10)
+    popUpHandle=getHandle(setup,screenName,parent)
+    if len(popUpHandle[parent][child])!=0:
+        if str(popUpHandle[parent][child][0].find_elements_by_tag_name('label')[0].get_attribute('style').split('visibility:')[1].split(';')[0]).lower().strip()=='visible':
+            r = "issue_" + str(random.randint(99999, 9999999)) + ".png"
+            #setup.d.save_screenshot(r)
+            logger.debug("ERROR :: Screenshot with name = %s is saved", r)
+            logger.error("Error msg found on Popup")
+            errorMessage= str(popUpHandle[parent][child][0].find_elements_by_tag_name('label')[0].text)
+
+            logger.error("Error Message = %s", errorMessage)
+            resultlogger.info("ERROR :: Screenshot with name = %s is saved <br>", r)
+            resultlogger.info("******* Error msg found = %s *******<br>", errorMessage)
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 def dumpResultForButton(condition,request,screenInstance,setup,button_label="Create"):

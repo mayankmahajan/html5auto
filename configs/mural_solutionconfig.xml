@@ -260,7 +260,7 @@
             <component id ="allselects" selector="css selector" locator="div.privilegeForm" parent="True"/>
             <component id ="icons" selector="css selector" locator="div.modalContent" parent="True"/>
             <component id ="allsliders" selector="css selector" locator="div.modalContent" parent="True"/>
-
+            <component id="errorMsgContainer" selector="css selector" locator="div.modalContent" parent="True"/>
 
         </screenConfig>
         <screenConfig id = "kpi_Screen">

@@ -11,10 +11,10 @@
     </wizardquicklinks>
 
     <wizardquicklinks1>
-        <wizardquicklink id = "today" locatorText="Today"/>
+        <!--<wizardquicklink id = "today" locatorText="Today"/>-->
         <wizardquicklink id = "yesterday" locatorText="Yesterday"/>
-        <wizardquicklink id = "last7day" locatorText="Last 7 days"/>
-        <wizardquicklink id = "last30day" locatorText="Last 30 days"/>
+        <!--<wizardquicklink id = "last7day" locatorText="Last 7 days"/>-->
+        <!--<wizardquicklink id = "last30day" locatorText="Last 30 days"/>-->
         <!--<wizardquicklink id = "thismonth" locatorText="This Month"/>-->
         <!--<wizardquicklink id = "lastmonth" locatorText="Last Month"/>-->
     </wizardquicklinks1>
@@ -559,6 +559,11 @@
             <component id="helpIcon" selector="css selector" locator="div.helpIcon"/>
             <component id="closePopupIcon" selector="css selector" locator="div.closePopupIcon"/>
             <component id="datePickerIcon" selector="css selector" locator='.datePickerIcon'/>
+        </componentConfig>
+
+        <componentConfig id="errorMsgContainer">
+            <!--<component id="msg" selector="tag name" locator="label"/>-->
+            <component id="msg" selector="css selector" locator="div.bottomButtonContainer"/>
         </componentConfig>
 
         <componentConfig id="allinputs">
