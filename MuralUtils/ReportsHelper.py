@@ -57,7 +57,7 @@ def createreport(setup,reportTypes,reportObj,time):
 
         reviewPageParams= doActionsOnReviewPage(setup,grPopInstance,inputinfo,reportType)
 
-        makePasswordProtected(setup,grPopInstance,inputinfo)
+        makePasswordProtected(setup,grPopInstance,inputinfo,reportType)
 
 
         logger.debug("Report with info is going to be submitted")
@@ -260,8 +260,13 @@ def doActionsOnReviewPage(setup,grPopInstance,inputinfo,reportType):
     grPopInstance.dropdown.clear_input(grPopHandle,"generateReportDialog","reportName")
     grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["reportName"],inputinfo['reportname'])
     # grPopInstance.dropdown.sendkeys_input(inputinfo['reportname'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLINPUTS),0)
-    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"),0)
-    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"),1)
+    if reportType['isCSV']=='True':
+        grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"),0)
+        grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"),1)
+        #grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"),2)
+    else:
+        grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"), 0)
+        #grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, "allcheckboxes"), 1)
     grPopInstance.dropdown.customSendkeys(grPopHandle['generateReportDialog']["emailInput"],inputinfo['email'])
 
 
@@ -325,8 +330,11 @@ def checkEmailValidations(setup,grPopInstance,inputinfo,emailStrings):
     grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),0)
 
 
-def makePasswordProtected(setup,grPopInstance,inputinfo):
-    grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),2)
+def makePasswordProtected(setup,grPopInstance,inputinfo,reportType):
+    if reportType['isCSV']=='True':
+        grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),2)
+    else:
+        grPopInstance.dropdown.clickCheckBox(getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLCHECKBOXES),1)
     grPopInstance.dropdown.sendkeys_input(inputinfo['password'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLINPUTS),0,MuralConstants.ALLINPUTS,"password")
     grPopInstance.dropdown.sendkeys_input(inputinfo['password'],getHandle(setup, MuralConstants.REPORTWIZARDPOPUP, MuralConstants.ALLINPUTS),1,MuralConstants.ALLINPUTS,"password")
     return True

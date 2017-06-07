@@ -3,15 +3,15 @@
 
 
     <measureswithdirection>  
-        <measure id = "volumeD" locatorText="Volume (Downlink)" isCount="sum" /> 
-        <measure id = "volumeU" locatorText="Volume (Uplink)" isCount="sum" /> 
-        <measure id = "volumeT" locatorText="Volume (Total)" isCount="sum" />  
-        <measure id = "bitrateD" locatorText="Bitrate (Downlink)" isCount="sum" /> 
-        <measure id = "bitrateU" locatorText="Bitrate (Uplink)" isCount="sum" /> 
-        <measure id = "bitrateT" locatorText="Bitrate (Total)" isCount="sum"/>  
-        <measure id = "flows" locatorText="Flows" isCount="sum"/> 
-        <measure id = "flowduration" locatorText="Avg Flow Duration" isCount="none"/> 
-        <measure id = "subscribers" locatorText="Unique Subscribers" isCount="none"/>   
+        <measure id = "volumeD" locatorText="Volume (Downlink)" isCount="sum" isCountForTable="sum"/> 
+        <measure id = "volumeU" locatorText="Volume (Uplink)" isCount="sum" isCountForTable="sum"/> 
+        <measure id = "volumeT" locatorText="Volume (Total)" isCount="sum" isCountForTable="sum"/>  
+        <measure id = "bitrateD" locatorText="Bitrate (Downlink)" isCount="sum" isCountForTable="avg"/> 
+        <measure id = "bitrateU" locatorText="Bitrate (Uplink)" isCount="sum" isCountForTable="avg"/> 
+        <measure id = "bitrateT" locatorText="Bitrate (Total)" isCount="sum" isCountForTable="avg"/>  
+        <measure id = "flows" locatorText="Flows" isCount="sum" isCountForTable="sum"/> 
+        <measure id = "flowduration" locatorText="Avg Flow Duration" isCount="none" isCountForTable="none"/> 
+        <measure id = "subscribers" locatorText="Unique Subscribers" isCount="none" isCountForTable="none"/>   
     </measureswithdirection>    
 
 
@@ -64,16 +64,17 @@
 
     <reportfiltersrelations>
 
-        <reportfiltersrelation id = "Subscriber Activity" filters="network,subscriber"/>
-        <reportfiltersrelation id = "Device Usage" filters="network,subscriber"/>
+        <reportfiltersrelation id = "Subscriber Activity" filters="network,subscriber" isCSV="False"/>
+        <reportfiltersrelation id = "Device Usage" filters="network,subscriber" isCSV="False"/>
 
-        <!--<reportfiltersrelation id = "Tonnage Distribution based on Subscriber Percent" filters="network,apnrat"/>-->
+        <reportfiltersrelation id = "Tonnage Distribution based on Subscriber Percent" filters="network,apnrat" isCSV="False"/>
 
-        <reportfiltersrelation id = "Gateway Traffic" filters="network,apnrat,subscriber"/>
-        <reportfiltersrelation id = "Content Type Analysis" filters="network,apnrat,subscriber"/>
-        <reportfiltersrelation id = "Top Domains" filters="network,apnrat,subscriber"/>
-        <reportfiltersrelation id = "Top Apps" filters="network,apnrat,subscriber"/>
-        <!--<reportfiltersrelation id = "Tethering Usage" filters="network,apnrat,subscriber"/>-->
+        <reportfiltersrelation id = "Gateway Traffic" filters="network,apnrat,subscriber" isCSV="False"/>
+        <reportfiltersrelation id = "Content Type Analysis" filters="network,apnrat,subscriber" isCSV="False"/>
+        <reportfiltersrelation id = "Top Domains" filters="network,apnrat,subscriber" isCSV="False"/>
+        <reportfiltersrelation id = "Top Apps" filters="network,apnrat,subscriber" isCSV="False"/>
+        <reportfiltersrelation id = "Top Subscribers Activity" filters="network,apnrat,subscriber" isCSV="True"/>
+        <reportfiltersrelation id = "Tethering Usage" filters="network,apnrat,subscriber" isCSV="False"/>
     </reportfiltersrelations>
 
     <measures>
@@ -664,7 +665,8 @@
 
         <componentConfig id ="alert">
             <component id="filters" selector="class name" locator="alertPopupMessage"/>
-            <component id="close" selector="class name" locator="closePopupIcon"/>
+            <!--<component id="close" selector="class name" locator="closePopupIcon"/>-->
+            <component id="close" selector="css selector" locator="[class*=closePopupIcon]"/>
             <component id ='ok' selector="id" locator="ok"/>
             <component id ='cancel' selector="css selector" locator="#cancel,.Cancel"/>
             <component id = "button" selector="tag name" locator='button' />

@@ -39,9 +39,11 @@ try:
     dimensions = setup.cM.getNodeElements("tmdimension", "dimension")
     mes = []
     c=[]
+    tableCount = []
     for k, measure in measures.iteritems():
         mes.append(measure['locatorText'])
         c.append(measure['isCount'])
+        tableCount.append(measure['isCountForTable'])
 
     dim = []
     for k, dimension in dimensions.iteritems():
@@ -141,7 +143,7 @@ try:
 
                 else:
                     value_list =[data['rows'][element][index] for element in data['rows']]
-                    valueformtable=TMScreenInstance.table.getValueFromTable(value_list,c[m])
+                    valueformtable=TMScreenInstance.table.getValueFromTable(value_list,tableCount[m])
 
                     if 'Avg' in selectedMeasure and valueformtable != " ":
                         valueformtable = UnitSystem().getValueFromRawValue(valueformtable, unitValue=60)
