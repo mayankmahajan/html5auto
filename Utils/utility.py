@@ -145,6 +145,7 @@ def checkEqualValueAssert(expected, actual, time="", measure="", message="",test
 
     except:
         checkEqualAssert(expected, actual, time=time, measure=measure, message=message, testcase_id=testcase_id)
+        return
     try:
         assert abs(expectedNum - actualNum)<= (Constants.PercentageAllowedinDiff*expectedNum)
         msg = msg+tcPass
