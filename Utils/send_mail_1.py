@@ -63,9 +63,18 @@ def sendmail_selenium(additional_script_path= "",additional_text=""):
     # display.start()
 
     # driver = webdriver.Firefox()
-    driver = webdriver.Chrome(Constants.chromedriverpath)
+    #driver = webdriver.Chrome(Constants.chromedriverpath)
 
-    driver.get(Constants.localserver)
+    #driver.get(Constants.localserver)
+    #chromeOptions = webdriver.ChromeOptions()
+    # chromeOptions.add_argument("--kiosk")
+    #chromeOptions.add_argument("--start-maximized")
+
+    # self.d = webdriver.Firefox()
+    driver = webdriver.Chrome(Constants.chromedriverpath)
+    # driver = webdriver.Firefox()
+    driver.get(Constants.HTMLPATH)
+    # driver.get("http://localhost:3333/index2.html")
     import time
     time.sleep(4)
 
