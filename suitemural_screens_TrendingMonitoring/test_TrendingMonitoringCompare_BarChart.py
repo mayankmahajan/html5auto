@@ -50,7 +50,7 @@ try:
         isError(setup)
         TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.BarChartIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
-
+    comparechartIndexForDimension = -1
     for i in range(6):
 
         TMScreenInstance.dropdown.customClick(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare")["trend-compare"]["trendchart"][i])
@@ -80,7 +80,8 @@ try:
 
         dimensionfrommain = TMScreenInstance.dropdown.getSelectionOnVisibleDropDown(getHandle(setup, MuralConstants.TMSCREEN,"trend-header"), index=1, parent="trend-header")
         if str(dimensionfrommain).strip() != 'None':
-            dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=i)
+            comparechartIndexForDimension = comparechartIndexForDimension + 1
+            dimensionfromcompare = TMScreenInstance.quicktrends.getDimensionFromCompareChart(getHandle(setup, MuralConstants.TMSCREEN,"trend-compare"),index=comparechartIndexForDimension)
             checkEqualAssert(str(dimensionfrommain), str(dimensionfromcompare), str(selectedQuicklink), "", "Verify dimension on Main and Compare Chart")
         TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex, getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
