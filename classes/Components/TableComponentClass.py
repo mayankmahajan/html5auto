@@ -259,7 +259,10 @@ class TableComponentClass(BaseComponentClass):
             if colIndex == -1:
                 data[str(row)] = row
             else:
+                if row[colIndex] in data.keys():
+                     row[colIndex]=row[colIndex]+"_DST"
                 data[row[colIndex]] = row
+
         if ForTableData:
             return [rows,h]
         return [data, h]

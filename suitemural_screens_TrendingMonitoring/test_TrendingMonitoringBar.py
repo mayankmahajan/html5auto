@@ -137,13 +137,20 @@ try:
                 comparechartIndex = TMScreenInstance.quicktrends.getSelectedCompareChartIndex(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"))
                 compare_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"),parent="trend-compare",index=comparechartIndex)
 
+                legends = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
+                if len(legends)==1:
+                    columntobeSearch=str(legends[0]['value'].split('\n')[0]).strip()
+                else:
+                    columntobeSearch=selectedMeasure
+
                 TMScreenInstance.switcher.measureChangeSwitcher(MuralConstants.TableViewIndex,getHandle(setup, MuralConstants.TMSCREEN, "trend-main"),parent="trend-main")
 
                 data = TMScreenInstance.table.getTableDataMap(getHandle(setup, MuralConstants.TMSCREEN, "table"),driver=setup)
-                print selectedMeasure
-                index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], selectedMeasure)
+                #print selectedMeasure
+                index = TMScreenInstance.table.getIndexForValueInArray1(data['header'], columntobeSearch)
                 print index
                 if index== -1:
+                    checkEqualAssert(False,index==-1,selectedQuicklink,selectedMeasure,"Column for " + selectedMeasure+ " not found in table when dimension = "+selectedDimension)
                     logger.error("Column for %s in %s not found", selectedMeasure, selectedDimension)
                     resultlogger.info(" ************Column for %s in %s not found **********************", selectedMeasure, selectedDimension)
                     continue
