@@ -48,8 +48,12 @@ try:
                                                                                   "btvGroup"), occurence=0)
 
             if btvdata0 == False:
-                logger.info("No Data for globalfilter=%s ", globalFilterFromScreen)
-                raise
+                r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+                setup.d.save_screenshot(r)
+                logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",globalFilterFromScreen, r)
+                resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",globalFilterFromScreen, r)
+                #logger.info("No Data for globalfilter=%s ", globalFilterFromScreen)
+                #raise
 
         setup.d.close()
 

@@ -49,9 +49,10 @@ try:
 
             data = subscriberScreenInstance.table.getTableData1(tableHandle, "table", length=5)
             if data['rows'] == Constants.NODATA:
-                logger.info("No Table Data for globalfilter=%s ", globalFilterFromScreen)
-                raise
-
+                r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+                setup.d.save_screenshot(r)
+                logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",globalFilterFromScreen, r)
+                resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",globalFilterFromScreen, r)
         setup.d.close()
 
 except Exception as e:

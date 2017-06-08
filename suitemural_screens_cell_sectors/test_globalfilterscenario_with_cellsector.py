@@ -53,7 +53,11 @@ try:
             #tableMap = cellsectorScreenInstance.table.getTableDataMap(tableHandle, driver=setup, colIndex=-1)
 
             if data['rows'] == Constants.NODATA:
-                logger.info("No Table Data for globalfilter=%s ",globalFilterFromScreen )
+                r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+                setup.d.save_screenshot(r)
+                logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",globalFilterFromScreen, r)
+                resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",globalFilterFromScreen, r)
+                #logger.info("No Table Data for globalfilter=%s ",globalFilterFromScreen )
 
         setup.d.close()
 
