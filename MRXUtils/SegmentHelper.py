@@ -649,7 +649,8 @@ def performLogicalOperation(setup,screenInstance,button_label,checkButtonStatus=
                             segmentDetailFromUIPopup = logicalOperationSegment(setup, screenInstance,checkboxname, autSegmentName,access, uniquecountforAut,'Aut')
                             verifyEntryEditSuccessfully(setup, screenInstance, checkboxname,segmentDetailFromUIPopup, autSegmentName,testCaseId='MKR-1674,1735',testCaseId_1='MKR-1732')
 
-                        screenInstance.cm.clickButton('Refresh', segmentScreenHandle)
+                        screenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
+                        time.sleep(3)
                         #tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
                         #screenInstance.table.scrollUpTable(tableHandle, driver=setup)
                         if checkboxname['button']!='Cancel':
@@ -658,5 +659,5 @@ def performLogicalOperation(setup,screenInstance,button_label,checkButtonStatus=
                                 index = screenInstance.table.getRowIndexFromTable(0, tableHandle, str(segmentName))
                                 screenInstance.cm.clickCheckBox(tableHandle, index, parent="table")
 
-    screenInstance.cm.clickButton('Refresh', segmentScreenHandle)
+    screenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
     time.sleep(3)
