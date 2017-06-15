@@ -72,7 +72,7 @@ try:
 
             createdon_from_table=tableMap['rows'][segmentDetail['segmentname']].pop()
             createdon_from_UI=segmentDetailFromUIPopup.pop()
-            checkEqualAssert(createdon_from_UI.split(":")[0],createdon_from_table.split(':')[0],'','','Verify Created on from UI..... Expected ='+createdon_from_UI+' Actual ='+createdon_from_table,testcase_id='MKR-1703')
+            checkEqualAssert(str(createdon_from_UI.split(":")[0]).strip(),str(createdon_from_table.split(':')[0]).strip(),'','','Verify Created on from UI..... Expected ='+createdon_from_UI+' Actual ='+createdon_from_table,testcase_id='MKR-1703')
 
             checkEqualAssert(tableMap['rows'][segmentDetail['segmentname']], segmentDetailFromUIPopup, "", "","Verify Segment Detail From table, Details ="+str(segmentDetailFromUIPopup),testcase_id='MKR-1661,1663,1671')
 
