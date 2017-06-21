@@ -108,6 +108,10 @@ class UnitSystem :
 
         return self.getRawValue(value,unitstring)
 
+    def convertStringToExactInteger(self,value):
+        import locale
+        locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+        return int(locale.atof(value.strip().replace(' ', '')))
 
 
 

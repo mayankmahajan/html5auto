@@ -72,3 +72,17 @@ class ExploreListComponentClass(BaseComponentClass):
         for i in range(len(h[parent][child])):
             list.append(str(h[parent][child][i].text).strip())
         return list
+
+
+    def clickOnLinkByValue(self,exploreHandle,value, parent='appHeader', child='alllinks'):
+        try:
+            for i in range(len(exploreHandle[parent][child])):
+                if str(exploreHandle[parent][child][i].text) == str(value):
+                    exploreHandle[parent][child][i].click()
+                    return True
+            return False
+        except Exception as e:
+            logger.error("Not able to click on %s", value)
+            logger.error("Got Exception <method> %s", str(e))
+            resultlogger.error("Not able to click on %s", value)
+            return False

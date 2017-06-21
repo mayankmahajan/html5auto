@@ -10,17 +10,38 @@
         <column id="created_on" locatorText="Created on"/>
     </segmentsorttablecolumn>
 
+    <udpfilters>
+        <filter id = 'segment' locatorText="Segmentation Filters"/>
+        <filter id = 'device' locatorText="Device Filters"/>
+        <filter id = 'network' locatorText="Network Filters"/>
+        <filter id = 'content' locatorText="Content Filters"/>
+        <filter id = 'usage' locatorText="Usage Filters"/>
+    </udpfilters>
+
+    <ud_measures>  
+        <measure id = "volumeD" locatorText="Volume (Download)" isCount="sum"/> 
+        <measure id = "volumeU" locatorText="Volume (Upload)" isCount="sum" /> 
+        <measure id = "volume" locatorText="Volume" isCount="sum" />  
+        <measure id = "session" locatorText="# Session" isCount="sum" /> 
+    </ud_measures>    
+
 
     <screenConfigs>
 
 
         <screenConfig id = "ud_Screen">
-            <!--<component id="switcher" selector="id" locator="UD_Legend_Container" parent="True" />-->
-            <!--<component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />-->
-            <!--<component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <component id="switcher" selector="id" locator="UD_Legend_Container" parent="True" />
+            <component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />
+            <component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />
             <component id='table' selector="id" locator="UD_Table_Container" parent="True" />
-            <!--<component id="editFilters" selector="tag name" locator="kiwik-edit-parameter-dropdown" parent="True"/>-->
+            <component id="editFilters" selector="tag name" locator="kiwik-edit-parameter-dropdown" parent="True"/>
+            <component id="time_measure" selector="css selector" locator="div.timeRangeValue" parent="True"/>
             <component id="body" selector="id" locator="UD_Data_Container" parent="True"/>
+            <component id ="filterArea" selector="css selector" locator="div.filterContainerBox" parent="True"/>
+            <component id ="selectionchartcontainer" selector="css selector" locator="div.selectionChartContainer" parent="True"/>
+            <!--<component id ="screenheader" selector="css selector" locator='[class="crud_header"]' parent="True" />-->
+            <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
+
         </screenConfig>
 
         <screenConfig id ="createsegment_popup">
@@ -31,15 +52,38 @@
         </screenConfig>
 
         <screenConfig id="udp_popup">
-            <component id = "timeRangeDiv" selector="id" locator="ud_timeRangeDiv" parent="True"/>
+            <!--<component id = "timeRangeDiv" selector="id" locator="ud_timeRangeDiv" parent="True"/>-->
+            <component id = "ktrs" selector="tag name" locator="kiwik-ktrs" parent="True"/>
             <component id = "filterPopup" selector="id" locator="filterPopup" parent="True"/>
-            <component id = "radios" parent="False"/>
+            <component id = "icons" selector="css selector" locator="div.filterPopup" parent="True"/>
             <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
             <component id = "allspans" selector="class name" locator="headerDiv" parent="True" />
-            <component id = "allselects" selector="tag name" locator="filterPopup" parent="True" />
+            <component id = "allselects" selector="css selector" locator="div.filterPopup" parent="True" />
             <component id = "alllinks" selector="class name" locator="filterTabs" parent="True" />
+            <component id = "alltrees" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "allinputs" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id ="allcheckboxes" selector="css selector" locator="div.filterPopup" parent="True"/>
             <!--<component id = "filterContainer" selector="class name" locator="filterContainer" parent="True" />-->
+            <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
+            <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
+        </screenConfig>
 
+
+        <screenConfig id="loadfilter_popup">
+            <!--<component id = "timeRangeDiv" selector="id" locator="ud_timeRangeDiv" parent="True"/>-->
+            <component id = "icons" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
+            <component id = "allspans" selector="class name" locator="headerDiv" parent="True" />
+            <component id = "loadfilterlist" selector="class name" locator="filterPopup" parent="True"/>
+        </screenConfig>
+
+        <screenConfig id="saveNewfilter_popup">
+            <component id = "icons" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = "allbuttons" selector="class name" locator="footerDiv" parent="True" />
+            <component id = "allspans" selector="class name" locator="headerDiv" parent="True" />
+            <component id = "allinputs" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id ="allcheckboxes" selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id = 'alertMsg' selector="css selector" locator="div.filterPopup" parent="True"/>
         </screenConfig>
 
 
@@ -59,6 +103,7 @@
             <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
             <component id ='dropdown_open' selector="class name" locator="dropdown" parent="True"/>
         </screenConfig>
+
 
         <screenConfig id = "popUp_Screen">
             <component id = "allspans" selector="css selector" locator='[class="basePopupView"]' parent="True"/>
@@ -88,8 +133,9 @@
         <screenConfig id ="calender_popUp">
             <component id = 'leftcalendar' selector="class name" locator="left" parent="True" />
             <component id ='allbuttons' selector="css selector" locator="div.range_inputs" parent="True"/>
-
-            dropdown-menu-daterangepicker
+            <!--<component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />-->
+            <component id = 'rightcalendar' selector="class name" locator="right" parent="True" />
+            <component id="allspans" selector="class name" locator="range_labels" parent="True"/>
         </screenConfig>
 
         <screenConfig id = 'confirmation_filter_popup'>
@@ -168,6 +214,10 @@
             <component id = "enddrag" selector="id" locator="endHandle"/>
         </componentConfig>
 
+        <componentConfig id ='alertMsg'>
+            <component id="msg" selector="class name" locator="alertPopupMessage"/>
+        </componentConfig>
+
         <componentConfig id = "icons">
             <component id="closePopupIcon" selector="css selector" locator='[class="closePopupIconWithPadding"]'/>
             <component id="datePickerIcon" selector="css selector" locator='[class*=datePickerIcon]'/>
@@ -216,8 +266,13 @@
             <component id ="filterText" selector="css selector" locator=".filterItemContainer"/>
             <component id ='filterIcon' selector="css selector" locator=".filterIcon"/>
             <component id = "filter" selector="css selector" locator="[class*=filterTextDiv]"/>
+            <component id = "edit" selector="class name" locator="drop-down-prompt-txt"/>
+            <component id ="toggleicon" selector="class name" locator="dropdown-toggle-icon"/>
+            <component id ="multiSelectDropDown" selector="class name" locator="multiSelectDropDown"/>
+
             <!--<component id = 'globalfiltertooltip' selector="xpath" locator='//kiwik-filter-layout//*[contains(@class, "tooltipBox")]' parent="True"/>-->
         </componentConfig>
+
 
         <componentConfig id="screenheader">
             <component id="headertext" selector="css selector" locator="label.crud_header_title" />
@@ -236,6 +291,27 @@
             <component id ='exportdata' selector="css selector" locator='[class*=exportImg]'/>
         </componentConfig>
 
+        <componentConfig id="loadfilterlist">
+            <component id="list" selector="tag name" locator="li"/>
+        </componentConfig>
+
+        <componentConfig id="alltrees">
+            <component id="tree" selector="css selector" locator="div.tree"/>
+        </componentConfig>
+
+        <componentConfig id ="selectionchartcontainer">
+            <component id="startHandle" selector="class name" locator="cs-thumb-start"/>
+            <component id="endHandle" selector="class name" locator="cs-thumb-end"/>
+        </componentConfig>
+
+        <componentConfig id="time_measure">
+            <component id="span" selector="tag name" locator="span"/>
+        </componentConfig>
+
+        <componentConfig id="ktrs">
+            <component id = "datepicker" selector="css selector" locator="img.dateRangecalendarSVGClass"/>
+
+        </componentConfig>
 
         <!--<componentConfig id ='browsebuttons'>-->
             <!--<component id="browsebutton" selector="css selector" locator='input[type=file]'/>-->

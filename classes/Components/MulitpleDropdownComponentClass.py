@@ -28,7 +28,7 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
 
                 flag = True
                 # commenting below lines to get all selected values in dropdown (Below if is only for Global Filter Scenario)
-                if e.find_elements_by_xpath("../../div")[0].text.strip() == "Select All":
+                if e.find_elements_by_xpath("../../div")[0].text.strip() == "Select All" or e.find_elements_by_xpath("../../div")[0].text.strip() == "All":
                     selections.append("ALL")
                     activeDropDowns[index].click()
                     return selections
@@ -90,12 +90,36 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         activeDropDowns[index].click()
         return self.getSelection(h,index)
 
+    def setEqualOrNotEqualIcon(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=1):
+        try:
+            activeDropDowns = self.getAllActiveElements(h[parent][child])
+            activeDropDowns[index].click()
+            time.sleep(2)
+            if 'E' in value and 'not-equal' in activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].get_attribute('class'):
+                activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].click()
+            elif 'NE' in value and 'equal' in activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].get_attribute('class'):
+                activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].click()
+            elif not('E' in value) and not('NE' in value):
+                return ''
+
+            valueFromUI=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
+            activeDropDowns[index].click()
+
+            return valueFromUI
+        except Exception as e:
+            if setup != False:
+                self.utility.utility.isError(setup)
+            raise e
+            return e
+
+
     def domultipleSelectionWithIndex(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False):
         try:
             activeDropDowns = self.getAllActiveElements(h[parent][child])
             activeDropDowns[index].click()
             time.sleep(2)
             elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
+            #elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menuitem"]')
             for i in range(len(elements)):
                 if i in value or str(i) in value:
                     elements[i].click()
@@ -123,6 +147,15 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
 
     def getHeader(self,h,index,parent="picker",child="multiselect-dropdown"):
         return h[parent][child][index].find_elements_by_css_selector("[class*=PickerHeaderClass]")[0].text.strip().strip('\n').strip()
+
+
+    def domultipleSelectionWithNameWithoutActiveDropDown(self,h,value,index,parent="filterPopup",child="multiSelectDropDown"):
+        DropDowns = h[parent][child]
+
+        for el in DropDowns[index].find_elements_by_class_name("menuitemDiv"):
+            if str(el.text).strip() == value:
+                el.click()
+                return True
 
 
     def domultipleSelectionWithName(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):

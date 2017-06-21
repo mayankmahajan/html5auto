@@ -438,6 +438,42 @@ class TableComponentClass(BaseComponentClass):
                 elHandle[i].click()
                 return True
 
+    def getSelectedRow(self,h,parent='table',child='SELECTED_ROWS'):
+        try:
+            data = {}
+            data['header'] = self.getIterfaceHeaders(h[parent])
+            data['rows'] = self.getRows(h,parent,child)
+            return data
+        except Exception as e:
+            return e
+
+    def getRows(self,h,parent='table',child='SELECTED_ROWS'):
+        elHandle=h[parent][child]
+
+        if len(elHandle) <1:
+            logger.info("No Row Selected on Table")
+            return []
+
+        rowCount = len(elHandle)
+        rows = []
+
+        for i in range(rowCount):
+            rowValue=[]
+            try:
+                cellHandle=elHandle[i].find_elements_by_xpath('./div')
+                for cell in cellHandle:
+                    rowValue.append(str(cell.text).strip())
+                rows.append(rowValue)
+            except:
+                logger.debug("Check manually Selected Rows= %d", i)
+                pass
+
+        return rows
+
+
+
+
+
 
 
     def scrollVertical(self):
@@ -446,12 +482,12 @@ class TableComponentClass(BaseComponentClass):
     def getTableMap(self,h,parent="table",length=15,child="",columnName="Id"):
         return self.convertDataToDict(self.getTableData1(h),columnName)
 
-    def getTableData1(self,h,parent="table",length=15,child=""):
+    def getTableData1(self,h,parent="table",length=15,child="",selected=False):
         # handlers = self.compHandlers('table', h)
         try:
             data = {}
             data['header'] = self.getIterfaceHeaders(h[parent])
-            data['rows'] = self.getIterfaceRows(len(data['header']),h[parent],length)
+            data['rows'] = self.getIterfaceRows(len(data['header']),h[parent],length,selected)
             return data
         except Exception as e:
             return e
@@ -483,7 +519,6 @@ class TableComponentClass(BaseComponentClass):
             ActionChains(driver).key_down(key).perform()
             self.setSelectionIndex(indices[1],colCount,rowCount,h[parent])
             ActionChains(driver).key_up(key).perform()
-
 
 
     def getTableCells(self,h,parent="table",child=None):

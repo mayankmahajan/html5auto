@@ -61,6 +61,36 @@ class SwitcherComponentClass(BaseComponentClass):
             logger.error("Got Exception while using Measure Switcher %s",str(e))
             return e
 
+    def measureChangeSwitcher_UD(self,index,h,parent="switcher",child="switches"):
+        try:
+            logger.info("Going to click Switcher index = %d",index)
+            h[parent][child][index].click()
+            try:
+                h[parent][child][index].click()
+            except:
+                pass
+            time.sleep(2)
+            return True
+        except Exception as e:
+            logger.error("Got Exception while using Switcher %s",str(e))
+            return e
+
+    def getMeasureChangeSelectedSwitcher_UD(self,h,parent="switcher",child="switches"):
+        try:
+            if not h[parent][child]:
+                return False
+            divs = h[parent][child]
+            selectedSwitcher = []
+            for i in range(len(divs)):
+                if "selected" in str(divs[i].get_attribute("ng-reflect-class-name")).lower():
+                    selectedSwitcher.append(i)
+            time.sleep(2)
+            return selectedSwitcher
+        except Exception as e:
+            logger.error("Got Exception while getting Measure Switcher Selection = %s", str(e))
+            return e
+
+
     # for mural
     def getMeasureChangeSelectedSwitcher(self,h,parent="measureChangeSection",child="switcher",occurence = 0):
         try:

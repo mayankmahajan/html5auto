@@ -11,7 +11,9 @@
     </wizardquicklinks>
 
     <wizardquicklinks1>
-        <!--<wizardquicklink id = "today" locatorText="Today"/>-->
+        <wizardquicklink id = "today" locatorText="Today"/>
+        <!--<wizardquicklink id = "last4hours" locatorText="Last 4 hours"/>-->
+        <!--<wizardquicklink id = "last24hours" locatorText="Last 24 hours"/>-->
         <wizardquicklink id = "yesterday" locatorText="Yesterday"/>
         <!--<wizardquicklink id = "last7day" locatorText="Last 7 days"/>-->
         <!--<wizardquicklink id = "last30day" locatorText="Last 30 days"/>-->
@@ -280,6 +282,7 @@
             <!--<component id = "HEADERROW" selector="id" locator='agText' locatorDimension ='id' locatorText = 'agText' action="getData" wait = 'skip'/>-->
             <component id = "table" selector="tag name" locator="ag-grid-ng2" wait="skip"/>
             <component id = "HEADERROW" selector="class name" locator='ag-header-cell-text' locatorDimension ='class' locatorText = 'ag-header-cell-text' action="getData" wait = 'skip'/>
+            <component id = "SELECTED_ROWS" selector="css selector" locator="[class*=row-selected]" wait="skip"/>
 
             <component id = "ROWS" selector="class name" locator='ag-cell-value' locatorDimension ='class' locatorText = 'ag-cell-value' action="getData" wait = 'skip'/>
             <!--<component id = "bar" selector="class name" locator='bar1' locatorDimension ='id' locatorText = 'bar1' action="hover" parentDependency="False"/>-->
@@ -524,6 +527,14 @@
             <component id = "CHECKSORT" selector="class name" locator='ag-header-cell-label' locatorDimension ='class' locatorText = 'ag-header-cell-label' action="checksort" wait = 'skip'/>
             <component id = "count" selector="class name" locator='dynamic-container' locatorDimension ='class' locatorText = 'dynamic-container' action="" wait = 'skip'/>
 
+        </componentConfig>
+
+        <componentConfig id = "ktrs">
+            <component id = "bar" selector="css selector" locator="div.timeRangeBar"/>
+            <component id = "a" selector="tag name" locator='a' />
+            <!--<component id = "label" selector="id" locator="timeRangeValueSpanID"/>-->
+            <component id = "label" selector="css selector" locator="[id*=timeRangeValueSpanID]"/>
+            <component id = "calicon" selector="css selector" locator="timeRangeCustom"/>
         </componentConfig>
 
         <componentConfig id = 'calendar'>

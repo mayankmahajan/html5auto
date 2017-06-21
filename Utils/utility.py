@@ -49,7 +49,7 @@ def setupTestcase(self):
     self.driverHelper = DriverHelper(self.driver)
     return True
 
-def checkEqualDict(f1,f2,time="",measure="",message="",testcase_id=""):
+def checkEqualDict(f1,f2,time="",measure="",message="",testcase_id="",doSortingBeforeCheck=False):
     tc_id = "<font color='blue'>" + str(testcase_id) + "</font> "
     msg = tc_id + time + " " + measure + " " + message
 
@@ -59,6 +59,10 @@ def checkEqualDict(f1,f2,time="",measure="",message="",testcase_id=""):
         msg1 = ''
         msg1 = msg
         try:
+            if type(f1[k])==list and type(f2[k])==list and doSortingBeforeCheck:
+                f1[k].sort()
+                f2[k].sort()
+
             assert f1[k] == f2[k]
             # msg = msg+" : "+k+" "+tcPass
             resultlogger.info(msg1+"  :: " +k+" ::  "+tcPass)
