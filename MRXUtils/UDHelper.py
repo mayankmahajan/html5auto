@@ -225,21 +225,51 @@ def getUDPFiltersFromScreen(screenName,setup):
     actualFilters = insertKeys(getAllSelectedFilters(getHandle(setup,screenName,"filterArea")),segmentKeys+deviceKeys+networkKeys+contentKeys+usageKeys)
     return actualFilters
 
-def verifySummary(screenInstance,data,h,parent='alllabels',child='label'):
-    summaryTextLine1=str(h[parent][child][0].text)
+def getSummaryDetailAndValidatePresenceOfValidationBox(setup,screenName,parent='summary_validation',child='label',view=[1],check=False):
+
+    h = getHandle(setup, screenName, parent)
+    summaryTextLine1 = str(h[parent][child][0].text)
     summaryTextLine2 = str(h[parent][child][1].text)
 
-    numberofUsersFromSummary=UnitSystem().convertStringToExactInteger(summaryTextLine1.split('Subscribers')[0].strip())
-    percentageOfVolumeFromSummary=int(summaryTextLine1.split('/')[1].split('%')[0].strip())
-    avgVolumePerUserFromSummary=summaryTextLine2.split('er:')[1]
-#################################################################
+    summaryText=[]
+    if str(summaryTextLine1)!='':
+        summaryText.append(summaryTextLine1)
+
+    if str(summaryTextLine2) != '':
+        summaryText.append(summaryTextLine2)
+
+    numberofUsersFromSummary = UnitSystem().convertStringToExactInteger(summaryTextLine1.split('Subscribers')[0].strip())
+    percentageOfVolumeFromSummary = int(summaryTextLine1.split('/')[1].split('%')[0].strip())
+    avgVolumePerUserFromSummary = str(summaryTextLine2.split('er:')[1]).strip()
+
+    actualSegmentDetail = []
+    if str(percentageOfVolumeFromSummary).strip() != '':
+        actualSegmentDetail.append(percentageOfVolumeFromSummary)
+    if str(numberofUsersFromSummary).strip() != '':
+        actualSegmentDetail.append(numberofUsersFromSummary)
+    if str(avgVolumePerUserFromSummary).strip() != '':
+        actualSegmentDetail.append(str(avgVolumePerUserFromSummary).strip())
+
+    if check:
+        if view==[1]:
+            checkEqualAssert(3, len(actualSegmentDetail),message='Segment Validation box present at User Distribution page in Table view With 3 info (number of user,% of total <selected measure>, avg of <selected measure> per user)',testcase_id='MKR-1810')
+        elif view==[0]:
+            checkEqualAssert(3, len(actualSegmentDetail),message='Segment Validation box present at User Distribution page in Chart view With 3 info (number of user,% of total <selected measure>, avg of <selected measure> per user)',testcase_id='MKR-1810')
+
+    return actualSegmentDetail,summaryText
+
+
+def verifySummaryWithTable(setup,screenName,screenInstance,data,parent='summary_validation',child='label'):
+    actualSegmentDetail,textFromSummary=getSummaryDetailAndValidatePresenceOfValidationBox(setup,screenName,parent,child)
+
+    #################################################################
     user_list = []
 
     for rows in data['rows']:
         user_list.append(UnitSystem().convertStringToExactInteger(rows[1]))
     numberofUsersFromTable=sum(user_list)
 
-##################################################################
+    ##################################################################
     perVolume_list=[]
     for rows in data['rows']:
         if '<' in (rows[2]):
@@ -248,7 +278,7 @@ def verifySummary(screenInstance,data,h,parent='alllabels',child='label'):
             perVolume_list.append(float(rows[2]))
 
     percentageOfVolumeFromTable=int(round(sum(perVolume_list)))
-##################################################################
+    ##################################################################
     Avg_Volume = []
     for rows in data['rows']:
         Avg_Volume.append(rows[4].strip())
@@ -256,11 +286,9 @@ def verifySummary(screenInstance,data,h,parent='alllabels',child='label'):
     raw_value=screenInstance.table.getValueFromTable(Avg_Volume,'avg')
     avgVolumePerUserFromTable=UnitSystem().getValueFromRawValue(raw_value, unitValue=1024)
 
-    checkEqualAssert(percentageOfVolumeFromTable,percentageOfVolumeFromSummary,message='Verify % of volume on Summary with selected Table')
-    checkEqualAssert(numberofUsersFromTable,numberofUsersFromSummary,message='Verify % of volume on Summary with selected Table')
-    checkEqualAssert(avgVolumePerUserFromTable,avgVolumePerUserFromSummary.strip(),message='Verify Avg Volume on Summary with selected Table')
-
-    return [summaryTextLine1,summaryTextLine2]
+    expectedSegmentDetail=[percentageOfVolumeFromTable,numberofUsersFromTable,avgVolumePerUserFromTable]
+    checkEqualAssert(expectedSegmentDetail,actualSegmentDetail,message='Verify that the information shown in the Segment Validation box for a particular selection made is correct',testcase_id='MKR-1811,MKR-1814')
+    return textFromSummary
 
 
 def createSegmentFromUD(setup,screenInstance,segment_Input):
@@ -268,7 +296,7 @@ def createSegmentFromUD(setup,screenInstance,segment_Input):
     key_Class='titleSpan'
     value_Class='titleValueSpan'
     popUpHandle = getHandle(setup, MRXConstants.POPUPSCREEN)
-    checkEqualAssert(MRXConstants.CREATESEGMENT, str(popUpHandle['allspans']['span'][0].text),'Verify Create Segment Header in Popup')
+    checkEqualAssert(MRXConstants.CREATESEGMENT, str(popUpHandle['allspans']['span'][0].text),'Verify that on clicking the "Create Segment" button a pop up window appears with options to create the segment',testcase_id='MKR-1816')
 
     ##############################################################################
     key_list=[]
@@ -346,7 +374,7 @@ def saveNewFilter(setup,screenName,screenInstance,filterDetail,isEdit=False):
         checkEqualAssert("Rename Save Filter", h['allspans']['span'][0].text, message='Verify Rename Save Filter Header')
     else:
         checkEqualAssert("Save New Filter",h['allspans']['span'][0].text,message='Verify Save New Filter Header')
-        button_Status(False,"Without Entering filter name",screenInstance,setup,screen=screenName,button_label='Save')
+        button_Status(False,"Without Entering filter name",screenInstance,setup,screen=screenName,button_label='Save',testcase_id="MKR-1798")
         button_Status(True,"Without Entering filter name",screenInstance,setup,screen=screenName,button_label='Cancel')
 
     logger.info('Going to enter filter name =%s',str(filterDetail['filtername']))
@@ -427,10 +455,10 @@ def verifySaveFilterFromLoadFilter(setup,screenInstance,screenName,filterDetail)
     screenInstance.clickButton("Cancel", getHandle(setup,screenName,Constants.ALLBUTTONS))
     if filterDetail['button']=="Save":
         expected_Detail=[filterDetail['filtername'],'*' if filterDetail['default']=='1' else '']
-        checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Filter save successfully :: Filter Detail ='+str(filter_dict[filterDetail['filtername']]))
+        checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify that an applied filter can be saved for future use (Filter save successfully) :: Filter Detail ='+str(filter_dict[filterDetail['filtername']]),testcase_id="MKR-1798")
         checkEqualAssert(expected_Detail,filter_dict[filterDetail['filtername']],message='Verify Detail of new added filter')
     else:
-        checkEqualAssert(False, filter_dict.has_key(filterDetail['filtername']),message='Verify that if we Press Cancel or cross (X) then Filter not save')
+        checkEqualAssert(False, filter_dict.has_key(filterDetail['filtername']),message='Verify that if we Press Cancel or cross (X) then Filter not save',testcase_id="MKR-1799")
     return
 
 
@@ -457,9 +485,9 @@ def checkDefaultFilter(setup,screenInstance,screenName,exploreScreen,filterDetai
             timeRangeFromScreen = str(screenHandle['time_measure']['span'][0].text).strip()
             measureFromScreen = str(screenHandle['time_measure']['span'][1].text).strip()
             udpFilterFromScreen = getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
-            checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='Verify timeRange For default loaded filter')
-            checkEqualAssert(measureFromPopup,measureFromScreen,message='Verify measuer For default loaded filter')
-            checkEqualDict(expected_filter,udpFilterFromScreen, message="Verify Filters for default loaded filter", doSortingBeforeCheck=True)
+            checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='Verify timeRange For default loaded filter (Part of mention TC)',testcase_id='MKR-1802')
+            checkEqualAssert(measureFromPopup,measureFromScreen,message='Verify measuer For default loaded filter (Part of mention TC)',testcase_id='MKR-1802')
+            checkEqualDict(expected_filter,udpFilterFromScreen, message="Verify that default filter gets applied automatically on re-logins for this user", doSortingBeforeCheck=True,testcase_id='MKR-1802')
 
 
 def clearFilter(setup,screenName,parent='filterArea',child='filterClearIcon'):
@@ -501,7 +529,7 @@ def deleteSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfi
                 flag=confirmDelete(setup,screenInstance,filterDetail)
                 filter_dict = getLoadFilterList(getHandle(setup, screenName, parent))
                 if flag:
-                    checkEqualAssert(False,filter_dict.has_key(filterDetail['filtername']),message='Verify filter delete successfully')
+                    checkEqualAssert(False,filter_dict.has_key(filterDetail['filtername']),message='Verify filter delete successfully',testcase_id='MKR-1804')
                 else:
                     checkEqualAssert(True, filter_dict.has_key(filterDetail['filtername']),message='Verify filter not deleted if press Cancel')
                 return
@@ -523,10 +551,10 @@ def editSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilt
                 filterDetailFromUI = saveNewFilter(setup, MRXConstants.SNFPOPUP, screenInstance,filterDetail,isEdit=True)
                 if filterDetail['button'] == 'Save':
                     expected_detail = [filterDetail['filtername'], filterDetail['default']]
-                    checkEqualAssert(expected_detail, filterDetailFromUI,message='Verify Entered detail after rename Save filter')
+                    checkEqualAssert(expected_detail, filterDetailFromUI,message='Verify Entered detail after rename Save filter (Part of mention TC)',testcase_id='MKR-1805')
 
                 filter_dict = getLoadFilterList(getHandle(setup, screenName, parent))
-                checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify filter delete successfully')
+                checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify that edit filter added successfully',testcase_id='MKR-1805')
                 return
     except:
         logger.error('Not able click on delete button')
@@ -550,3 +578,150 @@ def confirmDelete(setup,screenInstance,filterDetail):
         logger.error('Confirm Delete Popup not found')
         resultlogger.error('Confirm Delete Popup not found')
         return False
+
+
+def availableQuickLink(setup,screenName,parent='ktrs',child='a',childForCustomClick='datepicker'):
+    availableQuickLinkList = []
+    h=getHandle(setup, screenName, parent)
+    for ele in h[parent][child]:
+        availableQuickLinkList.append(str(ele.text))
+    if h[parent][childForCustomClick][0].is_enabled():
+        availableQuickLinkList.append('Calender')
+
+    return availableQuickLinkList
+
+
+def availableMeasure(setup,screenName,index=0,parent='allselects',child='select'):
+    availableMeasureList=[]
+    h=getHandle(setup,screenName,parent)
+    if len(h[parent][child]) > index:
+        for ele in h[parent][child][index].find_elements_by_tag_name('option'):
+            availableMeasureList.append(str(ele.text).strip())
+    return availableMeasureList
+
+def getTestCaseID(selectedMeasure):
+    if selectedMeasure.strip() == str(MRXConstants.ExpectedMeasure[0]).strip():
+        testidForChart = 'MKR-1764'
+        testidForGrid = 'MKR-1765'
+
+    elif selectedMeasure.strip() == str(MRXConstants.ExpectedMeasure[1]).strip():
+        testidForChart = 'MKR-1766'
+        testidForGrid = 'MKR-1767'
+
+    elif selectedMeasure.strip() == str(MRXConstants.ExpectedMeasure[2]).strip():
+        testidForChart = 'MKR-1768'
+        testidForGrid = 'MKR-1769'
+
+    elif selectedMeasure.strip() == str(MRXConstants.ExpectedMeasure[3]).strip():
+        testidForChart = 'MKR-1770'
+        testidForGrid = 'MKR-1771'
+
+    else:
+        testidForChart = ''
+        testidForGrid = ''
+    return testidForChart,testidForGrid
+
+def getAxisPoint(h,parent='body',child='xaxis'):
+    point=[]
+    for ele in h[parent][child][0].find_elements_by_class_name('tick'):
+        point.append(str(ele.text).strip())
+    return point
+    pass
+
+
+def validateRangeAndSortingInTable(udScreenInstance,data,selectedQuicklink, selectedMeasure):
+
+    ################################## Check Sorting ###################################################################
+    index = udScreenInstance.table.getIndexForValueInArray(data['header'], selectedMeasure)
+    selectedMeasure_value_list = [element[index] for element in data['rows']]
+    l = []
+    for i in range(len(selectedMeasure_value_list)):
+        if str(selectedMeasure_value_list[i]).strip()!='':
+            l.append(UnitSystem().getRawValueFromUI(selectedMeasure_value_list[i]))
+
+    sorting_Flag=True
+
+    for j in range(1,len(l)):
+        if l[j]>l[j-1]:
+            sorting_Flag=False
+            break
+
+    checkEqualAssert(True,sorting_Flag,selectedQuicklink,selectedMeasure,message='Verify that the table is sorted from high to low values based on the selected metric :: Value_List ='+str(selectedMeasure_value_list),testcase_id='MKR-1813')
+
+    ############################################# Check Range ##########################################################
+
+    rangeValueList=[element[0] for element in data['rows']]
+    start = int(str(rangeValueList[0]).rstrip(']%').lstrip('[').split('-')[0])
+    end = int(str(rangeValueList[len(rangeValueList) - 1]).rstrip(']%').lstrip('[').split('-')[1])
+    checkEqualAssert(0, start, selectedQuicklink, selectedMeasure, message="Verify that Range must Started From 0",testcase_id='MKR-1812')
+    checkEqualAssert(0, start, selectedQuicklink, selectedMeasure, message="Verify thst Range must Ended at 100",testcase_id='MKR-1812')
+
+    flag = True
+    for rangeValue in rangeValueList:
+        low = int(str(rangeValue).rstrip(']%').lstrip('[').split('-')[0])
+        high = int(str(rangeValue).rstrip(']%').lstrip('[').split('-')[1])
+        if (high - low) != 5:
+            checkEqualAssert(True, (high - low) == 5, selectedQuicklink, selectedMeasure,message="Verify that in the table view user gets a tabular view of subscriber distribution in 5% bins :: Actual Interval = " + str(rangeValue),testcase_id='MKR-1812')
+            return
+
+    checkEqualAssert(True, flag, selectedQuicklink, selectedMeasure,message="Verify that in the table view user gets a tabular view of subscriber distribution in 5% bins", testcase_id='MKR-1812')
+    return
+
+
+
+def validateRangeInChart(rangeList,selectedQuicklink, selectedMeasure):
+    range_list=[]
+    for range_value in rangeList:
+        range_list.append(int(str(range_value).rstrip('%').strip()))
+
+    sorting_flag=True
+    for i in range(0,len(range_list)):
+        if range_list[i]!=i*5:
+            sorting_flag = False
+            break
+
+    checkEqualAssert(True, sorting_flag, selectedQuicklink, selectedMeasure,message='Verify that in the line chart shown in Chart view, subscriber distribution is divided in 5% bins :: Range =' + str(rangeList), testcase_id='MKR-1807')
+    return
+
+
+
+# def hoverOverTicksGetMainChartText(setup, h1, parent="body", child="lineChartComponent", parent_tooltip="trend-header", child_tooltip="qttooltip"):
+#         try:
+#             hticks = h1[parent][child].find_element_by_class_name('[cs-not-selected-point],[cs-point]')
+#             tooltipText={}
+#             for el in hticks:
+#                 logger.info("Going to perform Hover Action")
+#                 setup.dH.action.move_to_element(el).perform()
+#                 logger.info("Hover Action Performed")
+#                 # tempHandlers = self.util.utility.getHandle(setup,screenName,parent)
+#                 time.sleep(1) # only to show in demo
+#                 # headerhandles = self.util.utility.getHandle(setup,screenName,parent_tooltip)
+#                 # time.sleep(1) # only to show in demo
+#                 tooltipText[el.text] = str(el.text)
+#                 logger.debug("Got tooltip data =  %s",str(tooltipText))
+#                 return tooltipText
+#
+#         except Exception as e:
+#             logger.error("Got Exception while performing hover actions = %s",str(e))
+#             return e
+#
+#
+#
+
+
+# summaryTextLine1=str(h[parent][child][0].text)
+    # summaryTextLine2 = str(h[parent][child][1].text)
+    #
+    # numberofUsersFromSummary=UnitSystem().convertStringToExactInteger(summaryTextLine1.split('Subscribers')[0].strip())
+    # percentageOfVolumeFromSummary=int(summaryTextLine1.split('/')[1].split('%')[0].strip())
+    # avgVolumePerUserFromSummary=summaryTextLine2.split('er:')[1]
+    #
+    # actualSegmentDetail =[]
+    # if str(percentageOfVolumeFromSummary).strip()!='':
+    #     actualSegmentDetail.append(percentageOfVolumeFromSummary)
+    # if str(numberofUsersFromSummary).strip()!='':
+    #     actualSegmentDetail.append(numberofUsersFromSummary)
+    # if str(avgVolumePerUserFromSummary).strip()!='':
+    #     actualSegmentDetail.append(str(avgVolumePerUserFromSummary).strip())
+    #
+    # checkEqualAssert(3, len(actualSegmentDetail),message='"Segment Validation" box present at User Distribution page in Table view With 3 info',testcase_id='MKR-1810')

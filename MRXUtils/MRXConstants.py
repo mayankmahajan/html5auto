@@ -23,11 +23,15 @@ class MRXConstants(Constants):
     LFPOPUP='loadfilter_popup'
     SNFPOPUP='saveNewfilter_popup'
     ExploreScreen="explore_Screen"
+    AvailableFilterList='availableFilterList'
     Logout='Logout'
+    NO_FILTER='No filters'
 
     MinimumUserConfig=15
     Source_User_Distribution='User Distribution'
-
+    ExpectedFilterOption = ['Time Range','Measure','Segmentation Filters','Device Filters','Network Filters','Content Filters','Usage Filters']
+    ExpectedQuickLinkList= ['Last 30 days','Last 7 days','Yesterday','Last 24 hours','Last 4 hours','Today','Calender']
+    ExpectedMeasure=['Volume (Upload)','Volume (Download)','Volume','# Session']
     ALL='ALL'
     REFRESH='Refresh'
     ALLLINKS = "alllinks"

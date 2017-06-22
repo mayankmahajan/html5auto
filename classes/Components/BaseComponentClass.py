@@ -417,6 +417,19 @@ class BaseComponentClass:
                 return e
         return False
 
+    def clickIcon(self,h,parent="icons",child="closePopupIcon"):
+        if len(h[parent][child])!=0:
+            try:
+                h[parent][child][0].click()
+                time.sleep(2)
+                return True
+
+            except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
+                return e
+        else:
+            return False
+
+
     def clickImage(self,value,h,parent="allimages",child="image"):
         for el in h[parent][child]:
             try:

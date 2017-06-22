@@ -58,6 +58,9 @@ try:
         ######################################### Load Filter ##########################################################
 
         UDHelper.clearFilter(setup,MRXConstants.UDSCREEN)
+        filterFromScreen= UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
+        checkEqualAssert(MRXConstants.NO_FILTER,filterFromScreen,message='Verify that an applied filter can be removed by pressing the "x" present in the filter bar just below Edit Filter option',testcase_id='MKR-1806')
+
         if filterDetail['button']=='Save':
             h = getHandle(setup, MRXConstants.UDSCREEN, 'filterArea')
             h['filterArea']['toggleicon'][0].click()
@@ -67,10 +70,10 @@ try:
             screenHandle=getHandle(setup, MRXConstants.UDSCREEN, 'time_measure')
             timeRangeFromScreen = str(screenHandle['time_measure']['span'][0].text).strip()
             measureFromScreen = str(screenHandle['time_measure']['span'][1].text).strip()
-            checkEqualAssert(timeRangeFromPopup, timeRangeFromScreen,message='After load filter verify timerange value on screen')
-            checkEqualAssert(measureFromPopup, measureFromScreen,message='After load filter verify measure value on screen')
+            checkEqualAssert(timeRangeFromPopup, timeRangeFromScreen,message='After load filter verify timerange value on screen (Part of mention TC)',testcase_id='MKR-1801')
+            checkEqualAssert(measureFromPopup, measureFromScreen,message='After load filter verify measure value on screen (Part of mention TC)',testcase_id='MKR-1801')
             udpFilterFromScreen_2 = UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
-            checkEqualDict(udpFilterFromScreen_1, udpFilterFromScreen_2, message="Verify loaded Filters on Screen",doSortingBeforeCheck=True)
+            checkEqualDict(udpFilterFromScreen_1, udpFilterFromScreen_2, message="Verify that a user can re-apply any saved filter",doSortingBeforeCheck=True,testcase_id='MKR-1801')
 
             ############################################### Check Default Filter #######################################
 
@@ -85,5 +88,4 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
-    raise e
     setup.d.close()

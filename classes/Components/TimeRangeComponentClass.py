@@ -108,13 +108,36 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
             if int(h) == 0:
                 h=24
             if (etepoch - stepoch) <= int(h)*3600:
+                return False,""
+            else:
+                    if (etepoch - stepoch) > (int(h)+(24*7))*3600 :
+                        return True, self.time_format(getDateString(etepoch-(3600*(int(h)+(24*7)))),getDateString(etepoch-(3600*(int(h)))))
+                    else:
+                        return True, self.time_format(stime1,getDateString(etepoch-(3600*(int(h)))))
+
+        elif quicklink=="last30day":
+            if int(h) == 0:
+                h=24
+            if (etepoch - stepoch) <= int(h)*3600:
+                return False,""
+            else:
+                    if (etepoch - stepoch) > (int(h)+(24*30))*3600 :
+                        return True, self.time_format(getDateString(etepoch-(3600*(int(h)+(24*30)))),getDateString(etepoch-(3600*(int(h)))))
+                    else:
+                        return True, self.time_format(stime1,getDateString(etepoch-(3600*(int(h)))))
+
+
+        elif quicklink=="last4hours":
+            if (etepoch - stepoch) <= 4*3600:
                 return True, self.time_format(stime1, etime1)
             else:
-                    if (etepoch - stepoch) > (int(h)+(24*6))*3600 :
-                        return True, self.time_format(getDateString(etepoch-(3600*(int(h)+(24*6)))),etime1)
-                    else:
-                        return True, self.time_format(stime1,etime1)
+                return True, self.time_format(getDateString(etepoch-(3600*4)),etime1)
 
+        elif quicklink=="last24hours":
+            if (etepoch - stepoch) <= 24*3600:
+                return True, self.time_format(stime1, etime1)
+            else:
+                return True, self.time_format(getDateString(etepoch-(3600*24)),etime1)
 
         elif quicklink == "thisweek":
             numberofdayfromsunday = int(dayNameToNumber[ds])

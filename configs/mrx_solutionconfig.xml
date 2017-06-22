@@ -31,14 +31,15 @@
 
         <screenConfig id = "ud_Screen">
             <component id="switcher" selector="id" locator="UD_Legend_Container" parent="True" />
-            <component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />
-            <component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />
+            <!--<component id="allbuttons" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <!--<component id="alllabels" selector="id" locator="UD_Summary_Container" parent="True" />-->
+            <component id ="summary_validation" selector="id" locator="UD_Summary_Container" parent="True"/>
             <component id='table' selector="id" locator="UD_Table_Container" parent="True" />
             <component id="editFilters" selector="tag name" locator="kiwik-edit-parameter-dropdown" parent="True"/>
             <component id="time_measure" selector="css selector" locator="div.timeRangeValue" parent="True"/>
             <component id="body" selector="id" locator="UD_Data_Container" parent="True"/>
             <component id ="filterArea" selector="css selector" locator="div.filterContainerBox" parent="True"/>
-            <component id ="selectionchartcontainer" selector="css selector" locator="div.selectionChartContainer" parent="True"/>
+            <!--<component id ="selectionchartcontainer" selector="css selector" locator="div.selectionChartContainer" parent="True"/>-->
             <!--<component id ="screenheader" selector="css selector" locator='[class="crud_header"]' parent="True" />-->
             <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
 
@@ -66,8 +67,13 @@
             <!--<component id = "filterContainer" selector="class name" locator="filterContainer" parent="True" />-->
             <component id = "filterArea" selector="tag name" locator="kiwik-filter-layout" parent="True"/>
             <component id = 'globalfiltertooltip' selector="css selector" locator="[class*=tooltipBox]" parent="True"/>
+
         </screenConfig>
 
+        <screenConfig id="availableFilterList">
+            <component id ='availablefilter' selector="css selector" locator="div.filterPopup" parent="True"/>
+            <component id ='filterTab' selector="css selector" locator="div.filterTabs" parent="True"/>
+        </screenConfig>
 
         <screenConfig id="loadfilter_popup">
             <!--<component id = "timeRangeDiv" selector="id" locator="ud_timeRangeDiv" parent="True"/>-->
@@ -209,9 +215,14 @@
             <!--<component id = 'switcher' selector="class name" locator="switcherContainer" wait="skip"/>-->
 
         </componentConfig>
+
         <componentConfig id="body">
             <component id = "startdrag" selector="id" locator="startHandle"/>
             <component id = "enddrag" selector="id" locator="endHandle"/>
+            <component id ='data_label' selector="class name" locator="state-component-label"/>
+            <component id ='xaxis' selector="css selector" locator="g.wm-axis"/>
+            <component id ='yaxis' selector="css selector" locator="g.wm-yaxis"/>
+            <component id="lineChartComponent" selector="id" locator="lineChartComponent"/>
         </componentConfig>
 
         <componentConfig id ='alertMsg'>
@@ -302,15 +313,30 @@
         <componentConfig id ="selectionchartcontainer">
             <component id="startHandle" selector="class name" locator="cs-thumb-start"/>
             <component id="endHandle" selector="class name" locator="cs-thumb-end"/>
+            <!--<component id="lineChartComponent" selector="id" locator="lineChartComponent"/>-->
         </componentConfig>
 
         <componentConfig id="time_measure">
             <component id="span" selector="tag name" locator="span"/>
         </componentConfig>
 
+
+        <componentConfig id="summary_validation">
+            <component id = "button" selector="tag name" locator='button' />
+            <component id = "label" selector="tag name" locator='label' />
+        </componentConfig>
+
         <componentConfig id="ktrs">
             <component id = "datepicker" selector="css selector" locator="img.dateRangecalendarSVGClass"/>
 
+        </componentConfig>
+
+        <componentConfig id="availablefilter">
+            <component id="option" selector="class name" locator="titleSpan"/>
+        </componentConfig>
+
+        <componentConfig id="filterTab">
+            <component id="dimension" selector="tag name" locator="a"/>
         </componentConfig>
 
         <!--<componentConfig id ='browsebuttons'>-->
