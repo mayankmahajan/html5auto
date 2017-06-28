@@ -129,9 +129,12 @@ try:
                 compare_chart_value = TMScreenInstance.quicktrends.getHoverText(getHandle(setup, MuralConstants.TMSCREEN, "trend-compare"),parent="trend-compare",index=comparechartIndex)
                 #compare_chart_value = UnitSystem().getRawValueFromUI(compare_chart_text)
 
-                legends = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
-                if len(legends) == 1:
-                    columntobeSearch = str(legends[0]['value'].split('\n')[0]).strip()
+                if dim[d]!='None':
+                    legends = TMScreenInstance.quicktrends.getLegends_tm(getHandle(setup, MuralConstants.TMSCREEN, "trend-legend"))
+                    if len(legends) == 1:
+                        columntobeSearch = str(legends[0]['value'].split('\n')[0]).strip()
+                    else:
+                        columntobeSearch = selectedMeasure
                 else:
                     columntobeSearch = selectedMeasure
 
