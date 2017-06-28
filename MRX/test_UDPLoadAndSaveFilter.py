@@ -92,7 +92,7 @@ try:
             setup.d.close()
             break
 
-    import MRX.DeleteSaveFilter
+    import MRX.UDPDeleteSaveFilter
 
 except Exception as e:
     isError(setup)
