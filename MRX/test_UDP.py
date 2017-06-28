@@ -54,6 +54,9 @@ try:
 
     createSegmentDetails = setup.cM.getNodeElements("createSegmentFromUD", "segment")
 
+    checkBlankLoadFilter=True
+    beforeCreateSegmentTotalSaveFilter=0
+
     for k, segmentDetail in createSegmentDetails.iteritems():
         udScreenInstance.switcher.measureChangeSwitcher_UD(1,getHandle(setup, MRXConstants.UDSCREEN, "switcher"))
         udScreenInstance.table.setSpecialSelection(setup.d,[int(segmentDetail['select_row_from']),int(segmentDetail['select_row_to'])], Keys.SHIFT,getHandle(setup, MRXConstants.UDSCREEN, 'table'))
@@ -66,8 +69,15 @@ try:
 
         textFromSummary=UDHelper.verifySummaryWithTable(setup,MRXConstants.UDSCREEN,udScreenInstance,data)
         detailFromScreen_Dict = detailFromScreen(setup, MRXConstants.UDSCREEN)
-        udScreenInstance.clickButton('Create Segment',getHandle(setup,MRXConstants.UDSCREEN,'summary_validation'),parent='summary_validation')
 
+        if checkBlankLoadFilter:
+            h = getHandle(setup, MRXConstants.UDSCREEN, 'filterArea')
+            h['filterArea']['toggleicon'][0].click()
+            udScreenInstance.multiDropdown.domultipleSelectionWithNameWithoutActiveDropDown(getHandle(setup, MRXConstants.UDSCREEN, 'filterArea'), 'Load Filter', 0, parent="filterArea",child="multiSelectDropDown")
+            beforeCreateSegmentTotalSaveFilter=UDHelper.getTotalSaveFilter(setup)
+            udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.LFPOPUP, Constants.ALLBUTTONS))
+
+        udScreenInstance.clickButton('Create Segment',getHandle(setup,MRXConstants.UDSCREEN,'summary_validation'),parent='summary_validation')
         addedSegmentDetail, detailFromPopup_Dict, textFromPopUp =UDHelper.createSegmentFromUD(setup,udScreenInstance,segmentDetail)
 
         checkEqualAssert(textFromSummary,textFromPopUp,message='Verify same text on summary and popup',testcase_id='MKR-1816')
@@ -82,6 +92,8 @@ try:
 
         if segmentDetail['button'] == 'Cancel':
             checkEqualAssert(False,tableMap['rows'].has_key(segmentDetail['segmentname']),message="Verify that if cancel button is pressed then the segment does not get created",testcase_id='MKR-1871')
+            exploreScreenInstance.exploreList.launchModule(getHandle(setup, 'explore_Screen'), "USER DISTRIBUTION")
+
         if segmentDetail['button']=='Create' and len(addedSegmentDetail)>0:
             checkEqualAssert(True,tableMap['rows'].has_key(segmentDetail['segmentname']),message="Verify Segment added Successfully With Detail= "+str(addedSegmentDetail),testcase_id='MKR-1815')
             tableMap['rows'][segmentDetail['segmentname']].pop()
@@ -103,8 +115,26 @@ try:
             checkEqualAssert(str(createdon_from_Popup.split(":")[0]).strip(),str(createdon_from_table.split(':')[0]).strip(),'','','Verify Created on from UI..... Expected ='+createdon_from_Popup+' Actual ='+createdon_from_table)
             checkEqualAssert(tableMap['rows'][segmentDetail['segmentname']], addedSegmentDetail,message="Verify Segment Detail From table, Details ="+str(addedSegmentDetail))
 
-        exploreScreenInstance.exploreList.launchModule(getHandle(setup, 'explore_Screen'), "USER DISTRIBUTION")
+            exploreScreenInstance.exploreList.launchModule(getHandle(setup, 'explore_Screen'), "USER DISTRIBUTION")
+            if checkBlankLoadFilter:
+                exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+                udScreenInstance.explore.exploreList.clickOnLinkByValue(exploreHandle, Constants.USERNAME)
+                exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+                udScreenInstance.explore.exploreList.clickOnLinkByValue(exploreHandle, MRXConstants.Logout)
+                time.sleep(5)
+                login(setup, Constants.USERNAME, Constants.PASSWORD)
+                exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+                udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
+                h = getHandle(setup, MRXConstants.UDSCREEN, 'filterArea')
+                h['filterArea']['toggleicon'][0].click()
+                udScreenInstance.multiDropdown.domultipleSelectionWithNameWithoutActiveDropDown(getHandle(setup, MRXConstants.UDSCREEN, 'filterArea'), 'Load Filter', 0, parent="filterArea",child="multiSelectDropDown")
+                afterCreateSegmentTotalSaveFilter = UDHelper.getTotalSaveFilter(setup)
+                udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.LFPOPUP, Constants.ALLBUTTONS))
+                checkEqualAssert(beforeCreateSegmentTotalSaveFilter,afterCreateSegmentTotalSaveFilter,message=' Validate that when user wants to create segment from the UDR screen , then no blank filters should be added in the load filters list',testcase_id='MKR-3090')
+                checkBlankLoadFilter=False
+
         time.sleep(3)
+    setup.d.close()
 
 except Exception as e:
     isError(setup)

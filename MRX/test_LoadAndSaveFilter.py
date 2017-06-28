@@ -31,7 +31,7 @@ try:
         SegmentHelper.clickOnfilterIcon(setup,MRXConstants.UDSCREEN,'nofilterIcon')
         timeRangeFromPopup, measureFromPopup = UDHelper.setQuickLink_Measure(setup, udScreenInstance, k)
         expected_filter = {}
-        expected_filter = UDHelper.setGlobalFilters(udScreenInstance, setup,k)
+        expected_filter = UDHelper.setUDPFilters(udScreenInstance, setup, k)
         udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
         isError(setup)
         screenTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDSCREEN, setup)
@@ -79,7 +79,18 @@ try:
 
             UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
             UDHelper.checkDefaultFilter(setup,udScreenInstance,MRXConstants.UDSCREEN,MRXConstants.ExploreScreen,filterDetail,udpFilterFromScreen_1,timeRangeFromPopup,measureFromPopup)
-    setup.d.close()
+        setup.d.close()
+
+    for k, filterDetail in newFilterDetails.iteritems():
+        if filterDetail['default']=='1'and filterDetail['button']=='Save':
+            setup = SetUp()
+            login(setup, Constants.USERNAME, Constants.PASSWORD)
+            udScreenInstance = UDScreenClass(setup.d)
+            exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+            udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
+            UDHelper.removeAndVerifyDefaultFilter(setup, udScreenInstance, MRXConstants.UDSCREEN, MRXConstants.ExploreScreen,filterDetail)
+            setup.d.close()
+            break
 
     import MRX.DeleteSaveFilter
 

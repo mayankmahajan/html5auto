@@ -48,9 +48,9 @@ try:
         availableFilter.append(str(dim.text))
     checkEqualAssert(MRXConstants.ExpectedFilterOption, availableFilter,message="Verify that on clicking Filter icon User Distribution Parameters window appears with all the possible fields on which filter can be applied",testcase_id='MKR-1759')
 
-
+    UDHelper.setQuickLink_Measure(setup, udScreenInstance, str('testCalender')) # Check Calender Scenario (Start Time > End Time)
     expected = {}
-    expected = UDHelper.setGlobalFilters(udScreenInstance, setup, str(0))
+    expected = UDHelper.setUDPFilters(udScreenInstance, setup, str(0))
     isError(setup)
     udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
     udpFilterFromScreen= UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
@@ -59,18 +59,53 @@ try:
 
     UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
     SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+
     expected = {}
-    expected = UDHelper.setGlobalFilters(udScreenInstance, setup, str(0))
+    expected = UDHelper.setUDPFilters(udScreenInstance, setup, str(0))
     isError(setup)
     udScreenInstance.clickIcon(getHandle(setup, MRXConstants.UDPPOPUP,'icons'),child='closePopupIcon')
     udpFilterFromScreen = UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
     checkEqualAssert(MRXConstants.NO_FILTER, udpFilterFromScreen,message="Verify that on pressing X button the selections made on User Distribution Parameters, selected filters do not get applied and the page",testcase_id='MKR-1761')
 
+    ############################################## For Toggle State ########################################################
+
+    UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+    SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+    expectedtoggleState = {}
+    expectedtoggleState = UDHelper.setUDPFilters(udScreenInstance, setup, 'toggle_NotEqual',toggleStateFlag=True)
+    isError(setup)
+    click_Status=udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+
+    if click_Status:
+        SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
+        actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, 'toggle_NotEqual',validateSearch=True)
+        isError(setup)
+        checkEqualDict(expectedtoggleState,actualtoggleState,message='Verify that toggle button should have that same state that you set while applying filters (Select All + Not Equal)',testcase_id='MKR-3095')
+        udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+
+
+    UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+    SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+    expectedtoggleState = {}
+    expectedtoggleState = UDHelper.setUDPFilters(udScreenInstance, setup, 'toggle_Equal',toggleStateFlag=True)
+    isError(setup)
+    click_Status=udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+
+    if click_Status:
+        SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
+        actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, 'toggle_Equal')
+        isError(setup)
+        checkEqualDict(expectedtoggleState,actualtoggleState,message='Verify that toggle button should have that same state that you set while applying filters (Select All + Equal)',testcase_id='MKR-3095')
+        udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+
+    ####################################################################################################################
+
     setup.d.close()
+
 
     ###################################### Filter Scenario #############################################################
 
-    for i in range(5):
+    for i in range(3,5):
         setup = SetUp()
         login(setup, Constants.USERNAME, Constants.PASSWORD)
         udScreenInstance = UDScreenClass(setup.d)
@@ -85,10 +120,13 @@ try:
         SegmentHelper.clickOnfilterIcon(setup,MRXConstants.UDSCREEN,'nofilterIcon')
         timeRangeFromPopup,measureFromPopup=UDHelper.setQuickLink_Measure(setup,udScreenInstance,str(i))
         expected={}
-        expected = UDHelper.setGlobalFilters(udScreenInstance, setup,str(i))
+        expected = UDHelper.setUDPFilters(udScreenInstance, setup, str(i))
         isError(setup)
         popUpTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDPPOPUP,setup)
-        checkEqualDict(popUpTooltipData, expected,message="Verify Filters Selections",doSortingBeforeCheck=True)
+        for k in MRXConstants.ListOfFilterContainingTree:
+            if expected[k]!=[]:
+                checkEqualAssert(expected[k],popUpTooltipData[k],message='Verify Tree selection on UI ( it shouf be like level 1 > level 2 > level 3 and soon',testcase_id='MKR-3198')
+        checkEqualDict(expected,popUpTooltipData,message="Verify Filters Selections",doSortingBeforeCheck=True)
 
         # apply global filters
         udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
@@ -100,14 +138,19 @@ try:
         checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='After apply filter verify timerange value on screen')
         checkEqualAssert(measureFromPopup,measureFromScreen,message='After apply filter verify measure value on screen')
         screenTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDSCREEN, setup)
-        checkEqualDict(popUpTooltipData, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied", doSortingBeforeCheck=True,testcase_id='MKR-1760')
+        checkEqualDict(expected, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied", doSortingBeforeCheck=True,testcase_id='MKR-1760')
 
         tableHandle = getHandle(setup, MRXConstants.UDSCREEN, "table")
         data = udScreenInstance.table.getTableData1(tableHandle, "table", length=5)
-
         if data['rows'] == Constants.NODATA:
+            h=getHandle(setup, MRXConstants.UDSCREEN, "table")['table']['no_data_msg']
+            if len(h)>0:
+                msg=str(h[0].text)
+                checkEqualAssert(MRXConstants.NODATAMSG,msg,measure='Verify that the meaningful message should be shown on the Table view when no data is on screen.',testcase_id='MKR-3094')
+            else:
+                checkEqualAssert(MRXConstants.NODATAMSG,'',measure='Verify that the meaningful message should be shown on the Table view when no data is on screen.',testcase_id='MKR-3094')
             r = "issue_" + str(random.randint(0, 9999999)) + ".png"
-            #setup.d.save_screenshot(r)
+            setup.d.save_screenshot(r)
             logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
             resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
 

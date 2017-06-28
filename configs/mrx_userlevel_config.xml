@@ -186,6 +186,34 @@
         <measure id="edit_1" locatorText="Volume"/>
 
 
+        <segment id ="testCalender" filters = ' '/>
+        <device id = "testCalender" filters = ' :: :: :: '/>
+        <network id = "testCalender" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "testCalender" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="testCalender" filters = ' '/>
+        <quicklink id="testCalender" locatorText="CustomClick" startTime="2017 June 06 12 00" endTime="2017 May 12 05 00"/>
+        <measure id="testCalender" locatorText="Volume"/>
+
+
+        <segment id ="toggle_NotEqual" filters = 'NE,0'/>
+        <device id = "toggle_NotEqual" filters = 'NE,0::NE,0::NE,0::NE,0'/>
+        <network id = "toggle_NotEqual" filters = ' :: ::No_Selection_On_Tree::NE,0::NE,0::NE,0'/>
+        <content id = "toggle_NotEqual" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::NE,0::NE,0::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="toggle_NotEqual" filters = 'NE,0'/>
+        <quicklink id="toggle_NotEqual" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>
+        <measure id="toggle_NotEqual" locatorText="Volume"/>
+
+        <segment id ="toggle_Equal" filters = 'E,0'/>
+        <device id = "toggle_Equal" filters = 'E,0::E,0::E,0::E,0'/>
+        <network id = "toggle_Equal" filters = ' :: ::No_Selection_On_Tree::E,0::E,0::E,0'/>
+        <content id = "toggle_Equal" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,0::E,0::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="toggle_Equal" filters = 'E,0'/>
+        <quicklink id="toggle_Equal" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>
+        <measure id="toggle_Equal" locatorText="Volume"/>
+
+
+
+
         <segment id ="0" filters = 'E,1,2'/>
         <device id = "0" filters = ' :: :: :: '/>
         <network id = "0" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
@@ -270,6 +298,7 @@
   </editSegmentDetails>
 
   <createSegmentFromUD>
+      <!--seselect_row_from and select_row_to must be lies between 1 and 20  -->
       <segment id="0" segmentname="autoUDP_0" select_row_from="2" select_row_to="4"  status="Completed" access="Private" button="Create"/>
       <segment id="1" segmentname="autoUDP_1" select_row_from="3" select_row_to="7"  status="Completed" access="Shared" button="Create"/>
       <segment id="2" segmentname="autoUDP_2" access="Private" button="Cancel"/>

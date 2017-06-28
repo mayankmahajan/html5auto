@@ -6,26 +6,36 @@ from MRXUtils import UDHelper
 from MRXUtils import SegmentHelper
 
 try:
-    setup = SetUp()
-    login(setup, Constants.USERNAME, Constants.PASSWORD)
-    udScreenInstance = UDScreenClass(setup.d)
-    exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
-    udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
+    # setup = SetUp()
+    # login(setup, Constants.USERNAME, Constants.PASSWORD)
+    # udScreenInstance = UDScreenClass(setup.d)
+    # exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+    # udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
 
-    measures = setup.cM.getNodeElements("ud_measures", "measure")
+    measures = ConfigManager().getNodeElements("ud_measures", "measure")
     mes = []
     for k, measure in measures.iteritems():
         mes.append(measure['locatorText'])
 
-    qs = setup.cM.getNodeElements("wizardquicklinks1", "wizardquicklink")
-    quicklink = setup.cM.getAllNodeElements("wizardquicklinks1", "wizardquicklink")
+    qs = ConfigManager().getNodeElements("wizardquicklinks1", "wizardquicklink")
+    quicklink = ConfigManager().getAllNodeElements("wizardquicklinks1", "wizardquicklink")
 
 
-    UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
-    SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+    # UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+    # SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
     flag=True
 
     for m in range(len(mes)):
+        ########## For Perform Hover ( for each measure ) putting setup inside the loop ####
+        setup = SetUp()
+        login(setup, Constants.USERNAME, Constants.PASSWORD)
+        udScreenInstance = UDScreenClass(setup.d)
+        exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+        udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
+
+        UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+        SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+
         chartAndTableFlag=True
         selectedMeasure = udScreenInstance.dropdown.doSelectionOnVisibleDropDown(getHandle(setup, MRXConstants.UDPPOPUP, "allselects"), str(mes[m]), index=0, parent="allselects")
         for e in quicklink:
@@ -59,7 +69,12 @@ try:
                 if len(getHandle(setup,MRXConstants.UDSCREEN,'body')['body']['lineChartComponent'])>0:
                     if chartAndTableFlag:
                         xAxisPointList=UDHelper.getAxisPoint(getHandle(setup,MRXConstants.UDSCREEN,'body'))
-                        UDHelper.validateRangeInChart(xAxisPointList, selectedQuicklink, selectedMeasure)
+                        hoverData = UDHelper.hoverOverTicksGetMainChartText(setup,getHandle(setup, MRXConstants.UDSCREEN,'body'))
+                        if 'header' in hoverData.keys():
+                            checkEqualAssert(selectedMeasure,hoverData['header'][1].strip('Cumulated').strip(),selectedQuicklink,selectedMeasure,message='Verify that no unit is assign to any variable (Chart View)',testcase_id='MKR-2765')
+                        exactData = UDHelper.exactDataFromChart(hoverData)
+                        UDHelper.validateRangeAndSortingInChart(xAxisPointList,exactData,selectedQuicklink, selectedMeasure)
+
                     chartPlotted=True
                 else:
                     chartPlotted=False
@@ -71,15 +86,17 @@ try:
                 tableHandle = getHandle(setup, MRXConstants.UDSCREEN, "table")
                 data = udScreenInstance.table.getTableData1(tableHandle, "table", length=20)
                 checkEqualAssert(expectedHeader,data['header'],selectedQuicklink,selectedMeasure,message="Verify that on selecting " +str(selectedMeasure)+" metric for "+ selectedQuicklink+" time range the user distribution Grid gets plotted for this metric",testcase_id=testidForGrid)
+                checkEqualAssert(expectedHeader, data['header'], selectedQuicklink, selectedMeasure,message="Verify that no unit is assign to any variable (Table- View)",testcase_id='MKR-2765')
+
+                checkEqualAssert(20, len(data['rows']), selectedQuicklink, selectedMeasure,message='Verify Number of rows in Table')
                 if chartAndTableFlag:
                     UDHelper.validateRangeAndSortingInTable(udScreenInstance,data,selectedQuicklink,selectedMeasure)
-
                 udScreenInstance.switcher.measureChangeSwitcher_UD(0,getHandle(setup, MRXConstants.UDSCREEN, "switcher"))
 
             SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
             chartAndTableFlag=False
         flag=False
-    setup.d.close()
+        setup.d.close()
 
 except Exception as e:
     isError(setup)

@@ -59,9 +59,18 @@ class TreeComponentClass(BaseComponentClass):
                 elementToBeSelect[k]=elementDict[k]
 
         expectedTextFormUIForSelectedTree=[]
+        # for k in elementToBeSelect.keys():
+        #     expectedText=self.selectTree(setup,treeHandle,elementToBeSelect[k],index=index)
+        #     expectedTextFormUIForSelectedTree.append(expectedText)
+
+        expected={}
         for k in elementToBeSelect.keys():
-            expectedText=self.selectTree(setup,treeHandle,elementToBeSelect[k],index=index)
-            expectedTextFormUIForSelectedTree.append(expectedText)
+            expected[k]=self.selectTree(setup,treeHandle,elementToBeSelect[k],index=index)
+
+        keysList=expected.keys()  ### for verify level 1>2>3...###
+        keysList.sort()
+        for k in keysList:
+            expectedTextFormUIForSelectedTree.append(expected[k])
 
         return str(' > '.join(expectedTextFormUIForSelectedTree)),elementToBeSelect,self.getSelectionFromExpendedTree(treeHandle)
 

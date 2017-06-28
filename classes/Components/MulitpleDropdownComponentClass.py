@@ -75,8 +75,6 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             except Exception as e:
                 logger.error("Exception %s found while getting current selection, Component: MulitpleDropdownComponentClass",e)
 
-
-
         return selections
 
 
@@ -109,7 +107,23 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         except Exception as e:
             if setup != False:
                 self.utility.utility.isError(setup)
-            raise e
+            #raise e
+            return e
+
+    def getToggleStateInMultiDropDown(self,h,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=1):
+        try:
+            activeDropDowns = self.getAllActiveElements(h[parent][child])
+            activeDropDowns[index].click()
+            time.sleep(2)
+
+            togglevalue=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
+            activeDropDowns[index].click()
+
+            return togglevalue
+        except Exception as e:
+            if setup != False:
+                self.utility.utility.isError(setup)
+            #raise e
             return e
 
 
@@ -140,10 +154,14 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
     def doSearch(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
         activeDropDowns[index].click()
-        for el in activeDropDowns[index].find_elements_by_class_name("input"):
+        #for el in activeDropDowns[index].find_elements_by_class_name("input"):
+        for el in activeDropDowns[index].find_elements_by_tag_name("input"):
             if el.get_attribute("type") == "text":
                 el.send_keys(value)
-        return self.getOptionsAvailable(h,index)
+                #return self.getOptionsAvailable(h,index)
+                valueList=self.getOptionsAvailable(h,index)
+                activeDropDowns[index].click()
+                return valueList
 
     def getHeader(self,h,index,parent="picker",child="multiselect-dropdown"):
         return h[parent][child][index].find_elements_by_css_selector("[class*=PickerHeaderClass]")[0].text.strip().strip('\n').strip()

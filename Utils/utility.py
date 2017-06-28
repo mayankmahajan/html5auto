@@ -944,6 +944,19 @@ def setCalendar(y,m,d,h,min,intance,setup,page="routers_popup",parent="leftcalen
         return e
 
 
+def getAvailableMonthList(setup,Pagename=Constants.CALENDERPOPUP,parent='leftcalendar',child='month'):
+    monthList=[]
+    h=getHandle(setup,Pagename,parent)
+
+    if len(h)>0:
+        for ele in h[parent][child][0].find_elements_by_tag_name('option'):
+            monthList.append(str(ele.text))
+        logger.debug('Month list :: %s',str(monthList))
+    else:
+        logger.error('Drop Down For Month is not available or Calender Not Found')
+    return monthList
+
+
 def getInputText(h,parent,child):
     for el in h[parent][child]:
         if el.is_displayed() == True:
