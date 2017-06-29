@@ -301,7 +301,7 @@
       <!--seselect_row_from and select_row_to must be lies between 1 and 20  -->
       <segment id="0" segmentname="autoUDP_0" select_row_from="2" select_row_to="4"  status="Completed" access="Private" button="Create"/>
       <segment id="1" segmentname="autoUDP_1" select_row_from="3" select_row_to="7"  status="Completed" access="Shared" button="Create"/>
-      <segment id="2" segmentname="autoUDP_2" access="Private" button="Cancel"/>
+      <segment id="2" segmentname="autoUDP_2" select_row_from="1" select_row_to="5" status="Completed" access="Private" button="Cancel"/>
   </createSegmentFromUD>
 
 

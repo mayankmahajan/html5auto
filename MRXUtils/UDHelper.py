@@ -164,7 +164,7 @@ def setQuickLink_Measure(setup,udScreenInstance,i='0'):
         udScreenInstance.timeBar.setQuickLink(quicklink[str(i)]['locatorText'], getHandle(setup, MRXConstants.UDPPOPUP, "ktrs"))
         isError(setup)
         selectedQuicklink = udScreenInstance.timeBar.getSelectedQuickLink(getHandle(setup, MRXConstants.UDPPOPUP, "ktrs"))
-        t = TimeRangeComponentClass().get_Label(str(quicklink[str(i)]['locatorText']).lower())
+        t = TimeRangeComponentClass().get_Label(str(quicklink[str(i)]['locatorText']).replace(' ','').lower())
         t1 = udScreenInstance.timeBar.getLabel(getHandle(setup, MRXConstants.UDPPOPUP, "ktrs"))
         checkEqualAssert(t[1], t1, selectedQuicklink, "", "verify quicklink label")
 
@@ -594,7 +594,7 @@ def saveNewFilter(setup,screenName,screenInstance,filterDetail,isEdit=False):
         logger.info('Going to Click on %s Button ', filterDetail['button'])
         checkBox_Value=screenInstance.cm.isCheckBoxSelected_UMMural(h,0)
         click_status = screenInstance.cm.clickButton(str(filterDetail['button']),h)
-        flag=isOverwrite(setup,screenInstance,filterDetail)
+        flag,msg=isOverwrite(setup,screenInstance,filterDetail)
         if flag:
             h = getHandle(setup, screenName)
             filterDetail['filtername']=filterDetail['filtername']+'_new'
@@ -604,13 +604,13 @@ def saveNewFilter(setup,screenName,screenInstance,filterDetail,isEdit=False):
         checkEqualAssert(True, click_status, "", "","Verify whether " + filterDetail['button'] + " button clicked or not")
         logger.info('New Added/Edit Filter Details (Name and default status) = %s',[filter_name,str(checkBox_Value)])
         resultlogger.info('New Added/Edit Filter Details (Name and default status) = %s',[filter_name,str(checkBox_Value)])
-        return [filter_name,str(checkBox_Value)]
+        return [filter_name,str(checkBox_Value)],msg
 
     elif filterDetail['button'] == 'Cancel' and cancelButtonStatus_AfterEnterFilterName:
         logger.info('Going to Click on %s Button ', filterDetail['button'])
         click_status = screenInstance.cm.clickButton(str(filterDetail['button']), h)
         checkEqualAssert(True, click_status, "", "","Verify whether " + filterDetail['button'] + " button clicked or not")
-        return ''
+        return '',''
 
     else:
         try:
@@ -621,7 +621,7 @@ def saveNewFilter(setup,screenName,screenInstance,filterDetail,isEdit=False):
             except:
                 pass
 
-        return ''
+        return '',''
 
 
 def getLoadFilterList(h,parent="loadfilterlist",child="list"):
@@ -733,7 +733,7 @@ def isOverwrite(setup,screenInstance,filterDetail):
         checkEqualAssert(expectedMsg,alertmsg,message='Verify Overwrite msg')
         if filterDetail['isOverwrite'] == 'True':
             screenInstance.clickButton("OK", getHandle(setup, MRXConstants.SNFPOPUP, Constants.ALLBUTTONS))
-            return False
+            return False,'OverWrite Functionality'
         else:
             try:
                 handle['icons']['closePopupIcon'][0].click()
@@ -743,9 +743,9 @@ def isOverwrite(setup,screenInstance,filterDetail):
                 except:
                     pass
 
-            return True
+            return True,''
     else:
-        return False
+        return False,''
 
 def deleteSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilterlist',child='list'):
     try:
@@ -778,14 +778,14 @@ def editSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilt
 
                 if changeNameFlag:
                     filterDetail['filtername']=filterDetail['filtername']+"_new"
-                filterDetailFromUI = saveNewFilter(setup, MRXConstants.SNFPOPUP, screenInstance,filterDetail,isEdit=True)
+                filterDetailFromUI,msg = saveNewFilter(setup, MRXConstants.SNFPOPUP, screenInstance,filterDetail,isEdit=True)
 
                 if filterDetail['button'] == 'Save':
                     expected_detail = [filterDetail['filtername'], filterDetail['default']]
-                    checkEqualAssert(expected_detail, filterDetailFromUI,message='Verify Entered detail after rename Save filter (Part of mention TC)',testcase_id='MKR-1805')
+                    checkEqualAssert(expected_detail, filterDetailFromUI,message='Verify Entered detail after rename Save filter (Part of mention TC, by following scenario 1)',testcase_id='MKR-1805')
 
                 filter_dict = getLoadFilterList(getHandle(setup, screenName, parent))
-                checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify that edit filter added successfully',testcase_id='MKR-1805')
+                checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify that edit filter added successfully (by following scenario 1)',testcase_id='MKR-1805')
                 return
     except:
         logger.error('Not able click on edit button')
@@ -895,7 +895,7 @@ def validateRangeAndSortingInTable(udScreenInstance,data,selectedQuicklink, sele
     start = int(str(rangeValueList[0]).rstrip(']%').lstrip('[').split('-')[0])
     end = int(str(rangeValueList[len(rangeValueList) - 1]).rstrip(']%').lstrip('[').split('-')[1])
     checkEqualAssert(0, start, selectedQuicklink, selectedMeasure, message="Verify that Range must Started From 0",testcase_id='MKR-1812')
-    checkEqualAssert(0, start, selectedQuicklink, selectedMeasure, message="Verify thst Range must Ended at 100",testcase_id='MKR-1812')
+    checkEqualAssert(100, end, selectedQuicklink, selectedMeasure, message="Verify thst Range must Ended at 100",testcase_id='MKR-1812')
 
     flag = True
     for rangeValue in rangeValueList:
@@ -947,7 +947,6 @@ def validateRangeAndSortingInChart(rangeList,data,selectedQuicklink, selectedMea
 
     checkEqualAssert(True, sorting_Flag1, selectedQuicklink, selectedMeasure,message='Verify that the line chart is sorted from high to low values based on the selected metric :: Value_Dict =' + str(data), testcase_id='MKR-1808')
     return
-
 
 def hoverOverTicksGetMainChartText(setup, h1, parent="body", child="lineChartComponent",axischild='xaxis'):
     try:

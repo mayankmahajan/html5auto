@@ -104,7 +104,7 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
                     else:
                         return True, self.time_format(stime1,getDateString(etepoch-3600*int(h)))
 
-        elif quicklink=="last7day":
+        elif quicklink=="last7days":
             if int(h) == 0:
                 h=24
             if (etepoch - stepoch) <= int(h)*3600:
@@ -115,7 +115,7 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
                     else:
                         return True, self.time_format(stime1,getDateString(etepoch-(3600*(int(h)))))
 
-        elif quicklink=="last30day":
+        elif quicklink=="last30days":
             if int(h) == 0:
                 h=24
             if (etepoch - stepoch) <= int(h)*3600:
