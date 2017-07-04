@@ -124,3 +124,8 @@ class Constants(object):
 
     PercentageAllowedinDiff=0.02
 
+    # For Mac
+    Encoding='en_US.UTF-8'
+
+    # For Window
+    #Encoding='eng'

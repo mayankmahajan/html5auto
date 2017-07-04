@@ -2,6 +2,7 @@ import math
 import decimal
 from Utils.logger import *
 from Utils.resultlogger import *
+from Utils.Constants import *
 
 
 class UnitSystem :
@@ -110,7 +111,7 @@ class UnitSystem :
 
     def convertStringToExactInteger(self,value):
         import locale
-        locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+        locale.setlocale(locale.LC_ALL,Constants.Encoding)
         return int(locale.atof(value.strip().replace(' ', '')))
 
 
