@@ -767,7 +767,7 @@ def deleteSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfi
         return
 
 
-def editSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilterlist',child='list',changeNameFlag=True):
+def editSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilterlist',child='list',changeNameFlag=True,isSpecialScenario=False):
     try:
         h=getHandle(setup,screenName,parent)
         for ele in h[parent][child]:
@@ -777,7 +777,11 @@ def editSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilt
                 ele.find_element_by_class_name('renameBtn').click()
 
                 if changeNameFlag:
-                    filterDetail['filtername']=filterDetail['filtername']+"_new"
+                    if isSpecialScenario:
+                        filterDetail['filtername'] = 'specialTest_1'
+                    else:
+                        filterDetail['filtername']=filterDetail['filtername']+"_new"
+
                 filterDetailFromUI,msg = saveNewFilter(setup, MRXConstants.SNFPOPUP, screenInstance,filterDetail,isEdit=True)
 
                 if filterDetail['button'] == 'Save':
@@ -785,7 +789,12 @@ def editSaveFilter(setup,screenName,screenInstance,filterDetail,parent='loadfilt
                     checkEqualAssert(expected_detail, filterDetailFromUI,message='Verify Entered detail after rename Save filter (Part of mention TC, by following scenario 1)',testcase_id='MKR-1805')
 
                 filter_dict = getLoadFilterList(getHandle(setup, screenName, parent))
-                checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify that edit filter added successfully (by following scenario 1)',testcase_id='MKR-1805')
+
+                if isSpecialScenario:
+                    checkEqualAssert(False, filter_dict.has_key('specialTest_2'),message='Verify that edit filter added successfully i.e filter with same name should be overwrite and current edit filter should be removed (by following scenario 2)',testcase_id='MKR-1805')
+                else:
+                    checkEqualAssert(True,filter_dict.has_key(filterDetail['filtername']),message='Verify that edit filter added successfully (by following scenario 1)',testcase_id='MKR-1805')
+
                 return
     except:
         logger.error('Not able click on edit button')

@@ -48,6 +48,11 @@
     </savenewfilter>
 
 
+    <specialEditFilter>
+        <filter id="edit_1" filtername="specialTest_1" default="0" button="Save" isOverwrite="True" deleteFlag="True"/>
+        <filter id="edit_2" filtername="specialTest_2" default="0" button="Save" isOverwrite="True" deleteFlag="True"/>
+    </specialEditFilter>
+
 
     <segmentFilter>
 
@@ -184,6 +189,17 @@
         <usage id ="edit_1" filters = ' '/>
         <quicklink id="edit_1" locatorText="Today"/>
         <measure id="edit_1" locatorText="Volume"/>
+
+
+
+        <segment id ="edit_2" filters = ' '/>
+        <device id = "edit_2" filters = 'NE,0:: :: :: '/>
+        <network id = "edit_2" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "edit_2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="edit_2" filters = ' '/>
+        <quicklink id="edit_2" locatorText="Yesterday"/>
+        <measure id="edit_2" locatorText="Volume (Download)"/>
+
 
 
         <segment id ="testCalender" filters = ' '/>
