@@ -105,7 +105,7 @@ try:
 
     ###################################### Filter Scenario #############################################################
 
-    for i in range(3,5):
+    for i in range(0,6):
         setup = SetUp()
         login(setup, Constants.USERNAME, Constants.PASSWORD)
         udScreenInstance = UDScreenClass(setup.d)
@@ -161,5 +161,5 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
-    raise e
+    #raise e
     setup.d.close()
