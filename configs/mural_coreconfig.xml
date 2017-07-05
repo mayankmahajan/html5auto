@@ -12,11 +12,11 @@
 
     <wizardquicklinks1>
         <wizardquicklink id = "today" locatorText="Today"/>
-        <!--<wizardquicklink id = "last4hours" locatorText="Last 4 hours"/>-->
-        <!--<wizardquicklink id = "last24hours" locatorText="Last 24 hours"/>-->
+        <wizardquicklink id = "last4hours" locatorText="Last 4 hours"/>
+        <wizardquicklink id = "last24hours" locatorText="Last 24 hours"/>
         <wizardquicklink id = "yesterday" locatorText="Yesterday"/>
-        <!--<wizardquicklink id = "last7day" locatorText="Last 7 days"/>-->
-        <!--<wizardquicklink id = "last30day" locatorText="Last 30 days"/>-->
+        <wizardquicklink id = "last7days" locatorText="Last 7 days"/>
+        <wizardquicklink id = "last30days" locatorText="Last 30 days"/>
         <!--<wizardquicklink id = "thismonth" locatorText="This Month"/>-->
         <!--<wizardquicklink id = "lastmonth" locatorText="Last Month"/>-->
     </wizardquicklinks1>

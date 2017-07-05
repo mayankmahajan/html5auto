@@ -72,7 +72,7 @@ class TreeComponentClass(BaseComponentClass):
         for k in keysList:
             expectedTextFormUIForSelectedTree.append(expected[k])
 
-        return str(' > '.join(expectedTextFormUIForSelectedTree)),elementToBeSelect,self.getSelectionFromExpendedTree(treeHandle)
+        return str(' > '.join(expectedTextFormUIForSelectedTree)),elementToBeSelect,self.getSelectionFromExpendedTree(treeHandle,index=index)
 
 
     def getSelectionFromExpendedTree(self,treeHandle,parent='alltrees',child='tree',index=0):

@@ -83,15 +83,15 @@ def getToggleState(setup,udpScreenInstance,tab_name,k ="0",validateSearch=False)
             toggleStateList.append(equalOrNotEqual)
             ##############
             if validateSearch:
-                # valueBeforeSearch=udpScreenInstance.multiDropdown.getOptionsAvailable(getHandle(setup,MRXConstants.UDPPOPUP,"filterPopup"),(i-treeindex-inputFieldIndex))
-                valueBeforeSearch=udpScreenInstance.multiDropdown.doSearch(getHandle(setup,MRXConstants.UDPPOPUP,"filterPopup"),'',(i-treeindex-inputFieldIndex))
+                #valueBeforeSearch=udpScreenInstance.multiDropdown.doSearch(getHandle(setup,MRXConstants.UDPPOPUP,"filterPopup"),'',(i-treeindex-inputFieldIndex))
 
-                expectedSearchList=[]
-                for val in valueBeforeSearch:
-                    if (MRXConstants.SearchValue.lower() in val) or (MRXConstants.SearchValue.upper() in val) or ('All' in val):
-                        expectedSearchList.append(val)
                 valueAfterSearch=udpScreenInstance.multiDropdown.doSearch(getHandle(setup,MRXConstants.UDPPOPUP,"filterPopup"),MRXConstants.SearchValue,(i-treeindex-inputFieldIndex))
-                checkEqualAssert(expectedSearchList,valueAfterSearch,message='Validate that search is working fine in the apply filters diloag box on the USer distribution screen for' +tab_name,testcase_id='MKR-2717')
+                searchFlag=True
+                for val in valueAfterSearch:
+                   if not ((MRXConstants.SearchValue.lower() in val) or (MRXConstants.SearchValue.upper() in val) or ('All' in val)):
+                        searchFlag=False
+                        break
+                checkEqualAssert(True,searchFlag,message='Validate that search is working fine in the apply filters diloag box on the User distribution screen for :' +tab_name+" :: Search Keyword ="+str(MRXConstants.SearchValue)+ " Search result :"+str(valueAfterSearch),testcase_id='MKR-2717')
             ##############
 
     return toggleStateList

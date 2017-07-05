@@ -125,7 +125,7 @@ try:
         popUpTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDPPOPUP,setup)
         for k in MRXConstants.ListOfFilterContainingTree:
             if expected[k]!=[]:
-                checkEqualAssert(expected[k],popUpTooltipData[k],message='Verify Tree selection on UI ( it shouf be like level 1 > level 2 > level 3 and soon',testcase_id='MKR-3198')
+                checkEqualAssert(expected[k],popUpTooltipData[k],message='Verify Tree selection on UI ( it should be like level 1 > level 2 > level 3 and soon',testcase_id='MKR-3198')
         checkEqualDict(expected,popUpTooltipData,message="Verify Filters Selections",doSortingBeforeCheck=True)
 
         # apply global filters
