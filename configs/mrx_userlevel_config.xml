@@ -20,11 +20,17 @@
 
         <starttime id="4" year="2017" month ="01" day="15" hour="10" min="00"/>
         <endtime id ="4" year="2017" month ="02" day="13" hour="00" min="00"/>
-
-
-
     </availabletimerange>
 
+
+    <!--YYYY MONTH DD HH min  => '%d %b %Y %H:%M'-->
+    <availabletimerangepoint>
+        <point id="3600" starttime="23 May 2017 00:00" endtime="06 Jun 2017 13:00"/>
+
+        <!--<instead of 24th hour of any day We have to write 00th hour of next day>-->
+        <point id="86400" starttime="02 Apr 2017 00:00" endtime="06 Jun 2017 00:00"/>
+        <point id="2592000" starttime="01 Apr 2017 00:00" endtime="01 Jun 2017 00:00"/>
+    </availabletimerangepoint>
 
     <segment_Filters>
         <filter id = "Segment Name"/>

@@ -600,6 +600,15 @@
             <component id = "label" selector="tag name" locator='label' />
         </componentConfig>
 
+        <componentConfig id="leftSpanInfo">
+            <component id = "span" selector="tag name" locator='span' />
+        </componentConfig>
+
+        <componentConfig id="rightSpanInfo">
+            <component id = "span" selector="tag name" locator='span' />
+        </componentConfig>
+
+
     </componentConfigs>
 
 </data>

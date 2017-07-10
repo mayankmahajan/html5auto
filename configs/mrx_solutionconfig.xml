@@ -142,6 +142,8 @@
             <!--<component id = 'leftcalendar' selector="css selector" locator=".left.calendar" parent="True" />-->
             <component id = 'rightcalendar' selector="class name" locator="right" parent="True" />
             <component id="allspans" selector="class name" locator="range_labels" parent="True"/>
+            <component id="leftSpanInfo" selector="class name" locator="spanInfoLeft" parent="True"/>
+            <component id="rightSpanInfo" selector="class name" locator="spanInfoRight" parent="True"/>
         </screenConfig>
 
         <screenConfig id = 'confirmation_filter_popup'>

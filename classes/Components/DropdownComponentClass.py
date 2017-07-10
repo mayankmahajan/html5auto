@@ -119,17 +119,22 @@ class DropdownComponentClass(BaseComponentClass):
         try:
             logger.info("Getting DropDown Selection using ng-reflect-model property")
             for ele in h.find_elements_by_xpath(".//*"):
-                if str(ele.get_attribute('selected')).lower() == 'true':
-                    selection = ele.text
-                    break
-                else:
-                    selection = ''
+                try:
+                    if str(ele.get_attribute('selected')).lower() == 'true':
+                        selection = ele.text
+                        break
+                    else:
+                        selection = ''
+                except Exception as e:
+                    logger.error("Exception found while getting DropDown Selection using selected attribute = %s", e)
+                    return "Exception : " + str(e)
+
             if not selection:
                 selection = h.get_attribute("ng-reflect-model")
             logger.debug("Got Selection as %s",selection)
             return selection
         except Exception as e:
-            logger.error("Exception found while getting DropDown Selection = %s",e)
+            logger.error("Exception found while getting DropDown Selection using ng-reflect-model = %s",e)
             return "Exception : "+str(e)
 
     def getSelectionOnVisibleDropDown(self,h,index=0,parent="allselects",child="select"):

@@ -14,6 +14,7 @@ from MRXUtils import SegmentHelper
 import os
 
 try:
+    import MRX.DeleteSegment
     newFilterDetails=ConfigManager().getNodeElements("savenewfilter","filter")
     for k, filterDetail in newFilterDetails.iteritems():
         setup = SetUp()
