@@ -403,7 +403,7 @@ try:
 
         if flagBE:
             expectedText=time_format(getDateString(snapValue),getDateString(dailyEndEpoch))
-            checkEqualAssert(value[0],getDateString(snapValue),message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch))
 
@@ -421,7 +421,7 @@ try:
 
         if flagBE:
             expectedText = time_format(getDateString(snapValue), getDateString(dailyEndEpoch - 86400))
-            checkEqualAssert(value[0],getDateString(snapValue),message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch - 86400))
 
@@ -440,7 +440,7 @@ try:
 
         if flagBE:
             expectedText = time_format(getDateString(snapValue), getDateString(dailyStartEpoch + n * 86400))
-            checkEqualAssert(value[0],getDateString(snapValue),message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyStartEpoch + n * 86400))
 
@@ -458,7 +458,7 @@ try:
 
         if flagBE:
             expectedText = time_format(getDateString(snapValue), getDateString(dailyEndEpoch+3600))
-            checkEqualAssert(value[0],getDateString(snapValue),message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch+3600))
 
@@ -484,7 +484,7 @@ try:
         checkEqualAssert(flagBE,flag,message='Verify Snapping')
         if flagBE:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(snapValue))
-            checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Snapped Value')
+            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch))
 
@@ -502,7 +502,7 @@ try:
 
         if flagBE:
             expectedText = time_format(getDateString(dailyStartEpoch + 86400), getDateString(snapValue))
-            checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Snapped Value')
+            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch + 86400), getDateString(dailyEndEpoch))
 
@@ -520,7 +520,7 @@ try:
 
         if flagBE:
             expectedText = time_format(getDateString(dailyStartEpoch + n * 86400), getDateString(snapValue))
-            checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Snapped Value')
+            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch + n * 86400), getDateString(dailyEndEpoch))
 
@@ -577,7 +577,7 @@ try:
 
         if flagBE:
             expectedText=time_format(getDateString(snapValue),getDateString(monthlyEndEpoch))
-            checkEqualAssert(value[0],getDateString(snapValue),message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
         else:
             expectedText = time_format(getDateString(monthlyStartEpoch), getDateString(monthlyEndEpoch))
 
@@ -597,7 +597,7 @@ try:
 
             if flagBE:
                 expectedText = time_format(getDateString(snapValue), getDateString(dailyStartEpoch + n * 86400))
-                checkEqualAssert(value[0],getDateString(snapValue),message='Verify Snapped Value')
+                checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
             else:
                 expectedText = time_format(getDateString(monthlyStartEpoch), getDateString(dailyStartEpoch + n * 86400))
 
@@ -628,7 +628,7 @@ try:
 
             if flagBE:
                 expectedText=time_format(getDateString(hourlyStartEpoch),getDateString(snapValue))
-                checkEqualAssert(value[1], formattedEndTime(getDateString(snapValue)),selectedQuicklink, message='Verify Snapped Value')
+                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink, message='Verify Snapped Value')
             else:
                 expectedText = time_format(getDateString(hourlyStartEpoch), getDateString(defaultRightValue))
 
@@ -650,7 +650,7 @@ try:
 
             if flagBE:
                 expectedText=time_format(getDateString(dailyStartEpoch),getDateString(snapValue))
-                checkEqualAssert(value[1], formattedEndTime(getDateString(snapValue)),selectedQuicklink,message='Verify Snapped Value')
+                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink,message='Verify Snapped Value')
             else:
                 expectedText = time_format(getDateString(dailyStartEpoch), getDateString(defaultRightValue))
 
@@ -670,7 +670,7 @@ try:
             checkEqualAssert(flagBE,flag,message='Verify Snapping')
             if flagBE:
                 expectedText=time_format(getDateString(monthlyStartEpoch),getDateString(snapValue))
-                checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),selectedQuicklink,message='Verify Snapped Value')
+                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink,message='Verify Snapped Value')
             else:
                 expectedText = time_format(getDateString(monthlyStartEpoch), getDateString(defaultRightValue))
 
