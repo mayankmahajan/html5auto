@@ -58,15 +58,29 @@ class CalendarComponentClass(BaseComponentClass):
                 availableDates.append(el)
         return availableDates
 
-    def selectDay(self,day,availableDates):
-        for el in availableDates:
-            if int(el.text) == int(day):
-                el.click()
-                break
+    # def selectDay(self,day,availableDates):
+    #     for el in availableDates:
+    #         if int(el.text) == int(day):
+    #             el.click()
+    #             break
+
+    def selectDay(self, day, availableDates):
+        if int(day)>23:
+            handle=''
+            for el in availableDates:
+                if int(el.text) == int(day):
+                    handle=el
+            if handle:
+                handle.click()
+        else:
+            for el in availableDates:
+                if int(el.text) == int(day):
+                    el.click()
+                    break
 
 
 
-        # for i in range(len(availableDates)):
+    # for i in range(len(availableDates)):
         #     previousDay = availableDates[i].text if i==0 else availableDates[i-1].text
         #     if int(previousDay)> int(availableDates[i].text):
         #         break
