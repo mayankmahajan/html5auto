@@ -929,6 +929,8 @@ def validatesearchtable(data,columnname,searchtext):
 
 def setCalendar(y,m,d,h,min,intance,setup,page="routers_popup",parent="leftcalendar"):
     try:
+        logger.info('Going to Select :'+str(d)+"-"+str(m)+"-"+str(y)+" "+str(h)+":"+str(min))
+        resultlogger.info('Going to Select :'+str(d)+"-"+str(m)+"-"+str(y)+" "+str(h)+":"+str(min))
         selectedYear = intance.calendar.set("year",y,getHandle(setup,page,parent),parent)
         selectedMonth = intance.calendar.set("month",m,getHandle(setup,page,parent),parent)
         selectedDay = intance.calendar.setDay("day",d,getHandle(setup,page,parent),parent)

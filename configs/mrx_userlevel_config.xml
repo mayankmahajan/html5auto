@@ -129,7 +129,6 @@
         <device id = "5" filters = 'NE,1,2::E,2::NE,1,2::E,2'/>
         <network id = "5" filters = '1,2::1,2,3::No_Selection_On_Tree::NE,1,2::E,2::NE,1,2'/>
         <content id = "5" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::NE,1,2::E,2::Input' inputvalue="guavus.com,facebook.com"/>
-        <content id = "5" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::NE,1,2::E,2::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="5" filters = 'NE,1,2'/>
         <quicklink id="5" locatorText="Yesterday"/>
         <measure id="5" locatorText="Volume (Download)"/>

@@ -109,8 +109,8 @@
         <!--EXPLORE SCREEN-->
         <screenConfig id = "explore_Screen">
             <component id="switchApp" selector="class name" locator="switchTable" parent="True"/>
-
             <component id = "appHeader" selector="class name" locator="appHeader" parent="True"/>
+
             <!--<component id = "exploreList" parent="False"/>-->
             <!--<component id = "exploreList" selector = 'class name' locator="row" parent="True"/>-->
         </screenConfig>
@@ -120,6 +120,11 @@
         <screenConfig id = "TableDummy_Screen">
             <component id = "table" selector="tag name" locator="kiwik-grid-view" parent="True"/>
         </screenConfig>
+
+        <screenConfig id = "AboutUs_Screen">
+            <component id = "alllabels" selector="class name" locator="aboutUsBody" parent="True"/>
+        </screenConfig>
+
 
 
         <!--<screenConfig id = "siteScreen">-->
@@ -412,6 +417,7 @@
             <component id = "alllinks" selector="tag name" locator='a' />
             <component id = "dropbtn" selector="class name" locator ="dropbtn" />
             <component id = "switchertemplate" selector="id" locator ="switchertemplate" />
+            <component id ="helpIcon" selector="class name" locator="dropdown-toggle"/>
         </componentConfig>
 
         <componentConfig id="report">
