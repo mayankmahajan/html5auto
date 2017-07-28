@@ -105,7 +105,7 @@ try:
 
     ###################################### Filter Scenario #############################################################
 
-    for i in range(0,6):
+    for i in range(0,MRXConstants.NUMBEROFFILTERSCENARIO):
         setup = SetUp()
         login(setup, Constants.USERNAME, Constants.PASSWORD)
         udScreenInstance = UDScreenClass(setup.d)

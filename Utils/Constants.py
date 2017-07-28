@@ -8,24 +8,27 @@ class Constants(object):
     # URL = "https://scrum.jalapeno.com:6443"
     # URL = "https://uiscrummural.cisco.com:6443/"
     BROWSER = "chrome"
-    #BROWSER = "ff"
+    # BROWSER = "ff"
     isOffline = False
     if isOffline:
         URL = 'localhost:3333'
     else:
         #URL = "https://muralautomation.cisco.com:6443"
         #URL = "https://murala-ca.guavus.com:6443"
-        # URL = "https://uiscrum-mural.cisco.com:6443"
+        #URL = "https://uiscrum-mural.cisco.com:6443"
+        #URL = "https://ucsd.cisco.com:7443"
+        #URL="http://192.168.174.71:9080"
+        URL="http://192.168.113.191:9080/app/user-distribution"
         #URL="http://192.168.192.204:28080/"
         #URL="http://192.168.195.57:28080/"
-        URL="http://192.168.162.33:9080/"
+        #URL="http://192.168.162.33:9080/"
     # URL = 'http://10.71.3.77/'
     # URL = 'https://nrmca.nmcc.sprintspectrum.com:6443/'
     # URL = 'https://nrmca-upgrade-setup.sprintspectrum.com:6443/'
     # URL = 'https://nrmca-perf.guavus.com:44710/'
     USERNAME = 'admin'
     PASSWORD = 'admin123'
-
+    #PASSWORD = 'New@1234'
     SITES = 'site_Screen'
 
     # SITES = 'SITES'
@@ -39,6 +42,7 @@ class Constants(object):
     EXPORTTO = 'EXPORTTO'
     EXPORTTOCSV = 'EXPORTTOCSV'
     EXPORTTOSNAPSHOT = 'EXPORTTOSNAPSHOT'
+    NUMBEROFFILTERSCENARIO=6
 
     DRILLTO = 'DRILLTO'
     DRILLTONF = 'DRILLTONF'
@@ -62,6 +66,7 @@ class Constants(object):
     TIMEZONEOFFSET = -6
     # TIMEPATTERN = '%d %b %Y %H:%M:%S'
     TIMEPATTERN = '%d %b %Y %H:%M'
+
     FLAGDAILY = 24
     FLAGHOURLY = 1
     localserver = "http://localhost:3333/index2.html"
