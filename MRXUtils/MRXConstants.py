@@ -28,6 +28,8 @@ class MRXConstants(Constants):
     NO_FILTER='No filters'
     SearchValue='h'
 
+    NUMBEROFFILTERSCENARIO = 6
+
     MinimumUserConfig=15
     Source_User_Distribution='User Distribution'
     ExpectedFilterOption = ['Time Range','Measure','Segmentation Filters','Device Filters','Network Filters','Content Filters','Usage Filters']
