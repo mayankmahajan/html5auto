@@ -947,13 +947,14 @@ def validateRangeAndSortingInChart(rangeList,data,selectedQuicklink, selectedMea
         if str(data[i*5]).strip() != '':
             l.append(UnitSystem().getRawValueFromUI(data[i*5]))
 
-    sorting_Flag1 = True
+    # sorting_Flag1 = True
+    #
+    # for j in range(1, len(l)):
+    #     if l[j] >= l[j - 1]:
+    #         sorting_Flag1 = False
+    #         break
 
-    for j in range(1, len(l)):
-        if l[j] > l[j - 1]:
-            sorting_Flag1 = False
-            break
-
+    sorting_Flag1=verifySortingWithSomeDifference(l)
     checkEqualAssert(True, sorting_Flag1, selectedQuicklink, selectedMeasure,message='Verify that the line chart is sorted from high to low values based on the selected metric :: Value_Dict =' + str(data), testcase_id='MKR-1808')
     return
 

@@ -86,36 +86,43 @@ def checkEqualDict(f1,f2,time="",measure="",message="",testcase_id="",doSortingB
             logger.info(msg1+"  :: " +k+" ::  "+" Expected: "+str(f1[k])+" Actual: key not present :"+str(k)+tcFail)
 
 def checkEqualAssert(expected, actual, time="", measure="", message="",testcase_id=""):
-
     tc_id = "<font color='blue'>" + str(testcase_id) + "</font> "
     msg = tc_id + time + " " + measure + " " + message
 
     org_msg = msg
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
-    try:
-        assert expected == actual
-        msg = msg+tcPass
-        resultlogger.info(msg)
-        logger.info(msg)
 
+    if type(expected)==list and type(actual)==list:
+        for i in range(len(expected)):
+            checkEqualValueAssert(expected[i],actual[i],time,measure,message,testcase_id)
+
+    else:
         try:
-            testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'PASS'})
-        except:
-            pass
+            assert expected == actual
+            msg = msg+tcPass
+            resultlogger.info(msg)
+            logger.info(msg)
 
-    except AssertionError:
+            try:
+                testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'PASS'})
+            except:
+                pass
 
-        msg = msg+" Expected: "+str(expected) + " Actual: " + str(actual) + tcFail
-        resultlogger.info(msg)
-        logger.info(msg)
+        except AssertionError:
 
-        # import __builtin__
-        # if hasattr(__builtin__,"testcases"):
-        try:
-            testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'FAIL'})
-        except:
-            pass
+            msg = msg+" Expected: "+str(expected) + " Actual: " + str(actual) + tcFail
+            resultlogger.info(msg)
+            logger.info(msg)
+
+            # import __builtin__
+            # if hasattr(__builtin__,"testcases"):
+            try:
+                testcases.append({'title': org_msg, 'expected': expected, 'actual': actual, 'status':'FAIL'})
+            except:
+                pass
+
+
 
 def get_num(x):
     return float(''.join(ele for ele in x if ele.isdigit() or ele == '.'))
@@ -173,6 +180,20 @@ def checkEqualValueAssert(expected, actual, time="", measure="", message="",test
         except:
             pass
 
+
+
+def verifySortingWithSomeDifference(dataListInRawForm,percentageAllow=Constants.PercentageAllowedinDiff,order='DES'):
+    sorting_Flag=True
+    for j in range(1, len(dataListInRawForm)):
+        if (dataListInRawForm[j] - dataListInRawForm[j - 1])> 0 and order=='DESC':
+            if (dataListInRawForm[j] - dataListInRawForm[j - 1])>= percentageAllow*dataListInRawForm[j]:
+                sorting_Flag = False
+                break
+        elif (dataListInRawForm[j] - dataListInRawForm[j - 1])< 0 and order=='ASC':
+            if (dataListInRawForm[j-1] - dataListInRawForm[j]) >= percentageAllow * dataListInRawForm[j]:
+                sorting_Flag = False
+                break
+    return sorting_Flag
 
 
 def login(obj,username,password):

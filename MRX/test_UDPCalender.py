@@ -249,11 +249,11 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue=isSnapping(hourlyStartEpoch,hourlyEndEpoch,availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         expectedText=time_format(getDateString(hourlyStartEpoch),getDateString(hourlyEndEpoch))
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #2
 
@@ -262,11 +262,11 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(hourlyStartEpoch, hourlyEndEpoch-3600, availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         expectedText=time_format(getDateString(hourlyStartEpoch),getDateString(hourlyEndEpoch-3600))
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #3
 
@@ -276,11 +276,11 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(hourlyStartEpoch, hourlyStartEpoch+n*3600, availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         expectedText=time_format(getDateString(hourlyStartEpoch),getDateString(hourlyStartEpoch+n*3600))
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
     # Set End Point (Hourly)
 
@@ -297,11 +297,11 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue=isSnapping(hourlyEndEpoch,hourlyStartEpoch,availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         expectedText=time_format(getDateString(hourlyStartEpoch),getDateString(hourlyEndEpoch))
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #2
 
@@ -311,11 +311,11 @@ try:
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(hourlyEndEpoch, hourlyStartEpoch+3600, availablepointEpoch)
 
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         expectedText=time_format(getDateString(hourlyStartEpoch+3600),getDateString(hourlyEndEpoch))
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #3
 
@@ -325,11 +325,11 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(hourlyEndEpoch, hourlyStartEpoch+n*3600, availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         expectedText=time_format(getDateString(hourlyStartEpoch+n*3600),getDateString(hourlyEndEpoch))
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #4
 
@@ -340,9 +340,9 @@ try:
         flagBE,snapValue = isSnapping(hourlyEndEpoch, hourlyStartEpoch-3600, availablepointEpoch,snap_Side='right')
         selfSnapFlag,selfSnapValue=selfSnapping(hourlyStartEpoch-3600,availablepointEpoch,snap_Side='left')
 
-        checkEqualAssert(value[0],getDateString(selfSnapValue),message='Verify left Snapped Value')
-        checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Right Snapped Value')
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(value[0],getDateString(selfSnapValue),message='Verify left Snapped Value',testcase_id='MKR-3186')
+        checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Right Snapped Value',testcase_id='MKR-3186')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
 
         if flagBE and selfSnapFlag:
@@ -353,7 +353,7 @@ try:
             expectedText = time_format(getDateString(hourlyStartEpoch - 3600), getDateString(hourlyEndEpoch))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #5
         if '2592000' in availablepoint.keys():
@@ -364,9 +364,9 @@ try:
             flagBE, snapValue = isSnapping(hourlyEndEpoch, monthlyStartEpoch + 3600, availablepointEpoch, snap_Side='right')
             selfSnapFlag, selfSnapValue = selfSnapping(monthlyStartEpoch + 3600, availablepointEpoch, snap_Side='left')
 
-            checkEqualAssert(value[0], getDateString(selfSnapValue), message='Verify left Snapped Value')
-            checkEqualAssert(value[1], formattedEndTime(getDateString(snapValue)), message='Verify Right Snapped Value')
-            checkEqualAssert(flagBE, flag, message='Verify Snapping')
+            checkEqualAssert(value[0], getDateString(selfSnapValue), message='Verify left Snapped Value',testcase_id='MKR-3186')
+            checkEqualAssert(value[1], formattedEndTime(getDateString(snapValue)), message='Verify Right Snapped Value',testcase_id='MKR-3186')
+            checkEqualAssert(flagBE, flag, message='Verify Snapping',testcase_id='MKR-3186')
 
             if flagBE and selfSnapFlag:
                 expectedText = time_format(getDateString(selfSnapValue), getDateString(snapValue))
@@ -376,7 +376,7 @@ try:
                 expectedText = time_format(getDateString(monthlyStartEpoch + 3600), getDateString(hourlyEndEpoch))
 
             valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            checkEqualAssert(expectedText, valueFromCalender, message='Verify TimeRange on Calendar')
+            checkEqualAssert(expectedText, valueFromCalender, message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
 
     ####################################################################################################################
@@ -399,16 +399,16 @@ try:
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue=isSnapping(dailyStartEpoch,dailyEndEpoch,availablepointEpoch,snap_Side='left')
 
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText=time_format(getDateString(snapValue),getDateString(dailyEndEpoch))
-            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #2
 
@@ -417,16 +417,16 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(dailyStartEpoch, dailyEndEpoch-86400, availablepointEpoch,snap_Side='left')
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText = time_format(getDateString(snapValue), getDateString(dailyEndEpoch - 86400))
-            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch - 86400))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #3
 
@@ -436,16 +436,16 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(dailyStartEpoch, dailyStartEpoch+n*86400, availablepointEpoch,snap_Side='left')
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText = time_format(getDateString(snapValue), getDateString(dailyStartEpoch + n * 86400))
-            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyStartEpoch + n * 86400))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
 
         #4
@@ -454,16 +454,16 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(dailyStartEpoch, dailyEndEpoch+3600, availablepointEpoch,snap_Side='left')
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText = time_format(getDateString(snapValue), getDateString(dailyEndEpoch+3600))
-            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch+3600))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
 
     # Set End Point (Hourly)
@@ -481,15 +481,15 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue=isSnapping(dailyEndEpoch,dailyStartEpoch,availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
         if flagBE:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(snapValue))
-            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value')
+            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch), getDateString(dailyEndEpoch))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #2
 
@@ -498,16 +498,16 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(dailyEndEpoch, dailyStartEpoch+86400, availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText = time_format(getDateString(dailyStartEpoch + 86400), getDateString(snapValue))
-            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value')
+            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch + 86400), getDateString(dailyEndEpoch))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #3
         n = random.randrange((dailyEndEpoch - dailyStartEpoch) / 86400)
@@ -516,16 +516,16 @@ try:
 
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue = isSnapping(dailyEndEpoch, dailyStartEpoch+n*86400, availablepointEpoch)
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText = time_format(getDateString(dailyStartEpoch + n * 86400), getDateString(snapValue))
-            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value')
+            checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(dailyStartEpoch + n * 86400), getDateString(dailyEndEpoch))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
 
         #4
@@ -537,9 +537,9 @@ try:
             flagBE,snapValue = isSnapping(dailyEndEpoch, monthlyStartEpoch+3600,availablepointEpoch,snap_Side='right')
             selfSnapFlag,selfSnapValue=selfSnapping(monthlyStartEpoch+3600,availablepointEpoch,snap_Side='left')
 
-            checkEqualAssert(value[0],getDateString(selfSnapValue),message='Verify left Snapped Value')
-            checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Right Snapped Value')
-            checkEqualAssert(flagBE,flag,message='Verify Snapping')
+            checkEqualAssert(value[0],getDateString(selfSnapValue),message='Verify left Snapped Value',testcase_id='MKR-3186')
+            checkEqualAssert(value[1],formattedEndTime(getDateString(snapValue)),message='Verify Right Snapped Value',testcase_id='MKR-3186')
+            checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
 
             if flagBE and selfSnapFlag:
@@ -550,7 +550,7 @@ try:
                 expectedText = time_format(getDateString(monthlyStartEpoch+3600), getDateString(dailyEndEpoch))
 
             valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
 
     ####################################################################################################################
@@ -573,16 +573,16 @@ try:
         flag,value = isSnappingFromUI(setup)
         flagBE,snapValue=isSnapping(monthlyStartEpoch,monthlyEndEpoch,availablepointEpoch,snap_Side='left')
 
-        checkEqualAssert(flagBE,flag,message='Verify Snapping')
+        checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
         if flagBE:
             expectedText=time_format(getDateString(snapValue),getDateString(monthlyEndEpoch))
-            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
+            checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value',testcase_id='MKR-3186')
         else:
             expectedText = time_format(getDateString(monthlyStartEpoch), getDateString(monthlyEndEpoch))
 
         valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+        checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
         #2
 
@@ -593,16 +593,16 @@ try:
 
             flag,value = isSnappingFromUI(setup)
             flagBE,snapValue = isSnapping(monthlyStartEpoch, dailyStartEpoch + n * 86400, availablepointEpoch,snap_Side='left')
-            checkEqualAssert(flagBE,flag,message='Verify Snapping')
+            checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
             if flagBE:
                 expectedText = time_format(getDateString(snapValue), getDateString(dailyStartEpoch + n * 86400))
-                checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value')
+                checkEqualAssert(getDateString(snapValue),value[0],message='Verify Snapped Value',testcase_id='MKR-3186')
             else:
                 expectedText = time_format(getDateString(monthlyStartEpoch), getDateString(dailyStartEpoch + n * 86400))
 
             valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
     udScreenInstance.clickButton("Cancel", getHandle(setup, Constants.CALENDERPOPUP, Constants.ALLBUTTONS))
 
@@ -624,16 +624,16 @@ try:
 
             flag,value = isSnappingFromUI(setup)
             flagBE,snapValue=isSnapping(defaultRightValue,hourlyStartEpoch,availablepointEpoch)
-            checkEqualAssert(flagBE,flag,selectedQuicklink,message='Verify Snapping')
+            checkEqualAssert(flagBE,flag,selectedQuicklink,message='Verify Snapping',testcase_id='MKR-3186')
 
             if flagBE:
                 expectedText=time_format(getDateString(hourlyStartEpoch),getDateString(snapValue))
-                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink, message='Verify Snapped Value')
+                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink, message='Verify Snapped Value',testcase_id='MKR-3186')
             else:
                 expectedText = time_format(getDateString(hourlyStartEpoch), getDateString(defaultRightValue))
 
             valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            checkEqualAssert(expectedText,valueFromCalender,selectedQuicklink,message='Verify TimeRange on Calendar')
+            checkEqualAssert(expectedText,valueFromCalender,selectedQuicklink,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
             udScreenInstance.clickButton("Cancel", getHandle(setup, Constants.CALENDERPOPUP, Constants.ALLBUTTONS))
 
@@ -646,16 +646,16 @@ try:
 
             flag,value = isSnappingFromUI(setup)
             flagBE,snapValue=isSnapping(defaultRightValue,dailyStartEpoch,availablepointEpoch)
-            checkEqualAssert(flagBE,flag,message='Verify Snapping')
+            checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
 
             if flagBE:
                 expectedText=time_format(getDateString(dailyStartEpoch),getDateString(snapValue))
-                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink,message='Verify Snapped Value')
+                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink,message='Verify Snapped Value',testcase_id='MKR-3186')
             else:
                 expectedText = time_format(getDateString(dailyStartEpoch), getDateString(defaultRightValue))
 
             valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
             udScreenInstance.clickButton("Cancel", getHandle(setup, Constants.CALENDERPOPUP, Constants.ALLBUTTONS))
 
@@ -667,15 +667,15 @@ try:
 
             flag,value = isSnappingFromUI(setup)
             flagBE,snapValue=isSnapping(defaultRightValue,monthlyStartEpoch,availablepointEpoch)
-            checkEqualAssert(flagBE,flag,message='Verify Snapping')
+            checkEqualAssert(flagBE,flag,message='Verify Snapping',testcase_id='MKR-3186')
             if flagBE:
                 expectedText=time_format(getDateString(monthlyStartEpoch),getDateString(snapValue))
-                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink,message='Verify Snapped Value')
+                checkEqualAssert(formattedEndTime(getDateString(snapValue)),value[1],selectedQuicklink,message='Verify Snapped Value',testcase_id='MKR-3186')
             else:
                 expectedText = time_format(getDateString(monthlyStartEpoch), getDateString(defaultRightValue))
 
             valueFromCalender = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar')
+            checkEqualAssert(expectedText,valueFromCalender,message='Verify TimeRange on Calendar',testcase_id='MKR-3186')
 
             udScreenInstance.clickButton("Cancel", getHandle(setup, Constants.CALENDERPOPUP, Constants.ALLBUTTONS))
 
