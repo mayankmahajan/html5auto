@@ -10,6 +10,22 @@ class ExploreListComponentClass(BaseComponentClass):
                 return elHandler
         return False
 
+    def clickOnHelpIcon(self,handlres,parent,child):
+        try:
+            for handle in handlres[parent][child]:
+                if len(handle.find_elements_by_tag_name('img'))>0:
+                    if 'help' in handle.find_elements_by_tag_name('img')[0].get_attribute('src'):
+                        handle.click()
+                        return True
+        except Exception as e:
+            logger.error("Exception found while clicking on HelpIcon")
+            return e
+
+        logger.debug("HelpIcon Not Found")
+        return False
+
+
+
     def launchScreen(self,handlres,parent,child):
         # h = self.compHandlers(parent,handlres)
         handlres[parent][child][0].click()
@@ -31,8 +47,6 @@ class ExploreListComponentClass(BaseComponentClass):
             logger.error("Exception found while clicking Module with Title = %s", str(text))
             return e
 
-        logger.debug("Module with title = %s not found", str(text))
-        return False
 
     def switchApp(self,h):
         h['appHeader']['switchertemplate'][0].click()

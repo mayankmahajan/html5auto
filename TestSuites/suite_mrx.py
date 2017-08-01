@@ -94,7 +94,7 @@ if platform.system() == "Windows":
 else:
     delimiter = "/"
 
-test_file_strings = glob.glob('..//test_*.py')
+test_file_strings = glob.glob('../MRX*/test*.py')
 
 # creating global object accessed through out all modules
 import __builtin__
@@ -112,6 +112,20 @@ result_chart_file_path = os.path.abspath(result_chart_file_path)
 
 
 module_strings = [module.split(delimiter)[1] + "." + module.split(delimiter)[2].split('.')[0] for module in test_file_strings]
+
+
+############
+version =''
+version_strings = glob.glob('../MRX*/FindVersion.py')
+version_string = [module.split(delimiter)[1] + "." + module.split(delimiter)[2].split('.')[0] for module in version_strings]
+
+for module in version_string:
+    try:
+        version= __import__(module).FindVersion.version
+    except Exception as e:
+        logger.error('Exception found while executing %s ::: %s', module, e)
+
+#############
 
 for module in module_strings:
     try:
@@ -150,8 +164,11 @@ for module in module_strings:
             logger.error('Got Exception %s while executing "taskkill /im chromedriver.exe /f"',e)
 
 
+
+
 text_to_dump  = dump_to_html(testsuite)
 with open(result_chart_file_path) as f:
     data = f.readlines()
+    subject="UI Automation Execution Summary : MRX : "+version
     # sendmail_selenium(additional_script_path=js_file_path,additional_text=data[0])
-    sendmail_selenium(additional_script_path=text_to_dump,additional_text=data[0])
+    sendmail_selenium(additional_script_path=text_to_dump,additional_text=data[0],subject=subject)

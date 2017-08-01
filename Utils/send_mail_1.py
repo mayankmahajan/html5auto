@@ -7,15 +7,20 @@ from email.mime.image import MIMEImage
 from Utils.Constants import *
 
 # Define these once; use them twice!
-def sendResults(filePath,additional_text=""):
+def sendResults(filePath,additional_text="",subject=''):
     strFrom = 'mayank.mahajan@guavus.com'
-    # strTo = 'mayank.mahajan@guavus.com,Saikat.Prabhakar@guavus.com'
-    strTo = 'mayank.mahajan@guavus.com'
+    #strTo = 'praveen.garg1@guavus.com,mayank.mahajan@guavus.com,Saikat.Prabhakar@guavus.com'
+    strTo = 'praveen.garg1@guavus.com'
     smtp_server = "smtp-relay.guavus.com"
 
     # Create the root message and fill in the from, to, and subject headers
     msgRoot = MIMEMultipart('related')
-    msgRoot['Subject'] = 'Test Results'
+
+    if subject!='':
+        msgRoot['Subject'] = subject
+    else:
+        msgRoot['Subject'] = 'Test Results'
+
     msgRoot['From'] = strFrom
     msgRoot['To'] = strTo
     msgRoot.preamble = 'This is a multi-part message in MIME format.'
@@ -54,7 +59,7 @@ def sendResults(filePath,additional_text=""):
     server.quit()
 
 
-def sendmail_selenium(additional_script_path= "",additional_text=""):
+def sendmail_selenium(additional_script_path= "",additional_text="",subject=''):
 
     # from pyvirtualdisplay import Display
     from selenium import webdriver
@@ -89,6 +94,6 @@ def sendmail_selenium(additional_script_path= "",additional_text=""):
 
     filenamePath = "result_graph.png"
     driver.save_screenshot(filenamePath)
-    sendResults(filenamePath,additional_text)
+    sendResults(filenamePath,additional_text,subject)
     driver.quit()
     # display.stop()
