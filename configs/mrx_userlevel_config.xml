@@ -235,13 +235,23 @@
 
 
 
-        <segment id ="0" filters = 'E,1,2'/>
-        <device id = "0" filters = ' :: :: :: '/>
+        <!--<segment id ="0" filters = 'E,1,2'/>-->
+        <!--<device id = "0" filters = ' :: :: :: '/>-->
+        <!--<network id = "0" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
+        <!--<content id = "0" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="0" filters = ' '/>-->
+        <!--<quicklink id="0" locatorText="Yesterday"/>-->
+        <!--<measure id="0" locatorText="Volume (Download)"/>-->
+
+
+        <segment id ="0" filters = ' '/>
+        <device id = "0" filters = 'E,2:: :: :: '/>
         <network id = "0" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "0" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="0" filters = ' '/>
-        <quicklink id="0" locatorText="Yesterday"/>
+        <quicklink id="0" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
         <measure id="0" locatorText="Volume (Download)"/>
+
 
 
         <segment id ="1" filters = ' '/>
@@ -351,6 +361,32 @@
       <column id="delete" locatorText="Delete"/>
   </segment_Table_Header>
 
+  <filter_Mapping>
+      <filter id="Application Category" backEnd_ID="mobileappcategory"/>
+      <filter id="Global Data Service" backEnd_ID="gds"/>
+      <filter id="Content Interest" backEnd_ID="spt1category,spt2category"/>
+      <filter id="Serving Node" backEnd_ID="sgsn"/>
+      <filter id="Device Category" backEnd_ID="devicegroup"/>
+      <filter id="Operator Data Services" backEnd_ID="ods1,ods2,ods3"/>
+      <filter id="Application" backEnd_ID="mobileapp"/>
+      <filter id="Device Manufacturer" backEnd_ID="devicemanufacturer"/>
+      <filter id="Packet GW" backEnd_ID="ggsn"/>
+      <filter id="APN" backEnd_ID="apn"/>
+      <filter id="Device Model" backEnd_ID="devicename"/>
+      <filter id="Web Domain" backEnd_ID="Web Domain"/>
+      <filter id="Device OS" backEnd_ID="deviceos"/>
+      <filter id="Roaming" backEnd_ID="roamingflag"/>
+      <filter id="Segment" backEnd_ID="Segment"/>
+      <filter id="Radio Access Type" backEnd_ID="rat"/>
+      <filter id="Location" backEnd_ID="location_layer1,location_layer2,location_layer3,location_layer4,location_layer5 "/>
+  </filter_Mapping>
+
+  <measure_Mapping>
+      <measure id = "Volume (Download)" backEnd_ID="downbytes" method="aggr_measure"/> 
+      <measure id = "Volume (Upload)" backEnd_ID="upbytes" method="aggr_measure"/> 
+      <measure id = "Volume" backEnd_ID="upbytes,downbytes" method="aggr_measure"/>  
+      <measure id = "# Session" backEnd_ID="sessioncount" method="aggr_measure"/> 
+  </measure_Mapping>
 
 
 </data>
