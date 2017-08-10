@@ -12,7 +12,7 @@ class UnitSystem :
     metricValues = [1,1000,1000,1000,1000, 1000, 1000, 1000, 1000]
     #byteUnits = ["", "K", "M", "G", "T", "P", "E", "Z", "Y"]
     #metricUnits= ["", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    byteUnits = ["", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+    byteUnits = Constants.byteUnits
     byteValues = [1,1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024]
     timeUnits = ["s","m"]
     timeValues = [1,"60"]
@@ -42,6 +42,10 @@ class UnitSystem :
         if unitString in self.timeUnits:
             rawValue = convertedValue * self.timeValues[self.timeUnits.index(unitString)]
         elif unitString in self.byteUnits or "bps" in unitString:
+
+            if str(unitString).strip()=="B":
+                return convertedValue
+
             if "bps" in unitString:
                 import re
                 # unit=unitString.strip('bps')+"B"

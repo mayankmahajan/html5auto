@@ -7,6 +7,14 @@ class Constants(object):
     # URL = "https://muralautomation.cisco.com:6443/"
     # URL = "https://scrum.jalapeno.com:6443"
     # URL = "https://uiscrummural.cisco.com:6443/"
+
+    PROJECT = "MRX"
+    # PROJECT = ""
+    if PROJECT == "MRX":
+        byteUnits = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+    else:
+        byteUnits = ["", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+
     BROWSER = "chrome"
     # BROWSER = "ff"
     isOffline = False
