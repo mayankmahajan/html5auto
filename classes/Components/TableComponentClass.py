@@ -429,12 +429,14 @@ class TableComponentClass(BaseComponentClass):
             return e
 
 
-    def setSelectionIndex(self,index,colCount,rowCount,h):
+    def setSelectionIndex(self,index,colCount,rowCount,h,driver=""):
         elHandle=h['ROWS']
         newIndex = (colCount)*(index-1)+1
 
         for i in range(len(elHandle)):
             if i == newIndex:
+                if driver != "":
+                    driver.execute_script("return arguments[0].scrollIntoView();", elHandle[i])
                 elHandle[i].click()
                 return True
 
@@ -492,14 +494,14 @@ class TableComponentClass(BaseComponentClass):
         except Exception as e:
             return e
 
-    def setSelectionIndex(self,index,colCount,rowCount,h):
-        elHandle=h['ROWS']
-        newIndex = (colCount)*(index-1)+1
-
-        for i in range(len(elHandle)):
-            if i == newIndex:
-                elHandle[i].click()
-                return True
+    # def setSelectionIndex(self,index,colCount,rowCount,h):
+    #     elHandle=h['ROWS']
+    #     newIndex = (colCount)*(index-1)+1
+    #
+    #     for i in range(len(elHandle)):
+    #         if i == newIndex:
+    #             elHandle[i].click()
+    #             return True
 
     def setSelection1(self,index,h,parent,child=None):
         data = self.getTableData1(h,parent)
@@ -514,10 +516,10 @@ class TableComponentClass(BaseComponentClass):
         data = self.getTableData1(h,parent)
         colCount = len(data['header'])
         rowCount = len(data['rows'])
-        self.setSelectionIndex(indices[0],colCount,rowCount,h[parent])
+        self.setSelectionIndex(indices[0],colCount,rowCount,h[parent],driver)
         if len(indices) == 2:
             ActionChains(driver).key_down(key).perform()
-            self.setSelectionIndex(indices[1],colCount,rowCount,h[parent])
+            self.setSelectionIndex(indices[1],colCount,rowCount,h[parent],driver)
             ActionChains(driver).key_up(key).perform()
 
 

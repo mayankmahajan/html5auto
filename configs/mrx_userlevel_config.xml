@@ -125,13 +125,13 @@
     <udpScreenFilters>
         <!--For select tree put "Do_Selection_On_Tree" otherwise "No_Selection_On_Tree"-->
         <!--For input enter value in inputfield put "Input" otherwise "No_Input" -->
-        <segment id ="5" filters = 'E,1,2'/>
-        <device id = "5" filters = 'NE,1,2::E,2::NE,1,2::E,2'/>
-        <network id = "5" filters = '1,2::1,2,3::No_Selection_On_Tree::NE,1,2::E,2::NE,1,2'/>
-        <content id = "5" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::NE,1,2::E,2::Input' inputvalue="guavus.com,facebook.com"/>
-        <usage id ="5" filters = 'NE,1,2'/>
-        <quicklink id="5" locatorText="Yesterday"/>
-        <measure id="5" locatorText="Volume (Download)"/>
+        <!--<segment id ="5" filters = 'E,1,2'/>-->
+        <!--<device id = "5" filters = 'NE,1,2::E,2::NE,1,2::E,2'/>-->
+        <!--<network id = "5" filters = '1,2::1,2,3::No_Selection_On_Tree::NE,1,2::E,2::NE,1,2'/>-->
+        <!--<content id = "5" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::NE,1,2::E,2::Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="5" filters = 'NE,1,2'/>-->
+        <!--<quicklink id="5" locatorText="Yesterday"/>-->
+        <!--<measure id="5" locatorText="Volume (Download)"/>-->
 
 
 
@@ -243,48 +243,563 @@
         <!--<quicklink id="0" locatorText="Yesterday"/>-->
         <!--<measure id="0" locatorText="Volume (Download)"/>-->
 
+        <!--<quicklink id="1" locatorText="Last 4 hours" table="hourly_points" />-->
+        <!--<quicklink id="2" locatorText="Last 24 hours" table="hourly_points"/>-->
+        <!--<quicklink id="3" locatorText="Yesterday" table="hourly_points"/>-->
+        <!--<quicklink id="8" locatorText="Today" table="hourly_points" />-->
 
-        <segment id ="0" filters = ' '/>
-        <device id = "0" filters = 'E,2:: :: :: '/>
+        <segment id ="0" filters = 'E,0'/>
+        <device id = "0" filters = ' :: :: :: '/>
         <network id = "0" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "0" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="0" filters = ' '/>
         <quicklink id="0" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
         <measure id="0" locatorText="Volume (Download)"/>
-
-
+        <testcase id="0" value="MKR-1777"/>
 
         <segment id ="1" filters = ' '/>
-        <device id = "1" filters = 'E,1,2::NE,0::E,1,2,3::E,1'/>
+        <device id = "1" filters = 'E,2:: :: :: '/>
         <network id = "1" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "1" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="1" filters = ' '/>
-        <quicklink id="1" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>
-        <measure id="1" locatorText="Volume"/>
+        <quicklink id="1" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="1" locatorText="Volume (Download)"/>
+        <testcase id="1" value="MKR-1779"/>
 
         <segment id ="2" filters = ' '/>
-        <device id = "2" filters = ' :: :: :: '/>
-        <network id = "2" filters = '1,2::2,4::Do_Selection_On_Tree::E,1,2,3::E,1,2::NE,2,4'/>
+        <device id = "2" filters = ' ::E,2,3:: :: '/>
+        <network id = "2" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="2" filters = ' '/>
-        <quicklink id="2" locatorText="Last 7 days"/>
-        <measure id="2" locatorText="Volume"/>
+        <quicklink id="2" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="2" locatorText="Volume (Download)"/>
+        <testcase id="2" value="MKR-1780"/>
 
         <segment id ="3" filters = ' '/>
-        <device id = "3" filters = ' :: :: :: '/>
+        <device id = "3" filters = ' :: ::E,1,2:: '/>
         <network id = "3" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
-        <content id = "3" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::E,2::NE,2,4::Input' inputvalue="guavus.com,facebook.com"/>
+        <content id = "3" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="3" filters = ' '/>
-        <quicklink id="3" locatorText="Last 24 hours"/>
-        <measure id="3" locatorText="Volume (Upload)"/>
+        <quicklink id="3" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="3" locatorText="Volume (Download)"/>
+        <testcase id="3" value="MKR-1781"/>
+
 
         <segment id ="4" filters = ' '/>
-        <device id = "4" filters = ' :: :: :: '/>
+        <device id = "4" filters = ' :: :: ::E,2'/>
         <network id = "4" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "4" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
-        <usage id ="4" filters = 'E,0'/>
-        <quicklink id="4" locatorText="Today"/>
-        <measure id="4" locatorText="# Session"/>
+        <usage id ="4" filters = ' '/>
+        <quicklink id="4" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="4" locatorText="Volume (Download)"/>
+        <testcase id="4" value="MKR-1782"/>
+
+        <segment id ="5" filters = ' '/>
+        <device id = "5" filters = ' :: :: :: '/>
+        <network id = "5" filters = '1,2:: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "5" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="5" filters = ' '/>
+        <quicklink id="5" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="5" locatorText="Volume (Download)"/>
+        <testcase id="5" value="MKR-1784"/>
+
+        <segment id ="6" filters = ' '/>
+        <device id = "6" filters = ' :: :: :: '/>
+        <network id = "6" filters = ' ::2,3::No_Selection_On_Tree:: :: :: '/>
+        <content id = "6" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="6" filters = ' '/>
+        <quicklink id="6" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="6" locatorText="Volume (Download)"/>
+        <testcase id="6" value="MKR-1785"/>
+
+        <segment id ="7" filters = ' '/>
+        <device id = "7" filters = ' :: :: :: '/>
+        <network id = "7" filters = ' :: ::No_Selection_On_Tree::E,2:: :: '/>
+        <content id = "7" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="7" filters = ' '/>
+        <quicklink id="7" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="7" locatorText="Volume (Download)"/>
+        <testcase id="7" value="MKR-1787"/>
+
+        <segment id ="8" filters = ' '/>
+        <device id = "8" filters = ' :: :: :: '/>
+        <network id = "8" filters = ' :: ::No_Selection_On_Tree:: ::E,2,3:: '/>
+        <content id = "8" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="8" filters = ' '/>
+        <quicklink id="8" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="8" locatorText="Volume (Download)"/>
+        <testcase id="8" value="MKR-1788"/>
+
+        <segment id ="9" filters = ' '/>
+        <device id = "9" filters = ' :: :: :: '/>
+        <network id = "9" filters = ' :: ::No_Selection_On_Tree:: :: ::E,3'/>
+        <content id = "9" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="9" filters = ' '/>
+        <quicklink id="9" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="9" locatorText="Volume (Download)"/>
+        <testcase id="9" value="MKR-1789"/>
+
+        <segment id ="10" filters = ' '/>
+        <device id = "10" filters = ' :: :: :: '/>
+        <network id = "10" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "10" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,2,3,4:: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="10" filters = ' '/>
+        <quicklink id="10" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="10" locatorText="Volume (Download)"/>
+        <testcase id="10" value="MKR-1793"/>
+
+
+        <segment id ="11" filters = ' '/>
+        <device id = "11" filters = ' :: :: :: '/>
+        <network id = "11" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "11" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: ::E,3,4::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="11" filters = ' '/>
+        <quicklink id="11" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="11" locatorText="Volume (Download)"/>
+        <testcase id="11" value="MKR-1794"/>
+
+
+        <segment id ="12" filters = ' '/>
+        <device id = "12" filters = ' :: :: :: '/>
+        <network id = "12" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "12" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="12" filters = ' '/>
+        <quicklink id="12" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="12" locatorText="Volume (Download)"/>
+        <testcase id="12" value="MKR-1795"/>
+
+        <segment id ="13" filters = ' '/>
+        <device id = "13" filters = ' :: :: :: '/>
+        <network id = "13" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "13" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="13" filters = 'E,2,3'/>
+        <quicklink id="13" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="13" locatorText="Volume (Download)"/>
+        <testcase id="13" value="MKR-1797"/>
+
+
+
+        <segment id ="14" filters = 'E,2,3'/>
+        <device id = "14" filters = ' :: :: :: '/>
+        <network id = "14" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "14" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="14" filters = ' '/>
+        <quicklink id="14" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="14" locatorText="Volume (Upload)"/>
+        <testcase id="14" value="MKR-1777"/>
+
+        <segment id ="15" filters = ' '/>
+        <device id = "15" filters = 'E,1,2,3:: :: :: '/>
+        <network id = "15" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "15" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="15" filters = ' '/>
+        <quicklink id="15" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="15" locatorText="Volume (Upload)"/>
+        <testcase id="15" value="MKR-1779"/>
+
+        <segment id ="16" filters = ' '/>
+        <device id = "16" filters = ' ::E,3:: :: '/>
+        <network id = "16" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "16" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="16" filters = ' '/>
+        <quicklink id="16" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="16" locatorText="Volume (Upload)"/>
+        <testcase id="16" value="MKR-1780"/>
+
+        <segment id ="17" filters = ' '/>
+        <device id = "17" filters = ' :: ::E,1,2:: '/>
+        <network id = "17" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "17" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="17" filters = ' '/>
+        <quicklink id="17" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="17" locatorText="Volume (Upload)"/>
+        <testcase id="17" value="MKR-1781"/>
+
+
+        <segment id ="18" filters = ' '/>
+        <device id = "18" filters = ' :: :: ::E,3,4'/>
+        <network id = "18" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "18" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="18" filters = ' '/>
+        <quicklink id="18" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="18" locatorText="Volume (Upload)"/>
+        <testcase id="18" value="MKR-1782"/>
+
+        <segment id ="19" filters = ' '/>
+        <device id = "19" filters = ' :: :: :: '/>
+        <network id = "19" filters = '2,3:: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "19" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="19" filters = ' '/>
+        <quicklink id="19" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="19" locatorText="Volume (Upload)"/>
+        <testcase id="19" value="MKR-1784"/>
+
+        <segment id ="20" filters = ' '/>
+        <device id = "20" filters = ' :: :: :: '/>
+        <network id = "20" filters = ' ::2::No_Selection_On_Tree:: :: :: '/>
+        <content id = "20" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="20" filters = ' '/>
+        <quicklink id="20" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="20" locatorText="Volume (Upload)"/>
+        <testcase id="20" value="MKR-1785"/>
+
+        <segment id ="21" filters = ' '/>
+        <device id = "21" filters = ' :: :: :: '/>
+        <network id = "21" filters = ' :: ::No_Selection_On_Tree::E,2,4:: :: '/>
+        <content id = "21" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="21" filters = ' '/>
+        <quicklink id="21" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="21" locatorText="Volume (Upload)"/>
+        <testcase id="21" value="MKR-1787"/>
+
+        <segment id ="22" filters = ' '/>
+        <device id = "22" filters = ' :: :: :: '/>
+        <network id = "22" filters = ' :: ::No_Selection_On_Tree:: ::E,1,2,3:: '/>
+        <content id = "22" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="22" filters = ' '/>
+        <quicklink id="22" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="22" locatorText="Volume (Upload)"/>
+        <testcase id="22" value="MKR-1788"/>
+
+        <segment id ="23" filters = ' '/>
+        <device id = "23" filters = ' :: :: :: '/>
+        <network id = "23" filters = ' :: ::No_Selection_On_Tree:: :: ::E,1,3'/>
+        <content id = "23" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="23" filters = ' '/>
+        <quicklink id="23" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="23" locatorText="Volume (Upload)"/>
+        <testcase id="23" value="MKR-1789"/>
+
+        <segment id ="24" filters = ' '/>
+        <device id = "24" filters = ' :: :: :: '/>
+        <network id = "24" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "24" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,2,3:: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="24" filters = ' '/>
+        <quicklink id="24" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="24" locatorText="Volume (Upload)"/>
+        <testcase id="24" value="MKR-1793"/>
+
+
+        <segment id ="25" filters = ' '/>
+        <device id = "25" filters = ' :: :: :: '/>
+        <network id = "25" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "25" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: ::E,4::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="25" filters = ' '/>
+        <quicklink id="25" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="25" locatorText="Volume (Upload)"/>
+        <testcase id="25" value="MKR-1794"/>
+
+
+        <segment id ="26" filters = ' '/>
+        <device id = "26" filters = ' :: :: :: '/>
+        <network id = "26" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "26" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::Input' inputvalue="facebook.com"/>
+        <usage id ="26" filters = ' '/>
+        <quicklink id="26" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="26" locatorText="Volume (Upload)"/>
+        <testcase id="26" value="MKR-1795"/>
+
+        <segment id ="27" filters = ' '/>
+        <device id = "27" filters = ' :: :: :: '/>
+        <network id = "27" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "27" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="27" filters = 'E,1,2'/>
+        <quicklink id="27" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="27" locatorText="Volume (Upload)"/>
+        <testcase id="27" value="MKR-1797"/>
+
+
+        <segment id ="28" filters = 'E,2,4'/>
+        <device id = "28" filters = ' :: :: :: '/>
+        <network id = "28" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "28" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="28" filters = ' '/>
+        <quicklink id="28" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="28" locatorText="Volume"/>
+        <testcase id="28" value="MKR-1777"/>
+
+        <segment id ="29" filters = ' '/>
+        <device id = "29" filters = 'E,2,3:: :: :: '/>
+        <network id = "29" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "29" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="29" filters = ' '/>
+        <quicklink id="29" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="29" locatorText="Volume"/>
+        <testcase id="29" value="MKR-1779"/>
+
+        <segment id ="30" filters = ' '/>
+        <device id = "30" filters = ' ::E,2,3,4:: :: '/>
+        <network id = "30" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "30" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="30" filters = ' '/>
+        <quicklink id="30" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="30" locatorText="Volume"/>
+        <testcase id="30" value="MKR-1780"/>
+
+        <segment id ="31" filters = ' '/>
+        <device id = "31" filters = ' :: ::E,1,2:: '/>
+        <network id = "31" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "31" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="31" filters = ' '/>
+        <quicklink id="31" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="31" locatorText="Volume"/>
+        <testcase id="31" value="MKR-1781"/>
+
+
+        <segment id ="32" filters = ' '/>
+        <device id = "32" filters = ' :: :: ::E,2,3'/>
+        <network id = "32" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "32" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="32" filters = ' '/>
+        <quicklink id="32" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="32" locatorText="Volume"/>
+        <testcase id="32" value="MKR-1782"/>
+
+        <segment id ="33" filters = ' '/>
+        <device id = "33" filters = ' :: :: :: '/>
+        <network id = "33" filters = '1:: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "33" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="33" filters = ' '/>
+        <quicklink id="33" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="33" locatorText="Volume"/>
+        <testcase id="33" value="MKR-1784"/>
+
+        <segment id ="34" filters = ' '/>
+        <device id = "34" filters = ' :: :: :: '/>
+        <network id = "34" filters = ' ::1,2,3::No_Selection_On_Tree:: :: :: '/>
+        <content id = "34" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="34" filters = ' '/>
+        <quicklink id="34" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="34" locatorText="Volume"/>
+        <testcase id="34" value="MKR-1785"/>
+
+        <segment id ="35" filters = ' '/>
+        <device id = "35" filters = ' :: :: :: '/>
+        <network id = "35" filters = ' :: ::No_Selection_On_Tree::E,2,4:: :: '/>
+        <content id = "35" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="35" filters = ' '/>
+        <quicklink id="35" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="35" locatorText="Volume"/>
+        <testcase id="35" value="MKR-1787"/>
+
+        <segment id ="36" filters = ' '/>
+        <device id = "36" filters = ' :: :: :: '/>
+        <network id = "36" filters = ' :: ::No_Selection_On_Tree:: ::E,1,2,4:: '/>
+        <content id = "36" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="36" filters = ' '/>
+        <quicklink id="36" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="36" locatorText="Volume"/>
+        <testcase id="36" value="MKR-1788"/>
+
+        <segment id ="37" filters = ' '/>
+        <device id = "37" filters = ' :: :: :: '/>
+        <network id = "37" filters = ' :: ::No_Selection_On_Tree:: :: ::E,3,4'/>
+        <content id = "37" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="37" filters = ' '/>
+        <quicklink id="37" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="37" locatorText="Volume"/>
+        <testcase id="37" value="MKR-1789"/>
+
+        <segment id ="38" filters = ' '/>
+        <device id = "38" filters = ' :: :: :: '/>
+        <network id = "38" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "38" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,1,2,3,4:: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="38" filters = ' '/>
+        <quicklink id="38" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="38" locatorText="Volume"/>
+        <testcase id="38" value="MKR-1793"/>
+
+
+        <segment id ="39" filters = ' '/>
+        <device id = "39" filters = ' :: :: :: '/>
+        <network id = "39" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "39" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: ::E,2,3,4::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="39" filters = ' '/>
+        <quicklink id="39" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="39" locatorText="Volume"/>
+        <testcase id="39" value="MKR-1794"/>
+
+
+        <segment id ="40" filters = ' '/>
+        <device id = "40" filters = ' :: :: :: '/>
+        <network id = "40" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "40" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="40" filters = ' '/>
+        <quicklink id="40" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="40" locatorText="Volume"/>
+        <testcase id="40" value="MKR-1795"/>
+
+        <segment id ="41" filters = ' '/>
+        <device id = "41" filters = ' :: :: :: '/>
+        <network id = "41" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "41" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="41" filters = 'E,3'/>
+        <quicklink id="41" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="41" locatorText="Volume"/>
+        <testcase id="41" value="MKR-1797"/>
+
+
+
+        <segment id ="42" filters = 'E,1,2'/>
+        <device id = "42" filters = ' :: :: :: '/>
+        <network id = "42" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "42" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="42" filters = ' '/>
+        <quicklink id="42" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="42" locatorText="# Session"/>
+        <testcase id="42" value="MKR-1777"/>
+
+        <segment id ="43" filters = ' '/>
+        <device id = "43" filters = 'E,2:: :: :: '/>
+        <network id = "43" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "43" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="43" filters = ' '/>
+        <quicklink id="43" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="43" locatorText="# Session"/>
+        <testcase id="43" value="MKR-1779"/>
+
+        <segment id ="44" filters = ' '/>
+        <device id = "44" filters = ' ::E,2,3:: :: '/>
+        <network id = "44" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "44" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="44" filters = ' '/>
+        <quicklink id="44" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="44" locatorText="# Session"/>
+        <testcase id="44" value="MKR-1780"/>
+
+        <segment id ="45" filters = ' '/>
+        <device id = "45" filters = ' :: ::E,1,2:: '/>
+        <network id = "45" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "45" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="45" filters = ' '/>
+        <quicklink id="45" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="45" locatorText="# Session"/>
+        <testcase id="45" value="MKR-1781"/>
+
+
+        <segment id ="46" filters = ' '/>
+        <device id = "46" filters = ' :: :: ::E,2'/>
+        <network id = "46" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "46" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="46" filters = ' '/>
+        <quicklink id="46" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="46" locatorText="# Session"/>
+        <testcase id="46" value="MKR-1782"/>
+
+        <segment id ="47" filters = ' '/>
+        <device id = "47" filters = ' :: :: :: '/>
+        <network id = "47" filters = '1,2:: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "47" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="47" filters = ' '/>
+        <quicklink id="47" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="47" locatorText="# Session"/>
+        <testcase id="47" value="MKR-1784"/>
+
+        <segment id ="48" filters = ' '/>
+        <device id = "48" filters = ' :: :: :: '/>
+        <network id = "48" filters = ' ::2,3::No_Selection_On_Tree:: :: :: '/>
+        <content id = "48" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="48" filters = ' '/>
+        <quicklink id="48" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="48" locatorText="# Session"/>
+        <testcase id="48" value="MKR-1785"/>
+
+        <segment id ="49" filters = ' '/>
+        <device id = "49" filters = ' :: :: :: '/>
+        <network id = "49" filters = ' :: ::No_Selection_On_Tree::E,2:: :: '/>
+        <content id = "49" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="49" filters = ' '/>
+        <quicklink id="49" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="49" locatorText="# Session"/>
+        <testcase id="49" value="MKR-1787"/>
+
+        <segment id ="50" filters = ' '/>
+        <device id = "50" filters = ' :: :: :: '/>
+        <network id = "50" filters = ' :: ::No_Selection_On_Tree:: ::E,2,3:: '/>
+        <content id = "50" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="50" filters = ' '/>
+        <quicklink id="50" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <measure id="50" locatorText="# Session"/>
+        <testcase id="50" value="MKR-1788"/>
+
+        <segment id ="51" filters = ' '/>
+        <device id = "51" filters = ' :: :: :: '/>
+        <network id = "51" filters = ' :: ::No_Selection_On_Tree:: :: ::E,3'/>
+        <content id = "51" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="51" filters = ' '/>
+        <quicklink id="51" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="51" locatorText="# Session"/>
+        <testcase id="51" value="MKR-1789"/>
+
+        <segment id ="52" filters = ' '/>
+        <device id = "52" filters = ' :: :: :: '/>
+        <network id = "52" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "52" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,2,3,4:: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="52" filters = ' '/>
+        <quicklink id="52" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="52" locatorText="# Session"/>
+        <testcase id="52" value="MKR-1793"/>
+
+
+        <segment id ="53" filters = ' '/>
+        <device id = "53" filters = ' :: :: :: '/>
+        <network id = "53" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "53" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: ::E,3,4::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="53" filters = ' '/>
+        <quicklink id="53" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="53" locatorText="# Session"/>
+        <testcase id="53" value="MKR-1794"/>
+
+
+        <segment id ="54" filters = ' '/>
+        <device id = "54" filters = ' :: :: :: '/>
+        <network id = "54" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "54" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="54" filters = ' '/>
+        <quicklink id="54" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <measure id="54" locatorText="# Session"/>
+        <testcase id="54" value="MKR-1795"/>
+
+        <segment id ="55" filters = ' '/>
+        <device id = "55" filters = ' :: :: :: '/>
+        <network id = "55" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "55" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="55" filters = 'E,2,3'/>
+        <quicklink id="55" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <measure id="55" locatorText="# Session"/>
+        <testcase id="55" value="MKR-1797"/>
+
+        <!--<segment id ="1" filters = ' '/>-->
+        <!--<device id = "1" filters = 'E,1,2::NE,0::E,1,2,3::E,1'/>-->
+        <!--<network id = "1" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
+        <!--<content id = "1" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="1" filters = ' '/>-->
+        <!--<quicklink id="1" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>-->
+        <!--<measure id="1" locatorText="Volume"/>-->
+
+        <!--<segment id ="2" filters = ' '/>-->
+        <!--<device id = "2" filters = ' :: :: :: '/>-->
+        <!--<network id = "2" filters = '1,2::2,4::Do_Selection_On_Tree::E,1,2,3::E,1,2::NE,2,4'/>-->
+        <!--<content id = "2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="2" filters = ' '/>-->
+        <!--<quicklink id="2" locatorText="Last 24 hours"/>-->
+        <!--<measure id="2" locatorText="Volume"/>-->
+
+        <!--<segment id ="3" filters = ' '/>-->
+        <!--<device id = "3" filters = ' :: :: :: '/>-->
+        <!--<network id = "3" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
+        <!--<content id = "3" filters = 'Do_Selection_On_Tree::No_Selection_On_Tree::E,2::NE,2,4::Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="3" filters = ' '/>-->
+        <!--<quicklink id="3" locatorText="Last 7 days" table="hourly_points"/>-->
+        <!--<measure id="3" locatorText="Volume (Upload)"/>-->
+
+        <!--<segment id ="4" filters = ' '/>-->
+        <!--<device id = "4" filters = ' :: :: :: '/>-->
+        <!--<network id = "4" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
+        <!--<content id = "4" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="4" filters = 'E,0'/>-->
+        <!--<quicklink id="4" locatorText="Today"/>-->
+        <!--<measure id="4" locatorText="# Session"/>-->
 
 
     </udpScreenFilters>
@@ -382,10 +897,10 @@
   </filter_Mapping>
 
   <measure_Mapping>
-      <measure id = "Volume (Download)" backEnd_ID="downbytes" method="aggr_measure"/> 
-      <measure id = "Volume (Upload)" backEnd_ID="upbytes" method="aggr_measure"/> 
-      <measure id = "Volume" backEnd_ID="upbytes,downbytes" method="aggr_measure"/>  
-      <measure id = "# Session" backEnd_ID="sessioncount" method="aggr_measure"/> 
+      <measure id = "Volume (Download)" backEnd_ID="downbytes" /> 
+      <measure id = "Volume (Upload)" backEnd_ID="upbytes" /> 
+      <measure id = "Volume" backEnd_ID="upbytes,downbytes" />  
+      <measure id = "# Session" backEnd_ID="sessioncount" /> 
   </measure_Mapping>
 
 

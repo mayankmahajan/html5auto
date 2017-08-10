@@ -1,17 +1,12 @@
-import unittest
-from Utils.logger import *
-from selenium import webdriver
-from Utils.utility import *
-from classes.DriverHelpers.DriverHelper import DriverHelper
 from Utils.Constants import *
 from Utils.SetUp import *
-from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MRXScreens.UDScreenClass import *
 from MRXUtils.MRXConstants import *
 from classes.Pages.ExplorePageClass import *
 from MRXUtils import UDHelper
 from MRXUtils import SegmentHelper
-import os
+from Utils.AvailableMethod import *
+import json
 
 # newFilterDetails = ConfigManager().getNodeElements("savenewfilter", "filter")
 # for k, filterDetail in newFilterDetails.iteritems():
@@ -23,6 +18,55 @@ import os
 #     udScreenInstance = UDScreenClass(setup.d)
 #     timeRangeFromPopup = ''
 #     measureFromPopup = ''
+
+
+def measureAndDimensionAfterMapping(timeRangeFromScreen,measureFromScreen,screenTooltipData):
+    query={}
+    query['measure']=[]
+    measures = ConfigManager().getNodeElements("measure_Mapping", "measure")
+    for k, measure in measures.iteritems():
+        if str(k)==str(measureFromScreen):
+            query['measure'].append(measure['backEnd_ID'])
+
+
+    filters = ConfigManager().getNodeElements("filter_Mapping", "filter")
+    for k, filter in filters.iteritems():
+        if str(k) in screenTooltipData.keys() and screenTooltipData[k] !=[] and screenTooltipData[k] !=['ALL']:
+            query[filter['backEnd_ID']]=screenTooltipData[k]
+
+    timeRange=timeRangeFromScreen.split('to')
+
+    if len(timeRange)==1:
+        startTime=str(str(timeRange[0]).strip().split('(')[0]).strip()+" 00:00"
+        query['starttime']=str(getepoch(startTime,tOffset=MRXConstants.TIMEZONEOFFSET))
+        query['endtime'] =str(getepoch(startTime,tOffset=MRXConstants.TIMEZONEOFFSET)+86400)
+    else:
+
+        if len(str(timeRange[0]).strip().split(' '))==3:
+            query['starttime'] =str(getepoch(str(timeRange[0]).strip()+" 00:00",tOffset=MRXConstants.TIMEZONEOFFSET))
+        else:
+            query['starttime'] = str(getepoch(str(timeRange[0]).strip(), tOffset=MRXConstants.TIMEZONEOFFSET))
+
+        if len(str(str(timeRange[1]).strip().split('(')[0]).strip().split(' ')) == 3:
+            query['endtime'] = str(getepoch(str(str(timeRange[1]).strip().split('(')[0]).strip() + " 00:00", tOffset=MRXConstants.TIMEZONEOFFSET)+86400)
+        else:
+            query['endtime'] =str(getepoch(str(str(timeRange[1]).strip().split('(')[0]).strip(),tOffset=MRXConstants.TIMEZONEOFFSET))
+
+
+    query['dimension']=['subscriberid']
+    return query
+
+
+def fireBV(query,method,table_name,data,testcase=''):
+    query['method']=method
+    query['table_name']=table_name
+    query['data']=data
+    query['testcase']=testcase
+
+    logger.info("Going to dump info from UI for Backend Data validation ::" + str(query))
+    with open("DumpFile.txt",mode='a') as fs:
+        fs.write(json.dumps(query))
+        fs.write(" __DONE__" + "\n")
 
 try:
     setup = SetUp()
@@ -67,6 +111,7 @@ try:
     udpFilterFromScreen = UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
     checkEqualAssert(MRXConstants.NO_FILTER, udpFilterFromScreen,message="Verify that on pressing X button the selections made on User Distribution Parameters, selected filters do not get applied and the page",testcase_id='MKR-1761')
 
+    '''
     ############################################## For Toggle State ########################################################
 
     UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
@@ -99,6 +144,7 @@ try:
         udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
 
     ####################################################################################################################
+    '''
 
     setup.d.close()
 
@@ -119,6 +165,11 @@ try:
         UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
         SegmentHelper.clickOnfilterIcon(setup,MRXConstants.UDSCREEN,'nofilterIcon')
         timeRangeFromPopup,measureFromPopup=UDHelper.setQuickLink_Measure(setup,udScreenInstance,str(i))
+
+        ### get table name form XML
+        quicklink = setup.cM.getNodeElements("udpScreenFilters", 'quicklink')
+        testcase = setup.cM.getNodeElements("udpScreenFilters", "testcase")
+
         expected={}
         expected = UDHelper.setUDPFilters(udScreenInstance, setup, str(i))
         isError(setup)
@@ -126,7 +177,7 @@ try:
         for k in MRXConstants.ListOfFilterContainingTree:
             if expected[k]!=[]:
                 checkEqualAssert(expected[k],popUpTooltipData[k],message='Verify Tree selection on UI ( it should be like level 1 > level 2 > level 3 and soon',testcase_id='MKR-3198')
-        checkEqualDict(expected,popUpTooltipData,message="Verify Filters Selections",doSortingBeforeCheck=True)
+        checkEqualDict(expected,popUpTooltipData,message="Verify Filters Selections On UDP Popup (Functional)",testcase_id=testcase[str(i)]['value'],doSortingBeforeCheck=True)
 
         # apply global filters
         udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
@@ -138,11 +189,19 @@ try:
         checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='After apply filter verify timerange value on screen')
         checkEqualAssert(measureFromPopup,measureFromScreen,message='After apply filter verify measure value on screen')
         screenTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDSCREEN, setup)
-        checkEqualDict(expected, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied", doSortingBeforeCheck=True,testcase_id='MKR-1760')
+        checkEqualDict(expected, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied (Functional)", doSortingBeforeCheck=True,testcase_id='MKR-1760'+testcase[str(i)]['value'])
+
+        queryFromUI = {}
+        m_data = []
+        d_data = []
+
+        queryFromUI = measureAndDimensionAfterMapping(timeRangeFromScreen, measureFromScreen, screenTooltipData)
 
         tableHandle = getHandle(setup, MRXConstants.UDSCREEN, "table")
-        data = udScreenInstance.table.getTableData1(tableHandle, "table", length=5)
-        if data['rows'] == Constants.NODATA:
+        udScreenInstance.table.setSpecialSelection(setup.d, [1, 20], Keys.SHIFT, tableHandle)
+        data = udScreenInstance.table.getSelectedRow(getHandle(setup, MRXConstants.UDSCREEN, "table"))
+
+        if data['rows'] ==[]:
             h=getHandle(setup, MRXConstants.UDSCREEN, "table")['table']['no_data_msg']
             if len(h)>0:
                 msg=str(h[0].text)
@@ -153,6 +212,24 @@ try:
             setup.d.save_screenshot(r)
             logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
             resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
+
+        else:
+            columnIndex = udScreenInstance.table.getIndexForValueInArray(data['header'],str(measureFromScreen).strip())
+            if columnIndex !=-1:
+                listOfValueForSelectedMeasure = []
+                for rows in data['rows']:
+                    listOfValueForSelectedMeasure.append(rows[columnIndex].strip())
+
+                m_data.append(str(udScreenInstance.table.getValueFromTable(listOfValueForSelectedMeasure,'sum')))
+
+
+            actualSegmentDetail,textFromSummary=UDHelper.getSummaryDetailAndValidatePresenceOfValidationBox(setup,MRXConstants.UDSCREEN)
+            if len(actualSegmentDetail)==3:
+                d_data.append(str(actualSegmentDetail[1]))
+
+
+        fireBV(queryFromUI, AvailableMethod.Aggr_Measure, quicklink[str(i)]['table'], m_data, testcase[str(i)]['value'])
+        fireBV(queryFromUI, AvailableMethod.Distinct_Dimension, quicklink[str(i)]['table'], d_data,testcase[str(i)]['value'])
 
         setup.d.close()
 
