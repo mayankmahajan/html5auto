@@ -34,7 +34,7 @@ def measureAndDimensionAfterMapping(timeRangeFromScreen,measureFromScreen,screen
         if str(k) in screenTooltipData.keys() and screenTooltipData[k] !=[] and screenTooltipData[k] !=['ALL']:
             query[filter['backEnd_ID']]=screenTooltipData[k]
 
-    timeRange=timeRangeFromScreen.split('to')
+    timeRange=timeRangeFromScreen.split(Constants.TimeRangeSpliter)
 
     if len(timeRange)==1:
         startTime=str(str(timeRange[0]).strip().split('(')[0]).strip()+" 00:00"
@@ -62,6 +62,8 @@ def fireBV(query,method,table_name,data,testcase=''):
     query['table_name']=table_name
     query['data']=data
     query['testcase']=testcase
+    import time
+    query['id']=str(time.time()).split('.')[0]
 
     logger.info("Going to dump info from UI for Backend Data validation ::" + str(query))
     with open("DumpFile.txt",mode='a') as fs:
@@ -81,7 +83,7 @@ try:
     checkEqualAssert(MRXConstants.ExpectedQuickLinkList,actualAvailableQuickLinkList,message='Verify that a user is able to select filter time range as "Last 30 days", "Last 7 Days", "Yesterday", "Last 24 Hours", "Last 4 Hours"," Today" or, from calendar',testcase_id='MKR-1762')
 
     actualAvailableMeasureList=UDHelper.availableMeasure(setup,MRXConstants.UDPPOPUP,index=0)
-    checkEqualAssert(MRXConstants.ExpectedMeasure,actualAvailableMeasureList,message='Verify that a user is able to select Measure as "Volume (Upload)", "Volume (Download)", "Volume", # Session',testcase_id='MKR-1763')
+    checkEqualAssert(MRXConstants.ExpectedMeasure,actualAvailableMeasureList,message='Verify that a user is able to select available Measure',testcase_id='MKR-1763')
 
     udpHandle = getHandle(setup, MRXConstants.AvailableFilterList)
     availableFilter = []
@@ -144,10 +146,9 @@ try:
         udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
 
     ####################################################################################################################
+
     '''
-
     setup.d.close()
-
 
     ###################################### Filter Scenario #############################################################
 

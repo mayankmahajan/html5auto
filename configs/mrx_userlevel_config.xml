@@ -6,8 +6,11 @@
         <time id ="endtime" year="2016" month ="09" day="26" hour="00" min="00"/>
 
 
-        <starttime id="0" year="2017" month ="05" day="07" hour="00" min="00"/>
-        <endtime id ="0" year="2017" month ="06" day="06" hour="13" min="00"/>
+        <!--<starttime id="0" year="2017" month ="05" day="07" hour="00" min="00"/>-->
+
+        <starttime id="0" year="2017" month ="08" day="07" hour="00" min="00"/>
+        <endtime id ="0" year="2017" month ="08" day="11" hour="16" min="00"/>
+
 
         <starttime id="1" year="2017" month ="02" day="10" hour="19" min="00"/>
         <endtime id ="1" year="2017" month ="02" day="13" hour="05" min="00"/>
@@ -125,13 +128,15 @@
     <udpScreenFilters>
         <!--For select tree put "Do_Selection_On_Tree" otherwise "No_Selection_On_Tree"-->
         <!--For input enter value in inputfield put "Input" otherwise "No_Input" -->
-        <!--<segment id ="5" filters = 'E,1,2'/>-->
-        <!--<device id = "5" filters = 'NE,1,2::E,2::NE,1,2::E,2'/>-->
-        <!--<network id = "5" filters = '1,2::1,2,3::No_Selection_On_Tree::NE,1,2::E,2::NE,1,2'/>-->
-        <!--<content id = "5" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::NE,1,2::E,2::Input' inputvalue="guavus.com,facebook.com"/>-->
-        <!--<usage id ="5" filters = 'NE,1,2'/>-->
-        <!--<quicklink id="5" locatorText="Yesterday"/>-->
-        <!--<measure id="5" locatorText="Volume (Download)"/>-->
+        <!--<segment id ="0" filters = 'E,1,2'/>-->
+        <!--<device id = "0" filters = 'NE,1,2::E,2::NE,1,2::E,2'/>-->
+        <!--<network id = "0" filters = '1,2::1,2,3::No_Selection_On_Tree::NE,1,2::E,2::NE,1,2'/>-->
+        <!--<content id = "0" filters = 'Do_Selection_On_Tree::Do_Selection_On_Tree::NE,1,2::E,2::Input' inputvalue="guavus.com,facebook.com"/>-->
+        <!--<usage id ="0" filters = 'NE,1,2'/>-->
+        <!--<quicklink id="0" locatorText="Last 7 days" table="daily_points"/>-->
+        <!--<quicklink id="0" locatorText="Yesterday"/>-->
+        <!--<measure id="0" locatorText="Volume (Download)"/>-->
+        <!--<testcase id="0" value=""/>-->
 
 
 
@@ -140,7 +145,9 @@
         <network id = "save_0" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "save_0" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="save_0" filters = ' '/>
-        <quicklink id="save_0" locatorText="Yesterday"/>
+        <quicklink id="save_0" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="save_0" locatorText="Yesterday"/>-->
+
         <measure id="save_0" locatorText="Volume (Download)"/>
 
 
@@ -150,7 +157,7 @@
         <content id = "save_1" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="save_1" filters = ' '/>
         <quicklink id="save_1" locatorText="Yesterday"/>
-        <measure id="save_1" locatorText="# Session"/>
+        <measure id="save_1" locatorText="Volume"/>
 
         <segment id ="save_2" filters = ' '/>
         <device id = "save_2" filters = ' ::E,1,2:: :: '/>
@@ -198,7 +205,7 @@
 
 
         <segment id ="edit_2" filters = ' '/>
-        <device id = "edit_2" filters = 'NE,0:: :: :: '/>
+        <device id = "edit_2" filters = 'NE,1:: :: :: '/>
         <network id = "edit_2" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "edit_2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="edit_2" filters = ' '/>
@@ -212,7 +219,7 @@
         <network id = "testCalender" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "testCalender" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="testCalender" filters = ' '/>
-        <quicklink id="testCalender" locatorText="CustomClick" startTime="2017 June 06 12 00" endTime="2017 May 12 05 00"/>
+        <quicklink id="testCalender" locatorText="CustomClick" startTime="2017 August 10 12 00" endTime="2017 August 10 03 00"/>
         <measure id="testCalender" locatorText="Volume"/>
 
 
@@ -221,7 +228,7 @@
         <network id = "toggle_NotEqual" filters = ' :: ::No_Selection_On_Tree::NE,0::NE,0::NE,0'/>
         <content id = "toggle_NotEqual" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::NE,0::NE,0::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="toggle_NotEqual" filters = 'NE,0'/>
-        <quicklink id="toggle_NotEqual" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>
+        <quicklink id="toggle_NotEqual" locatorText="CustomClick" startTime="2017 August 10 12 00" endTime="2017 August 10 15 00"/>
         <measure id="toggle_NotEqual" locatorText="Volume"/>
 
         <segment id ="toggle_Equal" filters = 'E,0'/>
@@ -229,7 +236,7 @@
         <network id = "toggle_Equal" filters = ' :: ::No_Selection_On_Tree::E,0::E,0::E,0'/>
         <content id = "toggle_Equal" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,0::E,0::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="toggle_Equal" filters = 'E,0'/>
-        <quicklink id="toggle_Equal" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>
+        <quicklink id="toggle_Equal" locatorText="CustomClick" startTime="2017 August 10 12 00" endTime="2017 August 10 15 00"/>
         <measure id="toggle_Equal" locatorText="Volume"/>
 
 
@@ -253,6 +260,7 @@
         <network id = "0" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "0" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="0" filters = ' '/>
+        <quicklink id="0" locatorText="Last 7 days" table="daily_points"/>
         <quicklink id="0" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
         <measure id="0" locatorText="Volume (Download)"/>
         <testcase id="0" value="MKR-1777"/>
@@ -262,7 +270,8 @@
         <network id = "1" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "1" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="1" filters = ' '/>
-        <quicklink id="1" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="1" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="1" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="1" locatorText="Volume (Download)"/>
         <testcase id="1" value="MKR-1779"/>
 
@@ -271,7 +280,8 @@
         <network id = "2" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="2" filters = ' '/>
-        <quicklink id="2" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="3" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="2" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="2" locatorText="Volume (Download)"/>
         <testcase id="2" value="MKR-1780"/>
 
@@ -280,7 +290,8 @@
         <network id = "3" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "3" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="3" filters = ' '/>
-        <quicklink id="3" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="3" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="3" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="3" locatorText="Volume (Download)"/>
         <testcase id="3" value="MKR-1781"/>
 
@@ -290,7 +301,8 @@
         <network id = "4" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "4" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="4" filters = ' '/>
-        <quicklink id="4" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <quicklink id="4" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="4" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>-->
         <measure id="4" locatorText="Volume (Download)"/>
         <testcase id="4" value="MKR-1782"/>
 
@@ -299,7 +311,8 @@
         <network id = "5" filters = '1,2:: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "5" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="5" filters = ' '/>
-        <quicklink id="5" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <quicklink id="5" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="5" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>-->
         <measure id="5" locatorText="Volume (Download)"/>
         <testcase id="5" value="MKR-1784"/>
 
@@ -308,7 +321,8 @@
         <network id = "6" filters = ' ::2,3::No_Selection_On_Tree:: :: :: '/>
         <content id = "6" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="6" filters = ' '/>
-        <quicklink id="6" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="6" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="6" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="6" locatorText="Volume (Download)"/>
         <testcase id="6" value="MKR-1785"/>
 
@@ -317,7 +331,8 @@
         <network id = "7" filters = ' :: ::No_Selection_On_Tree::E,2:: :: '/>
         <content id = "7" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="7" filters = ' '/>
-        <quicklink id="7" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="7" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="7" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="7" locatorText="Volume (Download)"/>
         <testcase id="7" value="MKR-1787"/>
 
@@ -326,7 +341,8 @@
         <network id = "8" filters = ' :: ::No_Selection_On_Tree:: ::E,2,3:: '/>
         <content id = "8" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="8" filters = ' '/>
-        <quicklink id="8" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <quicklink id="8" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="8" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>-->
         <measure id="8" locatorText="Volume (Download)"/>
         <testcase id="8" value="MKR-1788"/>
 
@@ -335,7 +351,8 @@
         <network id = "9" filters = ' :: ::No_Selection_On_Tree:: :: ::E,3'/>
         <content id = "9" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="9" filters = ' '/>
-        <quicklink id="9" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="9" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="9" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="9" locatorText="Volume (Download)"/>
         <testcase id="9" value="MKR-1789"/>
 
@@ -344,7 +361,8 @@
         <network id = "10" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "10" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,2,3,4:: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="10" filters = ' '/>
-        <quicklink id="10" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <quicklink id="10" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="10" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>-->
         <measure id="10" locatorText="Volume (Download)"/>
         <testcase id="10" value="MKR-1793"/>
 
@@ -354,7 +372,8 @@
         <network id = "11" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "11" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: ::E,3,4::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="11" filters = ' '/>
-        <quicklink id="11" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="11" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="11" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="11" locatorText="Volume (Download)"/>
         <testcase id="11" value="MKR-1794"/>
 
@@ -364,7 +383,8 @@
         <network id = "12" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "12" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="12" filters = ' '/>
-        <quicklink id="12" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <quicklink id="12" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="12" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 10 00" table="hourly_points"/>-->
         <measure id="12" locatorText="Volume (Download)"/>
         <testcase id="12" value="MKR-1795"/>
 
@@ -373,7 +393,8 @@
         <network id = "13" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "13" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="13" filters = 'E,2,3'/>
-        <quicklink id="13" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="13" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="13" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="13" locatorText="Volume (Download)"/>
         <testcase id="13" value="MKR-1797"/>
 
@@ -384,7 +405,8 @@
         <network id = "14" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "14" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="14" filters = ' '/>
-        <quicklink id="14" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="14" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="14" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="14" locatorText="Volume (Upload)"/>
         <testcase id="14" value="MKR-1777"/>
 
@@ -393,7 +415,8 @@
         <network id = "15" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "15" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="15" filters = ' '/>
-        <quicklink id="15" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <quicklink id="15" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="15" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>-->
         <measure id="15" locatorText="Volume (Upload)"/>
         <testcase id="15" value="MKR-1779"/>
 
@@ -402,7 +425,8 @@
         <network id = "16" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "16" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="16" filters = ' '/>
-        <quicklink id="16" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="16" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="16" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="16" locatorText="Volume (Upload)"/>
         <testcase id="16" value="MKR-1780"/>
 
@@ -411,7 +435,8 @@
         <network id = "17" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "17" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="17" filters = ' '/>
-        <quicklink id="17" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <quicklink id="17" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="17" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>-->
         <measure id="17" locatorText="Volume (Upload)"/>
         <testcase id="17" value="MKR-1781"/>
 
@@ -421,7 +446,8 @@
         <network id = "18" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "18" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="18" filters = ' '/>
-        <quicklink id="18" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <quicklink id="18" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="18" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 11 00" table="hourly_points"/>-->
         <measure id="18" locatorText="Volume (Upload)"/>
         <testcase id="18" value="MKR-1782"/>
 
@@ -430,7 +456,8 @@
         <network id = "19" filters = '2,3:: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "19" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="19" filters = ' '/>
-        <quicklink id="19" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <quicklink id="19" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="19" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>-->
         <measure id="19" locatorText="Volume (Upload)"/>
         <testcase id="19" value="MKR-1784"/>
 
@@ -439,7 +466,8 @@
         <network id = "20" filters = ' ::2::No_Selection_On_Tree:: :: :: '/>
         <content id = "20" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="20" filters = ' '/>
-        <quicklink id="20" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="20" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="20" locatorText="CustomClick" startTime="2017 June 06 11 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="20" locatorText="Volume (Upload)"/>
         <testcase id="20" value="MKR-1785"/>
 
@@ -448,6 +476,7 @@
         <network id = "21" filters = ' :: ::No_Selection_On_Tree::E,2,4:: :: '/>
         <content id = "21" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="21" filters = ' '/>
+        <quicklink id="21" locatorText="Last 7 days" table="daily_points"/>
         <quicklink id="21" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
         <measure id="21" locatorText="Volume (Upload)"/>
         <testcase id="21" value="MKR-1787"/>
@@ -457,7 +486,8 @@
         <network id = "22" filters = ' :: ::No_Selection_On_Tree:: ::E,1,2,3:: '/>
         <content id = "22" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="22" filters = ' '/>
-        <quicklink id="22" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="22" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="22" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="22" locatorText="Volume (Upload)"/>
         <testcase id="22" value="MKR-1788"/>
 
@@ -466,7 +496,8 @@
         <network id = "23" filters = ' :: ::No_Selection_On_Tree:: :: ::E,1,3'/>
         <content id = "23" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="23" filters = ' '/>
-        <quicklink id="23" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="23" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="23" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="23" locatorText="Volume (Upload)"/>
         <testcase id="23" value="MKR-1789"/>
 
@@ -475,7 +506,8 @@
         <network id = "24" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "24" filters = 'No_Selection_On_Tree::No_Selection_On_Tree::E,2,3:: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="24" filters = ' '/>
-        <quicklink id="24" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>
+        <quicklink id="24" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="24" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 10 00" table="hourly_points"/>-->
         <measure id="24" locatorText="Volume (Upload)"/>
         <testcase id="24" value="MKR-1793"/>
 
@@ -485,7 +517,8 @@
         <network id = "25" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "25" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: ::E,4::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="25" filters = ' '/>
-        <quicklink id="25" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="25" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="25" locatorText="CustomClick" startTime="2017 June 06 10 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="25" locatorText="Volume (Upload)"/>
         <testcase id="25" value="MKR-1794"/>
 
@@ -495,7 +528,8 @@
         <network id = "26" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "26" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::Input' inputvalue="facebook.com"/>
         <usage id ="26" filters = ' '/>
-        <quicklink id="26" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>
+        <quicklink id="26" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="26" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 11 00" table="hourly_points"/>-->
         <measure id="26" locatorText="Volume (Upload)"/>
         <testcase id="26" value="MKR-1795"/>
 
@@ -504,11 +538,12 @@
         <network id = "27" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "27" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="27" filters = 'E,1,2'/>
-        <quicklink id="27" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>
+        <quicklink id="27" locatorText="Last 7 days" table="daily_points"/>
+        <!--<quicklink id="27" locatorText="CustomClick" startTime="2017 June 06 09 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="27" locatorText="Volume (Upload)"/>
         <testcase id="27" value="MKR-1797"/>
 
-
+        <!--
         <segment id ="28" filters = 'E,2,4'/>
         <device id = "28" filters = ' :: :: :: '/>
         <network id = "28" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
@@ -769,38 +804,47 @@
         <measure id="55" locatorText="# Session"/>
         <testcase id="55" value="MKR-1797,MKR-3091"/>
 
-        <!--<segment id ="1" filters = ' '/>-->
-        <!--<device id = "1" filters = 'E,1,2::NE,0::E,1,2,3::E,1'/>-->
-        <!--<network id = "1" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
-        <!--<content id = "1" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
-        <!--<usage id ="1" filters = ' '/>-->
+        -->
+
+        <segment id ="28" filters = ' '/>
+        <device id = "28" filters = 'E,1,2::NE,0::E,1,2,3::E,1'/>
+        <network id = "28" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "28" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="28" filters = ' '/>
+        <quicklink id="28" locatorText="Last 7 days" table="daily_points"/>
         <!--<quicklink id="1" locatorText="CustomClick" startTime="2017 May 12 05 00" endTime="2017 June 06 12 00"/>-->
-        <!--<measure id="1" locatorText="Volume"/>-->
+        <measure id="28" locatorText="# Network Session"/>
+        <testcase id="28" value=""/>
 
-        <!--<segment id ="2" filters = ' '/>-->
-        <!--<device id = "2" filters = ' :: :: :: '/>-->
-        <!--<network id = "2" filters = '1,2::2,4::Do_Selection_On_Tree::E,1,2,3::E,1,2::NE,2,4'/>-->
-        <!--<content id = "2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
-        <!--<usage id ="2" filters = ' '/>-->
+        <segment id ="29" filters = ' '/>
+        <device id = "29" filters = ' :: :: :: '/>
+        <network id = "29" filters = '1,2::2,4::Do_Selection_On_Tree::E,1,2,3::E,1,2::NE,2,4'/>
+        <content id = "29" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="29" filters = ' '/>
+        <quicklink id="29" locatorText="Last 7 days" table="daily_points"/>
         <!--<quicklink id="2" locatorText="Last 24 hours"/>-->
-        <!--<measure id="2" locatorText="Volume"/>-->
+        <measure id="29" locatorText="# IAB Session"/>
+        <testcase id="29" value=""/>
 
-        <!--<segment id ="3" filters = ' '/>-->
-        <!--<device id = "3" filters = ' :: :: :: '/>-->
-        <!--<network id = "3" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
-        <!--<content id = "3" filters = 'Do_Selection_On_Tree::No_Selection_On_Tree::E,2::NE,2,4::Input' inputvalue="guavus.com,facebook.com"/>-->
-        <!--<usage id ="3" filters = ' '/>-->
+        <segment id ="30" filters = ' '/>
+        <device id = "30" filters = ' :: :: :: '/>
+        <network id = "30" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "30" filters = 'Do_Selection_On_Tree::No_Selection_On_Tree::E,2::NE,2,4::Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="30" filters = ' '/>
+        <quicklink id="30" locatorText="Last 7 days" table="daily_points"/>
         <!--<quicklink id="3" locatorText="Last 7 days" table="hourly_points"/>-->
-        <!--<measure id="3" locatorText="Volume (Upload)"/>-->
+        <measure id="30" locatorText="Volume (Upload)"/>
+        <testcase id="30" value=""/>
 
-        <!--<segment id ="4" filters = ' '/>-->
-        <!--<device id = "4" filters = ' :: :: :: '/>-->
-        <!--<network id = "4" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>-->
-        <!--<content id = "4" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>-->
-        <!--<usage id ="4" filters = 'E,0'/>-->
+        <segment id ="31" filters = ' '/>
+        <device id = "31" filters = ' :: :: :: '/>
+        <network id = "31" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
+        <content id = "31" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
+        <usage id ="31" filters = 'E,0'/>
+        <quicklink id="31" locatorText="Last 7 days" table="daily_points"/>
         <!--<quicklink id="4" locatorText="Today"/>-->
-        <!--<measure id="4" locatorText="# Session"/>-->
-
+        <measure id="31" locatorText="# Contextual Session"/>
+        <testcase id="31" value=""/>
 
     </udpScreenFilters>
 
@@ -900,8 +944,20 @@
       <measure id = "Volume (Download)" backEnd_ID="downbytes" /> 
       <measure id = "Volume (Upload)" backEnd_ID="upbytes" /> 
       <measure id = "Volume" backEnd_ID="upbytes,downbytes" />  
-      <measure id = "# Session" backEnd_ID="sessioncount" /> 
+      <!--<measure id = "# Session" backEnd_ID="sessioncount" />-->
+      <measure id = "# Network Session" backEnd_ID="# Network Session" />
+      <measure id = "# Web Domain Session" backEnd_ID="# Web Domain Session" />
+      <measure id = "# IAB Session" backEnd_ID="# IAB Session" />
+      <measure id = "# Contextual Session" backEnd_ID="# Contextual Session" />
+       
   </measure_Mapping>
+
+  <segment_Filters_Mapping>
+      <measure id = "Segment Name" backEnd_ID="campaign_name" /> 
+      <measure id = "Owner" backEnd_ID="campaign_owner_name" /> 
+      <measure id = "User Count" backEnd_ID="segment_size" />  
+      <measure id = "# Session" backEnd_ID="sessioncount" /> 
+  </segment_Filters_Mapping>
 
 
 </data>

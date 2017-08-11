@@ -88,19 +88,27 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         activeDropDowns[index].click()
         return self.getSelection(h,index)
 
-    def setEqualOrNotEqualIcon(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=1):
+    def setEqualOrNotEqualIcon(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=0):
         try:
             activeDropDowns = self.getAllActiveElements(h[parent][child])
             activeDropDowns[index].click()
             time.sleep(2)
-            if 'E' in value and 'not-equal' in activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].get_attribute('class'):
-                activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].click()
-            elif 'NE' in value and 'equal' in activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].get_attribute('class'):
-                activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].click()
+            if 'E' in value and 'not-equal' in activeDropDowns[index].find_elements_by_css_selector('i[class*=equal-sign-style]')[E_NE_index].get_attribute('class'):
+                #activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].click()
+
+                activeDropDowns[index].find_elements_by_css_selector('i[class*=equal-sign-style]')[E_NE_index].click()
+
+            elif 'NE' in value and 'equal' in activeDropDowns[index].find_elements_by_css_selector('i[class*=equal-sign-style]')[E_NE_index].get_attribute('class'):
+
+                #activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].click()
+
+                activeDropDowns[index].find_elements_by_css_selector('i[class*=equal-sign-style]')[E_NE_index].click()
+
             elif not('E' in value) and not('NE' in value):
                 return ''
 
-            valueFromUI=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
+            #valueFromUI=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
+            valueFromUI = str(activeDropDowns[index].find_elements_by_css_selector('span[class*=sign-txt-style]')[E_NE_index].text)
             activeDropDowns[index].click()
 
             return valueFromUI
@@ -132,8 +140,10 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             activeDropDowns = self.getAllActiveElements(h[parent][child])
             activeDropDowns[index].click()
             time.sleep(2)
-            elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
+            #elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
             #elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menuitem"]')
+            elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menu-item"]')
+
             for i in range(len(elements)):
                 if i in value or str(i) in value:
                     elements[i].click()

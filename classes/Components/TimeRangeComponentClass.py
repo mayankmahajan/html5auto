@@ -52,9 +52,9 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
             endtimeEpoch=getepoch(endtime)
             endtimeEpoch=endtimeEpoch-3600
             endtime=getDateString(endtimeEpoch)
-            return starttime.split(" ")[0] + " " + starttime.split(" ")[1] + " " + starttime.split(" ")[2] + " to " + endtime.split(" ")[0] + " " + endtime.split(" ")[1] + " " + endtime.split(" ")[2]
+            return starttime.split(" ")[0] + " " + starttime.split(" ")[1] + " " + starttime.split(" ")[2] + " "+Constants.TimeRangeSpliter+" " + endtime.split(" ")[0] + " " + endtime.split(" ")[1] + " " + endtime.split(" ")[2]
         else:
-            return starttime+" to "+endtime
+            return starttime+" "+Constants.TimeRangeSpliter+" "+endtime
 
     def get_Label(self, quicklink, flag=Constants.FLAGHOURLY, stEtCombID=0):
 
@@ -279,13 +279,13 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
     @staticmethod
     def setQuickLink(value,h,parent="ktrs",child="bar"):
         try:
-            logger.info("Going to click quicklink from KTRS = %s",str(value))
-            quicklinkHandlers = h[parent][child][0].find_elements_by_xpath("./*")[2]
-            quickLinkToClick = quicklinkHandlers.find_elements_by_xpath('//a[contains(text(), "' + value + '")]')
-            logger.info("Got Quicklink(s) with text = %s on the KTRS = %d ",str(value),len(quickLinkToClick))
-            logger.info("Going to click on Quicklink = %s",str(quickLinkToClick[0].text))
-            quickLinkToClick[0].click()
-            logger.info("Quicklink clicked successfully")
+            # logger.info("Going to click quicklink from KTRS = %s",str(value))
+            # quicklinkHandlers = h[parent][child][0].find_elements_by_xpath("./*")[2]
+            # quickLinkToClick = quicklinkHandlers.find_elements_by_xpath('//a[contains(text(), "' + value + '")]')
+            # logger.info("Got Quicklink(s) with text = %s on the KTRS = %d ",str(value),len(quickLinkToClick))
+            # logger.info("Going to click on Quicklink = %s",str(quickLinkToClick[0].text))
+            # quickLinkToClick[0].click()
+            # logger.info("Quicklink clicked successfully")
             return True
         except Exception as e:
             logger.error("Got Exception while clicking quicklink = %s from KTRS = %s",str(value),str(e))

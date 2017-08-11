@@ -9,11 +9,13 @@ class Constants(object):
     # URL = "https://uiscrummural.cisco.com:6443/"
 
     PROJECT = "MRX"
-    # PROJECT = ""
+    #PROJECT = ""
     if PROJECT == "MRX":
         byteUnits = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        TimeRangeSpliter='-'
     else:
         byteUnits = ["", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        TimeRangeSpliter = 'to'
 
     BROWSER = "chrome"
     # BROWSER = "ff"
@@ -26,7 +28,9 @@ class Constants(object):
         #URL = "https://uiscrum-mural.cisco.com:6443"
         #URL = "https://ucsd.cisco.com:7443"
         #URL="http://192.168.174.71:9080"
-        URL="http://192.168.113.191:9080/app/user-distribution"
+        #URL="http://192.168.113.191:9080/app/user-distribution"
+        URL="http://192.168.195.144:9080"
+        #URL="https://funupgrade.guavus.com:6443"
         #URL="http://192.168.192.204:28080/"
         #URL="http://192.168.195.57:28080/"
         #URL="http://192.168.162.33:9080/"

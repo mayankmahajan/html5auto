@@ -22,7 +22,12 @@
         <measure id = "volumeD" locatorText="Volume (Download)" isCount="sum"/> 
         <measure id = "volumeU" locatorText="Volume (Upload)" isCount="sum" /> 
         <measure id = "volume" locatorText="Volume" isCount="sum" />  
-        <measure id = "session" locatorText="# Session" isCount="sum" /> 
+        <measure id ="network_session" locatorText="# Network Session" isCount="sum" />
+        <!--<measure id = "session" locatorText="# Session" isCount="sum" /> -->
+        <measure id ="web_domain_session" locatorText="# Web Domain Session" isCount="sum" />
+        <measure id ="iab_session" locatorText="# IAB Session" isCount="sum" />
+        <measure id ="contextual_session" locatorText="# Contextual Session" isCount="sum" />
+
     </ud_measures>    
 
 
@@ -199,7 +204,8 @@
 
         <componentConfig id="filterPopup">
             <component id="header" selector="class name" locator="headerDiv"/>
-            <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
+            <!--<component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>-->
+            <component id = "multiselect-dropdown" selector="tag name" locator="mrx-multiselect-dropdown" wait="skip"/>
             <component id = "tree" selector="tag name" locator="tree" wait="skip"/>
             <component id="allfilters" selector="class name" locator="filterTextDiv" wait="skip"/>
 
