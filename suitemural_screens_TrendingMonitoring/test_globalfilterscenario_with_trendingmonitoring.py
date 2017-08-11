@@ -58,5 +58,4 @@ except Exception as e:
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
     resultlogger.info("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
-    raise e
     setup.d.close()

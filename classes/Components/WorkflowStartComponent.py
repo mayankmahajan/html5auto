@@ -17,10 +17,10 @@ class WorkflowStartComponentClass(BaseComponentClass):
                     logger.info("Going to launch = %s",str(el.text))
                     el.click()
                     logger.info("Launched = %s",str(name))
+                    return True
         except Exception as e:
             logger.error("Exception caught while launching = %s",name)
             raise e
-            return e
 
 
 
