@@ -276,16 +276,16 @@ class TimeRangeComponentClass(QuicklinkTimeRangeComponentClass):
             return e
 
 
-    @staticmethod
-    def setQuickLink(value,h,parent="ktrs",child="bar"):
+    # @staticmethod
+    def setQuickLink(self,value,h,parent="ktrs",child="bar"):
         try:
-            # logger.info("Going to click quicklink from KTRS = %s",str(value))
-            # quicklinkHandlers = h[parent][child][0].find_elements_by_xpath("./*")[2]
-            # quickLinkToClick = quicklinkHandlers.find_elements_by_xpath('//a[contains(text(), "' + value + '")]')
-            # logger.info("Got Quicklink(s) with text = %s on the KTRS = %d ",str(value),len(quickLinkToClick))
-            # logger.info("Going to click on Quicklink = %s",str(quickLinkToClick[0].text))
-            # quickLinkToClick[0].click()
-            # logger.info("Quicklink clicked successfully")
+            logger.info("Going to click quicklink from KTRS = %s",str(value))
+            quicklinkHandlers = h[parent][child][0].find_elements_by_xpath("./*")[2]
+            quickLinkToClick = self.getAllActiveElements(quicklinkHandlers.find_elements_by_xpath('//a[contains(text(), "' + value + '")]'))
+            logger.info("Got Quicklink(s) with text = %s on the KTRS = %d ",str(value),len(quickLinkToClick))
+            logger.info("Going to click on Quicklink = %s",str(quickLinkToClick[0].text))
+            quickLinkToClick[0].click()
+            logger.info("Quicklink clicked successfully")
             return True
         except Exception as e:
             logger.error("Got Exception while clicking quicklink = %s from KTRS = %s",str(value),str(e))
