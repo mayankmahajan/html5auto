@@ -10,7 +10,7 @@ from Utils.Constants import *
 def sendResults(filePath,additional_text="",subject=''):
     strFrom = 'mayank.mahajan@guavus.com'
     #strTo = 'praveen.garg1@guavus.com,mayank.mahajan@guavus.com,Saikat.Prabhakar@guavus.com'
-    strTo = 'praveen.garg1@guavus.com'
+    strTo = 'automation-ui-st@guavus.com'
     smtp_server = "smtp-relay.guavus.com"
 
     # Create the root message and fill in the from, to, and subject headers
