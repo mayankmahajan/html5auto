@@ -93,7 +93,8 @@ def checkEqualAssert(expected, actual, time="", measure="", message="",testcase_
     tcPass = "<b><font color='green'> PASS</font></b><br>"
     tcFail = "<b><font color='red'> FAIL</font></b><br>"
 
-    if type(expected)==list and type(actual)==list:
+
+    if type(expected)==list and type(actual)==list and expected!=actual:
         for i in range(len(expected)):
             checkEqualValueAssert(expected[i],actual[i],time,measure,message,testcase_id)
 
@@ -182,7 +183,7 @@ def checkEqualValueAssert(expected, actual, time="", measure="", message="",test
 
 
 
-def verifySortingWithSomeDifference(dataListInRawForm,percentageAllow=Constants.PercentageAllowedinDiff,order='DES'):
+def verifySortingWithSomeDifference(dataListInRawForm,percentageAllow=Constants.PercentageAllowedinDiff,order='DESC'):
     sorting_Flag=True
     for j in range(1, len(dataListInRawForm)):
         if (dataListInRawForm[j] - dataListInRawForm[j - 1])> 0 and order=='DESC':
@@ -1015,6 +1016,53 @@ def parseTimeRange(datestring,timezone,pattern="%Y-%m-%d",delimiter = '-'):
     startime = getepoch(datestring.split(delimiter)[0].strip(), timezone, pattern)
     endtime = getepoch(datestring.split(delimiter)[1].strip(), timezone, pattern)
     return startime,endtime
+
+
+def parseTimeRange1(datestring,timezone=Constants.TIMEZONEOFFSET,pattern=Constants.TIMEPATTERN,delimiter= Constants.TimeRangeSpliter):
+
+    if len(datestring.split(delimiter))>1:
+        startTimeString=str(datestring.split(delimiter)[0]).strip()
+        endTimeString=str(datestring.split(delimiter)[1]).strip()
+
+        startEpoch=getEpoch1(starttime=startTimeString,timezone=timezone,pattern=pattern)
+        endEpoch=getEpoch1(endtime=endTimeString,timezone=timezone,pattern=pattern)
+
+    else:
+        startEpoch = getEpoch1(starttime=str(datestring).strip(), timezone=timezone, pattern=pattern)
+        endEpoch = getEpoch1(endtime=str(datestring).strip(), timezone=timezone, pattern=pattern)
+
+    logger.debug("Date From Calender i.e ="+str(datestring)+" Converted in to epoch:: StartTime = "+str(startEpoch)+" EndTime = "+str(endEpoch) + " With Parameter [TimeZone,pattern,delimiter_between_Start_And_End] = "+str([str(timezone)+" , "+str(pattern)+" , "+str(delimiter)]))
+    return startEpoch,endEpoch
+
+
+def getEpoch1(starttime="",endtime="",timezone=Constants.TIMEZONEOFFSET,pattern=Constants.TIMEPATTERN):
+    try:
+        if str(starttime)!="":
+            if len(str(starttime).strip().split(" "))==3:
+                starttime=str(starttime).strip()+" 00:00"
+
+            return getepoch(str(starttime).strip(),timezone,pattern)
+
+        if str(endtime)!="":
+            if len(str(endtime).strip().split(" "))==3:
+                endtime=str(endtime).strip()+" 23:00"
+                return getepoch(str(endtime).strip(), timezone, pattern) +3600
+
+            elif len(str(endtime).strip().split(" "))==4 and str(str(endtime).strip().split(" ")[3].split(":")[0])=="24":
+                tmp = str(endtime).strip().split(" ")
+                del tmp[3]
+                tmp.append("23:00")
+                endtime=" ".join(tmp)
+                return getepoch(str(endtime).strip(), timezone, pattern) + 3600
+
+            return getepoch(str(endtime).strip(),timezone,pattern)
+
+        else:
+            return 0
+
+    except Exception as e:
+        logger.info("Not able to convert date string into epoch (check manually)")
+        return e
 
 def createreport(setup,reportType,reportObj,time):
     '''
