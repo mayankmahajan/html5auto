@@ -70,6 +70,8 @@ class MultipleBTVComponentClass(BaseComponentClass):
         data = {}
         data[child1] = self.getData(h,child=child1,occurence=occurence)
         data[child2] = self.getData(h,child=child2,occurence=occurence)
+
+        logger.debug("Selected btv data = %s",str(data))
         return data
 
     def getData(self,handlrs,parent="btvGroup",child="BTVCOLUMN1",occurence=0):

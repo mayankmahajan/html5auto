@@ -133,7 +133,15 @@ def setQuickLink_Measure(setup,udScreenInstance,i='0'):
             setCalendar(et_year, et_month, et_day, et_hour, et_min, udScreenInstance, setup, Constants.CALENDERPOPUP,"rightcalendar")
 
             valueFromCalender1 = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-            button_Status(False,"When Start Time > End Time ==> Selected Time Range ="+valueFromCalender1, udScreenInstance, setup,Constants.CALENDERPOPUP, "Apply",testcase_id='MKR-3188')
+
+            stepoch,etepoch=parseTimeRange1(valueFromCalender1,timezone=MRXConstants.TIMEZONEOFFSET)
+            try:
+                if etepoch-stepoch <=0:
+                    button_Status(False,"When Start Time > End Time ==> Selected Time Range ="+valueFromCalender1, udScreenInstance, setup,Constants.CALENDERPOPUP, "Apply",testcase_id='MKR-3188')
+                else:
+                    checkEqualAssert(True,etepoch-stepoch>=0,"Not allow to choose StartTime > EndTime",testcase_id='MKR-3188')
+            except:
+                logger.info("Skipping TestCase = "+ str('MKR-3188'))
 
             monthListFormLeftCalender=getAvailableMonthList(setup,parent='leftcalendar')
             checkEqualAssert(MRXConstants.MONTHLIST,monthListFormLeftCalender,message='Verify that all the months should be there in the custom calendar (Left Calender)',testcase_id='MKR-3191')
@@ -283,7 +291,8 @@ def setFilters(setup,udpScreenInstance,tab_name,k ="0",toggleStateFlag=False):
 
         elif len(udp_filter[k][i]) ==1 and udp_filter[k][i][0] == 'Do_Selection_On_Tree':
             treeHandle=getHandle(setup,MRXConstants.UDPPOPUP,'alltrees')
-            udpScreenInstance.tree.expandTree(treeHandle, index=treeindex)
+            #udpScreenInstance.tree.expandTree(treeHandle, index=treeindex)
+            udpScreenInstance.tree.expandTree(setup, treeHandle, index=treeindex)
             level_Dict = udpScreenInstance.tree.seprateElementOfTreeByLevel(treeHandle, index=treeindex)
             expectedFromUI, expected, selected = udpScreenInstance.tree.doSelectionOnTree_Random(setup, level_Dict,treeHandle, index=treeindex)
             checkEqualDict(expected,selected,message='Verify selection on Tree',doSortingBeforeCheck=True)
@@ -316,6 +325,7 @@ def setFilters(setup,udpScreenInstance,tab_name,k ="0",toggleStateFlag=False):
                 filterSelected.append(inputvalue.split(','))
 
         elif len(udp_filter[k][i]) == 1 and udp_filter[k][i][0] == 'No_Input':
+            udpScreenInstance.cm.sendkeys_input("", getHandle(setup, MRXConstants.UDPPOPUP, 'allinputs'),inputFieldIndex)
             inputFieldIndex = inputFieldIndex + 1
             if toggleStateFlag:
                 toggleStateList.append('')
@@ -394,15 +404,17 @@ def getAllSelectedFilters(h,parent="filterArea",child="filterText",flag=True):
                     if flag==True:
                         temp = []
                         # ele.send_keys(Keys.NULL)
-                        uifilter = str(ele.text).split(':')
-                        if '>' in uifilter[1]:
-                            filters[uifilter[0].strip()]=[str(uifilter[1]).strip()]
+                        uifilter = str(ele.text).split(': ')
+                        if len(uifilter)==1:
+                            filters[uifilter[0].strip().rstrip(':').strip()] = [str("").strip()]
                         else:
-                            for s in uifilter[1].split(Delimiter):
-                                temp.append(s.strip())
-                            filters[uifilter[0].strip()] = temp
+                            if '>' in uifilter[1]:
+                                filters[uifilter[0].strip()]=[str(uifilter[1]).strip()]
+                            else:
+                                for s in uifilter[1].split(Delimiter):
+                                    temp.append(s.strip())
+                                filters[uifilter[0].strip()] = temp
                             # sleep(2)
-
                     else:
                         #for handling : and , for MRX Segment filter
                         key_value=(ele.text).split(':', 1)
@@ -565,6 +577,7 @@ def createSegmentFromUD(setup,screenInstance,segment_Input):
         return [],detailFromUI_Dict,textFromPopUp
 
     else:
+        screenInstance.cm.clickButton('Cancel',popUpHandle)
         return [], detailFromUI_Dict, textFromPopUp
 
 
@@ -876,7 +889,7 @@ def validateRangeAndSortingInTable(udScreenInstance,data,selectedQuicklink, sele
     selectedMeasure_value_list = [element[index] for element in data['rows']]
 
     unitFlagForSession = False
-    if selectedMeasure == '# Session':
+    if 'Session' in selectedMeasure:
         for i in range(len(selectedMeasure_value_list)):
             if len(re.findall(r'[a-zA-Z]+', selectedMeasure_value_list[i])) != 0:
                 unitFlagForSession=True
@@ -934,7 +947,7 @@ def validateRangeAndSortingInChart(rangeList,data,selectedQuicklink, selectedMea
 
 
     unitFlagForSession=False
-    if selectedMeasure == '# Session':
+    if 'Session' in selectedMeasure:
         for i in range(0, len(data.keys())):
             if len(re.findall(r'[a-zA-Z]+', data[i * 5])) != 0:
                 unitFlagForSession=True

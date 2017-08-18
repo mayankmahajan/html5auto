@@ -84,7 +84,7 @@ try:
         checkEqualDict(detailFromScreen_Dict,detailFromPopup_Dict,message='Verify Same Detail on Create Segment Popup',testcase_id='MKR-1816')
 
         exploreScreenInstance.exploreList.launchModule(getHandle(setup,'explore_Screen'), "SEGMENTS")
-        time.sleep(3)
+        time.sleep(8)
         udScreenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
 
         tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
@@ -110,7 +110,10 @@ try:
             if 'Rejected' in status_from_Popup:
                 checkEqualAssert(str(status_from_Popup),str(status_from_table),message='Verify Rejected status of new added segment')
             else:
-                checkEqualAssert(True, str(status_from_table)=='Completed' or str(status_from_table)=='Running',message='Verify status of new added segment ')
+                if str(status_from_table)=='Running':
+                    checkEqualAssert('Completed',str(status_from_table),message='Verify status of new added segment (Job may be running Check manually)')
+                else:
+                    checkEqualAssert('Completed',str(status_from_table),message='Verify status of new added segment')
 
             checkEqualAssert(str(createdon_from_Popup.split(":")[0]).strip(),str(createdon_from_table.split(':')[0]).strip(),'','','Verify Created on from UI..... Expected ='+createdon_from_Popup+' Actual ='+createdon_from_table)
             checkEqualAssert(tableMap['rows'][segmentDetail['segmentname']], addedSegmentDetail,message="Verify Segment Detail From table, Details ="+str(addedSegmentDetail))

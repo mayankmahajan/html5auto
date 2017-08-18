@@ -82,7 +82,7 @@ class SwitcherComponentClass(BaseComponentClass):
             divs = h[parent][child]
             selectedSwitcher = []
             for i in range(len(divs)):
-                if "selected" in str(divs[i].get_attribute("ng-reflect-class-name")).lower():
+                if "selected" in str(divs[i].get_attribute("class")).lower():  # changes "ng-reflect-class" to "class" in get_attribute
                     selectedSwitcher.append(i)
             time.sleep(2)
             return selectedSwitcher

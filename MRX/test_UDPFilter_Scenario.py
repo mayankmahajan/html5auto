@@ -113,8 +113,21 @@ try:
     udpFilterFromScreen = UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
     checkEqualAssert(MRXConstants.NO_FILTER, udpFilterFromScreen,message="Verify that on pressing X button the selections made on User Distribution Parameters, selected filters do not get applied and the page",testcase_id='MKR-1761')
 
+    UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+    SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+
+    expected = {}
+    UDHelper.setUDPFilters(udScreenInstance, setup, str('web_domain1'))
+    expected = UDHelper.setUDPFilters(udScreenInstance, setup, str('web_domain2'))
+    isError(setup)
+    udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+    udpFilterFromScreen= UDHelper.getUDPFiltersFromScreen(MRXConstants.UDSCREEN, setup)
+
+    checkEqualDict(expected,udpFilterFromScreen,message="Verify filter after removing web domain value")
+
+
     '''
-    ############################################## For Toggle State ########################################################
+    ############################################# For Toggle State ########################################################
 
     UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
     SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
@@ -182,7 +195,10 @@ try:
 
         # apply global filters
         udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
-        isError(setup)
+        response=isError(setup)
+        if response[0]:
+            setup.d.close()
+            continue
 
         h = getHandle(setup, MRXConstants.UDSCREEN, 'time_measure')
         timeRangeFromScreen=str(h['time_measure']['span'][0].text).strip()
