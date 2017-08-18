@@ -447,7 +447,8 @@ class BaseComponentClass:
     def isButtonEnabled(self,value,h,parent="allbuttons",child="button"):
         for el in h[parent][child]:
             try:
-                if value == el.text.strip():
+                #if value == el.text.strip():
+                if str(value).lower() == str(el.text.strip()).lower():
                     try:
                         return el.is_enabled()
                     except ElementNotVisibleException or ElementNotSelectableException or Exception as e:
