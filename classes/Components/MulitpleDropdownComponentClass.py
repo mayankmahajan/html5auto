@@ -2,6 +2,7 @@ from DropdownComponentClass import DropdownComponentClass
 from Utils.ConfigManager import ConfigManager
 import time
 from Utils.logger import *
+from Utils.Constants import *
 
 class MulitpleDropdownComponentClass(DropdownComponentClass):
 
@@ -10,9 +11,17 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         self.configmanager = ConfigManager()
         self.utility = __import__("Utils.utility")
 
-
-
     def getSelection(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
+        try:
+            if Constants.PROJECT=="MRX":
+                return self.getSelection_MRX(h,index,parent,child)
+            elif Constants.PROJECT=="MURAL":
+                return self.getSelection_MURAL(h,index,parent,child)
+
+        except Exception as e:
+            raise e
+
+    def getSelection_MURAL(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
         time.sleep(1)
         activeDropDowns[index].click()
@@ -40,7 +49,7 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             try:
                 for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[checked="true"]'):
                     flag=True
-                    if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All":
+                    if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All" or e.find_elements_by_xpath("../../div")[0].text.strip() == "All":
                         selections.append("ALL")
                         activeDropDowns[index].click()
                         return selections
@@ -54,6 +63,45 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
         activeDropDowns[index].click()
         time.sleep(1)
         return selections
+
+
+    def getSelection_MRX(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
+        activeDropDowns = self.getAllActiveElements(h[parent][child])
+        time.sleep(1)
+        activeDropDowns[index].click()
+        selections = []
+
+        flag = False
+        try:
+            for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[ng-reflect-checked="true"],[ng-reflect-ng-class="menu-item-selected"]'):
+                flag = True
+                # commenting below lines to get all selected values in dropdown (Below if is only for Global Filter Scenario)
+                if e.find_elements_by_xpath("../../div")[0].text.strip() == "Select All" or e.find_elements_by_xpath("../../div")[0].text.strip() == "All":
+                    selections.append("ALL")
+                    activeDropDowns[index].click()
+                    return selections
+                selections.append(e.find_elements_by_xpath("../../div")[0].text)
+                # selections.append(e.find_elements_by_xpath("..//div")[0].text)
+            if not flag:
+                selections.append("")
+        except Exception as e:
+            try:
+                for e in activeDropDowns[index].find_elements_by_css_selector('[ng-reflect-model="true"],[checked="true"],[ng-reflect-ng-class="menu-item-selected"]'):
+                    flag=True
+                    if e.find_elements_by_xpath("..//div")[0].text.strip() == "Select All" or e.find_elements_by_xpath("..//div")[0].text.strip() == "All":
+                        selections.append("ALL")
+                        activeDropDowns[index].click()
+                        return selections
+                    selections.append(e.find_elements_by_xpath("..//div")[0].text)
+                if not flag:
+                    selections.append("")
+            except Exception as e:
+                logger.error("Exception %s found while getting current selection, Component: MulitpleDropdownComponentClass",e)
+
+        activeDropDowns[index].click()
+        time.sleep(1)
+        return selections
+
 
     def getSelectionWithIndex(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
@@ -118,13 +166,14 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             #raise e
             return e
 
-    def getToggleStateInMultiDropDown(self,h,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=1):
+    def getToggleStateInMultiDropDown(self,h,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=0):
         try:
             activeDropDowns = self.getAllActiveElements(h[parent][child])
             activeDropDowns[index].click()
             time.sleep(2)
 
-            togglevalue=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
+            #togglevalue=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
+            togglevalue = str(activeDropDowns[index].find_elements_by_css_selector('span[class*=sign-txt-style]')[E_NE_index].text)
             activeDropDowns[index].click()
 
             return togglevalue
@@ -134,14 +183,64 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             #raise e
             return e
 
+    # def domultipleSelectionWithIndex(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False):
+    #     try:
+    #         activeDropDowns = self.getAllActiveElements(h[parent][child])
+    #         activeDropDowns[index].click()
+    #         time.sleep(2)
+    #         #elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
+    #         elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menuitem"]')
+    #
+    #         for i in range(len(elements)):
+    #             if i in value or str(i) in value:
+    #                 elements[i].click()
+    #
+    #         activeDropDowns[index].click()
+    #         return self.getSelection(h,index,parent,child)
+    #     except Exception as e:
+    #         if setup != False:
+    #             self.utility.utility.isError(setup)
+    #         raise e
+
 
     def domultipleSelectionWithIndex(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False):
+        try:
+            if Constants.PROJECT=="MRX":
+                return self.domultipleSelectionWithIndex_MRX(h,value,index,parent,child,setup)
+            elif Constants.PROJECT=="MURAL":
+                return self.domultipleSelectionWithIndex_MURAL(h,value,index,parent,child,setup)
+        except Exception as e:
+            if setup != False:
+                self.utility.utility.isError(setup)
+            raise e
+
+
+    def domultipleSelectionWithIndex_MURAL(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False):
         try:
             activeDropDowns = self.getAllActiveElements(h[parent][child])
             activeDropDowns[index].click()
             time.sleep(2)
             #elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
-            #elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menuitem"]')
+            elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menuitem"]')
+
+            for i in range(len(elements)):
+                if i in value or str(i) in value:
+                    elements[i].click()
+
+            activeDropDowns[index].click()
+            return self.getSelection(h,index,parent,child)
+        except Exception as e:
+            if setup != False:
+                self.utility.utility.isError(setup)
+            raise e
+
+
+    def domultipleSelectionWithIndex_MRX(self,h,value,index,parent="filterPopup",child="multiselect-dropdown",setup=False):
+        try:
+            activeDropDowns = self.getAllActiveElements(h[parent][child])
+            activeDropDowns[index].click()
+            time.sleep(2)
+            #elements = activeDropDowns[index].find_elements_by_css_selector('input[type="checkbox"]')
             elements = activeDropDowns[index].find_elements_by_css_selector('div[class="menu-item"]')
 
             for i in range(len(elements)):
@@ -154,11 +253,10 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             if setup != False:
                 self.utility.utility.isError(setup)
             raise e
-            return e
 
-    def getOptionsAvailable(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
+    def getOptionsAvailable_MRX(self,h,index,parent="filterPopup",child="multiselect-dropdown"):
         activeDropDowns = self.getAllActiveElements(h[parent][child])
-        return [el.text for el in activeDropDowns[index].find_elements_by_class_name("menuitem")]
+        return [el.text for el in activeDropDowns[index].find_elements_by_class_name("menu-item")]
 
 
     def doSearch(self,h,value,index,parent="filterPopup",child="multiselect-dropdown"):
@@ -169,7 +267,7 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
             if el.get_attribute("type") == "text":
                 el.send_keys(value)
                 #return self.getOptionsAvailable(h,index)
-                valueList=self.getOptionsAvailable(h,index)
+                valueList=self.getOptionsAvailable_MRX(h,index)
                 activeDropDowns[index].click()
                 return valueList
 
