@@ -9,13 +9,16 @@ class Constants(object):
     # URL = "https://uiscrummural.cisco.com:6443/"
 
     PROJECT = "MRX"
-    #PROJECT = ""
+    #PROJECT = "MURAL"
     if PROJECT == "MRX":
         byteUnits = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
         TimeRangeSpliter='-'
+        ConfigXMLFile=['../configs/mural_coreconfig.xml', '../configs/mrx_solutionconfig.xml','../configs/mrx_userlevel_config.xml']
     else:
         byteUnits = ["", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
         TimeRangeSpliter = 'to'
+        ConfigXMLFile=['../configs/mural_coreconfig.xml', '../configs/mural_solutionconfig.xml', '../configs/mural_userlevel_config.xml']
+
 
     BROWSER = "chrome"
     # BROWSER = "ff"

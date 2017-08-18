@@ -15,6 +15,8 @@ from xml.etree.ElementTree import TreeBuilder
 from xml.etree.ElementTree import ElementTree
 import glob
 from Utils.logger import *
+from Utils.Constants import *
+
 import copy
 
 from Utils.XMLCombiner import XMLCombiner
@@ -26,9 +28,10 @@ class ConfigManager(object):
     def __init__(self):
         # self.tree = self.mergeScreenConfigs()
         # self.tree = self.parse()
-        self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mural_solutionconfig.xml', '../configs/mural_userlevel_config.xml']).combine()
+        self.tree = XMLCombiner(Constants.ConfigXMLFile).combine()
+        #self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mural_solutionconfig.xml', '../configs/mural_userlevel_config.xml']).combine()
 
-        # self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mrx_solutionconfig.xml','../configs/mrx_userlevel_config.xml']).combine()
+        #self.tree = XMLCombiner(['../configs/mural_coreconfig.xml', '../configs/mrx_solutionconfig.xml','../configs/mrx_userlevel_config.xml']).combine()
 
         # self.tree = XMLCombiner(['../configs/copy_coreconfig.xml', '../configs/copy_solutionconfig.xml']).combine()
 
