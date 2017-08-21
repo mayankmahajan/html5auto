@@ -1023,4 +1023,15 @@ def exactDataFromChart(hoverData):
         rawValue=UnitSystem().getRawValueFromUI(hoverData[i*5][1])
     return exactData
 
+def mapToggleStateWithSelectedFilter(selectedFilter,toggleState):
+    tmp={}
+    try:
+        for k,v in selectedFilter.iteritems():
+                tmp[k]=deepcopy(selectedFilter[k])
+                if str(toggleState[k]) !='':
+                    tmp[k].append(toggleState[k])
+        return tmp
+    except:
+        logger.error("Not able to map Selected filter with toggle state")
+        return selectedFilter
 

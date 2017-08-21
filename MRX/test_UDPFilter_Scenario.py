@@ -126,7 +126,6 @@ try:
     checkEqualDict(expected,udpFilterFromScreen,message="Verify filter after removing web domain value")
 
 
-    '''
     ############################################# For Toggle State ########################################################
 
     UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
@@ -140,27 +139,29 @@ try:
         SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
         actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, 'toggle_NotEqual',validateSearch=True)
         isError(setup)
-        checkEqualDict(expectedtoggleState,actualtoggleState,message='Verify that toggle button should have that same state that you set while applying filters (Select All + Not Equal)',testcase_id='MKR-3095')
+
+        for k,v in actualtoggleState.iteritems():
+            if str(v)!='':
+                checkEqualAssert('Equal',str(v),message='Verify that toggle button state should be Equal for Select ALL case :: filter = '+str(k),testcase_id='')
         udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
 
-
-    UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
-    SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
-    expectedtoggleState = {}
-    expectedtoggleState = UDHelper.setUDPFilters(udScreenInstance, setup, 'toggle_Equal',toggleStateFlag=True)
-    isError(setup)
-    click_Status=udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
-
-    if click_Status:
-        SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
-        actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, 'toggle_Equal')
-        isError(setup)
-        checkEqualDict(expectedtoggleState,actualtoggleState,message='Verify that toggle button should have that same state that you set while applying filters (Select All + Equal)',testcase_id='MKR-3095')
-        udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+    # UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+    # SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'nofilterIcon')
+    # expectedtoggleState = {}
+    # expectedtoggleState = UDHelper.setUDPFilters(udScreenInstance, setup, 'toggle_Equal',toggleStateFlag=True)
+    # isError(setup)
+    # click_Status=udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+    #
+    # if click_Status:
+    #     SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
+    #     actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, 'toggle_Equal')
+    #     isError(setup)
+    #     checkEqualDict(expectedtoggleState,actualtoggleState,message='Verify that toggle button should have that same state that you set while applying filters (Select All + Equal)',testcase_id='MKR-3095')
+    #     udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
 
     ####################################################################################################################
 
-    '''
+
     setup.d.close()
 
     ###################################### Filter Scenario #############################################################
@@ -206,13 +207,20 @@ try:
         checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='After apply filter verify timerange value on screen')
         checkEqualAssert(measureFromPopup,measureFromScreen,message='After apply filter verify measure value on screen')
         screenTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDSCREEN, setup)
+
+        SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
+        actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, str(i))
+        udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+
+        filterFromScreenForDV=UDHelper.mapToggleStateWithSelectedFilter(screenTooltipData,actualtoggleState)
+
         checkEqualDict(expected, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied (Functional)", doSortingBeforeCheck=True,testcase_id='MKR-1760'+testcase[str(i)]['value'])
 
         queryFromUI = {}
         m_data = []
         d_data = []
 
-        queryFromUI = measureAndDimensionAfterMapping(timeRangeFromScreen, measureFromScreen, screenTooltipData)
+        queryFromUI = measureAndDimensionAfterMapping(timeRangeFromScreen, measureFromScreen, filterFromScreenForDV)
 
         tableHandle = getHandle(setup, MRXConstants.UDSCREEN, "table")
         udScreenInstance.table.setSpecialSelection(setup.d, [1, 20], Keys.SHIFT, tableHandle)

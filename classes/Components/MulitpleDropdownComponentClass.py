@@ -168,12 +168,14 @@ class MulitpleDropdownComponentClass(DropdownComponentClass):
 
     def getToggleStateInMultiDropDown(self,h,index,parent="filterPopup",child="multiselect-dropdown",setup=False,E_NE_index=0):
         try:
+            togglevalue=''
             activeDropDowns = self.getAllActiveElements(h[parent][child])
             activeDropDowns[index].click()
             time.sleep(2)
 
             #togglevalue=str(activeDropDowns[index].find_elements_by_css_selector('i[class*=equalSignStyle]')[E_NE_index].text)
-            togglevalue = str(activeDropDowns[index].find_elements_by_css_selector('span[class*=sign-txt-style]')[E_NE_index].text)
+            if len(activeDropDowns[index].find_elements_by_css_selector('span[class*=sign-txt-style]'))>0:
+                togglevalue = str(activeDropDowns[index].find_elements_by_css_selector('span[class*=sign-txt-style]')[E_NE_index].text)
             activeDropDowns[index].click()
 
             return togglevalue
