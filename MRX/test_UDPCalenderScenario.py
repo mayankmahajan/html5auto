@@ -31,7 +31,7 @@ try:
     etime = Time(et['year'], et['month'], et['day'], et['hour'], et['min'])
 
     stepoch = getepoch(stime.datestring, MRXConstants.TIMEZONEOFFSET, "%Y-%m-%d %H:%M")
-#    etepoch = getepoch(etime.datestring, MRXConstants.TIMEZONEOFFSET, "%Y-%m-%d %H:%M")
+    etepoch = getepoch(etime.datestring, MRXConstants.TIMEZONEOFFSET, "%Y-%m-%d %H:%M")
 
     valueFromCalenderBeforeSelectingPastDate = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
 
@@ -45,7 +45,7 @@ try:
 
     launchCalendar(setup, MRXConstants.UDPPOPUP)
     valueFromCalenderBeforeSelectingFutureDate = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
-    dateStringStart = getDateString(stepoch + 86400, tOffset=MRXConstants.TIMEZONEOFFSET,tPattern='%Y %B %d %H %M').split(' ')
+    dateStringStart = getDateString(etepoch + 86400, tOffset=MRXConstants.TIMEZONEOFFSET,tPattern='%Y %B %d %H %M').split(' ')
     setCalendar(dateStringStart[0], dateStringStart[1], dateStringStart[2], dateStringStart[3], dateStringStart[4],udScreenInstance, setup, page=Constants.CALENDERPOPUP, parent="leftcalendar")
 
     valueFromCalenderAfterSelectingFutureDate = str(getHandle(setup, Constants.CALENDERPOPUP, 'allspans')['allspans']['span'][0].text).strip()
