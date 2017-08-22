@@ -164,99 +164,118 @@ try:
 
     setup.d.close()
 
+except Exception as e:
+    isError(setup)
+    r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+    setup.d.save_screenshot(r)
+    logger.debug("Got Exception During Basic Filter Scenario :: Screenshot with name = %s is saved", r)
+    # raise e
+    setup.d.close()
+
     ###################################### Filter Scenario #############################################################
 
+try:
     for i in range(0,MRXConstants.NUMBEROFFILTERSCENARIO):
-        setup = SetUp()
-        login(setup, Constants.USERNAME, Constants.PASSWORD)
-        udScreenInstance = UDScreenClass(setup.d)
-        exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
-        udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
-        time.sleep(3)
-        udScreenInstance.switcher.measureChangeSwitcher_UD(1, getHandle(setup, MRXConstants.UDSCREEN, "switcher"))
+        try:
+            setup = SetUp()
+            login(setup, Constants.USERNAME, Constants.PASSWORD)
+            udScreenInstance = UDScreenClass(setup.d)
+            exploreHandle = getHandle(setup, MRXConstants.ExploreScreen)
+            udScreenInstance.explore.exploreList.launchModule(exploreHandle, "USER DISTRIBUTION")
+            time.sleep(3)
+            udScreenInstance.switcher.measureChangeSwitcher_UD(1, getHandle(setup, MRXConstants.UDSCREEN, "switcher"))
 
-        timeRangeFromPopup = ''
-        measureFromPopup = ''
-        UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
-        SegmentHelper.clickOnfilterIcon(setup,MRXConstants.UDSCREEN,'nofilterIcon')
-        timeRangeFromPopup,measureFromPopup=UDHelper.setQuickLink_Measure(setup,udScreenInstance,str(i))
+            timeRangeFromPopup = ''
+            measureFromPopup = ''
+            UDHelper.clearFilter(setup, MRXConstants.UDSCREEN)
+            SegmentHelper.clickOnfilterIcon(setup,MRXConstants.UDSCREEN,'nofilterIcon')
+            timeRangeFromPopup,measureFromPopup=UDHelper.setQuickLink_Measure(setup,udScreenInstance,str(i))
 
-        ### get table name form XML
-        quicklink = setup.cM.getNodeElements("udpScreenFilters", 'quicklink')
-        testcase = setup.cM.getNodeElements("udpScreenFilters", "testcase")
+            ### get table name form XML
+            quicklink = setup.cM.getNodeElements("udpScreenFilters", 'quicklink')
+            testcase = setup.cM.getNodeElements("udpScreenFilters", "testcase")
 
-        expected={}
-        expected = UDHelper.setUDPFilters(udScreenInstance, setup, str(i))
-        isError(setup)
-        popUpTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDPPOPUP,setup)
-        for k in MRXConstants.ListOfFilterContainingTree:
-            if expected[k]!=[]:
-                checkEqualAssert(expected[k],popUpTooltipData[k],message='Verify Tree selection on UI ( it should be like level 1 > level 2 > level 3 and soon',testcase_id='MKR-3198')
-        checkEqualDict(expected,popUpTooltipData,message="Verify Filters Selections On UDP Popup (Functional)",testcase_id=testcase[str(i)]['value'],doSortingBeforeCheck=True)
+            expected={}
+            expected = UDHelper.setUDPFilters(udScreenInstance, setup, str(i))
+            isError(setup)
+            popUpTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDPPOPUP,setup)
+            for k in MRXConstants.ListOfFilterContainingTree:
+                if expected[k]!=[]:
+                    checkEqualAssert(expected[k],popUpTooltipData[k],message='Verify Tree selection on UI ( it should be like level 1 > level 2 > level 3 and soon',testcase_id='MKR-3198')
+            checkEqualDict(expected,popUpTooltipData,message="Verify Filters Selections On UDP Popup (Functional)",testcase_id=testcase[str(i)]['value'],doSortingBeforeCheck=True)
 
-        # apply global filters
-        udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
-        response=isError(setup)
-        if response[0]:
-            setup.d.close()
-            continue
+            # apply global filters
+            udScreenInstance.clickButton("Apply", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+            response=isError(setup)
+            if response[0]:
+                setup.d.close()
+                continue
 
-        h = getHandle(setup, MRXConstants.UDSCREEN, 'time_measure')
-        timeRangeFromScreen=str(h['time_measure']['span'][0].text).strip()
-        measureFromScreen=str(h['time_measure']['span'][1].text).strip()
-        checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='After apply filter verify timerange value on screen')
-        checkEqualAssert(measureFromPopup,measureFromScreen,message='After apply filter verify measure value on screen')
-        screenTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDSCREEN, setup)
+            h = getHandle(setup, MRXConstants.UDSCREEN, 'time_measure')
+            timeRangeFromScreen=str(h['time_measure']['span'][0].text).strip()
+            measureFromScreen=str(h['time_measure']['span'][1].text).strip()
+            checkEqualAssert(timeRangeFromPopup,timeRangeFromScreen,message='After apply filter verify timerange value on screen')
+            checkEqualAssert(measureFromPopup,measureFromScreen,message='After apply filter verify measure value on screen')
+            screenTooltipData = UDHelper.getUDPFiltersToolTipData(MRXConstants.UDSCREEN, setup)
 
-        SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
-        actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, str(i))
-        udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
+            SegmentHelper.clickOnfilterIcon(setup, MRXConstants.UDSCREEN, 'filterIcon')
+            actualtoggleState = UDHelper.getToggleStateForFilters(udScreenInstance, setup, str(i))
+            udScreenInstance.clickButton("Cancel", getHandle(setup, MRXConstants.UDPPOPUP, MuralConstants.ALLBUTTONS))
 
-        filterFromScreenForDV=UDHelper.mapToggleStateWithSelectedFilter(screenTooltipData,actualtoggleState)
+            filterFromScreenForDV=UDHelper.mapToggleStateWithSelectedFilter(screenTooltipData,actualtoggleState)
 
-        checkEqualDict(expected, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied (Functional)", doSortingBeforeCheck=True,testcase_id='MKR-1760'+testcase[str(i)]['value'])
+            checkEqualDict(expected, screenTooltipData,message="Verify Filters Selections:: After clicking on Apply button the selected filter gets applied (Functional)", doSortingBeforeCheck=True,testcase_id='MKR-1760'+testcase[str(i)]['value'])
 
-        queryFromUI = {}
-        m_data = []
-        d_data = []
+            queryFromUI = {}
+            m_data = []
+            d_data = []
 
-        queryFromUI = measureAndDimensionAfterMapping(timeRangeFromScreen, measureFromScreen, filterFromScreenForDV)
+            queryFromUI = measureAndDimensionAfterMapping(timeRangeFromScreen, measureFromScreen, filterFromScreenForDV)
 
-        tableHandle = getHandle(setup, MRXConstants.UDSCREEN, "table")
-        udScreenInstance.table.setSpecialSelection(setup.d, [1, 20], Keys.SHIFT, tableHandle)
-        data = udScreenInstance.table.getSelectedRow(getHandle(setup, MRXConstants.UDSCREEN, "table"))
+            tableHandle = getHandle(setup, MRXConstants.UDSCREEN, "table")
+            udScreenInstance.table.setSpecialSelection(setup.d, [1, 20], Keys.SHIFT, tableHandle)
+            data = udScreenInstance.table.getSelectedRow(getHandle(setup, MRXConstants.UDSCREEN, "table"))
 
-        if data['rows'] ==[]:
-            h=getHandle(setup, MRXConstants.UDSCREEN, "table")['table']['no_data_msg']
-            if len(h)>0:
-                msg=str(h[0].text)
-                checkEqualAssert(MRXConstants.NODATAMSG,msg,measure='Verify that the meaningful message should be shown on the Table view when no data is on screen.',testcase_id='MKR-3094')
+            if data['rows'] ==[]:
+                h=getHandle(setup, MRXConstants.UDSCREEN, "table")['table']['no_data_msg']
+                if len(h)>0:
+                    msg=str(h[0].text)
+                    checkEqualAssert(MRXConstants.NODATAMSG,msg,measure='Verify that the meaningful message should be shown on the Table view when no data is on screen.',testcase_id='MKR-3094')
+                else:
+                    checkEqualAssert(MRXConstants.NODATAMSG,'',measure='Verify that the meaningful message should be shown on the Table view when no data is on screen.',testcase_id='MKR-3094')
+                r = "issue_" + str(random.randint(0, 9999999)) + ".png"
+                setup.d.save_screenshot(r)
+                logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
+                resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
+
             else:
-                checkEqualAssert(MRXConstants.NODATAMSG,'',measure='Verify that the meaningful message should be shown on the Table view when no data is on screen.',testcase_id='MKR-3094')
+                columnIndex = udScreenInstance.table.getIndexForValueInArray(data['header'],str(measureFromScreen).strip())
+                if columnIndex !=-1:
+                    listOfValueForSelectedMeasure = []
+                    for rows in data['rows']:
+                        listOfValueForSelectedMeasure.append(rows[columnIndex].strip())
+
+                    m_data.append(str(udScreenInstance.table.getValueFromTable(listOfValueForSelectedMeasure,'sum')))
+
+
+                actualSegmentDetail,textFromSummary=UDHelper.getSummaryDetailAndValidatePresenceOfValidationBox(setup,MRXConstants.UDSCREEN)
+                if len(actualSegmentDetail)==3:
+                    d_data.append(str(actualSegmentDetail[1]))
+
+
+            fireBV(queryFromUI, AvailableMethod.Aggr_Measure, quicklink[str(i)]['table'], m_data, testcase[str(i)]['value'])
+            fireBV(queryFromUI, AvailableMethod.Distinct_Dimension, quicklink[str(i)]['table'], d_data,testcase[str(i)]['value'])
+
+            setup.d.close()
+
+        except Exception as e:
+            isError(setup)
             r = "issue_" + str(random.randint(0, 9999999)) + ".png"
             setup.d.save_screenshot(r)
-            logger.debug("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
-            resultlogger.info("No Table Data for globalfilter=%s :: Screenshot with name = %s is saved",screenTooltipData, r)
+            logger.debug("Got Exception During Filter Scenario :: Screenshot with name = %s is saved", r)
+            # raise e
+            setup.d.close()
 
-        else:
-            columnIndex = udScreenInstance.table.getIndexForValueInArray(data['header'],str(measureFromScreen).strip())
-            if columnIndex !=-1:
-                listOfValueForSelectedMeasure = []
-                for rows in data['rows']:
-                    listOfValueForSelectedMeasure.append(rows[columnIndex].strip())
-
-                m_data.append(str(udScreenInstance.table.getValueFromTable(listOfValueForSelectedMeasure,'sum')))
-
-
-            actualSegmentDetail,textFromSummary=UDHelper.getSummaryDetailAndValidatePresenceOfValidationBox(setup,MRXConstants.UDSCREEN)
-            if len(actualSegmentDetail)==3:
-                d_data.append(str(actualSegmentDetail[1]))
-
-
-        fireBV(queryFromUI, AvailableMethod.Aggr_Measure, quicklink[str(i)]['table'], m_data, testcase[str(i)]['value'])
-        fireBV(queryFromUI, AvailableMethod.Distinct_Dimension, quicklink[str(i)]['table'], d_data,testcase[str(i)]['value'])
-
-        setup.d.close()
 
 except Exception as e:
     isError(setup)

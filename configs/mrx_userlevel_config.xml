@@ -297,7 +297,7 @@
         <network id = "2" filters = ' :: ::No_Selection_On_Tree:: :: :: '/>
         <content id = "2" filters = 'No_Selection_On_Tree::No_Selection_On_Tree:: :: ::No_Input' inputvalue="guavus.com,facebook.com"/>
         <usage id ="2" filters = ' '/>
-        <quicklink id="3" locatorText="Last 7 days" table="daily_points"/>
+        <quicklink id="2" locatorText="Last 7 days" table="daily_points"/>
         <!--<quicklink id="2" locatorText="CustomClick" startTime="2017 June 06 08 00" endTime="2017 June 06 12 00" table="hourly_points"/>-->
         <measure id="2" locatorText="Volume (Download)"/>
         <testcase id="2" value="MKR-1780"/>
