@@ -72,7 +72,7 @@ try:
                         hoverData = UDHelper.hoverOverTicksGetMainChartText(setup,getHandle(setup, MRXConstants.UDSCREEN,'body'))
                         if 'header' in hoverData.keys():
                             checkEqualAssert(selectedMeasure,hoverData['header'][1].lstrip('Cumulated').strip(),selectedQuicklink,selectedMeasure,message='Verify that no unit is assign to any variable (Chart View)',testcase_id='MKR-2765')
-                        exactData = UDHelper.exactDataFromChart(hoverData)
+                        exactData = UDHelper.exactDataFromChart(hoverData,selectedMeasure)
                         UDHelper.validateRangeAndSortingInChart(xAxisPointList,exactData,selectedQuicklink, selectedMeasure)
 
                     chartPlotted=True

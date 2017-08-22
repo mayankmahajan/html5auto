@@ -949,7 +949,7 @@
       <filter id="Packet GW" backEnd_ID="ggsn"/>
       <filter id="APN" backEnd_ID="apn"/>
       <filter id="Device Model" backEnd_ID="devicename"/>
-      <filter id="Web Domain" backEnd_ID="Web Domain"/>
+      <filter id="Web Domain" backEnd_ID="serviceprovider"/>
       <filter id="Device OS" backEnd_ID="deviceos"/>
       <filter id="Roaming" backEnd_ID="roamingflag"/>
       <filter id="Segment" backEnd_ID="Segment"/>

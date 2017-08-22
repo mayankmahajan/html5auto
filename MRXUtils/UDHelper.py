@@ -902,12 +902,14 @@ def validateRangeAndSortingInTable(udScreenInstance,data,selectedQuicklink, sele
         if str(selectedMeasure_value_list[i]).strip()!='':
             l.append(UnitSystem().getRawValueFromUI(selectedMeasure_value_list[i]))
 
-    sorting_Flag=True
+    # sorting_Flag=True
+    #
+    # for j in range(1,len(l)):
+    #     if l[j]>l[j-1]:
+    #         sorting_Flag=False
+    #         break
 
-    for j in range(1,len(l)):
-        if l[j]>l[j-1]:
-            sorting_Flag=False
-            break
+    sorting_Flag = verifySortingWithSomeDifference(l)
 
     checkEqualAssert(True,sorting_Flag,selectedQuicklink,selectedMeasure,message='Verify that the table is sorted from high to low values based on the selected metric :: Value_List ='+str(selectedMeasure_value_list),testcase_id='MKR-1813')
 
@@ -944,15 +946,6 @@ def validateRangeAndSortingInChart(rangeList,data,selectedQuicklink, selectedMea
             break
 
     checkEqualAssert(True, sorting_flag, selectedQuicklink, selectedMeasure,message='Verify that in the line chart shown in Chart view, subscriber distribution is divided in 5% bins :: Range =' + str(rangeList), testcase_id='MKR-1807')
-
-
-    unitFlagForSession=False
-    if 'Session' in selectedMeasure:
-        for i in range(0, len(data.keys())):
-            if len(re.findall(r'[a-zA-Z]+', data[i * 5])) != 0:
-                unitFlagForSession=True
-                break
-        checkEqualAssert(False,unitFlagForSession,selectedQuicklink,selectedMeasure,message='Validate that no unit is seen for the session(Chart View)',testcase_id='MKR-3092')
 
 
     l = []
@@ -1014,13 +1007,25 @@ def hoverOverTicksGetMainChartText(setup, h1, parent="body", child="lineChartCom
         logger.error("Got Exception while performing hover actions = %s",str(e))
         return e
 
-def exactDataFromChart(hoverData):
+def exactDataFromChart(hoverData,selectedMeasure):
     exactData={}
     rawValue=UnitSystem().getRawValueFromUI(hoverData[0][1])
-    exactData[0]=hoverData[0][1]
-    for i in range(1,len(hoverData)-1):
-        exactData[i*5]=UnitSystem().getValueFromRawValue(UnitSystem().getRawValueFromUI(hoverData[i*5][1])-rawValue)
-        rawValue=UnitSystem().getRawValueFromUI(hoverData[i*5][1])
+    exactData[0]=str(hoverData[0][1]).strip()
+    if 'Session' in selectedMeasure:
+        unitFlagForSession=False
+        for i in range(1,len(hoverData)-1):
+            exactData[i*5]=str(int(UnitSystem().getRawValueFromUI(hoverData[i*5][1])-rawValue))
+            rawValue=UnitSystem().getRawValueFromUI(hoverData[i*5][1])
+
+            if len(re.findall(r'[a-zA-Z]+', str(hoverData[i*5][1]))) != 0:
+                unitFlagForSession = True
+
+        checkEqualAssert(False, unitFlagForSession,measure=selectedMeasure,message='Validate that no unit is seen for the session(Chart View)',testcase_id='MKR-3092')
+
+    else:
+        for i in range(1,len(hoverData)-1):
+            exactData[i*5]=UnitSystem().getValueFromRawValue(UnitSystem().getRawValueFromUI(hoverData[i*5][1])-rawValue)
+            rawValue=UnitSystem().getRawValueFromUI(hoverData[i*5][1])
     return exactData
 
 def mapToggleStateWithSelectedFilter(selectedFilter,toggleState):

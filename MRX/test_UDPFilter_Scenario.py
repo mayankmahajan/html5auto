@@ -58,6 +58,7 @@ def measureAndDimensionAfterMapping(timeRangeFromScreen,measureFromScreen,screen
 
 
 def fireBV(query,method,table_name,data,testcase=''):
+    sleep(1)
     query['method']=method
     query['table_name']=table_name
     query['data']=data
