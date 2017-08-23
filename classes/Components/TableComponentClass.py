@@ -369,7 +369,7 @@ class TableComponentClass(BaseComponentClass):
 
     def getColumnValueFromTable(self,columnIndex,tableHandle):
         columnValue=[]
-        data2=self.getTableData1(tableHandle)
+        data2=self.getTableData1(tableHandle,length=20)
         for index in range(len(data2['rows'])):
             columnValue.append(str(data2['rows'][index][columnIndex]).strip())
         return columnValue
