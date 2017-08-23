@@ -298,7 +298,8 @@
         </componentConfig>
 
         <componentConfig id ="allDropDown">
-            <component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>
+            <!--<component id = "multiselect-dropdown" selector="tag name" locator="kiwik-multiselect-dropdown" wait="skip"/>-->
+            <component id = "multiselect-dropdown" selector="tag name" locator="mrx-multiselect-dropdown" wait="skip"/>
         </componentConfig>
 
         <componentConfig id = "globalfiltertooltip">

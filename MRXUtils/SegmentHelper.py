@@ -27,14 +27,6 @@ def dumpResultForButton(condition,request,screenInstance,setup,screen=MRXConstan
     return button_status
 
 def VerifyBasicTableFuncationality(setup,screenInstance,parent='table'):
-
-    # header = setup.cM.getNodeElements("segment_Table_Header","column")
-    # header_list = []
-    # for k, columnname in header.iteritems():
-    #     header_list.append(columnname['locatorText'])
-
-    header_list = ['SegmentName','#Users','Status','Source','Owner','Access','Created on','Edit/Info','Delete']
-
     columns = setup.cM.getNodeElements("segmentsorttablecolumn", "column")
     column_names = []
     for k, column in columns.iteritems():
@@ -42,7 +34,7 @@ def VerifyBasicTableFuncationality(setup,screenInstance,parent='table'):
 
     tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, parent)
     tableMap = screenInstance.table.getTableDataMap(tableHandle,driver=setup,colIndex=-1)
-    checkEqualAssert(header_list,tableMap['header'],'','','Verify Table Header on Segment Screen',testcase_id='MKR-1658')
+    checkEqualAssert(MRXConstants.SegmentScreenTableHeaderList,tableMap['header'],'','','Verify Table Header on Segment Screen',testcase_id='MKR-1658')
 
     if tableMap['rows'] == Constants.NODATA:
         logger.info("*********Table Data Not Present************")
@@ -203,7 +195,7 @@ def importSegment(setup,screenInstance,segment_Input,source='Import'):
         logger.info('Going to Click on %s Button ', segment_Input['button'])
         click_status = screenInstance.cm.clickButton(str(segment_Input['button']),popUpHandle)
         checkEqualAssert(True, click_status, "", "", "Verify whether " + segment_Input['button'] + " button clicked or not")
-        # isError(setup)
+        isError(setup)
         logger.info("********Folowing Data added into table =%s ************",segmentDetailFromUI)
         return segmentDetailFromUI
 
@@ -215,7 +207,7 @@ def logicalOperationSegment(setup,screenInstance,input_Detail,segmentname,access
     segmentDetailFromUI=[]
 
     popUpHandle = getHandle(setup, MRXConstants.POPUPSCREEN)
-    checkEqualAssert(operation+" Segment", str(popUpHandle['allspans']['span'][0].text), '', '','Verify Import Segment Header in Import Popup')
+    checkEqualAssert(operation+" Segment", str(popUpHandle['allspans']['span'][0].text),message='Verify '+str(operation)+' Segment Header')
 
     logger.info('Going to Enter Segment Name = %s when perform =%s',segmentname,operation)
     resultlogger.info('Going to Enter Segment Name = %s when perform =%s',segmentname,operation)
@@ -226,7 +218,7 @@ def logicalOperationSegment(setup,screenInstance,input_Detail,segmentname,access
 
     segmentDetailFromUI.append(count)
 
-    if int(count)==0:
+    if int(count)< MRXConstants.MinimumUserConfig:
         segmentDetailFromUI.append('Rejected')
     else:
         segmentDetailFromUI.append('Completed')
@@ -273,12 +265,12 @@ def logicalOperationSegment(setup,screenInstance,input_Detail,segmentname,access
         click_status = screenInstance.cm.clickButton(str(input_Detail['button']),popUpHandle)
         checkEqualAssert(True, click_status, "", "", "Verify whether " + str(input_Detail['button']) + " button clicked or not")
         isError(setup)
-        logger.info("********Folowing Data added into table =%s ************",segmentDetailFromUI)
+        logger.info("********Following Data added into table =%s ************",segmentDetailFromUI)
         return segmentDetailFromUI
 ##################################################################################################################################
 
 def verifyEntryEditSuccessfully(setup,screenInstance,inputDetail,segmentDetailFromUIPopup,addedValue,testCaseId='',testCaseId_1=''):
-
+    refreshSegmentScreen(screenInstance, setup)
     tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
     tableMap = screenInstance.table.getTableDataMap(tableHandle, driver=setup)
     if inputDetail['button']=='Cancel' and 'tersect' in addedValue:
@@ -402,7 +394,7 @@ def setFilters(setup,screenInstance,h,k=0):
             elif len(max.strip(''))!=0:
                 selectedFilter_listforUserlimit.append(u"{0}".format(le) + max)
 
-        dumpResultForButton(True, "#User", screenInstance, setup, screen=MRXConstants.FILTERSCREEN,button_label="Apply Filters")
+        dumpResultForButton(True, "User Count", screenInstance, setup, screen=MRXConstants.FILTERSCREEN,button_label="Apply Filters")
     selected_filter.append(selectedFilter_listforUserlimit)
 
     ######################################### Set Created On#################################################
@@ -487,9 +479,13 @@ def clickOnfilterIcon(setup,screen,filterIcon,parent='filterArea'):
     except:
         logger.info('Not able to click on = %s',filterIcon)
         resultlogger.info('Not able to click on = %s', filterIcon)
-        False
+        return False
     return True
 
+def clearFilter(setup,screenName,parent='filterArea',child='filterClearIcon'):
+    if len(getHandle(setup,screenName,parent)[parent][child]) > 0:
+        clickOnfilterIcon(setup, screenName,child)
+        time.sleep(3)
 
 def getSegmentFilter(setup,screenInstance):
     Expectedfilter=[]
@@ -605,7 +601,6 @@ def performLogicalOperation(setup,screenInstance,button_label,checkButtonStatus=
 
     for k, checkboxname in checkBoxForLogicalOp.iteritems():
         tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
-        time.sleep(2)
         index = screenInstance.table.getRowIndexFromTable(0, tableHandle, checkboxname['segmentname'])
 
         if index != -1:
@@ -650,14 +645,19 @@ def performLogicalOperation(setup,screenInstance,button_label,checkButtonStatus=
                             verifyEntryEditSuccessfully(setup, screenInstance, checkboxname,segmentDetailFromUIPopup, autSegmentName,testCaseId='MKR-1674,1735',testCaseId_1='MKR-1732')
 
                         screenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
-                        time.sleep(3)
+                        #time.sleep(3)
                         #tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
                         #screenInstance.table.scrollUpTable(tableHandle, driver=setup)
-                        if checkboxname['button']!='Cancel':
-                            tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
-                            for segmentName in selectedSegments:
-                                index = screenInstance.table.getRowIndexFromTable(0, tableHandle, str(segmentName))
-                                screenInstance.cm.clickCheckBox(tableHandle, index, parent="table")
+                        #if checkboxname['button']!='Cancel':
+                        tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
+                        for segmentName in selectedSegments:
+                            index = screenInstance.table.getRowIndexFromTable(0, tableHandle, str(segmentName))
+                            screenInstance.cm.clickCheckBox(tableHandle, index, parent="table")
 
     screenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
     time.sleep(3)
+
+def refreshSegmentScreen(screenInstance,setup):
+    sleep(10)
+    screenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
+    return

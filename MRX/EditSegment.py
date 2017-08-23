@@ -44,7 +44,7 @@ try:
     editSegmentDetails=setup.cM.getNodeElements("editSegmentDetails","segment")
     for k, segmentDetail in editSegmentDetails.iteritems():
         tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
-        data2 = segmentScreenInstance.table.getTableData1(tableHandle)
+        data2 = segmentScreenInstance.table.getTableData1(tableHandle,length=20)
         index = segmentScreenInstance.table.getRowIndexFromTable(0, tableHandle, segmentDetail['segmentname'])
 
         if index!=-1:
@@ -77,7 +77,7 @@ try:
             ###########################Edit Segment####################################################################
             if segmentDetail['edit_info']=='edit':
                 tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
-                data2 = segmentScreenInstance.table.getTableData1(tableHandle)
+                data2 = segmentScreenInstance.table.getTableData1(tableHandle,length=20)
                 index = segmentScreenInstance.table.getRowIndexFromTable(0, tableHandle, segmentDetail['segmentname'])
 
                 segmentDetailFromTable1 = []
@@ -100,17 +100,18 @@ try:
                 tableMap = segmentScreenInstance.table.getTableDataMap(tableHandle, driver=setup)
                 if segmentDetail['button']=='Cancel':
                     checkEqualAssert(True, tableMap['rows'].has_key(segmentDetail['segmentname']), "", "","Verify Segment Not Updated if Press Cancel button",testcase_id='MKR-1695')
-                    tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
-                    segmentScreenInstance.table.scrollUpTable(tableHandle, driver=setup)
-
+                    segmentScreenInstance.cm.clickButton('Refresh',getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
+                    #tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
+                    #segmentScreenInstance.table.scrollUpTable(tableHandle, driver=setup)
                 else:
                     checkEqualAssert(True, tableMap['rows'].has_key(segmentDetail['newsegmentname']), "", "","Verify Segment Updated Successfully")
+                    segmentScreenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
                     tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
-                    segmentScreenInstance.table.scrollUpTable(tableHandle, driver=setup)
+                    #segmentScreenInstance.table.scrollUpTable(tableHandle, driver=setup)
                     index = segmentScreenInstance.table.getRowIndexFromTable(0, tableHandle, segmentDetail['newsegmentname'])
-                    data2 = segmentScreenInstance.table.getTableData1(tableHandle)
+                    data2 = segmentScreenInstance.table.getTableData1(tableHandle,length=20)
                     if index==-1:
-                        logger.debug("Not able to Update Edit Details = %s",segmentDetailFromUI1)
+                        logger.error("Not able to Update Edit Details = %s",segmentDetailFromUI1)
                         raise
                     else:
                         segmentDetailFromTable2 = []
@@ -128,5 +129,5 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
-    raise e
+    resultlogger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved and Exception = %s",r,str(e))
     setup.d.close()

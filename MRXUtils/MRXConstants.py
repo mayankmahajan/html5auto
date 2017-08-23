@@ -10,6 +10,7 @@ class MRXConstants(Constants):
     NumberOfElementToBeExpandOnAtAnyLevel = 5
 
     SEGMENTSCREEN = "segment_Screen"
+    SEGMENTFILTERSCREEN="filter_Screen"
     UDSCREEN= "ud_Screen"
     UDPPOPUP="udp_popup"
     POPUPSCREEN="popUp_Screen"
@@ -38,6 +39,7 @@ class MRXConstants(Constants):
     #ExpectedMeasure=['Volume (Upload)','Volume (Download)','Volume','# Session']
     ExpectedMeasure = ['Volume (Upload)', 'Volume (Download)', 'Volume', '# Network Session','# Web Domain Session','# IAB Session','# Contextual Session']
     ListOfFilterContainingTree=['Content Interest','Operator Data Services','Location']
+    SegmentScreenTableHeaderList= ['Segment Name','User Count','Status','Source','Owner','Access','Created on','Edit/Info','Delete']
     ALL='ALL'
     REFRESH='Refresh'
     ALLLINKS = "alllinks"

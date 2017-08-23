@@ -1,10 +1,3 @@
-import unittest
-from Utils.logger import *
-from selenium import webdriver
-
-from Utils.utility import *
-from classes.DriverHelpers.DriverHelper import DriverHelper
-from Utils.Constants import *
 from Utils.SetUp import *
 from classes.Components.TimeRangeComponentClass import *
 from classes.Pages.MRXScreens.SegmentScreenClass import *
@@ -31,6 +24,10 @@ try:
     checkEqualAssert(True,tablelocation_y > exportIconLocation_y and (exportIconLocation_x - tablelocation_x)<200,message='Verify that there is "Export Table Data" option just above the segments tables.....table(y) ='+str(tablelocation_y)+' ExportIcon(y)= '+str(exportIconLocation_y)+ ' table(x) ='+str(tablelocation_x)+' ExportIcon(x)= '+str(exportIconLocation_x ),testcase_id='MKR-1710')
     ########################################################################################################################
 
+    tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
+    tableMap1 = segmentScreenInstance.table.getTableDataMap(tableHandle, driver=setup)
+    #segmentScreenInstance.cm.clickButton('Refresh', getHandle(setup, MRXConstants.SEGMENTSCREEN, 'allbuttons'))
+
     click_status=SegmentHelper.clickOnfilterIcon(setup,MRXConstants.SEGMENTSCREEN,'nofilterIcon')
     expected = SegmentHelper.setSegmentFilter(setup,segmentScreenInstance,k=1)
     segmentScreenInstance.cm.clickButton("Apply Filters", getHandle(setup, MRXConstants.FILTERSCREEN, 'allbuttons'))
@@ -39,8 +36,15 @@ try:
     handle=getHandle(setup,MRXConstants.SEGMENTSCREEN,'table')
     columnValueFromTable=segmentScreenInstance.table.getColumnValueFromTable(0,handle)
     SegmentHelper.clickOnfilterIcon(setup, MRXConstants.SEGMENTSCREEN, 'filterClearIcon')
-    h=getHandle(setup,MRXConstants.SEGMENTSCREEN,'filterArea')
-    checkEqualAssert(0,len(h['filterArea']['filterClearIcon']),message='Verify Cross (X) functionality on Segment Screen',testcase_id='MKR-1690')
+    filterFromScreenAfterClear = SegmentHelper.getGlobalFiltersFromScreen(MRXConstants.SEGMENTSCREEN,segmentScreenInstance, setup, flag=False)
+
+    tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN, 'table')
+    tableMap2 = segmentScreenInstance.table.getTableDataMap(tableHandle, driver=setup)
+    checkEqualAssert(MRXConstants.NO_FILTER, str(filterFromScreenAfterClear),message='Verify No filter text on Segment Screen')
+
+    checkEqualAssert(len(tableMap1['rows']),len(tableMap2['rows']),message='Verify Cross (X) functionality on Segment Screen :: Before any filter total segment ='+str(len(tableMap1['rows']))+' After Clear Applied Filter total Segment ='+str(len(tableMap2['rows'])),testcase_id='MKR-1690')
+    #h=getHandle(setup,MRXConstants.SEGMENTSCREEN,'filterArea')
+    #checkEqualAssert(0,len(h['filterArea']['filterClearIcon']),message='Verify Cross (X) functionality on Segment Screen',testcase_id='MKR-1690')
 
 
 ########################################################################################################################
@@ -97,7 +101,7 @@ try:
                 break
     elif Createdon=='2':
         for j in range(len(column_6_valueIn_epoch)):
-            if long(column_6_valueIn_epoch[j]) > long(epochTime):
+            if long(column_6_valueIn_epoch[j]) >= long(epochTime):
                 Createdon_flag = False
                 break
 
@@ -229,5 +233,5 @@ except Exception as e:
     r = "issue_" + str(random.randint(0, 9999999)) + ".png"
     setup.d.save_screenshot(r)
     logger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved", r)
-    raise e
+    resultlogger.debug("Got Exception from Script Level try catch :: Screenshot with name = %s is saved and Exception = %s", r, str(e))
     setup.d.close()

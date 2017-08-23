@@ -347,7 +347,7 @@ class TableComponentClass(BaseComponentClass):
         # return a 2D array
 
     def getRowIndexFromTable(self,columnIndex,tableHandle,value):
-        data2=self.getTableData1(tableHandle)
+        data2=self.getTableData1(tableHandle,length=24)
         for index in range(len(data2['rows'])):
             if str(data2['rows'][index][columnIndex]).strip()==str(value):
                 return index

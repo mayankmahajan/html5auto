@@ -19,7 +19,6 @@ try:
     segmentScreenHandle = getHandle(setup,MRXConstants.SEGMENTSCREEN,'allbuttons')
     segmentDetails=setup.cM.getNodeElements("segmentDetails","segment")
 
-
 ######################################### Blank Segment Name scenario ##################################################
     segmentScreenInstance.cm.clickButton("Import", segmentScreenHandle)
     popUpHandle = getHandle(setup, MRXConstants.POPUPSCREEN)
@@ -47,6 +46,7 @@ try:
         segmentScreenInstance.cm.clickButton("Import", segmentScreenHandle)
         try:
             segmentDetailFromUIPopup=SegmentHelper.importSegment(setup,segmentScreenInstance,segmentDetail)
+            SegmentHelper.refreshSegmentScreen(segmentScreenInstance,setup)
             if flag_Top_segment:
                 tableHandle = getHandle(setup, MRXConstants.SEGMENTSCREEN,'table')
                 data2 = segmentScreenInstance.table.getTableData1(tableHandle)
@@ -74,7 +74,7 @@ try:
             createdon_from_UI=segmentDetailFromUIPopup.pop()
             checkEqualAssert(str(createdon_from_UI.split(":")[0]).strip(),str(createdon_from_table.split(':')[0]).strip(),'','','Verify Created on from UI..... Expected ='+createdon_from_UI+' Actual ='+createdon_from_table,testcase_id='MKR-1703')
 
-            checkEqualAssert(tableMap['rows'][segmentDetail['segmentname']], segmentDetailFromUIPopup, "", "","Verify Segment Detail From table, Details ="+str(segmentDetailFromUIPopup),testcase_id='MKR-1661,1663,1671')
+            checkEqualAssert(tableMap['rows'][segmentDetail['segmentname']], segmentDetailFromUIPopup, "", "","Verify Segment Detail From table (if Status is Running, check manually (We already wait for 10 sec)), Details ="+str(segmentDetailFromUIPopup),testcase_id='MKR-1661,1663,1671')
 
     # Basic Table Functionality
 

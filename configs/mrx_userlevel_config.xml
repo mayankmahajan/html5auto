@@ -75,7 +75,7 @@
         <filter id="2" segmentname="autopraveen_0" user=" :: " createdon=" :: " status=" " source=" " owner=" " access=" " />
         <filter id="3" segmentname=" " user="05::20" createdon=" :: " status=" " source=" " owner=" " access=" " />
         <filter id="4" segmentname=" " user=" :: " createdon="1::2017 May 12 05 10" status=" " source=" " owner=" " access=" " />
-        <filter id="5" segmentname=" " user=" :: " createdon=" :: " status="0,1" source=" " owner=" " access=" " />
+        <filter id="5" segmentname=" " user=" :: " createdon=" :: " status="1,2" source=" " owner=" " access=" " />
         <filter id="6" segmentname=" " user=" :: " createdon=" :: " status=" " source="2,3,4" owner=" " access=" " />
         <filter id="7" segmentname=" " user=" :: " createdon=" :: " status=" " source=" " owner="admin" access=" " />
         <filter id="8" segmentname=" " user=" :: " createdon=" :: " status=" " source=" " owner=" " access="0" />
@@ -927,7 +927,7 @@
 
   <segment_Table_Header>
       <column id="segmentname" locatorText="SegmentName"/>
-      <column id="user" locatorText="#Users"/>
+      <column id="user" locatorText="User Count"/>
       <column id="status" locatorText="Status"/>
       <column id="source" locatorText="Source"/>
       <column id="owner" locatorText="Owner"/>
