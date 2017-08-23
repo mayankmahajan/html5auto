@@ -31,7 +31,7 @@ def measureAndDimensionAfterMapping(timeRangeFromScreen,measureFromScreen,screen
 
     filters = ConfigManager().getNodeElements("filter_Mapping", "filter")
     for k, filter in filters.iteritems():
-        if str(k) in screenTooltipData.keys() and screenTooltipData[k] !=[] and screenTooltipData[k] !=['ALL']:
+        if str(k) in screenTooltipData.keys() and screenTooltipData[k] !=[] and str(screenTooltipData[k][0]).lower() != 'ALL'.lower():
             query[filter['backEnd_ID']]=screenTooltipData[k]
 
     timeRange=timeRangeFromScreen.split(Constants.TimeRangeSpliter)
