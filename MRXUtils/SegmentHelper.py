@@ -78,7 +78,7 @@ def set_GetDetailFromEdit(setup,screenInstance,isSetEdit,segment_Input):
         checkEqualAssert(MRXConstants.EDITHEADERINEDITPOPUP,str(popUpHandle['allspans']['span'][0].text),'','','Verify Edit Header in Popup')
     elif segment_Input['edit_info']=='info':
         checkEqualAssert(MRXConstants.INFOHEADERINPOPUP, str(popUpHandle['allspans']['span'][0].text), '', '','Verify Info Header in Popup')
-        checkEqualAssert('Segment creation failed as there were 0 subscribers',str(popUpHandle['allspans']['span'][9].text),message='Verify message on Info in case of Status=Rejected')
+        checkEqualAssert('Segment creation failed as there were less then '+str(MRXConstants.MinimumUserConfig)+' subscribers',str(popUpHandle['allspans']['span'][9].text),message='Verify message on Info in case of Status=Rejected')
     import re
 
     if isSetEdit and segment_Input['edit_info']=='edit':
@@ -295,7 +295,7 @@ def verifyEntryEditSuccessfully(setup,screenInstance,inputDetail,segmentDetailFr
         createdon_from_table=tableMap['rows'][addedValue].pop()
         createdon_from_UI=segmentDetailFromUIPopup.pop()
         checkEqualAssert(createdon_from_UI.split(":")[0],createdon_from_table.split(':')[0],'','','Verify Created on from UI..... Expected ='+createdon_from_UI+' Actual ='+createdon_from_table)
-        checkEqualAssert(tableMap['rows'][addedValue], segmentDetailFromUIPopup, "", "","Verify Segment Detail From table= "+str(segmentDetailFromUIPopup),testcase_id=testCaseId+',1668')
+        checkEqualAssert(tableMap['rows'][addedValue], segmentDetailFromUIPopup,message="Verify Segment Detail From table= "+str(segmentDetailFromUIPopup),testcase_id=testCaseId+',1668')
 
 
 
